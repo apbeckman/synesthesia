@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "trippin",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "taste_of_noise_11.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Taste of Noise 11",
+	"WIDTH" : 1280
+}

@@ -1,0 +1,93 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : -2,
+         "NAME" : "LookXY",
+         "TYPE" : "xy smooth",
+         "PARAMS" : 0.05,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Cam_Control",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.25,
+         "MIN" : 1,
+         "NAME" : "Fog",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : -5,
+         "NAME" : "Rock_Morph",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 1.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 15,
+         "MIN" : 0,
+         "NAME" : "Tunnel_Width",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Morph_Time",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 1,
+         "NAME" : "Glop",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "warp"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "A cave-like desert passageway.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image45",
+         "PATH" : "images/45.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "desert.png",
+   "TITLE" : "Desert Passage",
+   "WIDTH" : 1920
+}

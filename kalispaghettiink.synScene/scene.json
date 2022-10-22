@@ -1,0 +1,31 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : -4,
+         "NAME" : "RotateXY",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "apb_0",
+   "DESCRIPTION" : "+reactivity",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "kalispaghettiink.png",
+   "TITLE" : "KaliSpaghettiInk",
+   "WIDTH" : 1920
+}

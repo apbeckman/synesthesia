@@ -1,0 +1,25 @@
+{
+	"CREDIT" : "tdhooper",
+	"DESCRIPTION" : "Tiling the sphere with triangle voronoi patterns, polished version of [url]https://www.shadertoy.com/view/fsKBRR[/url]",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "hardsurface_sphere_[2].png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "HardSurface Sphere [2]",
+	"WIDTH" : 1280
+}

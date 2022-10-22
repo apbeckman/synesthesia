@@ -1,0 +1,37 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.1,
+			"MIN" : 0,
+			"NAME" : "test1",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "The classic hexagon fractal cube grid, rendered in 3D form.",
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpg"
+		}
+	],
+	"IMAGE_PATH" : "fractal_cube_steps.png",
+	"TITLE" : "Fractal Cube Steps",
+	"WIDTH" : 1920
+}

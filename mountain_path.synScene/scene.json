@@ -1,0 +1,143 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 6.28,
+         "MIN" : 0,
+         "NAME" : "Tunnel_Color",
+         "TYPE" : "knob",
+         "UI_GROUP" : "colors"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 6.28,
+         "MIN" : 0,
+         "NAME" : "Stair_Color",
+         "TYPE" : "knob",
+         "UI_GROUP" : "colors"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0,
+         "NAME" : "Path_Warp",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 8,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 16,
+         "MIN" : 1,
+         "NAME" : "Ceiling_Texture",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.08,
+         "MIN" : 1,
+         "NAME" : "Uh_Oh",
+         "TYPE" : "slider",
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Stair_Bump",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.3,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0.2,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Texture_Gain",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "audio"
+      },
+      {
+         "DEFAULT" : 0.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "Bump_Gain",
+         "TYPE" : "knob",
+         "UI_GROUP" : "audio"
+      },
+      {
+         "DEFAULT" : 0.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Occlusion_Gain",
+         "TYPE" : "knob",
+         "UI_GROUP" : "audio"
+      },
+      {
+         "DEFAULT" : 8.94,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : 8.94,
+         "NAME" : "Ray_Distance",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2.2,
+         "MIN" : 5,
+         "NAME" : "Ray_Drop",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : -5,
+         "NAME" : "Fly_Speed",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "A path running through some dry rocky terrain. Rendered in a pseudo low-poly style.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image46",
+         "PATH" : "images/46.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "mountain.png",
+   "TITLE" : "Mountain Path",
+   "WIDTH" : 1920
+}

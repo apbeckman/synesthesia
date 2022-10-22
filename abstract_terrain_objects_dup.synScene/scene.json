@@ -1,0 +1,215 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Look around, there's a whole world out there!",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookXY",
+			"PARAMS" : 0.0125,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 2,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 0.2,
+			"MIN" : 2,
+			"PARAMS" : 0.0125,
+			"NAME" : "FOV",
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "fly speed, duh",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "Fly_Speed",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 10,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 1.732,
+			"MIN" : 10,
+			"NAME" : "Fog",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Use water refraction instead of light reflection",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Refract",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Sun (and shadows) move when bass hits",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Light_Hits",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Level of audioreactivity of Light Hits",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Light_Gain",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Level of audioreactivity of Warp Time",
+			"MAX" : 3,
+			"MIN" : 1,
+			"NAME" : "Warp_Gain",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "warp"
+		},
+		{
+			"DEFAULT" : 0.12,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 0.4,
+			"MIN" : 0,
+			"NAME" : "Sin_Warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "warp"
+		},
+		{
+			"DEFAULT" : 0.14,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 0.5,
+			"MIN" : 0,
+			"NAME" : "Cos_Warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "warp"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 1.5,
+			"MIN" : 0,
+			"NAME" : "Plane_Gain",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "warp"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 0.447,
+			"MIN" : 1,
+			"NAME" : "Ray_Steps",
+			"TYPE" : "slider",
+			"UI_GROUP" : "warp"
+		},
+		{
+			"DEFAULT" : 0.7071,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 0.05,
+			"MIN" : 1,
+			"NAME" : "Mirror_Size",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "objects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "Shaper",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "objects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 0.9,
+			"MIN" : 0,
+			"NAME" : "Colorize_Objects",
+			"TYPE" : "slider",
+			"UI_GROUP" : "objects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 0,
+			"MIN" : -3.8,
+			"NAME" : "Object_Distance",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "objects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "Object_Height",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "objects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 0.25,
+			"MIN" : 0,
+			"NAME" : "Hue_Time",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "objects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggles landscape warp audioreactivity",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Warp_Time",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "warp"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : -1,
+			"MIN" : 1,
+			"NAME" : "Dark_Terrain",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of view",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Night_Time",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "lighting"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Rendering some abstract objects onto terrain. Inspired by Mike Winkelmann's imagery.",
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "abstract_terrain_objects_dup.png",
+	"TITLE" : "Abstract Terrain Objects_dup",
+	"WIDTH" : 1920
+}

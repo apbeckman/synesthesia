@@ -1,0 +1,129 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 3.14,
+			"DESCRIPTION" : "",
+			"MAX" : 6.28,
+			"MIN" : 0,
+			"NAME" : "spin",
+			"PARAMS" : 0.11,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "twist"
+		},
+		{
+			"DEFAULT" : 3.14,
+			"DESCRIPTION" : "",
+			"MAX" : 6.28,
+			"MIN" : 0,
+			"NAME" : "iters",
+			"PARAMS" : 0.11,
+			"TYPE" : "slider",
+			"UI_GROUP" : "twist"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "squiggle",
+			"PARAMS" : 0.11,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "twist"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0.01,
+			"NAME" : "separation",
+			"PARAMS" : 0.11,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "space"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "xy_mod",
+			"PARAMS" : 0.11,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "space"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "fly_in_out",
+			"PARAMS" : 0.08,
+			"TYPE" : "slider traveler",
+			"UI_GROUP" : "space"
+		},
+		{
+			"DEFAULT" : 0.4,
+			"DESCRIPTION" : "",
+			"MAX" : 1.4,
+			"MIN" : 0.01,
+			"NAME" : "size",
+			"PARAMS" : 0.15,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "hexagons"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "size_hole",
+			"PARAMS" : 0.15,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "hexagons"
+		},
+		{
+			"DEFAULT" : 0.1,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0.001,
+			"NAME" : "depth",
+			"PARAMS" : 0.11,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "hexagons"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "greyscale",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0.7,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "lighting",
+			"PARAMS" : 0.4,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "color"
+		}
+	],
+	"CREDIT" : "sheltron",
+	"DESCRIPTION" : "",
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "hex_array_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1440,
+			"TARGET" : "backbuffer",
+			"WIDTH" : 2560
+		}
+	],
+	"TITLE" : "Hex Array_dup",
+	"WIDTH" : 1920
+}

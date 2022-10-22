@@ -1,0 +1,30 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "totetmatt",
+   "DESCRIPTION" : "Following the really good Revision Seminar Shader from @flopine and @evvvvil and tweaking it .\nhttps://www.twitch.tv/videos/414382208\n\nFinally understand the base of Ray Marching, still exploring and unknowledgeable on lightning , shading and color",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "spinal_lattice.png",
+   "TITLE" : "Spinal Lattice",
+   "WIDTH" : 1920
+}

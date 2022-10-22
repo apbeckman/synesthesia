@@ -1,0 +1,66 @@
+{
+   "CONTROLS" : [
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "lookXY",
+			"PARAMS" : 0.05,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "separation",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "jeyko",
+   "DESCRIPTION" : "Another day of daily creative coding challenge",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image30",
+         "PATH" : "images/30.png"
+      }
+   ],
+   "IMAGE_PATH" : "day_74.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1035,
+         "TARGET" : "BuffA",
+         "WIDTH" : 1840
+      }
+   ],
+   "TITLE" : "Day 74", 
+   "WIDTH" : 1920
+}

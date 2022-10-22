@@ -1,0 +1,70 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "lookAt",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : -1,
+         "NAME" : "radius",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : -4,
+         "NAME" : "zoom",
+         "PARAMS" : 0.025,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "If manual_camera is on, use this XY to look around.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "camera_look",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+	}
+   ],
+   "CREDIT" : "apb_0",
+   "DESCRIPTION" : "aaa",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "colored_lines.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 828,
+         "TARGET" : "BuffA",
+         "WIDTH" : 1472
+      }
+   ],
+   "TITLE" : "Colored Lines",
+   "WIDTH" : 1920
+}

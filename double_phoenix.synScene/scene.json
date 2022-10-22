@@ -1,0 +1,22 @@
+{
+	"CONTROLS" : 
+	[
+	   {
+			"DEFAULT" : 2.5,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 1.5,
+			"PARAMS" : 0.05,
+			"NAME" : "test",
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "russ",
+	"DESCRIPTION" : "The phoenix fractal with an extra feedback step.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "double_phoenix.png",
+	"TITLE" : "Double Phoenix",
+	"WIDTH" : 1920
+}

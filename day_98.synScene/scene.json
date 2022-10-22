@@ -1,0 +1,44 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "test",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "jeyko",
+   "DESCRIPTION" : "potato",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image30",
+         "PATH" : "images/30.png"
+      }
+   ],
+   "IMAGE_PATH" : "day_98.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1440,
+         "TARGET" : "BuffA",
+         "WIDTH" : 2560
+      }
+   ],
+   "TITLE" : "Day 98",
+   "WIDTH" : 1920
+}

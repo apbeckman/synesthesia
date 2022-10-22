@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Using an offset triangle grid to produce some randomly glowing markings on some irregular triangles.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpeg"
+		}
+	],
+	"IMAGE_PATH" : "glowing_offset_triangles.png",
+	"TITLE" : "Glowing Offset Triangles",
+	"WIDTH" : 1920
+}

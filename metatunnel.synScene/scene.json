@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "XT95",
+	"DESCRIPTION" : "Fixed step marching.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "metatunnel.png",
+	"TITLE" : "Metatunnel",
+	"WIDTH" : 1920
+}

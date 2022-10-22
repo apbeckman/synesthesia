@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "morisil",
+	"DESCRIPTION" : "I just played a bit with the coefficients of my original \"generative art deco\". I changed color grading to be based on polar coordinates and put the shape in motion.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "generative_art_deco_2.png",
+	"TITLE" : "generative art deco 2",
+	"WIDTH" : 1280
+}

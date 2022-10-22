@@ -1,0 +1,71 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Move the X-axis to spin about your main axis, or move the Y-axis to tilt forwards or backwards.",
+			"MAX" : 
+			[
+				-1,
+				-1
+			],
+			"MIN" : 
+			[
+				1,
+				1
+			],
+			"NAME" : "lookXY",
+			"PARAMS" : 0.03,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		}
+	],
+	"CREDIT" : "pjkarlik",
+	"DESCRIPTION" : " Has a jungle kind of feel, if that jungle was some alien organs. Playground of things as I attempt to learn the \"demo scene\" techniques and - like lights and sparkley stuff.. (like a lot of @evvvvil's shaders) - | VR a little chopping but nice..",
+	"GPU" : 0,
+	"HEIGHT" : 1620,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "gyroid_jungle_thing.png",
+	"TITLE" : "Gyroid Jungle Thing",
+	"WIDTH" : 3072
+}

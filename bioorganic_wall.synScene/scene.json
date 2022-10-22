@@ -1,0 +1,78 @@
+{
+   "CONTROLS" : [
+     {
+        "DEFAULT" : 1,
+        "DESCRIPTION" : "How fast the time variable grows, whether it is reactive time or constant time.",
+        "IS_META" : false,
+        "MAX" : 3,
+        "MIN" : -3,
+        "NAME" : "fly_speed",
+        "TYPE" : "knob smooth",
+        "PARAMS" : 0.1,
+        "UI_GROUP" : "reactivity"
+     },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Change the colors palette slightly. Color cycle is audioreactive",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0,
+         "NAME" : "Color_Cycle",
+         "TYPE" : "knob",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Remove the colored background to black. Good to use with an Auto Mask",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : 1,
+         "NAME" : "DeColorize",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Add some cool audioreactive distortion to the scene",
+         "IS_META" : false,
+         "MAX" : 8,
+         "MIN" : 0,
+         "NAME" : "Distort",
+         "TYPE" : "knob",
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "How high the bioorganic pieces will extrude towards the screen",
+         "IS_META" : false,
+         "MAX" : 6,
+         "MIN" : 1,
+         "NAME" : "Bio_Height",
+         "TYPE" : "slider",
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "How much the bass levels affect the bulging of the bump map",
+         "IS_META" : false,
+         "MAX" : 20,
+         "MIN" : 1,
+         "NAME" : "Bass_Bulge",
+         "TYPE" : "slider",
+         "UI_GROUP" : "warp"
+      }
+   ],
+   "CREDIT" : "Shane ft. Sieg Mattel",
+   "DESCRIPTION" : "Raymarching a textured XY plane. Basically, just an excuse to try out the new pebbled texture.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image47",
+         "PATH" : "images/47.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "bio_wall.png",
+   "TITLE" : "Bioorganic Wall",
+   "WIDTH" : 1920
+}

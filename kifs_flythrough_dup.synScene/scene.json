@@ -1,0 +1,173 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Applies extra constant rotational motion to the fractal.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "unfolding",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "X, Y, and Z params control the shape of the fractal.",
+			"MAX" : 1.5,
+			"MIN" : 0.5,
+			"NAME" : "x_param",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "X, Y, and Z params control the shape of the fractal.",
+			"MAX" : 1.5,
+			"MIN" : 0.5,
+			"NAME" : "y_param",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "X, Y, and Z params control the shape of the fractal.",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "z_param",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "This controls the size of the blocks that form the fractal.",
+			"MAX" : -0.2,
+			"MIN" : 0.05,
+			"NAME" : "size",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Move the X-axis to spin about your main axis, or move the Y-axis to tilt forwards or backwards.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "lookXY",
+			"PARAMS" : 0.03,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "ON: time variable is influenced by the audio bass. OFF: constant rate.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reactive_time",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "How fast the time variable grows, whether it is reactive time or constant time.",
+			"MAX" : 4,
+			"MIN" : -4,
+			"NAME" : "rate_in",
+			"TYPE" : "knob",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Blue, reflective lighting. Turn down to use more alternate lighting.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "standard_lighting",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Alternate lighting pattern, using built-in texture or user selected media. Scan it in and out with 'scan alt light'.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "alternate_lighting",
+			"PARAMS" : 0.2,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Moves the 'alternate lighting' source further from the camera.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "scan_alt_light",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "A rendering glitch that causes a strange liquifying effect near hard edges.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "liquify",
+			"TYPE" : "slider",
+			"UI_GROUP" : "render glitches"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Brings in the far wall, resulting in very interesting patterns when brought up close.",
+			"MAX" : 1,
+			"MIN" : 0.01,
+			"NAME" : "far_wall",
+			"TYPE" : "slider",
+			"UI_GROUP" : "render glitches"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Constructing a basic fractal object with Knighty's Kaleidoscopic IFS procedure.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpg"
+		},
+		{
+			"NAME" : "image10",
+			"PATH" : "images/10.jpg"
+		},
+		{
+			"NAME" : "geom",
+			"PATH" : "images/geo.jpg"
+		}
+	],
+	"IMAGE_PATH" : "kifs_flythrough_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "fractalPass",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "KIFS Flythrough_dup",
+	"WIDTH" : 1920
+}

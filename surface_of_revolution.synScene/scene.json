@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Draw an SDF and make it turn. Like making pottery or something",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "surface_of_revolution.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Surface of Revolution",
+	"WIDTH" : 1280
+}

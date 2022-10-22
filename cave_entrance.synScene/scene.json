@@ -1,0 +1,184 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : -5,
+         "NAME" : "fly_speed",
+         "TYPE" : "knob",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 2,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : 2,
+         "NAME" : "fov",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 16,
+         "MIN" : 0,
+         "NAME" : "fog",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "look",
+         "TYPE" : "xy smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0,
+         "NAME" : "light_rate",
+         "TYPE" : "knob",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_lights",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_time",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_morph",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "ray_march",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0,
+         "NAME" : "morph_rate",
+         "TYPE" : "knob",
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : 0,
+         "NAME" : "z_waves",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.75,
+         "MIN" : 0,
+         "NAME" : "y_waves",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : -2,
+         "NAME" : "x_waves",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "heat_map",
+         "TYPE" : "slider",
+         "UI_GROUP" : "texture"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "texture_mix",
+         "TYPE" : "slider",
+         "UI_GROUP" : "texture"
+      },
+      {
+         "DEFAULT" : 0.55,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "ambience",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "lighting"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "Simple raymarching exercise, inspired by IQ's parallax \"Cave\" experiment.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image2",
+         "PATH" : "images/2.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "cave.png",
+   "TITLE" : "Cave Entrance",
+   "WIDTH" : 1920
+}

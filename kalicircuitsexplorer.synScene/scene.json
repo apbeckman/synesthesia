@@ -1,0 +1,90 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 1.75,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0.15,
+         "NAME" : "rate",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 10,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 24,
+         "MIN" : 8,
+         "NAME" : "loops",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0.01,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.051,
+         "MIN" : 0.01000001,
+         "NAME" : "intensity",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 2.14000010490417,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 0.5,
+         "NAME" : "focus",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 39,
+         "MIN" : 6,
+         "NAME" : "pulse",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 10,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 100,
+         "MIN" : -100,
+         "NAME" : "glow",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : -2,
+         "NAME" : "center",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "motion"
+      },
+      {
+         "DEFAULT" : 0.75,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.1,
+         "NAME" : "zoom",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "motion"
+      }
+   ],
+   "CREDIT" : "by mojovideotech",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 2160,
+   "IMAGE_PATH" : "kalicircuitsexplorer.png",
+   "TITLE" : "KaliCircuitsExplorer",
+   "WIDTH" : 3480
+}

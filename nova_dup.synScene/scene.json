@@ -1,0 +1,102 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn up to simplify the scene into a few splotches of color.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "simplify",
+         "PARAMS" : 0.25,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "zoom"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "'Zooms Out' when turned up, causing a grainy effect like a sandstorm.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "sandstorm",
+         "PARAMS" : 0.400000005960464,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "zoom"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Cause the slopes of the texture to highlight on high percussive hits.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "flashing",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "action"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "While ON, pulses emanate outwards synced to the BPM of the song.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "pulsate",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "action"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "A radial grid effect that emanates out from the center like rays of energy.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "radial_grid",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "action"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Rotates the main texture on the beat when set to ON. Standard slow rotation when set to OFF.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "beat_rotate",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "action"
+      }
+   ],
+   "CREDIT" : "Felix Woitzel",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "nova_dup.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 810,
+         "TARGET" : "buffA",
+         "WIDTH" : 1440
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 810,
+         "TARGET" : "buffC",
+         "WIDTH" : 1440
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 810,
+         "TARGET" : "buffD",
+         "WIDTH" : 1440
+      }
+   ],
+   "SMOOTH_TRANSITIONS" : [
+      {
+         "DURATION" : 3,
+         "UNIFORMS" : [ "light", "dark" ]
+      },
+      {
+         "DURATION" : 3,
+         "UNIFORMS" : [ "cReg1", "cReg0", "cReg2", "cReg3" ]
+      }
+   ],
+   "TITLE" : "Nova_dup",
+   "WIDTH" : 1920
+}

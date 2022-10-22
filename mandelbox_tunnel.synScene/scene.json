@@ -1,0 +1,21 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "test",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "dr2",
+	"DESCRIPTION" : "Tunneling through a Mandelbox",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "mandelbox_tunnel.png",
+	"TITLE" : "Mandelbox Tunnel",
+	"WIDTH" : 1280
+}

@@ -1,0 +1,21 @@
+{
+	"CONTROLS" : [
+		{
+			"DEFAULT" : -0.0125,
+			"DESCRIPTION" : "Choose from one of four different patterns for the scene.",
+			"MAX" : 0.125,
+			"MIN" : 0,
+			"NAME" : "Size",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "pattern"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Too many eyes\nContinued tweaking on KIFS fractals",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "too_many_eyes.png",
+	"TITLE" : "Too many eyes",
+	"WIDTH" : 1280
+}

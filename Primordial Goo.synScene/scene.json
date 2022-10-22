@@ -1,0 +1,62 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -0.6,
+			"NAME" : "terrain",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rate",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.1,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : -2,
+			"NAME" : "zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.7,
+			"MIN" : -2.5,
+			"NAME" : "FOV",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.75,
+			"MIN" : -0.25,
+			"NAME" : "yPos",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "Anonymous",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 900,
+	"IMAGE_PATH" : "Primordial_Goo.jpg",
+	"TITLE" : "Primordial Goo",
+	"WIDTH" : 1600
+}

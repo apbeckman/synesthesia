@@ -1,0 +1,68 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "crystalrate",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.25,
+         "MIN" : -0.25,
+         "NAME" : "mod1",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.75,
+         "MIN" : -0.75,
+         "NAME" : "crazyFloor",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "lookXY",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "jeyko",
+   "DESCRIPTION" : "potato",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "crystalline_pillars_-_day_94.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 900,
+         "TARGET" : "BuffA",
+         "WIDTH" : 1600
+      }
+   ],
+   "TITLE" : "Crystalline Pillars - Day 94",
+   "WIDTH" : 1920
+}

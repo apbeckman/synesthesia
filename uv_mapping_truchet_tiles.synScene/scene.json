@@ -1,0 +1,42 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "byt3_m3chanic",
+	"DESCRIPTION" : "Thank you @Fabrice for helping me though this beast - wanted to share / Doing a UV map on a tile set made my head cave in but wow!! ( Kind of looking like a Lisa Frank sticker)",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "uv_mapping_truchet_tiles.png",
+	"TITLE" : "UV Mapping Truchet Tiles",
+	"WIDTH" : 1280
+}

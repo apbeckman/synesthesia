@@ -1,0 +1,143 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Rotate the fractal along the Z axis, turning it into a goopy mess.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "rot_on",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "psych"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Rotate to the right or left.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rot_direction",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "psych"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Changes from a short to long lens perspective.",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "perspective",
+			"PARAMS" : 0.025,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Multiplier on the z-axis. Similar, but different from perspective.",
+			"MAX" : 1.5,
+			"MIN" : 0,
+			"NAME" : "z_depth",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Rotate the camera downwards by 90 degrees.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "down_rot",
+			"TYPE" : "bang counter",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Rotate the camera rightwards by 90 degrees.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "right_rot",
+			"TYPE" : "bang counter",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 4.3,
+			"DESCRIPTION" : "Changes the number of iterations that create the scaffold. Only 4 options here. Heavily modifies how the rotation in psych behaves as well.",
+			"MAX" : 4.3,
+			"MIN" : 1.01,
+			"NAME" : "iters",
+			"TYPE" : "slider",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Stretches and distorts the fractal. Default is 50/50 right in the middle.",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "scale_xy",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 1,
+			"DEF_COLOR" : 
+			[
+				1,
+				1,
+				1
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "col1",
+			"TYPE" : "color",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 1,
+			"DEF_COLOR" : 
+			[
+				0,
+				0.8,
+				1
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "col2",
+			"TYPE" : "color",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 1,
+			"DEF_COLOR" : 
+			[
+				1,
+				0.4,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "col3",
+			"TYPE" : "color",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "bar_on",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "color"
+		}
+	],
+	"CREDIT" : "Meebs",
+	"DESCRIPTION" : "",
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "scaffold_fractal_dup.png",
+	"TITLE" : "Scaffold Fractal_dup",
+	"WIDTH" : 1280
+}

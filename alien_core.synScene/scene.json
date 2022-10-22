@@ -1,0 +1,57 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "rotatexy",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "direction",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.25,
+         "MIN" : 0,
+         "NAME" : "test",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "glkt",
+   "DESCRIPTION" : "A weird alien core, using raymarching. Click to turn around. \nTry changing the texture, there are interesting patterns to find...",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image48",
+         "PATH" : "images/48.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "alien_core.png",
+   "TITLE" : "Alien Core",
+   "WIDTH" : 1920
+}

@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Fortress Harkonnen\nInspired by: http://www.fractalforums.com/new-theories-and-research/very-simple-formula-for-fractal-patterns/\n",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "fortress_harkonnen.png",
+	"TITLE" : "Fortress Harkonnen",
+	"WIDTH" : 1920
+}

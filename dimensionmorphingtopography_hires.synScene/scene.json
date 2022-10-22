@@ -1,0 +1,118 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "rate",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 3.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : 1,
+         "NAME" : "subdivisions",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.550000011920929,
+         "MIN" : -0.100000001490116,
+         "NAME" : "expand",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.75,
+         "MIN" : 0.25,
+         "NAME" : "cycle",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3.14590001106262,
+         "MIN" : -3.14590001106262,
+         "NAME" : "rXY",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "Camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3.14590001106262,
+         "MIN" : -3.14590001106262,
+         "NAME" : "rZ",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "Rotates"
+      },
+      {
+         "DEFAULT" : 2.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 1,
+         "NAME" : "zoom",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "Camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "blend",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "light/color"
+      },
+      {
+         "DEFAULT" : 12.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 20,
+         "MIN" : 0,
+         "NAME" : "light",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "light/color"
+      },
+      {
+         "DEFAULT" : 0.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "roto",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "Defaults"
+      }
+   ],
+   "CREDIT" : "by mojovideotech",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "dimensionmorphingtopography_hires.png",
+   "TITLE" : "DimensionMorphingTopography hires",
+   "WIDTH" : 1920
+}

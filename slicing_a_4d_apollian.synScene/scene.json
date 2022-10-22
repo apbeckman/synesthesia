@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Slicing a 4D apollian\nWas experimenting with slicing 3D fractals in 2D.\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "slicing_a_4d_apollian.png",
+	"TITLE" : "Slicing a 4D apollian",
+	"WIDTH" : 1280
+}

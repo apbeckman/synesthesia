@@ -1,0 +1,158 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add a circular 'paint brush' to the scene. Other controls invert the brush, change the brush size, or change the position.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "paint_on",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "paint"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "paint on must be on. Inverts the paintbrush from 'cutting out' the simulation or painting where it is on.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "paint_invert",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "paint"
+		},
+		{
+			"DEFAULT" : 0.2,
+			"DESCRIPTION" : "paint on must be on. Brush size.",
+			"MAX" : 0.5,
+			"MIN" : -0,
+			"NAME" : "paint_size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "paint"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "paint on must be on. Move to move the paintbrush.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "paint_pos",
+			"PARAMS" : 0.05,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "paint"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Slicing action will automatically happen on the beats in the music with this set to on. Otherwise, turn this off and manually slice with the slice_pos.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_slice",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "slice"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "auto slice must be OFF to see this action. Move to manually slice the simulation.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "manual_slice",
+			"TYPE" : "xy",
+			"UI_GROUP" : "slice"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Invert the color palette.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "color_mix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Invert the color palette.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Flash yellow on high hits.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flashing",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Changes the simulation to make it more drippy when on.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "drips",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "mode"
+		}
+	],
+	"CREDIT" : "Meebs ft. Flexi",
+	"DESCRIPTION" : "",
+	"HARD_TRANSITIONS" : 
+	[
+		{
+			"UNIFORM" : "inOrOut",
+			"VALUES" : 
+			[
+				1,
+				-1,
+				0
+			]
+		},
+		{
+			"UNIFORM" : "mode",
+			"VALUES" : 
+			[
+				1,
+				-1,
+				0
+			]
+		}
+	],
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "colornoise",
+			"PATH" : "images/colornoise.jpg"
+		}
+	],
+	"IMAGE_PATH" : "biopsy_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "buffB",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "buffC",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "buffD",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "coloredSim",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Biopsy_dup",
+	"WIDTH" : 1920
+}

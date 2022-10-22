@@ -1,0 +1,238 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "ignore"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "ignore"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "LookXY",
+         "TYPE" : "xy smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 3.42,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2.15,
+         "MIN" : 3.42,
+         "NAME" : "Fog",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Fly_Speed",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 0,
+         "NAME" : "Cam_Height",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Cam_Control",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "Height_Bounce",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Warp_Geometry",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : -0.7071,
+         "MIN" : 0,
+         "NAME" : "Plane_Morph",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "Shiny",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : 0.5,
+         "NAME" : "Smoother",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 30,
+         "DESCRIPTION" : "Drop the ray steps to 20% to make it more gloopy",
+         "IS_META" : false,
+         "MAX" : 6,
+         "MIN" : 30,
+         "NAME" : "Shloopy",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Drop the ray steps to 20% to make it more gloopy",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "Tex_Bump",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Sinusoidal wave carrying the height of the plane",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0,
+         "NAME" : "Wave_Height",
+         "TYPE" : "slider",
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 2,
+         "DESCRIPTION" : "Controls wave length (frequency of sin wave)",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : 1,
+         "NAME" : "Wave_Length",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 6.28,
+         "MIN" : 0,
+         "NAME" : "Tile_Color",
+         "TYPE" : "slider",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 6.28,
+         "MIN" : 0,
+         "NAME" : "Second_Tile",
+         "TYPE" : "slider",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Hue_Rotate",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : 1,
+         "NAME" : "Color_Secondary",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Raise the occlusion",
+         "IS_META" : false,
+         "MAX" : 2.5,
+         "MIN" : 0,
+         "NAME" : "Shadow",
+         "TYPE" : "slider",
+         "UI_GROUP" : "lighting"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "Using a randomized 3D tile to add some pronounced surfacing to a warped plane.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image46",
+         "PATH" : "images/46.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "plane.png",
+   "TITLE" : "Abstract Plane",
+   "WIDTH" : 1920
+}

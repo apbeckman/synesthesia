@@ -1,0 +1,98 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				2,
+				2
+			],
+			"MIN" : 
+			[
+				-2,
+				-2
+			],
+			"NAME" : "center",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0.01,
+			"NAME" : "rate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 15,
+			"DESCRIPTION" : "",
+			"MAX" : 24,
+			"MIN" : 8,
+			"NAME" : "loops",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.03,
+			"DESCRIPTION" : "",
+			"MAX" : 0.05,
+			"MIN" : 0.01,
+			"NAME" : "intensity",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 2.14,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 0.5,
+			"NAME" : "focus",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 30,
+			"DESCRIPTION" : "",
+			"MAX" : 60,
+			"MIN" : 6,
+			"NAME" : "pulse",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 10,
+			"DESCRIPTION" : "",
+			"MAX" : 100,
+			"MIN" : -100,
+			"NAME" : "glow",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.67,
+			"DESCRIPTION" : "",
+			"MAX" : 1.04,
+			"MIN" : 0.1,
+			"NAME" : "zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "by mojovideotech",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 2160,
+	"IMAGE_PATH" : "kalicircuits2.png",
+	"TITLE" : "KaliCircuits2",
+	"WIDTH" : 3840
+}

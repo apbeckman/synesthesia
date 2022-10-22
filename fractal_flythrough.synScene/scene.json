@@ -1,0 +1,30 @@
+{
+		"CONTROLS" :
+	[ 
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"IS_META" : false,
+			"MAX" : 1,
+			"MIN" : -1,
+			"PARAMS" : 0.05,
+			"NAME" : "lookXY",
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		 }
+	   ],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Moving a camera through a fractal object.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image6",
+			"PATH" : "images/6.jpeg"
+		}
+	],
+	"IMAGE_PATH" : "fractal_flythrough.png",
+	"TITLE" : "Fractal Flythrough",
+	"WIDTH" : 1280
+}

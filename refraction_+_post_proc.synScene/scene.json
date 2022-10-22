@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Refraction + post proc\nAdded a bit of post processing to the earlier refraction experiment\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "refraction_+_post_proc.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Refraction + post proc",
+	"WIDTH" : 1280
+}

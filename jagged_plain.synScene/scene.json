@@ -1,0 +1,134 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "fly_speed",
+         "TYPE" : "knob",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "look",
+         "TYPE" : "xy smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "cam_path",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "rate_in",
+         "TYPE" : "knob",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : 0,
+         "NAME" : "morph_rate",
+         "TYPE" : "knob",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_time",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_hue",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_morph",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_lights",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "image_mix",
+         "TYPE" : "slider",
+         "UI_GROUP" : "texture"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : 0,
+         "NAME" : "waves",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "Using relatively cheap functions to produce a sharp, jagged, surface with a fake glow.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image2",
+         "PATH" : "images/2.jpg"
+      },
+      {
+         "NAME" : "image3",
+         "PATH" : "images/3.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "plain.png",
+   "TITLE" : "Jagged Plain",
+   "WIDTH" : 1920
+}

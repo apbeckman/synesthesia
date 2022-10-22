@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "derSchamane",
+	"DESCRIPTION" : "I tested a transparent 3D raymarching idea and found some sacred patterns.\n\nEnjoy an extra dimension with your red/cyan glasses on and drag the mouse to rotate the camera.\n\nIn the end there's just a moving sphere in a mirror box...",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "anaglyph_sphere_waves.png",
+	"TITLE" : "Anaglyph Sphere Waves",
+	"WIDTH" : 1280
+}

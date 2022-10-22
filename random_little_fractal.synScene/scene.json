@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Random little fractal\nWeird but to me appealing results after a bit of tinkering with no clear goals\n\n",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "random_little_fractal.png",
+	"TITLE" : "Random little fractal",
+	"WIDTH" : 1920
+}

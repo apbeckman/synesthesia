@@ -1,0 +1,30 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.8,
+			"MIN" : -0.8,
+			"NAME" : "test",
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.8,
+			"MIN" : -0.8,
+			"NAME" : "test2",
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Apollian with a twist\nPlaying around with apollian fractal\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "apollian_with_a_twist.png",
+	"TITLE" : "Apollian with a twist",
+	"WIDTH" : 1280
+}

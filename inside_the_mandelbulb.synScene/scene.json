@@ -1,0 +1,32 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 4,
+			"MIN" : 0,
+			"NAME" : "Power",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.25,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Inside the mandelbulb\nSimple extension of the earlier refraction shaders but it turned out mandelbulb had a bit of an interesting inside\nso shared the result\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "inside_the_mandelbulb.png",
+	"TITLE" : "Inside the mandelbulb",
+	"WIDTH" : 1280
+}

@@ -1,0 +1,25 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Using a pseudo path tracing technique to produce a simple realtime scene lit up with multiple emitters.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image10",
+			"PATH" : "images/10.jpg"
+		}
+	],
+	"IMAGE_PATH" : "pseudo_realtime_path_tracing.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Pseudo Realtime Path Tracing",
+	"WIDTH" : 1920
+}

@@ -1,0 +1,36 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Semi-physical model of combustion.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "combust.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1440,
+			"TARGET" : "BuffD",
+			"WIDTH" : 2560
+		}
+	],
+	"TITLE" : "Combust",
+	"WIDTH" : 1920
+}

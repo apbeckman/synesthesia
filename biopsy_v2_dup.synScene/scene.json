@@ -1,0 +1,198 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Changes the simulation to make it more drippy.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "drips",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Automatically slice the simulation on the beats in the music.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "slicing",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Vertical and horizontal stretching in time with the music.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "stretching",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Adds a slow lens distortion. Add vertical or horizontal mirrors for best effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "distort",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : -1,
+			"MIN" : 1,
+			"NAME" : "in_or_out",
+			"TYPE" : "slider",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "If on, only center circle will be 'fiery'.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "circle_on",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "circle"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Size of center circle.",
+			"MAX" : 1,
+			"MIN" : -0.3,
+			"NAME" : "circle_size",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "circle"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Choose from one of three color palettes.",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "color_palette",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Flash yellow on high hits.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flashing",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0.1,
+			"DESCRIPTION" : "Default scene has a darker, subtly audio reactive shading. Turn this up to use full-color, no shading.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "no_shading",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Send a sweep through the simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "down_sweep",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "sweep"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Send a sweep through the simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "up_sweep",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "sweep"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Send a sweep through the simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "left_sweep",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "sweep"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Send a sweep through the simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "right_sweep",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "sweep"
+		}
+	],
+	"CREDIT" : "Meebs ft. Flexi",
+	"DESCRIPTION" : "",
+	"HARD_TRANSITIONS" : 
+	[
+		{
+			"UNIFORM" : "inOrOut",
+			"VALUES" : 
+			[
+				1,
+				-1,
+				0
+			]
+		},
+		{
+			"UNIFORM" : "mode",
+			"VALUES" : 
+			[
+				1,
+				-1,
+				0
+			]
+		}
+	],
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "colornoise",
+			"PATH" : "images/colornoise.jpg"
+		}
+	],
+	"IMAGE_PATH" : "biopsy_v2_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "buffB",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "buffB2",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "buffC",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "buffD",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Biopsy_V2_dup",
+	"WIDTH" : 1920
+}

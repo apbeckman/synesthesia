@@ -1,0 +1,30 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "balkhan",
+   "DESCRIPTION" : "tunnel/grid fx, featuring costy colors",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "pulsing_tunnel_grid.png",
+   "TITLE" : "Pulsing tunnel grid",
+   "WIDTH" : 1920
+}

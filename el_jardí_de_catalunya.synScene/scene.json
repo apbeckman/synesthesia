@@ -1,0 +1,30 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "wizgrav",
+   "DESCRIPTION" : "Port of a rayglider script minus the audio reactive bits. Original here https://tinyurl.com/ybgfwulm",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "el_jardí_de_catalunya.png",
+   "TITLE" : "El Jardí de Catalunya",
+   "WIDTH" : 1920
+}

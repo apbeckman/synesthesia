@@ -1,0 +1,156 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Control levels of fog emerging from the z axis",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Fog",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Make the scene darker",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Darkness",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Move around the camera. Can be reset with Cam_Reset",
+         "IS_META" : false,
+         "MAX" : 1.25,
+         "MIN" : -1.25,
+         "NAME" : "LookXY",
+         "TYPE" : "xy smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Field of View",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 0.5,
+         "NAME" : "FOV",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Transition from a straight path to a curved one that alternates sides",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Curve_Path",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "path"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Add some waviness to the y coordinates!",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0,
+         "NAME" : "Wave_Height",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "path"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "How fast the time variable grows, whether it is reactive time or constant time.",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "rate_in",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "ON: time variable is influenced by the audio bass. OFF: constant rate.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_time",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "ON: time variable is influenced by the audio bass. OFF: constant rate.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "bass_lights",
+         "TYPE" : "knob",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Get rid of those bolts on the wall, ya goof!",
+         "IS_META" : false,
+         "MAX" : 0.975,
+         "MIN" : 1,
+         "NAME" : "Remove_Bolts",
+         "TYPE" : "slider",
+         "UI_GROUP" : "surface"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Cycles through some bump mapping driven by audio levels. It looks... eh, it's not perfect",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Surface_Time",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "surface"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Transition between a color and the original texture",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Texture",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "surface"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Goopify the scene! Turns down the number of iterations of the raymarching function.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Ray_Steps",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      }
+   ],
+   "CREDIT" : "Shane ft. Sieg Mattel",
+   "DESCRIPTION" : "Using cylindrical coordinates to construct a steel-plated tunnel with an industrial feel.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image3",
+         "PATH" : "images/3.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "tunnel.png",
+   "TITLE" : "Industrial Tunnel",
+   "WIDTH" : 1920
+}

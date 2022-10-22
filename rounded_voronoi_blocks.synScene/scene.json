@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Applying some bump mapping and lighting to a variation on IQ's 9-tap Voronoi algorithm to produce some animated, pseudo-lit rounded blocks. 2D made to look like 3D would be another way to put it. :)",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpeg"
+		}
+	],
+	"IMAGE_PATH" : "rounded_voronoi_blocks.png",
+	"TITLE" : "Rounded Voronoi Blocks",
+	"WIDTH" : 1920
+}

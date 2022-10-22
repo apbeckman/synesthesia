@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "gaz",
+	"DESCRIPTION" : "3d",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "icosahedron_frame.png",
+	"TITLE" : "Icosahedron frame",
+	"WIDTH" : 1280
+}

@@ -1,0 +1,51 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "iMouse",
+			"TYPE" : "xy",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Slider1",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "Slider1",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "tmpInputName2",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "",
+	"DESCRIPTION" : "Automatically converted from https://www.shadertoy.com/view/7l2SRh by atara.  This CPPN and CLIP fed shader is rendering a neon synthwave style grod! ",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "synthwave.png",
+	"TITLE" : "Synthwave",
+	"WIDTH" : 1920
+}

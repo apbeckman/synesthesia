@@ -1,0 +1,36 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Try to kill them all!\n\nThanks for the inspo mathmasterzach",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "branching_paths.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Branching Paths",
+	"WIDTH" : 1280
+}

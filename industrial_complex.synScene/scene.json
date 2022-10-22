@@ -1,0 +1,144 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 3,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 1,
+         "NAME" : "Fly_Speed",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2.75,
+         "MIN" : 0,
+         "NAME" : "FOV",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "Look_XY",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : 1,
+         "NAME" : "Cam_Reset",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Camera_Wrap",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Ray_Steps",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Escape",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Warmth",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "aesthetic"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Textures",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "aesthetic"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "texture_react",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "aesthetic"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "Using standard distance field operations to produce an abstract industrial complex with a lot of floor space. :)",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image3",
+         "PATH" : "images/3.jpg"
+      },
+      {
+         "NAME" : "image4",
+         "PATH" : "images/4.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "complex.png",
+   "TITLE" : "Industrial Complex",
+   "WIDTH" : 1920
+}

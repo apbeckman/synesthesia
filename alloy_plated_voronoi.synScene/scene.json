@@ -1,0 +1,59 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Cube Scale",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "RIGID_SCROLL",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Cube Scale",
+			"MAX" : 5,
+			"MIN" : 0.5,
+			"NAME" : "Many",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Cube Scale",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Bronze_Copper",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.45,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.09,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "KaleidoMode",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Bump mapped, smooth Voronoi layers, sectioned off into fractional contours. Basically, just an excuse to make something shiny. :)",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "alloy_plated_voronoi.png",
+	"TITLE" : "Alloy Plated Voronoi",
+	"WIDTH" : 1920
+}

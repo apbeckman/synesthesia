@@ -1,0 +1,64 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 7,
+			"MIN" : -2,
+			"NAME" : "Count",
+			"PARAMS" : 0.06,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				2,
+				2
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -2,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.136,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.75,
+			"NAME" : "Expand",
+			"PARAMS" : 0.153,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "Raymarching experiment, use mouse to control camera. And tweak the code ♥ !",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "cubucious.png",
+	"TITLE" : "Cubucious",
+	"WIDTH" : 1280
+}

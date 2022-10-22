@@ -1,0 +1,70 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Smoothly switch between normal perspective and Equirectangular coordinates. Best results with this slider at 0% or 100%.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "perspective",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 8,
+			"MIN" : 1,
+			"NAME" : "FOVmod",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookZ",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "whiteout",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "effects"
+		},
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "",
+			"MAX" : -1,
+			"MIN" : 1,
+			"NAME" : "rate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Applying a geometric pattern and edging to Fizzer's infinite, maze-like lattice structure.",
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "maze_lattice_dup.png",
+	"TITLE" : "Maze Lattice_dup",
+	"WIDTH" : 1920
+}

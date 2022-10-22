@@ -1,0 +1,42 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flash",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "michael0884",
+	"DESCRIPTION" : "Using Voronoi particle tracking to simulate the dynamics of a slime mold. Use mouse to change parameters.",
+	"GPU" : 0,
+	"HEIGHT" : 1440,
+	"IMAGE_PATH" : "mold_van_damme_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1440,
+			"TARGET" : "BuffA",
+			"WIDTH" : 2560
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1440,
+			"TARGET" : "BuffB",
+			"WIDTH" : 2560
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1440,
+			"TARGET" : "BuffC",
+			"WIDTH" : 2560
+		}
+	],
+	"TITLE" : "Mold van Damme_dup",
+	"WIDTH" : 2560
+}

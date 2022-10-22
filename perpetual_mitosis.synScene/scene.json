@@ -1,0 +1,30 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "tdhooper",
+   "DESCRIPTION" : "I wanted this to have the feel of a Marvel movie intro, but finding an interesting camera path, and doing 'realistic' shading was hard; so we got neon colours instead ;)",
+   "HEIGHT" : 900,
+   "IMAGE_PATH" : "perpetual_mitosis.png",
+   "TITLE" : "Perpetual mitosis",
+   "WIDTH" : 1600
+}

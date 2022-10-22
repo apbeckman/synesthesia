@@ -1,0 +1,56 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.88,
+         "MIN" : 0,
+         "NAME" : "openUp",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : -0.3,
+         "MIN" : 0,
+         "NAME" : "Angle",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : -1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "inOrOut",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4.5,
+         "MIN" : 0,
+         "NAME" : "separation",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "jeyko",
+   "DESCRIPTION" : "Wow, it's 30. Is this the end?",
+   "HEIGHT" : 1224,
+   "IMAGES" : [
+      {
+         "NAME" : "image30",
+         "PATH" : "images/30.png"
+      }
+   ],
+   "IMAGE_PATH" : "day_30_-_xargantian_polyjupe.png",
+   "TITLE" : "Day 30 - Xargantian Polyjupe",
+   "WIDTH" : 2176
+}

@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "Experimenting shapes",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "smoke_rings.png",
+	"TITLE" : "Smoke Rings",
+	"WIDTH" : 1280
+}

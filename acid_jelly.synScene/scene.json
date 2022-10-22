@@ -1,0 +1,141 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.07,
+			"DESCRIPTION" : "",
+			"MAX" : 0.2,
+			"MIN" : 0.02,
+			"NAME" : "zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.13,
+			"DESCRIPTION" : "",
+			"MAX" : 0.16,
+			"MIN" : 0.075,
+			"NAME" : "contrast",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 11,
+			"DESCRIPTION" : "",
+			"MAX" : 100,
+			"MIN" : 0,
+			"NAME" : "radius",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 10.32,
+			"DESCRIPTION" : "",
+			"MAX" : 26,
+			"MIN" : 0,
+			"NAME" : "colorShift",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "rotation",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : -10,
+			"NAME" : "sinMul",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 2.38,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : -10,
+			"NAME" : "cosMul",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "yMul",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.28,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "xMul",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "xSpeed",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "ySpeed",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.003,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : 0,
+			"NAME" : "gloop",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 4.99,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "yDivide",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 6.27,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "xDivide",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "https://www.shadertoy.com/user/yozic",
+	"DESCRIPTION" : "From: https://www.shadertoy.com/view/WtGfRw",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "acid_jelly.png",
+	"TITLE" : "Acid Jelly",
+	"WIDTH" : 1920
+}

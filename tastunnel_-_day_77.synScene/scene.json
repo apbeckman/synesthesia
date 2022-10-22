@@ -1,0 +1,34 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "lookXY",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "jeyko",
+   "DESCRIPTION" : "potato",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image30",
+         "PATH" : "images/30.png"
+      }
+   ],
+   "IMAGE_PATH" : "tastunnel_-_day_77.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "BuffA",
+         "WIDTH" : 1920
+      }
+   ],
+   "TITLE" : "TASTUNNEL - Day 77",
+   "WIDTH" : 1920
+}

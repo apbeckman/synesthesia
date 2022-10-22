@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "amhall",
+	"DESCRIPTION" : "A continuous cube spiral inspired by bitless' \"Infinite Cube Zoom.\" Mouse y changes the size of each layer.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "infinite_cube_spiral.png",
+	"TITLE" : "Infinite Cube Spiral",
+	"WIDTH" : 1280
+}

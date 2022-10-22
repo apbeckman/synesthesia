@@ -1,0 +1,112 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1.2,
+			"DESCRIPTION" : "Bump",
+			"MAX" : 4.8,
+			"MIN" : 0.8,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 2,
+			"DESCRIPTION" : "Watch the shapes morph!",
+			"MAX" : 8,
+			"MIN" : 0,
+			"NAME" : "ShapeSlide",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Combines layers",
+			"MAX" : 0.4,
+			"MIN" : -0.4,
+			"NAME" : "Combiner",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 3,
+			"DESCRIPTION" : "Testy",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "TestSlider",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Bass Levels",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "BassPower",
+			"TYPE" : "slider",
+			"UI_GROUP" : "audio_reactivity"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Gain Levels",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "Gain",
+			"TYPE" : "slider",
+			"UI_GROUP" : "audio_reactivity"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "AudioReactive Shimmer Levels",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "Shimmer",
+			"TYPE" : "slider",
+			"UI_GROUP" : "audio_reactivity"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Fast, animated 2d cellular block algorithm. The blocks have been added to a back plane and raymarched to give a pseudo 3D block effect.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpg"
+		}
+	],
+	"IMAGE_PATH" : "blocks.png",
+	"TITLE" : "Cellular Blocks_dup",
+	"WIDTH" : 1920
+}

@@ -1,0 +1,72 @@
+{
+   "CONTROLS" : [
+      {
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+      {
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookZ",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 6,
+         "MIN" : -2,
+         "NAME" : "Height",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : 0,
+         "NAME" : "wallsOut",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.649999976158142,
+         "MIN" : 0,
+         "NAME" : "distortion",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : 0,
+         "NAME" : "moreTwisties",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "apb_0",
+   "DESCRIPTION" : "creds to flopine gonna edit and play around, just wanna save my changes",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "greyscale_vines.png",
+   "TITLE" : "Greyscale vines",
+   "WIDTH" : 1920
+}

@@ -1,0 +1,40 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1.75,
+         "MIN" : -0.5,
+         "NAME" : "SIZE",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "mrange",
+   "DESCRIPTION" : "License: CC0\nResults after some random coding while listening to online concert",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "psychedelic_dodec_experiment.png",
+   "TITLE" : "Psychedelic Dodec experiment",
+   "WIDTH" : 1920
+}

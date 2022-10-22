@@ -1,0 +1,31 @@
+{
+   "CONTROLS" : [
+      {
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "macbooktall",
+   "DESCRIPTION" : "the idea is to rotate the fractal based on distance from the camera.\ni used it to make this gif https://media.giphy.com/media/l2QE1mlTRVy7Y7Hfa/giphy.gif",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "fractal_trees_gif.png",
+   "TITLE" : "fractal trees gif",
+   "WIDTH" : 1920
+}

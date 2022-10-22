@@ -1,0 +1,100 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "circle_or_tri",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "geometry"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.200000002980232,
+         "MIN" : -0.200000002980232,
+         "NAME" : "distort",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "geometry"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "layers_on",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "layers"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "twist",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "layers"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "flashing",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "layers"
+      },
+      {
+         "DEFAULT" : 0.200000002980232,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "power_zoom",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "layers"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Use this scene with Media!",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "media_on",
+         "PARAMS" : 0.200000002980232,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "media"
+      }
+   ],
+   "CREDIT" : "Meebs",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "colornoise",
+         "PATH" : "images/colornoise.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "replik8_dup.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1440,
+         "TARGET" : "backbuffer",
+         "WIDTH" : 2560
+      }
+   ],
+   "TITLE" : "replik8_dup",
+   "WIDTH" : 1920
+}

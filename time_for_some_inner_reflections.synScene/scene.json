@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Time for some inner reflections\nAn evolution of: https://www.shadertoy.com/view/7dKBDt\nAfter a tip from shane found knighty's shader: https://www.shadertoy.com/view/MsKGzw\nKnighty's shaders allows one to experiment with many cool polyhedras\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "time_for_some_inner_reflections.png",
+	"TITLE" : "Time for some inner reflections",
+	"WIDTH" : 1280
+}

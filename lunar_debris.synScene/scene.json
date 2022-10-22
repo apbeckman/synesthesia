@@ -1,0 +1,111 @@
+{
+   "CONTROLS" : [
+      {
+          "DEFAULT" : 0,
+          "DESCRIPTION" : "",
+          "IS_META" : false,
+          "MAX" : 0.5,
+          "MIN" : -0.5,
+          "NAME" : "ignore",
+          "TYPE" : "xy smooth",
+          "PARAMS" : 0.03,
+          "UI_GROUP" : "ignore"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "rate_in",
+         "TYPE" : "knob",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_time",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "reactive_morph",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "fly_speed",
+         "TYPE" : "knob",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "look_around",
+         "TYPE" : "xy smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 3,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.4,
+         "MIN" : 3,
+         "NAME" : "fov",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "curve_path",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "path"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0,
+         "NAME" : "morph_rate",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "Running a camera through a random debris field.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image46",
+         "PATH" : "images/46.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "moonrocks.png",
+   "TITLE" : "Lunar Debris",
+   "WIDTH" : 1920
+}

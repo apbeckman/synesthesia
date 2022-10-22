@@ -1,0 +1,169 @@
+{
+   "CONTROLS" : [
+      {
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"IS_META" : false,
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookXY",
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		 },   
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : -10,
+         "NAME" : "CamPosition",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : -2,
+         "NAME" : "Fly_Speed",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "Rotation",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Circle_Tunnel",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Careful with this one",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : 0,
+         "NAME" : "Mapper",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Camera Field of View",
+         "IS_META" : false,
+         "MAX" : 0.1,
+         "MIN" : 1,
+         "NAME" : "FOV",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.15,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : 0.25,
+         "NAME" : "Light_Brightness",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "lighting"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Reactive_Temp",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "lighting"
+      },
+      {
+         "DEFAULT" : -0.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : -4,
+         "NAME" : "Temperature",
+         "TYPE" : "knob",
+         "UI_GROUP" : "lighting"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : 1,
+         "NAME" : "Smooth_Pipes",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "texture"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2.5,
+         "MIN" : 0.6,
+         "NAME" : "Morph_Lattice",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "Depth",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.917281,
+         "MIN" : 1,
+         "NAME" : "Ray_Steps",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "The lattice structure in this example is really simple to construct, and represents just one of infinitely many combinations.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image3",
+         "PATH" : "images/3.jpg"
+      },
+      {
+         "NAME" : "image7",
+         "PATH" : "images/7.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "lattice.png",
+   "TITLE" : "Steel Lattice",
+   "WIDTH" : 1920
+}

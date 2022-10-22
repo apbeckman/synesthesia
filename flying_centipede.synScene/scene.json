@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "Klems",
+	"DESCRIPTION" : "Also VR compatible! Click to rotate the camera.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image47",
+			"PATH" : "images/47.jpg"
+		}
+	],
+	"IMAGE_PATH" : "flying_centipede.png",
+	"TITLE" : "Flying Centipede",
+	"WIDTH" : 1280
+}

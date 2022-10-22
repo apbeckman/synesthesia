@@ -1,0 +1,73 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_on",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.015,
+			"MIN" : -0.25,
+			"NAME" : "test",
+			"TYPE" : "slider",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.0125,
+			"MIN" : -0.0125,
+			"NAME" : "rotat",
+			"TYPE" : "slider",
+			"UI_GROUP" : "camera"
+		}
+	],
+	"CREDIT" : "xenn",
+	"DESCRIPTION" : "Check mouse! \n\nhttps://xemantic.github.io/shader-web-background/\n \nGoal: shadertoy-style shaders in regular web development\n",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image8",
+			"PATH" : "images/8.jpg"
+		}
+	],
+	"IMAGE_PATH" : "hippy_flip.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Hippy Flip",
+	"WIDTH" : 1920
+}

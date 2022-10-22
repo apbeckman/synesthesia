@@ -1,0 +1,21 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT": 0,
+			"DESCRIPTION": "",
+			"MAX": 2.5,
+			"MIN": 0,
+			"NAME": "test",
+			"TYPE": "slider",
+			"UI_GROUP": "textures"
+		}
+	],
+"CREDIT": "mrange",
+"DESCRIPTION": "License CC0: Smooth Koch coordinate transform\nPlaying around with koch mappings and attempt to smooth the distance\nfunction between cells",
+"GPU": 0,
+"HEIGHT": 720,
+"IMAGE_PATH": "smooth_koch_coordinate_transform.png",
+"TITLE": "Smooth koch coordinate transform",
+"WIDTH": 1280
+}

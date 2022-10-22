@@ -1,0 +1,62 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.0625,
+			"DESCRIPTION" : "Cube Scale",
+			"MAX" : 0.5,
+			"MIN" : 0.0025,
+			"PARAMS" : 0.15,
+			"NAME" : "SCALER",
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Cube Scale",
+			"MAX" : 1,
+			"MIN" : 0.0,
+			"NAME" : "sparkles",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "ungrouped"
+		},		
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.025,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "grayscale",
+			"PARAMS" : 0.025,
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	
+	],
+	"CREDIT" : "by you",
+	"DESCRIPTION" : "Your shader description",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "extruded_video_image_2.png",
+	"TITLE" : "Extruded Video Image 2",
+	"WIDTH" : 1920
+}

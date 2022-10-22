@@ -1,0 +1,161 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Add in juicy colors.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "colorize",
+         "PARAMS" : 0.200000002980232,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Bright, watery caustics look.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "watery_tex",
+         "PARAMS" : 0.5,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Digital green/blue/yellow.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "digital_tex",
+         "PARAMS" : 0.5,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn the camera to look around.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "camera_direction",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Horizontal slices. Turn OFF if using voxelate or beat slice.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "always_sliced",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "geometry"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Split space into 3D pixels for a lo-fi glitchy look.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "voxelate",
+         "PARAMS" : 0.5,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "geometry"
+      },
+      {
+         "DEFAULT" : 10,
+         "DESCRIPTION" : "Size of voxels when using 'voxelate'.",
+         "IS_META" : false,
+         "MAX" : 0.100000001490116,
+         "MIN" : 50,
+         "NAME" : "size_voxels",
+         "PARAMS" : 0.200000002980232,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "geometry"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn ON for a reactive horizontal slicing effect. 'always sliced' must be OFF.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "beat_slice",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "Turn off for pure black/white. Turn up for mid-responsive color.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "mids_color",
+         "PARAMS" : 0.5,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0.200000002980232,
+         "DESCRIPTION" : "Bass causes the geometry to morph. Turn up for more effect, off for none.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "bass_morph",
+         "PARAMS" : 0.5,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0.400000005960464,
+         "DESCRIPTION" : "Adds extra flashing on high percussion.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "flashing",
+         "PARAMS" : 0.5,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0.00999999977648258,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.100000001490116,
+         "MIN" : -0.100000001490116,
+         "NAME" : "rate_in",
+         "PARAMS" : 0.5,
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "time"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.100000001490116,
+         "MIN" : -0.100000001490116,
+         "NAME" : "bass_rate",
+         "PARAMS" : 0.5,
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "time"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "A transparent organic field partitioned horizontally into 2D isosurface slices.",
+   "HEIGHT" : 1440,
+   "IMAGES" : [
+      {
+         "NAME" : "texIn",
+         "PATH" : "images/img.jpg"
+      },
+      {
+         "NAME" : "texIn2",
+         "PATH" : "images/img2.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "transparent_isoslices_dup.png",
+   "TITLE" : "Transparent Isoslices_dup",
+   "WIDTH" : 2560
+}

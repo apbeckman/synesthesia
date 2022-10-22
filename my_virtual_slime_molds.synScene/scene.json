@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "michael0884",
+	"DESCRIPTION" : "Virtual biological stuff, much slime, so wow *doge.png*",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "my_virtual_slime_molds.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "My virtual slime molds",
+	"WIDTH" : 1920
+}

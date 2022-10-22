@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "XT95",
+	"DESCRIPTION" : "A fractal tree with 15 cubes and 1 sphere",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "the_cubitree.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "The cubitree",
+	"WIDTH" : 1920
+}

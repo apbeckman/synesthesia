@@ -1,0 +1,100 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 1.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "rate",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 84,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 100,
+         "MIN" : 50,
+         "NAME" : "scale",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0.400000005960464,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.990000009536743,
+         "MIN" : 0.25,
+         "NAME" : "cycle",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 61,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 50,
+         "MIN" : 5,
+         "NAME" : "loops",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 2.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : -5,
+         "NAME" : "warp",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0.330000013113022,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : -0.5,
+         "NAME" : "hue",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0.100000001490116,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : -0.5,
+         "NAME" : "tint",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : -0.25,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : -1.0,
+         "NAME" : "thickness",
+         "TYPE" : "slider",
+         "UI_GROUP" : "other"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "invert_bool",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "color"
+      }
+   ],
+   "CREDIT" : "by mojovideotech",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1224,
+   "IMAGE_PATH" : "candywarp.png",
+   "TITLE" : "CandyWarp",
+   "WIDTH" : 2176
+}

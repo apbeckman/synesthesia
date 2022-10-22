@@ -1,0 +1,40 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "A multipass reflective box tunnel with some random reflective ray scattering thrown in. Basically, it's just a remake of W23's \"Path Racer\" and NuSan's \"Corridor Travel\" examples.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image3",
+         "PATH" : "images/3.jpg"
+      },
+      {
+         "NAME" : "image48",
+         "PATH" : "images/48.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "traced_tunnel.png",
+   "TITLE" : "Traced Tunnel",
+   "WIDTH" : 1920
+}

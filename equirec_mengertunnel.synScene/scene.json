@@ -1,0 +1,40 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : -1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 5,
+			"DESCRIPTION" : "",
+			"MAX" : 12,
+			"MIN" : 1,
+			"NAME" : "depth",
+			"PARAMS" : 0.25,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : -0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "colorCycle",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "by mojovideotech",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "equirec_mengertunnel.png",
+	"TITLE" : "Equirec_MengerTunnel",
+	"WIDTH" : 1920
+}

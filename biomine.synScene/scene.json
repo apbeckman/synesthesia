@@ -1,0 +1,218 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Move the camera",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "LookXY",
+         "PARAMS" : 0.0299999993294477,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 64,
+         "DESCRIPTION" : "How many steps before the raymarcher is pooped",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 64,
+         "NAME" : "ray_steps",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morphers"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "what to draw on the veins",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "cell_mode",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "aesthetic"
+      },
+      {
+         "DEFAULT" : 1.666,
+         "DESCRIPTION" : "Field of View of camera",
+         "IS_META" : false,
+         "MAX" : 9,
+         "MIN" : 1.666,
+         "NAME" : "FOV",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Control FlyThrough Speed.",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "Fly_Speed",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Make them look all cartoony",
+         "IS_META" : false,
+         "MAX" : 2.66,
+         "MIN" : 0,
+         "NAME" : "Cartoonize",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "aesthetic"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "Control the scene's ambient lighting",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : -15,
+         "NAME" : "Ambience",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "aesthetic"
+      },
+      {
+         "DEFAULT" : 3,
+         "DESCRIPTION" : "Level of audioreactivity for lighting",
+         "IS_META" : false,
+         "MAX" : 8,
+         "MIN" : 0,
+         "NAME" : "Lighting_Gain",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "audio"
+      },
+      {
+         "DEFAULT" : 3,
+         "DESCRIPTION" : "Level of audioreactivity on vein width",
+         "IS_META" : false,
+         "MAX" : 25,
+         "MIN" : 0,
+         "NAME" : "Vein_Gain",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "audio"
+      },
+      {
+         "DEFAULT" : 0.3,
+         "DESCRIPTION" : "Level of audioreactivity on vein twisting (if Vein Time is enabled)",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Twist_Gain",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "audio"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Make vein lights react to bass hits",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Light_Hits",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "audio"
+      },
+      {
+         "DEFAULT" : 0.1,
+         "DESCRIPTION" : "RGB Red value",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "Red",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "vein_colors"
+      },
+      {
+         "DEFAULT" : 0.01,
+         "DESCRIPTION" : "RGB Green value",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "Green",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "vein_colors"
+      },
+      {
+         "DEFAULT" : 0.004,
+         "DESCRIPTION" : "RGB Blue value",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "Blue",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "vein_colors"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Bring on dem shadows, boi",
+         "IS_META" : false,
+         "MAX" : -1.75,
+         "MIN" : 0,
+         "NAME" : "Shadows",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "aesthetic"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Control the walls",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Walls",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morphers"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Control the walls",
+         "IS_META" : false,
+         "MAX" : 2.5,
+         "MIN" : -2.1,
+         "NAME" : "Tunnel_Reveal",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morphers"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Some pretty wild vein morphing",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : -5,
+         "NAME" : "Vein_Twist",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morphers"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Make vein lights react to bass hits",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Vein_Time",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morphers"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "Using a combination of simple gyroid surfaces to create a dual mineral and organic looking scene.",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "biomine_2.png",
+   "TITLE" : "Biomine",
+   "WIDTH" : 1920
+}

@@ -1,0 +1,25 @@
+{
+	"CREDIT" : "Trixelized",
+	"DESCRIPTION" : "there he is",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image7",
+			"PATH" : "images/7.jpg"
+		}
+	],
+	"IMAGE_PATH" : "there_he_is.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "there he is",
+	"WIDTH" : 1280
+}

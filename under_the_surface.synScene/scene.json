@@ -1,0 +1,41 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : -2,
+         "NAME" : "its",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "Virgill",
+   "DESCRIPTION" : "There is something under the surface\nJust testing enhanced sphere tracing: lgdv.cs.fau.de/get/2234\nImplemented by chronos in www.shadertoy.com/view/4lj3zK",
+   "HEIGHT" : 720,
+   "IMAGE_PATH" : "under_the_surface.png",
+   "TITLE" : "Under the surface",
+   "WIDTH" : 1280
+}

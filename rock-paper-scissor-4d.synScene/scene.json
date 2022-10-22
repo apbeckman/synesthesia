@@ -1,0 +1,43 @@
+{
+	"CREDIT" : "Flexi",
+	"DESCRIPTION" : "Multi-scale \"Milkdrop2\" Gaussian blur diffusion, vortex pair plane deformation, cyclic rgba reaction, gradient lookups for expansive flow and edgy color map. If it freezes, rub it. click down and hold. ",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "rock-paper-scissor-4d.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Rock-Paper-Scissor-4D",
+	"WIDTH" : 1920
+}

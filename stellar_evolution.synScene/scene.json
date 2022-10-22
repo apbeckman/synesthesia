@@ -1,0 +1,30 @@
+{
+	"CREDIT" : "michael0884",
+	"DESCRIPTION" : "Toy model of a self-gravitating gas\nThe gas has pressure proportional to density^2 \nThe gravity is solved by an future estimating Jacobi like iterative thing, even that is not sufficient.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "stellar_evolution.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Stellar evolution",
+	"WIDTH" : 1280
+}

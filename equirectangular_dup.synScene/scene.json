@@ -1,0 +1,114 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Smoothly switch between 3D and 2D perspective using Equirectangular projection.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "perspective",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 
+			[
+				1,
+				1
+			],
+			"DESCRIPTION" : "Just move the X-axis to spin about your main axis, or move the Y-axis to tilt forwards or backwards.",
+			"MAX" : 
+			[
+				2,
+				2
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "look_xy",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Zoom in and out of the input media.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Pan input media in any direction.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "position",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Automatically pan input media in any direction.",
+			"MAX" : 
+			[
+				0.5,
+				0.5
+			],
+			"MIN" : 
+			[
+				-0.5,
+				-0.5
+			],
+			"NAME" : "velocity",
+			"PARAMS" : 0.0025,
+			"TYPE" : "xy traveler",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Mirror input texture when tiling.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "media"
+		}
+	],
+	"CREDIT" : "Shady Headstash",
+	"DESCRIPTION" : "Smoothly switch between 3D and 2D perspective using Equirectangular projection.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image1",
+			"PATH" : "images/1.jpg"
+		}
+	],
+	"IMAGE_PATH" : "equirectangular_dup.png",
+	"TITLE" : "Equirectangular_dup",
+	"WIDTH" : 1920
+}

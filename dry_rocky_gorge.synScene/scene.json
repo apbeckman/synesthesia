@@ -1,0 +1,157 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : -4,
+         "NAME" : "Fly_Speed",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : 0,
+         "NAME" : "Cam_Height",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Control where the camera is pointed",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "LookXY",
+         "PARAMS" : 0.008,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 3,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.25,
+         "MIN" : 3,
+         "NAME" : "FOV",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.03,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Straight_Path",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "path"
+      },
+      {
+         "DEFAULT" : 0.1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : 0,
+         "NAME" : "Morph_Speed",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 3,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : 0,
+         "NAME" : "Morph_Amount",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Ray_Steps",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "morph"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1.75,
+         "MIN" : 0,
+         "NAME" : "Frequency",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "terrain"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : 3,
+         "NAME" : "Amplitude",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "terrain"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Amplitude_Time",
+         "TYPE" : "toggle smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "terrain"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0.1,
+         "NAME" : "Wave_Speed",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "terrain"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "Wave_Height",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "terrain"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "A simple canyon\\gorge fly-through. Not much different to the many other examples on here, but fun to make.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image45",
+         "PATH" : "images/45.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "gorge.png",
+   "TITLE" : "Dry Rocky Gorge",
+   "WIDTH" : 1920
+}

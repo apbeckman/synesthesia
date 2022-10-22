@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Voronoi Glass Panes\n Tinkering with the voronoi pattern by Shane on saturday evening\n Kind of hackish overall but that never stopped me from sharing a shader before\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "voronoi_glass_panes.png",
+	"TITLE" : "Voronoi Glass Panes",
+	"WIDTH" : 1280
+}

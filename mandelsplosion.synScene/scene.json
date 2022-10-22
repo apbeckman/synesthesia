@@ -1,0 +1,70 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1.5,
+         "MIN" : 0,
+         "NAME" : "zoom",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0.75,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1.5,
+         "MIN" : -1.5,
+         "NAME" : "rate",
+         "TYPE" : "slider speed",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : -5,
+         "NAME" : "Iterations",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 6,
+         "MIN" : -0.5,
+         "NAME" : "light",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2.5,
+         "MIN" : -2.5,
+         "NAME" : "rotXY",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "apb_0",
+   "DESCRIPTION" : "making some changes, credit to boris159",
+   "HEIGHT" : 1224,
+   "IMAGE_PATH" : "mandelsplosion.png",
+   "TITLE" : "Mandelsplosion",
+   "WIDTH" : 2176
+}

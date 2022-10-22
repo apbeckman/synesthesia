@@ -1,0 +1,42 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "test",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "jarble",
+	"DESCRIPTION" : "A simple tunnel, based on my [url=https://www.shadertoy.com/view/wljyWR]\"swiss cheese caves\"[/url] fractal.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "fractal_tunnel.png",
+	"TITLE" : "Fractal tunnel",
+	"WIDTH" : 1280
+}

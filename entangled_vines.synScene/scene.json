@@ -1,0 +1,71 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookZ",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 3,
+			"DESCRIPTION" : "Field of View",
+			"IS_META" : false,
+			"MAX" : 0.25,
+			"MIN" : 3,
+			"NAME" : "FOV",
+			"TYPE" : "slider smooth",
+			"PARAMS" : 0.1,
+			"UI_GROUP" : "camera"
+		 },   
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "RotOn",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "camera"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Flying through an entangled vine structure at dusk.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image2",
+			"PATH" : "images/2.jpg"
+		}
+	],
+	"IMAGE_PATH" : "entangled_vines.png",
+	"TITLE" : "Entangled Vines",
+	"WIDTH" : 1920
+}

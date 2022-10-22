@@ -1,0 +1,106 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0.75,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "rate",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.015599999576807,
+         "MIN" : -0.00753000006079674,
+         "NAME" : "angle",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "timewarp",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0.75,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "warpRate",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1.5,
+         "MIN" : -1.5,
+         "NAME" : "angle2",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "complexity",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : 1,
+         "NAME" : "zoom",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 0,
+         "NAME" : "expand",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -3,
+         "NAME" : "yPos",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "nimitz",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "string_theory.png",
+   "TITLE" : "String_theory",
+   "WIDTH" : 1920
+}

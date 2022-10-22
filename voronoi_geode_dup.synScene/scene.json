@@ -1,0 +1,123 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Causes a bright pulse to emanate from the center.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "pulse",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "bang smooth",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 2,
+         "DESCRIPTION" : "Affects the speed of the crystal gyration.",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 0,
+         "NAME" : "speed_motion",
+         "TYPE" : "slider",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "grid_growth",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "highs_shimmer",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Zooms the camera in or out. Fully out causes it to take on a 'planetoid' look.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "elevation",
+         "PARAMS" : 0.025000000372529,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Whether or not the camera is rotating.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "spinning",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "OFF: Standard, angular crystals. ON: Grid-like crystals using the manhattan distance.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "alternate_crystals",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "geometry"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Deforms the surface, distorting the edges in glitchy ways.",
+         "IS_META" : false,
+         "MAX" : 0.100000001490116,
+         "MIN" : -0.100000001490116,
+         "NAME" : "rot_distort",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "geometry"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Default, geode-looking red texture. TURN OFF to use other backgrounds.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "red_geode",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "background"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Green, circuit-like texture. TURN OFF to use other backgrounds.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "green_circuits",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "background"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "agate2",
+         "PATH" : "images/agate2.jpg"
+      },
+      {
+         "NAME" : "agate1",
+         "PATH" : "images/agate1.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "voronoi_geode_dup.png",
+   "TITLE" : "Voronoi Geode_dup",
+   "WIDTH" : 1920
+}

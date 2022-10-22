@@ -1,0 +1,36 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "ocb",
+	"DESCRIPTION" : "USE MOUSE TO LOOK AROUND.\n\n3D version of  https://www.shadertoy.com/view/4sVcz3\nwith a mix of: https://www.shadertoy.com/view/MllfDX   for variable size voxels.\n\nAnti-aliased due to high contrast. Can be remove in the code line 15 to see the difference.\n",
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image16",
+			"PATH" : "images/16.png"
+		}
+	],
+	"IMAGE_PATH" : "boxlight_3d.png",
+	"TITLE" : "Boxlight 3D",
+	"WIDTH" : 1280
+}

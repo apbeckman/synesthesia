@@ -1,0 +1,30 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "iridule",
+   "DESCRIPTION" : "A psychedelic ray-marching demo to test the VR features of ShaderToy.\nAdded colour cycling- toggle via define\n\nTry in VR :3\n\n",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "take_me_to_the_void.png",
+   "TITLE" : "Take me to the void",
+   "WIDTH" : 1920
+}

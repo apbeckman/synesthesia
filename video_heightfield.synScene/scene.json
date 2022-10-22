@@ -1,0 +1,104 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.125,
+			"DESCRIPTION" : "",
+			"MAX" : 0.85,
+			"MIN" : -0.85,
+			"NAME" : "MAXHEIGHT",
+			"PARAMS" : 0.15,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flashy",
+			"PARAMS" : 0.15,
+			"TYPE" : "toggle",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 128,
+			"DESCRIPTION" : "",
+			"MAX" : 256,
+			"MIN" : 1,
+			"NAME" : "SLICES",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 7,
+			"MIN" : 1,
+			"NAME" : "OVERDRIVE",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				0.75,
+				0.75
+			],
+			"MIN" : 
+			[
+				-0.75,
+				-0.75
+			],
+			"NAME" : "MoveXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 2,
+			"DESCRIPTION" : "",
+			"MAX" : 0.4,
+			"MIN" : 10,
+			"NAME" : "MOVEZ",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0.5,
+				0.5
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				0.7
+			],
+			"MIN" : 
+			[
+				0,
+				0.3
+			],
+			"NAME" : "RotateXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "by nikharron",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "video_heightfield.png",
+	"TITLE" : "Video Heightfield",
+	"WIDTH" : 1920
+}

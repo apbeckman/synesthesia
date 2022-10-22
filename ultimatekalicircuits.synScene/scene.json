@@ -1,0 +1,90 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : -2,
+         "NAME" : "rate",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0.0500000007450581,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.100000001490116,
+         "MIN" : 0.00999999977648258,
+         "NAME" : "offset",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 3,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 9,
+         "MIN" : 0,
+         "NAME" : "glow",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0.00124999997206032,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.00249999994412065,
+         "MIN" : 0.000500000023748726,
+         "NAME" : "intensity",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 40,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 100,
+         "MIN" : 10,
+         "NAME" : "trace",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 24,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 60,
+         "MIN" : 6,
+         "NAME" : "runtime",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 1.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 0.5,
+         "NAME" : "zoom",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "Camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "center",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "ungrouped"
+      }
+   ],
+   "CREDIT" : "by mojovideotech",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "ultimatekalicircuits.png",
+   "TITLE" : "UltimateKaliCircuits",
+   "WIDTH" : 1920
+}

@@ -1,0 +1,22 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.125,
+			"MIN" : 0,
+			"NAME" : "test",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "BradyInstead",
+	"DESCRIPTION" : "Procedurally generated alien voxel landscape, based on iq's voxel rendering. Uses Brian Sharpe's fast Value3D noise algorithm.\n\nWEBSITE: bradyinstead.comr\nTWITTER: twitter.com/BradyInstead\nINSTA: instagram.com/bradyinstead/",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "alien_voxel_landscape.png",
+	"TITLE" : "Alien Voxel Landscape",
+	"WIDTH" : 1280
+}

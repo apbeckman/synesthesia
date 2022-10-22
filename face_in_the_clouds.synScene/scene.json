@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Face in the clouds\nSymmetry around y-axis can often create an illusion of a face\nor a human body. I was playing around with smeared FBM\nand added some glowing points to mislead the brain to think it's eyes\nof a malevolent cloud being.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "face_in_the_clouds.png",
+	"TITLE" : "Face in the clouds",
+	"WIDTH" : 1920
+}

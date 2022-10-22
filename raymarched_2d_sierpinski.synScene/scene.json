@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Raymarching a 2D Sierpinski Carpet pattern.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpg"
+		}
+	],
+	"IMAGE_PATH" : "raymarched_2d_sierpinski.png",
+	"TITLE" : "Raymarched 2D Sierpinski",
+	"WIDTH" : 1280
+}

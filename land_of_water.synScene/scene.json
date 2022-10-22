@@ -1,0 +1,43 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "hold mouse to make mountains\n\n\n[url]javascript:  (function(){if(Effect.prototype.Paint.toString().length>1000){_Paint=Effect.prototype.Paint;} Effect.prototype.Paint = function(...args){for(var i=0; i<4;i++){_Paint.apply(this,args);}}})()[/url]",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image8",
+			"PATH" : "images/8.jpg"
+		}
+	],
+	"IMAGE_PATH" : "land_of_water.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Land of Water",
+	"WIDTH" : 1280
+}

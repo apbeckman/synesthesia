@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Testing different people's quartic roots algorithms in the context of a couple simple quartic shapes + some quadric ones too\n\nhad big dreams for this one, but it looks like shiny unstable poo\n\nShane wins for best quartic solver!",
+	"GPU" : 1,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "quartic_intersection.png",
+	"TITLE" : "Quartic Intersection",
+	"WIDTH" : 1920
+}

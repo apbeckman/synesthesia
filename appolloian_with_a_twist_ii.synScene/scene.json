@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Appolloian with a twist II\n  Playing around with shadows in 2D\n  Needed a somewhat more complex distance field than boxes\n  The appolloian fractal turned out quite nice\n",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "appolloian_with_a_twist_ii.png",
+	"TITLE" : "Appolloian with a twist II",
+	"WIDTH" : 1920
+}

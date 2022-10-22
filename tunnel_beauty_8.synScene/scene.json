@@ -1,0 +1,51 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 20,
+         "MIN" : -4,
+         "NAME" : "Open",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Background",
+         "TYPE" : "slider",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "aiekick",
+   "DESCRIPTION" : "Tunnel Beauty 8",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "tunnel.PNG",
+   "TITLE" : "Tunnel Beauty 8",
+   "WIDTH" : 1920
+}

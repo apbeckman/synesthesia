@@ -1,0 +1,97 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Ray_Steps",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "morph"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "How fast the time variable grows, whether it is reactive time or constant time.",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "ON: time variable is influenced by the audio bass. OFF: constant rate.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reactive_time",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "How fast the time variable grows for the camera, whether it is reactive time or constant time.",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "fly_speed",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 3,
+			"DESCRIPTION" : "Field of View",
+			"MAX" : 0.25,
+			"MIN" : 3,
+			"NAME" : "FOV",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "LookXY",
+			"PARAMS" : 0.03,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Transition from a color to texture",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Texture",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "texture"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Slimmer tubes",
+			"MAX" : -0.075,
+			"MIN" : 0.075,
+			"NAME" : "Tube_Radius",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "texture"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Using a randomly oriented, 3D Truchet block to produce some interlaced windy tubes.",
+	"HEIGHT" : 2160,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image45",
+			"PATH" : "images/45.jpeg"
+		}
+	],
+	"IMAGE_PATH" : "twisted_tubes_dup.png",
+	"TITLE" : "Twisted Tubes_dup",
+	"WIDTH" : 3840
+}

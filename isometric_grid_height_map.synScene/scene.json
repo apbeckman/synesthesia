@@ -1,0 +1,29 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Rendering some overlapping hexagons on an isometric grid to produce a height map of extruded blocks.",
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "isometric_grid_height_map.png",
+	"TITLE" : "Isometric Grid Height Map",
+	"WIDTH" : 1280
+}

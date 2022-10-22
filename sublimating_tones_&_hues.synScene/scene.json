@@ -1,0 +1,47 @@
+{
+	"CREDIT" : "xenn",
+	"DESCRIPTION" : " ~ like onion skin layers of smokey glass marbles , sort of, but maybe not ~\n\n. Try going full screen then Alt-1 (to refresh/force 100% pixel canvas extents\nmouse click influences general direction ",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image5",
+			"PATH" : "images/5.jpg"
+		},
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "sublimating_tones_&_hues.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "sUBLIMATING tONES & hUES",
+	"WIDTH" : 1280
+}

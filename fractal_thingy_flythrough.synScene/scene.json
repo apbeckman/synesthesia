@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "Klems",
+	"DESCRIPTION" : "Flythrough a cone traced 3D fractal thingy.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "fractal_thingy_flythrough.png",
+	"TITLE" : "Fractal Thingy Flythrough",
+	"WIDTH" : 1280
+}

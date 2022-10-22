@@ -1,0 +1,49 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "iq",
+	"DESCRIPTION" : "Or a line integral, pretty much inspired by fizzer's \"funcky planet\". I used to know this as \"directional blur\" in the demoscene times. Here it is anyway, a doodling that ended up looking cute I think ^_^",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image2",
+			"PATH" : "images/2.jpg"
+		}
+	],
+	"IMAGE_PATH" : "noise_blur_1.png",
+	"TITLE" : "Noise blur_1",
+	"WIDTH" : 1920
+}

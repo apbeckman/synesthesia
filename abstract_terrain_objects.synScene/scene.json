@@ -1,0 +1,226 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Look around, there's a whole world out there!",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "LookXY",
+         "TYPE" : "xy smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 2,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 0.2,
+         "MIN" : 2,
+         "NAME" : "FOV",
+         "TYPE" : "slider",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "fly speed, duh",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "Fly_Speed",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 10,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 1.732,
+         "MIN" : 10,
+         "NAME" : "Fog",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Use water refraction instead of light reflection",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Refract",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Sun (and shadows) move when bass hits",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Light_Hits",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Level of audioreactivity of Light Hits",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Light_Gain",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "reactivity"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Level of audioreactivity of Warp Time",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : 1,
+         "NAME" : "Warp_Gain",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 0.12,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 0.4,
+         "MIN" : 0,
+         "NAME" : "Sin_Warp",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 0.14,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : 0,
+         "NAME" : "Cos_Warp",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 1.5,
+         "MIN" : 0,
+         "NAME" : "Plane_Gain",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 0.447,
+         "MIN" : 1,
+         "NAME" : "Ray_Steps",
+         "TYPE" : "slider",
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 0.7071,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 0.05,
+         "MIN" : 1,
+         "NAME" : "Mirror_Size",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "objects"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 0,
+         "NAME" : "Shaper",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "objects"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 0.9,
+         "MIN" : 0,
+         "NAME" : "Colorize_Objects",
+         "TYPE" : "slider",
+         "UI_GROUP" : "objects"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : -3.8,
+         "NAME" : "Object_Distance",
+         "TYPE" : "knob smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "objects"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : 0,
+         "NAME" : "Object_Height",
+         "TYPE" : "slider smooth",
+         "PARAMS" : 0.1,
+         "UI_GROUP" : "objects"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 0.25,
+         "MIN" : 0,
+         "NAME" : "Hue_Time",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "objects"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Toggles landscape warp audioreactivity",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Warp_Time",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "warp"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : -1,
+         "MIN" : 1,
+         "NAME" : "Dark_Terrain",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "lighting"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Field of view",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "Night_Time",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "lighting"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "Rendering some abstract objects onto terrain. Inspired by Mike Winkelmann's imagery.",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "abstract_terrain_object.png",
+   "TITLE" : "Abstract Terrain Objects",
+   "WIDTH" : 1920
+}

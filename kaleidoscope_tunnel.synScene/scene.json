@@ -1,0 +1,29 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "kaneta",
+	"DESCRIPTION" : "I was inspired by live VJ",
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "kaleidoscope_tunnel.png",
+	"TITLE" : "Kaleidoscope Tunnel",
+	"WIDTH" : 1280
+}

@@ -1,0 +1,30 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "line tracking + fluid",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "mycorrhizal.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Mycorrhizal",
+	"WIDTH" : 1280
+}

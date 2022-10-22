@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "A random weave pattern on a hexagonal isometric grid, rendered in an impossible-geometry style.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "isometric_weave_pattern.png",
+	"TITLE" : "Isometric Weave Pattern",
+	"WIDTH" : 1280
+}

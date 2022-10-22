@@ -1,0 +1,90 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "center",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 10,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 30,
+         "MIN" : 0,
+         "NAME" : "scale",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3,
+         "MIN" : -3,
+         "NAME" : "rate",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0.25,
+         "NAME" : "fov",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0.400000005960464,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : -2,
+         "NAME" : "light",
+         "TYPE" : "slider",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : -0.5,
+         "NAME" : "hue",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.5,
+         "MIN" : -0.5,
+         "NAME" : "tint",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "pulse_bool",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "ungrouped"
+      }
+   ],
+   "CREDIT" : "by mojovideotech",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "metasevenvortex.png",
+   "TITLE" : "MetaSevenVortex",
+   "WIDTH" : 1920
+}

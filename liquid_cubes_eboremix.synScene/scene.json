@@ -1,0 +1,153 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				1,
+				1,
+				1
+			],
+			"DESCRIPTION" : "Color",
+			"MAX" : 
+			[
+				1,
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0,
+				0
+			],
+			"NAME" : "uColor_color",
+			"TYPE" : "color",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Texture blend",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "uTextureBlend",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.433,
+			"DESCRIPTION" : "Texture deform",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "uTextureDeform",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.937,
+			"DESCRIPTION" : "CubeSize",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "CubeSize",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.63,
+			"DESCRIPTION" : "BlendPower",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "BlendPower",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.827,
+			"DESCRIPTION" : "Gap",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Gap",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : -0.425,
+			"DESCRIPTION" : "Twist",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "uTwist",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.559,
+			"DESCRIPTION" : "Rotation speed",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "uRotationSpeed",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0.209,
+			"DESCRIPTION" : "Height",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "uHeight",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 3.704,
+			"DESCRIPTION" : "Light position X",
+			"MAX" : 5,
+			"MIN" : -5,
+			"NAME" : "uLightX",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : -1.142,
+			"DESCRIPTION" : "Light position Y",
+			"MAX" : 5,
+			"MIN" : -5,
+			"NAME" : "uLightY",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : -0.499,
+			"DESCRIPTION" : "Object pos X",
+			"MAX" : 5,
+			"MIN" : -5,
+			"NAME" : "uPositionX",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 1.469,
+			"DESCRIPTION" : "Object pos Y",
+			"MAX" : 5,
+			"MIN" : -5,
+			"NAME" : "uPositionY",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Use alpha",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "uAlpha_bool",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "by titoasty, remixed by Tim Gerritsen for EboStudio/EboSuite",
+	"DESCRIPTION" : "Liquid cubes - https://www.shadertoy.com/view/MljXzw",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "liquid_cubes_eboremix.png",
+	"TITLE" : "Liquid Cubes EboRemix",
+	"WIDTH" : 1920
+}

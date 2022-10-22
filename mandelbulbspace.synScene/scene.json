@@ -1,0 +1,179 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "flip_bool",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "flop_bool",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "timewarp",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "effects"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : -1,
+         "MIN" : 2,
+         "NAME" : "warpfastorslow",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "effects"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "infinity",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "effects"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "infinity2",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "effects"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Fly deeper quickly or go slowly backwards.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -0.25,
+         "NAME" : "rate",
+         "PARAMS" : 0.150000005960464,
+         "TYPE" : "slider traveler",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3.14590001106262,
+         "MIN" : -3.14590001106262,
+         "NAME" : "rXY",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 3.14590001106262,
+         "MIN" : -3.14590001106262,
+         "NAME" : "rZ",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 3,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 6,
+         "MIN" : 1,
+         "NAME" : "zoom",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "center",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "mXY",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "ungrouped"
+      },
+      {
+         "DEFAULT" : 0.025000000372529,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.100000001490116,
+         "MIN" : 0.000500000023748726,
+         "NAME" : "e",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 12,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 24,
+         "MIN" : 9,
+         "NAME" : "depth",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 9,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : 0,
+         "NAME" : "saturation",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 8,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 12,
+         "MIN" : 2,
+         "NAME" : "glow",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "by mojovideotech",
+   "DESCRIPTION" : "",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "mandelbulbspace.png",
+   "TITLE" : "MandelbulbSpace",
+   "WIDTH" : 1920
+}

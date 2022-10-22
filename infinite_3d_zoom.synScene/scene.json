@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "A standard infinite 3D box zoom variation.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image6",
+			"PATH" : "images/6.jpg"
+		}
+	],
+	"IMAGE_PATH" : "infinite_3d_zoom.png",
+	"TITLE" : "Infinite 3D Zoom",
+	"WIDTH" : 1280
+}

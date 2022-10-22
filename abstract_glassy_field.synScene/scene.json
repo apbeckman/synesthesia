@@ -1,0 +1,51 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "A rendering glitch that causes a strange liquifying effect near hard edges.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "liquify",
+			"TYPE" : "slider",
+			"UI_GROUP" : "render glitches"
+		},
+
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "An abstract, blobby-looking field - rendered in the style of hot, glowing, fluid-filled glass. All produced using cheap low-budget pseudoscience. :)",
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image10",
+			"PATH" : "images/10.jpg"
+		},
+		{
+			"NAME" : "image47",
+			"PATH" : "images/47.jpg"
+		}
+	],
+	"IMAGE_PATH" : "abstract_glassy_field.png",
+	"TITLE" : "Abstract Glassy Field",
+	"WIDTH" : 1920
+}

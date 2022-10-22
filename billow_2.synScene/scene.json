@@ -1,0 +1,30 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "BILLOW",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "BILLOW2",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "AxiomCrux mod [twitch] Misty Grid by NuSan https://www.shadertoy.com/view/wl2Szd",
+	"DESCRIPTION" : "Your shader description",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "billow_2.png",
+	"TITLE" : "Billow 2",
+	"WIDTH" : 1920
+}

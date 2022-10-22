@@ -1,0 +1,20 @@
+{
+	"CREDIT" : "iq",
+	"DESCRIPTION" : "Space curvature. Sphere is raytraced. Plane is raymarched. Atmospheric glow is analytical",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image4",
+			"PATH" : "images/4.jpg"
+		},
+		{
+			"NAME" : "image10",
+			"PATH" : "images/10.jpg"
+		}
+	],
+	"IMAGE_PATH" : "[nv15]_space_curvature.png",
+	"TITLE" : "[NV15] Space Curvature",
+	"WIDTH" : 1280
+}

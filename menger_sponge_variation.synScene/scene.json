@@ -1,0 +1,61 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "lookXY",
+			"PARAMS" : 0.05,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 6,
+			"MIN" : 1,
+			"NAME" : "FOVmod",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 10.125,
+			"MIN" : 0,
+			"NAME" : "test",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Simple fractal object, constructed with mild alterations to the standard repeat Menger Sponge formula.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image6",
+			"PATH" : "images/6.jpg"
+		}
+	],
+	"IMAGE_PATH" : "menger_sponge_variation.png",
+	"TITLE" : "Menger Sponge Variation",
+	"WIDTH" : 1920
+}

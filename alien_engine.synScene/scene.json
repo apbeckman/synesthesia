@@ -1,0 +1,24 @@
+{   
+	"CONTROLS" : 
+	[
+	{
+	   "DEFAULT" : 0,
+	   "DESCRIPTION" : "",
+	   "IS_META" : false,
+	   "MAX" : 1,
+	   "MIN" : -1,
+	   "NAME" : "test",
+	   "PARAMS" : 0.00999999977648258,
+	   "TYPE" : "slider smooth",
+	   "UI_GROUP" : "defaults"
+	}
+	],
+
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "Alien engine, based upon: https://www.shadertoy.com/view/4ds3zn",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "alien_engine.png",
+	"TITLE" : "Alien engine",
+	"WIDTH" : 1920
+}

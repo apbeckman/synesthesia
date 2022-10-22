@@ -1,0 +1,101 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Smoothly switch between normal perspective and Equirectangular coordinates. Best results with this slider at 0% or 100%.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "perspective",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Just move the X-axis to spin about your main axis, or move the Y-axis to tilt forwards or backwards.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 2,
+			"DESCRIPTION" : "Modify the Menger fractal to give it a more complex look. Find an interesting spot and save it.",
+			"MAX" : 0.2,
+			"MIN" : 2,
+			"NAME" : "noise",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "structure"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Change from thick chunks of structure to thin bars and panels.",
+			"MAX" : 0.68,
+			"MIN" : 0,
+			"NAME" : "thin_structure",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "structure"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Goes further than 'thin structure' to fully open it up.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "fully_open",
+			"PARAMS" : 0.2,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "structure"
+		},
+		{
+			"DEFAULT" : -0.35,
+			"DESCRIPTION" : "Rate that you fly into or out of the structure. 50% is no motion, 100% is motion forward, 0% is motion backwards. But it automatically reverses if you change perspective.",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "rate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Change the size of the media in comparison with the struture.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_scale",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Choose whether you want to add the real colors from the media or multiply the media colors in with the scene's natural colors.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_mult_or_add",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "media"
+		}
+	],
+	"CREDIT" : "mojovideotech",
+	"DESCRIPTION" : "",
+	"HEIGHT" : 1440,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "circuits",
+			"PATH" : "images/circuits.jpg"
+		},
+		{
+			"NAME" : "circuits2",
+			"PATH" : "images/circuits2.jpg"
+		}
+	],
+	"IMAGE_PATH" : "circuit_bending_dup.png",
+	"TITLE" : "Circuit Bending_dup",
+	"WIDTH" : 2560
+}

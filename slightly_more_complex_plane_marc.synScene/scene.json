@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "Licence CC0: Slightly more complex plane marcher\nI had fun messing around with \"plane marching\" and FBMs\n",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "slightly_more_complex_plane_marc.png",
+	"TITLE" : "Slightly more complex plane marc",
+	"WIDTH" : 1920
+}

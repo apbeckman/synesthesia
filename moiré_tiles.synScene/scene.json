@@ -1,0 +1,38 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "Klems",
+   "DESCRIPTION" : "Coloring tiles based on a moiré pattern.",
+   "HEIGHT" : 720,
+   "IMAGE_PATH" : "moiré_tiles.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 720,
+         "TARGET" : "BuffA",
+         "WIDTH" : 1280
+      }
+   ],
+   "TITLE" : "Moiré Tiles",
+   "WIDTH" : 1280
+}

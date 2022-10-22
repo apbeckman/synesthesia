@@ -1,0 +1,43 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "It's really cool that you can represent a fluid as just up down left right energy",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image7",
+			"PATH" : "images/7.jpg"
+		}
+	],
+	"IMAGE_PATH" : "lattice_boltzmann_.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Lattice Boltzmann ",
+	"WIDTH" : 1280
+}

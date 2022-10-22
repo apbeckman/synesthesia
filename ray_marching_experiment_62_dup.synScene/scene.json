@@ -1,0 +1,148 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "auto_hue",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "darker",
+         "PARAMS" : 0.200000002980232,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "flashing",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0.600000023841858,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "fov_mod",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "ridges_constant",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "shape"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : -1,
+         "MIN" : 1,
+         "NAME" : "flatten",
+         "PARAMS" : 0.025000000372529,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "shape"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "highhits_ridges",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "shape"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "spiral_ridges",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "shape"
+      },
+      {
+         "DEFAULT" : 0.100000001490116,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.400000005960464,
+         "MIN" : -0.400000005960464,
+         "NAME" : "speed_direction",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "knob traveler",
+         "UI_GROUP" : "time"
+      },
+      {
+         "DEFAULT" : 0.349999994039536,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "bass_time",
+         "TYPE" : "knob",
+         "UI_GROUP" : "time"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "media_scale",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "media"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "media_only",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "media"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "selector",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "media"
+      }
+   ],
+   "CREDIT" : "aiekick",
+   "DESCRIPTION" : " Ray Marching Experiment 62 with another lighting try :)",
+   "HEIGHT" : 1440,
+   "IMAGE_PATH" : "ray_marching_experiment_62_dup.png",
+   "TITLE" : "Ray Marching Experiment 62_dup",
+   "WIDTH" : 2560
+}

@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "petet",
+	"DESCRIPTION" : "everyone's first instinct when they learn about raymarching infinite things is to rip off the big man himself, m.c. escher.  so that's exactly what i did",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image9",
+			"PATH" : "images/9.jpg"
+		}
+	],
+	"IMAGE_PATH" : "broken_space_division.png",
+	"TITLE" : "Broken Space Division",
+	"WIDTH" : 1280
+}

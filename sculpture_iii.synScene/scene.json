@@ -1,0 +1,68 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2.5,
+         "MIN" : -2.5,
+         "NAME" : "Zoom",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 2.5,
+         "MIN" : -2.5,
+         "NAME" : "rotateX",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 4.0,
+         "MIN" : 0,
+         "NAME" : "closeness",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 60,
+         "MIN" : 0,
+         "NAME" : "steps",
+         "PARAMS" : 0.2,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "camera"
+      },
+
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "flashing",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "iq",
+   "DESCRIPTION" : "Another sine/cosine deformation of a sphere.",
+   "HEIGHT" : 1080,
+   "IMAGES" : [
+      {
+         "NAME" : "image4",
+         "PATH" : "images/4.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "sculpture_iii.png",
+   "TITLE" : "Sculpture III",
+   "WIDTH" : 1920
+}

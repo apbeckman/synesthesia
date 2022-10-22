@@ -1,0 +1,40 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0.02,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 0.2,
+         "MIN" : 0.0001,
+         "NAME" : "Repetitions",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "apb_0",
+   "DESCRIPTION" : "aa",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "vortexpath.png",
+   "TITLE" : "VortexPath",
+   "WIDTH" : 1920
+}

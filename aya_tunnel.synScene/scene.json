@@ -1,0 +1,29 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "BigWIngs",
+	"DESCRIPTION" : "Put fullscreen and watch a while! See comments for details.",
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "aya_tunnel.png",
+	"TITLE" : "Aya Tunnel",
+	"WIDTH" : 1280
+}

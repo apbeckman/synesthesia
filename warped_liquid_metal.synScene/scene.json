@@ -1,0 +1,30 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Twitch",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "Licence CC0: Liquid Metal\nSome experimenting with warped FBM and very very fake lighting turned out ok ",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "warped_liquid_metal.png",
+	"TITLE" : "Warped Liquid Metal",
+	"WIDTH" : 1280
+}

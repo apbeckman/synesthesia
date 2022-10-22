@@ -1,0 +1,29 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "eiffie",
+	"DESCRIPTION" : "When Ed got the maintenance job on Alpha station he thought how hard can it be changing light bulbs?",
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "machine_dna.png",
+	"TITLE" : "Machine DNA",
+	"WIDTH" : 1280
+}

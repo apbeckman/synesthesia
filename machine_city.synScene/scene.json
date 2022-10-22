@@ -1,0 +1,49 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "iMouse",
+			"TYPE" : "xy",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "een",
+			"TYPE" : "slider",
+			"UI_GROUP" : "ungrouped"
+		}
+	],
+	"CREDIT" : "",
+	"DESCRIPTION" : "Automatically converted from https://www.shadertoy.com/view/XtsGRX by raziel.  Messing around with mandelbox fractals.  Thanks to iq for all the sdf resources. ",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "iChannel0",
+			"PATH" : "3083c722c0c738cad0f468383167a0d246f91af2bfa373e9c5c094fb8c8413e0.png"
+		}
+	],
+	"IMAGE_PATH" : "machine_city.png",
+	"TITLE" : "Machine City",
+	"WIDTH" : 1920
+}

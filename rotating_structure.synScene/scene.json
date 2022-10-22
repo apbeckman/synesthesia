@@ -1,0 +1,53 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "iq",
+	"DESCRIPTION" : "Another space flipping experiment, similar to [url]https://www.shadertoy.com/view/Xdf3Rn[/url], [url]https://www.shadertoy.com/view/MsXGRf[/url] and [url]https://www.shadertoy.com/view/4dsGD7[/url]. I used an infinite grid like Kali's Inversion Machine.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image7",
+			"PATH" : "images/7.jpg"
+		},
+		{
+			"NAME" : "image17",
+			"PATH" : "images/17.png"
+		}
+	],
+	"IMAGE_PATH" : "rotating_structure.png",
+	"TITLE" : "Rotating Structure",
+	"WIDTH" : 1280
+}

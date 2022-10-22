@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "Raymarching skectch inspired by the work of Marc-Antoine Mathieu",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "tribute_to_marc-antoine_mathieu.png",
+	"TITLE" : "Tribute to Marc-Antoine Mathieu",
+	"WIDTH" : 1280
+}

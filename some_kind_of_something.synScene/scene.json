@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "DJDoomz",
+	"DESCRIPTION" : "colors n such",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "some_kind_of_something.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Some Kind of Something",
+	"WIDTH" : 1280
+}

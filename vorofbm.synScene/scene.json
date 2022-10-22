@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Metallic Voronot Roses\nIf you got a decent height function, apply FBM and see if it makes it more interesting\nBased upon: https://www.shadertoy.com/view/4tXGW4\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "vorofbm.png",
+	"TITLE" : "Vorofbm",
+	"WIDTH" : 1280
+}

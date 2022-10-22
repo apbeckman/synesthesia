@@ -1,0 +1,162 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 4,
+         "DESCRIPTION" : "Speed forward",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : -10,
+         "NAME" : "uSpeedForward",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "camera controls"
+      },
+      {
+         "DEFAULT" : 45,
+         "DESCRIPTION" : "Fov",
+         "IS_META" : false,
+         "MAX" : 180,
+         "MIN" : 0,
+         "NAME" : "uFov",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "camera controls"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Camera direction X",
+         "IS_META" : false,
+         "MAX" : 180,
+         "MIN" : -180,
+         "NAME" : "CameraDirectionXY",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "camera controls"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "Box/Sphere",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "uSphere",
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "shapes"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Texture multiply",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "uMultiply_bool",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "shapes"
+      },
+      {
+         "DEFAULT" : 0.300000011920929,
+         "DESCRIPTION" : "Frequency X",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : 0,
+         "NAME" : "uFrequencyX",
+         "TYPE" : "knob",
+         "UI_GROUP" : "Frequency"
+      },
+      {
+         "DEFAULT" : 0.300000011920929,
+         "DESCRIPTION" : "Frequency Y",
+         "IS_META" : false,
+         "MAX" : 5,
+         "MIN" : 0,
+         "NAME" : "uFrequencyY",
+         "TYPE" : "knob",
+         "UI_GROUP" : "Frequency"
+      },
+      {
+         "DEFAULT" : 0.300000011920929,
+         "DESCRIPTION" : "Amplitude X",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "uAmplitudeX",
+         "TYPE" : "slider",
+         "UI_GROUP" : "Amplitudes"
+      },
+      {
+         "DEFAULT" : 0.300000011920929,
+         "DESCRIPTION" : "Amplitude Y",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "uAmplitudeY",
+         "TYPE" : "slider",
+         "UI_GROUP" : "Amplitudes"
+      },
+      {
+         "DEFAULT" : 2,
+         "DESCRIPTION" : "Speed wave X",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : -10,
+         "NAME" : "uSpeedX",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "shapes"
+      },
+      {
+         "DEFAULT" : 4,
+         "DESCRIPTION" : "Speed wave Y",
+         "IS_META" : false,
+         "MAX" : 10,
+         "MIN" : -10,
+         "NAME" : "uSpeedY",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "shapes"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Size frequency",
+         "IS_META" : false,
+         "MAX" : 50,
+         "MIN" : 0,
+         "NAME" : "uSizeFrequency",
+         "TYPE" : "knob",
+         "UI_GROUP" : "Frequency"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "Size amplitude",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "uSizeAmplitude",
+         "TYPE" : "slider",
+         "UI_GROUP" : "Amplitudes"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DEF_COLOR" : [ 0, 0, 0 ],
+         "DESCRIPTION" : "Color A",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "uColorA_color",
+         "TYPE" : "color",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DEF_COLOR" : [ 1, 1, 1 ],
+         "DESCRIPTION" : "Color B",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "uColorB_color",
+         "TYPE" : "color",
+         "UI_GROUP" : "color"
+      }
+   ],
+   "CREDIT" : "Paulofalcao/T.Gerritsen",
+   "DESCRIPTION" : "Cubes and Spheres (http://glslsandbox.com/e#897.0)",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "cubes_and_spheres_-_ebo_remix.png",
+   "TITLE" : "Cubes and Spheres - ebo remix",
+   "WIDTH" : 1920
+}

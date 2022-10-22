@@ -1,0 +1,41 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseXY",
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "defaults"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "lookXY",
+         "PARAMS" : 0.00999999977648258,
+         "TYPE" : "xy smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "MouseClick",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "defaults"
+      }
+   ],
+   "CREDIT" : "mla",
+   "DESCRIPTION" : "Ungolfed version of GregRostami's [url]https://www.shadertoy.com/view/3sjcDV[/url], derived from vahidk's [url]https://www.shadertoy.com/view/tdSyDG[/url].\n\nyoshin4004's original: [url]https://twitter.com/yosshin4004/status/1251357672504360966[/url]",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "rainbow_temple,_ungolfed.png",
+   "TITLE" : "Rainbow Temple, Ungolfed",
+   "WIDTH" : 1920
+}

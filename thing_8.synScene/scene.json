@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "balkhan",
+	"DESCRIPTION" : "deforming a plane by a reaction diffusion fed by an optical flow on a video",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "thing_8.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Thing_8",
+	"WIDTH" : 1280
+}

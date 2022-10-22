@@ -1,0 +1,237 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn horizontal segments on or off.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "hori_sg",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "tubes"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn vertical segments on or off.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "vert_sg",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "tubes"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn diagonal segments on or off.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "diag_sg",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "tubes"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Turn stick segments on or off.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "stick_sg",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "tubes"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Turn sphere segments on or off.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "sphere_sg",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "tubes"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "When this is ON, the tubes will bump with drum hits, when OFF, they'll keep a constant thickness.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "auto_thickness",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "tubes"
+      },
+      {
+         "DEFAULT" : 0.25,
+         "DESCRIPTION" : "Thickness of the tubes and spheres. Default 25%.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "thickness",
+         "TYPE" : "slider",
+         "UI_GROUP" : "tubes"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "0% is fully flat. 100% is high pointed peaks. Default is 25%.",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : 0,
+         "NAME" : "perturbation",
+         "PARAMS" : 0.200000002980232,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "floor"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Floor will automatically change from flat to perturbed slowly as the music energy rises and falls.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "auto_perturb",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "floor"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn ON for audio-reactive blinking floor. You'll need to choose a floor color that is non-black as well.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "blinking_floor",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "floor"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "ON to make the 3D lighting overblown and sharp.",
+         "IS_META" : false,
+         "MAX" : 0.200000002980232,
+         "MIN" : 0,
+         "NAME" : "overblown",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "floor"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "ON make the 3D lighting flat and blurred.",
+         "IS_META" : false,
+         "MAX" : 0.800000011920929,
+         "MIN" : 0,
+         "NAME" : "flat_blurred",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "floor"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "ON for a smooth, glossy floor, or OFF for the low-poly triangle floor.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "glossy",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "floor"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "How much of the floor the media covers. Default 50%, up to make it small and tiled, down to make it huge.",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "media_scale",
+         "TYPE" : "slider",
+         "UI_GROUP" : "look"
+      },
+      {
+         "DEFAULT" : 1.5,
+         "DESCRIPTION" : "Defines the scale of the space. Down to zoom in, up to zoom out. Best to just click a new spot, not use smoothly.",
+         "IS_META" : false,
+         "MAX" : 4,
+         "MIN" : 0,
+         "NAME" : "zoom",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "look"
+      },
+      {
+         "DEFAULT" : 1.5,
+         "DEF_COLOR" : [ 1, 1, 1 ],
+         "DESCRIPTION" : "Color of the pipes.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "pipe_col",
+         "TYPE" : "color",
+         "UI_GROUP" : "look"
+      },
+      {
+         "DEFAULT" : 1.5,
+         "DEF_COLOR" : [ 0, 0, 0 ],
+         "DESCRIPTION" : "The color of the floor. Make this non-black to use the blinking floor effect. If you have media selected, this is ignored.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "floor_col",
+         "TYPE" : "color",
+         "UI_GROUP" : "look"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Turn ON for red/cyan split when the bass hits, or OFF for a constant split controlled by the slider.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "auto_split",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "redcyan_split"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn ON to splits the red and cyan color channels, but also keep the unchanged original colors, or OFF for just red/cyan.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "incl_original",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "redcyan_split"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn ON for a noisier split efect, or off for the standard split.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "noisy_split",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "redcyan_split"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Default: 0%, meaning split effect is off. Turn up to increase the intensity of the red/cyan split effect.",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "split_amt",
+         "TYPE" : "slider",
+         "UI_GROUP" : "redcyan_split"
+      }
+   ],
+   "CREDIT" : "Shane",
+   "DESCRIPTION" : "A hybrid point-lit, flat-shaded terrain with a mesh structure on it.",
+   "HEIGHT" : 666,
+   "IMAGES" : [
+      {
+         "NAME" : "image3",
+         "PATH" : "images/3.jpg"
+      }
+   ],
+   "IMAGE_PATH" : "terrain_lattice_dup.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 834,
+         "TARGET" : "meshPass",
+         "WIDTH" : 1536
+      }
+   ],
+   "TITLE" : "Terrain Lattice_dup",
+   "WIDTH" : 1184
+}

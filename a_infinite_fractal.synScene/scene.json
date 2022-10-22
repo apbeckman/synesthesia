@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "Cewein",
+	"DESCRIPTION" : "just a simple infinite fractal with color and a bit of chromatic aberation",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "a_infinite_fractal.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "a infinite fractal",
+	"WIDTH" : 1280
+}

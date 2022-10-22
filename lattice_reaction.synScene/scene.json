@@ -1,0 +1,49 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.25,
+			"MIN" : 0,
+			"NAME" : "heightMod",
+			"PARAMS" : 0.253,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Its amazing how many different systems produce the same patterns...\nI made this after hours of experimenting. not sure what it is. It involves advection along gradients and reaction diffusion",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "lattice_reaction.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Lattice Reaction",
+	"WIDTH" : 1280
+}

@@ -1,0 +1,161 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rate_color",
+			"TYPE" : "slider",
+			"UI_GROUP" : "speed"
+		},
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rate_forward",
+			"TYPE" : "slider",
+			"UI_GROUP" : "speed"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "beat_reaction",
+			"TYPE" : "slider",
+			"UI_GROUP" : "speed"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "smooth_rotate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "rotate"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "jump_rotate",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "rotate"
+		},
+		{
+			"DEFAULT" : 3,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0,
+			"NAME" : "color_selector",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0.05,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : 0,
+			"NAME" : "media_distort",
+			"PARAMS" : 0.15,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "sunset",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "two_color_minimal",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DEF_COLOR" : 
+			[
+				1,
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "col1",
+			"TYPE" : "color",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DEF_COLOR" : 
+			[
+				0,
+				1,
+				1
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "col2",
+			"TYPE" : "color",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "square",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "shape"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "octagon",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "shape"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "complexity",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "shape"
+		}
+	],
+	"CREDIT" : "Meebs",
+	"DESCRIPTION" : "kalidescopes whoa",
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "kaleidowhoa,_man_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 990,
+			"TARGET" : "backTex",
+			"WIDTH" : 1760
+		}
+	],
+	"TITLE" : "KaleidoWHOA, MAN_dup",
+	"WIDTH" : 1920
+}

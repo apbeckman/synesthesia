@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "Klems",
+	"DESCRIPTION" : "Flying through the upper atmosphere of a gas giant. Rendered at half resolution with volumetric cone tracing. Click the screen to look around.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "gas_giant_flyby.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Gas Giant Flyby",
+	"WIDTH" : 1280
+}

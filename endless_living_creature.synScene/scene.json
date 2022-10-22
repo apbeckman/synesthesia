@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "Weird endless living creature\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "endless_living_creature.png",
+	"TITLE" : "Endless living creature",
+	"WIDTH" : 1280
+}

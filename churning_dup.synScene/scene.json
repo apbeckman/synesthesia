@@ -1,0 +1,165 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Adds more small swirling turbulence to the simulation when on.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "turbulence",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "creative"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Makes the simulation less like paint, more like overdriven plasma.",
+         "IS_META" : false,
+         "MAX" : -0.5,
+         "MIN" : 0,
+         "NAME" : "plasma",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "creative"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "If you want smaller strokes, more consistent texture, less big swatches of colors, turn this off.",
+         "IS_META" : false,
+         "MAX" : 0,
+         "MIN" : 1,
+         "NAME" : "broad_strokes",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "creative"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Causes the color palette to smoothly cycle in time.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "color_phasing",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "creative"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Lifts certain parts of the simulation on press, causing vertical streaks.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "lift",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "bang smooth",
+         "UI_GROUP" : "movement"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Swirls the entire simulation about the center on press.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "swirl",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "bang smooth",
+         "UI_GROUP" : "movement"
+      },
+      {
+         "DEFAULT" : 0.0500000007450581,
+         "DESCRIPTION" : "How heavily or subtly do you want the underlying UserImage or Video to be mixed in? Turn up to snap an image into focus, turn down to have it fade into colors.",
+         "IS_META" : false,
+         "MAX" : 0.300000011920929,
+         "MIN" : 0,
+         "NAME" : "img_mix",
+         "TYPE" : "slider",
+         "UI_GROUP" : "general"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn ON if you do not get any FPS lag and like the tilt-shift blur effect. Turn OFF to preserve FPS.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "blur_on_fps",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "general"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "Keep ON to have the simulation automatically swirl and push based on the music. Turn OFF to manually control with manual push.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "auto_push",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "push"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "auto push MUST BE SET TO OFF. Manually push the simulation forward and backward with this slider.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : -1,
+         "NAME" : "manual_push",
+         "PARAMS" : 0.0500000007450581,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "push"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "'Dive In' to the simulation. Best used by choosing a value and letting it sit, resulting in strange feedback fractals. Turn off your user image for a pure, clean look. Recommended to turn plasma ON.",
+         "IS_META" : false,
+         "MAX" : 2,
+         "MIN" : 0,
+         "NAME" : "dive_in",
+         "TYPE" : "slider",
+         "UI_GROUP" : "dive"
+      }
+   ],
+   "CREDIT" : "Victor S.",
+   "DESCRIPTION" : "",
+   "HARD_TRANSITIONS" : [
+      {
+         "UNIFORM" : "direction",
+         "VALUES" : [
+            0.100000001490116,
+            0.349999994039536,
+            0.600000023841858,
+            0.850000023841858,
+            1.29999995231628
+         ]
+      },
+      {
+         "UNIFORM" : "colRegSel",
+         "VALUES" : [ 0, 0.100000001490116, 0.200000002980232 ]
+      }
+   ],
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "churning_dup.png",
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "firstFB",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 0,
+         "TARGET" : "secondFB",
+         "WIDTH" : 0
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 0,
+         "TARGET" : "vertBlur",
+         "WIDTH" : 0
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 0,
+         "TARGET" : "horBlur",
+         "WIDTH" : 0
+      }
+   ],
+   "TITLE" : "Churning_dup",
+   "WIDTH" : 1920
+}

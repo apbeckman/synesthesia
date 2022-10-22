@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "fenix",
+	"DESCRIPTION" : "An infinite zoom animation of a rearranging checkerboard, with anti-aliasing. I did my best to golf the code, but I am hoping someone will join in to make it even smaller.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "checker_shuffle_zoom.png",
+	"TITLE" : "Checker Shuffle Zoom",
+	"WIDTH" : 1280
+}

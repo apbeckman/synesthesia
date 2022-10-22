@@ -1,0 +1,29 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "Based orignally upon: https://www.shadertoy.com/view/XdlSD4\nI always liked mandelbox_ryu made by EvilRyu\n\nThis is a derivate of that shader that added camera path derived from: https://www.shadertoy.com/view/XdcfR8",
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "boney_tunnel.png",
+	"TITLE" : "boney tunnel",
+	"WIDTH" : 1280
+}
