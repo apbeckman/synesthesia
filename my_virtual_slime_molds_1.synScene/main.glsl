@@ -10,13 +10,14 @@
 #define ch1 iChannel1
 #define ch2 iChannel2
 #define ch3 iChannel3
+float growthFactor = normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0));
 
-#define PI 3.14159265
+//#define PI 3.14159265
 
 #define loop(i,x) for(int i = 0; i < x; i++)
 #define range(i,a,b) for(int i = a; i <= b; i++)
 
-#define dt 1.5
+#define dt 1.5*(0.95+growthFactor*0.05)
 
 #define border_h 5.
 vec2 R;
@@ -29,11 +30,11 @@ float time;
 
 
 //mold stuff 
-#define sense_ang 0.4
-#define sense_dis 2.5
-#define sense_force 0.1
+#define sense_ang 0.4*(1.0+Sense_Ang)
+#define sense_dis 2.5*(1.0+Sense_Dist)
+#define sense_force 0.1*(1.0+Sense_Force)
 #define trailing 0.
-#define acceleration 0.01
+#define acceleration 0.01*(1.0+growthFactor)
 
 
 //SPH stuff
@@ -122,7 +123,7 @@ particle getParticle(vec4 data, vec2 pos)
 
 vec4 saveParticle(particle P, vec2 pos)
 {
-    P.X = clamp(P.X - pos, vec2(-0.5), vec2(0.5));
+    P.X = clamp(P.X - pos, vec2(-0.5*(0.95+growthFactor*0.05)), vec2(0.5*(0.95+growthFactor*0.085)));
     return vec4(encode(P.X), encode(P.V), P.M);
 }
 
@@ -144,7 +145,7 @@ float G0(vec2 x)
 }
 
 //diffusion amount
-#define dif 1.3
+#define dif 1.3 *(1.0+Diffusion)
 vec3 distribution(vec2 x, vec2 p, float K)
 {
     vec4 aabb0 = vec4(p - 0.5, p + 0.5);
@@ -222,16 +223,16 @@ void Simulation(sampler2D ch, inout particle P, vec2 pos)
    	//sensors
     float ang = atan(P.V.y, P.V.x);
     vec4 dir = sense_dis*vec4(Dir(ang+sense_ang), Dir(ang - sense_ang));
-    vec2 sd = vec2(pixel(ch, P.X + dir.xy).w, pixel(ch, P.X + dir.zw).w);
-    F += sense_force*(Dir(ang+PI*0.5)*sd.x + Dir(ang-PI*0.5)*sd.y); 
+    vec2 sd = vec2(pixel(ch, P.X + dir.xy).w, pixel(ch, P.X + dir.zw).w)*(1.0+growthFactor);
+    F += sense_force*(Dir(ang+PI*0.5)*sd.x + Dir(ang-PI*0.5)*sd.y)*(1.0+basshits); 
     
     //gravity
-    F -= 0.001*P.M.x*vec2(0,1);
+    F -= 0.001*P.M.x;
 
     if(Mouse.z > 0.)
     {
         vec2 dm =(Mouse.xy - Mouse.zw)/10.; 
-        float d = distance(Mouse.xy, P.X)/20.;
+        float d = distance(Mouse.xy, P.X)/50.;
         F += 0.01*dm*exp(-d*d);
        // P.M.y += 0.1*exp(-40.*d*d);
     }
@@ -362,7 +363,7 @@ vec4 renderMainImage() {
     vec2 x0 = P0.X; //update position
     //how much mass falls into this pixel
     vec4 rho = vec4(P0.V, P0.M)*G((pos - x0)/0.75); 
-    vec3 dx = vec3(-3., 0., 3.);
+    vec3 dx = vec3(-5., 0., 5.);
  
     float a = pow(smoothstep(fluid_rho*0., fluid_rho*2., rho.z),0.1);
     float b = exp(-1.7*smoothstep(fluid_rho*1., fluid_rho*7.5, rho.z));
@@ -370,8 +371,10 @@ vec4 renderMainImage() {
     vec3 col1 = vec3(0., 0.9, 1.);
     // Output to screen
     col.xyz += 0.2*a;
-    col.xyz += 0.5 - 0.5*cos(8.*vec3(0.2,0.8,0.6)*rho.w);
+//    col.xyz += 0.5 - 0.5*cos(8.*vec3(0.2,0.8,0.6)*rho.w);
     //col.xyz += vec3(1,1,1)*bord;
+   col.xyz += 0.5 - 0.5*cos(8.*vec3(0.25*(1.0+cos(smoothTimeB*0.25)*0.025+0.25),0.29,0.3*(1.0+sin(smoothTimeB*0.5)*0.0125+0.125))*rho.w);
+
     col.xyz = tanh(4.*pow(col.xyz,vec3(1.5)));
     col.w=1.0;
 	return col; 

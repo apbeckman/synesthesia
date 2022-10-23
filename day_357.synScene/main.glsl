@@ -61,7 +61,7 @@ vec4 renderPassA() {
 
 // CHEAP NOISE FROM NIMITZ https://www.shadertoy.com/view/XtS3DD
 // RENDERING TECHNIQUE LEARNED FROM IQ'S "CLOUDS"
-#define TIME (TIME + _mouse.x/RENDERSIZE.x)
+//#define TIME (TIME + _mouse.x/RENDERSIZE.x)
 
 float valueNoise(in vec3 p,float pw)
 {
@@ -79,18 +79,18 @@ float fbm(vec3 p){
     vec3 op = p;
     float n = 0.;
     p *= 0.5;
-    p.y += TIME*0.5;
+    p.y += smoothTimeC*0.5;
     float fa = valueNoise(p,1.); 
     
-    p.y += fa*(1. + sin(op.z + TIME*0.2)*0.5);
-    p.x += TIME*.325;
-    p.y -= TIME*0.25;
+    p.y += fa*(1. + sin(op.z + smoothTimeC*0.2)*0.5);
+    p.x += smoothTimeC*.325;
+    p.y -= smoothTimeC*0.25;
     
     float fb = valueNoise(p*2.,1.);
     
     
-    p.x += fb*.2 + TIME*0.1;
-    p.z += fb*1.1 + TIME*0.02;
+    p.x += fb*.2 + smoothTimeC*0.1;
+    p.z += fb*1.1 + smoothTimeC*0.02;
     float fd = valueNoise(p*9.8,1.);
     
     float fc = valueNoise(p*4.2,1.);
@@ -130,11 +130,11 @@ float map(vec3 p){
     p.xy *= rot(p.z*0.14);
     
     
-    p.z += TIME;
-    p.y += sin(TIME)*0.2 + 0.;
+    p.z += smoothTime*0.2;
+    p.y += sin(smoothTime*0.2)*0.2 + 0.;
     //p.xy *= rot(p.z*0.1);
     
-    p.xy *= rot(sin(p.z*0.2 + TIME*0.2)*0.4);
+    p.xy *= rot(sin(p.z*0.2 + smoothTime*0.2)*0.4);
     
     d = fbm(p);
     
@@ -158,20 +158,20 @@ vec4 renderMainImage() {
     col = vec3(0.14,0.14,0.12)*1.6;
 
 
-    col += sin(uv.xyx*0.2 + TIME*0.4)*0.1;
+    col += sin(uv.xyx*0.2 + smoothTimeB*0.4)*0.1;
     
     
     col += sin(uv.xyx*0.2 )*0.1;
     
     vec3 lightDir = normalize(vec3(-1.,1.,2.));
 
-    mat2 lightRot = rot(TIME*0.5); 
+    mat2 lightRot = rot(smoothTimeB*0.5); 
     
     lightDir.xy *= lightRot;
     vec3 ro = vec3(0);
     vec3 rd = normalize(vec3(uv,0.9));
     
-    rd.yz *= rot(sin(TIME*0.25)*0.2);
+    rd.yz *= rot(sin(smoothTime*0.25)*0.2);
     
     vec3 p = ro;
     
@@ -180,13 +180,13 @@ vec4 renderMainImage() {
     float dTotal = 0.;
     vec3 accum = vec3(0);
     
-    ro += 0.2*rd*hash13(vec3(uv*220.,1.+ TIME*4.));
+    ro += 0.2*rd*hash13(vec3(uv*220.,1.+ smoothTime*4.));
     
     vec3 lightCol;
     
     
     
-    float steps = 200.;
+    float steps = 125.;
     float i = 0.;
     float t = 0.;
     for(; i < steps; i++){

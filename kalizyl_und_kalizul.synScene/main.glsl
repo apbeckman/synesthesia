@@ -16,7 +16,7 @@
 float Tanh(in float x) { return clamp(x * ( 27. + x * x ) / ( 27. + 9. * x * x ), -1., 1.); }
 
 // two different traps and colorings
-#define mph (.5 + .5 * Tanh(sin(TIME/9.123+1.2)*7.))
+#define mph (.5 + .5 * Tanh(sin(smoothTimeB/9.123+1.2)*7.))
 
 
 vec3 kali_sky(in vec3 pos, in vec3 dir)
@@ -29,7 +29,7 @@ vec3 kali_sky(in vec3 pos, in vec3 dir)
 		vec4 p = vec4(pos + t * dir, 1.);
 
 		vec3 param = mix(
-            vec3(1., .5, 1.),
+            vec3(1.*(1.0+cos(smoothTimeC*0.125)*0.25), .5*(1.0+sin(smoothTimeC*0.125)*0.25), 1.),
 			vec3(.51, .5, 1.+0.1*mph), mph);
 
         // "kali-set" by Kali
@@ -55,7 +55,7 @@ vec3 kali_sky(in vec3 pos, in vec3 dir)
         
 #if 1
         // a few more steps for texture
-        for (int i=0; i<3; ++i)
+        for (int i=0; i<5; ++i)
         {
             p = abs(p) / dot(p.xyz, p.xyz);
             av += p.xyz/(4.+p.w);
@@ -86,11 +86,13 @@ vec4 renderMainImage() {
     
     vec3 dir = normalize(vec3(uv, (.9+.2*mph) - 0.4*length(uv)));
     
-    float t = TIME-2.;
+    float t = smoothTime*0.2-2.;
+    float t2 = smoothTimeC*0.2-2.;
+
 	vec3 pos = vec3((1.-mph*.5)*sin(t/2.), (.3-.2*mph)*cos(t/2.), (.3+2.*mph)*(-1.+sin(t/4.13)));
     pos.xy *= 1.5 + sin(t/3.47) + 0.5 * -pos.z;
-    dir.yz = rotate(dir.yz, -1.4+mph+(1.-.6*mph)*(-.5+0.5*sin(t/4.13+2.+1.*sin(t/1.75))));
-    dir.xy = rotate(dir.xy, sin(t/2.)+0.2*sin(t+sin(t/3.)));
+    dir.yz = rotate(dir.yz, -1.4+mph+(1.-.6*mph)*(-.5+0.5*sin(t2/4.13+2.+1.*sin(t2/1.75))));
+    dir.xy = rotate(dir.xy, sin(t2/2.)+0.2*sin(t2+sin(t/3.)));
     
 	fragColor = vec4(kali_sky(pos, dir), 1.);
 	return fragColor; 

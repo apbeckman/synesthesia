@@ -68,7 +68,7 @@ vec2 map(vec3 p){
     p.z = pmod(p.z, modDist);
     
     vec3 o = p;
-    //p.xy *= rot(0.4 + p.z*(0.1 + sin(TIME*0.1) )+ TIME*0.3);
+    p.xy *= rot(0.4 + p.z*(0.1 + sin(smoothTimeC*0.1) )+ smoothTimeC*0.1);
     vec2 pC = vec2(atan(p.y,p.x), length(p.xy));
     
     vec3 q = vec3(pC, p.z);
@@ -106,9 +106,9 @@ vec2 map(vec3 p){
     
     
     // mod
-    float mm = sin(TIME*0.5 + g.z*0.5 + p.z);
+    float mm = sin(smoothTime *0.5 + g.z*0.5 + p.z);
     modu = (mm/sqrt(0.02 + mm*mm ))*0.5 + 0.5;
-    float mmB = sin(TIME*1.25 + g.z*0.25 + p.z*0.8 + p.y);
+    float mmB = sin(smoothTime *1.25 + g.z*0.25 + p.z*0.8 + p.y);
     moduB = (mmB/sqrt(0.01 + mmB*mmB ))*0.5 + 0.5;
     //moduB = 1. - moduB;
     moduB *= 0.16;
@@ -141,11 +141,11 @@ vec2 march(vec3 ro,vec3 rd,inout vec3 p,inout float t,inout bool hit){
     vec2 d;
     for(int i = 0; i < 200; i++){
     	d = map(p);
-        if (d.y < 10.){
+        if (d.y < 6.*(1.0+highhits)){
             glow += mix(
                 mix(
                     exp(-d.x*5.)*pal(1.3,0.7,vec3(1.8+modu*0.5,0.4,0.8), 3.9 +modu*0.2 + sin(p.z)*0.5,2. + t*0.1)*2.,
-                    exp(-d.x*0.01)*pal(2.8,1.4,vec3(5.8,2.4+modu*0.2,0.8+ sin(p.y + TIME)*.09), 6.9 +modu*0.2 + sin(p.z)*.5,0.5 + t*0.5)*2.,
+                    exp(-d.x*0.01)*pal(2.8,1.4,vec3(5.8,2.4+modu*0.2,0.8+ sin(p.y + smoothTimeB)*.09), 6.9 +modu*0.2 + sin(p.z)*.5,0.5 + t*0.5)*2.,
                     moduB
                 ),exp(-d.x*20.)*pal(0.8,0.7,vec3(1.8+modu*0.5,0.4,0.8), 3.9 +modu*0.2 + sin(p.z)*0.5,1.9 - t*0.1)*2.
                 , 1. - modu
@@ -183,7 +183,7 @@ vec4 renderMainImage() {
     vec3 col = vec3(0);
 
     vec3 ro = vec3(0);
-    ro.z += mx;
+    ro.z += smoothTime;
     ro += path(ro.z);
     vec3 lookAt = ro + vec3(0,0,4);
     lookAt += path(lookAt.z);
