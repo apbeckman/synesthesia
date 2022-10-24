@@ -73,7 +73,7 @@ vec4 renderPassA() {
     if (shade > .001 && total < maxDist) {
         vec2 noff = vec2(.001,0); // NuSan https://www.shadertoy.com/view/3sBGzV
         vec3 normal = normalize(map(pos)-vec3(map(pos-noff.xyy), map(pos-noff.yxy), map(pos-noff.yyx)));
-        float top = dot(reflect(ray, normal), vec3(0,1,0))*.5+.5;
+        float top = dot(reflect(ray, normal), vec3(0,1,0))*.5+.5*(1.0+highhits);
         vec3 tint = .5+.5*cos(vec3(1,2,3)+pos.y+details*6.);
         color = vec3(0.2) + vec3(.8)*top;
         color += tint * .5;
