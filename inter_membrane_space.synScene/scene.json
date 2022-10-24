@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "another Lipschitz discontinuity",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "inter_membrane_space.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Inter Membrane Space",
+	"WIDTH" : 1280
+}

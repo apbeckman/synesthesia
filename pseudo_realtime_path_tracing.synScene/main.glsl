@@ -118,7 +118,7 @@ float smax(float a, float b, float k) {
 
 // Number of samples: My computer can handle more. If yours is struggling, you 
 // can lower this. Naturally, sample number is proportional to noise quality.
-#define sampNum 16
+#define sampNum 32 //16
 
 // The blended samples per frame: Higher numbers give the impression of more
 // samples, which boosts quality. However, there's a price to pay, and that's 
@@ -271,7 +271,8 @@ vec2 sphereIntersect(in vec3 ro, in vec3 rd, in vec4 sph){
 
 
 // Sphere position and radius.
-const vec4 sph4 = vec4(0, -.32, 1.35, .68);
+vec4 sph4 = vec4(0.1*(1.0+cos(smoothTimeC*0.25+10.)*16.), -.32*(1.0+sin(smoothTimeC*0.25+0.5))+0.25, 1.35*(1.0+sin(smoothTimeC*0.25)*.2)-0.15, .68); //AB: moving ball around, kinda like it
+//vec4 sph4 = vec4(0., -.32, 1.35, .68); //AB: og version, comment out above line and uncomment this for static ball
 
 // Hacking in a normal for the box equation.
 vec3 boxNrm;
@@ -343,7 +344,7 @@ vec3 distField(vec2 p){
         ip = floor(p/sc);
         p -= (ip + .5)*sc;
          
-        /*
+        
         // Extra subdivision.
         if(hash21(ip + .1/sc)<.666){
             sc /= 2.;
@@ -351,11 +352,11 @@ vec3 distField(vec2 p){
             ip = floor(p/sc);
             p -= (ip + .5)*sc;
              
-        }*/
+        }
     }     
     
     // Rounded square.
-    float sh = sBox(p, sc/2. - ew, .15*sc.x);//1.5*sc.x*sc.x
+    float sh = sBox(p, sc/2. - ew, .15*sc.x)*(1.-pow(syn_BassLevel*0.6+syn_MidLevel*0.6, 2.));//1.5*sc.x*sc.x
     //float sh = length(p) - sc.x/2. + ew;
  
     // Producing a rounded circle.
@@ -365,7 +366,7 @@ vec3 distField(vec2 p){
     //d = max(d, -(length(p) - .2*sc.x));
     
     // Rings.
-    //d = abs(d + .125*sc.x) - .125*sc.x;
+    d = abs(d + .25*sc.x) - .25*sc.x;
     
     // Returning the distance and local cell ID. Note that the 
     // distance has been rescaled by the scaling factor.
@@ -405,7 +406,7 @@ vec4 renderPassA() {
     // Setting a maximum resolution, then upscaling. I picked up this tip when
     // looking at one of Spalmer's examples, here:
     // https://www.shadertoy.com/view/sdKXD3
-    float maxRes = 540.;
+    float maxRes = 1080.;
     float iRes = min(RENDERSIZE.y, maxRes);
     //ivec2 iR = ivec2(fragCoord);
     //if(iR.y > 0 || iR.x>3){
@@ -422,7 +423,7 @@ vec4 renderPassA() {
     
   
     float FOV = 1.; // FOV - Field of view.
-    vec3 ro = vec3(0, .25, -2);
+    vec3 ro = vec3(0, .25+sin(smoothTime*0.012)*0.125, -2+cos(smoothTime*0.1)*0.1);
     // "Look At" position.
     vec3 lk = ro + vec3(0, -.01, .25);
     vec3 fwd = normalize(lk - ro);
@@ -434,8 +435,8 @@ vec4 renderPassA() {
     
     // Camera.
     mat3 mCam = mat3(rgt, up, fwd);
-    mCam *= _rot(vec3(0, .05, 0)); 
-    mCam *= _rot(vec3(0, 0, -sin(TIME/6.)*.125)); 
+    mCam *= _rot(vec3(0, .05+sin(smoothTime*0.15)*0.1), 0); 
+    mCam *= _rot(vec3(0, 0, -sin(smoothTime*0.15)*.1)); 
     
     // Accumulative color.
     vec3 aCol = vec3(0);
@@ -507,7 +508,7 @@ vec4 renderPassA() {
                     vec3 txP = sp - sph4.xyz;
                     // Rotation.
                     txP.xy *= rot2(-3.14159/12.);
-                    txP.xz *= rot2(-smoothTime/4.);
+                    txP.xz *= rot2(-smoothTimeC/4.);
                     
                     // Using spherical coordinates to put some latitudinal squares
                     // around the longitudinal direction... Not much different to the
@@ -556,7 +557,7 @@ vec4 renderPassA() {
                     
                     // Emissivity.
                     // Using a texture to color the emissive lights.
-                    vec3 tx = texture(image10, sphID + smoothTmeB/128.).xyz; tx *= tx;
+                    vec3 tx = texture(image10, sphID + smoothTimeB/128.).xyz; tx *= tx*(1.0+normalize(highhits));
                     // Fade out emissivity higher up the walls.
                     float st = clamp(sp.y/1.25 - 1., 0., 1.);
                     float rnd = smoothstep(st, 1., dot(tx, vec3(.299, .587, .114)));
@@ -572,7 +573,7 @@ vec4 renderPassA() {
                     
                     
                     // Roughness.
-                    rough = hash21(vec2(sphID.x*aNum, sphID.y) + .23)*.5; //(clamp(.5 - d3.x/.2, 0., 1.))*
+                    rough = hash21(vec2(sphID.x*aNum, sphID.y) + .23)*.25; //(clamp(.5 - d3.x/.2, 0., 1.))*
                 
                }
                else {
@@ -598,7 +599,7 @@ vec4 renderPassA() {
                     
                     // Emissivity.
                     // Using a texture to color the emissive lights.
-                    vec3 tx = texture(image10, d3.yz/16. - vec2(-1, 2)*smoothTimeB/64.).xyz; tx *= tx;
+                    vec3 tx = texture(image10, d3.yz/16. - vec2(-1, 2)*smoothTimeB/64.).xyz; tx *= tx+*(1.0+normalize(highhits));
                     // Fade out emissivity higher up the walls.
                     float st = clamp(d3.z/1.25 - 1., 0., 1.);
                     float rnd = smoothstep(st, 1., dot(tx, vec3(.299, .587, .114)));
@@ -609,7 +610,7 @@ vec4 renderPassA() {
                     emissive = mix(emissive, emissive.zyx, clamp(sp.y, 0., 1.));
                     
                     // Roughness.
-                    rough = hash21(d3.yz + .1)*.5; //(clamp(.5 - d3.x/.2, 0., 1.))*
+                    rough = hash21(d3.yz + .1)*.25; //(clamp(.5 - d3.x/.2, 0., 1.))*
  
                   
                 }
@@ -622,7 +623,7 @@ vec4 renderPassA() {
                 // Applying this bounce's color to future bounces. For instance, if we
                 // hit a pink emitter then hit another surface later, that surface will
                 // incorporate a bit of pink into it.
-                through *= oCol;
+                through *= oCol*(1.0+normalize(highhits));
 
 
                 vec3 ref = reflect(rd, sn); // Purely reflected vector.
@@ -673,8 +674,8 @@ vec4 renderPassA() {
     // Mix the previous frames in with no camera reprojection.
     // It's OK, but full temporal blur will be experienced.
     vec4 preCol = texelFetch(BuffA, ivec2(fragCoord), 0);
-    float blend = (FRAMECOUNT < 2) ? 1. : 1./blendNum; 
-    fragColor = mix(preCol, vec4(clamp(aCol, 0., 1.), 1), blend);
+    float blend = (FRAMECOUNT <= 2) ? 1. : 1./blendNum; 
+    fragColor = mix(preCol, vec4(clamp(aCol, 0., 1.*(1.+pow(basshits, 2.0)*0.5)), 1), blend*(1.+pow(syn_BassLevel, 2.0)*0.5));
     
     // No reprojection or temporal blur, for comparisson.
     //fragColor = vec4(max(aCol, 0.), 1);
