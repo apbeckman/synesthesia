@@ -173,7 +173,7 @@ vec4 renderPassA() {
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
 
-    float m = pow(abs(sin(T/2.)), 5.);
+    float m = pow(abs(sin(smoothTimeB/2.)), 5.);
     //uv *= 1. - dot(uv,uv)*(1. - pow(m,2.)*1.)*0.4;
     
     
