@@ -6,7 +6,7 @@
 float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0);
 
 #define dt 0.25
-#define prad 1.4+growthFactor*0.125
+#define prad 1.4*(0.875+growthFactor*0.125)
 #define decay 0.125
 
 //cell speed
@@ -70,7 +70,7 @@ vec2 hash22(vec2 p)
 //functions
 float gauss(vec2 x, float r)
 {
-    return exp(-pow(length(x)/r,2.));
+    return exp(-pow(length(x)/r,3.));
 }
    
 
@@ -152,6 +152,7 @@ void CheckRadius(inout vec4 U, vec2 pos, float r)
 
 vec4 renderPassA() {
 	vec4 U = vec4(0.0);
+	//vec2 pos = _xy;
 	vec2 pos = _xy;
 
     vec2 muv = _mouse.xy/size;
@@ -190,7 +191,7 @@ vec4 renderPassA() {
     float dangl = (pixel(BuffB, sleft).x - pixel(BuffB, sright).x);
     U.z += dt*sst*tanh(3.*dangl)*(1+growthFactor*0.25);
    
-    vec2 pvel = (0.9+growthFactor*0.125)*pspeed*vec2(cos(U.z), sin(U.z));
+    vec2 pvel = (0.9+growthFactor*0.25)*pspeed*vec2(cos(U.z), sin(U.z));
     
     //update the particle
     U.xy += dt*pvel;
@@ -259,7 +260,7 @@ vec4 renderMainImage() {
 	vec2 pos = _xy;
 
 	vec4 particle = texel(BuffA, pos);
-    float distr = gauss(pos - particle.xy, prad*(1.0+basshits*0.125));
+    float distr = gauss(pos - particle.xy, prad)*(1.0+pow(normalize(highhits), 2.0)*0.25);
     vec4 pheromone = 2.*texel(BuffB, pos);
     fragColor = vec4(sin(pheromone.xyz*vec3(1,1.2,1.5)), 1.);
 	return fragColor; 
