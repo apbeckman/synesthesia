@@ -1,17 +1,4 @@
 {
-	"CONTROLS" : 
-	[
-	   {
-			"DEFAULT" : 2.5,
-			"DESCRIPTION" : "",
-			"MAX" : 10,
-			"MIN" : 1.5,
-			"PARAMS" : 0.05,
-			"NAME" : "test",
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "ungrouped"
-		}
-	],
 	"CREDIT" : "russ",
 	"DESCRIPTION" : "The phoenix fractal with an extra feedback step.",
 	"GPU" : 0,
