@@ -219,7 +219,7 @@ vec4 renderPassB() {
     Q += dt*Laplace(ch1, p);
     
     vec4 particle = texel(ch0, p);
-    float distr = gauss(p - particle.xy, prad);
+    float distr = gauss(p - particle.xy, prad)*(1.0+pow(normalize(highhits))*0.25);
     
     //pheromone depositing
     Q += dt*distr;
