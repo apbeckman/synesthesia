@@ -24,16 +24,16 @@ vec4 renderPassA() {
 
     Q = C(U);
     vec4 
-        n = D(U+vec2(0,1)),
-        e = D(U+vec2(1,0)),
-        s = D(U-vec2(0,1)),
-        w = D(U-vec2(1,0)),
+        n = D(U+vec2(0,1)*(1.0+Height)),
+        e = D(U+vec2(1,0)*(1.0+Height)),
+        s = D(U-vec2(0,1)*(1.0+Height)),
+        w = D(U-vec2(1,0)*(1.0+Height)),
         m = 0.25*(n+e+s+w);
     
     float d = 0.25*(n.y-s.y+e.x-w.x);
     float c = 0.25*(n.x-s.x-e.y+w.y);
     
-    Q.z = m.z*.999 - mix(d,c,length(U-0.5*R)/R.y);
+    Q.z = m.z*.9999 - mix(d,c,length(U-0.5*R)/R.y);
     Q.w = d;
     if (FRAMECOUNT <= 1) Q = vec4(sin(U.x)*cos(U.y));
 	return Q; 
@@ -48,10 +48,10 @@ vec4 renderPassB() {
 
     Q = A(U);
     vec4 
-        n = A(U+vec2(0,1)),
-        e = A(U+vec2(1,0)),
-        s = A(U-vec2(0,1)),
-        w = A(U-vec2(1,0)),
+        n = A(U+vec2(0,1)*(1.0+Height)),
+        e = A(U+vec2(1,0)*(1.0+Height)),
+        s = A(U-vec2(0,1)*(1.0+Height)),
+        w = A(U-vec2(1,0)*(1.0+Height)),
         m = 0.25*(n+e+s+w);
     Q.xy = 0.25*vec2(e.z-w.z,n.z-s.z);
     if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.2);
@@ -68,16 +68,16 @@ vec4 renderPassC() {
 
     Q = A(U);
     vec4 
-        n = B(U+vec2(0,1)),
-        e = B(U+vec2(1,0)),
-        s = B(U-vec2(0,1)),
-        w = B(U-vec2(1,0)),
+        n = B(U+vec2(0,1)*(1.0+Height)),
+        e = B(U+vec2(1,0)*(1.0+Height)),
+        s = B(U-vec2(0,1)*(1.0+Height)),
+        w = B(U-vec2(1,0)*(1.0+Height)),
         m = 0.25*(n+e+s+w);
     
     float d = 0.25*(n.y-s.y+e.x-w.x);
     float c = 0.25*(n.x-s.x-e.y+w.y);
     
-    Q.z = m.z*.999 - mix(d,c,.2);
+    Q.z = m.z*.9999 - mix(d,c,.2);
     
     if (FRAMECOUNT <= 1) Q = vec4(sin(U.x)*cos(U.y));
 	return Q; 
@@ -98,10 +98,10 @@ vec4 renderPassD() {
     U += c;
     Q = C(U);
     vec4 
-        n = C(U+vec2(0,1)), 
-        e = C(U+vec2(1,0)),
-        s = C(U-vec2(0,1)),
-        w = C(U-vec2(1,0)),
+        n = C(U+vec2(0,1)*(1.0+Height)), 
+        e = C(U+vec2(1,0)*(1.0+Height)),
+        s = C(U-vec2(0,1)*(1.0+Height)),
+        w = C(U-vec2(1,0)*(1.0+Height)),
         m = 0.25*(n+e+s+w);
     Q.xy = 0.25*vec2(e.z-w.z,n.z-s.z);
     if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.2);

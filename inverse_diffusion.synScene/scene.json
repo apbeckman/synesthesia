@@ -19,17 +19,37 @@
 			"TYPE" : "toggle",
 			"UI_GROUP" : "default"
 		},
-
 		{
-			"DEFAULT" : 0.5,
+			"DEFAULT" : 
+			[
+				0.5,
+				0.5
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "moveXY",
 			"TYPE" : "xy",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -0.5,
+			"NAME" : "Height",
+			"PARAMS" : 0.205,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
-
 	],
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "The Diffusion equation in negative time!\nSomeone told me I do \"Millennial tie dye\" lol",
