@@ -61,7 +61,7 @@ vec2 map(vec3 p){
         j = abs(j);
         
         j.x -= 0.05;
-        j.xy *= rot(-0.25*pi + sin(TIME+ id.y*0.1) - 0.34 );
+        j.xy *= rot(-0.25*pi + sin(smoothTimeC*0.25+ id.y*0.1)*0.75 - 0.34 );
         j.xz *= rot(-0.25*pi);
     }
     
@@ -83,7 +83,7 @@ vec2 map(vec3 p){
     i = abs(i);
     i.xz *= rot(0.6*pi);
     
-    dGoldA = length(i.xy)- 0.03 ;
+    dGoldA = length(i.xy)- 0.0123 ;
     d = dmin(d, vec2(dGoldA, 2.));
     
 
@@ -99,11 +99,11 @@ vec2 map(vec3 p){
     
     //d = dmin(d, vec2(dGlow,9.));
     //float attenC = pow(abs(sin(q.z*0.1  + sin(q.x*0.2 + TIME)*2. + sin(q.y*3.)*0. + TIME*2.2)), 200.);
-    float attenC = pow(abs( sin(q.x +TIME + sin(q.z*0.1 + TIME) + q.z) ), 40.);
+    float attenC = pow(abs( sin(q.x +smoothTimeB*0.2 + sin(q.z*0.1 + smoothTimeB*0.2) + q.z) ), 40.);
 
     //float attenC = 0.2;
     
-    vec3 col = pal(0.2,0.8 ,vec3(0.1 + pow(abs(sin(TIME*1.)), 40. )*0.005,2.2,0.3),0.5 + sin(TIME)*0.005,0.5 - attenC*0.6);
+    vec3 col = pal(0.2,0.8 ,vec3(0.1 + pow(abs(sin(smoothTimeB*0.2*1.)), 40. )*0.005,2.2,0.3),0.5 + sin(smoothTimeB*0.2)*0.005,0.5 - attenC*0.6);
 
     glowB += exp(-dGlow*20.) * col*attenuation*4.*attenC;    
     
@@ -113,7 +113,7 @@ vec2 map(vec3 p){
     float dCeilings = q.y + HEIGHT;
     dCeilings = min(dCeilings,-q.y + HEIGHT);
     
-    dCeilings += max(exp(-q.x*100.), exp(-q.z*100.))*0.0000004;
+    dCeilings += max(exp(-q.x*100.), exp(-q.z*100.))*0.0000001;
     
     d = dmin(d, vec2(dCeilings, 0.));
     
@@ -151,7 +151,7 @@ vec2 march(vec3 ro, vec3 rd,inout vec3 p,inout float t,inout bool hit){
 }
 
 vec3 getNormal(vec3 p){
-	vec2 t= vec2(0.001,0);
+	vec2 t= vec2(0.0001,0);
     return normalize(vec3(
     	map(p - t.xyy).x - map(p + t.xyy).x ,
     	map(p - t.yxy).x - map(p + t.yxy).x ,
@@ -160,7 +160,7 @@ vec3 getNormal(vec3 p){
 }
 
 vec3 getNormala(vec3 p){
-	vec2 t= vec2(0.0001,0);
+	vec2 t= vec2(0.00001,0);
     return normalize(map(p).x - vec3(
     	map(p - t.xyy).x,
     	map(p - t.yxy).x,
@@ -183,11 +183,11 @@ vec4 renderPassA() {
     	 rd = normalize(vec3(uv,1.)),
          p;
 
-    ro.y += sin(smoothTime)*0.04;    
+    ro.y += sin(smoothTime*0.5)*0.0124;    
     ro.z += mx;
     
     
-    rd.xy *= rot(sin(smoothTimeC*0.1)*0.02);
+    rd.xy *= rot(sin(smoothTimeC*0.1)*0.0125);
     float t; bool hit;
     float tB = 0.;
     
@@ -225,7 +225,7 @@ vec4 renderPassA() {
             glow *= c;
         	attenuation *= c*3.;
             //side *= -1.;
-        	rd = refract(rd, n, 0.4 + sin(p.x*40. + p.y*40. + TIME)*0.2);
+        	rd = refract(rd, n, 0.4 + sin(p.x*40. + p.y*40. + smoothTime*0.2)*0.012);
         	//rd = reflect(rd, n);
         } else {
         	rd = reflect(rd, n);

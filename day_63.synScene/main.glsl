@@ -160,11 +160,14 @@ vec3 getRd(vec3 ro, vec3 lookAt, vec2 uv){
     return normalize(dir + right*uv.x + up * uv.y);
 }
 #define pmod0(p,x) mod(p,x) - 0.5*x
-#define mx (TIME*0. + 20.*_mouse.x/RENDERSIZE.x)
+#define mx (smoothTimeC*0. + 20.*_mouse.x/RENDERSIZE.x)
 
 #define pi acos(-1.)
 #define tau (2.*pi)
-#define time (TIME*0.125)
+#define time (smoothTime*0.125)
+#define timeB (smoothTimeB*0.125)
+#define timeC (smoothTimeC*0.125)
+
 #define rot0(x) mat2(cos(x),-sin(x),sin(x),cos(x))
 #define pal0(a,b,c,d,e) (a + b*cos(tau*(c*d + e)))
 
@@ -176,11 +179,11 @@ vec2 map(vec3 p){
     vec3 q = p;
     
 
-    float sc = 3.4 - sin(TIME*0.5)*2. ;
+    float sc = 3.4 - sin(smoothTime*0.125)*2. ;
     float dp = dot(p,p);
     p /= dp;
     p*= sc;
-    p=sin(p+vec3(-time*tau*2.2,1.4 - 1.*time*tau,.1 + time*tau*3. + sin(time*tau)*1.5));
+    p=sin(p+vec3(-timeC*tau*2.2,1.4 - 1.*timeC*tau,.1 + timeC*tau*3. + sin(timeC*tau)*1.5));
     pA = p;
     d.x = 0.;
     d.x = length(p) - 0.7 + length(q)*0.3;
@@ -231,11 +234,11 @@ vec4 renderPassA() {
 
     
     //ro.x += sin(TIME)*0.1;
-    ro.z += 0.5-sin(TIME*0.5)*0.3;
+    ro.z += 0.5-sin(smoothTime*0.5)*0.3;
     vec3 lookAt = vec3(0.);
     vec3 rd = getRd(ro, lookAt, uv);
-    rd.xy *= rot0(sin(TIME*0.5)*0.6);
-    rd.xz *= rot0(sin(TIME*0.75)*0.2);
+    rd.xy *= rot0(sin(smoothTime*0.0125)*0.6);
+    rd.xz *= rot0(sin(smoothTime*0.075)*0.2);
     vec3 p; float t; bool hit;
     vec2 d = trace(ro, rd, p, t, hit);
     

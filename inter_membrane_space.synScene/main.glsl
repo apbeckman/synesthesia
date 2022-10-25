@@ -38,7 +38,7 @@ float map(vec3 p)
 {
     // spicy fbm cyclic gyroid noise
     details = sin(smoothTime*.1-fbm(p)+length(p));
-    return max(abs(details*.05), p.z+2.*(1.0+cos(smoothTime*0.1)*0.6));
+    return max(abs(details*.05), p.z+2.*(1.0+cos(smoothTime*0.1)*0.6));//AB: reactive time
 }
 
 vec4 renderPassA() {
@@ -46,7 +46,7 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
     // salt
-    vec3 rng = hash33(vec3(fragCoord, smoothTimeC));
+    vec3 rng = hash33(vec3(fragCoord, smoothTimeC));//AB: reactive time
     
     // coordinates
     vec2 uv = (fragCoord-RENDERSIZE.xy/2.)/RENDERSIZE.y;
@@ -73,7 +73,7 @@ vec4 renderPassA() {
     if (shade > .001 && total < maxDist) {
         vec2 noff = vec2(.001,0); // NuSan https://www.shadertoy.com/view/3sBGzV
         vec3 normal = normalize(map(pos)-vec3(map(pos-noff.xyy), map(pos-noff.yxy), map(pos-noff.yyx)));
-        float top = dot(reflect(ray, normal), vec3(0,1,0))*.5+.5*(1.0+highhits);
+        float top = dot(reflect(ray, normal), vec3(0,1,0))*.5+.5*(1.0+highhits);//AB: flashy
         vec3 tint = .5+.5*cos(vec3(1,2,3)+pos.y+details*6.);
         color = vec3(0.2) + vec3(.8)*top;
         color += tint * .5;
