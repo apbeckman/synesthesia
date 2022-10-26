@@ -52,7 +52,7 @@ vec4 renderPassA() {
         w = A(U-vec2(1,0));
     Q = mix(Q,0.25*(n+e+s+w),.1);
     Q = mix(Q,D(U),.0005);
-    if (FRAMECOUNT < 10) Q = vec4(.0005)*sin(U.y/R.y*60.+U.x/R.x);
+    if (FRAMECOUNT <= 1) Q = vec4(.0005)*sin(U.y/R.y*60.+U.x/R.x);
     if (_mouse.z>0.&&length(U-_mouse.xy)<2.) Q=vec4(.01);
 	return Q; 
  } 

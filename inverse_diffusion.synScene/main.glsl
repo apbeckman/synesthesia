@@ -6,7 +6,7 @@
 vec2 mirror (vec2 u) {
     if (u.x>1.) u.x = 1.-fract(u.x);
     if (u.x<0.) u.x = fract(u.x);
-    if (u.y>1.) u.x = 1.-fract(u.y)*sin(TIME);
+    if (u.y>1.) u.x = 1.-fract(u.y);
     if (u.y<0.) u.x = fract(u.y);
 	return u;
 }
@@ -16,7 +16,6 @@ vec2 mirror (vec2 u) {
 #define D(U) texture(BuffD,mirror((U)/R))
 
 			//******** BuffA Code Begins ********
-float growthFactor = pow(normalize(syn_BassLevel*0.45)+(syn_MidLevel*0.25)+(syn_Level*0.125), 2.0)*syn_Intensity;
 
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
@@ -54,7 +53,7 @@ vec4 renderPassB() {
         w = A(U-vec2(1,0)*(1.0+Height)),
         m = 0.25*(n+e+s+w);
     Q.xy = 0.25*vec2(e.z-w.z,n.z-s.z);
-    if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.2);
+    if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.125);
     
 	return Q; 
  } 
@@ -79,7 +78,7 @@ vec4 renderPassC() {
     
     Q.z = m.z*.9999 - mix(d,c,.2);
     
-    if (FRAMECOUNT <= 1) Q = vec4(sin(U.x)*cos(U.y));
+    if (FRAMECOUNT <= 1) Q = vec4(sin(U.x)*cos(U.y)*distortion);
 	return Q; 
  } 
 
@@ -139,7 +138,7 @@ vec4 renderMainImage() {
     for (int i = 0; i<30; i++){ 
     	p += .5*d*min(p.z-4.*A(p.xy).z,length(p-o)-1.);
     }
-    Q = (exp(-length(p-o)+1.)*(1.)*(cos(-.05*smoothTimeC+(.1*(1.)) * z + .5*vec4(1,2,3,4)))*.5*(dot(reflect(n,d),q)-dot(n,d)))*(1.0+pow(syn_HighLevel, 2)*0.125);
+    Q = (exp(-length(p-o)+1.)*(1.)*(cos(-.015*smoothTimeC*.2+(.15*(1.)) * z + .5*vec4(1,2,3,4)))*.5*(dot(reflect(n,d),q)-dot(n,d)))*(1.0+pow(syn_HighLevel, 2)*0.1);
 	Q*=Q;
 	return Q; 
  } 
