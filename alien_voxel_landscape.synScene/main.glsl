@@ -13,8 +13,8 @@
 
 void doCamera( out vec3 camPos, out vec3 camTar, in float time)
 {
-    float zoom = 45.;
-    vec3 initPos = vec3(zoom);
+    float zoom = 15.;
+    vec3 initPos = vec3(zoom*Zoom, zoom*Zoom, zoom);
 	camPos = initPos;
     camPos.z += smoothTime*4.; // movement
     camTar = camPos-initPos;
@@ -45,7 +45,7 @@ vec4 opElongate( in vec3 p, in vec3 h )
 
 float opSmoothUnion( float d1, float d2, float k )
 {
-	float h = clamp( 0.5 + 0.5*(d2-d1)/k, 0.0, 1.0 );
+	float h = clamp( 0.5 + 0.25*(d2-d1)/k, 0.0, 1.0 );
 	return mix( d2, d1, h ) - k*h*(1.0-h);
 }
 
@@ -92,7 +92,7 @@ float mapTerrain( vec3 p )
 float map(in vec3 p)
 {
 	float terrain = mapTerrain( p ) + 0.12*p.y;
-	return step( terrain, 0.995 );
+	return step( terrain, 0.9975 );
 }
 
 

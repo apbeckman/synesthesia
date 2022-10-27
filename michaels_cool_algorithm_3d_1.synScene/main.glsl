@@ -26,7 +26,7 @@ void prog (vec3 U, out vec4 a, out vec4 b, sampler2D cha, sampler2D chb) {
         vec3 u = vec3(x,y,z);
     	vec4 aa = A(U+u), bb = B(U+u);
         aa.xyz += bb.xyz;
-        #define q 1.1
+        #define q 1.125
 		vec3 w1 = clamp(aa.xyz-0.5*q,U - 0.5,U + 0.5),
              w2 = clamp(aa.xyz+0.5*q,U - 0.5,U + 0.5);
         float m = (w2.x-w1.x)*(w2.y-w1.y)*(w2.z-w1.z)/(q*q*q);
@@ -60,27 +60,25 @@ void prog2 (vec3 U, out vec4 a, out vec4 b, sampler2D cha, sampler2D chb) {
     
     
     // Boundaries:
-   	b.xyz -= 1e-3*signe(a.w)*(a.xyz-0.5*R3D)*sin(1e-15*float(I));
+   	b.xyz -= 1e-3*signe(a.w)*(a.xyz-0.5*R3D)*sin(1e-5*float(I));
 
     
-    if (I<=1||U.x<=1.||R3D.x-U.x<=1.||R3D.y-U.y<=1.||R3D.x-U.x<=1.||U.z<=1.||R3D.z-U.z<=1.) {
+    if (FRAMECOUNT<=1.||U.x<1.||R3D.x-U.x<1.||R3D.y-U.y<1.||R3D.x-U.x<1.||U.z<1.||R3D.z-U.z<1.) {
     	a = vec4(U,0);
         b = vec4(0);
-        if (length(U-0.5*R3D) <= 0.2*R3D.y) a.w = 20.;
+        if (length(U-0.5*R3D) < 0.2*R3D.y) a.w = 26.;
     }
 }
 
 			//******** BuffA Code Begins ********
 
 vec4 renderPassA() {
-    vec4 Q = vec4(0.0);
-    vec2 U = _xy;
-
+    vec4 Q = vec4 (0.);
 	R = RENDERSIZE.xy;
     M = _mouse;
     I = int(FRAMECOUNT);
    	vec4 a, b;
-    
+    vec2 U = _xy;
    	prog (d3(U),a,b,BuffC,BuffD);
     
     Q = a;
@@ -91,7 +89,7 @@ vec4 renderPassA() {
 			//******** BuffB Code Begins ********
 
 vec4 renderPassB() {
-    vec4 Q = vec4(0.0);
+    vec4 Q = vec4 (0.);
     vec2 U = _xy;
 
 	R = RENDERSIZE.xy;
@@ -109,7 +107,7 @@ vec4 renderPassB() {
 			//******** BuffC Code Begins ********
 
 vec4 renderPassC() {
-    vec4 Q = vec4(0.0);
+    vec4 Q = vec4 (0.);
     vec2 U = _xy;
 
 	R = RENDERSIZE.xy;
@@ -127,7 +125,7 @@ vec4 renderPassC() {
 			//******** BuffD Code Begins ********
 
 vec4 renderPassD() {
-    vec4 Q = vec4(0.0);
+    vec4 Q = vec4 (0.);
     vec2 U = _xy;
 
 	R = RENDERSIZE.xy;
@@ -148,9 +146,9 @@ vec4 renderPassD() {
 Sampler
 vec4 renderMainImage()
 {
-    vec4 Q = vec4(0.0);
-    vec2 U = _xy;
+    vec4 Q = vec4 (0.);
 
+    vec2 U = _xy;
     R = RENDERSIZE.xy;
     vec3 mi = 0.5*vec3(R/N,N*N);
     vec3 p = vec3(0,0,-R.x/N);
@@ -161,8 +159,8 @@ vec4 renderMainImage()
         p.yz *= e(6.2*_mouse.y/R.y);
 		d.yz *= e(6.2*_mouse.y/R.y);
     } else {
-		p.xz *= e(.05*smoothTime);
-		d.xz *= e(.05*smoothTime);
+		p.xz *= e(.1*smoothTime);
+		d.xz *= e(.1*smoothTime);
 	}
     Q = vec4(0);
     for (int i = 0; i < 100; i++) {

@@ -2,8 +2,8 @@
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "..",
 	"GPU" : 0,
-	"HEIGHT" : 1080,
-	"IMAGE_PATH" : "michael's_cool_algorithm_3d.png",
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "michaels_cool_algorithm_3d.png",
 	"PASSES" : 
 	[
 		{
@@ -26,11 +26,11 @@
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1080,
+			"HEIGHT" : 720,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1920
+			"WIDTH" : 1280
 		}
 	],
-	"TITLE" : "Michael's Cool Algorithm 3D",
-	"WIDTH" : 1920
+	"TITLE" : "Michaels Cool Algorithm 3D",
+	"WIDTH" : 1280
 }
