@@ -65,7 +65,7 @@ float fbm(vec2 p) {
 }
 
 vec3 path (float z){
-    z *= 0.5;
+    z *= 0.35;
 	return vec3(
     	sin(z + cos(z*0.7))*0.7,
     	cos(z + cos(z*1.2))*0.6,
@@ -84,7 +84,7 @@ vec2 map(vec3 p){
     n *= 0.5;
     //n = pow(n*1., 4.)*3.;
     
-    p.xy *= rot(sin(p.z*0.9 + sin( p.x*2. + p.z*4. + TIME*0.1)*0.9 + p.z*0.1)*0.6);
+    p.xy *= rot(sin(p.z*0.9 + sin( p.x*2. + p.z*4. + smoothTime*0.1)*0.9 + p.z*0.1)*0.6*(1.0+sin(smoothTime*0.5)*0.125));
     
     
     float flTop =(-p.y + FL_H + n*0.7)*0.3;
@@ -110,17 +110,17 @@ vec2 map(vec3 p){
     float dPipesB = max(q.y,q.z);
     //d = dmin(d, vec2(dPipes, 2.));
     
-    float atten = pow(abs(sin(z.z*0.2 + TIME*0.2)), 10.);
-    float attenB = pow(abs(sin(z.z*0.02  + sin(z.x + TIME)*0.2 + sin(z.y*3.)*1. + TIME*0.5)), 100.);
-    float attenC = pow(abs(sin(z.z*0.1  + sin(z.x + TIME)*0.2 + sin(z.y*3.)*4. + TIME*0.2)), 200.);
+    float atten = pow(abs(sin(z.z*0.2 + smoothTimeB*0.2)), 10.);
+    float attenB = pow(abs(sin(z.z*0.02  + sin(z.x + smoothTimeB)*0.12 + sin(z.y*3.)*1. + smoothTimeB*0.125)), 100.);
+    float attenC = pow(abs(sin(z.z*0.1  + sin(z.x + smoothTimeB)*0.12 + sin(z.y*3.)*4. + smoothTimeB*0.12)), 200.);
     
-    vec3 col = pal(0.2,0.6 - attenC,vec3(0.1 + pow(abs(sin(TIME*1.)), 40. )*0.005,2.2,0.3),0.5 + sin(TIME)*0.005,0.5 - attenB*0.6);
+    vec3 col = pal(0.2,0.6 - atten*0.5,vec3(0.1 + pow(abs(sin(smoothTimeB*.25)), 40. )*0.005,2.2,0.3),0.5 + sin(smoothTimeB*.25)*0.005,0.5 - attenB*0.16);
     //vec3 col = pal(0.4,0.6,vec3(0.1 + pow(abs(sin(TIME*1.)), 40.)*0.0,2.2,0.3),0.5 + sin(TIME)*0.01,0.5 );
     
     //vec3 col = pal(0.4,0.6,vec3(0.1 + pow(abs(sin(TIME*1.)), 40.)*0.1,2.2,0.3),0.5 + sin(TIME)*0.01,0.5 - attenB*0.6);
 
     
-    float sc = 60. - atten*55.;
+    float sc = 60. - atten*55.*(0.999+pow(syn_HighLevel*0.785+syn_Hits*0.225, 2.0)*0.1);
     glowB += exp(-dPipes*sc)*col*reflAtten;
     glowB += exp(-dPipesB*sc)*col*reflAtten;
     //glowC += exp(-dBalls*90.)*colB;
@@ -132,10 +132,10 @@ vec2 map(vec3 p){
 vec2 march(vec3 ro, vec3 rd, inout vec3 p, inout float t, inout bool hit){
 	vec2 d = vec2(10e6);
 	p = ro; t = 0.; hit = false;
-    for (int i = 0; i < 150 ; i++){
+    for (int i = 0; i < 90 ; i++){
     	d = map(p);
         //glow += exp(-d.x*20.);
-        if(d.x < 0.002){
+        if(d.x < 0.02){
         	hit = true;
             break;
         }
@@ -173,7 +173,7 @@ vec4 renderPassA() {
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
 
-    float m = pow(abs(sin(smoothTimeB/2.)), 5.);
+    float m = pow(abs(sin(smoothTimeB/2.)), 4.);
     //uv *= 1. - dot(uv,uv)*(1. - pow(m,2.)*1.)*0.4;
     
     
@@ -183,10 +183,10 @@ vec4 renderPassA() {
     
     vec3 ro = vec3(0);
     
-    ro.z += mx*2.;
-    ro.xy += valueNoise(TIME*40.)*(0.01)*m; // camshake
+    ro.z += mx*1.5;
+    //ro.xy += valueNoise(smoothTime*40.)*(0.01)*m; // camshake
     
-    ro.z += TIME*SPEED - sin(T)*SPEED;
+    ro.z += smoothTime*0.225*SPEED;
     
     ro += path(ro.z);
     
@@ -196,11 +196,11 @@ vec4 renderPassA() {
     
     vec3 rd = getRd(ro, lookAt, uv);
     
-    rd.xy *= rot(sin(TIME)*0.1);
+    rd.xy *= rot(sin(smoothTime*0.01)*0.1);
     
     
     
-    //ro += rd*texture(image30, (uv*200. + TIME*9.)).x*2.;
+    ro += rd*texture(image30, (uv*200. + smoothTime*9.)).x*2.;
     
     bool hit; float t; vec3 p;
     
@@ -224,11 +224,11 @@ vec4 renderPassA() {
 	
     
     glowB = max(glowB, 0.);
-    glowB = pow(glowB, vec3(1./0.45));
-    col += glowB*0.0004;
+    glowB = pow(glowB, vec3(1./0.45)*(1.0+pow(syn_HighLevel, 2.0)/2));
+    col += glowB*0.00074;
     
     col += glowC*0.004;
-    col += glow*0.1;
+    col += (glow*0.1)*(1.0+highhits);
     col = mix(col, vec3(0.55,0.25,0.2)*0.01, pow(smoothstep(0.,1., firstT*0.08), 2.) );
     
     
