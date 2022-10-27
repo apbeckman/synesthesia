@@ -5,10 +5,10 @@
 
 vec3 glow = vec3(0);
 #define dmin(a, b) a.x < b.x ? a : b
-#define PI acos(-1.)
+//#define PI acos(-1.)
 #define tau (2.*PI)
 #define rot(x) mat2(cos(x),-sin(x),sin(x),cos(x))
-#define TIME (TIME + 3.6 + 5.)
+#define TIME (smoothTime*0.25  + 3.6 + 5.)
 #define pal(a,b,c,d,e) (a + b*sin(c*d + e))
 
 vec3 att = vec3(1);
@@ -359,7 +359,7 @@ vec4 renderPassA() {
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
     //
 	//uv *= 1. - dot(uv,uv)*0.2;
-    uv.xy *= rot(sin((TIME*0.7 - 3.6))*0.3);
+    uv.xy *= rot(sin((smoothTimeC*0.7 - 3.6))*0.3);
     uv *= 1. + dot(uv,uv)*1.5;
     
     
@@ -382,7 +382,7 @@ vec4 renderPassA() {
     
     ro.y += 0.3;
     
-    vec3 lookAt = vec3(0,ro.y + sin(TIME)*0.05,0.);
+    vec3 lookAt = vec3(0,ro.y + sin(TIME + smoothTime*0.125)*0.05,0.);
     lookAt.y += -0.5 + valueNoise(TIME*1./2.).x;
     vec3 rd = getRd(ro, lookAt, uv);
     //rd.yz *= rot(TIME);

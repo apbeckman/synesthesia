@@ -42,10 +42,10 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0.25,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -0.5,
+			"MIN" : 0,
 			"NAME" : "Height",
 			"PARAMS" : 0.205,
 			"TYPE" : "slider smooth",

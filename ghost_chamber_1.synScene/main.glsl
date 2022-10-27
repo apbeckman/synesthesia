@@ -68,8 +68,10 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    t1 = (TIME * .78) + 166.;
-    d1 = sin(t1 * .2);
+    t1 = (smoothTime * .78) + 166.;
+    float t2 = (smoothTimeC * .78) + 166.;
+
+    d1 = sin(t2 * .2);
     vec2 st = (fragCoord.xy / RENDERSIZE.xy) * 2.1 - 1.;
     st.x *= RENDERSIZE.x / RENDERSIZE.y;
     vec3 ro = vec3(st, 3.0);

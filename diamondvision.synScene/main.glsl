@@ -112,7 +112,7 @@ vec4 renderMain() {
 	ps.x *= RENDERSIZE.x / RENDERSIZE.y;
 	vec3 up = vec3(0, -1, 0);
 	vec3 cd = vec3(1, 0, 0);
-	vec3 co = vec3((rate*smoothTime*0.5+50.)*0.1, 0, 0);
+	vec3 co = vec3(( smoothTime*0.125+50.), 0, 0);
 	vec3 uw = normalize(cross(up, co));
 	vec3 vw = normalize(cross(cd, uw));
 	//vec3 rd = normalize(uw * ps.x + vw * ps.y + cd*(1.0-length(ps)*phi));

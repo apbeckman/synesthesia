@@ -24,10 +24,10 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 0.125,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 0.25,
-			"MIN" : -0.25,
+			"MAX" : 1,
+			"MIN" : 1,
 			"NAME" : "rate",
 			"TYPE" : "slider speed",
 			"UI_GROUP" : "defaults"

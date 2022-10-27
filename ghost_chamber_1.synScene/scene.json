@@ -3,7 +3,7 @@
 	"DESCRIPTION" : "Whisp forms",
 	"GPU" : 0,
 	"HEIGHT" : 720,
-	"IMAGE_PATH" : "ghost_chamber_#13.png",
-	"TITLE" : "Ghost Chamber #13",
+	"IMAGE_PATH" : "ghost_chamber.png",
+	"TITLE" : "Ghost Chamber",
 	"WIDTH" : 1280
 }
