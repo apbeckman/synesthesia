@@ -71,7 +71,7 @@ vec2 march(vec3 ro, vec3 rd,inout vec3 p,inout float t,inout bool hit){
     hit = false;
     p = ro;
     t = 0.;
-    for(int i = 0; i < 90; i++){
+    for(int i = 0; i < 60; i++){
     	d = map(p);
         glowA += exp(-d.x*20.)*WS[0];
         glowB += exp(-d.x*05.)*WS[1]*0.5;
@@ -113,9 +113,11 @@ vec4 renderMainImage() {
     vec3 ro = vec3(0);
     //ro.x += sin(mx)*ZOOM;
     //ro.z += cos(mx)*ZOOM;
-    float m = sin(script_time*0.2);
-    ro.x += m*0.25;
-    ro.z += TIME + 14.;
+    float m = sin(smoothTime*0.125);
+    float n = cos(smoothTime*0.125);
+
+    ro.xy += vec2(n*0.125, m*0.125);
+    ro.z += smoothTime + 14.;
     vec3 lookAt = vec3(0);
     lookAt.z = ro.z +1.;
     //lookAt.x += m*3.;
@@ -153,14 +155,14 @@ vec4 renderMainImage() {
     G += pow(glowD*0.004,vec3(1.))*pal(0.2, 0.6, vec3(0.8,0.4,0.7), 0.6, 2.4);
     G -= pow(glowC*0.005, vec3(1.1))*pal(0.2, 0.4, vec3(0.8,0.4,0.7), 9.6, 2.4);
     
-    G += glowB*0.002 *pal(0.2, 0.6, vec3(0.8,0.4,0.7), 5.99 - sin(smooth_hightime), 2.4);
+    G += glowB*0.002 *pal(0.2, 0.6, vec3(0.8,0.4,0.7), 5.99 - sin(smoothTimeB*0.125), 2.4);
     G *= 1. + pow(S.x,5.)*0.2;
     
     col += G;
     uv.y *= 1.5;
     col *= 1. - dot(uv,uv)*0.1;
     col = mix(col, vec3(0.5,0.4,0.35)*0.3, smoothstep(0.,1.,t*0.1 - 0.1));
-    //col += glowB*0.004;
+    col += (glowB*0.004)*(0.5+highhits*0.125);
     //col += glow*0.006;
     col = clamp(col, 0., 1.);
     col = pow(col, vec3(0.7));
