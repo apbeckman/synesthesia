@@ -24,7 +24,7 @@ vec4 renderPassA() {
     
     float ti = (smoothTimeC);
 	
-    vec2 resdif = texture(BuffA, vec2(.5)/RENDERSIZE.xy,-100.*(1.+sin(smoothTime))*(1.+sin(smoothTime))).xy - RENDERSIZE.xy;
+    vec2 resdif = texture(BuffA, vec2(.5)/RENDERSIZE.xy,-100.).xy - RENDERSIZE.xy;
     
     // reset
 	if (FRAMECOUNT < 1 
@@ -311,16 +311,16 @@ vec3 envMap(vec3 rd, vec3 sn){
     
     // Add a time component, scale, then pass into the noise function.
     rd.xy -= smoothTimeC*.075;
-    rd *= 3.;
+    rd *= 2.;
     
-    float c = n3D(rd)*.657 + n3D(rd*2.)*.28 + n3D(rd*4.)*.15; // Noise value.
+    float c = n3D(rd)*.57 + n3D(rd*2.)*.28 + n3D(rd*4.)*.15; // Noise value.
     c = smoothstep(0.14, 1., c); // Darken and add contast for more of a spotlight look.
     
     vec3 col = vec3(c, c*c, c*c*c*c); // Simple, warm coloring.
     //vec3 col = vec3(min(c*1.5, 1.), pow(c, 2.5), pow(c, 12.)); // More color.
     
     // Mix in some more red to tone it down and return.
-    return mix(col, col.yzx, sRd*.25+.25); 
+    return mix(col, col.yzx, sRd*.25+.25)*(1.0+highhits); 
     
 }
 
@@ -340,13 +340,13 @@ vec4 renderMainImage() {
     
     
     // Ray origin. Moving in the X-direction to the right.
-    vec3 ro = vec3(TIME/5., cos(TIME/4.), 0.);
+    vec3 ro = vec3(smoothTime*0.125, cos(smoothTime*0.125), 0.);
     
     //fragColor = vec4( envMap(rd, vec3(1,1,1)), 1.);
     //return;
     
     // Light position, hovering around camera.
-    vec3 lp = ro + vec3(cos(TIME/2.)*.5, sin(TIME/2.)*.5, -.5);
+    vec3 lp = ro + vec3(cos(smoothTimeB/2.)*.5, sin(smoothTimeB/2.)*.5, -.5);
     
     // Standard raymarching segment. Because of the straight forward setup, not many 
     // iterations are needed.
@@ -361,7 +361,7 @@ vec4 renderMainImage() {
 	// Texture scale factor.
     const float tSize0 = 1./2.;
     // Texture-based bump mapping.
-	sn = doBumpMap(image3, sp*tSize0, sn, 0.002);    
+	sn = doBumpMap(image3, sp*tSize0, sn, 0.001);    
     
     
     // Point light.

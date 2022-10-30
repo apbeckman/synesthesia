@@ -65,7 +65,7 @@ float heightMap(vec2 p){
         vec2 w = .5 - abs(p - 1.5); // Prepare to make a square. Other shapes are also possible.
         float l = sqrt( max(16.0*w.x*w.y*(1.0-w.x)*(1.0-w.y), 0.))*.5+.5; // Edge shaping.
         w = smoothstep(0., .05, w); // Smooth edge stepping.
-        h = max(h, w.x*w.y*a*l); // Producing the smooth edged, shaped square.
+        h = max(h, w.x*w.y*a*l)*(0.75+0.5*basshits); // Producing the smooth edged, shaped square.
         //h += w.x*w.y*a*l;
         //h = max(h, abs(abs(w.x)-abs(w.y))*a*l);
         sum += a; // Keep a total... This could be hardcoded to save cycles.

@@ -1,0 +1,42 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Show_Image",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Density",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "FabriceNeyret2",
+	"DESCRIPTION" : "trace the luminance profile of a source image ( video or webcam ) along a series of horizontal and vertical lines.\nSPACE: show image\nTAB: fix webcam vignetting.\nMouse.y: change grid density.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "oscilloscope_analysis_luminance.png",
+	"TITLE" : "oscilloscope analysis luminance",
+	"WIDTH" : 1280
+}

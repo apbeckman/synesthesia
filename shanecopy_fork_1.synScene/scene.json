@@ -2,12 +2,13 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 0.5,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 1.25,
+			"MIN" : -0.25,
 			"NAME" : "FOV",
-			"TYPE" : "slider",
+			"PARAMS" : 0.095,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -22,7 +23,7 @@
 			"PATH" : "images/3.jpg"
 		}
 	],
-	"IMAGE_PATH" : "fork_shanecopy_apb_0_154.png",
+	"IMAGE_PATH" : "shanecopy_fork.png",
 	"PASSES" : 
 	[
 		{
@@ -38,6 +39,6 @@
 			"WIDTH" : 1920
 		}
 	],
-	"TITLE" : "Fork ShaneCopy apb_0 154",
+	"TITLE" : "ShaneCopy Fork",
 	"WIDTH" : 1920
 }

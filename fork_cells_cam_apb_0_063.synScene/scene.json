@@ -1,0 +1,30 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : -0.5,
+			"NAME" : "Size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "apb_0",
+	"DESCRIPTION" : "experiments with voronoi",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "fork_cells_cam_apb_0_063.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Fork Cells cam apb_0 063",
+	"WIDTH" : 1280
+}
