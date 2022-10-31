@@ -1,0 +1,32 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Twist",
+			"PARAMS" : 0.246,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "Complexity",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "butadiene",
+	"DESCRIPTION" : "30min livecoding",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "monster.png",
+	"TITLE" : "MONSTER",
+	"WIDTH" : 1280
+}
