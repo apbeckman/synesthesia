@@ -97,7 +97,7 @@ vec3 getNormal( in vec3 pos )
 
 bool isEdge(const vec3 point)
 {
-	float d = 0.0125;
+	float d = 0.025;
 	//get points a little bit to each side of the point
 	vec3 right = point + vec3(d, 0.0, 0.0);
 	vec3 left = point + vec3(-d, 0.0, 0.0);
@@ -115,7 +115,7 @@ bool isEdge(const vec3 point)
 
 	vec3 normal = getNormal(point);
 
-	const float limit = 0.999;
+	const float limit = 0.99;
 
 	// float gradient1 = abs(dot(normal, normRight - normLeft));
 	// float gradient2 = abs(dot(normal, normUp - normDown));
@@ -282,7 +282,7 @@ vec4 renderMainImage() {
 	//	fog
 	//vec3 fogColor = vec3( 0.1*(1.0-sin(smoothTimeB)*0.25), 0.1+0.1*(1.0-sin(smoothTimeB)*0.25), 0.1+0.1*(1.0-sin(smoothTimeB)*0.25) );
 	vec3 fogColor = vec3(abs(0.45+cos(smoothTimeB*0.125+10.)*0.125+0.9125), abs(sin(smoothTimeB*0.125)*0.125+0.925), 0.525)*1.5*(1.0+pow(normalize(highhits), 2.0)*0.125);
-	float FogDensity = 0.0125*(1.0+pow(syn_HighLevel*0.875+syn_Hits*0.125, 2.0)*0.5);
+	float FogDensity = 0.025*(1.0+pow(syn_HighLevel*0.875+syn_Hits*0.125, 2.0)*0.5);
 	float fogFactor = 1.0 /exp(t * FogDensity);
 	fogFactor = clamp( fogFactor, 0.0, 1.0 );
 	color = mix(fogColor, color, fogFactor);

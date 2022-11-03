@@ -30,6 +30,9 @@ float fbm6( vec2 p )
     f += 0.015625*(0.5+0.5*noise( p ));
     return f/(0.96875);
 }
+vec3 _position;
+vec3 camPos = _position + vec3(0.,0.,smoothTime * 10.);
+float camNoise =  fbm6(camPos.xz * (.025)*1.+0.125*smoothTimeC) *1.;
 
 
 mat2 getRot(float a)
@@ -39,9 +42,6 @@ mat2 getRot(float a)
 }
 
 
-vec3 _position;
-vec3 camPos = _position + vec3(0.+sin(smoothTime*0.1)*0.5,0.+cos(smoothTime*0.1)*0.5,smoothTime * 3);
-float camNoise =  fbm6(camPos.xz * (.05)*1.+0.00000125*smoothTimeC) *1.;
 
 
 float sphere(vec3 center, float radius)
@@ -59,7 +59,7 @@ float swingPlane(float height)
     vec3 pos = _position + vec3(0.+sin(smoothTime*0.1)*0.5,0.+cos(smoothTime*0.1)*0.5,smoothTime * 7.5);
     float def =  fbm6(pos.xz * (.125)*1.+0.25*smoothTimeC) * 1.;
     
-    float way = pow(abs(pos.x) * (34.*NoiseStretch) ,2.5) *.0000125;
+    float way = pow(abs(pos.x) * (34.*(1.0+NoiseStretch)) ,2.5) *.0000125;
     def *= way;
     
     float ch = height + def;
@@ -100,7 +100,7 @@ vec4 renderMainImage() {
     vec3 rayDir = normalize(vec3(uv , 1.));
     
    	rayDir.zy = getRot(.05*Distance) * rayDir.zy;
-   	rayDir.xy = getRot(.075*(1.+camNoise)) * rayDir.xy;
+   	rayDir.xy = getRot(.075) * rayDir.xy*FOV;
     
     vec3 position = rayOrigin;
     

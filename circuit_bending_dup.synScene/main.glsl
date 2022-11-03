@@ -11,8 +11,8 @@
 //Modifications by Meebs
 
 
-#define 	twpi  	6.283185307179586  	// two pi, 2*pi
-#define 	pi   	3.141592653589793 	// pi
+#define 	twpi  	PI*2.0  	// two pi, 2*pi
+#define 	pi   	PI 	// pi
 
 float mid(vec3 p) { p = min(p, p.yzx); return max( max(p.x, p.y), p.z); }
 

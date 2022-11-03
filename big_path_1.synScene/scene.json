@@ -11,24 +11,14 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0.5,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0.01,
-			"NAME" : "NoiseHeight",
-			"PARAMS" : 0.046,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0.25,
-			"DESCRIPTION" : "",
-			"MAX" : 1.125,
-			"MIN" : 0.1,
+			"MAX" : -0.5,
+			"MIN" : -0.95,
 			"NAME" : "NoiseStretch",
-			"PARAMS" : 0.089,
+			"PARAMS" : 0.032,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Geometry"
 		},
 		{
 			"DEFAULT" : 1.5,
@@ -38,7 +28,7 @@
 			"NAME" : "Distance",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Geometry"
 		},
 		{
 			"DEFAULT" : 1,
@@ -48,7 +38,17 @@
 			"NAME" : "CamHeight",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.5,
+			"NAME" : "FOV",
+			"PARAMS" : 0.106,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
 		}
 	],
 	"CREDIT" : "antonOTI",

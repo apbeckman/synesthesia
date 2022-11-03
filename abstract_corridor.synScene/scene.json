@@ -1,0 +1,33 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Floor_Height",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Using Nimitz's triangle noise idea and his curvature function to fake an abstract, flat-shaded, point-lit, mesh look.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image6",
+			"PATH" : "images/6.jpg"
+		},
+		{
+			"NAME" : "image9",
+			"PATH" : "images/9.jpeg"
+		}
+	],
+	"IMAGE_PATH" : "abstract_corridor.png",
+	"TITLE" : "Abstract Corridor",
+	"WIDTH" : 1280
+}

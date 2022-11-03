@@ -138,9 +138,9 @@
    "PASSES" : [
       {
          "FLOAT" : true,
-         "HEIGHT" : 1080,
+         "HEIGHT" : 720,
          "TARGET" : "toFilter",
-         "WIDTH" : 1770
+         "WIDTH" : 1280
       }
    ],
    "TITLE" : "Tunnel Beauty 6_dup",

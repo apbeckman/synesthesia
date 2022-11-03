@@ -99,7 +99,7 @@ float SubDensity(vec3 surfPoint, float prec, float ms)
 {
 	vec3 n;
 	float s = 0.;
-    const int iter = 10;
+    const int iter = 12;
 	for (int i=0;i<iter;i++)
 	{
 		n = nor(surfPoint,prec); 
