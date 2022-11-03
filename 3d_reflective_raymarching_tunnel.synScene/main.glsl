@@ -97,7 +97,7 @@ vec3 getNormal( in vec3 pos )
 
 bool isEdge(const vec3 point)
 {
-	float d = 0.025;
+	float d = 0.0125;
 	//get points a little bit to each side of the point
 	vec3 right = point + vec3(d, 0.0, 0.0);
 	vec3 left = point + vec3(-d, 0.0, 0.0);
