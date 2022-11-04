@@ -2,44 +2,13 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "MouseXY",
-			"PARAMS" : 0.01,
-			"TYPE" : "xy smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : 0,
+			"MIN" : -0.4,
 			"NAME" : "separation",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.095,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -63,10 +32,10 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
+			"MAX" : 0.5,
 			"MIN" : 0,
-			"NAME" : "PathDeviance",
-			"PARAMS" : 0.01,
+			"NAME" : "WallHeight",
+			"PARAMS" : 0.014,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}

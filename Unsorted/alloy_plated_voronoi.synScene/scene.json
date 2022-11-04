@@ -33,19 +33,41 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : 0.45,
+			"MIN" : 0.25,
 			"NAME" : "Zoom",
-			"PARAMS" : 0.09,
+			"PARAMS" : 0.078,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
+			"MAX" : 4,
 			"MIN" : 0,
 			"NAME" : "KaleidoMode",
-			"TYPE" : "toggle",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "manual_position",
+			"PARAMS" : 0.199,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		}
 	],

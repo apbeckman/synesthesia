@@ -1,0 +1,52 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0.5,
+				0.5
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				0.9,
+				0.9
+			],
+			"MIN" : 
+			[
+				0.4,
+				0.4
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.072,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.125,
+			"MIN" : 0,
+			"NAME" : "accentRotate",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.125,
+			"MIN" : 0,
+			"NAME" : "FOV",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "yasuo",
+	"DESCRIPTION" : "The wall of speakers\n\nsound:\nminutesunlimited\nhttps://soundcloud.com/minutesunlimited\n\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "the_wall_of_speakers.png",
+	"TITLE" : "The wall of speakers",
+	"WIDTH" : 1280
+}

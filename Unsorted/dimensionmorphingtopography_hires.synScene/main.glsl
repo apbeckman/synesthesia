@@ -39,7 +39,7 @@ float	scene(vec3 p) {
    // float aa = rate*(-0.5)+(script_time*0.06+script_bass_time*0.015);
     float aa = ((smoothTime)+rate);
     aa *= 0.025;
-    p.z+=6.0;
+    p.z+=5.0;
     float tr = (smoothTimeC*0.1)+roto;
     rotate(p.zx, rXY.x+cos(tr)/4.);
     rotate(p.zy, rXY.y+sin(tr)/4.);
@@ -76,7 +76,7 @@ float	scene(vec3 p) {
 
 vec3 evaluateLight(in vec3 pos) {
     vec3 lightCol = vec3(blend.x,length(blend),blend.y)+sin(tc);
-    return vec3(lightCol * 1.0/(distanceToL*distanceToL)/(31.0-(light+(12.*highhits))))*mix(lightCol+pos+highhits,lightCol-pos-highhits,sin(tc));
+    return vec3(lightCol * 1.0/(distanceToL*distanceToL)/(31.0-(light+(12.*highhits))))*mix(lightCol+pos+highhits,lightCol-pos-highhits,sin(tc))*1.0;
 }
 
 vec2	march(vec3 pos, vec3 dir) {
@@ -111,7 +111,7 @@ vec4 renderMain() {
     vec3 pos = vec3(0.0, 0.0, 0.0);
     vec2 inter = (march(pos, dir));
     if (inter.y < 20.0) {
-    	o.xyz += vec3( abs(sin(tc*1.0+ii*0.1+m+1.04)-blend.x), abs(sin(tc*1.0+ii*0.1+m+2.09+blend.x)), abs(sin(tc*1.0+ii*0.1+m+3.14+blend.y)))*(1.0-inter.x*0.05);
+    	o.xyz += vec3( abs(sin(tc*1.0+ii*0.1+m+1.04)-blend.x), abs(sin(tc*1.0+ii*0.1+m+2.09+blend.x)), abs(sin(tc*1.0+ii*0.1+m+PI+blend.y)))*(1.0-inter.x*0.05);
    		o.xyz += lux;
     }
     out_FragColor = vec4(o);

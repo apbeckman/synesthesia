@@ -129,7 +129,7 @@ vec3 sumonTheDemon( vec2 p, float id )
 
     float idy = floor(2000.*k.y/ysep);
     p.x += valueNoise(syn_BassHits*1.25 + idy*120.5 + id, 0.1).x*0.04*Glitch;
-    p.y += valueNoise(syn_BassHits*1.25 + idx*120.5 + id, 0.1).y*0.04*Glitch;
+    //p.y += valueNoise(syn_BassHits*1.25 + idx*120.5 + id, 0.1).y*0.04*Glitch;
 
     p = abs(p);
     p *= rot(0.25*pi);

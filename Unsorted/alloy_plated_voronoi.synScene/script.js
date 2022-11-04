@@ -32,7 +32,7 @@ function CameraLook () {
 var bpmcount = new BPMCounter();
 var cPos = new CameraPos();
 var cLook = new CameraLook();
-
+var clicked = false;
 var decimator = 0;
 var tAtLast0 = 0;
 var bpmTime = 0;
@@ -42,6 +42,15 @@ var midT = 0.0;
 var highhits = 0.0;
 var basshits = 0.0;
 function update(dt) {
+
+    if (_click.x > 0.5) {
+        setControl('manual_position',[_muv.x*2-1, _muv.y*2-1])
+        setControl('manual_impulse',1);
+        clicked = true;
+    } else if (clicked) {
+        setControl('manual_impulse',0);
+        clicked = false;
+    }
 
   var bpm = inputs.syn_BPM/4.0;
   bpmcount.updateTime(bpm, dt);

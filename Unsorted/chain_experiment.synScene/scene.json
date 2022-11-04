@@ -1,0 +1,22 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "Test",
+			"PARAMS" : 0.205,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "yasuo",
+	"DESCRIPTION" : "back to the shader life.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "chain_experiment.png",
+	"TITLE" : "Chain Experiment",
+	"WIDTH" : 1280
+}

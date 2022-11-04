@@ -100,9 +100,9 @@ vec2 hash22(vec2 p) {
         return p - .5;
     
     #endif
-    return cos(p*6.283 + smoothTime*0.125)*.75;
+    return cos(p*6.283 + smoothTime*0.15)*.75;
     
-    return abs(fract(p+ smoothTime*.125)-.5)*2. - .5; // Snooker.
+    return abs(fract(p+ smoothTimeC*.15)-.5)*2. - .5; // Snooker.
     //return abs(cos(p*6.283 + TIME))*.5; // Bounce.
     
 
@@ -175,8 +175,8 @@ float smoothVoronoi(vec2 p, float falloff) {
 	
 	float d = 1., res = 0.;
 	
-	for(int i=-1; i<=2; i++) {
-		for(int j=-1; j<=2; j++) {
+	for(int i=-1; i<=3; i++) {
+		for(int j=-1; j<=3; j++) {
             
 			vec2 b = vec2(i, j);
             
@@ -196,21 +196,72 @@ float smoothVoronoi(vec2 p, float falloff) {
 }
 
 
+vec2 posCent = _uvc-manual_position*0.5*vec2(RENDERSIZE.x/RENDERSIZE.y,0.5);
 
 // 2D function we'll be creating the fractional contours for. 
 float func2D(vec2 p){
+    vec4 fragColor = vec4(0.0);
+	vec2 fragCoord = _xy;
+
+
+    // Screen coordinates.
+	vec2 u = (fragCoord.xy - RENDERSIZE.xy*.5)/RENDERSIZE.y;
     
+
      #ifdef RIGID_SCROLL
     p += vec2(0, 0.125)*smoothTime*RIGID_SCROLL; // Scrolling.
     //}
     #endif
-    p/= Zoom;
-    if(KaleidoMode == 1.0){
-        p*=p;
+    if(int(KaleidoMode) == 1.0){
+        p/= Zoom/2.;
+               if (_mouse.z > 0.){
+               p *= normalize(p+posCent);
+
+       }
+
+        p*=normalize(p+p);
+        //p*=normalize(_rotate(p, 1.0+cos(smoothTimeC*0.2)*0.5+0.5));
+
        // d+= smoothTime;
+       return smoothVoronoi(p*1., 2.)*.66 + smoothVoronoi(p*2., 4.)*.34;
     }
-    return smoothVoronoi(p*2., 4.)*.66 + smoothVoronoi(p*6., 4.)*.34;
+    if(int(KaleidoMode) == 2.){
+        p/= Zoom/2.;
+        //p*=normalize(p+vec2(cos(smoothTimeC*0.1)*tetraNoise(vec3(0100.5)), sin(smoothTimeC*0.1)*tetraNoise(vec3(0100.5))));
+        p*=normalize(p*_uvc*4.-vec2(cos(smoothTimeC*0.1)*tetraNoise(vec3(0100.5)), sin(smoothTimeC*0.1)*tetraNoise(vec3(0100.5))));
+
+        //p*=normalize(_rotate(p, 1.0+cos(smoothTimeC*0.2)*0.5+0.5));
+//        p/=normalize(p/p);
+       // d+= smoothTime;
+       return smoothVoronoi(p*1., 2.)*.66 + smoothVoronoi(p*2., 4.)*.34;
+    }
     
+    else if(int(KaleidoMode)==3.0){
+            p/=normalize(p);
+            p*=normalize(p*_uvc*4.-vec2(cos(smoothTimeC*0.1)*tetraNoise(vec3(0100.5)), sin(smoothTimeC*0.1)*tetraNoise(vec3(0100.5))));
+
+            p/= Zoom;
+            return smoothVoronoi(p*2., 4.)*.66 + smoothVoronoi(p*6., 4.)*.34;
+
+    }
+
+    else if(int(KaleidoMode)==4.0){
+            p/=normalize(p);
+            //p*=normalize(p*_uvc*4.-vec2(cos(smoothTimeC*0.1)*tetraNoise(vec3(0100.5)), sin(smoothTimeC*0.1)*tetraNoise(vec3(0100.5))));
+
+            p/= Zoom;
+            return smoothVoronoi(p*2., 4.)*.66 + smoothVoronoi(p*6., 4.)*.34;
+
+    }
+ 
+ 
+
+    else{
+        
+        p/= Zoom;
+        return smoothVoronoi(p*2., 4.)*.66 + smoothVoronoi(p*6., 4.)*.34;
+
+    }
 }
 
 // For fractional countours, something like "fract(func(p)*layers" will work, but the results 
@@ -233,7 +284,7 @@ float func(vec2 p){
     // above wouldn't be necessary), so if you like that aesthetic more, then that's the way to go.
     gF = length(f - vec2(fxr, fyb)); 
     
-    const float palNum = 12.; // 12 contour lines.
+    const float palNum = 8.; // 12 contour lines.
     return sFract(f*palNum, 4.); // 4 is a smoothing factor. Getting the balance right can be frustrating.   
     
 }
@@ -289,16 +340,16 @@ vec4 renderMainImage() {
         // Extra color layers. I found it a bit much.
         //col *= vec3(1, .18, .28);
         //col = rotHue(col, mod(TIME/3. + 3.14159, 6.2831853) + (length(u*vec2(3., 5.))));        
-        col *= .25;                   
+        col *= 1.25;                   
     }
     else if(fi>2./12.) {
         
         col *= vec3(1, .18, .28);
-        col = rotHue(col, mod(smoothTimeC/6., 6.2831853) + (length(u*vec2(2.5, 4.5))));// + TIME*.5
+        col = rotHue(col, mod(smoothTimeB/6., 6.2831853) + (length(u*vec2(2.5, 4.5))));// + TIME*.5
     }
     
     // Adding a bit of noise for a bit more authenticity.
-    vec3 u3 = vec3(u, f); // Fake height, "ssd," according to function value.
+    vec3 u3 = vec3(u, f)*(1.0+basshits); // Fake height, "ssd," according to function value.
     #ifdef RIGID_SCROLL
     u3.xy += vec2(-.2, 0)*smoothTime; // Scrolling.
     #endif
@@ -307,11 +358,11 @@ vec4 renderMainImage() {
 
    
     // Extra highlighting to shine up the edges. Purely for aesthetics. Not based on science. :)
-    col += vec3(.5, .7, 1)*(max(f - fyt, 0.) + max(f - fxl, 0.))*1.*ssd*2.;
+    col += vec3(.5, .7, 1)*(max(f - fyt, 0.) + max(f - fxl, 0.))*1.*ssd*1.;
 
     
     vec3 rd = normalize(vec3(u, 1)); // Unit direction vector.
-    vec3 n = normalize(vec3(0, 0, -1) + vec3(fxr - fxl, fyb - fyt, 0)/e.x/1.4*.01); // Bumped normal.
+    vec3 n = normalize(vec3(0-cos(smoothTimeB*0.3)*0.5, 0+sin(smoothTimeB*0.3)*0.5, -1) + vec3(fxr - fxl, fyb - fyt, 0)/e.x/1.4*.01); // Bumped normal.
     vec3 ld = (vec3(.25, .25, -1.) - vec3(u, 0)); // Light direction - Position minus surface point.
     
     float dist = length(ld); // Light distance.

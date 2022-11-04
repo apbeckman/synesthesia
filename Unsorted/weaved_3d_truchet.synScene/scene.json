@@ -17,7 +17,7 @@
 			"MAX" : 4,
 			"MIN" : -2,
 			"NAME" : "FOVmod",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.101,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -27,17 +27,7 @@
 			"MAX" : 1.95,
 			"MIN" : 0,
 			"NAME" : "yPos",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : -0.15,
-			"MIN" : 1.75,
-			"NAME" : "LookY",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.033,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -97,7 +87,7 @@
 				-0.5
 			],
 			"NAME" : "lookXY",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.037,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
@@ -107,7 +97,7 @@
 			"MAX" : 0.55,
 			"MIN" : -0.85,
 			"NAME" : "floorDistort",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.049,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "effects"
 		},

@@ -44,14 +44,14 @@ float map(vec3 p){
         sin(w.z*2.9 + p.z*0.7 + sin( w.x*2. + w.z*4. + smoothTimeC*0.15 + 0.5) + w.z*0.1)*(1.6)
     ); 
     
-    float flTop =(-p.y + FL_H )*0.13;
-    float flBot =(p.y + FL_H )*0.3;
+    float flTop =(-p.y + FL_H )*0.13+WallHeight;
+    float flBot =(p.y + FL_H )*0.3+WallHeight;
     float floors = min(flBot, flTop)+pow(basshits*0.122*Twitch*syn_Intensity, 2.0);
     d = min(d,floors);
     
-    float sep = 0.2; // seperation between glowy lines
+    float sep = 0.2*(1.0+pow(sin(smoothTimeB*0.1), 2.)*0.1+0.1+separation); // seperation between glowy lines
     
-    w.y = pmod(w.y,(sep+separation));
+    w.y = pmod(w.y,(sep));
     
     float flash = pow(syn_HighLevel*0.35+syn_MidHighLevel*0.35+syn_Hits*0.25+syn_HighHits*0.125, 2.);
     vec3 z = p;
@@ -59,8 +59,8 @@ float map(vec3 p){
     float atten = pow(abs(sin(z.z*0.2 + (smoothTimeB*0.1))), 50.);
     float attenC = pow(abs(sin(z.z*0.1  + sin(z.x + smoothTimeC)*0.1 + + sin(z.y*3.)*4. + smoothTimeB*0.1)), 100.);
     float attenB = pow(abs(sin(w.z*0.2  + sin(w.x + smoothTimeB)*0.1 + sin(w.y*0.7)*4. + (w.y*20.) + (smoothTimeC*0.1))), 10.);
-    vec3 col = pal(0.1,0.6 - attenC*0.65,vec3(1.7  - atten*0.4,1.1,0.8),0.2 - atten*0.34 ,0.5 - attenB*0.56 )*(1.0+flash*Flash);
-    col = max(col, 0.0125);
+    vec3 col = pal(0.1,0.6 - attenC*0.65,vec3(1.7  - atten*0.4,1.1,0.8),0.2 - atten*0.34 ,0.5 - attenB*0.56 );
+    col = max(col, 0.0125*(1.0+flash*Flash));
 
     
     float sc = 60. - atten*65.;
@@ -79,14 +79,14 @@ float map(vec3 p){
 
     // glow
    // glowB += exp(-dGlowzers*(70.))*reflAtten*col*40.;
-    d *= 0.65;
+    d *= 0.65+Twitch*basshits;
     return d;
 }
 
 float march(vec3 ro, vec3 rd, inout vec3 p, inout float t, inout bool hit){
 	float d = 10e6;
 	p = ro; t = 0.; hit = false;
-    for (int i = 0; i < 180 ; i++){
+    for (int i = 0; i < 150 ; i++){
     	d = map(p);
         //glow += exp(-d.x*20.)*0.001;
         if(d < 0.001){
