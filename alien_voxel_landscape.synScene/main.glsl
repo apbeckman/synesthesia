@@ -84,14 +84,14 @@ float noise( vec3 P )
 
 float mapTerrain( vec3 p )
 {
-    p*=.35;
+    p*=.35*VoxelFactor;
     p.y /= 2.;
 	return noise(p);
 }
 
 float map(in vec3 p)
 {
-	float terrain = mapTerrain( p ) + 0.12*p.y;
+	float terrain = mapTerrain( p ) + 0.125*p.y;
 	return step( terrain, 0.9975 );
 }
 
@@ -105,7 +105,7 @@ vec3 doMaterial( vec3 pos, vec3 vos )
     float h = vos.y/32.;
     
     vec3 primary = vec3(.9, .1, .2) ;
-    vec3 secondary = vec3(.1, .25, 1.)*(1.0+basshits);
+    vec3 secondary = vec3(.1, .125, 1.);
     
     return mix(primary, secondary, h)*h;
 }
@@ -295,7 +295,7 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
    
     vec2 p = (-RENDERSIZE.xy + 2.0*fragCoord.xy)/RENDERSIZE.y;
-    p.x /= 1.5;
+    p.x /= 1.125;
 
     //-----------------------------------------------------
     // camera

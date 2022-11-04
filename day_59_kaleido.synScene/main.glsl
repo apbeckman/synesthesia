@@ -1,4 +1,4 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 			//******** BuffA Code Begins ********
@@ -90,14 +90,14 @@ vec4 valueNoise(float i, float tol){
 
 
 vec2 sUv = vec2(0);
-#define mx (smoothTime*1.5 + 10.*iMouse.x/RENDERSIZE.x)
+#define mx (smoothTime*1.)
 vec3 sumonTheDemon( vec2 p, float id )
 {
     vec3 col = vec3(0);
 
     #define spacing (0.04 + sin(smoothTime*0.25)*0.02)
     #define PLANES 50.
-    #define W 0.00023
+    #define W 0.00023*(pow(1.0+syn_BassLevel, 2.0))
     
     float rA = texture(image30, vec2(sin(id*0.01)*200.,id )).x;
     float rB = texture(image30, vec2(sin(id*0.03 + 0.2)*200.,id*1.4 )).x;
@@ -114,7 +114,7 @@ vec3 sumonTheDemon( vec2 p, float id )
     //p.x += 0.1*nScreen.z*exp(-(500.+nScreen.y*500.)*abs(sUv.y - nScreen.x + 0.5))*0.2*sin(sUv.y*200. + TIME*50.);
     
     #ifdef KALEIDOMODE
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 10*Iterations; i++){
 		p = abs(p);
         p *= rot(0.1 + sin(id*0.1)*0.2);
         p -= 0.05 + sin(smoothTimeC*0.25 + id*0.1)*0.0;
@@ -125,8 +125,12 @@ vec3 sumonTheDemon( vec2 p, float id )
     #define onion(d, amt) (length(mod(amt*d, 1.) - 0.5 ) - 0.0)
     
     #define ysep 10.
+    float idx = floor(2000.*k.x/ysep);
+
     float idy = floor(2000.*k.y/ysep);
-    p.x += valueNoise(smoothTimeB*1.25 + idy*20.5 + id, 0.1).x*0.04;
+    p.x += valueNoise(syn_BassHits*1.25 + idy*120.5 + id, 0.1).x*0.04*Glitch;
+    p.y += valueNoise(syn_BassHits*1.25 + idx*120.5 + id, 0.1).y*0.04*Glitch;
+
     p = abs(p);
     p *= rot(0.25*pi);
     if(rA < 0.5){
@@ -143,10 +147,10 @@ vec3 sumonTheDemon( vec2 p, float id )
     fig = onion(fig , (20. + 5.*sin(smoothTimeC*0.25 + id)));
     
     
-    
     col += smoothstep(0.01,0.,fig)*vec3(1)*1.;    
+    col *= pow(1.0+highhits, 2.);
 
-    col *= pal(1.4,vec3(1.,1.,1.)*0.7,vec3(.87,4.4,1.8), vec3(3.7,2.5,1.1), id*0.1);
+    col *= pal(1.4,vec3(1.,1.,1.)*0.7,vec3(.87,4.4*(1.0+cos(smoothTimeC)*0.0025),1.8*(1.0+sin(smoothTimeC)*0.0025)), vec3(3.7,2.5,1.1), id*0.1);
     
     
     k += id;

@@ -1,4 +1,4 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 			//******** BuffA Code Begins ********
@@ -10,7 +10,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 #define FL_H 0.3
 
 
-#define mx (10.*iMouse.x/RENDERSIZE.x)
+#define mx (10.)
 #define rot(x) mat2(cos(x),-sin(x),sin(x),cos(x))
 #define pal(a,b,c,d,e) ((a) + (b)*sin(6.28*((c)*(d) + (e))))
 vec3 glowB = vec3(0);
@@ -19,10 +19,10 @@ vec3 reflAtten = vec3(1);
 
 
 vec3 path (float z){
-    z *= 0.5;
+    z *= 0.25;
 	return vec3(
     	sin(z + cos(z*0.7))*0.7,
-    	cos(z + cos(z*1.2))*0.6,
+    	cos(z + cos(z*1.2))*(0.6),
         0.
     )*2.;
 }
@@ -39,43 +39,54 @@ float map(vec3 p){
     
     // the tunnel is made by the next two lines, otherwise it's just to planes
 	p -= path(p.z);
-    
+    vec2 try = vec2 (sin(smoothTime), cos(smoothTime*0.1));
     p.xy *= rot(
-        sin(w.z*2.9 + p.z*0.7 + sin( w.x*2. + w.z*4. + smoothTimeC*0.15 + 0.5) + w.z*0.1)*1.6
+        sin(w.z*2.9 + p.z*0.7 + sin( w.x*2. + w.z*4. + smoothTimeC*0.15 + 0.5) + w.z*0.1)*(1.6)
     ); 
     
     float flTop =(-p.y + FL_H )*0.13;
     float flBot =(p.y + FL_H )*0.3;
-    float floors = min(flBot, flTop);
+    float floors = min(flBot, flTop)+pow(basshits*0.122*Twitch*syn_Intensity, 2.0);
     d = min(d,floors);
     
-    const float sep = 0.2; // seperation between glowy lines
+    float sep = 0.2; // seperation between glowy lines
     
     w.y = pmod(w.y,(sep+separation));
     
-    
+    float flash = pow(syn_HighLevel*0.35+syn_MidHighLevel*0.35+syn_Hits*0.25+syn_HighHits*0.125, 2.);
     vec3 z = p;
     // random attenuation to feed to the glowy lines
     float atten = pow(abs(sin(z.z*0.2 + (smoothTimeB*0.1))), 50.);
     float attenC = pow(abs(sin(z.z*0.1  + sin(z.x + smoothTimeC)*0.1 + + sin(z.y*3.)*4. + smoothTimeB*0.1)), 100.);
     float attenB = pow(abs(sin(w.z*0.2  + sin(w.x + smoothTimeB)*0.1 + sin(w.y*0.7)*4. + (w.y*20.) + (smoothTimeC*0.1))), 10.);
-    vec3 col = pal(0.1,0.6 - attenC*0.65,vec3(1.7  - atten*0.4,1.1,0.8),0.2 - atten*0.34 ,0.5 - attenB*0.56 );
-	col = max(col, 0.0125);
+    vec3 col = pal(0.1,0.6 - attenC*0.65,vec3(1.7  - atten*0.4,1.1,0.8),0.2 - atten*0.34 ,0.5 - attenB*0.56 )*(1.0+flash*Flash);
+    col = max(col, 0.0125);
+
     
     float sc = 60. - atten*65.;
     
     // distance to the glowy lines
     float dGlowzers = max(floors,-abs(w.y) + sep*0.5) - 0.02;
-    
-    // glow
+       
+        if(Flash == 0.) {
     glowB += exp(-dGlowzers*(70.))*reflAtten*col*40.;
+    }
+
+    else {
+    glowB += exp(-dGlowzers*(70.))*reflAtten*col*40.*(0.25+flash);
+    }
+    
+
+    // glow
+   // glowB += exp(-dGlowzers*(70.))*reflAtten*col*40.;
     d *= 0.65;
     return d;
 }
+
 float march(vec3 ro, vec3 rd, inout vec3 p, inout float t, inout bool hit){
 	float d = 10e6;
 	p = ro; t = 0.; hit = false;
-    for (int i = 0; i < 160 ; i++){
+    for (int i = 0; i < 180 ; i++){
     	d = map(p);
         //glow += exp(-d.x*20.)*0.001;
         if(d < 0.001){
@@ -190,7 +201,7 @@ vec4 renderMainImage() {
     vec4 radial = vec4(0);
     for(float i = 0.; i < steps; i++){
     
-        scale *= 0.98;
+        scale *= 0.99;
         vec2 target = uv + offs;
         offs -= normalize(uvn)*scale/steps;
     	radial.r += texture(BuffA, target + chromAb*1./RENDERSIZE.xy).x;
