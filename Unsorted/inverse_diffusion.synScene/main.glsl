@@ -93,7 +93,7 @@ vec4 renderPassD() {
     if (_mouse.z>0.) c = _mouse.xy;
     
     U -= c;
-    U *= (.99575*(1.-growthFactor*0.00525));
+    U *= (.99325*(1.-growthFactor*0.00675));
     U += c;
     Q = C(U);
     vec4 
@@ -122,7 +122,7 @@ vec4 renderMainImage() {
         d = normalize(vec3((U-0.5*R)/R.y,-1)),
         o = vec3(0.5,.1,.5)*R.xyy;
     if (_mouse.z>0.) o.xy = _mouse.xy;
-    mat2 m = r(.44);
+    mat2 m = r(4./9.);
     p.y -= .19*R.y;
     d.yz *= m;
     p.yz *= m;

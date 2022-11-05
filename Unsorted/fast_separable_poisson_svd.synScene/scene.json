@@ -1,0 +1,43 @@
+{
+	"CREDIT" : "cornusammonis",
+	"DESCRIPTION" : "A separable Poisson solver method computed using singular value decomposition",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpg"
+		}
+	],
+	"IMAGE_PATH" : "fast_separable_poisson_svd.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Fast Separable Poisson SVD",
+	"WIDTH" : 1280
+}

@@ -802,12 +802,12 @@ vec4 renderMainImage() {
     // Screen coordinates.
 	vec2 u = (fCoord - RENDERSIZE.xy*.5) / RENDERSIZE.y;
     
-	
+	// /u *= normalize(u/RENDERSIZE*_uvc);
 	// Camera Setup.
 	vec3 lk = vec3(0, 0+(yPos*1.75)-floorDistort, ((smoothTime*0.125)+(fly_in_out*0.4)));  // "Look At" position.
 	vec3 o = lk + vec3(0, .3+LookY, -.25); // Camera position, doubling as the ray origin.
-
-   
+    
+    
     // Light position. Set in the vicinity the ray origin.
     vec3 l = o + vec3(0, .5, 2.);
     

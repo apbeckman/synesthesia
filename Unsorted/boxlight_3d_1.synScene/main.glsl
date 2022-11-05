@@ -66,12 +66,12 @@ vec3 grid(in vec2 xz, in float t)
 }
 
 float map(in vec3 tex){ return 6.*tex.r*tex.r; }
-/*
-float  (in vec3 tex) {return 3.*(tex.r*tex.r		// Music map
-    							  //*(texelFetch(iChannel1,ivec2(1,0),0).x
-                                  //+ texelFetch(iChannel1,ivec2(400,0),0).x))
+
+float Mmap(in vec3 tex) {return 3.*(tex.r*tex.r		// Music map
+    							  *(texelFetch(iChannel1,ivec2(1,0),0).x
+                                  + texelFetch(iChannel1,ivec2(400,0),0).x))
     					;}
-*/
+
 vec3 setCol(in vec3 tex, in vec2 xz)	// box color
 {
     vec2 bp = 
@@ -115,7 +115,7 @@ vec4 trace(in vec3 pos, in vec3 ray, inout vec3 litflux, inout vec3 tex, inout f
         vec3 p = pos+t*ray;
         
         tex = grid(p.xz,TIME);		// get texture at current time.
-        float dh = p.y;	// height of the box depend on the red channel of the texture
+        float dh = p.y - Mmap(tex);	// height of the box depend on the red channel of the texture
         
         if( abs(dh)<.25){			// if a box is hit
             
@@ -184,7 +184,7 @@ vec4 renderMainImage() {
     // camera def
     vec3 camTarget = vec3(-50.*sin(2.*ti),25.*_mouse.y/RENDERSIZE.y,-30.*cos(3.*ti));    
     vec3 pos = getCamPos(camTarget);
-    pos.y = max(pos.y, (pos.xz,TIME))+1.; // anti-collision
+    pos.y = max(pos.y,Mmap(grid(pos.xz,TIME))+1.); // anti-collision
     
     vec3 ray = getRay(st, pos,camTarget);
     	
@@ -201,7 +201,7 @@ vec4 renderMainImage() {
 	vec3 p = pos + t*ray;
 
     if(t<INFINI){
-        vec2 h = vec2(0.); //mmap
+        vec2 h = vec2(0.,Mmap(tex));
         vec2 side = p.xz*norm.y+(p.xy-h)*abs(norm.z)+(p.zy-h)*abs(norm.x);
         color += setCol(tex,p.xz)*(.7+.005*p.y*p.y*p.y);
         color *= min(1.,20./t);
@@ -228,7 +228,7 @@ vec4 renderMainImage() {
         float tt = wall.w+.0001;
         
 		// adding light flux to the next voxel
-        float dh = p.y;	//mmap			
+        float dh = p.y - Mmap(tex);				
         float dhdt = map(grid(p.xz,TIME-.03*p.y+.5));
         litflux = .1*wall.w*wall.w*setRayCol(tex,p.xz)*smoothstep(6.,20.,dhdt)*min(1.,30./t)*step(0.,dh);
         
@@ -240,7 +240,7 @@ vec4 renderMainImage() {
         
         if(t<INFINI){	// a box is hit, setting its color
             p += (t+tt)*ray;
-            vec2 h = vec2(0.);
+            vec2 h = vec2(0.,Mmap(tex));
             vec2 side = p.xz*norm.y+(p.xy-h)*abs(norm.z)+(p.zy-h)*abs(norm.x);
             vec3 colAA = setCol(tex,p.xz)*(.7+.005*p.y*p.y*p.y);
             colAA *= min(1.,20./T);

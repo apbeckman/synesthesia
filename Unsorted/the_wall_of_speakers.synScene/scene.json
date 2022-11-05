@@ -4,8 +4,8 @@
 		{
 			"DEFAULT" : 
 			[
-				0.5,
-				0.5
+				0.9,
+				0.4
 			],
 			"DESCRIPTION" : "",
 			"MAX" : 
@@ -33,12 +33,13 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 0.1,
 			"DESCRIPTION" : "",
-			"MAX" : 0.125,
-			"MIN" : 0,
+			"MAX" : 1,
+			"MIN" : 1,
 			"NAME" : "FOV",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}
 	],

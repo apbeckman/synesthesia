@@ -10,6 +10,15 @@
 			"PARAMS" : 0.205,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Blow",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "yasuo",

@@ -1,0 +1,57 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.1,
+			"DESCRIPTION" : "Smoothness of the brush",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "brush_smooth",
+			"TYPE" : "slider",
+			"UI_GROUP" : "brush"
+		},
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "Size of the brush",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "brush_size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "brush"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Draw colors or paint video",
+			"LABELS" : 
+			[
+				"color",
+				"video"
+			],
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "draw_mode",
+			"TYPE" : "dropdown",
+			"UI_GROUP" : "brush",
+			"VALUES" : 
+			[
+				0,
+				1
+			]
+		}
+	],
+	"CREDIT" : "Synesthesia",
+	"DESCRIPTION" : "A demonstration of drawing with Synesthesia's mouse variables. Try clicking and dragging directly on the preview window or visualizer.",
+	"GPU" : 1,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "mouse_demo_dup.png",
+	"TAGS" : 
+	[
+		"developer",
+		"mouse",
+		"drawing",
+		"2D",
+		"feedback"
+	],
+	"TITLE" : "Mouse Demo_dup",
+	"WIDTH" : 1920
+}

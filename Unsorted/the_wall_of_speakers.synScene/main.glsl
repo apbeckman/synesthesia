@@ -1,8 +1,8 @@
 
 
-#define MAX_STEPS 100
-#define MAX_DIST 100.
-#define SURF_DIST .00025
+#define MAX_STEPS 120
+#define MAX_DIST 120.
+#define SURF_DIST .000125
 #define Rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 #define antialiasing(n) n/min(RENDERSIZE.y,RENDERSIZE.x)
 #define S(d,b) smoothstep(antialiasing(1.0),b,d)
@@ -54,7 +54,7 @@ float speaker(vec3 p){
     d2 = length(p-vec3(0.,-0.25,-0.08))-0.12;
     d = min(d,d2);
     
-    d2 = sdHorizontalCapsule(p-vec3(0.,-0.75-syn_HighHits*0.0125,-0.36),0.6,0.06);
+    d2 = sdHorizontalCapsule(p-vec3(0.,-0.75,-0.36),0.6,0.06);
     d = max(-d2,d);
     
     d2 = length(p-vec3(0.,0.55,-0.36))-0.2;
@@ -149,7 +149,7 @@ float speaker3(vec3 p){
     d = min(d,max((abs(p.z)-0.02),d2));    
     
     p = prevP;
-    p.xy*=Rot(radians(90.+(smoothTimeC)*120.));
+    p.xy*=Rot(radians(90.+(smoothTimeC*accentRotate)*120.));
     p.z-=-0.37;
     p.y=abs(p.y)-0.93;
     d2 = Tri(p.xy,vec2(0.08),radians(45.));
@@ -264,7 +264,7 @@ float calcOcclusion( in vec3 pos, in vec3 nor )
 vec3 diffuseMaterial(vec3 n, vec3 rd, vec3 p, vec3 col) {
     float occ = calcOcclusion(p,n);
     vec3 diffCol = vec3(0.0);
-    vec3 lightDir = normalize(vec3(1,10,-10));
+    vec3 lightDir = normalize(vec3(1+cos(smoothTimeB*0.25)*2.,10+sin(smoothTimeB*0.25)*10,-10));
     float diff = clamp(dot(n,lightDir),0.0,1.0);
     float shadow = step(RayMarch(p+n*0.3,lightDir,1.0, 15).x,0.9);
     float skyDiff = clamp(0.5+0.5*dot(n,vec3(0,1,0)),0.0,1.0);
@@ -292,9 +292,9 @@ vec4 renderMainImage() {
     
     vec3 ro = vec3(0, 0, -1.5);
     //if(_mouse.z>0.){
-        ro.yz *= Rot(m.y*3.14+1.);
+        ro.yz *= Rot(m.y*PI+1.);
         ro.y = max(-0.9,ro.y);
-        ro.xz *= Rot(-m.x*6.2831);
+        ro.xz *= Rot(-m.x*2*PI);
     //} else {
         /*float scene = mod(TIME,15.);
         float rotY = -10.;
@@ -311,18 +311,7 @@ vec4 renderMainImage() {
         ro.xz *= Rot(radians(rotX));
     }
     */
-    //removed mouse controls, adding in modified ray for FOV 
-    float FOV = 3.14159/(2/FOV);
-    vec3 fwd = normalize(ro); // o = ray origin vector
-    vec3 rgt = normalize(vec3(fwd.z, 0, -fwd.x ));
-    vec3 up = cross(fwd, rgt);
-    // Unit direction ray.
-    vec3 rd = normalize(fwd + FOV*(uv.x*rgt + uv.y*up));
-    rd.yz = _rotate(rd.yz, LookXY.y*PI) ;
-    rd.xy = _rotate(rd.xy, LookXY.x*PI);
-
-
-    //vec3 rd = R(uv, ro, vec3(0,0.0,0), 1.0);
+    vec3 rd = R(uv, ro, vec3(0,0.0,0), 1.0);
     vec2 d = RayMarch(ro, rd, 1.,MAX_STEPS);
     vec3 col = vec3(.0);
     

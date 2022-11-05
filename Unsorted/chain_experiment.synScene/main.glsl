@@ -14,12 +14,12 @@ float sdChain(vec3 p, float speed) {
     p.y -= smoothTimeC*speed;
     
     const float le = 0.2, r1 = 0.3, r2 = 0.1;
-    
+    float blow = pow(syn_BassLevel*0.35+syn_MidLevel*0.35+syn_Level*0.3, 2.0)*Blow;
     float ya = max(abs(mod(p.y,     1.5)-0.75)-le,0.0);
     float yb = max(abs(mod(p.y+0.75,1.5)-0.75)-le,0.0);
 
-    float la = ya*ya - 2.0*r1*sqrt(p.x*p.x+ya*ya);
-    float lb = yb*yb - 2.0*r1*sqrt(p.z*p.z+yb*yb);
+    float la = ya*ya - (2.0+blow)*r1*sqrt(p.x*p.x+ya*ya);
+    float lb = yb*yb - (2.0+blow)*r1*sqrt(p.z*p.z+yb*yb);
     
     return sqrt(dot(p.xz,p.xz) + r1*r1 + min(la,lb)) - r2;
 }
@@ -57,10 +57,10 @@ float shadowMap(vec3 ro, vec3 rd){
     float h = 0.0;
     float c = 0.001;
     float r = 1.0;
-    float shadow = 0.5;
-    for(float t = 0.0; t < 30.0; t++){
+    float shadow = 0.25;
+    for(float t = 0.0; t < 40.0; t++){
         h = map(ro + rd * c).w;
-        if(h < 0.001){
+        if(h < 0.0001){
             return shadow;
         }
         r = min(r, h * 16.0 / c);
@@ -133,7 +133,7 @@ vec4 renderMainImage() {
     if(dist < 1.0){
         // lighting
         vec3 lightDir = vec3(0.0, 1.0, 0.0);
-        vec3 light = normalize(lightDir + vec3(0.5, 0.0, 0.9));
+        vec3 light = normalize(lightDir + vec3(0.5, 0.0, 01.9));
         vec3 normal = normalMap(distPos);
 
         // difuse color
@@ -151,7 +151,7 @@ vec4 renderMainImage() {
         color = ao*diffuse*(distCl.xyz+(.1-length(p.xy)/3.))*vec3(1.0, 1.0, 1.0);
         
     }else{
-        color =.0*max(mix(vec3(1.1,0.9,0.0)+(.1-length(p.xy)/3.),vec3(1),.1),0.);
+        //color =max(mix(vec3(1.1,0.9,0.0)+(.1-length(p.xy)/3.),vec3(1),.1),0.);
     }
 
     // rendering result

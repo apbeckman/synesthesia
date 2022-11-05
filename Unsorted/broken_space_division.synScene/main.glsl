@@ -49,9 +49,9 @@ float SDF(vec3 v) {
     float box4 = boxSDF(vmod, vec3(0.5,0.5,0.5),vec3(.03,.03,1.));
     
     
-    float morphtime=TIME*0.1+(v.x-v.y-v.z)*0.02;
+    float morphtime= smoothTimeC*0.1+(v.x-v.y-v.z)*0.02;
     
-    float noisemorph = 2.*(floor(morphtime)+smoothstep(0.3,0.7,fract(morphtime)));
+    float noisemorph = 1.*(floor(morphtime)+smoothstep(0.3,0.7,fract(morphtime)));
     
     return max(min(box1,min(box2,min(box3,box4))),valueNoise(v+vec3(0.5)+noisemorph)-0.5)-rounding;
     		
@@ -79,12 +79,12 @@ vec4 renderMainImage() {
     const int ITERATIONS = 60;
     
     
-    vec3 camera = vec3(TIME*0.2,0,TIME*0.5);
+    vec3 camera = vec3( smoothTime*0.2,0, smoothTime*0.25);
     vec3 pos = camera;
     vec3 dir = normalize(vec3(uv,1.));
-    float theta=TIME*0.1;
+    float theta= smoothTimeC*0.1;
     
-    dir.yz=rotate2d(sin(TIME*0.1))*dir.yz;
+    dir.yz=rotate2d(sin( smoothTime*0.1))*dir.yz;
     
     dir.xz=rotate2d(theta)*dir.xz;
                   
@@ -97,7 +97,7 @@ vec4 renderMainImage() {
     for (int i = 0; i < ITERATIONS; i++) {
     	float dist = SDF(pos);
         if (dist < surf_threshold) {
-            //vec3 light = normalize(vec3(0,0,TIME)-pos);
+            vec3 light = normalize(vec3(0,0, smoothTimeB)-pos);
             vec3 norm = normal(pos);
             float luminance = 0.5+0.5*dot(norm,light);
             //col = vec3(valueNoise(pos*10.));
