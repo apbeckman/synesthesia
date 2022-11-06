@@ -12,7 +12,7 @@ float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.25)+(syn_Level*0.12
 
 
 // contrast
-#define SIGMOID_CONTRAST 12.50
+#define SIGMOID_CONTRAST 12.50*pow(1.+syn_Intensity*0.1+syn_Presence*0.1, 1.75)
 
 vec3 contrast(vec3 x) {
 	return 1.0 / (1.0 + exp(-SIGMOID_CONTRAST * (x - 0.5)));    
@@ -88,14 +88,14 @@ float ggx(vec3 n, vec3 v, vec3 l, float rough, float f0){
 
 #define STEPS 50  // advection steps
 
-#define ts 0.25    // advection curl
+#define ts 0.25*Amp    // advection curl
 #define cs -2.0   // curl scale
-#define ls 0.05   // laplacian scale
-#define ps -2.0   // laplacian of divergence scale
-#define ds -0.4   // divergence scale
+#define ls 0.05*Amp   // laplacian scale
+#define ps -2.0*pow(Divergence, 01.25)   // laplacian of divergence scale
+#define ds -0.4/(Divergence)   // divergence scale
 #define dp -0.03  // divergence update scale
 #define pl 0.3    // divergence smoothing
-#define amp 1.0   // self-amplification
+#define amp 1.0*(0.999+growthFactor*0.001)   // self-amplification
 #define upd 0.4   // update smoothing
 
 #define _D 0.6    // diagonal weight
@@ -104,7 +104,7 @@ float ggx(vec3 n, vec3 v, vec3 l, float rough, float f0){
 #define _K1 4.0/6.0   // laplacian edge-neighbors
 #define _K2 1.0/6.0   // laplacian vertex-neighbors
 
-#define _G0 0.25      // gaussian center weight
+#define _G0 0.25*(weight)      // gaussian center weight
 #define _G1 0.125     // gaussian edge-neighbors
 #define _G2 0.0625    // gaussian vertex-neighbors
 
@@ -172,13 +172,14 @@ vec4 renderPassA() {
     }
     
     vec2 tab = (amp * ab.xy*(0.9925+growthFactor*0.0725) + (ls * lapl.xy + norm * sp)*0.99999+syn_Level*0.00001 + (uv.xy * ds * sd)*(0.999125+syn_MidLevel*0.000895));    
-    vec2 rab = rot(tab,sc);
+    vec2 rab = rot(tab,sc)*impulse;
     
     vec3 abd = mix(vec3(rab,sd), uv, upd+syn_Level*0.025);
     
     if (_mouse.z > 0.0) {
-    	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.x;
+    	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy+0.25;
         vec2 m = 0.1 * normz(d) * exp(-length(d) / 0.02);
+        m *= Size;
         abd.xy += m;
         uv.xy += m;
     }
@@ -189,7 +190,7 @@ vec4 renderPassA() {
         fragColor = vec4(rnd, 0);
     } else {
         abd.z = clamp(abd.z, -1.0, 1.0);
-        abd.xy = clamp(length(abd.xy) > 1.0 ? normz(abd.xy) : abd.xy, -1.0, 1.0);
+        abd.xy = clamp(length(abd.xy) > 1.0 ? normz(abd.xy) : abd.xy, -1.0, 1.0)*(0.99+normalize(growthFactor)*0.01);
         fragColor = vec4(abd, 0.0);
     }
 

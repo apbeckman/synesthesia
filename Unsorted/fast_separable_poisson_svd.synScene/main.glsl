@@ -177,7 +177,7 @@ vec4 renderPassA() {
     vec3 abd = mix(vec3(rab,sd), uv, upd);
     
     if (_mouse.z > 0.0) {
-    	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.x;
+    	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy+0.25;
         vec2 m = 0.1 * normz(d) * exp(-length(d) / 0.02);
         abd.xy += m;
         uv.xy += m;

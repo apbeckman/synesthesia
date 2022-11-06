@@ -42,6 +42,7 @@
 	https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system
 
 */
+float growthFactor = normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0));
 
 float hash21(vec2 p){
     p = mod(p, 64.);
@@ -205,7 +206,7 @@ vec4 Laplacian(vec2 p) {
 }
 
 
-/*
+
 // Nine tap Laplacian.
 vec4 Laplacian9(vec2 p) {
     
@@ -226,9 +227,9 @@ vec4 Laplacian9(vec2 p) {
 	//		tx(p + e.wy) + tx(p + e.zy) +  tx(p + e.xy))/2.; // Third row
  
 }
-*/
 
-/*
+
+
 // Five tap Laplacian -- The simplest Laplacian filter... unless there's a more minimalistic one.
 vec4 Laplacian5( vec2 p) {
     
@@ -236,10 +237,10 @@ vec4 Laplacian5( vec2 p) {
 
 	return tx(p - e.zy) + tx(p - e.xz) - tx(p)*4. + tx(p + e.xz) + tx( p +  e.zy);
 }
-*/
 
 
-/*
+
+
 // Analytic Laplacian of sorts.
 vec4 grad(in vec2 uv) {
     
@@ -259,7 +260,7 @@ vec2 LaplacianA(in vec2 uv) {
     
     return lap/RENDERSIZE.y/RENDERSIZE.y;
 }
-*/
+
 
 
 
@@ -302,27 +303,82 @@ vec4 renderPassA() {
 	// be involved. Hence, the Laplacian step below:
     //
     // 25 tap Laplacian to really smoothen things out.
-    vec2 lap = Laplacian(p).xy;
+
+    vec2 lap;// = Laplacian(p).xy;
     // Other Laplacian functions to experiment with. The different pixels arrangements
     // produce subtle differences. Each function would need to be uncommented above.
     //vec2 lap = Laplacian9(p).xy;
     //vec2 lap = LaplacianA(p);
     //vec2 lap = Laplacian5(p).xy;
-    
+    int LPM = int(Laplacian_Mode); //feed kill mode integer
+
+    if(LPM==0.){
+    lap = Laplacian(p).xy; //original
+    }
+
+    if(LPM==1.){
+    lap = Laplacian9(p).xy; //
+    }
+    if(LPM==2.){
+    lap = LaplacianA(p).xy; //
+    }
+    if(LPM==3.){
+    lap = Laplacian5(p).xy; //
+    }
+
     // Feed and kill rates. These are close to standard values that you see everywhere.
     // You can change them, but they're sensitive.
-    //float feed = 0.0545, kill = 0.062;
+    //float feed = 0.0545, kill = 0.062; //original constants
    // feed -= basshits/15*sin(TIME);
     //kill -= basshits/105*cos(TIME);
+    //AB: refactored to allow each of the alternate sets of feed/kill values to be used via the Feed_Kill_Mode slider
+    float feed, kill;
+    int FKM = int(Feed_Kill_Mode); //feed kill mode integer
+
+    if(FKM==-1.){
+    feed = 0.0545, kill = 0.062; //original constants
+    }
+
+    if(FKM==0.){
+        feed = 0.058, kill = 0.065; // Lines and dots.
+    }
+
+    if(FKM==1.){
+        feed = 0.046, kill = 0.063; // Lines and dots2.
+    }
+
+    if(FKM==2.){
+        feed = 0.098, kill = 0.057; // Solid cells.
+    }
+
+    if(FKM==3.){
+        feed = 0.037, kill = 0.06; // Random joined lines.
+    }
+
+    if(FKM==4.){
+        feed = 0.058, kill = 0.065; // Lines and dots.
+    }
+    if(FKM==5.){
+        feed = 0.03, kill = 0.0565; // Maze.
+    }
+    if(FKM==6.){
+        feed = 0.03, kill = 0.063; // Self replicating spots.
+    }
+    //AB: fine adjust
+    feed += Feed;
+    kill += Kill;
+
     // More constants to try. A lot of them are presets that I found using a handy pattern
     // generator at this link: http://mrob.com/pub/comp/xmorphia/ogl/index.html
+
     //const float feed = 0.058, kill = 0.065; // Lines and dots.
     //const float feed = 0.046, kill = 0.063; // Lines and dots.
     //const float feed = 0.098, kill = 0.057; // Solid cells.
     //const float feed = 0.037, kill = 0.06; // Random joined lines.
-    float feed = 0.0353, kill = 0.06; // Random joined lines.
+    //float feed = 0.0353, kill = 0.06; // Random joined lines.
     //float feed = 0.03, kill = 0.063; // Self replicating spots.
-    feed *= (1.0+basshits*0.0125);
+
+    //feed *= (0.99975+basshits*0.00025);
     //const float feed = 0.03, kill = 0.0565; // Maze.
     
     // Diffusion rates for concentrations A and B. The first component needs to be higher
@@ -331,31 +387,31 @@ vec4 renderPassA() {
     // vary greatly. Tiny changes in these values will widely change the pattern, but can
     // also bring about a blank screen. I guess that's one of the downsides of diffusion 
     // patterns.
-	vec2 dAB = vec2(.2, .106);
+	vec2 dAB = vec2( ((.2)*(0.975+growthFactor*0.025))+DiffA, .106+DiffB-DiffA*0.0125);
     //vec2 dAB = vec2(.2, .1);
     
     // Time component. Kind of redundant here, but it can be used to control reaction rate.
     // Unfortunately, like all the figures used here, just a tiny change can ruin the 
     // reaction, which results in no pattern at all. Either way, you should try to set 
     // this number as high as you can without trashing the pattern.
-    float t = 1.*(1.+sin(smoothTime*0.001)*0.001); 
+    float t = 1.*(0.999+growthFactor*0.001); 
     
     // The diffusion term: Just the constant diffusion rates multiplied by the Laplacian
     // for each concentration.
-    vec2 diffusion = dAB*lap;
+    vec2 diffusion = dAB*lap*((1.0+Feed)/(1.0+Kill));
     // The reaction term: The "rdVal.x*rdVal.y*rdVal.y" value is representative of the
     // chance that a particle from concentration A will react with two particles from
     // concentration B, which from probability theory is: A*B*B. This results in a decrease
     // of concentration A and an increase in concentration B by that particular amount.
     // Hence, the negative and positive vector terms on the end.
-    vec2 reaction = vec2(rdVal.x*rdVal.y*rdVal.y)*vec2(-1, 1)*(1.+sin(TIME)/100);
+    vec2 reaction = vec2(rdVal.x*rdVal.y*rdVal.y)*vec2(-1, 1);
     
     // Feed and kill rates. Substance A is added at a feed rate, and substance B is taken
     // away at a kill rate. Hence, the positive and negative vector terms on the end.
     // It took me a while to figure out why the "1. - rdVal.x" term was necessary. It's 
     // necessary to reduce the amount that is fed into the system as the concentration of
     // A "rdVal.x" builds up, otherwise, we'd never reach equilibrium.
-    vec2 feedKill = vec2(feed*(1. - rdVal.x*(1.+cos(smoothTime*0.25)/100)), (kill + feed)*(1.-cos(TIME/4)/100)*rdVal.y*(1.+sin(smoothTime*0.25)/100))*vec2(1, -1)*(1.+cos(TIME/4)/100);
+    vec2 feedKill = vec2(feed*(1. - rdVal.x), (kill + feed)*rdVal.y)*vec2(1, -1);
     // Try the following with just the "rdVal.x" and the initial condition:
     // fragColor.xy = vec2(1, 0) + (hash22(p*64.).xy - .5)*.75;
     //
@@ -391,7 +447,7 @@ vec4 renderPassA() {
     // Sometimes, the application won't recognize the first frame -- or something, so it's 
     // necessary to initialize for the first few frames to give it a chance to catch on.
     // Also, check for changes in canvas size.
-    if(FRAMECOUNT<10 || abs(rdVal.w - RENDERSIZE.y)>.001) {
+    if(FRAMECOUNT<10 || abs(rdVal.w - RENDERSIZE.y)>.001|| Reset > 0.)  {
 
         fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5);
 
@@ -636,9 +692,9 @@ vec3 bump(vec3 sp, vec3 sn, float bumpFactor, inout float edge){
     
     
     eps = vec2(6./RENDERSIZE.y, 0);
-    fx = bumpFunc(sp.xy - eps.xy)+highhits;// - bumpFunc(sp.xy + eps.xy); // Same for the nearby sample in the X-direction.
+    fx = bumpFunc(sp.xy - eps.xy);// - bumpFunc(sp.xy + eps.xy); // Same for the nearby sample in the X-direction.
     fy = bumpFunc(sp.xy - eps.yx);// - bumpFunc(sp.xy + eps.yx);
-    edge = (abs(f*1. - fx) + abs(f*1. - fy)); // Edge value.
+    edge = (abs(f*1. - fx) + abs(f*1. - fy))+highhits; // Edge value.
  	
  
     
@@ -699,10 +755,10 @@ vec4 renderMainImage() {
     vec3 sp = ro + rd*t;
      
 
-    vec3 lp = vec3(.125, .35, -1); // Light position - Back from the screen.
+    vec3 lp = vec3(.125+cos(smoothTimeB*0.3), .35+sin(smoothTimeB*0.3), -1); // Light position - Back from the screen.
     
-    sp.xy -= vec2(-1, -.5)*TIME/8.;
-    lp.xy -= vec2(-1, -.5)*TIME/8.;
+    sp.xy -= vec2(-5*sin(smoothTime*0.00125+TIME*0.01), -5.5*cos(smoothTime*0.00125+TIME*0.01));
+    lp.xy -= vec2(- 5*sin(smoothTime*0.00125+TIME*0.01), -5.5*cos(smoothTime*0.00125+TIME*0.01));
 	
     //vec3 sn = vec3(0., 0., -1); // Plane normal. Z pointing toward the viewer.
     
@@ -737,7 +793,7 @@ vec4 renderMainImage() {
     // Enhancing the diffuse value a bit. Made up.
     diff = pow(diff, 2.)*0.66 + pow(diff, 4.)*0.34; 
     // Specular highlighting.
-    float spec = pow(max(dot( reflect(-ld, sn), -rd), 0.), 64.); 
+    float spec = pow(max(dot( reflect(-ld, sn), -rd), 0.), 64.)*(1.+highhits); 
 
 	
     // TEXTURE COLOR

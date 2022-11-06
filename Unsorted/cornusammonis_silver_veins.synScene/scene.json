@@ -1,8 +1,57 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 4,
+			"MIN" : 0.15,
+			"NAME" : "Size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.1,
+			"MIN" : 0.995,
+			"NAME" : "impulse",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.8,
+			"NAME" : "Divergence",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.1,
+			"MIN" : 0.95,
+			"NAME" : "weight",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.25,
+			"MIN" : 0.9,
+			"NAME" : "Amp",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "cornusammonis",
 	"DESCRIPTION" : "A separable Poisson solver method computed using singular value decomposition",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
@@ -15,29 +64,29 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffC",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "Cornusammonis Silver Veins",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

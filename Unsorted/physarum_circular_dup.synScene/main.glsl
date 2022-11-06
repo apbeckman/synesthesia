@@ -178,7 +178,7 @@ vec4 renderPassA() {
     CheckRadius(U, pos, 4.);
     CheckRadius(U, pos, 5.);
    
-    U.xy = loop(U.xy);
+    U.xy = loop(U.xy+sin(smoothTime*0.1)*0.1);
     
     //cell cloning 
     if(length(U.xy - pos) > 10.)//change pos for thiccness
@@ -260,8 +260,8 @@ vec4 renderMainImage() {
 	vec2 pos = _xy;
 
 	vec4 particle = texel(BuffA, pos);
-    float distr = gauss(pos - particle.xy, prad)*(1.0+pow(normalize(highhits), 2.0)*0.25);
-    vec4 pheromone = 2.*texel(BuffB, pos);
+    float distr = gauss(pos - particle.xy, prad);
+    vec4 pheromone = 2.*texel(BuffB, pos)*(1.0+pow(normalize(highhits), 2.0)*0.25);
     fragColor = vec4(sin(pheromone.xyz*vec3(1,1.2,1.5)), 1.);
 	return fragColor; 
  } 

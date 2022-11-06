@@ -1,4 +1,16 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.1,
+			"DESCRIPTION" : "Smoothness of the brush",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mouse",
+			"TYPE" : "xy",
+			"UI_GROUP" : "brush"
+		}
+	],
 	"CREDIT" : "cornusammonis",
 	"DESCRIPTION" : "A separable Poisson solver method computed using singular value decomposition",
 	"GPU" : 0,

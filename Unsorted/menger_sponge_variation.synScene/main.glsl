@@ -276,7 +276,7 @@ vec4 renderMainImage() {
     rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z/FOVmod - dot(rd.xy/FOVmod, rd.xy)/FOVmod*.2, 0.))));
     
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
-    vec2 m = sin(vec2(0, 1.57079632) + smoothTime*0.25);
+    vec2 m = sin(vec2(0, 1.57079632) + smoothTime*0.2);
     //rd.xy = mat2(m.y, -m.x, m)*rd.xy;
     //rd.xz = mat2(m.y, -m.x, m)*rd.xz;
     rd.yz = _rotate(rd.yz, lookXY.y*PI);
@@ -374,7 +374,7 @@ vec4 renderMainImage() {
     
     // Working in a bit of a blue fadeout in the distance. Totally fake. I chose blue to counter all
     // that walnut. Seemed like a good idea at the time. :)
-    col = mix(col, vec3(.55, .75, 1.), smoothstep(0., FAR - 15., t));////1.-exp(-0.01*t*t)
+    col = mix(col, vec3(1.95, 1.85, 1.9)*(0.5+highhits*0.5), smoothstep(0., FAR - 15., t));////1.-exp(-0.01*t*t)
 
     
     // No gamma correction: It was a style choice, plus I didn't feel like going back and retweaking the 

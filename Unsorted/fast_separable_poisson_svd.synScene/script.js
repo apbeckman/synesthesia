@@ -42,16 +42,17 @@ var midT = 0.0;
 var highhits = 0.0;
 var basshits = 0.0;
 var midhits = 0.0;
-var bass = 0.0;
-var hits = 0.0;
+
+
 function update(dt) {
 
 
 
     if (_click.x > 0.5) {
-        setControl('manual_position',[_muv.x*2-1, _muv.y*2-1])
+        setControl('mouse',[_mouse.x*2-1, _mouse.y*2-1])
         setControl('manual_impulse',1);
         clicked = true;
+        
     } else if (clicked) {
         setControl('manual_impulse',0);
         clicked = false;
@@ -68,13 +69,10 @@ function update(dt) {
   // bpmTime = tAtLast0;
   // bpmTime += (1. - Math.exp(-bpmcount.timeWithinBeat*3.))*inputs.amount_to_step;
   // uniforms.script_time = bpmTime;
-  uniforms.highhits = Math.pow( (inputs.syn_HighLevel*0.5 + inputs.syn_Hits*0.125+inputs.syn_HighHits*0.375)*inputs.syn_Intensity, 2.0);
-  uniforms.basshits = Math.pow( (inputs.syn_BassLevel*0.5 + inputs.syn_Level*0.125+inputs.syn_BassHits*0.375)*inputs.syn_Intensity, 2.0);
-  uniforms.midhits = Math.pow( (inputs.syn_MidLevel*0.5 + inputs.syn_Level*0.125+inputs.syn_MidHits*0.375)*inputs.syn_Intensity, 2.0);
-  uniforms.hits = Math.pow( (inputs.syn_HighLevel*0.5 + inputs.syn_Level*0.125+inputs.syn_Hits*0.375)*inputs.syn_Intensity, 2.0);
-
-  uniforms.low = Math.pow( (inputs.syn_BassLevel*0.5 + inputs.syn_MidLevel*0.375+inputs.syn_Level*0.125)*inputs.syn_Intensity, 2.0);
-
+  uniforms.highhits = 0.75*Math.pow( (inputs.syn_HighLevel*0.45 + inputs.syn_Level*0.125+inputs.syn_HighHits*0.25), 2.0)*inputs.syn_Intensity;
+  uniforms.basshits = 0.75*Math.pow( (inputs.syn_BassLevel*0.45 + inputs.syn_Level*0.125+inputs.syn_BassHits*0.25), 2.0)*inputs.syn_Intensity;
+  uniforms.midhits = 0.75*Math.pow( (inputs.syn_MidLevel*0.45 + inputs.syn_Level*0.125+inputs.syn_MidHits*0.25), 2.0)*inputs.syn_Intensity;
+  uniforms.level = 
   bassT = bassT + Math.pow(inputs.syn_BassLevel*0.35+inputs.syn_MidLevel*0.15,2.0);
   uniforms.script_bass_time = bassT;
   midT = midT + Math.pow(inputs.syn_MidLevel*0.25+inputs.syn_MidHighLevel*0.25,2.0);
