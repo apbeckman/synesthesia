@@ -2,13 +2,34 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
 			"NAME" : "lookXY",
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -20,19 +41,20 @@
 			"TYPE" : "slider",
 			"UI_GROUP" : "render glitches"
 		},
-
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 0.125,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
+			"MAX" : 2,
 			"MIN" : 0,
-			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
-			"UI_GROUP" : "defaults"
+			"NAME" : "FOV",
+			"PARAMS" : 0.218,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "An abstract, blobby-looking field - rendered in the style of hot, glowing, fluid-filled glass. All produced using cheap low-budget pseudoscience. :)",
+	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[

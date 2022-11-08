@@ -65,7 +65,7 @@ float heightMap(vec2 p){
         vec2 w = .5 - abs(p - 1.5); // Prepare to make a square. Other shapes are also possible.
         float l = sqrt( max(16.0*w.x*w.y*(1.0-w.x)*(1.0-w.y), 0.))*.5+.5; // Edge shaping.
         w = smoothstep(0., .05, w); // Smooth edge stepping.
-        h = max(h, w.x*w.y*a*l)*(0.75+0.5*basshits); // Producing the smooth edged, shaped square.
+        h = max(h, w.x*w.y*a*l)*pow(0.75+0.25*syn_BassPresence, 2.0); // Producing the smooth edged, shaped square.
         //h += w.x*w.y*a*l;
         //h = max(h, abs(abs(w.x)-abs(w.y))*a*l);
         sum += a; // Keep a total... This could be hardcoded to save cycles.
@@ -180,7 +180,7 @@ vec3 envMap(vec3 rd, vec3 sn){
     vec3 sRd = rd; // Save rd, just for some mixing at the end.
     
     // Add a time component, scale, then pass into the noise function.
-    rd.xy -= TIME*.25;
+    rd.xy -= smoothTime*.25;
     rd *= 3.;
     
     float c = n3D(rd)*.57 + n3D(rd*2.)*.28 + n3D(rd*4.)*.15; // Noise value.
@@ -205,16 +205,16 @@ vec4 renderMainImage() {
     
     // Rotating the XY-plane back and forth, for a bit of variance.
     // 2D rotation with fewer instructions, courtesy of Fabrice Neyret.
-    vec2 a = sin(vec2(1.570796, 0) - sin(TIME/4.)*.3);
+    vec2 a = sin(vec2(1.570796, 0) - sin(smoothTime*0.05)*.3);
     rd.xy = rd.xy*mat2(a, -a.y, a.x);
     
     
     // Ray origin. Moving in the X-direction to the right.
-    vec3 ro = vec3(TIME, cos(TIME/4.), 0.);
+    vec3 ro = vec3(smoothTime*0.125, cos((smoothTime*0.125)), 0.);
     
     
     // Light position, hovering around camera.
-    vec3 lp = ro + vec3(cos(TIME/2.)*.5, sin(TIME/2.)*.5, -.5);
+    vec3 lp = ro + vec3(cos(smoothTimeB*0.1)*.5, sin(smoothTimeB*0.1)*.5, -.5);
     
     // Standard raymarching segment. Because of the straight forward setup, not many 
     // iterations are needed.

@@ -31,7 +31,7 @@
 
 */
 
-#define PI 3.14159265
+//#define PI 3.14159265
 #define FAR 50.
 
 // Frequencies and amplitudes of tunnel "A" and "B". See then "path" function.
@@ -126,7 +126,8 @@ float drawSphere(in vec3 p){
 // particular function is used by the raymarcher, so involves fewer spheres.
 //
 float cellTile(in vec3 p){
-    
+        p *= (1.+Voronoi_Level);
+
     float c = .25; // Set the maximum.
     
     // Draw four overlapping objects (spheres, in this case) using the darken blend 
@@ -140,7 +141,7 @@ float cellTile(in vec3 p){
     
     // Add some smaller spheres at various positions throughout the tile.
     
-    p *= 1.4142;
+    p *= pow(2., 0.5);
     
     c = min(c, drawSphere(p - vec3(.48, .29, .2)));
     c = min(c, drawSphere(p - vec3(.06, .87, .78)));
@@ -159,7 +160,7 @@ float cellTile(in vec3 p){
 // However, the GPU can bump map this function in its sleep.
 //
 float cellTile2(in vec3 p){
-    
+    p *= pow(1.+Cell_Tile, 2.);
     float c = .25; // Set the maximum.
     
     c = min(c, drawSphere(p - vec3(.81, .62, .53)));
@@ -168,7 +169,7 @@ float cellTile2(in vec3 p){
     c = min(c, drawSphere(p - vec3(.62, .24, .06)));
     c = min(c, drawSphere(p - vec3(.2, .82, .64)));
     
-    p *= 1.4142;
+    p *= pow(2., 0.5);
     
     c = min(c, drawSphere(p - vec3(.48, .29, .2)));
     c = min(c, drawSphere(p - vec3(.06, .87, .78)));
@@ -200,7 +201,7 @@ float map(vec3 p){
      p.xy -= path(p.z); // Move the scene around a sinusoidal path.
      p.xy = rot2(p.z/12.)*p.xy; // Twist it about XY with respect to distance.
     
-     float n = dot(sin(p*1. + sin(p.yzx*.5 + smoothTimeC)), vec3(.25)); // Sinusoidal layer.
+     float n = dot(sin(p*1. + sin(p.yzx*.5 +0.5 *smoothTimeC)), vec3(.25)); // Sinusoidal layer.
      
      return 2. - abs(p.y) + n + sf; // Warped double planes, "abs(p.y)," plus surface layers.
    
@@ -266,6 +267,7 @@ float trace(in vec3 ro, in vec3 rd){
         // "t" increases. It's a cheap trick that works in most situations... Not all, though.
         if(abs(h)<0.002*(t*.25 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
         t += h*.8;
+        
         
     }
 
@@ -434,7 +436,7 @@ float getMist(in vec3 ro, in vec3 rd, in vec3 lp, in float t){
     float mist = 0.;
     ro += rd*t/8.; // Edge the ray a little forward to begin.
     
-    for (int i = 0; i<4; i++){
+    for (int i = 0; i<5; i++){
         // Lighting. Technically, a lot of these points would be
         // shadowed, but we're ignoring that.
         float sDi = length(lp-ro)/FAR; 
@@ -462,7 +464,7 @@ vec4 renderMainImage() {
 	//vec3 lookAt = vec3(0., 0.25, TIME*2.);  // "Look At" position.
 	//vec3 camPos = lookAt + vec3(2., 1.5, -1.5); // Camera position, doubling as the ray origin.
 	
-	vec3 lookAt = vec3(0., 0.0, smoothTime*3. + 0.1);  // "Look At" position.
+	vec3 lookAt = vec3(0., 0.0, smoothTime*1.5 + 0.1);  // "Look At" position.
 	vec3 camPos = lookAt + vec3(0.0, 0.0, -0.1); // Camera position, doubling as the ray origin.
 
  
@@ -472,7 +474,8 @@ vec4 renderMainImage() {
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
 	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
-	lookAt.xy += path(lookAt.z);
+	lookAt.xy+=(_uvc.xy/2.)*Equirec;
+    lookAt.xy += path(lookAt.z);
 	camPos.xy += path(camPos.z);
 	light_pos.xy += path(light_pos.z);
 
@@ -589,7 +592,7 @@ vec4 renderMainImage() {
         // Cool blue hilights. Adapted from numerous examples on here. Kali uses it to great effect.
         float per = 10.;
     	float tanHi = abs(mod(per*.5 + t + smoothTimeB, per) - per*.5);
-    	vec3 tanHiCol = vec3(0, .2, 1)*(1./tanHi*.2);
+    	vec3 tanHiCol = vec3(0, .2, 1)*(1./tanHi*.2)*pow(0.8+syn_HighLevel*0.6, 2.);
         sceneCol += tanHiCol;
         
         
@@ -607,7 +610,7 @@ vec4 renderMainImage() {
 	}
        
     // Blend the scene and the background with some very basic, 4-layered fog.
-    float mist = getMist(camPos, rd, light_pos, t);
+    float mist = getMist(camPos, rd, light_pos, t)*pow(0.8+highhits*0.6, 2.);
     vec3 sky = vec3(2.5, 1.75, .875)* mix(1., .72, mist)*(rd.y*.25 + 1.);
     sceneCol = mix(sceneCol, sky, min(pow(t, 1.5)*.25/FAR, 1.));
 

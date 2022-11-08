@@ -150,7 +150,7 @@ vec4 Laplacian(vec2 p) {
     
  		//The Laplacian-Gaussian... I can't remember where I found this,
         // but I've seen it in more than one place, and it seems about right.
-		0.,  0., .25,  0.+cos(smoothTime/100)/1000,  0.+sin(smoothTime/100)/1000,
+		0.,  0., .25,  0.,  0.,
         0., .25,  .5, .25,  0.,
         .25, .5,  -4., .5, .25,
         0., .25,  .5, .25,  0.,
@@ -210,7 +210,7 @@ vec4 Laplacian(vec2 p) {
 // Nine tap Laplacian.
 vec4 Laplacian9(vec2 p) {
     
-    vec2 px = 1./RENDERSIZE.yy;
+    vec2 px = 1.*_uvc/RENDERSIZE.yy;
     // Four spots aren't required in this case, but are when the above isn't aspect correct.
     vec4 e = vec4(px, 0, -px.x);
  
@@ -310,7 +310,7 @@ vec4 renderPassA() {
     //vec2 lap = Laplacian9(p).xy;
     //vec2 lap = LaplacianA(p);
     //vec2 lap = Laplacian5(p).xy;
-    int LPM = int(Laplacian_Mode); //feed kill mode integer
+    int LPM = int(Laplacian_Mode); //lap mode
 
     if(LPM==0.){
     lap = Laplacian(p).xy; //original
@@ -326,48 +326,53 @@ vec4 renderPassA() {
     lap = Laplacian5(p).xy; //
     }
 
-    // Feed and kill rates. These are close to standard values that you see everywhere.
-    // You can change them, but they're sensitive.
-    //float feed = 0.0545, kill = 0.062; //original constants
-   // feed -= basshits/15*sin(TIME);
-    //kill -= basshits/105*cos(TIME);
-    //AB: refactored to allow each of the alternate sets of feed/kill values to be used via the Feed_Kill_Mode slider
+    // AB: refactored to allow each of the alternate sets of feed/kill values to be used via the Feed_Kill_Mode slider
+    // Original code below
     float feed, kill;
     int FKM = int(Feed_Kill_Mode); //feed kill mode integer
 
-    if(FKM==-1.){
+    if(FKM==0.){
     feed = 0.0545, kill = 0.062; //original constants
     }
 
-    if(FKM==0.){
-        feed = 0.058, kill = 0.065; // Lines and dots.
-    }
-
     if(FKM==1.){
-        feed = 0.046, kill = 0.063; // Lines and dots2.
+        feed = 0.058, kill = 0.065; // Lines and dots.
     }
 
     if(FKM==2.){
-        feed = 0.098, kill = 0.057; // Solid cells.
+        feed = 0.046, kill = 0.063; // Lines and dots2.
     }
 
     if(FKM==3.){
-        feed = 0.037, kill = 0.06; // Random joined lines.
+        feed = 0.098, kill = 0.057; // Solid cells.
     }
 
     if(FKM==4.){
+        feed = 0.037, kill = 0.06; // Random joined lines.
+    }
+
+    if(FKM==5.){
         feed = 0.058, kill = 0.065; // Lines and dots.
     }
-    if(FKM==5.){
+    if(FKM==6.){
         feed = 0.03, kill = 0.0565; // Maze.
     }
+    /*
     if(FKM==6.){
         feed = 0.03, kill = 0.063; // Self replicating spots.
     }
+    */
+    if(FKM==7.){
+        feed = 0.082, kill = 0.06; // Self replicating spots.
+    }
+
     //AB: fine adjust
     feed += Feed;
     kill += Kill;
 
+    // Feed and kill rates. These are close to standard values that you see everywhere.
+    // You can change them, but they're sensitive.
+    //float feed = 0.0545, kill = 0.062; //original constants
     // More constants to try. A lot of them are presets that I found using a handy pattern
     // generator at this link: http://mrob.com/pub/comp/xmorphia/ogl/index.html
 
@@ -387,23 +392,24 @@ vec4 renderPassA() {
     // vary greatly. Tiny changes in these values will widely change the pattern, but can
     // also bring about a blank screen. I guess that's one of the downsides of diffusion 
     // patterns.
-	vec2 dAB = vec2( ((.2)*(0.975+growthFactor*0.025))+DiffA, .106+DiffB-DiffA*0.0125);
-    //vec2 dAB = vec2(.2, .1);
-    
+	//vec2 dAB = vec2( ((.2)*(0.9975+growthFactor*0.0025))+DiffA, .106+DiffB);
+    vec2 dAB = vec2(.2, .1);
+    dAB += vec2 (DiffA, DiffB);
     // Time component. Kind of redundant here, but it can be used to control reaction rate.
     // Unfortunately, like all the figures used here, just a tiny change can ruin the 
     // reaction, which results in no pattern at all. Either way, you should try to set 
     // this number as high as you can without trashing the pattern.
-    float t = 1.*(0.999+growthFactor*0.001); 
+    float t = 1.;//*(0.99875+growthFactor*0.00125); 
     
     // The diffusion term: Just the constant diffusion rates multiplied by the Laplacian
     // for each concentration.
-    vec2 diffusion = dAB*lap*((1.0+Feed)/(1.0+Kill));
+    vec2 diffusion = (dAB+Rate)*lap;
     // The reaction term: The "rdVal.x*rdVal.y*rdVal.y" value is representative of the
     // chance that a particle from concentration A will react with two particles from
     // concentration B, which from probability theory is: A*B*B. This results in a decrease
     // of concentration A and an increase in concentration B by that particular amount.
     // Hence, the negative and positive vector terms on the end.
+    rdVal.y *=(0.999875+growthFactor*0.00025);
     vec2 reaction = vec2(rdVal.x*rdVal.y*rdVal.y)*vec2(-1, 1);
     
     // Feed and kill rates. Substance A is added at a feed rate, and substance B is taken
@@ -449,7 +455,7 @@ vec4 renderPassA() {
     // Also, check for changes in canvas size.
     if(FRAMECOUNT<10 || abs(rdVal.w - RENDERSIZE.y)>.001|| Reset > 0.)  {
 
-        fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5);
+        fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93+cos(smoothTime), 19.37+sin(smoothTime)))) - .5);
 
         // Required multi-channel noise texture in "iChannel1."
         //fragColor.xy =  vec2(1, 0) +  texture(iChannel1, fragCoord.xy/RENDERSIZE.y).xy -.5;   

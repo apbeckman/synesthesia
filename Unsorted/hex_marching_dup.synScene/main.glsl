@@ -247,7 +247,7 @@ const mat2 brot = ROT(2.399);
 //  simplyfied version of Dave Hoskins blur
 vec3 dblur(vec2 q,float rad) {
   vec3 acc=vec3(0);
-  const float m = 0.002;
+  const float m = 0.00;
   vec2 pixel=vec2(m*RESOLUTION.y/RESOLUTION.x,m);
   vec2 angle=vec2(0,rad);
   rad=1.;
@@ -256,6 +256,7 @@ vec3 dblur(vec2 q,float rad) {
     rad += 1./rad;
     angle*=brot;
     vec4 col=texture(BuffB,q+pixel*(rad-1.)*angle);
+    col *= pow(1.0+highhits*0.35, 2.);
     acc+=col.xyz;
   }
   return acc*(1.0/float(iter));
@@ -272,6 +273,7 @@ vec4 renderPassB() {
   
   vec3 col = pcol.xyz;
   col += vec3(0.9, .8, 1.2)*mix(0.5, 0.66, length(p))*(0.05+bcol);
+  
   
   fragColor = vec4(col, 1.0);
 	return fragColor; 

@@ -38,7 +38,7 @@
 			"MAX" : 2,
 			"MIN" : 0.25,
 			"NAME" : "FOVmod",
-			"PARAMS" : 0.025,
+			"PARAMS" : 0.065,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},

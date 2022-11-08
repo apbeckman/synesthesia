@@ -162,7 +162,7 @@ void mainImage0(out vec4 fragColor, in vec2 fragCoord)
   if (image_block < 0.5){
     distFunc = distFunc-length(logoCol)*10.5;
   }
-
+  
   // if (invertLogo >= 0.5){
   //   distFunc = 1.0-logoCol;
   // }

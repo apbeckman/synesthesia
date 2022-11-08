@@ -13,6 +13,16 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
 			"MAX" : -0.5,
 			"MIN" : -0.95,
 			"NAME" : "NoiseStretch",
@@ -43,10 +53,10 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
+			"MAX" : 4,
 			"MIN" : 0.5,
 			"NAME" : "FOV",
-			"PARAMS" : 0.106,
+			"PARAMS" : 0.065,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Camera"
 		}

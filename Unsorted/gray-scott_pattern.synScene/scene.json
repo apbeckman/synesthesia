@@ -4,11 +4,11 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.0075,
+			"MAX" : 0.01,
 			"MIN" : -0.002,
 			"NAME" : "Feed",
 			"TYPE" : "slider",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Reaction_vars"
 		},
 		{
 			"DEFAULT" : 0,
@@ -17,33 +17,33 @@
 			"MIN" : -0.002,
 			"NAME" : "Kill",
 			"TYPE" : "slider",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.085,
+			"MIN" : -0.025,
+			"NAME" : "DiffA",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 0.075,
-			"MIN" : -0.075,
-			"NAME" : "DiffA",
-			"TYPE" : "slider",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.125,
-			"MIN" : -0.125,
+			"MIN" : -0.0125,
 			"NAME" : "DiffB",
 			"TYPE" : "slider",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Reaction_vars"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 6,
+			"MAX" : 7,
 			"MIN" : 0,
 			"NAME" : "Feed_Kill_Mode",
-			"TYPE" : "slider",
+			"TYPE" : "knob",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -58,9 +58,18 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "switch between different laplacian precets",
-			"MAX" : 4,
+			"MAX" : 3,
 			"MIN" : 0,
 			"NAME" : "Laplacian_Mode",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.05,
+			"MIN" : -0.05,
+			"NAME" : "Rate",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		}

@@ -1,103 +1,98 @@
 {
-	"CONTROLS" : [
+	"CONTROLS" : 
+	[
 		{
-		   "DEFAULT" : 0.45,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 2.5,
-		   "MIN" : 0.45,
-		   "NAME" : "Smoother",
-		   "TYPE" : "toggle",
-		   "UI_GROUP" : "textures"
+			"DEFAULT" : 0.45,
+			"DESCRIPTION" : "",
+			"MAX" : 2.5,
+			"MIN" : 0.45,
+			"NAME" : "Smoother",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "textures"
 		},
 		{
-		   "DEFAULT" : 0.25,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 1,
-		   "MIN" : 0.25,
-		   "NAME" : "Cell_Tile",
-		   "TYPE" : "slider smooth",
-		   "UI_GROUP" : "textures",
-		   "PARAMS" : 0.1
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0.25,
+			"NAME" : "Cell_Tile",
+			"TYPE" : "slider",
+			"UI_GROUP" : "textures"
 		},
 		{
-		   "DEFAULT" : 0.75,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 3,
-		   "MIN" : 0,
-		   "NAME" : "Voronoi_Level",
-		   "TYPE" : "slider smooth",
-		   "UI_GROUP" : "textures",
-		   "PARAMS" : 0.1
+			"DEFAULT" : 0.75,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "Voronoi_Level",
+			"TYPE" : "slider",
+			"UI_GROUP" : "textures"
 		},
 		{
-		   "DEFAULT" : 2,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 9,
-		   "MIN" : 0.5,
-		   "NAME" : "Clamp",
-		   "TYPE" : "slider smooth",
-		   "UI_GROUP" : "morph",
-		   "PARAMS" : 0.1
+			"DEFAULT" : 2,
+			"DESCRIPTION" : "",
+			"MAX" : 9,
+			"MIN" : 0.5,
+			"NAME" : "Clamp",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "morph"
 		},
 		{
-		   "DEFAULT" : 0,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 1,
-		   "MIN" : 0,
-		   "NAME" : "Standard_Tunnel",
-		   "TYPE" : "toggle",
-		   "UI_GROUP" : "morph"
+			"DEFAULT" : 0.1,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0.1,
+			"NAME" : "Equirec",
+			"PARAMS" : 0.124,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
 		},
 		{
-		   "DEFAULT" : 0,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 1.5,
-		   "MIN" : -1.5,
-		   "NAME" : "Fly_Speed",
-		   "TYPE" : "slider smooth",
-		   "UI_GROUP" : "camera"
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "Fly_Speed",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
 		},
 		{
-		   "DEFAULT" : 12,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 20,
-		   "MIN" : 0,
-		   "NAME" : "Rotation",
-		   "TYPE" : "knob smooth",
-		   "UI_GROUP" : "camera"
+			"DEFAULT" : 12,
+			"DESCRIPTION" : "",
+			"MAX" : 20,
+			"MIN" : 0,
+			"NAME" : "Rotation",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
 		},
 		{
-		   "DEFAULT" : 1,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 2,
-		   "MIN" : 0,
-		   "NAME" : "Wave_Gain",
-		   "TYPE" : "knob smooth",
-		   "UI_GROUP" : "reactivity"
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "Wave_Gain",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "reactivity"
 		},
 		{
-		   "DEFAULT" : 1,
-		   "DESCRIPTION" : "",
-		   "IS_META" : false,
-		   "MAX" : 2,
-		   "MIN" : 0,
-		   "NAME" : "Mist_Gain",
-		   "TYPE" : "knob smooth",
-		   "UI_GROUP" : "reactivity"
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "Mist_Gain",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "reactivity"
 		}
-	 ],  
+	],
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "Creating a Voronoi surface feel with minimal instructions by way of a cellular 3D tile.",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
@@ -107,5 +102,5 @@
 	],
 	"IMAGE_PATH" : "3d_cellular_tiling_1.png",
 	"TITLE" : "3D Cellular Tiling_1",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

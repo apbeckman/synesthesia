@@ -1,0 +1,159 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2.5,
+			"MIN" : -2.5,
+			"NAME" : "Rate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : -5,
+			"NAME" : "Reaction",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.01,
+			"MIN" : -0.002,
+			"NAME" : "Feed",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.002,
+			"MIN" : -0.002,
+			"NAME" : "Kill",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.085,
+			"MIN" : -0.025,
+			"NAME" : "DiffA",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.075,
+			"MIN" : -0.0125,
+			"NAME" : "DiffB",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 7,
+			"MIN" : 0,
+			"NAME" : "Feed_Kill_Mode",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Reset",
+			"TYPE" : "bang",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "switch between different laplacian precets",
+			"MAX" : 3,
+			"MIN" : 0,
+			"NAME" : "Laplacian_Mode",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "image_block",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.5,
+			"NAME" : "FOV",
+			"PARAMS" : 0.072,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				2,
+				2
+			],
+			"MIN" : 
+			[
+				-2,
+				-2
+			],
+			"NAME" : "Camera_Pos",
+			"PARAMS" : 0.032,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_scroll",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Creating a wrappable Gray-Scott reaction-diffusion texture, then using 2D imaging software techniques to produce a faux-3D styled scene. It takes about 10 seconds for a legible pattern to form and roughly 30 seconds for it to stabilize.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "gray-scott_pattern_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Gray-Scott Pattern_dup",
+	"WIDTH" : 1920
+}
