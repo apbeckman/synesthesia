@@ -177,9 +177,9 @@ vec4 renderPassA() {
     vec3 abd = mix(vec3(rab,sd), uv, upd+syn_Level*0.025);
     
     if (_mouse.z > 0.0) {
-    	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy+0.25;
-        vec2 m = 0.1 * normz(d) * exp(-length(d) / 0.02);
-        m *= Size;
+    	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy;
+        vec2 m = (Size*0.5) * normz(d) * exp(-length(d) / (0.02/(Size)));
+       //m *= Size;
         abd.xy += m;
         uv.xy += m;
     }
@@ -371,7 +371,7 @@ vec4 renderPassD() {
     float g_x[13] = float[](1.8154960e-002, 5.1439053e-002, 1.1757498e-001, 2.2045309e-001, 3.4292702e-001, 4.4580513e-001, 
          4.8633287e-001, 4.4580513e-001, 3.4292702e-001, 2.2045309e-001, 1.1757498e-001, 5.1439053e-002, 1.8154960e-002);  
 
-    #define RANGE 6
+    //#define RANGE 6
     
     #define Pc(m,n) texture(BuffC, fract(uv + texel * vec2(m,n)))
     
@@ -444,7 +444,7 @@ vec4 renderPassD() {
 #define DISP 0.02
 
 // bump mapping scale
-#define BUMP 1.5
+#define BUMP 1.5*(1.0+basshits*0.5)
 
 // mip level
 #define MIP 0.0

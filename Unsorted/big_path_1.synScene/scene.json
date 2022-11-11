@@ -2,7 +2,7 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
@@ -16,17 +16,55 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Spin",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.02,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : -0.5,
-			"MIN" : -0.95,
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "Waves",
+			"PARAMS" : 0.246,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Twitch",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "altNoise",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "Spin2",
+			"PARAMS" : 0.123,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.75,
+			"DESCRIPTION" : "",
+			"MAX" : 1.25,
+			"MIN" : 0.125,
 			"NAME" : "NoiseStretch",
-			"PARAMS" : 0.032,
+			"PARAMS" : 0.022,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Geometry"
 		},
@@ -43,8 +81,17 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0.1,
+			"MAX" : 1,
+			"MIN" : -0.99,
+			"NAME" : "Size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Geometry"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2.5,
+			"MIN" : 0.125,
 			"NAME" : "CamHeight",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
@@ -64,8 +111,8 @@
 	"CREDIT" : "antonOTI",
 	"DESCRIPTION" : "this is my first time really experimenting with 3d and raymarch (this time I understand most of what I did)",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "big_path.png",
 	"TITLE" : "big path",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }
