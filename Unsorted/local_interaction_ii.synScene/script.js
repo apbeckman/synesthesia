@@ -44,6 +44,7 @@ var basshits = 0.0;
 var midhits = 0.0;
 var bass = 0.0;
 var hits = 0.0;
+var growthFactor = 0.0;
 function update(dt) {
 
 
@@ -68,6 +69,8 @@ function update(dt) {
   // bpmTime = tAtLast0;
   // bpmTime += (1. - Math.exp(-bpmcount.timeWithinBeat*3.))*inputs.amount_to_step;
   // uniforms.script_time = bpmTime;
+  uniforms.growthFactor = Math.pow((inputs.syn_BassLevel*0.55)+(inputs.syn_MidLevel*0.45)+(inputs.syn_Level*0.125), 2.0);
+
   uniforms.highhits = Math.pow( (inputs.syn_HighLevel*0.5 + inputs.syn_Hits*0.125+inputs.syn_HighHits*0.375)*inputs.syn_Intensity, 2.0);
   uniforms.basshits = Math.pow( (inputs.syn_BassLevel*0.5 + inputs.syn_Level*0.125+inputs.syn_BassHits*0.375)*inputs.syn_Intensity, 2.0);
   uniforms.midhits = Math.pow( (inputs.syn_MidLevel*0.5 + inputs.syn_Level*0.125+inputs.syn_MidHits*0.375)*inputs.syn_Intensity, 2.0);
