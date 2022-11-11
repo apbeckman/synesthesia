@@ -181,7 +181,7 @@ float onionize(float d) {
 
 vec2 df(vec2 p, float h) {
   vec2 wp = p;
-  float rep = 10.0;
+  float rep = 12.0;
   float ss = 0.05*6.0/rep;
   float n = smoothKaleidoscope(wp, ss, rep);
   
@@ -202,10 +202,10 @@ vec2 df(vec2 p, float h) {
 //  n is plane number
 vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n) {
   float h = hash(n);
-  float s = 0.25*mix(0.5, 0.25, h);
-  float dd= length(pp-ro);
+  float s = 0.125*mix(0.5, 0.25, h)*(1/Size);
+  float dd= length(pp-ro)*(1/Size);
 
-  const vec3 nor  = vec3(0.0, 0.0, 1.0);
+  const vec3 nor  = normalize(vec3(0.0, 0.0, 1.0));
   const vec3 loff = vec3(0.25*0.5, 0.125*0.5, -0.125);
   vec3 lp1  = ro + loff;
   vec3 lp2  = ro + loff*vec3(-1.0, 1.0, 1.0);
@@ -230,7 +230,7 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n) {
 
   float l   = length(10.0*p);
   float ddf = 1.0/((1.0+2.0*dd));
-  float hue = fract(0.75*l-0.1*smoothTimeB)+0.3+0.15;
+  float hue = fract(0.75*l-0.05*smoothTimeB)+0.3+0.15;
   float sat = 0.75*tanh_approx(2.0*l)*ddf;
   float vue = sqrt(ddf);
   vec3 hsv  = vec3(hue, sat, vue);
@@ -252,10 +252,12 @@ vec3 skyColor(vec3 ro, vec3 rd) {
 vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
   float lp = length(p);
   vec2 np = p + 1.0/RESOLUTION.xy;
-  float rdd = (2.0+0.5*tanh_approx(lp));  // Playing around with rdd can give interesting distortions
+  float rdd = (FOV*2.0-0.5*tanh_approx(lp));  // AB:added FOV
+
+  //float rdd = (2.0+0.5*tanh_approx(lp));  // Playing around with rdd can give interesting distortions
   vec3 rd = normalize(p.x*uu + p.y*vv + rdd*ww);
   vec3 nrd = normalize(np.x*uu + np.y*vv + rdd*ww);
-
+  
   const float planeDist = 1.0-0.75;
   const int furthest = 8;
   const int fadeFrom = max(furthest-3, 0);
@@ -318,7 +320,7 @@ vec3 postProcess(vec3 col, vec2 q) {
 }
 
 vec3 effect(vec2 p, vec2 q) {
-  float tm  = TIME*0.2;
+  float tm  = smoothTimeC*0.2;
   vec3 ro   = offset(smoothTime*0.1);
   vec3 dro  = doffset(tm);
   vec3 ddro = ddoffset(tm);

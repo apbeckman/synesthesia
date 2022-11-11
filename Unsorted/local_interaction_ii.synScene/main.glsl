@@ -143,7 +143,7 @@ vec4 renderPassD() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
 
-    vec2 X = 0.5*RENDERSIZE.xy;
+    vec2 X = 0.5*RENDERSIZE.xy*moveXY;
     if (_mouse.z>0.) X = _mouse.xy;
     U-=X;
     //float a = .001*sin(.1*TIME)/(1.+length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y);

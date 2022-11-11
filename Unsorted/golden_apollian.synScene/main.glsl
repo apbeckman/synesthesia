@@ -8,8 +8,7 @@
 // -----------------------------------------------------------------------------
 
 #define PI              3.141592654
-#define TAU             (2.0*PI)
-#define TIME            TIME
+#define TAU             PI*2.
 #define RESOLUTION      RENDERSIZE
 #define ROT(a)          mat2(cos(a), sin(a), -sin(a), cos(a))
 #define PSIN(x)         (0.5+0.5*sin(x))
@@ -158,14 +157,13 @@ vec3 ddoffset(float z) {
 float weird(vec2 p, float h) {
   float z = 4.0;
   float tm = 0.075*smoothTime+h*10.0;
-  float tmc = 0.085*smoothTimeC+h*10.0;
-  p *= ROT(tm*0.45);
+  p *= ROT(tm*0.25);
   float r = 0.5;
   vec4 off = vec4(r*PSIN(tm*sqrt(3.0)), r*PSIN(tm*sqrt(1.5)), r*PSIN(tm*sqrt(2.0)), 0.0);
   vec4 pp = vec4(p.x, p.y, 0.0, 0.0)+off;
   pp.w = 0.125*(1.0-tanh_approx(length(pp.xyz)));
-  pp.yz *= ROT(tmc);
-  pp.xz *= ROT(tmc*sqrt(0.5));
+  pp.yz *= ROT(tm);
+  pp.xz *= ROT(tm*sqrt(0.5));
   pp /= z;
   float d = apollian(pp, 0.8+h);
   return d*z;
@@ -213,8 +211,8 @@ vec2 df(vec3 p, vec3 off, float s, mat2 rot, float h) {
 }
 
 vec3 skyColor(vec3 ro, vec3 rd) {
-  float ld = max(dot(rd, vec3(0.0, 0.0, 1.0)), 0.0);
-  return 0.6*sunCol*tanh_approx(3.0*pow(ld, 100.0));
+  float ld = max(dot(rd, vec3(0.0+sin(smoothTimeB*0.25), 0.0+cos(smoothTimeB*0.25), 1.0)), 0.0);
+  return 0.6*sunCol*tanh_approx(3.0*pow(ld, 100.0)*(1.0+highhits));
 }
 
 vec4 plane(vec3 ro, vec3 rd, vec3 pp, float pd, vec3 off, float aa, float n) {
@@ -224,7 +222,7 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, float pd, vec3 off, float aa, float n) {
   float h = hash(n);
   float s = 0.25*mix(0.5, 0.25*(1.0+sin(smoothTimeC*0.125)/2.), h);
   const float lw = 0.0235;
-  const float lh = 1.25;
+  float lh = 1.25;
 
   const vec3 nor  = vec3(0.0, 0.0, -1.0);
   const vec3 loff = 2.0*vec3(0.25*0.5, 0.125*0.5, -0.125);
@@ -245,7 +243,7 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, float pd, vec3 off, float aa, float n) {
   float spe1= pow(max(dot(ref, ld1), 0.0), 30.0*(1.0+highhits));
   float spe2= pow(max(dot(ref, ld2), 0.0), 30.0*(1.0+highhits));
 
-  const float boff = 0.0125*0.5;
+  float boff = (0.0125*0.5)*(1.0+basshits);
   float dbt = boff/rd.z;
   
   vec3 bpp = ro + (pd + dbt)*rd;
@@ -286,14 +284,18 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, float pd, vec3 off, float aa, float n) {
 vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
   float lp = length(p);
   vec2 np = p + 1.0/RESOLUTION.xy;
-  float rdd = (2.0-0.5*tanh_approx(lp));  // Playing around with rdd can give interesting distortions
-  vec3 rd = normalize(p.x*uu + p.y*vv + rdd*ww);
-  vec3 nrd = normalize(np.x*uu + np.y*vv + rdd*ww);
+  float rdd = (1/FOV*2.0-0.5*tanh_approx(lp));  // Playing around with rdd can give interesting distortions
+  
 
-  const float planeDist = 1.0-0.75;
-  const int furthest = 9;
-  const int fadeFrom = max(furthest-4, 0);
-  const float fadeDist = planeDist*float(furthest - fadeFrom);
+  vec3 rd = normalize(p.x*uu + p.y*vv + rdd*ww);
+ // rd.xy *= rd.xy*FOV;
+  vec3 nrd = normalize(np.x*uu + np.y*vv + rdd*ww);
+ // nrd.xy *= nrd.xy*(FOV);
+
+  float planeDist = 1.0-0.75;
+  int furthest = 9;
+  int fadeFrom = max(furthest-4, 0);
+  float fadeDist = planeDist*float(furthest - fadeFrom);
   float nz = floor(ro.z / planeDist);
 
   vec3 skyCol = skyColor(ro, rd);
@@ -372,7 +374,8 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-  vec2 q = fragCoord/RESOLUTION.xy;
+  vec2 q = (fragCoord/RESOLUTION.xy);
+  
   vec2 p = -1. + 2. * q;
   p.x *= RESOLUTION.x/RESOLUTION.y;
 

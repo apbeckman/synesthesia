@@ -15,20 +15,12 @@
 			],
 			"MIN" : 
 			[
-				0,
-				0
+				-1,
+				-1
 			],
 			"NAME" : "MouseXY",
-			"TYPE" : "xy",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 5,
-			"MIN" : 0,
-			"NAME" : "repetitions",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -39,6 +31,26 @@
 			"NAME" : "MouseClick",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.45,
+			"NAME" : "FOV",
+			"PARAMS" : 0.211,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 0.5,
+			"NAME" : "Size",
+			"PARAMS" : 0.249,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "mrange",

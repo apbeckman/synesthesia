@@ -17,6 +17,8 @@
 const mat2 rot0 = ROT(0.0);
 mat2 g_rot0 = rot0;
 mat2 g_rot1 = rot0;
+mat2 g_rot2 = rot0;
+mat2 g_rot3 = rot0;
 
 // License: Unknown, author: nmz (twitter: @stormoid), found: https://www.shadertoy.com/view/NdfyRM
 float sRGB(float t) { return mix(1.055*pow(t, 1./2.4) - 0.1055, 12.92*t, step(t, 0.0031308))*(1.0+highhits); }
@@ -54,11 +56,12 @@ float apolloian(vec3 p, float s, out float h) {
 
 float df(vec2 p, out float h) {
   float fz = 1.0-0.0;
-  float z = 1.55*fz+sin(smoothTime*0.06);
+  float z = 1.55*fz;
+  p, z *= Zoom;
   p /= z;
   vec3 p3 = vec3(p,0.1);
   p3.xz*=g_rot0;
-  p3.yz*=g_rot1;
+  p3.yz*=g_rot3;
   float d = apolloian(p3, 1.0/fz, h);
   d *= z;
   return d;
@@ -88,9 +91,13 @@ float shadow(vec2 lp, vec2 ld, float mint, float maxt) {
 vec3 effect(vec2 p, vec2 q) {
   float aa = 2.0/RESOLUTION.y;
   float a = 0.25*smoothTimeC;
-  float b = 0.07225*smoothTime;
+  float b = 0.07225*smoothTimeB;
+  float c = 0.07225*smoothTime;
+
   g_rot0 = ROT(0.5*a); 
   g_rot1 = ROT(sqrt(0.5)*b);
+  g_rot2 = ROT(sqrt(0.5)*(a+b)*0.5);
+  g_rot3 = ROT(sqrt(0.5)*c);
 
   vec2  lightPos  = vec2(0.0, 1.0);
   lightPos        *= (g_rot1);
@@ -124,8 +131,9 @@ vec4 renderMainImage() {
 
   vec2 q = fragCoord/RESOLUTION.xy;
   vec2 p = -1. + 2. * q;
-  p.x *= RESOLUTION.x/RESOLUTION.y;
-
+  p.x *= (RESOLUTION.x)/(RESOLUTION.y);
+  p.xy+= _uvc*FOV;
+  p.xy*=normalize(1.0+Kaleido*vec2(-_rotate(PI*_uvc*p.xy*0.5/(RENDERSIZE.xy*0.5)*RENDERSIZE,smoothTime*0.1+sin(smoothTimeC*0.1)*5.)));
   vec3 col = effect(p, q);
   //col *= mix(0.0, 1.0, smoothstep(0.0, 4.0, smoothTime)); //no fade-in
   col = sRGB(col);
