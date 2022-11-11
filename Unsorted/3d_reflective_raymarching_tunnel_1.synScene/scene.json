@@ -1,9 +1,0 @@
-{
-	"CREDIT" : "croxxx",
-	"DESCRIPTION" : "This shader was created as part of a small first demoscene project for a university course.\nThe viewer flies through an endless reflective tunnel.\n\nYou can watch the demo this was taken from here: https://www.youtube.com/watch?v=eUk_yZvCj5s",
-	"GPU" : 0,
-	"HEIGHT" : 720,
-	"IMAGE_PATH" : "3d_reflective_raymarching_tunnel_1.png",
-	"TITLE" : "3D reflective raymarching tunnel_1",
-	"WIDTH" : 1280
-}
