@@ -34,6 +34,7 @@ vec4 renderPassA() {
     
     Q.z = m.z*.9999 - mix(d,c,length(U-0.5*R)/R.y);
     Q.w = d;
+    
     if (FRAMECOUNT <= 1) Q = vec4(sin(U.x)*cos(U.y));
 	return Q; 
  } 
@@ -76,7 +77,7 @@ vec4 renderPassC() {
     float d = 0.25*(n.y-s.y+e.x-w.x);
     float c = 0.25*(n.x-s.x-e.y+w.y);
     
-    Q.z = m.z*.9999 - mix(d,c,.2);
+    Q.z = m.z*.9999 - mix(d,c,.1);
     
     if (FRAMECOUNT <= 1) Q = vec4(sin(U.x)*cos(U.y));
 	return Q; 
@@ -89,21 +90,24 @@ vec4 renderPassD() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
 
-    vec2 c = (R)*(0.5+moveXY.xy);
+    vec2 c = ((R));
+    c.xy *= (0.5+moveXY.xy);
     if (_mouse.z>0.) c = _mouse.xy;
     
     U -= c;
-    U *= (.99325*(1.-growthFactor*0.00675));
+//    U *= (.99325*(1.-growthFactor*Zoom*0.00675)-Zoom*0.01);
+    U *= (.99325*(1.-growthFactor*Zoom*0.00325*2.)-Zoom*0.0675);
+
     U += c;
     Q = C(U);
     vec4 
-        n = C(U+vec2(0,1)), 
-        e = C(U+vec2(1,0)),
-        s = C(U-vec2(0,1)),
-        w = C(U-vec2(1,0)),
+        n = C(U+vec2(0,1)+Height), 
+        e = C(U+vec2(1,0)+Height),
+        s = C(U-vec2(0,1)+Height),
+        w = C(U-vec2(1,0)+Height),
         m = 0.25*(n+e+s+w);
     Q.xy = 0.25*vec2(e.z-w.z,n.z-s.z);
-    if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.2);
+    if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.1);
     
 	return Q; 
  } 

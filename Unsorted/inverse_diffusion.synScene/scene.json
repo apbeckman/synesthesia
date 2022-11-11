@@ -59,6 +59,37 @@
 			"NAME" : "distortion",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.125,
+			"MIN" : -0.25,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.199,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "DistortXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "wyatt",

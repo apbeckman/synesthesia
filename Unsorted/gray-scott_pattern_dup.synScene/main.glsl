@@ -482,18 +482,21 @@ vec4 renderPassA() {
     // Sometimes, the application won't recognize the first frame -- or something, so it's 
     // necessary to initialize for the first few frames to give it a chance to catch on.
     // Also, check for changes in canvas size.
+    //AB: added reinitialization trigger for 'Reset' control
     if(FRAMECOUNT<10 || abs(rdVal.w - RENDERSIZE.y)>.001|| Reset > 0.)  {
 
         //AB: adding some simple variance to the initial state so resetting multiple times looks better
 
         //fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93*(1.0+cos(smoothTime)), 19.37+sin(smoothTime)))) - .5); 
 
-        // Required multi-channel noise texture in "iChannel1."
+        
+        //AB: adding option for user media
         if (_exists(syn_UserImage)){
         //fragColor.xy =  vec2(1, 0) +  texture(syn_UserImage, fragCoord.xy/RENDERSIZE.y).xy *.5;   
         fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5)*0.1+vec2(-1, 1)*(sTexture(syn_UserImage, p).xy*(1.+basshits) - .5);
         }
         else{
+        // Required multi-channel noise texture in "iChannel1."
         //fragColor.xy =  vec2(1, 0) +  texture(image30, fragCoord.xy/RENDERSIZE.y).xy -.5;   
         fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5)+basshits*  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5);
         }

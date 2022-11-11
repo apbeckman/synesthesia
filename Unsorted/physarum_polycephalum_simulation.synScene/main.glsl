@@ -1,6 +1,7 @@
 
 
 			//******** Common Code Begins ********
+float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0);
 
 //simulation variables
 float dt = 0.25;
