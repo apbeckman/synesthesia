@@ -1,0 +1,42 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.162,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Kaleido",
+			"PARAMS" : 0.119,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.25,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.11,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Appolloian with a twist II\n  Playing around with shadows in 2D\n  Needed a somewhat more complex distance field than boxes\n  The appolloian fractal turned out quite nice\n",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "appollonian_with_a_twist_ii.png",
+	"TITLE" : "Appollonian with a twist II",
+	"WIDTH" : 1920
+}
