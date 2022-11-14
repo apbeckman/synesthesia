@@ -295,6 +295,8 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
    
     vec2 p = (-RENDERSIZE.xy + 2.0*fragCoord.xy)/RENDERSIZE.y;
+    p.xy *= (1.0-Warp*(p.xy*0.25*PI*_uvc));
+    p.xy += _rotate(_uvc*Spin*PI*p.xy*0.25, smoothTime*0.2)*Warp*PI;
     p.x /= 1.125;
 
     //-----------------------------------------------------

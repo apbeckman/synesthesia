@@ -21,8 +21,8 @@ vec3 reflAtten = vec3(1);
 vec3 path (float z){
     z *= 0.25;
 	return vec3(
-    	sin(z + cos(z*0.7))*0.7,
-    	cos(z + cos(z*1.2))*(0.6),
+    	sin(z + (_uvc.y*FOV+1.0*(cos(z*0.7)+1.0)))*0.7,
+    	cos(z + (_uvc.x*FOV+1.0*(cos(z*1.2))+1.0))*(0.6),
         0.
     )*2.;
 }
@@ -39,16 +39,16 @@ float map(vec3 p){
     
     // the tunnel is made by the next two lines, otherwise it's just to planes
 	p -= path(p.z);
-    vec2 try = vec2 (sin(smoothTime), cos(smoothTime*0.1));
+    vec2 try = vec2 (sin(smoothTimeC), cos(smoothTimeC));
     p.xy *= rot(
         sin(w.z*2.9 + p.z*0.7 + sin( w.x*2. + w.z*4. + smoothTimeC*0.15 + 0.5) + w.z*0.1)*(1.6)
     ); 
-    
-    float flTop =(-p.y + FL_H )*0.13+WallHeight;
-    float flBot =(p.y + FL_H )*0.3+WallHeight;
-    float floors = min(flBot, flTop)+pow(basshits*0.122*Twitch*syn_Intensity, 2.0);
+    //+pow(basshits*0.122*Twitch*syn_Intensity, 2.0)
+    float flTop =(-p.y + FL_H )*0.13;
+    float flBot =(p.y + FL_H )*0.3;
+    float floors = min(flBot, flTop);
     d = min(d,floors);
-    
+    d+= WallHeight*0.125;
     float sep = 0.2*(1.0+pow(sin(smoothTimeB*0.1), 2.)*0.1+0.1+separation); // seperation between glowy lines
     
     w.y = pmod(w.y,(sep));
@@ -125,24 +125,26 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
-
     uv *= 1. - dot(uv,uv)*-0.2;
     
     
-    
+    uv.xy *=1.0+(_uvc*PI*FOV*uv.xy)*0.5;
+    uv.xy*= 1.0+(RENDERSIZE.xy*uv.xy*(WarpFurther));
     //uv.xy *= rot(0.1)
     vec3 col = vec3(0);
     
     vec3 ro = vec3(0);
     
     ro.z += mx*2.;
-    ro.z += smoothTime*SPEED*0.75 - sin(smoothTime*0.5)*SPEED*0.3;
+    ro.z += smoothTime*SPEED*0.75;
+
     ro += path(ro.z);
     
     vec3 lookAt = vec3(0,0,ro.z + 1.);
-    
+
     lookAt += path(lookAt.z);
-    
+    lookAt.xy += (_uvc*PI*FOV*lookAt.xy);
+
     vec3 rd = getRd(ro, lookAt, uv);
     
     //rd.xy *= rot(sin(smoothTime)*0.05);

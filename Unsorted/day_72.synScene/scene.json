@@ -1,8 +1,21 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.02,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "jeyko",
 	"DESCRIPTION" : "Two walls with some modded fbm",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
@@ -15,11 +28,11 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "Day 72",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

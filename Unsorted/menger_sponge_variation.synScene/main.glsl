@@ -270,13 +270,15 @@ vec4 renderMainImage() {
     // Unit direction ray vector: Note the absence of a divide term. I came across this via a comment 
     // Shadertoy user "Coyote" made. I'm pretty happy with this.
     vec3 rd = (vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y)); // Normalizing below.
-    
+    rd.xy*=1.0+ ((_uvc.xy*PI)-1.)*FOV;
+
     // Barrel distortion. Looks interesting, but I like it because it fits more of the scene in.
     // If you comment this out, make sure you normalize the line above.
     rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z/FOVmod - dot(rd.xy/FOVmod, rd.xy)/FOVmod*.2, 0.))));
     
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
     vec2 m = sin(vec2(0, 1.57079632) + smoothTime*0.2);
+
     //rd.xy = mat2(m.y, -m.x, m)*rd.xy;
     //rd.xz = mat2(m.y, -m.x, m)*rd.xz;
     rd.yz = _rotate(rd.yz, lookXY.y*PI);
@@ -285,6 +287,7 @@ vec4 renderMainImage() {
     
     // Ray origin, set off in the Z direction.
     vec3 ro = vec3(0.0, 0.0, smoothTime*0.5);
+
     vec3 lp = ro  + vec3(0.0, 1.0, 0.0); // Light, near the ray origin.
     
     // Initiate the scene color to black.

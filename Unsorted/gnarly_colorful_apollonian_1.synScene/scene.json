@@ -1,0 +1,22 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.5,
+			"NAME" : "Scale",
+			"PARAMS" : 0.251,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Gnarly colorful apollonian \nThe glow coloring of Fractal doodling: https://www.shadertoy.com/view/ds2GRW\ninspired me to revisit an old shader of mine and spice it up\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "gnarly_colorful_apollonian.png",
+	"TITLE" : "Gnarly colorful apollonian",
+	"WIDTH" : 1280
+}

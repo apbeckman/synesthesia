@@ -103,16 +103,16 @@ vec2 map(vec3 p){
     p.y = abs(p.y);
     p.y -= FL_H*0.7 + n*0.7;
     float dBalls = length(p);
-    vec3 q = abs(p) - 0.04;
+    vec3 q = abs(p) - (0.04+syn_HighLevel*0.01);
     
     
     float dPipes = max(q.x,q.y);
     float dPipesB = max(q.y,q.z);
     //d = dmin(d, vec2(dPipes, 2.));
     
-    float atten = pow(abs(sin(z.z*0.2 + smoothTimeB*0.2)), 10.);
-    float attenB = pow(abs(sin(z.z*0.02  + sin(z.x + smoothTimeB)*0.12 + sin(z.y*3.)*1. + smoothTimeB*0.125)), 100.);
-    float attenC = pow(abs(sin(z.z*0.1  + sin(z.x + smoothTimeB)*0.12 + sin(z.y*3.)*4. + smoothTimeB*0.12)), 200.);
+    float atten = pow(abs(sin(z.z*0.2 + smoothTimeB*0.2)), 20.);
+    float attenB = pow(abs(sin(z.z*0.02  + sin(z.x + smoothTimeB)*0.12 + sin(z.y*3.)*1. + smoothTimeB*0.125)), 10.);
+    float attenC = pow(abs(sin(z.z*0.1  + sin(z.x + smoothTimeB)*0.12 + sin(z.y*3.)*4. + smoothTimeB*0.12)), 20.);
     
     vec3 col = pal(0.2,0.6 - atten*0.5,vec3(0.1 + pow(abs(sin(smoothTimeB*.25)), 40. )*0.005,2.2,0.3),0.5 + sin(smoothTimeB*.25)*0.0025,0.5 - attenB*0.16);
     //vec3 col = pal(0.4,0.6,vec3(0.1 + pow(abs(sin(TIME*1.)), 40.)*0.0,2.2,0.3),0.5 + sin(TIME)*0.01,0.5 );
@@ -120,11 +120,11 @@ vec2 map(vec3 p){
     //vec3 col = pal(0.4,0.6,vec3(0.1 + pow(abs(sin(TIME*1.)), 40.)*0.1,2.2,0.3),0.5 + sin(TIME)*0.01,0.5 - attenB*0.6);
 
     
-    float sc = 60. - atten*55.*(0.999+pow(syn_HighLevel*0.785+syn_Hits*0.225, 2.0)*0.1);
+    float sc = 60. - atten*55.*(0.999+pow(syn_HighLevel*0.785+syn_Hits*0.225, 2.0)*0.05);
     glowB += exp(-dPipes*sc)*col*reflAtten;
     glowB += exp(-dPipesB*sc)*col*reflAtten;
-    //glowC += exp(-dBalls*90.)*colB;
-    //glowB -= 0.002/(0.02 + dPipes*dPipes)*0.4;
+    //glowC += exp(-dBalls*90.)*col;
+     glowB -= 0.002/(0.02 + dPipes*dPipes)*0.4;
     d.x *= 0.6;
     return d;
 }
@@ -132,10 +132,10 @@ vec2 map(vec3 p){
 vec2 march(vec3 ro, vec3 rd, inout vec3 p, inout float t, inout bool hit){
 	vec2 d = vec2(10e6);
 	p = ro; t = 0.; hit = false;
-    for (int i = 0; i < 120 ; i++){ //200
+    for (int i = 0; i < 150 ; i++){ //200
     	d = map(p);
         //glow += exp(-d.x*20.);
-        if(d.x < 0.02){
+        if(d.x < 0.01){
         	hit = true;
             break;
         }
@@ -173,6 +173,8 @@ vec4 renderPassA() {
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
 
+
+
     float m = pow(abs(sin(smoothTimeB/2.)), 4.);
     //uv *= 1. - dot(uv,uv)*(1. - pow(m,2.)*1.)*0.4;
     
@@ -182,8 +184,8 @@ vec4 renderPassA() {
     vec3 col = vec3(0);
     
     vec3 ro = vec3(0);
-    
-    ro.z += mx*1.5;
+
+    //ro.z += mx*1.5;
     //ro.xy += valueNoise(smoothTime*40.)*(0.01)*m; // camshake
     
     ro.z += smoothTime*0.225*SPEED;
@@ -191,7 +193,8 @@ vec4 renderPassA() {
     ro += path(ro.z);
     
     vec3 lookAt = vec3(0,0,ro.z + 1.);
-    
+    lookAt.xy +=(_uvc*PI*FOV);
+
     lookAt += path(lookAt.z);
     
     vec3 rd = getRd(ro, lookAt, uv);
@@ -215,7 +218,7 @@ vec4 renderPassA() {
         if(i == 0){
         	firstT = t;
         }
-        reflAtten *= 0.53;
+        reflAtten *= 0.53-(highhits*0.1);
            
         rd = reflect(rd, n);
         ro = p + rd*0.1;
@@ -223,7 +226,7 @@ vec4 renderPassA() {
     
 	
     
-    glowB = max(glowB, 0.);
+    glowB = max(glowB, 0);
     glowB = pow(glowB, vec3(1./0.45)*(1.0+pow(syn_HighLevel, 2.0)/2));
     col += glowB*0.00074;
     
@@ -268,7 +271,7 @@ vec4 renderMainImage() {
     radial /= steps;
     
     
-    fragColor = radial*3.; 
+    fragColor = radial*1.; 
     //fragColor = mix(fragColor,smoothstep(0.,1.,fragColor), 0.8);
     //1fragColor *= 18.;
     fragColor = max(fragColor, 0.);

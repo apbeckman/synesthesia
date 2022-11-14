@@ -1,0 +1,31 @@
+{
+	"CREDIT" : "z0rg",
+	"DESCRIPTION" : "BlobsBlobs",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image17",
+			"PATH" : "images/17.png"
+		}
+	],
+	"IMAGE_PATH" : "sea_blobs.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Sea blobs",
+	"WIDTH" : 1280
+}

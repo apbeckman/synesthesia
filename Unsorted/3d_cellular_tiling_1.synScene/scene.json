@@ -16,7 +16,8 @@
 			"MAX" : 1,
 			"MIN" : 0.25,
 			"NAME" : "Cell_Tile",
-			"TYPE" : "slider",
+			"PARAMS" : 0.253,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "textures"
 		},
 		{
@@ -25,7 +26,8 @@
 			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "Voronoi_Level",
-			"TYPE" : "slider",
+			"PARAMS" : 0.251,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "textures"
 		},
 		{
@@ -39,12 +41,12 @@
 			"UI_GROUP" : "morph"
 		},
 		{
-			"DEFAULT" : 0.1,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 3,
-			"MIN" : 0.1,
-			"NAME" : "Equirec",
-			"PARAMS" : 0.124,
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "FOV",
+			"PARAMS" : 0.141,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -59,24 +61,14 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 12,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 20,
-			"MIN" : 0,
+			"MAX" : 1,
+			"MIN" : -1,
 			"NAME" : "Rotation",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.107,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0,
-			"NAME" : "Wave_Gain",
-			"PARAMS" : 0.01,
-			"TYPE" : "knob smooth",
-			"UI_GROUP" : "reactivity"
 		},
 		{
 			"DEFAULT" : 1,
@@ -87,6 +79,37 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.087,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3.14,
+			"MIN" : 0,
+			"NAME" : "Warp",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",

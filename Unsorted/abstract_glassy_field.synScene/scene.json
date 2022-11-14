@@ -19,7 +19,7 @@
 				-1
 			],
 			"NAME" : "lookXY",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.029,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
@@ -42,13 +42,23 @@
 			"UI_GROUP" : "render glitches"
 		},
 		{
-			"DEFAULT" : 0.125,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0,
+			"MAX" : 1,
+			"MIN" : -1,
 			"NAME" : "FOV",
-			"PARAMS" : 0.218,
+			"PARAMS" : 0.088,
 			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotation",
+			"PARAMS" : 0.029,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		}
 	],

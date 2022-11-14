@@ -14,11 +14,13 @@
 
 const int   max_iter      = 70;
  
+// License: MIT, author: Inigo Quilez, found: https://iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
 float box(vec3 p, vec3 b) {
   vec3 q = abs(p) - b;
   return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
 }
 
+// License: MIT OR CC-BY-NC-4.0, author: mercury, found: https://mercury.sexy/hg_sdf/
 float mod1(inout float p, float size) {
   float halfsize = size*0.5;
   float c = floor((p + halfsize)/size);
@@ -26,6 +28,7 @@ float mod1(inout float p, float size) {
   return c;
 }
 
+// License: MIT OR CC-BY-NC-4.0, author: mercury, found: https://mercury.sexy/hg_sdf/
 vec2 modMirror2(inout vec2 p, vec2 size) {
   vec2 halfsize = size*0.5;
   vec2 c = floor((p + halfsize)/size);
@@ -34,11 +37,11 @@ vec2 modMirror2(inout vec2 p, vec2 size) {
   return c;
 }
 
-float apollian(vec3 p, out float ss) {
-  float s = mix(1.4, 1.45, smoothstep(0.9, 1.0, sin(-length(p.xz)+TAU*TIME/10.0))); 
+float apollonian(vec3 p, out float ss) {
+  float s = mix(1.4, 1.45, smoothstep(0.9, 1.0, sin(-length(p.xz)+TAU*smoothTimeC/10.0))); 
   float scale = 1.5;
 
-  const int rep = 5;
+  const int rep = 10;
   mat2 rr = ROT(PI/5.5);
 
   for(int i=0; i<rep; ++i) {
@@ -52,7 +55,7 @@ float apollian(vec3 p, out float ss) {
     scale *= k;
   }
   
-  float d = -(box(p - 0.1, vec3(1.0, 2.0, 1.)) - 0.6);
+  float d = -(box(p - 0.1, vec3(1.0, 2.0, 1.)*(1.0-highhits*0.35)) - 0.6);
   ss = scale;
   return 0.25*d/scale;
 }
@@ -66,7 +69,7 @@ vec3 glow(vec3 ro, vec3 rd) {
   for(int i = 0; i < max_iter; ++i) {
     vec3 p = ro + rd * t;
     float ss;
-    res = apollian(p, ss);
+    res = apollonian(p, ss);
     col += 0.06*(0.5+0.5*cos(3.0+vec3(1.0, 2.0, 3.0)+0.8*log(ss)))*exp(-0.05*t-.5*res*float(i*i));
     if(res < 0.0003 * t || res > 20.) {
       iter = i;

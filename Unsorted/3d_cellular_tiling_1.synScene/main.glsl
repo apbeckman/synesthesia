@@ -160,7 +160,7 @@ float cellTile(in vec3 p){
 // However, the GPU can bump map this function in its sleep.
 //
 float cellTile2(in vec3 p){
-    p *= pow(1.+Cell_Tile, 2.);
+        p *= (1.+Voronoi_Level);
     float c = .25; // Set the maximum.
     
     c = min(c, drawSphere(p - vec3(.81, .62, .53)));
@@ -459,7 +459,6 @@ vec4 renderMainImage() {
 	
 	// Screen coordinates.
 	vec2 uv = (fragCoord - RENDERSIZE.xy*0.5)/RENDERSIZE.y;
-	
 	// Camera Setup.
 	//vec3 lookAt = vec3(0., 0.25, TIME*2.);  // "Look At" position.
 	//vec3 camPos = lookAt + vec3(2., 1.5, -1.5); // Camera position, doubling as the ray origin.
@@ -474,10 +473,10 @@ vec4 renderMainImage() {
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
 	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
-	lookAt.xy+=(_uvc.xy/2.)*Equirec;
     lookAt.xy += path(lookAt.z);
 	camPos.xy += path(camPos.z);
 	light_pos.xy += path(light_pos.z);
+	lookAt.xy+=(_uvc.xy/2.)*FOV;
 
     // Using the above to produce the unit ray-direction vector.
     float FOV = PI/2.; // FOV - Field of view.
@@ -490,6 +489,12 @@ vec4 renderMainImage() {
     
     
     vec3 rd = normalize(forward + FOV*uv.x*right + FOV*uv.y*up);
+    rd.xy =  _rotate(rd.xy, Rotation*PI);
+    
+
+    rd.yz = _rotate(rd.yz, LookXY.y*PI);
+    rd.xz = _rotate(rd.xz, LookXY.x*PI);
+
     //rd = normalize(vec3(rd.xy, rd.z - dot(rd.xy, rd.xy)*.25));    
     
     // Swiveling the camera about the XY-plane (from left to right) when turning corners.
@@ -610,7 +615,7 @@ vec4 renderMainImage() {
 	}
        
     // Blend the scene and the background with some very basic, 4-layered fog.
-    float mist = getMist(camPos, rd, light_pos, t)*pow(0.8+highhits*0.6, 2.);
+    float mist = getMist(camPos, rd, light_pos, t)*pow(0.8-highhits*0.9, 2.);
     vec3 sky = vec3(2.5, 1.75, .875)* mix(1., .72, mist)*(rd.y*.25 + 1.);
     sceneCol = mix(sceneCol, sky, min(pow(t, 1.5)*.25/FAR, 1.));
 

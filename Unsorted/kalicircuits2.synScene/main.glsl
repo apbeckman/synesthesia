@@ -67,10 +67,14 @@ vec4 renderMain() {
 	float a = T * pi;
 	float b = a + T*2.;
 	float c = cos(a) + sin(b);
+
 	uv *= mat2(cos(b), sin(b), -sin(b), cos(b));
 	uv *= mat2(cos(a),-sin(a), sin(a),cos(a));
 	uv -= vec2(sin(c), cos(c)) / pi;
+			uv *= (1.0+Warp*_uvc.xy);
+
 	uv *= Z;
+
 	float pix = 0.5 / RENDERSIZE.x * Z / sph;
 	float dof = (zoom * focus) + (T * 0.25);
 	float L = floor(loops);

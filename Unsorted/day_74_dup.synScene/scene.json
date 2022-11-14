@@ -32,10 +32,30 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
+			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "WallHeight",
-			"PARAMS" : 0.014,
+			"PARAMS" : 0.126,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3.14,
+			"MIN" : -3.14,
+			"NAME" : "FOV",
+			"PARAMS" : 0.144,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.05,
+			"MIN" : 0,
+			"NAME" : "WarpFurther",
+			"PARAMS" : 0.081,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}

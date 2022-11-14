@@ -103,18 +103,25 @@ vec4 renderMainImage() {
     
 	vec2 uv = (coordinate.xy-.5*RENDERSIZE.xy)/RENDERSIZE.y;
     vec3 eye = vec3(0,2,2) * (2. - Zoom);
+
+
+	uv.xy *= normalize(1.0+(_uvc.xy*uv.xy * Warp*PI));
     vec3 target = vec3(0);
 	vec4 hit;
-    eye.xz *= rot(Rotate.x);
-	eye.yz *= rot(Rotate.y); //adding rotate control AB
-	eye.xy += (_rotate(eye.xy, smoothTime*0.01)*PI/10.);
+    //eye.xz *= rot(Rotate.x);
+	//eye.yz *= rot(Rotate.y); //adding rotate control AB
+	eye.xy += (_rotate(eye.xy*Rotate.xy, smoothTime*0.1)*PI/10.);
 
-    lightPos.xz *= rot(smoothTimeB*0.5);
-    
+    lightPos.xz *= rot(smoothTimeB*0.125);
+	lightPos += vec3(cos(smoothTimeB*0.25), sin(smoothTimeB*0.25), 0.);
+    eye.xz *= rot(Rotate.x*PI);
+	eye.yz *= rot(Rotate.y*PI); //adding rotate control AB
+
 	vec3 ray = look(eye, target, uv);
     raymarching(eye, ray, hit);
     
     vec3 pos = hit.xyz;
+	
 	vec3 normal = getNormal(pos);
 	vec3 lightDir = normalize(lightPos);
 	float lightIntensity = clamp(dot(lightDir, normal),0.,1.);

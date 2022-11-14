@@ -20,13 +20,13 @@
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				2,
-				2
+				1,
+				1
 			],
 			"MIN" : 
 			[
-				0,
-				0
+				-1,
+				-1
 			],
 			"NAME" : "Rotate",
 			"PARAMS" : 0.01,
@@ -50,6 +50,16 @@
 			"MIN" : 0.75,
 			"NAME" : "Expand",
 			"PARAMS" : 0.153,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Warp",
+			"PARAMS" : 0.063,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}

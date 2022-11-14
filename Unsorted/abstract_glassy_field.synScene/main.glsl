@@ -231,11 +231,11 @@ vec4 renderMainImage() {
     vec3 o = camPath( ( camTime)*speed ); // Camera position, doubling as the ray origin.
     vec3 lk = camPath( ( camTime)*speed + .25 );  // "Look At" position.
     vec3 l = camPath( ( camTime)*speed + 2. ) + vec3(0, 1, 0); // Light position, somewhere near the moving camera.
-	lk.xy+=(_uvc.xy/2.)*FOV;
+	lk.xy+=((_uvc.xy*PI)/2.)*FOV;
 
 
     // Using the above to produce the unit ray-direction vector.
-    float FOV = FOV; ///3. FOV - Field of view.
+    float FOV; ///3. FOV - Field of view.
     vec3 fwd = normalize(lk-o);
     vec3 rgt = normalize(vec3(fwd.z, 0, -fwd.x )); 
     vec3 up = cross(fwd, rgt);
@@ -246,7 +246,8 @@ vec4 renderMainImage() {
     vec3 r = (0.1+FOV)*(fwd + (u.x*rgt + u.y*up));
     r = normalize(vec3(r.xy, (r.z - length(r.xy)*.125)));
     r.yz = _rotate(r.yz, lookXY.y*PI);
-    r.xy = _rotate(r.xy, -1.0*lookXY.x*PI);
+    r.xz = _rotate(r.xz, -1.0*lookXY.x*PI);
+    r.xy =  _rotate(r.xy, Rotation*PI);
 
 
 

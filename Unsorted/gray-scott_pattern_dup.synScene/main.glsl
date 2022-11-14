@@ -411,7 +411,7 @@ vec4 renderPassA() {
     // concentration B, which from probability theory is: A*B*B. This results in a decrease
     // of concentration A and an increase in concentration B by that particular amount.
     // Hence, the negative and positive vector terms on the end.
-    rdVal.y*=(0.9975+growthFactor*0.00125);
+    rdVal.y*=(0.9975+growthFactor*0.0035);
     //rdVal.y *=(0.999875+growthFactor*0.00025);
     vec2 reaction = vec2(rdVal.x*rdVal.y*rdVal.y)*vec2(-1, 1);
     reaction.x *=1.-Reaction*0.0125;

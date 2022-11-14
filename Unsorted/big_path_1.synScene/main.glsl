@@ -103,7 +103,7 @@ vec4 renderMainImage() {
     
    	rayDir.zy = normalize(getRot(.05*Distance) * rayDir.zy);
    	rayDir.xy = (getRot(.075+Spin*-PI*2+sin(smoothTime*0.1)*0.0125) * rayDir.xy);
-    rayDir.xy+=normalize(FOV*_uvc.xy/4.)*Spin2*(_uv*_uvc)/-_uvc;
+    rayDir.xy+=normalize(FOV*_uvc.xy/4.)*Spin2*(_uv*_uvc.xy/4.)/(-_uvc.xy*0.25);
     //rayDir.xy+=_uvc*FOV;
     
     vec3 position = rayOrigin;

@@ -24,17 +24,6 @@
 		},
 		{
 			"DEFAULT" : 0,
-			"DESCRIPTION" : "Fly deeper quickly or go slowly backwards.",
-			"MAX" : 1,
-			"MIN" : -0.25,
-			"NAME" : "fly_in_out",
-			"PARAMS" : 0.125,
-			"TYPE" : "slider traveler",
-			"UI_GROUP" : "camera"
-		},
-
-		{
-			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
@@ -55,9 +44,9 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "test",
-			"PARAMS" : 0.01,
+			"MIN" : 0,
+			"NAME" : "Fold",
+			"PARAMS" : 0.113,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
@@ -67,7 +56,7 @@
 			"MAX" : 0.25,
 			"MIN" : -0.25,
 			"NAME" : "test2",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.147,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
@@ -77,21 +66,39 @@
 			"MAX" : 1.75,
 			"MIN" : 0.5,
 			"NAME" : "test3",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.089,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 1.75	,
+			"MAX" : 1.75,
 			"MIN" : 0.5,
 			"NAME" : "test4",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.107,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Fly deeper quickly or go slowly backwards.",
+			"MAX" : 1,
+			"MIN" : -0.25,
+			"NAME" : "fly_in_out",
+			"PARAMS" : 0.125,
+			"TYPE" : "slider traveler",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "FOV",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
-
 	],
 	"CREDIT" : "jeyko",
 	"DESCRIPTION" : "potato!!!!!!",

@@ -6,20 +6,40 @@
 			"DESCRIPTION" : "",
 			"MAX" : 2,
 			"MIN" : 0,
-			"NAME" : "test",
+			"NAME" : "Test",
 			"PARAMS" : 0.24,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Test"
 		},
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 3,
-			"MIN" : 0.5,
+			"MAX" : 2.5,
+			"MIN" : 0.75,
 			"NAME" : "Zoom",
 			"PARAMS" : 0.139,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Cam"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Cam"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Spin",
+			"PARAMS" : 0.159,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Cam"
 		},
 		{
 			"DEFAULT" : 1,
@@ -27,9 +47,9 @@
 			"MAX" : 1.1,
 			"MIN" : 0.125,
 			"NAME" : "VoxelFactor",
-			"PARAMS" : 0.223,
+			"PARAMS" : 0.344,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Geo"
 		}
 	],
 	"CREDIT" : "BradyInstead",

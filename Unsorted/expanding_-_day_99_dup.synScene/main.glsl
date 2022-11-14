@@ -44,9 +44,9 @@ void initIcosahedron() {
     float cospin=cos(PI/float(Type)), scospin=sqrt(0.75-cospin*cospin);
 	nc=vec3(-0.5+test2,-cospin,scospin);
 	pab=vec3(0.,0.,1.);
-	pbc=vec3(scospin,0.,0.5+test);
+	pbc=vec3(scospin,0.,0.5);
 	pca=vec3(0.,scospin,cospin);
-	pbc=normalize(pbc);	pca=normalize(pca);
+	pbc=normalize(pbc+vec3(0., 0.+Fold*0.5,Fold));	pca=normalize(pca+vec3(0., 0+Fold*0.5,Fold));
 }
 
 vec3 bToC(vec3 A, vec3 B, vec3 C, vec3 barycentric) {
@@ -60,11 +60,9 @@ vec3 pIcosahedron(inout vec3 p, int subdivisions) {
     p = abs(p);
 	pReflect(p, nc, 0.);
     p.xy = abs(p.xy);
-    p.xy *= test3;
 
 	pReflect(p, nc, 0.);
     p.xy = abs(p.xy);
-    p.xy *= test4;
 
 	pReflect(p, nc, 0.);
     float smoothSin = (sin(smoothTimeC*0.125)+sin(smoothTimeC*0.125+1.)-1.)*0.25+0.5;
@@ -309,7 +307,7 @@ vec4 renderMainImage() {
 
 	vec2 uv = fragCoord/RENDERSIZE.xy;
 	vec2 uvn = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.xy;
-    
+    uvn *=_uvc;
 	fragColor = vec4(0);
     // Radial blur
     float steps = 16.;
