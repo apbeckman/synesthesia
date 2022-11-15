@@ -5,9 +5,11 @@
 #define R RENDERSIZE.xy
 //#define Main void mainImage(out vec4 Q, in vec2 U)
 #define box for(int x=-1;x<=1;x++)for(int y=-1;y<=1;y++)
-float dt = .2;
-float _a = .05;
-float _b = .05;
+float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.25)+(syn_Level*0.125), 2.0);
+
+float dt = .2*(1.0+growthFactor);
+float _a = .05*(1.+pow(syn_MidLevel, 2.));
+float _b = .05*(1.+pow(syn_BassLevel, 2.));
 
 #define A(U) texture(BuffB,(U)/R)
 #define B(U) texture(BuffD,(U)/R)
@@ -33,22 +35,22 @@ vec4 renderPassA()
     vec4 T = Q;
     box if(abs(x)!=abs(y))
     {
-        vec2 u = vec2(x,y)*(1.0+basshits);
+        vec2 u = vec2(x,y);
         vec4 a = A(U+u);
-        float f = dt*.25*(a.w*(a.w-1.+a.z)*(1.0+basshits));
+        float f = dt*.25*(a.w*(a.w-1.+a.z)*(1.0+growthFactor));
         Q.xy -= f*u.xy;
         Q.z  += .125*.25*(a.z-T.z)-Q.w*f*dot(a.xy-T.xy+u.xy,u.xy); 
     }
     float M = dt*Q.z*Q.w*b.x*b.y*(1.0+basshits);
     Q.z += 10.*M;
     Q.y -= .1/R.y;
-    if (_mouse.z>0.&&length(U-_mouse.xy)<50.)
+    if (_mouse.z>0.&&length(U-_mouse.xy)<75.*(1.0+basshits))
         Q.x = .5;
     if (FRAMECOUNT <= 1)Q = vec4(0,0,.1,.1);
     if (U.x < 4.||R.x-U.x<4.) Q.xyz *= 0.;
     if (U.y < 4.||R.y-U.y<4.) Q.xyz *= 0.;
     Q = clamp(Q,vec4(-.5,-.5,0,0),vec4(.5,.5,2,Q.w));
-    if (length(Q.xy)>.5-basshits*0.45) Q.xy = (.5)*normalize(Q.xy);
+    if (length(Q.xy)>.5-growthFactor*0.45) Q.xy = (.5)*normalize(Q.xy);
     
 	return Q; 
  } 
@@ -83,8 +85,8 @@ vec4 renderPassB()
     if (dQ.w>0.)dQ.xyz/=dQ.w;
     Q = dQ;
     
-    if (U.x < 4.||R.x-U.x<4.) Q.xy *= 0.;
-    if (U.y < 4.||R.y-U.y<4.) Q.xy *= 0.;
+    if (U.x < 6.||R.x-U.x<6.) Q.xy *= 0.;
+    if (U.y < 6.||R.y-U.y<6.) Q.xy *= 0.;
 	return Q*(1.0+basshits*0.001); 
  } 
 

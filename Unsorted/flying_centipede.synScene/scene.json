@@ -1,4 +1,28 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "camXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "Klems",
 	"DESCRIPTION" : "Also VR compatible! Click to rotate the camera.",
 	"GPU" : 0,

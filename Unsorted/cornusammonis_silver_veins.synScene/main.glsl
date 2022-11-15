@@ -247,7 +247,6 @@ vec4 renderPassC() {
     vec2 uv = fragCoord / RENDERSIZE.xy;
     vec2 texel = 1.0 / RENDERSIZE.xy;
     
-    
 /*
 U:
  1.9000778e-006   2.6484959e-003  -1.0391083e-001

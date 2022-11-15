@@ -96,8 +96,12 @@ vec4 renderMainImage() {
     //mode = (w.x-th<0.0);
     
     // deform 1
-    p *=( 0.125+Center); // bigger number = smaller center circle
+    p *=( 0.125); // bigger number = smaller center circle
+    p.xy+=_uvc*FOV*PI;
     p = 0.5*p/dot(p,p);
+        p.xy *=1.0+((p.xy*Melt*PI*_uvc)/_xy);
+    p +=_rotate(p*_uvc*PI, Rotate)*Rotate;
+
     vec2 q = p;
     p.x += ((smoothTime) * (rate*0.5));
     
@@ -107,7 +111,6 @@ vec4 renderMainImage() {
 	p += (0.2+warp3)*cos( 3.3*p.yx + 0.06*1.2*smoothTimeB + vec2(3.2,3.4) );
 	p += (0.2+warp3)*cos( 4.2*p.yx + 0.06*1.7*(smoothTimeC) + vec2(1.8,5.2) );
 	p += 0.2*cos( 9.1*p.yx + 0.06*1.1*smoothTimeB + vec2(6.3,3.9) );
-
     // base color pattern
     vec3 col = getColor( 0.5*length(p) );
     

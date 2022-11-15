@@ -251,7 +251,9 @@ vec4 renderMainImage() {
   const vec3 lp2 = vec3(-1.0, 1.25, 1.0)*vec3(s, 1.0, s);
 
   vec2 q = fragCoord/RESOLUTION.xy;
+  
   vec2 p = -1. + 2. * q;
+
   p.x *= RESOLUTION.x/RESOLUTION.y;
 
   float aa = 2.0/RESOLUTION.y;
@@ -262,6 +264,7 @@ vec4 renderMainImage() {
   vec3  n = normal(p);
 
   vec3 ro = vec3(0.0, -10.0, 0.0);
+
   vec3 pp = vec3(p.x, 0.0, p.y);
 
   vec3 po = vec3(p.x, h, p.y);
@@ -274,6 +277,7 @@ vec4 renderMainImage() {
   float diff2 = max(dot(n, ld2), 0.0);
 
   vec3  rn    = n;
+  
   vec3  ref   = reflect(rd, rn);
   float ref1  = max(dot(ref, ld1), 0.0);
   float ref2  = max(dot(ref, ld2), 0.0);

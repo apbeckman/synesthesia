@@ -24,31 +24,12 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 0.25,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : -1,
-			"MIN" : 1,
-			"NAME" : "rate",
-			"TYPE" : "slider",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "Smoothly switch between normal perspective and Equirectangular coordinates. Best results with this slider at 0% or 100%.",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "perspective",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 3,
-			"MIN" : 0,
-			"NAME" : "FOVmod",
-			"PARAMS" : 0.046,
+			"NAME" : "FOV",
+			"PARAMS" : 0.053,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -58,8 +39,27 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "lookZ",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.095,
 			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0.1,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rate",
+			"TYPE" : "slider speed",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -68,7 +68,7 @@
 			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "whiteout",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.104,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "effects"
 		}

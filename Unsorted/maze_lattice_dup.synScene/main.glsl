@@ -390,23 +390,23 @@ vec4 renderMainImage() {
     vec3 rd = vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y);
     
     // Barrel distortion;
-    rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.)*FOVmod)*FOVmod));
+    rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.))));
     
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
     //vec2 m = sin(vec2(1.57079632, 0) + TIME/8.);
     //rd.xy = rd.xy*mat2(m.xy, -m.y, m.x);
     //rd.xz = rd.xz*mat2(m.xy, -m.y, m.x);
     rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, -1.0*lookXY.x*PI);
+    rd.xy = _rotate(rd.xy-_uvc*FOV*PI*0.5, -1.0*lookXY.x*PI);
     rd.xz = _rotate(rd.xz, lookZ*PI);
     // Ray origin: Sending it along the Z-axis.
     //vec3 ro = vec3(0, 0, TIME*rate*0.25);
-    vec3 ro = vec3(0, 0, ((smoothTime) * rate));
+    vec3 ro = vec3(0, 0, (smoothTime*0.1 * Rate*-1.));
 
     // Alternate: Set off in the YZ direction. Note the ".5." It's an old lattice trick.
     //vec3 ro = vec3(0, TIME/2. + .5, TIME/2.);
     
-    vec3 lp = ro + vec3(.2, 1., .3); // Light, near the ray origin.
+    vec3 lp = ro + vec3(.2+cos(smoothTimeB*0.1)*0.05, 1.+sin(smoothTimeB*0.1)*0.05, .3); // Light, near the ray origin.
     
     // Set the initial scene color to black.
     vec3 col = vec3(0);
@@ -423,7 +423,7 @@ vec4 renderMainImage() {
         
         float edge;
         
-        vec3 sp = ro + rd*t; // Surface position.
+        vec3 sp = ro + rd*t; // Surface position. 
         vec3 sn = normal(sp, edge); // Surface normal.
 
     	// Saving a copy of the unbumped normal, since the texture routine require it.
@@ -447,7 +447,7 @@ vec4 renderMainImage() {
         vec3 ld = lp - sp; // Light direction.
         float lDist = max(length(ld), 0.001); // Light to surface distance.
         ld /= lDist; // Normalizing the light direction vector.
-
+        
         float diff = max(dot(ld, sn), 0.); // Diffuse component.
         float spec = pow(max(dot(reflect(-ld, sn), -rd), 0.), 32.); // Specular.
 
@@ -466,7 +466,7 @@ vec4 renderMainImage() {
         //rsn = bumpMap(rsp, rsn, .005); // We're skipping the reflection bump to save some calculations.
 
         vec3 rCol = texFaces(rsp, rsn); // Texel at "rsp."    
-        if(rEdge>.001)rCol = texEdges(rsp, rsn); // Reflection edges.
+        // /if(rEdge>.001)rCol = texEdges(rsp, rsn); // Reflection edges.
 
         float rDiff = max(dot(rsn, normalize(lp-rsp)), 0.); // Diffuse light at "rsp."
         float rSpec = pow(max(dot(reflect(-normalize(lp-rsp), rsn), -ref), 0.), 8.); // Diffuse light at "rsp."
@@ -497,12 +497,12 @@ vec4 renderMainImage() {
     //}
     
     // Mixing in some hazy bluish orange background.
-    vec3 bg = mix(vec3(.5, .7, 1).zyx, vec3(1, .7, .3).zyx, -rd.y*.35 + .35);
+    vec3 bg = mix(vec3(.5, .7, 1).zyx, vec3(1, .7, .3).zyx, -rd.y*.35 + .35)+pow(0.5*highhits, 2.);
     col = mix(col, bg, smoothstep(0., FAR-25., t));//min(bg.zyx*vec3(1.3, .6, .2)*1.5, 1.)
     
     // Postprocesing - A subtle vignette with a bit of warm coloring... I wanted to warm the atmosphere up
     // a bit. Uncomment it, if you want to see the bluer -possibly more natural looking - unprocessed version.
-    vec2 uv = fragCoord/RENDERSIZE.xy;
+    vec2 uv = (fragCoord/RENDERSIZE.xy);
     float vig = pow(16.*uv.x*uv.y*(1.-uv.x)*(1.-uv.y), 0.125);
     col *= vec3(1.2, 1.1, .85)*vig;
 
