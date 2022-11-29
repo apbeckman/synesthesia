@@ -133,6 +133,7 @@ vec4 blocks(vec3 q3){
        
         // Correct positional individual tile ID.
         vec2 idi = ip*s + cntr;
+        idi *= 1.0+(_uvc*idi*PI)*(Mir);   
  
         // The extruded block height. See the height map function, above.
         float h = hm(idi);
@@ -342,7 +343,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ){
 	
 	// Camera Setup.
 	vec3 lk = vec3(0, 0, 0);//vec3(0, -.25, iTime);  // "Look At" position.
-	vec3 ro = lk + vec3(-.5*.3*cos(smoothTime*0.125), -.5*.2*sin(smoothTime*0.125), -2); // Camera position, doubling as the ray origin.
+    //lk.xy += (_uvc*FOV*PI);
+	vec3 ro = lk + vec3(0.+.013*cos(smoothTime*0.125),0.+ .012*sin(smoothTime*0.125), -2); // Camera position, doubling as the ray origin.
  
     // Light positioning. One is just in front of the camera, and the other is in front of that.
  	vec3 lp = ro + vec3(1.5, 2, -1);// Put it a bit in front of the camera.
@@ -358,8 +360,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ){
     vec3 up = cross(fwd, rgt); 
 
     // rd - Ray direction.
-    vec3 rd = normalize(fwd + FOV*uv.x*rgt + FOV*uv.y*up);
-    
+    vec3 rd = normalize(fwd + uv.x*rgt + uv.y*up);
+        rd.xy += (_uvc*FOV*PI);
+
     // Swiveling the camera about the XY-plane.
 	//rd.xy *= rot2( sin(iTime)/32. );
 

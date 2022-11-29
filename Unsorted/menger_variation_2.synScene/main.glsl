@@ -575,7 +575,6 @@ vec4 renderMainImage() {
 
     // Screen coordinates.
 	vec2 uv = (fragCoord.xy - RENDERSIZE.xy*.5) / RENDERSIZE.y;
-    
 	
 	// Camera Setup.
 	vec3 ro = vec3(0, 0, smoothTime); // Camera position, doubling as the ray origin.
@@ -606,14 +605,17 @@ vec4 renderMainImage() {
     vec3 rd = normalize(forward + FOV*uv.x*right + FOV*uv.y*up);
 */  
 
-    float FOV = 3.14159/(2/FOV);
+    //float FOV = 3.14159/(2/);
     vec3 fwd = normalize(ro); // o = ray origin vector
     vec3 rgt = normalize(vec3(fwd.z, 0, -fwd.x ));
     vec3 up = cross(fwd, rgt);
     // Unit direction ray.
-    vec3 rd = normalize(fwd + FOV*(uv.x*rgt + uv.y*up));
+    vec3 rd = normalize(fwd + (uv.x*rgt + uv.y*up));
+    //rd.xy += _uvc*PI*FOV;
     rd.yz = _rotate(rd.yz, lookXY.y*PI) ;
-    rd.xy = _rotate(rd.xy, lookXY.x*PI);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.xy = _rotate(rd.xy, Rotate*PI);
+    
 
 
 

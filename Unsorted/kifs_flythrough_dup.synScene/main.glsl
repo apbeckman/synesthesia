@@ -297,11 +297,12 @@ vec4 renderMainImage() {
     // Unit direction ray vector: Note the absence of a divide term. I came across
     // this via a comment Shadertoy user "coyote" made. I'm pretty happy with this.
     vec3 rd = (vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y));
-    
     // Barrel distortion;
     // rd = normalize(vec3(rd.xy, sqrt(rd.z*rd.z - dot(rd.xy, rd.xy)*disto_knob)));
     // rd = mix(rd, normalize(vec3(_uvc, 1.0)), )
-    rd = normalize(vec3(_uvc, 1.0));
+    rd = normalize(vec3(_uvc+FOV*(_uvc*PI*0.25), 1.0));
+    rd.xy += rd.xy*FOV*_uvc;
+    
     
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
     // vec2 m = sin(vec2(1.57079632, 0) + blur_out*2*PI);

@@ -26,8 +26,8 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 6,
-			"MIN" : 1,
+			"MAX" : 3.14,
+			"MIN" : -3.14,
 			"NAME" : "FOV",
 			"PARAMS" : 0.1,
 			"TYPE" : "slider smooth",
@@ -47,9 +47,10 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "perspective",
-			"TYPE" : "slider",
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.101,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		}
 	],

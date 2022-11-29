@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "got inspired by trirop's awesome shader(s) https://www.shadertoy.com/view/MsScWD\nI didnt use Runge-Kutta integration because im just not that fancy\nI think i nailed the colors (happy accident), but not the lighting or the stars",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "andromedas_jewel.png",
+	"TITLE" : "Andromedas Jewel",
+	"WIDTH" : 1280
+}

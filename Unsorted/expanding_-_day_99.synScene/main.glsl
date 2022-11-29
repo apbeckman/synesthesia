@@ -44,7 +44,7 @@ void initIcosahedron() {
     float cospin=cos(PI/float(Type)), scospin=sqrt(0.75-cospin*cospin);
 	nc=vec3(-0.5+test2,-cospin,scospin);
 	pab=vec3(0.,0.,1.);
-	pbc=vec3(scospin,0.,0.5+test);
+	pbc=vec3(scospin,0.,0.5);
 	pca=vec3(0.,scospin,cospin);
 	pbc=normalize(pbc);	pca=normalize(pca);
 }
@@ -73,7 +73,7 @@ vec3 pIcosahedron(inout vec3 p, int subdivisions) {
         vec3 n;
 
 
-        float d = .5+test;
+        float d = .5+Test;
         
         vec3 p1 = bToC(A, B, C, vec3(1.-d, .0, d));
         vec3 p2 = bToC(A, B, C, vec3(1.-d, d, .0));
@@ -121,6 +121,7 @@ float noise( in vec2 x )
 	f = f*f*(3.0-2.0*f);
 	
 	vec2 uv = (p.xy) + f.xy;
+    uv*=_uvc;
 	return textureLod( image30, (uv+ 0.5)/512.0, 0.0 ).x;
 }
 

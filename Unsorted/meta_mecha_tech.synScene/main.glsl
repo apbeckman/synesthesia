@@ -1,4 +1,4 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+// /vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 			//******** Common Code Begins ********
@@ -31,16 +31,17 @@ vec3 coord;
 // signed distance function
 float map(vec3 p)
 {
-    float dist = 100.;
+    float dist = 200.;
     float shape = 200.;
     float t = 206.+smoothTimeC*.1;
     float anim = fract(t);
     float index = floor(t);
     float signal = rng*sin(smoothTimeC*50.)*pow(anim,40.)*.1;
     t = pow(anim,0.1)+index+signal;
-    float a = 1.;
-    vec3 e = vec3(.01,0.05,0.02);
-    const float count = 5.;
+    float twitch = 1.0+pow((syn_BassLevel*0.5+syn_MidLevel*0.35)*Twitch, 2.0);
+    float a = 1.*Zoom;
+    vec3 e = vec3(.01*twitch,0.05*twitch,0.02*twitch);
+    const float count = 6.;
     for (float i = 0.; i < count; ++i) {
         
         p.xz = abs(p.xz)-.15*a;
@@ -53,7 +54,7 @@ float map(vec3 p)
     
     coord = p;
     
-    shape = max((dist - .002), p.z+.005);
+    shape = max((dist - .001), p.z+.005);
     material = shape < dist ? 1. : 0.;
     dist = min(dist, shape);
     
@@ -123,8 +124,8 @@ vec4 renderPassA() {
     for (steps = count; steps > 0.; --steps) {
         float dist = map(pos);
         if (dist < total/RENDERSIZE.y || total > maxDist) break;
-        dist *= 0.9+0.1*blue.z;
-        ray += white * total*.01;
+        dist *= 0.9999+0.0001*blue.z;
+        ray += white * total*(.001+syn_MidLevel*0.005);
         pos += ray * dist;
         total += dist;
     }

@@ -179,7 +179,7 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
     vec2 st = ( fragCoord.xy - .5*RENDERSIZE.xy ) / RENDERSIZE.y;
-    float ti = TIME*.1;
+    float ti = smoothTime*.1;
     
     // camera def
     vec3 camTarget = vec3(-50.*sin(2.*ti),25.*_mouse.y/RENDERSIZE.y,-30.*cos(3.*ti));    

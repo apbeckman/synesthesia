@@ -189,7 +189,7 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
-    uv.xy *= (1.0 + (-1.0+(_uvc.xy*uv.xy*PI))*FOV);
+    uv.xy *= (1.0 + (-1.0+(_uvc.xy*uv.xy))*FOV*PI);
 	sUv = uv;
     uv *= 1. + dot(uv,uv)*0.2;
     
@@ -199,8 +199,9 @@ vec4 renderPassA() {
     
     ro.z;
     vec3 rd = normalize(vec3(uv,1));
-    rd.xz+= _rotate (rd.xz, lookXY.x);
-    rd.yz+= _rotate (rd.yz, lookXY.y);
+    rd.xy=  _rotate (rd.xy, Rotate*PI);
+    rd.xz= _rotate (rd.xz, lookXY.x*PI*0.25);
+    rd.yz= _rotate (rd.yz, lookXY.y*PI*0.25);
     #define fog(a) smoothstep(1., 0., a*1.4)
     
     for(float i = 0.; i < PLANES + float(min(FRAMECOUNT, 0)); i++ ){

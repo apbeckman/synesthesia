@@ -1,0 +1,251 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 10,
+			"DESCRIPTION" : "number of iterations of the media",
+			"MAX" : 16,
+			"MIN" : 0,
+			"NAME" : "iterations",
+			"TYPE" : "slider",
+			"UI_GROUP" : "clones"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Changes the way the clones behave.",
+			"LABELS" : 
+			[
+				"xy",
+				"kaleido",
+				"tunnel",
+				"turbulent"
+			],
+			"MAX" : 3,
+			"MIN" : 0,
+			"NAME" : "cloner_style",
+			"TYPE" : "dropdown",
+			"UI_GROUP" : "clones",
+			"VALUES" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Changes how the clones appear at the edges of the sampled media",
+			"LABELS" : 
+			[
+				"normal",
+				"mirror",
+				"hold"
+			],
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "edge_behavior",
+			"TYPE" : "dropdown",
+			"UI_GROUP" : "clones",
+			"VALUES" : 
+			[
+				0,
+				1,
+				2
+			]
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Moves the cloned media around. Behaves differently depending on the cloner stlye",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "clones_offset",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "clones"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Zooms the clones in and out",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "clones_scale",
+			"PARAMS" : 0.072,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "clones"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "make the cloned content move to the beat",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "audio_reactive",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "clones"
+		},
+		{
+			"DEFAULT" : 0.33,
+			"DESCRIPTION" : "Adjusts the tolerance of the current keying style. This behaves differently depending on how the media is masked",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "matte_tolerance",
+			"PARAMS" : 0.508,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "key"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Adjusts how soft the edges of the current keying style are. This behaves differently depending on how the media is masked",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "feather_edge",
+			"PARAMS" : 0.585,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "key"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Adjusts the strength of the current keying style. This behaves differently depending on how the media is masked",
+			"MAX" : 1,
+			"MIN" : 0.01,
+			"NAME" : "matte_choke",
+			"PARAMS" : 0.599,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "key"
+		},
+		{
+			"DEFAULT" : 2,
+			"DESCRIPTION" : "Changes the method for masking out the selected media",
+			"LABELS" : 
+			[
+				"Luma Smooth",
+				"Luma Gate",
+				"Color",
+				"Color (mouse select)",
+				"Optical Flow"
+			],
+			"MAX" : 4,
+			"MIN" : 0,
+			"NAME" : "keying_style",
+			"TYPE" : "dropdown",
+			"UI_GROUP" : "key",
+			"VALUES" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		},
+		{
+			"DEFAULT" : 
+			[
+				0.20392,
+				0.98824,
+				0.098039
+			],
+			"DESCRIPTION" : "The color used for masking the media when the keying style is set to \"Color\"",
+			"MAX" : 
+			[
+				1,
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0,
+				0
+			],
+			"NAME" : "color_key",
+			"TYPE" : "color",
+			"UI_GROUP" : "key"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Controls the vignette amount  of the selected user media",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "vignette_amount",
+			"PARAMS" : 0.164,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "vignette"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Changes the vignette shape from the ratio of the  current resolution, to a circle",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "vignette_roundness",
+			"PARAMS" : 0.048,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "vignette"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Adjusts how sharp or soft the vignette is",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "vignette_softness",
+			"PARAMS" : 0.058,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "vignette"
+		}
+	],
+	"CREDIT" : "Synesthesia",
+	"DESCRIPTION" : "A quick way to mask and clone your media. Great for streamers and live camera feeds. Requires user media to work!",
+	"GPU" : 1,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "defaultImage",
+			"PATH" : "images/defaultImage.jpg"
+		}
+	],
+	"IMAGE_PATH" : "media_key_&_cloner_fx_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 0,
+			"TARGET" : "BuffB",
+			"WIDTH" : 0
+		},
+		{
+			"FLOAT" : false,
+			"HEIGHT" : 3,
+			"TARGET" : "keyBuffer",
+			"WIDTH" : 3
+		},
+		{
+			"FLOAT" : false,
+			"HEIGHT" : 1080,
+			"TARGET" : "opticalFlowBuffer",
+			"WIDTH" : 1920
+		}
+	],
+	"TAGS" : 
+	[
+		"media",
+		"feedback",
+		"streamer",
+		"2D",
+		"utility"
+	],
+	"TITLE" : "Media Key & Cloner FX_dup",
+	"WIDTH" : 1920
+}

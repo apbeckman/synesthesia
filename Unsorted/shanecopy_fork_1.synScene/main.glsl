@@ -11,7 +11,7 @@ vec4 renderPassA() {
     vec2 fc = (fragCoord);
 	vec2 suv = fc.xy / RENDERSIZE.xy;
 	vec2 uv = (fc.xy - RENDERSIZE.xy*.5) / RENDERSIZE.y * 2.;
-	vec2 seed = sin(uv+smoothTimeC)*999.;
+	vec2 seed = sin(uv+smoothTimeC)*9999.;
     
     // x,y, mindist, mindist
     vec4 kali = texture(BuffA, suv);
@@ -108,7 +108,7 @@ vec4 renderPassB() {
 
 */
 
-#define FAR 10.
+#define FAR 25.
 
 // Tri-Planar blending function. Based on an old Nvidia writeup:
 // GPU Gems 3 - Ryan Geiss: http://http.developer.nvidia.com/GPUGems3/gpugems3_ch01.html
@@ -290,7 +290,7 @@ float trace(in vec3 ro, in vec3 rd){
 // Other usage: Xyptonjtroz: https://www.shadertoy.com/view/4ts3z2
 float curve(in vec3 p){
 
-    const float eps = 0.02, amp = 8., ampInit = 0.6;
+    const float eps = 0.02, amp = 16., ampInit = 0.6;
 
     vec2 e = vec2(-1., 1.)*eps; //0.05->3.5 - 0.04->5.5 - 0.03->10.->0.1->1.
     

@@ -2,6 +2,7 @@
 
 			//******** BuffA Code Begins ********
 float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0);
+vec4 image = texture(syn_UserImage,(_xy)/RENDERSIZE.xy);
 
 #define R RENDERSIZE.xy
 #define A(U) texture(BuffC, (U)/R)
@@ -13,7 +14,7 @@ vec4 renderPassA() {
         vec4 a = A(U);
         U -= a.x*a.zw;
     }
-    Q = A(U);
+    Q = A(U)+(image*growthFactor)*0.35;
     vec4 
         n = A(U+vec2(0,1)),
         e = A(U+vec2(1,0)),

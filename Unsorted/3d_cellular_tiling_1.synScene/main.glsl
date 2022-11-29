@@ -321,7 +321,7 @@ float thickness(in vec3 p, in vec3 n){
     
 }
 
-/*
+
 // Shadows.
 float softShadow(vec3 ro, vec3 rd, float start, float end, float k){
 
@@ -347,7 +347,7 @@ float softShadow(vec3 ro, vec3 rd, float start, float end, float k){
     // Shadow value.
     return min(max(shade, 0.) + 0.3, 1.0); 
 }
-*/
+
 
 // Ambient occlusion, for that self shadowed look. Based on the original by XT95. I love this 
 // function, and in many cases, it gives really, really nice results. For a better version, and 
@@ -476,7 +476,7 @@ vec4 renderMainImage() {
     lookAt.xy += path(lookAt.z);
 	camPos.xy += path(camPos.z);
 	light_pos.xy += path(light_pos.z);
-	lookAt.xy+=(_uvc.xy/2.)*FOV;
+	lookAt.xy+=(_uvc.xy/4.)*(FOV*PI+FOV*lookAt.xy/PI);
 
     // Using the above to produce the unit ray-direction vector.
     float FOV = PI/2.; // FOV - Field of view.
@@ -564,7 +564,7 @@ vec4 renderMainImage() {
         vec3 ref = reflect(sn, rd);
 
         // Object texturing.
-        vec3 texCol = tex3D(image46, sp*tSize0, sn);
+        vec3 texCol = tex3D(image46, sp*tSize0, sn)*1.5;
         texCol = smoothstep(-.05, .95, texCol)*(smoothstep(-.5, 1., crv)*.75+.25);
         
     	/////////   
@@ -573,8 +573,8 @@ vec4 renderMainImage() {
         //float th = thickness( sp, sn, 1., 1. );
         float th = thickness( sp, sn);
         float tdiff =  pow( clamp( dot(rd, -hf), 0., 1.), 1.);
-        float trans = max((tdiff + .25)*th*1.5, 0.);  
-        trans = pow(trans, 4.)*1.;        
+        float trans = max((tdiff )*th*1.5+ (1.0+syn_Level)*.25, 0.);  
+        trans = pow(trans, 6.)*1.;        
     	////////        
 
     	
@@ -583,7 +583,7 @@ vec4 renderMainImage() {
     	
         // Shadows - They didn't add enough aesthetic value to justify the GPU drain, so they
         // didn't make the cut.
-        //shading *= softShadow(sp, ld, 0.05, distlpsp, 8.);
+        shading *= softShadow(sp, ld, 0.05, distlpsp, 8.);
     	
     	// Combining the above terms to produce the final color. It was based more on acheiving a
         // certain aesthetic than science.
@@ -595,9 +595,9 @@ vec4 renderMainImage() {
         
         
         // Cool blue hilights. Adapted from numerous examples on here. Kali uses it to great effect.
-        float per = 10.;
-    	float tanHi = abs(mod(per*.5 + t + smoothTimeB, per) - per*.5);
-    	vec3 tanHiCol = vec3(0, .2, 1)*(1./tanHi*.2)*pow(0.8+syn_HighLevel*0.6, 2.);
+        float per = 10.*LineMod;
+    	float tanHi = abs(mod(per*.5 + t -( smoothTimeB ), per) - per*.5);
+    	vec3 tanHiCol = vec3(0.7+sin(smoothTimeB*0.25)*0.925*colorShift, .2+(cos(smoothTimeB*0.25)+0.5)*01.5*colorShift, 1.6-sin(smoothTimeB*0.45)*0.25*colorShift)*(1./tanHi*.2*pow(0.8+syn_HighLevel*0.8, 1.+syn_Intensity));
         sceneCol += tanHiCol;
         
         
@@ -616,8 +616,8 @@ vec4 renderMainImage() {
        
     // Blend the scene and the background with some very basic, 4-layered fog.
     float mist = getMist(camPos, rd, light_pos, t)*pow(0.8-highhits*0.9, 2.);
-    vec3 sky = vec3(2.5, 1.75, .875)* mix(1., .72, mist)*(rd.y*.25 + 1.);
-    sceneCol = mix(sceneCol, sky, min(pow(t, 1.5)*.25/FAR, 1.));
+    vec3 sky = vec3(1.175, 01.1025, 1.15)* mix(1., .72, mist)*(rd.y*.25 + 1.);
+    sceneCol = mix(sceneCol, sky, min(pow(t, 1.5)*.175/FAR, 1.));
 
     // Clamp, perform rough gamma correction, then present the pixel to the screen.
 	fragColor = vec4(sqrt(clamp(sceneCol, 0., 1.)), 1.0);

@@ -2,10 +2,22 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "MouseXY",
 			"TYPE" : "xy",
 			"UI_GROUP" : "defaults"
@@ -15,13 +27,24 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "MouseClick",
+			"NAME" : "Twitch",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.1,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.75,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "leon",
 	"DESCRIPTION" : "mechanical metamorphoses with the color strips a la Chris Foss",
+	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[

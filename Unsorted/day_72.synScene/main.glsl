@@ -55,7 +55,7 @@ float fbm(vec2 p) {
 	float s = .0;
 	float m = .0;
 	float a = .5;	
-	for(int i = 0; i < 5; i++) {
+	for(int i = 0; i < 4; i++) {
 		s += a * noise(p);
 		m += a;
 		a *= .7;
@@ -120,7 +120,7 @@ vec2 map(vec3 p){
     //vec3 col = pal(0.4,0.6,vec3(0.1 + pow(abs(sin(TIME*1.)), 40.)*0.1,2.2,0.3),0.5 + sin(TIME)*0.01,0.5 - attenB*0.6);
 
     
-    float sc = 60. - atten*55.*(0.999+pow(syn_HighLevel*0.785+syn_Hits*0.225, 2.0)*0.05);
+    float sc = 75. - atten*55.*(0.999+pow(syn_HighLevel*0.785+syn_Hits*0.225, 2.0)*0.05);
     glowB += exp(-dPipes*sc)*col*reflAtten;
     glowB += exp(-dPipesB*sc)*col*reflAtten;
     //glowC += exp(-dBalls*90.)*col;
@@ -175,7 +175,7 @@ vec4 renderPassA() {
 
 
 
-    float m = pow(abs(sin(smoothTimeB/2.)), 4.);
+    float m = pow(abs(sin(smoothTimeB/2.)), 2.);
     //uv *= 1. - dot(uv,uv)*(1. - pow(m,2.)*1.)*0.4;
     
     
@@ -198,7 +198,10 @@ vec4 renderPassA() {
     lookAt += path(lookAt.z);
     
     vec3 rd = getRd(ro, lookAt, uv);
-    
+    rd.yz = _rotate(rd.yz, LookXY.y*PI);
+    rd.xz = _rotate(rd.xz, LookXY.x*PI);
+    rd.xy = _rotate(rd.xy, Rotate*PI);
+
     rd.xy *= rot(sin(smoothTime*0.01)*0.1);
     
     

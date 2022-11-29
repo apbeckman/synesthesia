@@ -1,4 +1,47 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.125,
+			"MIN" : -0.125,
+			"NAME" : "TunnelWidth",
+			"PARAMS" : 0.13,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -1,
+			"NAME" : "Dist",
+			"PARAMS" : 0.251,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.125,
+			"MIN" : -0.35,
+			"NAME" : "PipeWidth",
+			"PARAMS" : 0.489,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -2,
+			"NAME" : "FOV",
+			"PARAMS" : 0.126,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "jeyko",
 	"DESCRIPTION" : "just fyi the code is not very tidy.",
 	"GPU" : 0,

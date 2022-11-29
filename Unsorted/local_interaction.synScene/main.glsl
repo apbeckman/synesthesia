@@ -5,6 +5,7 @@
 #define A(COORD) texture(BuffA,(COORD)/RENDERSIZE.xy)
 float growthFactor = normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0));
 vec4 image = texture(syn_UserImage,(_xy)/RENDERSIZE.xy);
+
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = (_xy);
@@ -16,13 +17,14 @@ vec4 renderPassA() {
     U+=.5*RENDERSIZE.xy;
     U.xy += Dir_XY.xy;
     Q  =  A(U);
+    image *= MediaImpact;
     // Neighborhood :
-    vec4 pX  =  A(U + vec2(1,0))+(image*growthFactor)*0.25;
-    vec4 pY  =  A(U + vec2(0,1))+(image*growthFactor)*0.25;
-    vec4 nX  =  A(U - vec2(1,0))-(image*growthFactor)*0.25;
-    vec4 nY  =  A(U - vec2(0,1))-(image*growthFactor)*0.25;
-    vec4 m = 0.25*(pX+nX+pY+nY+Test);
-    float b = mix(1.,abs(Q.z),.8);
+    vec4 pX  =  A(U + vec2(1,0))+(image*growthFactor)*0.375;
+    vec4 pY  =  A(U + vec2(0,1))+(image*growthFactor)*0.375;
+    vec4 nX  =  A(U - vec2(1,0))-(image*growthFactor)*0.375;
+    vec4 nY  =  A(U - vec2(0,1))-(image*growthFactor)*0.375;
+    vec4 m = 0.25*(pX+nX+pY+nY+Intensity);
+    float b = mix(1.,abs(Q.z),.78+growthFactor*0.01);
     
     Q.xyz += (1.-b+0.0125*basshits)*(0.25*vec3(pX.z-nX.z,pY.z-nY.z,-pX.x+nX.x-pY.y+nY.y)- Q.xyz)*(Diffusion+growthFactor*0.125);
 
@@ -55,7 +57,7 @@ vec4 renderMainImage() {
     vec4 nY  =  A1(U - vec2(0,1));
     vec3 n = normalize(vec3(pX.z-nX.z,pY.z-nY.z,1));
     vec3 r = reflect(n,vec3(0,0,-1));
-    Q = (0.5+0.5*sin(smoothTimeB+atan(Q.x,Q.y)*vec4(3,2,1,4)));
+    Q = (0.5+0.5*sin(smoothTimeB*0.5+atan(Q.x,Q.y)*vec4(3,2,1,4)));
     float d = ln(vec3(.4,.4,6)*RENDERSIZE.xyy,
                  vec3(U,0),vec3(U,0)+r)/RENDERSIZE.y-(0.25*pow(syn_HighLevel*0.4 + syn_MidHighLevel*0.4 + syn_Hits*0.2, 2.));
     Q *= exp(-d*d)*.5+.5*exp(-3.*d*d);

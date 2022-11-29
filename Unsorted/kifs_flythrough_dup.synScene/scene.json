@@ -46,8 +46,7 @@
 			"MAX" : -0.2,
 			"MIN" : 0.05,
 			"NAME" : "size",
-			"PARAMS" : 0.2,
-			"TYPE" : "slider smooth",
+			"TYPE" : "slider",
 			"UI_GROUP" : "fractal"
 		},
 		{
@@ -116,7 +115,7 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "scan_alt_light",
-			"PARAMS" : 0.1,
+			"PARAMS" : 0.137,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "lighting"
 		},
@@ -126,7 +125,8 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "liquify",
-			"TYPE" : "slider",
+			"PARAMS" : 0.28,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "render glitches"
 		},
 		{
@@ -135,8 +135,19 @@
 			"MAX" : 1,
 			"MIN" : 0.01,
 			"NAME" : "far_wall",
-			"TYPE" : "slider",
+			"PARAMS" : 0.39,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "render glitches"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.15,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",

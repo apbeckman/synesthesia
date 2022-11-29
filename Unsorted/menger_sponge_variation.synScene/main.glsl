@@ -140,7 +140,8 @@ float map(vec3 q){
 
 // Very basic raymarching equation. Menger Sponge objects raymarch reasonably well. Not all surfaces do.
 float trace(vec3 ro, vec3 rd){
-    
+        rd.xy*=1.0- ((_uvc.xy*PI))*FOV;
+
     float t = 0., d;
     for(int i=0; i< 64; i++){        
         d = map(ro + rd*t);
@@ -269,12 +270,11 @@ vec4 renderMainImage() {
     
     // Unit direction ray vector: Note the absence of a divide term. I came across this via a comment 
     // Shadertoy user "Coyote" made. I'm pretty happy with this.
-    vec3 rd = (vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y)); // Normalizing below.
-    rd.xy*=1.0+ ((_uvc.xy*PI)-1.)*FOV;
+    vec3 rd = vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y); // Normalizing below.
 
     // Barrel distortion. Looks interesting, but I like it because it fits more of the scene in.
     // If you comment this out, make sure you normalize the line above.
-    rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z/FOVmod - dot(rd.xy/FOVmod, rd.xy)/FOVmod*.2, 0.))));
+    rd = normalize(vec3(rd.xy+PI*_uvc, sqrt(max(rd.z*rd.z/FOVmod - dot(rd.xy/FOVmod, rd.xy)/FOVmod*.2, 0.))));
     
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
     vec2 m = sin(vec2(0, 1.57079632) + smoothTime*0.2);

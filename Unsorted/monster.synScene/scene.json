@@ -4,11 +4,11 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 2,
+			"MIN" : -2,
 			"NAME" : "Twist",
-			"PARAMS" : 0.246,
-			"TYPE" : "slider smooth",
+			"PARAMS" : 0.143,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -17,7 +17,17 @@
 			"MAX" : 1.5,
 			"MIN" : -1.5,
 			"NAME" : "Complexity",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.058,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.104,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}

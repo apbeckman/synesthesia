@@ -13,6 +13,8 @@ vec2 mirror (vec2 u) {
 #define A(U) texture(BuffA,mirror((U)/R))
 #define B(U) texture(BuffB,mirror((U)/R))
 #define C(U) texture(BuffC,mirror((U)/R))
+#define Ca(U) texture(syn_UserImage,mirror((U)/R))*(0.5+growthFactor)
+
 #define D(U) texture(BuffD,mirror((U)/R))
 
 			//******** BuffA Code Begins ********
@@ -27,7 +29,7 @@ vec4 renderPassA() {
         e = D(U+vec2(1,0)),
         s = D(U-vec2(0,1)),
         w = D(U-vec2(1,0)),
-        m = 0.25*(n+e+s+w);
+        m = 0.25*(n+e+s+w)-0.2*Ca(U);
     
     float d = 0.25*(n.y-s.y+e.x-w.x);
     float c = 0.25*(n.x-s.x-e.y+w.y);

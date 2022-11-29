@@ -414,8 +414,8 @@ vec4 renderPassA() {
     rdVal.y*=(0.9975+growthFactor*0.0035);
     //rdVal.y *=(0.999875+growthFactor*0.00025);
     vec2 reaction = vec2(rdVal.x*rdVal.y*rdVal.y)*vec2(-1, 1);
-    reaction.x *=1.-Reaction*0.0125;
-    reaction.y *=1.+Rate*0.005;
+    reaction.x *=1.-(Reaction*0.025);
+    reaction.y *=1.+(Reaction*0.005);
     reaction.xy *= vec2(1.0+growthFactor*0.0001, 1.-growthFactor*0.0001);
     // Feed and kill rates. Substance A is added at a feed rate, and substance B is taken
     // away at a kill rate. Hence, the positive and negative vector terms on the end.
@@ -449,7 +449,7 @@ vec4 renderPassA() {
     
     
     //AB: trying to get fancy, transplanting some code from glassier
-    float distFunc = 0.0;
+    /*float distFunc = 0.0;
 
     vec3 logoCol = vec3(0.0);
     if (_exists(syn_UserImage)){
@@ -471,7 +471,7 @@ vec4 renderPassA() {
 
     else{
         distFunc = 0.;
-    }
+    }*/
     // Initializing the substances A and B: It requires a little finesse.
     //
     // You could literally spend weeks playing around with concentration initialization and 

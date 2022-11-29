@@ -4,7 +4,7 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "Fly deeper quickly or go slowly backwards.",
-			"MAX" : 1,
+			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "fly_in_out",
 			"PARAMS" : 0.15,
@@ -103,10 +103,21 @@
 			"NAME" : "walls_texture",
 			"TYPE" : "slider",
 			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.141,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Meebs",
 	"DESCRIPTION" : "",
+	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "deeper_dup.png",
 	"PASSES" : 

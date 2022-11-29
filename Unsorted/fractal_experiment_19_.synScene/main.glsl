@@ -23,7 +23,7 @@ float fractus(vec3 p)
 {
 	
 	vec2 z = p.xy;
-    vec2 c = vec2((0.28+spaghet),(-0.56-spaghet)) * cos(p.z*0.1);
+    vec2 c = vec2((0.28*(1.0+sin(smoothTimeC*0.125)*2.)),(-0.56-cos(smoothTimeC*0.05)*1.5)) * cos(p.z*0.1+(smoothTimeC*0.002));
 	float k = 1., h = 1.0;    
     for (float i=0.;i<8.;i++)
     {
@@ -103,8 +103,8 @@ vec3 lighting(vec3 p, vec3 lp, vec3 rd, float prec)
     dif *= softshadow(p, rd, 0.1, 1.);
     
     vec3 lin = vec3(0.08,0.32,0.47);
-    lin += 1.0*dif*vec3(1,1,0.84);
-    lin += 2.5*spe*dif*vec3(1,1,0.84);
+    lin += (1.0)*dif*vec3(1,1,0.84)*pow(1.0+0.5*syn_HighLevel+highhits, 2.);
+    lin += (2.5+highhits)*spe*dif*vec3(1,1,0.84);
     lin += 2.5*fre*vec3(1);
     lin += 0.5*dom*vec3(1);
     
@@ -118,7 +118,7 @@ float trace( in vec3 ro, in vec3 rd)
 	float d = 0.;
 	vec3 p = ro;
 	
-	for (float i=0.; i<150.; i++)
+	for (float i=0.; i<200.; i++)
 	{
 		if (s < 0.00125*log(d) || d>40.) break;
 		s = df(p);

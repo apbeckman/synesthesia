@@ -1,0 +1,21 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MoveXY",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "neozhaoliang",
+	"DESCRIPTION" : "old version of https://www.shadertoy.com/view/WdGBz3",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "hyperbolic_group_limit_set.png",
+	"TITLE" : "Hyperbolic Group Limit Set",
+	"WIDTH" : 1280
+}

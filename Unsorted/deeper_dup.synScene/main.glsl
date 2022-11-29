@@ -1,8 +1,4 @@
 #define MAX_ITER 70
-float smoothTime = (smooth_basstime * 0.75 + TIME * 0.125 + syn_Time * 0.25);
-float smoothTimeB = (smooth_hightime * 0.75 + TIME * 0.125 + syn_Time * 0.25);
-float smoothTimeC = (smooth_midtime * 0.75 + TIME * 0.125 + syn_Time * 0.25);
-
 float cameraZ = fly_in_out + smoothTime*1.0;
 
 float lengthRep = 1500;
@@ -28,7 +24,7 @@ vec3 filter_() {
   vec3 u = texture(backbuffer, _uv + vec2(delta.x, 0.)).xyz;
   vec3 d = texture(backbuffer, _uv - vec2(delta.x, 0.)).xyz;
 
-  vec3 n = vec3(_rand(_uvc+fract(TIME))) - 0.5;
+  vec3 n = vec3(_rand(_uvc+fract(smoothTimeB))) - 0.25;
   
   vec3 bloom = max(val, max(max(l, r), max( u, d)));
   bloom = bloom  + l + r + u + d;
@@ -164,7 +160,7 @@ vec3 DE(vec3 pos) {
     columnPos.y += cubicPulse(30.0+20.0*tan(smoothTimeB*0.125), 10.0, staticPos.z)*4.0*(syn_MidHighLevel*0.35+syn_HighLevel*0.35+syn_Level*0.125);
     columnPos = opRep(columnPos, vec3(2.5-syn_HighPresence*1.0,10.0,20.0));
     columnPos = rotateZ(columnPos, columnPos.z*0.1);
-    columns = sdTriPrism(columnPos, vec2(0.1+0.4*syn_HighHits, 100.0));
+    columns = sdTriPrism(columnPos, vec2(0.1+0.4*highhits, 100.0));
   } else {
     columnPos2 = rotateZ(columnPos2, 0.1);
     columnPos2 = opRep(columnPos2, vec3(5.0,20.0,20.0));
@@ -176,7 +172,7 @@ vec3 DE(vec3 pos) {
   // } else {
   //   columns = mix(1000, columns, columns_on);
     // columns = mix(1.0, columns, columns_on);
-    dist = mix(smin(dist, columns, 1.5+syn_Presence*3.5), dist, 1.0-beams_on);
+    dist = mix(smin(dist, columns, 1.5+(syn_Presence*1.5+syn_Intensity*2.)), dist, 1.0-beams_on);
 
 
 
@@ -253,13 +249,14 @@ vec3 raycast() {
 
   vec2 screenPos = -1.0 + 2.0 * _uv;
   screenPos.x *= RENDERSIZE.x / RENDERSIZE.y;
-  vec2 n = vec2(_rand(_uvc+fract(TIME))) - 0.5;
+  vec2 n = vec2(_rand(_uvc+fract(smoothTime))) - 0.5;
   
   vec3 ray = normalize(vec3( screenPos, 1.0));
   // ray = rotateX(ray, TIME);
-  ray = rotateX(ray, sin(script_time*PI*0.25)*0.2);
-  ray = rotateY(ray, sin(script_time*PI*0.5)*0.2);
-  ray = rotateZ(ray, syn_BassTime*0.1*rotating);
+  ray = rotateX(ray, sin(script_time*PI*0.25)*0.125);
+  ray = rotateY(ray, sin(script_time*PI*0.5)*0.125);
+  ray = rotateZ(ray, smoothTime*0.075*rotating);
+  ray.xy += FOV*_uvc.xy*PI;
 
   // raycasting parameter 
   float t  = 0.;

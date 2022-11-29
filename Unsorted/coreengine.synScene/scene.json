@@ -1,108 +1,111 @@
 {
-   "CONTROLS" : [
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : -1,
-         "NAME" : "lookXY",
-         "PARAMS" : 0.01,
-         "TYPE" : "xy smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1.5,
-         "MIN" : -1,
-         "NAME" : "FOVmod",
-         "PARAMS" : 0.1,
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 0.5,
-         "MIN" : -0.5,
-         "NAME" : "distort1",
-         "PARAMS" : 0.1,
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 0,
-         "MIN" : 3,
-         "NAME" : "middle",
-         "TYPE" : "slider",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "flashy",
-         "PARAMS" : 0.1,
-         "TYPE" : "toggle",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 50,
-         "MIN" : 0,
-         "NAME" : "liquid",
-         "PARAMS" : 0.1,
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0.200000002980232,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : -1,
-         "NAME" : "xRot",
-         "PARAMS" : 0.1,
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0.200000002980232,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 0.600000023841858,
-         "MIN" : -0.119999997317791,
-         "NAME" : "disturbFloor",
-         "PARAMS" : 0.1,
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "react",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "defaults"
-      }
-   ],
-   "CREDIT" : "EvilRyu",
-   "DESCRIPTION" : "Play with some simple kifs in the weekend.",
-   "HEIGHT" : 1080,
-   "IMAGE_PATH" : "coreengine.png",
-   "TITLE" : "CoreEngine",
-   "WIDTH" : 1920
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -1,
+			"NAME" : "FOVmod",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "distort1",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0,
+			"MIN" : 3,
+			"NAME" : "middle",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flashy",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 50,
+			"MIN" : 0,
+			"NAME" : "liquid",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.2,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "xRot",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.2,
+			"DESCRIPTION" : "",
+			"MAX" : 0.6,
+			"MIN" : -0.12,
+			"NAME" : "disturbFloor",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "react",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "EvilRyu",
+	"DESCRIPTION" : "Play with some simple kifs in the weekend.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "coreengine.png",
+	"TITLE" : "CoreEngine",
+	"WIDTH" : 1920
 }

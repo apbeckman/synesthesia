@@ -29,8 +29,29 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
+			"PARAMS" : 0.026,
+			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "Rotation",
+			"PARAMS" : 0.046,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",

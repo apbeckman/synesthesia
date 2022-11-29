@@ -26,6 +26,7 @@
 //
 //
 
+float growthFactor = normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0));
 
 const ivec3 SCENES[] = ivec3[](
 #define SCENE(n,d,b)	ivec3((d),(b),(n))
@@ -203,6 +204,7 @@ vec4 X (inout vec2 c,inout float m, vec2 u, vec2 r) {
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
+    //Q *= (.997+growthFactor*Zoom*0.125)-Zoom;
 
     Q = D(U);
     vec2 c = Q.xy;
@@ -221,7 +223,7 @@ vec4 renderPassA() {
     Q.z += (m/8.-Q).z+.05*Q.w - .00001*Q.z;
     Q.w -= 0.0001*Q.w;
     Q.zw = max(Q.zw,vec2(2,1)*smoothstep(4.,0.0,length(U-c)));
-    Q.xy -= 0.25*g;
+    Q.xy -= (0.25+growthFactor)*g;
     if (length(U-_mouse.xy)<.1*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
     if (FRAMECOUNT <= 1) Q = vec4(clamp(floor(U/2.)*2.,0.5*R-2.,0.5*R+2.),0,0);
     

@@ -35,10 +35,11 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "A rendering glitch that causes a strange liquifying effect near hard edges.",
-			"MAX" : 1,
+			"MAX" : 1.125,
 			"MIN" : 0,
 			"NAME" : "liquify",
-			"TYPE" : "slider",
+			"PARAMS" : 0.228,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "render glitches"
 		},
 		{

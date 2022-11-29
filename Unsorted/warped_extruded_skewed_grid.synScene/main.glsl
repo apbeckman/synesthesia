@@ -93,7 +93,7 @@
 
 // Max ray distance: If deliberately set this up close for artistic effect (and to
 // save a few cycles), but you'd normally set this higher to put the horizon further away.
-#define FAR 20.
+#define FAR 30.//20
 
 //float highhits = pow(syn_HighLevel*0.25 + (syn_Level*0.25+syn_HighHits*0.35), 2.0)*syn_Intensity;
 
@@ -126,10 +126,18 @@ vec2 path(in float z){
 // 2D texture function.
 //
 vec3 getTex(in vec2 p){
-    
+    vec3 tx;
     // Strething things out so that the image fills up the window.
     //p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
-    vec3 tx = texture(image10, p/16.).xyz;
+
+    if(_exists(syn_UserImage)){
+             tx = texture(syn_UserImage, p+TIME*0.0025).xyz*(0.5);
+
+    }
+    else{
+         tx = texture(image10, smoothTimeC*0.00095+p/16.).xyz;
+
+    }
     //vec3 tx = textureLod(image10, p, 0.).xyz;
     return tx*tx; // Rough sRGB to linear conversion.
 }
@@ -439,7 +447,7 @@ float softShadow(vec3 ro, vec3 lp, vec3 n, float k){
     // More would be nicer. More is always nicer, but not really affordable... Not on my slow test machine, anyway.
     const int iter = 9; 
     
-    ro += n*.0015;
+    ro += n*.00125;
     vec3 rd = lp - ro; // Unnormalized direction ray.
     
 
@@ -542,7 +550,9 @@ vec4 renderMainImage() {
     roTwist *= rot2(-getTwist(ro.z));
     ro.xy += roTwist;
     
-	vec3 lk = vec3(0, 0, ro.z + .25); // "Look At" position.
+	vec3 lk = vec3(0, 0, ro.z + .5); // "Look At" position.
+    lk.xy+=(PI*_uvc.xy/2.)*FOV;
+
     lk.xy += path(lk.z); 
     vec2 lkTwist = vec2(0, -.1); // Only twist horizontal and vertcal.
     lkTwist *= rot2(-getTwist(lk.z));
@@ -563,8 +573,8 @@ vec4 renderMainImage() {
     a += (path(ro.z).x - path(lk.z).x)/(ro.z - lk.z)/4.;
 	vec3 fw = normalize(lk - ro);
 	//vec3 up = normalize(vec3(-fw.x, 0, -fw.z));
-	vec3 up = vec3(sin(a), cos(a), 0);
-	//vec3 up = vec3(0, 1, 0);
+	//vec3 up = vec3(sin(a), cos(a), 0);
+	vec3 up = vec3(0, 1, 0);
     vec3 cu = normalize(cross(up, fw));
 	vec3 cv = cross(fw, cu);   
     
@@ -572,7 +582,8 @@ vec4 renderMainImage() {
     vec3 rd = normalize(uv.x*cu + uv.y*cv + fw/FOV);	
 	 
     rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, -1.0*lookXY.x*PI);
+    rd.xz = _rotate(rd.xz, -1.0*lookXY.x*PI);
+    rd.xy = _rotate(rd.xy, -1.0*Rotation*PI+smoothTime*MouseClick*0.1);
 
     // Raymarch to the scene.
     float t = trace(ro, rd);
@@ -717,7 +728,7 @@ vec4 renderMainImage() {
     // to figure out why it's not working. :) As for how you apply it, that's up to
     // you. I made the following up, and I'd imagine there'd be nicer ways to apply 
     // it, but it'll do.
-        col *= (1.0+highhits);
+       
 
     svGlow.xyz *= mix(vec3(4, 1, 2), vec3(4, 2, 1), min(svGlow.xyz*3.5, 1.25));
 
@@ -731,7 +742,7 @@ vec4 renderMainImage() {
     vec3 fog =  mix(vec3(4, 1, 2), vec3(4, 2, 1), rd.y*.5 + .5);
     fog = mix(fog, fog.zyx, smoothstep(0., .35, uv.y - .35));
     col = mix(col, fog/1.5, smoothstep(0., .99, t*t/FAR/FAR));
-    
+     col *= (1.0+highhits*0.25);
     
     #ifdef GRAYSCALE
     // Grayscale... or almost grayscale. :)

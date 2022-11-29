@@ -11,14 +11,22 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1.25,
-			"MIN" : 0.75,
-			"NAME" : "Diffusion",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media",
+			"TYPE" : "toggle",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "Intensity",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Geo"
 		},
 		{
 			"DEFAULT" : 0,
@@ -27,16 +35,7 @@
 			"MIN" : -0.0125,
 			"NAME" : "Zoom",
 			"TYPE" : "slider",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -0.5,
-			"NAME" : "Test",
-			"TYPE" : "slider",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Geo"
 		},
 		{
 			"DEFAULT" : 
@@ -47,35 +46,45 @@
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				2,
-				2
+				3.14,
+				3.14
 			],
 			"MIN" : 
 			[
-				-2,
-				-2
+				-3.14,
+				-3.14
 			],
 			"NAME" : "Dir_XY",
 			"TYPE" : "xy",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.9,
-			"MIN" : -0.9,
-			"NAME" : "Spin",
-			"TYPE" : "slider",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Geo"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "media",
-			"TYPE" : "toggle",
-			"UI_GROUP" : "default"
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"TYPE" : "knob",
+			"UI_GROUP" : "Geo"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.275,
+			"MIN" : 0.75,
+			"NAME" : "Diffusion",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "FX"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "MediaImpact",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Media"
 		}
 	],
 	"CREDIT" : "wyatt",

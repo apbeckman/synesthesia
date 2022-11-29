@@ -321,13 +321,13 @@ float trigNoise3D(in vec3 p){
 	float res = 0.;
 
     float t = trig3(p*PI);
-	p += (t - smoothTimeB*0.25);
+	p += (t - smoothTimeC*0.5);
     p = m3RotTheta*p;
     //p = (p+0.7071)*1.5;
     res += t;
     
     t = trig3(p*PI); 
-	p += (t - smoothTimeB*0.25)*0.7071;
+	p += (t - smoothTimeC*0.5)*0.7071;
     p = m3RotTheta*p;
      //p = (p+0.7071)*1.5;
     res += t*0.7071;
@@ -366,6 +366,7 @@ float getMist(in vec3 ro, in vec3 rd, in vec3 lp, in float t){
 /////
 
 vec4 renderMainImage() {
+/*
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
@@ -376,19 +377,87 @@ vec4 renderMainImage() {
 
     // Ray origin. Traversing with time along the Z-axis.
     vec3 ro = vec3(0., 0., (smoothTime*0.5));
-    //float FOV = 3.14159/FOV;
-
+    
     //vec3 ro = camPath(fly_time);
     //vec3 lk = camPath(fly_time + .25); // MS: trying out my first "look" vector
     //vec3 lp = ro + vec3(0.2, 0.5, -0.5); // Light, near the ray origin.
-
+/*
     float FOV = 3.14159/FOV;
     vec3 fwd = normalize(ro); // o = ray origin vector
     vec3 rgt = normalize(vec3(fwd.z, 0, -fwd.x ));
     vec3 up = cross(fwd, rgt);
     // Unit direction ray.
     vec3 rd = normalize(fwd + FOV*(uv.x*rgt + uv.y*up));
+ //AB:making a mess lol 
+	vec4 fragColor = vec4(0.0);
+	vec2 fragCoord = _xy;
 
+	
+	// Screen coordinates.
+	vec2 uv = (fragCoord - RENDERSIZE.xy*0.5)/RENDERSIZE.y;
+	// Camera Setup.
+	//vec3 lookAt = vec3(0., 0.25, TIME*2.);  // "Look At" position.
+	//vec3 camPos = lookAt + vec3(2., 1.5, -1.5); // Camera position, doubling as the ray origin.
+	
+	vec3 lookAt = vec3(0., 0.0, smoothTime*1.5 + 0.1);  // "Look At" position.
+	vec3 camPos = lookAt + vec3(0.0, 0.0, -0.1); // Camera position, doubling as the ray origin.
+
+ 
+    // Light positioning. One is a little behind the camera, and the other is further down the tunnel.
+ 	vec3 light_pos = camPos + vec3(0., 1, 8);// Put it a bit in front of the camera.
+
+	// Using the Z-value to perturb the XY-plane.
+	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
+	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
+    lookAt.xy += path(lookAt.z);
+	camPos.xy += path(camPos.z);
+	light_pos.xy += path(light_pos.z);
+	lookAt.xy+=(_uvc.xy/2.)*FOV;
+
+    // Using the above to produce the unit ray-direction vector.
+    float FOV = PI/2.; // FOV - Field of view.
+    vec3 forward = normalize(lookAt-camPos);
+*/
+	vec4 fragColor = vec4(0.0);
+	vec2 fragCoord = _xy;
+
+	
+	// Screen coordinates.
+	vec2 uv = (fragCoord - RENDERSIZE.xy*0.5)/RENDERSIZE.y;
+        // Ray origin. Traversing with time along the Z-axis.
+    vec3 ro = vec3(0., 0., (smoothTime*0.5));
+
+	// Camera Setup.
+	//vec3 lookAt = vec3(0., 0.25, TIME*2.);  // "Look At" position.
+	//vec3 camPos = lookAt + vec3(2., 1.5, -1.5); // Camera position, doubling as the ray origin.
+	
+	vec3 lookAt = vec3(0., 0.25, smoothTime*1.5);  // "Look At" position.
+	vec3 camPos = lookAt + vec3(01.0, 1, -01); // Camera position, doubling as the ray origin.
+
+ 
+    // Light positioning. One is a little behind the camera, and the other is further down the tunnel.
+ 	vec3 light_pos = camPos + vec3(0., 1, 8);// Put it a bit in front of the camera.
+
+	// Using the Z-value to perturb the XY-plane.
+	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
+	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
+	lookAt.xy+=(_uvc.xy*PI)*FOV;
+
+    lookAt.xy += (lookAt.z);
+	camPos.xy += (camPos.z);
+	light_pos.xy += (light_pos.z);
+
+    // Using the above to produce the unit ray-direction vector.
+    float FOV = PI/2.; // FOV - Field of view.
+    vec3 forward = normalize(lookAt-camPos);
+    vec3 right = normalize(vec3(forward.z, 0., -forward.x )); 
+    vec3 up = cross(forward, right);
+
+    // rd - Ray direction.
+    //vec3 rd = normalize(forward + FOV*uv.x*right + FOV*uv.y*up);
+    
+    
+    vec3 rd = normalize(forward + uv.x*right + uv.y*up);
 
 
     // Lazy way to construct a unit direction ray.
@@ -397,8 +466,8 @@ vec4 renderMainImage() {
     // Equally lazy way to look around the scene by rotating the unit direction vector. 
     mat2 m2 = rot(smoothTime * 0.25);
     rd.yz = _rotate(rd.yz, lookXY.y*PI) ;
-    rd.xy = _rotate(rd.xy, lookXY.x*PI);
-    rd.xz = _rotate(rd.xz, lookZ*PI);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.xy = _rotate(rd.xy, Rotate*PI);
     
 
     // The light position. In this case, it's the quasi-distant sun position, which is situated about 30 units in front
@@ -448,7 +517,7 @@ vec4 renderMainImage() {
 	    
 	    // Attenuation, based on the distance of the light (sun) to the surface point.
 	    lDist /= FAR; // Bringing the light distance down to the zero to one range, which is more workable.
-        float sAtten = min(1./(1. + lDist*0.125 + lDist*lDist*0.05), 1.);
+        float sAtten = min(1./(1. + lDist*0.125 + lDist*lDist*0.05)*(1.0+highhits), 1.);
         
  	    
         // Shadowing and occlusion. 
@@ -457,7 +526,7 @@ vec4 renderMainImage() {
     	
     	// Standard diffuse and specular calculations.
         float diff = max(dot(sn, ld), 0.);
-        float spec = pow(max( dot( reflect(-ld, sn), -rd ), 0.0 ), 8.);
+        float spec = pow(max( dot( reflect(-ld, sn), -rd ), 0.0 ), 8.)*(1.0+highhits);
        
         // Combining the properties above to produce the lit color.
         sc = (objCol*(diff + 0.5) + spec)*sAtten;
@@ -474,7 +543,7 @@ vec4 renderMainImage() {
     // Fog - Based on distance from the viewing position. Not to be confused with the misty haze.
     // Mix the background color (sky color above) and the object color according to a falloff value,
     // which is analogous to fog, so we call it that. Pretty standard.
-    float fog = min(1.0 / (1. + t*0.25 + t*t*0.025), 1.);
+    float fog = min(1.0 / (1. + t*0.25 + t*t*0.025)*(1.0-highhits*0.25), 1.);
     sc = mix(bc, sc, fog);
     //sc = mix(sc, bc, smoothstep(0.0, FAR-20., t)); // Another way to mix things, but using a quick transition.
     

@@ -197,7 +197,7 @@ vec3 doBumpMap(in vec3 p, in vec3 nor, float bumpfactor){
 float trace(in vec3 ro, in vec3 rd){
 
     float t = 0.0, h;
-    for(int i = 0; i < ray_steps; i++){
+    for(int i = 0; i < 64/ray_steps; i++){
 
         h = map(ro+rd*t);
         // Note the "t*b + a" addition. Basically, we're putting less emphasis on accuracy, as
@@ -356,7 +356,7 @@ vec4 renderMainImage() {
 	vec2 uv = (fragCoord - RENDERSIZE.xy*0.5)/RENDERSIZE.y;
 
 	// Camera Setup.
-	vec3 lookAt = vec3(0, 0, fly_time + 0.1);  // "Look At" position. Original: (0, 1, TIME*2. + 0.1) MS: Swapped TIME with syn_Time*.3
+	vec3 lookAt = vec3(0, 0, smoothTime + 0.1);  // "Look At" position. Original: (0, 1, TIME*2. + 0.1) MS: Swapped TIME with syn_Time*.3
   // Original: vec3 lookAt = vec3(0, 1, TIME*2. + 0.1);
 	vec3 camPos = lookAt + vec3(0, 0, -0.1); // Camera position, doubling as the ray origin.
 

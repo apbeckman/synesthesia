@@ -4,10 +4,10 @@
 		{
 			"DEFAULT" : -2,
 			"DESCRIPTION" : "",
-			"MAX" : 6,
-			"MIN" : -6,
+			"MAX" : 3,
+			"MIN" : -3,
 			"NAME" : "SCALE",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.085,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "ungrouped"
 		},
@@ -17,7 +17,7 @@
 			"MAX" : 10,
 			"MIN" : 0,
 			"NAME" : "In_Out",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.246,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "ungrouped"
 		},
@@ -27,7 +27,7 @@
 			"MAX" : 2.5,
 			"MIN" : 0,
 			"NAME" : "dthresh",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.108,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "ungrouped"
 		},
@@ -37,17 +37,29 @@
 			"MAX" : 10,
 			"MIN" : 0,
 			"NAME" : "fixedRad2",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.089,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "ungrouped"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 3.1456,
-			"MIN" : -3.1456,
+			"MAX" : 
+			[
+				3.1456,
+				3.1456
+			],
+			"MIN" : 
+			[
+				-3.1456,
+				-3.1456
+			],
 			"NAME" : "rXY",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.079,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "ungrouped"
 		},
@@ -57,17 +69,16 @@
 			"MAX" : 3.1456,
 			"MIN" : -3.1456,
 			"NAME" : "rZ",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
+			"TYPE" : "knob",
 			"UI_GROUP" : "ungrouped"
 		},
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 10,
+			"MAX" : 3,
 			"MIN" : 0,
 			"NAME" : "foldingLimit",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.072,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "ungrouped"
 		},
@@ -77,7 +88,8 @@
 			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "minRad2",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "ungrouped"
 		},
 		{

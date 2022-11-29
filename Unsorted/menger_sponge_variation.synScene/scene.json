@@ -47,7 +47,7 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : 0,
+			"MIN" : -1,
 			"NAME" : "FOV",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"

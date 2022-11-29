@@ -517,7 +517,7 @@ float Polygon(vec2 p, float vertices, float radius){
 vec2 mouseInversion(vec2 p){
     
     // Mouse coordinates.
-    vec2 m = vec2((2.*iMouse.xy - RENDERSIZE.xy)/RENDERSIZE.y);
+    vec2 m = vec2((2.*_mouse.xy - RENDERSIZE.xy)/RENDERSIZE.y);
     // Hack for the zero case instance. If someone has a better way,
     // feel free to let me know.
     if(length(m) < 1e-3) m += 1e-3; 

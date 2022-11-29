@@ -12,7 +12,7 @@ float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.25)+(syn_Level*0.12
 
 
 // contrast
-#define SIGMOID_CONTRAST 12.50*pow(1.+syn_Intensity*0.1+syn_Presence*0.1, 1.75)
+#define SIGMOID_CONTRAST 20
 
 vec3 contrast(vec3 x) {
 	return 1.0 / (1.0 + exp(-SIGMOID_CONTRAST * (x - 0.5)));    

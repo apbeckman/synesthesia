@@ -2,39 +2,32 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
 			"NAME" : "lookXY",
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 0.0625,
-			"DESCRIPTION" : "Cube Scale",
-			"MAX" : 0.5,
-			"MIN" : 0.0025,
-			"PARAMS" : 0.15,
-			"NAME" : "SCALER",
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "ungrouped"
-		},
-		{
 			"DEFAULT" : 0,
-			"DESCRIPTION" : "Cube Scale",
-			"MAX" : 1,
-			"MIN" : 0.0,
-			"NAME" : "sparkles",
-			"TYPE" : "toggle",
-			"UI_GROUP" : "ungrouped"
-		},		
-		{
-			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0.1,
+			"MAX" : 0.025,
+			"MIN" : -0.5,
 			"NAME" : "FOV",
 			"PARAMS" : 0.025,
 			"TYPE" : "slider smooth",
@@ -46,11 +39,38 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "grayscale",
-			"PARAMS" : 0.025,
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.0625,
+			"DESCRIPTION" : "Cube Scale",
+			"MAX" : 0.5,
+			"MIN" : 0.0025,
+			"NAME" : "SCALER",
+			"PARAMS" : 0.15,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Cube Scale",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "sparkles",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.75,
+			"NAME" : "Mir",
+			"PARAMS" : 0.13,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
-	
 	],
 	"CREDIT" : "by you",
 	"DESCRIPTION" : "Your shader description",

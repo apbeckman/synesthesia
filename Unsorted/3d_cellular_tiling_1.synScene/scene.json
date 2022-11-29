@@ -26,7 +26,7 @@
 			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "Voronoi_Level",
-			"PARAMS" : 0.251,
+			"PARAMS" : 0.373,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "textures"
 		},
@@ -43,8 +43,8 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
+			"MAX" : 1,
+			"MIN" : -1,
 			"NAME" : "FOV",
 			"PARAMS" : 0.141,
 			"TYPE" : "slider smooth",
@@ -103,12 +103,22 @@
 			"UI_GROUP" : "default"
 		},
 		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : 0.075,
+			"NAME" : "LineMod",
+			"PARAMS" : 0.396,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 3.14,
+			"MAX" : 0.125,
 			"MIN" : 0,
-			"NAME" : "Warp",
-			"TYPE" : "slider",
+			"NAME" : "colorShift",
+			"TYPE" : "toggle",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -120,7 +130,7 @@
 	[
 		{
 			"NAME" : "image46",
-			"PATH" : "images/46.jpg"
+			"PATH" : "images/2.jpeg"
 		}
 	],
 	"IMAGE_PATH" : "3d_cellular_tiling_1.png",

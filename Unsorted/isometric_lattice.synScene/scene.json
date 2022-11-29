@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Using a triangle grid to produce an isometric lattice, rendered in a hand drawn impossible geometry style.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "isometric_lattice.png",
+	"TITLE" : "Isometric Lattice",
+	"WIDTH" : 1280
+}

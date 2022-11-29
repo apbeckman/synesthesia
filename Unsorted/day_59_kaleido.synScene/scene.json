@@ -25,7 +25,8 @@
 			"MAX" : 10,
 			"MIN" : 0.5,
 			"NAME" : "Iterations",
-			"TYPE" : "slider",
+			"PARAMS" : 0.118,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -34,7 +35,8 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "FOV",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -55,8 +57,18 @@
 				-1
 			],
 			"NAME" : "lookXY",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.046,
 			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.032,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		}
 	],
