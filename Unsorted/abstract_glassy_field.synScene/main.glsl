@@ -78,7 +78,9 @@ float map(vec3 p){
      
 	p = cos(p*.315*1.25 + sin(p.zxy*.875*1.25)+ sin(smoothTimeC * 0.25 )*0.2); // 3D sinusoidal mutation.
     
-    
+    p.xy *= 1.0-_rotate(p.zz, smoothTimeC*0.5)*0.025;
+    p.yz *= 1.0-_rotate(p.zy, smoothTime*0.25)*0.025;
+
     float n = length(p); // Spherize. The result is some mutated, spherical blob-like shapes.
 
     // It's an easy field to create, but not so great to hone in one. The "1.4" fudge factor
@@ -136,7 +138,7 @@ vec3 nr(vec3 p){
 float trace(in vec3 ro, in vec3 rd){
     
     accum = 0.;
-    accum += highhits;
+    //accum += highhits;
     float t = 0.0, h;
     for(int i = 0; i < 96-liquify*liquify*60; i++){
     
@@ -147,7 +149,7 @@ float trace(in vec3 ro, in vec3 rd){
         t += h;
         
         // Simple distance-based accumulation to produce some glow.
-        if(abs(h)<.35) accum += (.35-abs(h))/24.;
+        if(abs(h)<.135) accum += (.35-abs(h))/24.;
         
     }
 
@@ -232,6 +234,8 @@ vec4 renderMainImage() {
     vec3 lk = camPath( ( camTime)*speed + .25 );  // "Look At" position.
     vec3 l = camPath( ( camTime)*speed + 2. ) + vec3(0, 1, 0); // Light position, somewhere near the moving camera.
 	lk.xy+=((_uvc.xy*PI)/2.)*FOV;
+	//lk.xy+=(_uvc.xy/4.)*(FOV*PI+FOV*lk.xy/PI);
+    lk.xy += _rotate(_uvc.xy, Twist*PI);
 
 
     // Using the above to produce the unit ray-direction vector.
@@ -243,10 +247,12 @@ vec4 renderMainImage() {
     // Unit direction ray.
     //vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
     // Lens distortion.
-    vec3 r = (0.1+FOV)*(fwd + (u.x*rgt + u.y*up));
-    r = normalize(vec3(r.xy, (r.z - length(r.xy)*.125)));
+    vec3 r = (0.1+FOV)*(fwd + (u.x*rgt-FOV*_uvc.x - FOV*_uvc.y+u.y*up));
+       r.xy += _rotate(r.xy*_uvc*0.5*PI, smoothTime*0.1)*Whoa;
+    r = normalize(vec3(r.xy*(1.0+(Flip*(-1+_uvc*PI))), (r.z - length(r.xy)*.125)));
     r.yz = _rotate(r.yz, lookXY.y*PI);
     r.xz = _rotate(r.xz, -1.0*lookXY.x*PI);
+ 
     r.xy =  _rotate(r.xy, Rotation*PI);
 
 
@@ -277,7 +283,7 @@ vec4 renderMainImage() {
         vec3 svn = n;
         
         // Texture bump the normal.
-        float sz = 1./3.; 
+        float sz = (1./(10.))+sin(smoothTimeB*.00125)*0.1; 
         n = db(image47, p*sz, n, .1/(1. + t*.25/FAR));
 
         l -= p; // Light to surface vector. Ie: Light direction vector.
@@ -289,7 +295,7 @@ vec4 renderMainImage() {
         
         // Ambient occlusion and shadowing.
         float ao =  cao(p, n);
-        float sh = sha(p, l, 0.04, d, 16.);
+        float sh = sha(p, l, 0.04, d, 8.);
         
         // Diffuse, specular, fresnel. Only the latter is being used here.
         float di = max(dot(l, n), 0.);
@@ -328,7 +334,7 @@ vec4 renderMainImage() {
         // Obviously, the reflected\refracted colors will involve lit values from their respective
         // hit points, but this is fake, so we're just combining it with a portion of the surface 
         // diffuse value.
-        col += refCol*((di*di*.25+.75) + ao*.25)*1.5; // Add the reflected color. You could combine it in other ways too.
+        col += refCol*((di*di*.25+.75) + ao*.25)*5; // Add the reflected color. You could combine it in other ways too.
         
         // Based on IQ's suggestion: Using the diffuse setting to vary the color slightly in the
         // hope that it adds a little more depth. It also gives the impression that Beer's Law is 

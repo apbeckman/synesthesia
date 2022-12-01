@@ -177,7 +177,7 @@ vec3 getShadedColor( vec3 hitPosition, vec3 normal, vec3 cameraPosition )
 	 }
 
 	//	ambient component
-    vec3 lightColor = vec3(abs(0.5+cos(smoothTimeB*0.125+10.)*0.125+0.9125), abs(sin(smoothTimeB*0.125)*0.125+0.925), 0.525+abs(sin(smoothTimeB*0.125)*0.125+0.925))*0.65;
+    vec3 lightColor = vec3(abs(0.5+cos(smoothTimeB*0.125+10.)*0.125+0.9125), abs(sin(smoothTimeB*0.125)*0.125+0.925), 0.2525+abs(sin(smoothTimeB*0.125)*0.125+0.925))*0.65;
 	vec3 ambientColor = surfaceColor * lightColor * 0.0; // ambient factor
 
 	//	diffuse component

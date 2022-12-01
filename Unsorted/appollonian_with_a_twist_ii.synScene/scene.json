@@ -30,6 +30,48 @@
 			"PARAMS" : 0.11,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 0.1,
+			"NAME" : "Z",
+			"PARAMS" : 0.037,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "Warp",
+			"PARAMS" : 0.13,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "PosXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "mrange",

@@ -62,6 +62,16 @@
 			"PARAMS" : 0.063,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Whoa",
+			"PARAMS" : 0.15,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "leon",

@@ -9,7 +9,7 @@
 #define RESOLUTION  RENDERSIZE
 #define TIME        TIME
 #define MAX_MARCHES 120
-#define TOLERANCE   0.000001
+#define TOLERANCE   0.00001
 #define ROT(a)      mat2(cos(a), sin(a), -sin(a), cos(a))
 //#define PI          3.141592654
 #define TAU         (2.0*PI)
@@ -21,14 +21,14 @@ mat2 g_rot2 = rot0;
 mat2 g_rot3 = rot0;
 
 // License: Unknown, author: nmz (twitter: @stormoid), found: https://www.shadertoy.com/view/NdfyRM
-float sRGB(float t) { return mix(1.055*pow(t, 1./2.4) - 0.1055, 12.92*t, step(t, 0.0031308))*(pow(1.0+highhits*0.5, 2.)); }
+float sRGB(float t) { return mix(1.055*pow(t, 1./2.4) - 0.1055, 2.92*t, step(t, 0.0021308))*(pow(1.0+highhits*0.5, 2.)); }
 // License: Unknown, author: nmz (twitter: @stormoid), found: https://www.shadertoy.com/view/NdfyRM
 vec3 sRGB(in vec3 c) { return vec3 (sRGB(c.x), sRGB(c.y), sRGB(c.z)); }
 
 // License: WTFPL, author: sam hocevar, found: https://stackoverflow.com/a/17897228/418488
 const vec4 hsv2rgb_K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
 vec3 hsv2rgb(vec3 c) {
-  vec3 p = abs(fract(c.xxx + hsv2rgb_K.xyz) * 6.0 - hsv2rgb_K.www);
+  vec3 p = abs(fract(c.xxx + hsv2rgb_K.xyz) * 7.0 - hsv2rgb_K.www);
   return c.z * mix(hsv2rgb_K.xxx, clamp(p - hsv2rgb_K.xxx, 0.0, 1.0), c.y);
 }
 
@@ -56,7 +56,7 @@ float apolloian(vec3 p, float s, out float h) {
 
 float df(vec2 p, out float h) {
   float fz = 1.0-0.0;
-  float z = 1.55*fz;
+  float z = (Z*1.55)*fz;
    z *= Zoom;
   p /= z;
   vec3 p3 = vec3(p,0.1);
@@ -73,7 +73,7 @@ float shadow(vec2 lp, vec2 ld, float mint, float maxt) {
   float nd = 1E7;
   float h;
   const float soff = 0.025;
-  const float smul = 1.5;
+  const float smul = .5;
   for (int i=0; i < MAX_MARCHES; ++i) {
     vec2 p = lp + ld*t;
     float d = df(p, h);
@@ -94,13 +94,15 @@ vec3 effect(vec2 p, vec2 q) {
   float b = 0.07225*smoothTimeB;
   float c = 0.07225*smoothTime;
 
-  g_rot0 = ROT(0.5*a); 
-  g_rot1 = ROT(sqrt(0.5)*b);
-  g_rot2 = ROT(sqrt(0.5)*(a+b)*0.5)*(pow(1.0+highhits*0.7, 2.));
-  g_rot3 = ROT(sqrt(0.5)*c);
+  g_rot0 = ROT(0.25*a); 
+  g_rot1 = ROT(sqrt(0.25)*b);
+  g_rot2 = ROT(sqrt(0.25)*(a+b)*0.5)*(pow(.70+highhits*0.3, 2.));
+  g_rot3 = ROT(sqrt(0.25)*c);
 
   vec2  lightPos  = vec2(0.0, 1.0);
   lightPos        *= (g_rot1);
+  lightPos.xy += PosXY.xy*0.95;
+
   vec2  lightDiff = lightPos - p;
   float lightD2   = dot(lightDiff,lightDiff);
   float lightLen  = sqrt(lightD2);
@@ -119,7 +121,7 @@ vec3 effect(vec2 p, vec2 q) {
 
   vec3 col = vec3(0.0);
   col += mix(0., 1.0, diff)*0.5*mix(0.1, 1.0, ss)/(lightLen3*lightLen3);
-  col += exp(-300.0*abs(d))*sqrt(bcol);
+  col += exp(-(500.0*(1.0+abs(FOV-2.0)))*abs(d))*sqrt(bcol);
   col += exp(-40.0*max(lightLen-0.02, 0.0));
  
   return col;
@@ -131,9 +133,14 @@ vec4 renderMainImage() {
 
   vec2 q = fragCoord/RESOLUTION.xy;
   vec2 p = -1. + 2. * q;
+  //p.xy+= _uvc.xy*FOV*0.75;
+  p.xy += PI*PosXY.xy;
   p.x *= (RESOLUTION.x)/(RESOLUTION.y);
-  p.xy+= _uvc.xy*FOV*0.75;
+ 
+
+  p.xy += _rotate(_uvc.xy*sin(p.xy*PI), smoothTimeC*0.25)*Warp;
   p.xy*=normalize(1.0+Kaleido*vec2(-_rotate(PI*_uvc*p.xy*0.5/(RENDERSIZE.xy*0.5)*RENDERSIZE,smoothTime*0.1+sin(smoothTimeC*0.1)*5.)));
+  p.xy+= _uvc.xy*FOV*0.75;
   vec3 col = effect(p, q);
   //col *= mix(0.0, 1.0, smoothstep(0.0, 4.0, smoothTime)); //no fade-in
   col = sRGB(col);

@@ -1,4 +1,36 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.25,
+			"MIN" : -0.25,
+			"NAME" : "Background",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Whoa",
+			"PARAMS" : 0.15,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.1,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Fov",
+			"PARAMS" : 0.142,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "Using a pseudo path tracing technique to produce a simple realtime scene lit up with multiple emitters.",
 	"GPU" : 0,

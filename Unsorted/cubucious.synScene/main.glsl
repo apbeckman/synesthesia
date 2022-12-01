@@ -63,6 +63,8 @@ float geometry (vec3 pos)
         p.xy *= -rot(smoothTimeC*0.0475+sin(smoothTimeC*0.0475));
         // rotations
 		p.xz *= rot(PIQUART+smoothTime*0.0675);
+		p.yz = _rotate(p.yz, smoothTimeC*0.0375);
+
 		p.yz *= -rot(smoothTimeC*0.0375+TAU);
 		p.yx *= rot(PIHALF);
 
@@ -103,19 +105,25 @@ vec4 renderMainImage() {
     
 	vec2 uv = (coordinate.xy-.5*RENDERSIZE.xy)/RENDERSIZE.y;
     vec3 eye = vec3(0,2,2) * (2. - Zoom);
+    eye.xz = _rotate(eye.xz, Rotate.x*PI);
+    eye.yz = _rotate(eye.yz, Rotate.y*PI);
+
 
 
 	uv.xy *= normalize(1.0+(_uvc.xy*uv.xy * Warp*PI));
+	uv.xy += _rotate((uv.xy*_uvc*PIHALF*uv.xy), smoothTimeC*0.25)*Whoa;
+	eye.xz += _rotate((eye.xz*_uvc*PIHALF*uv.xy), smoothTimeC*0.25)*Whoa;
+
     vec3 target = vec3(0);
 	vec4 hit;
     //eye.xz *= rot(Rotate.x);
 	//eye.yz *= rot(Rotate.y); //adding rotate control AB
-	eye.xy += (_rotate(eye.xy*Rotate.xy, smoothTime*0.1)*PI/10.);
+	//eye.xy = (_rotate(eye.xy*Rotate.xy, smoothTime*0.1)*PI/10.);
 
     lightPos.xz *= rot(smoothTimeB*0.125);
 	lightPos += vec3(cos(smoothTimeB*0.25), sin(smoothTimeB*0.25), 0.);
-    eye.xz *= rot(Rotate.x*PI);
-	eye.yz *= rot(Rotate.y*PI); //adding rotate control AB
+    //eye.xz = rot(Rotate.x*PI);
+	//eye.yz = rot(Rotate.y*PI); //adding rotate control AB
 
 	vec3 ray = look(eye, target, uv);
     raymarching(eye, ray, hit);

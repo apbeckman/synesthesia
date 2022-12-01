@@ -24,7 +24,7 @@ vec2 R;
 vec4 Mouse;
 float time;
 
-#define mass 2.
+#define mass 1.5+growthFactor
 
 #define fluid_rho 0.2
 
@@ -215,7 +215,7 @@ void Simulation(sampler2D ch, inout particle P, vec2 pos)
         particle P0 = getParticle(data, tpos);
         vec2 dx = P0.X - P.X;
         float avgP = 0.5*P0.M.x*(Pf(P.M) + Pf(P0.M)); 
-        F -= 0.5*G(1.*dx)*avgP*dx;
+        F -= 0.35*G(1.*dx)*avgP*dx;
         avgV += P0.M.x*G(1.*dx)*vec3(P0.V,1.);
     }
     avgV.xy /= avgV.z;
@@ -370,7 +370,7 @@ vec4 renderMainImage() {
     vec3 col0 = vec3(1., 0.7, 0.7);
     vec3 col1 = vec3(0., 0.9, 1.);
     // Output to screen
-    col.xyz += 0.2*a;
+    col.xyz += 0.2*a+pow(syn_HighLevel*0.15+syn_MidHighLevel*0.15+syn_Intensity*0.05, 2);
 //    col.xyz += 0.5 - 0.5*cos(8.*vec3(0.2,0.8,0.6)*rho.w);
     //col.xyz += vec3(1,1,1)*bord;
    col.xyz += 0.5 - 0.5*cos(8.*vec3(0.25*(1.0+cos(smoothTimeB*0.25)*0.025+0.25),0.29,0.3*(1.0+sin(smoothTimeB*0.5)*0.0125+0.125))*rho.w);

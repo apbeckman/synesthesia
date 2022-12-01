@@ -2,43 +2,44 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0.45,
-			"DESCRIPTION" : "",
-			"MAX" : 2.5,
-			"MIN" : 0.45,
-			"NAME" : "Smoother",
-			"TYPE" : "toggle",
-			"UI_GROUP" : "textures"
-		},
-		{
-			"DEFAULT" : 0.25,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : 0.25,
-			"NAME" : "Cell_Tile",
-			"PARAMS" : 0.253,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "textures"
-		},
-		{
-			"DEFAULT" : 0.75,
-			"DESCRIPTION" : "",
-			"MAX" : 2,
 			"MIN" : 0,
+			"NAME" : "Flash",
+			"PARAMS" : 0.361,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "textures"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -0.75,
 			"NAME" : "Voronoi_Level",
-			"PARAMS" : 0.373,
+			"PARAMS" : 0.503,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "textures"
 		},
 		{
-			"DEFAULT" : 2,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 9,
-			"MIN" : 0.5,
-			"NAME" : "Clamp",
-			"PARAMS" : 0.1,
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "LightLine",
+			"PARAMS" : 0.75,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "morph"
+			"UI_GROUP" : "Line"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 15,
+			"MIN" : -8,
+			"NAME" : "LineMod",
+			"PARAMS" : 0.089,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Line"
 		},
 		{
 			"DEFAULT" : 0,
@@ -66,17 +67,17 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Rotation",
-			"PARAMS" : 0.107,
+			"PARAMS" : 0.066,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0,
-			"NAME" : "Mist_Gain",
-			"PARAMS" : 0.01,
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Mist",
+			"PARAMS" : 0.085,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "reactivity"
 		},
@@ -98,26 +99,16 @@
 				-1
 			],
 			"NAME" : "LookXY",
-			"PARAMS" : 0.087,
+			"PARAMS" : 0.029,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 1.5,
-			"MIN" : 0.075,
-			"NAME" : "LineMod",
-			"PARAMS" : 0.396,
-			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.125,
+			"MAX" : 0.5,
 			"MIN" : 0,
-			"NAME" : "colorShift",
+			"NAME" : "ColorShift",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "default"
 		}

@@ -118,7 +118,7 @@ float smax(float a, float b, float k) {
 
 // Number of samples: My computer can handle more. If yours is struggling, you 
 // can lower this. Naturally, sample number is proportional to noise quality.
-#define sampNum 32 //16
+#define sampNum 64 //16
 
 // The blended samples per frame: Higher numbers give the impression of more
 // samples, which boosts quality. However, there's a price to pay, and that's 
@@ -356,7 +356,7 @@ vec3 distField(vec2 p){
     }     
     
     // Rounded square.
-    float sh = sBox(p, sc/2. - ew, .15*sc.x)*(1.-pow(syn_BassLevel*0.6+syn_MidLevel*0.6, 2.));//1.5*sc.x*sc.x
+    float sh = sBox(p, sc/2. - ew, .15*sc.x);//1.5*sc.x*sc.x
     //float sh = length(p) - sc.x/2. + ew;
  
     // Producing a rounded circle.
@@ -367,6 +367,7 @@ vec3 distField(vec2 p){
     
     // Rings.
     d = abs(d + .25*sc.x) - .25*sc.x;
+    d *= Background;
     
     // Returning the distance and local cell ID. Note that the 
     // distance has been rescaled by the scaling factor.
@@ -423,9 +424,13 @@ vec4 renderPassA() {
     
   
     float FOV = 1.; // FOV - Field of view.
+
     vec3 ro = vec3(0, .25+sin(smoothTime*0.012)*0.125, -2+cos(smoothTime*0.1)*0.1);
     // "Look At" position.
     vec3 lk = ro + vec3(0, -.01, .25);
+    lk.xy+=((_uvc.xy*PI)/2.)*Fov;
+        lk.xy -= _rotate(_uvc*PI, smoothTimeC*0.1)*Whoa;
+
     vec3 fwd = normalize(lk - ro);
     vec3 rgt = normalize(vec3(fwd.z, 0., -fwd.x )); 
     // "right" and "forward" are perpendicular, due to the dot product being zero. Therefore, I'm 
@@ -435,7 +440,7 @@ vec4 renderPassA() {
     
     // Camera.
     mat3 mCam = mat3(rgt, up, fwd);
-    mCam *= _rot(vec3(0, .05+sin(smoothTime*0.15)*0.1), 0); 
+    mCam *= _rot(vec3(0, 0, .05+sin(smoothTime*0.15)*0.1)); 
     mCam *= _rot(vec3(0, 0, -sin(smoothTime*0.15)*.1)); 
     
     // Accumulative color.
@@ -557,7 +562,8 @@ vec4 renderPassA() {
                     
                     // Emissivity.
                     // Using a texture to color the emissive lights.
-                    vec3 tx = texture(image10, sphID + smoothTimeB/128.).xyz; tx *= tx*(1.0+normalize(highhits));
+                    vec3 tx = texture(image10, sphID + smoothTimeB/128.).xyz; tx *= tx;
+            
                     // Fade out emissivity higher up the walls.
                     float st = clamp(sp.y/1.25 - 1., 0., 1.);
                     float rnd = smoothstep(st, 1., dot(tx, vec3(.299, .587, .114)));
@@ -599,7 +605,7 @@ vec4 renderPassA() {
                     
                     // Emissivity.
                     // Using a texture to color the emissive lights.
-                    vec3 tx = texture(image10, d3.yz/16. - vec2(-1, 2)*smoothTimeB/64.).xyz; tx *= tx+*(1.0+normalize(highhits));
+                    vec3 tx = texture(image10, d3.yz/16. - vec2(-1, 2)*smoothTimeB/64.).xyz; tx *= tx;
                     // Fade out emissivity higher up the walls.
                     float st = clamp(d3.z/1.25 - 1., 0., 1.);
                     float rnd = smoothstep(st, 1., dot(tx, vec3(.299, .587, .114)));
@@ -623,7 +629,7 @@ vec4 renderPassA() {
                 // Applying this bounce's color to future bounces. For instance, if we
                 // hit a pink emitter then hit another surface later, that surface will
                 // incorporate a bit of pink into it.
-                through *= oCol*(1.0+normalize(highhits));
+                through *= oCol;
 
 
                 vec3 ref = reflect(rd, sn); // Purely reflected vector.
@@ -675,7 +681,7 @@ vec4 renderPassA() {
     // It's OK, but full temporal blur will be experienced.
     vec4 preCol = texelFetch(BuffA, ivec2(fragCoord), 0);
     float blend = (FRAMECOUNT <= 2) ? 1. : 1./blendNum; 
-    fragColor = mix(preCol, vec4(clamp(aCol, 0., 1.*(1.+pow(basshits, 2.0)*0.5)), 1), blend*(1.+pow(syn_BassLevel, 2.0)*0.5));
+    fragColor = mix(preCol, vec4(clamp(aCol, 0., 1.), 1), blend);
     
     // No reprojection or temporal blur, for comparisson.
     //fragColor = vec4(max(aCol, 0.), 1);

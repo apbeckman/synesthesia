@@ -59,6 +59,7 @@ vec3 tex3D( sampler2D tex, in vec3 p, in vec3 n ){
     
 	return (texture(tex, p.yz)*n.x + texture(tex, p.zx)*n.y + texture(tex, p.xy)*n.z).xyz;
 }
+vec3 threeWaySin = vec3(sin(smoothTimeC*0.25)*0.5+0.5, cos(smoothTimeC*0.15)*0.25+0.25, -fbm6(vec2(sin(smoothTimeC*0.45)*0.3+0.3)));
 
 // The triangle function that Shadertoy user Nimitz has used in various triangle noise demonstrations.
 // See Xyptonjtroz - Very cool. Anyway, it's not really being used to its full potential here.
@@ -71,7 +72,7 @@ vec3 tri(in vec3 x){return abs(x-floor(x)-.5);} // Triangle function.
 // are bump mapped.
 float surfFunc(in vec3 p){
     
-	return dot(tri(p*0.5 + tri(p*0.25).yzx), vec3(0.666));
+	return dot(tri(p*0.5 + tri(p*0.25).yzx), vec3(0.666)*(1.0+threeWaySin*0.5));
 }
 
 
@@ -106,6 +107,21 @@ float map(vec3 p){
     return min(n, p.y + FH);
 */
  
+}
+float thickness(in vec3 p, in vec3 n){
+    
+    float sNum = 4.;
+    float sca = 1., occ = 0.;
+    for(float i=0.; i<sNum + .0001; i++ ){
+    
+        float hr = 0.05 + .4*i/sNum; 
+        //vec3 rn = normalize(n + RandomHemisphereDir(n, hr)*rad*.5);
+        float dd = map(p - n*hr);
+        occ += (hr - min(dd, 0.))*sca;
+        sca *= .9;
+    }
+    return 1. - max(occ/sNum, 0.); 
+    
 }
 
 // Texture bump mapping. Four tri-planar lookups, or 12 texture lookups in total.
@@ -257,7 +273,7 @@ vec4 renderMainImage() {
 	    float atten = min(1./(distlpsp) + 1./(distlpsp2), 1.);
     	
     	// Ambient light.
-	    float ambience = 0.25;
+	    float ambience = 0.+highhits;
     	
     	// Diffuse lighting.
 	    float diff = max( dot(sn, ld), 0.0);
@@ -271,14 +287,20 @@ vec4 renderMainImage() {
 	    float crv = clamp(curve(sp, 0.125)*0.5 + 0.5, .0, 1.);
 	    
 	    // Fresnel term. Good for giving a surface a bit of a reflective glow.
-        float fre = pow( clamp(dot(sn, rd) + 1., .0, 1.), 1.);
+        float fre = pow( clamp(dot(sn, rd) + 1., .0, 1.), 1.)*(.5+highhits);
         
         // Obtaining the texel color. If the surface point is above the floor
         // height use the wall texture, otherwise use the floor texture.
         vec3 texCol;
         if (sp.y<-(FH - 0.005)) texCol = tex3D(image6, sp*tSize1, sn); // Floor.
  	    else texCol = tex3D(image9, sp*tSize0, sn); // Walls.
-       
+        vec3 hf =  normalize(ld + sn);
+        //float th = thickness( sp, sn, 1., 1. );
+        float th = thickness( sp, sn);
+        float tdiff =  pow( clamp( dot(rd, -hf), 0., 1.), 1.);
+        float trans = max((tdiff )*th*1.5+ (1.0+syn_Level)*.25, 0.);  
+        trans = pow(trans, 6.)*1.;        
+
         // Shadertoy doesn't appear to have anisotropic filtering turned on... although,
         // I could be wrong. Texture-bumped objects don't appear to look as crisp. Anyway, 
         // this is just a very lame, and not particularly well though out, way to sparkle 
@@ -294,6 +316,8 @@ vec4 renderMainImage() {
         //
         // Glow.
         sceneCol = getGrey(texCol)*((diff + diff2)*0.75 + ambience*0.25) + (spec + spec2)*texCol*2. + fre*crv*texCol.zyx*2.;
+                sceneCol += texCol*mix(vec3(-0.02, .1, 0), vec3(syn_Level *0.1251, .05*highhits+0.1, syn_Level * .1), abs(hf.y))*trans*6.;
+
         //
         // Other combinations:
         //
@@ -309,7 +333,7 @@ vec4 renderMainImage() {
         
         // Drawing the lines on the walls. Comment this out and change the first texture to
         // granite for a granite corridor effect.
-       // sceneCol *= clamp(1.-abs(curve(sp, 0.0125)), .0, 1.);        
+        //sceneCol *= clamp(1.-abs(curve(sp, 0.0125)), .0, 1.);        
 	   
 	
 	}

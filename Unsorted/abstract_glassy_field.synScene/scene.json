@@ -27,9 +27,9 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
+			"MIN" : -1,
+			"NAME" : "Speed",
+			"TYPE" : "slider",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -46,7 +46,7 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
+			"MIN" : -1.5,
 			"NAME" : "FOV",
 			"PARAMS" : 0.088,
 			"TYPE" : "slider smooth",
@@ -61,6 +61,48 @@
 			"PARAMS" : 0.029,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Twist",
+			"PARAMS" : 0.178,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Flip",
+			"PARAMS" : 0.153,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3.14,
+			"MIN" : 0,
+			"NAME" : "Whoa",
+			"PARAMS" : 0.118,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",
@@ -71,11 +113,11 @@
 	[
 		{
 			"NAME" : "image10",
-			"PATH" : "images/10.jpg"
+			"PATH" : "images/33.jpeg"
 		},
 		{
 			"NAME" : "image47",
-			"PATH" : "images/47.jpg"
+			"PATH" : "images/12.jpg"
 		}
 	],
 	"IMAGE_PATH" : "abstract_glassy_field.png",

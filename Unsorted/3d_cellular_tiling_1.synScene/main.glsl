@@ -37,7 +37,7 @@
 // Frequencies and amplitudes of tunnel "A" and "B". See then "path" function.
 const float freqA = 0.15;
 const float freqB = 0.25;
-const float ampA = 3.6;
+const float ampA = PI;
 const float ampB = .85;
 
 
@@ -95,7 +95,7 @@ float noise3D(in vec3 p){
     return mix(h.x, h.y, p.z); // Range: [0, 1].
 	
 }
-
+vec3 threeWaySin = vec3(sin(smoothTimeB*0.5)*0.75+0.75, cos(smoothTimeB*0.45)*0.25+0.25, sin(smoothTimeB*0.35)*0.6+0.5);
 
 ////////
 
@@ -265,7 +265,7 @@ float trace(in vec3 ro, in vec3 rd){
         h = map(ro+rd*t);
         // Note the "t*b + a" addition. Basically, we're putting less emphasis on accuracy, as
         // "t" increases. It's a cheap trick that works in most situations... Not all, though.
-        if(abs(h)<0.002*(t*.25 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
+        if(abs(h)<0.0012*(t*.25 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
         t += h*.8;
         
         
@@ -309,7 +309,7 @@ float thickness(in vec3 p, in vec3 n){
     
     float sNum = 4.;
     float sca = 1., occ = 0.;
-    for(float i=0.; i<sNum + .001; i++ ){
+    for(float i=0.; i<sNum + .0001; i++ ){
     
         float hr = 0.05 + .4*i/sNum; 
         //vec3 rn = normalize(n + RandomHemisphereDir(n, hr)*rad*.5);
@@ -321,7 +321,7 @@ float thickness(in vec3 p, in vec3 n){
     
 }
 
-
+/*
 // Shadows.
 float softShadow(vec3 ro, vec3 rd, float start, float end, float k){
 
@@ -347,7 +347,7 @@ float softShadow(vec3 ro, vec3 rd, float start, float end, float k){
     // Shadow value.
     return min(max(shade, 0.) + 0.3, 1.0); 
 }
-
+*/
 
 // Ambient occlusion, for that self shadowed look. Based on the original by XT95. I love this 
 // function, and in many cases, it gives really, really nice results. For a better version, and 
@@ -440,7 +440,7 @@ float getMist(in vec3 ro, in vec3 rd, in vec3 lp, in float t){
         // Lighting. Technically, a lot of these points would be
         // shadowed, but we're ignoring that.
         float sDi = length(lp-ro)/FAR; 
-	    float sAtt = min(1./(1. + sDi*0.25 + sDi*sDi*0.05), 1.);
+	    float sAtt = min(1./(1. + sDi*0.25 + sDi*sDi*0.025), 1.);
 	    // Noise layer.
         mist += trigNoise3D(ro/2.)*sAtt;
         // Advance the starting point towards the hit point.
@@ -579,11 +579,11 @@ vec4 renderMainImage() {
 
     	
     	// Darkening the crevices. Otherwise known as cheap, scientifically-incorrect shadowing.	
-	    float shading = 1.;// crv*0.5+0.5; 
-    	
+	    //float shading = 1.;// crv*0.5+0.5; 
+    	float shading = crv*0.5+0.5;
         // Shadows - They didn't add enough aesthetic value to justify the GPU drain, so they
         // didn't make the cut.
-        shading *= softShadow(sp, ld, 0.05, distlpsp, 8.);
+        //shading *= softShadow(sp, ld, 0.0125, distlpsp, 15.);
     	
     	// Combining the above terms to produce the final color. It was based more on acheiving a
         // certain aesthetic than science.
@@ -595,9 +595,11 @@ vec4 renderMainImage() {
         
         
         // Cool blue hilights. Adapted from numerous examples on here. Kali uses it to great effect.
-        float per = 10.*LineMod;
+        float per = 10.+LineMod;
     	float tanHi = abs(mod(per*.5 + t -( smoothTimeB ), per) - per*.5);
-    	vec3 tanHiCol = vec3(0.7+sin(smoothTimeB*0.25)*0.925*colorShift, .2+(cos(smoothTimeB*0.25)+0.5)*01.5*colorShift, 1.6-sin(smoothTimeB*0.45)*0.25*colorShift)*(1./tanHi*.2*pow(0.8+syn_HighLevel*0.8, 1.+syn_Intensity));
+    	//vec3 tanHiCol = (threeWaySin*ColorShift+vec3(0.7, .2, 1.6))*(1./tanHi*.2*pow(0.8+syn_HighLevel*0.8+(Flash), 1.+syn_Intensity));
+    	vec3 tanHiCol = (threeWaySin*ColorShift+vec3(0.9, .7, .6))*(1./tanHi*.2*pow(0.8+syn_HighLevel*0.8+(Flash), 1.+syn_Intensity))*LightLine;
+        
         sceneCol += tanHiCol;
         
         
@@ -615,8 +617,9 @@ vec4 renderMainImage() {
 	}
        
     // Blend the scene and the background with some very basic, 4-layered fog.
-    float mist = getMist(camPos, rd, light_pos, t)*pow(0.8-highhits*0.9, 2.);
-    vec3 sky = vec3(1.175, 01.1025, 1.15)* mix(1., .72, mist)*(rd.y*.25 + 1.);
+    float mist = getMist(camPos, rd, light_pos, t)*pow(1.-highhits*0.9, 2.);
+    vec3 sky = (threeWaySin*ColorShift*vec3(1.0, 0.5, 1.0)+Mist* vec3(1.5125, 01.25025, 1.515))* mix(1., .72, mist)*(rd.y*1.25 + 1.);
+    sky+=0.25*Mist;
     sceneCol = mix(sceneCol, sky, min(pow(t, 1.5)*.175/FAR, 1.));
 
     // Clamp, perform rough gamma correction, then present the pixel to the screen.
