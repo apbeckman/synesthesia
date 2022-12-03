@@ -1,0 +1,43 @@
+{
+	"CREDIT" : "lomateron",
+	"DESCRIPTION" : "this only has 2D velocity vectors\noriginally wanted the velocity to get atracted to neighbor velocity that is spining\naccidentally put an abs() in that calculation and this came out",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image46",
+			"PATH" : "images/46.jpg"
+		}
+	],
+	"IMAGE_PATH" : "veinss.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "veinss",
+	"WIDTH" : 1280
+}

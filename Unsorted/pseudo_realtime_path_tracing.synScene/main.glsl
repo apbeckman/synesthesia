@@ -10,6 +10,40 @@
 //#define sabs(x, k) sqrt(x*x+k)
 
 #define rot(a) mat2(cos(a), -sin(a), sin(a), cos(a))
+vec2 hash( vec2 p ) // replace this by something better
+{
+	p = vec2( dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)) );
+	return -1.0 + 2.0*fract(sin(p)*43758.5453123);
+}
+// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
+// example that explains it, if you require it.
+float n3D(vec3 p){
+    
+	const vec3 s = vec3(7, 157, 113);
+	vec3 ip = floor(p); p -= ip; 
+    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
+    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
+    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
+    h.xy = mix(h.xz, h.yw, p.y);
+    return mix(h.x, h.y, p.z); // Range: [0, 1].
+}
+
+
+float n2D( in vec2 p )
+{
+    const float K1 = 0.366025404; // (sqrt(3)-1)/2;
+    const float K2 = 0.211324865; // (3-sqrt(3))/6;
+
+	vec2  i = floor( p + (p.x+p.y)*K1 );
+    vec2  a = p - i + (i.x+i.y)*K2;
+    float m = step(a.y,a.x); 
+    vec2  o = vec2(m,1.0-m);
+    vec2  b = a - o + K2;
+	vec2  c = a - 1.0 + 2.0*K2;
+    vec3  h = max( 0.5-vec3(dot(a,a), dot(b,b), dot(c,c) ), 0.0 );
+	vec3  n = h*h*h*h*vec3( dot(a,hash(i+0.0)), dot(b,hash(i+o)), dot(c,hash(i+1.0)));
+    return dot( n, vec3(70.0) );
+}
 
 float cc(float a, float b) {
     float f = thc(a, b);
@@ -118,7 +152,7 @@ float smax(float a, float b, float k) {
 
 // Number of samples: My computer can handle more. If yours is struggling, you 
 // can lower this. Naturally, sample number is proportional to noise quality.
-#define sampNum 64 //16
+#define sampNum 32 //16
 
 // The blended samples per frame: Higher numbers give the impression of more
 // samples, which boosts quality. However, there's a price to pay, and that's 
@@ -271,7 +305,8 @@ vec2 sphereIntersect(in vec3 ro, in vec3 rd, in vec4 sph){
 
 
 // Sphere position and radius.
-vec4 sph4 = vec4(0.1*(1.0+cos(smoothTimeC*0.25+10.)*16.), -.32*(1.0+sin(smoothTimeC*0.25+0.5))+0.25, 1.35*(1.0+sin(smoothTimeC*0.25)*.2)-0.15, .68); //AB: moving ball around, kinda like it
+vec4 sph4 = vec4(0.1*(1.0+cos(smoothTimeC*0.25+10.)*16.), -.32*(1.0+sin(smoothTimeC*0.25+0.5))+0.25, 1.35*(1.0+sin(smoothTimeC*0.25)*.2)-0.15, .68)* (1.0+ 0.25*vec4(n2D(vec2((TIME*0.1), (TIME*0.1))),n2D(vec2((TIME*0.1), (TIME*0.1))), n2D(vec2((TIME*0.1), (TIME*0.1))), n2D(vec2((TIME*0.1), (TIME*0.1))))); //AB: moving ball around, kinda like it
+
 //vec4 sph4 = vec4(0., -.32, 1.35, .68); //AB: og version, comment out above line and uncomment this for static ball
 
 // Hacking in a normal for the box equation.
@@ -429,8 +464,9 @@ vec4 renderPassA() {
     // "Look At" position.
     vec3 lk = ro + vec3(0, -.01, .25);
     lk.xy+=((_uvc.xy*PI)/2.)*Fov;
-        lk.xy -= _rotate(_uvc*PI, smoothTimeC*0.1)*Whoa;
-
+    lk.xy -= _rotate(_uvc*PI*n2D(lk.xy*n3D(lk.xyz)), smoothTimeC*0.1)*Whoa;
+    
+    lk += n3D(vec3(TIME*0.2, TIME*0.05,TIME*0.1))*0.05;
     vec3 fwd = normalize(lk - ro);
     vec3 rgt = normalize(vec3(fwd.z, 0., -fwd.x )); 
     // "right" and "forward" are perpendicular, due to the dot product being zero. Therefore, I'm 

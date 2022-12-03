@@ -35,7 +35,7 @@ vec4 renderPassA() {
     
     if(FRAMECOUNT <= 1 || Reset > 0.) Q = sin(.01*length(U-(0.5*RENDERSIZE.xy))*vec4(1,2,3,4));
     
-    if (_mouse.z>0.&&length(U-_mouse.xy)<(.09+basshits*0.1)*normalize(RENDERSIZE.y)*0.5) Q *= 0.;
+    if (_mouse.z>0.&&length(U-_mouse.xy)<(RENDERSIZE.y)*0.125) Q *= 0.;
     
 	return Q; 
  } 

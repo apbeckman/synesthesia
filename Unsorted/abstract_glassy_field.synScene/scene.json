@@ -43,7 +43,7 @@
 			"UI_GROUP" : "render glitches"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : -0.5,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -1.5,
@@ -58,7 +58,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Rotation",
-			"PARAMS" : 0.029,
+			"PARAMS" : 0.043,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		},
@@ -68,7 +68,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Twist",
-			"PARAMS" : 0.178,
+			"PARAMS" : 0.127,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		},
@@ -101,6 +101,16 @@
 			"MIN" : 0,
 			"NAME" : "Whoa",
 			"PARAMS" : 0.118,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 100,
+			"MIN" : 0.01,
+			"NAME" : "TexWeight",
+			"PARAMS" : 0.5,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}

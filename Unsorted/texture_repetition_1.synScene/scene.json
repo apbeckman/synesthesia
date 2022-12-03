@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "apb_0",
+	"DESCRIPTION" : "Avoiding texture repetition by using [url=https://www.shadertoy.com/view/Xd23Dh]Voronoise[/url]: a small texture can be used to generate infinite variety instead of tiled repetition. More info: [url]https://iquilezles.org/articles/texturerepetition/[/url]",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image47",
+			"PATH" : "images/47.jpg"
+		}
+	],
+	"IMAGE_PATH" : "texture_repetition.png",
+	"TITLE" : "Texture Repetition",
+	"WIDTH" : 1280
+}

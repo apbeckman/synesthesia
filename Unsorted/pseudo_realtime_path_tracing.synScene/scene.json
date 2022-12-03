@@ -21,13 +21,34 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0.1,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Fov",
-			"PARAMS" : 0.142,
+			"PARAMS" : 0.062,
 			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "LookXY",
+			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		}
 	],

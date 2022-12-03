@@ -1,0 +1,43 @@
+{
+	"CREDIT" : "lomateron",
+	"DESCRIPTION" : "this only has 2D velocity vectors\nI think this is filtering and enhancing a specific spin frequency of the velocity vector field\nI still don't understand why BufferA sin(dot(c,b2)) does that",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image46",
+			"PATH" : "images/46.jpg"
+		}
+	],
+	"IMAGE_PATH" : "spin_filter.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "spin filter",
+	"WIDTH" : 1280
+}

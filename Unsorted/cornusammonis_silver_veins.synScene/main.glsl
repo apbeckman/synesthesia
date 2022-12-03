@@ -178,7 +178,8 @@ vec4 renderPassA() {
     
     if (_mouse.z > 0.0) {
     	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy;
-        vec2 m = (Size*0.5) * normz(d) * exp(-length(d) / (0.02/(Size)));
+        vec2 m = (Size*0.5) * normz(d) * exp(-length(d) / (0.0125/(Size)));
+        m*=vec2(1., 0.5);
        //m *= Size;
         abd.xy += m;
         uv.xy += m;
@@ -443,7 +444,7 @@ vec4 renderPassD() {
 #define DISP 0.02
 
 // bump mapping scale
-#define BUMP 1.5*(1.0+basshits*0.5)
+#define BUMP 1.5
 
 // mip level
 #define MIP 0.0
@@ -518,6 +519,7 @@ vec4 renderMainImage() {
     vec3 i_w = I(dxn[2],dyn[0]);
     
     vec3 ib = 0.4 * i + 0.15 * (i_n+i_e+i_s+i_w);
+    //vec3 ib = .75 * i + 0.75 * (i_n+i_e+i_s+i_w);
 
     vec3 ld = normz(vec3(0.5+0.5*vec2(cos(smoothTimeB/4.0), sin(smoothTimeB/4.0)) - uv, -1.));
     
@@ -534,6 +536,8 @@ vec4 renderMainImage() {
     vec3 tc = 0.9*contrast(0.9*ib);
 
     fragColor = vec4((tc + vec3(0.9, 0.85, 0.8)*spec),1.0);
+//    fragColor = vec4((tc + vec3(0.9, 0.85, 0.8)*spec),1.0);
+
 	return fragColor; 
  } 
 

@@ -24,6 +24,40 @@
 */
 
 #define FAR 35. // Far plane, or maximum distance.
+vec2 hash( vec2 p ) // replace this by something better
+{
+	p = vec2( dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)) );
+	return -1.0 + 2.0*fract(sin(p)*43758.5453123);
+}
+// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
+// example that explains it, if you require it.
+float n3D(vec3 p){
+    
+	const vec3 s = vec3(7, 157, 113);
+	vec3 ip = floor(p); p -= ip; 
+    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
+    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
+    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
+    h.xy = mix(h.xz, h.yw, p.y);
+    return mix(h.x, h.y, p.z); // Range: [0, 1].
+}
+
+
+float n2D( in vec2 p )
+{
+    const float K1 = 0.366025404; // (sqrt(3)-1)/2;
+    const float K2 = 0.211324865; // (3-sqrt(3))/6;
+
+	vec2  i = floor( p + (p.x+p.y)*K1 );
+    vec2  a = p - i + (i.x+i.y)*K2;
+    float m = step(a.y,a.x); 
+    vec2  o = vec2(m,1.0-m);
+    vec2  b = a - o + K2;
+	vec2  c = a - 1.0 + 2.0*K2;
+    vec3  h = max( 0.5-vec3(dot(a,a), dot(b,b), dot(c,c) ), 0.0 );
+	vec3  n = h*h*h*h*vec3( dot(a,hash(i+0.0)), dot(b,hash(i+o)), dot(c,hash(i+1.0)));
+    return dot( n, vec3(70.0) );
+}
 
 
 //float objID = 0.; // Object ID
@@ -76,10 +110,9 @@ float map(vec3 p){
     p.xy -= camPath(p.z).xy; // Perturb the object around the camera path.
     
      
-	p = cos(p*.315*1.25 + sin(p.zxy*.875*1.25)+ sin(smoothTimeC * 0.25 )*0.2); // 3D sinusoidal mutation.
-    
-    p.xy *= 1.0-_rotate(p.zz, smoothTimeC*0.5)*0.025;
-    p.yz *= 1.0-_rotate(p.zy, smoothTime*0.25)*0.025;
+	p = cos(p*.315*1.25 + sin(p.zxy*.875*1.25)*(0.9+n3D(p)*0.1)+ sin(smoothTimeC * 0.25 )*0.2); // 3D sinusoidal mutation.
+
+
 
     float n = length(p); // Spherize. The result is some mutated, spherical blob-like shapes.
 
@@ -149,7 +182,7 @@ float trace(in vec3 ro, in vec3 rd){
         t += h;
         
         // Simple distance-based accumulation to produce some glow.
-        if(abs(h)<.135) accum += (.35-abs(h))/24.;
+        if(abs(h)<.135) accum += (.35-abs(h)+pow(0.5*syn_HighLevel+0.5*syn_MidHighLevel+syn_Intensity*0.4, 2.)*0.25)/24.;
         
     }
 
@@ -184,10 +217,10 @@ float sha(in vec3 ro, in vec3 rd, in float start, in float end, in float k){
 // Texture bump mapping. Four tri-planar lookups, or 12 texture lookups in total.
 vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
    
-    const vec2 e = vec2(0.001, 0);
+    vec2 e = vec2(0.01255, 0);
     
     // Three gradient vectors rolled into a matrix, constructed with offset greyscale texture values.    
-    mat3 m = mat3( tpl(tx, p - e.xyy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yyx, n));
+    mat3 m = mat3( tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n));
     
     vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
     g = (g - dot(tpl(tx,  p , n), vec3(0.299, 0.587, 0.114)) )/e.x; g -= n*dot(n, g);
@@ -195,20 +228,6 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
     return normalize( n + g*bf ); // Bumped normal. "bf" - bump factor.
 	
 }
-
-// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
-// example that explains it, if you require it.
-float n3D(vec3 p){
-    
-	const vec3 s = vec3(7, 157, 113);
-	vec3 ip = floor(p); p -= ip; 
-    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
-    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
-    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
-    h.xy = mix(h.xz, h.yw, p.y);
-    return mix(h.x, h.y, p.z); // Range: [0, 1].
-}
-
 
 
 // Simple environment mapping.
@@ -233,6 +252,8 @@ vec4 renderMainImage() {
     vec3 o = camPath( ( camTime)*speed ); // Camera position, doubling as the ray origin.
     vec3 lk = camPath( ( camTime)*speed + .25 );  // "Look At" position.
     vec3 l = camPath( ( camTime)*speed + 2. ) + vec3(0, 1, 0); // Light position, somewhere near the moving camera.
+   // lk.xy += n2D(vec2(cos(TIME*0.125), sin(TIME*0.2))*0.5)*0.25;
+
 	lk.xy+=((_uvc.xy*PI)/2.)*FOV;
 	//lk.xy+=(_uvc.xy/4.)*(FOV*PI+FOV*lk.xy/PI);
     lk.xy += _rotate(_uvc.xy, Twist*PI);
@@ -248,8 +269,8 @@ vec4 renderMainImage() {
     //vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
     // Lens distortion.
     vec3 r = (0.1+FOV)*(fwd + (u.x*rgt-FOV*_uvc.x - FOV*_uvc.y+u.y*up));
-       r.xy += _rotate(r.xy*_uvc*0.5*PI, smoothTime*0.1)*Whoa;
-    r = normalize(vec3(r.xy*(1.0+(Flip*(-1+_uvc*PI))), (r.z - length(r.xy)*.125)));
+       r.xy += _rotate(r.xy*_uvc*0.5*PI, n3D(r.xyz)+smoothTime*0.1)*Whoa*n3D(vec3(smoothTime*0.1));
+    r = normalize(vec3(n3D(r.xyz)+r.xy*(1.0+(Flip*(-1+_uvc*PI))), (r.z - length(r.xy)*.125)));
     r.yz = _rotate(r.yz, lookXY.y*PI);
     r.xz = _rotate(r.xz, -1.0*lookXY.x*PI);
  
@@ -283,7 +304,7 @@ vec4 renderMainImage() {
         vec3 svn = n;
         
         // Texture bump the normal.
-        float sz = (1./(10.))+sin(smoothTimeB*.00125)*0.1; 
+        float sz = (1./(5.)); 
         n = db(image47, p*sz, n, .1/(1. + t*.25/FAR));
 
         l -= p; // Light to surface vector. Ie: Light direction vector.
@@ -351,7 +372,7 @@ vec4 renderMainImage() {
         
         
         // Purple electric charge.
-        float hi = abs(mod(t/1. + ((smoothTimeB*0.1)/1.), 8.) - 8./2.)*2.;
+        float hi = abs(mod(t/1. + ((smoothTimeB*0.1)/1.), 8.) - 8./2.)*pow(2.-highhits, 2.);
         vec3 cCol = vec3(.01, .05, 1)*col*1./(.001 + hi*hi*.2);
         col += mix(cCol.yxz, cCol, n3D(p*3.));
  		// Similar effect.

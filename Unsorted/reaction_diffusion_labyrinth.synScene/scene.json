@@ -1,0 +1,25 @@
+{
+	"CREDIT" : "lomateron",
+	"DESCRIPTION" : "watched https://www.youtube.com/watch?v=ga1xt5zkmPI\nto port that here clamp() is also needed...took me sometime to figure that out\nthe shape is squared because the kernel has that shape...it's easy to make it not squared\ncode only uses blur convolutions",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image5",
+			"PATH" : "images/5.jpg"
+		}
+	],
+	"IMAGE_PATH" : "reaction_diffusion_labyrinth.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Reaction Diffusion labyrinth",
+	"WIDTH" : 1280
+}

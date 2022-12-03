@@ -35,15 +35,19 @@
 	"CREDIT" : "FabriceNeyret2",
 	"DESCRIPTION" : "short & simplified version of https://www.shadertoy.com/view/lllSWr#",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
 			"NAME" : "image30",
 			"PATH" : "images/30.png"
+		},
+		{
+			"NAME" : "image12",
+			"PATH" : "images/31.png"
 		}
 	],
 	"IMAGE_PATH" : "protoplasm_-_shorter.png",
 	"TITLE" : "protoplasm - shorter",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

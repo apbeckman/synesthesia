@@ -12,7 +12,7 @@ mat4 m = mat4( 0,   1.8,  1.2, 0,
 
 // --- compact Perlin noise
 
-#define N(p)   ( 2.* texture( image30, (p).xy/256. ) - 1. )
+#define N(p)   ( 2.* texture( image12, (p).xy/256. ) - 1. )
 vec4 P(vec4 p) { return N(p*=m/4.)/2. + N(p*=m)/4. + N(p*=m)/8.  + N(p*=m)/16. ;}
 
 // --- using the base ray-marcher of Trisomie21: https://www.shadertoy.com/view/4tfGRB#

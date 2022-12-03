@@ -1,0 +1,42 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Reset",
+			"TYPE" : "bang",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "lomateron",
+	"DESCRIPTION" : "click to interact\nkey W to reset\nsimilar to https://www.shadertoy.com/view/7lVGzD\nbut this one has mass appart from just 2D velocity vectors",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "swirl_explosion.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "swirl explosion",
+	"WIDTH" : 1920
+}

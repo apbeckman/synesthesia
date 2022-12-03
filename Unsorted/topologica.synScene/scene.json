@@ -1,0 +1,42 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 0.001,
+			"NAME" : "TempMod",
+			"PARAMS" : 0.17,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : 0.1,
+			"NAME" : "DepthMod",
+			"PARAMS" : 0.332,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "FOV",
+			"PARAMS" : 0.095,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "otaviogood",
+	"DESCRIPTION" : "At some point I stopped understanding exactly what makes this work, but it just kept getting cooler. Mostly, it's stepping through a low frequency noise function that ramps up to a 1/x pulse. But then there are lots of tweaks on top of that.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "topologica.png",
+	"TITLE" : "Topologica",
+	"WIDTH" : 1280
+}
