@@ -13,6 +13,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
     The system is unstable using a large timestep with simple Euler integration, so instead it is 
     updated with an exponentially-weighted moving average of the gradient (with time constant tc).
 */
+vec4 image = texture(syn_UserImage,(_xy)/RENDERSIZE.xy);
 
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
@@ -21,7 +22,7 @@ vec4 renderPassA() {
     const float _K0 = -20.0/6.0; // center weight
     const float _K1 = 4.0/6.0; // edge-neighbors
     const float _K2 = 1.0/6.0; // vertex-neighbors
-    const float timestep = 0.7;
+    float timestep = 0.97;
     const float a0 = -0.1;
     const float a1 = 2.0;
     const float epsilon = 0.05;
@@ -75,11 +76,11 @@ vec4 renderPassA() {
     
     if (iMouse.z > 0.0) {
     	float mLen = length(iMouse.xy - fragCoord.xy);
-    	a += exp(-mLen * mLen / 100.0);
+    	a += exp(-mLen * mLen / 1000.0);
     }
     
     // initialize with noise
-    if(FRAMECOUNT<10) {
+    if(FRAMECOUNT<=10) {
         fragColor = -0.5 + texture(image16, vUv);
     } else {
         fragColor = clamp(vec4(a, b, c, d), -1., 1.);

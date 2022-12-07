@@ -11,6 +11,8 @@ vec2 mouse = (_mouse.xy*_uvc);
 float a = .001*sin(.005*smoothTime)/(1.+length(U-0.5*RENDERSIZE.xy*_uvc)/RENDERSIZE.y+syn_BassLevel*0.001);
 float b = .3*(1.0-growthFactor*0.12)+growthFactor*0.0001;
 vec2 aa = _uvc*growthFactor;
+vec4 image = texture(syn_UserImage,(_xy)/RENDERSIZE.xy);
+
 vec4 renderPassA() {
 	//vec4 Q = vec4(0.0);
 	//vec2 U = _xy;
@@ -21,7 +23,7 @@ vec4 renderPassA() {
     U-=X;
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
     //U *= .999;
-    U*=(1.0-(Zoom*growthFactor*0.005)-Zoom*0.00125);
+    U*=(1.0-(Zoom*growthFactor*0.00125)-Zoom*0.00125);
     U+=X;
     Q  =  D(U+_uvc);
     // Neighborhood :
@@ -43,7 +45,7 @@ vec4 renderPassA() {
     
     if (length(Q.xy)>0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1) Q = sin(.1*U.xxxx);
+    if(FRAMECOUNT <= 1 || Reset > 0.) Q = sin(.1*U.xxxx);
     
      
 	return Q; 
@@ -68,10 +70,10 @@ vec4 renderPassB() {
     U+=X;
     Q  =  A(U+_uvc);
     // Neighborhood :
-    vec4 pX  =  A(U + vec2(1,0));
-    vec4 pY  =  A(U + vec2(0,1));
-    vec4 nX  =  A(U - vec2(1,0));
-    vec4 nY  =  A(U - vec2(0,1));
+    vec4 pX  =  A(U + vec2(1,0))*image;
+    vec4 pY  =  A(U + vec2(0,1))*image;
+    vec4 nX  =  A(U - vec2(1,0))*image;
+    vec4 nY  =  A(U - vec2(0,1))+growthFactor*image;
     vec4 m = 0.25*(pX+nX+pY+nY);
     //float b = .3;
     Q += (1.-b)*(0.25*vec4(
@@ -82,11 +84,11 @@ vec4 renderPassB() {
     )- Q);
 
     
-    Q = mix(Q,m,b);
+    Q = mix(Q,m,b)+0.6*growthFactor*image;
     
     if (length(Q.xy)>0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1) Q = sin(.1*U.xxxx);
+    if(FRAMECOUNT <= 1 || Reset > 0.) Q = sin(.1*U.xxxx);
     
      
 	return Q; 
@@ -106,16 +108,16 @@ vec4 renderPassC() {
     //float a = .001*sin(.1*TIME)/(1.+length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y);
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
     //U *= .999;
-    U*=(1.0-(Zoom*growthFactor*0.005)-Zoom*0.00125);
+    U*=(1.0-(Zoom*growthFactor*0.0025)-Zoom*0.00125);
 
     U+=X;
     Q  =  B(U+_uvc);
     // Neighborhood :
-    vec4 pX  =  B(U + vec2(1,0));
-    vec4 pY  =  B(U + vec2(0,1));
-    vec4 nX  =  B(U - vec2(1,0));
-    vec4 nY  =  B(U - vec2(0,1));
-    vec4 m = 0.25*(pX+nX+pY+nY);
+    vec4 pX  =  B(U + vec2(1,0))+growthFactor*image;
+    vec4 pY  =  B(U + vec2(0,1))+growthFactor*image;
+    vec4 nX  =  B(U - vec2(1,0))+growthFactor*image;
+    vec4 nY  =  B(U - vec2(0,1))+growthFactor*image;
+    vec4 m = 0.25*(pX+nX+pY+nY)+growthFactor*image;
     //float b = .3;
     Q += (1.-b)*(0.25*vec4(
        
@@ -129,7 +131,7 @@ vec4 renderPassC() {
     
     if (length(Q.xy)>0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1) Q = sin(.1*U.xxxx);
+    if(FRAMECOUNT <= 1 || Reset > 0.) Q = sin(.1*U.xxxx);
     
      
 	return Q; 
@@ -171,7 +173,7 @@ vec4 renderPassD() {
     
     if (length(Q.xy)>0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1) Q = sin(.1*U.xxxx);
+    if(FRAMECOUNT <= 1 || Reset > 0.) Q = sin(.1*U.xxxx);
     
      
 	return Q; 

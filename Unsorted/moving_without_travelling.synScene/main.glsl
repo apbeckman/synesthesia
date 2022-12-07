@@ -91,7 +91,7 @@ float modMirror1(inout float p, float size) {
 float smoothKaleidoscope(inout vec2 p, float sm, float rep) {
   vec2 hp = p;
 
-  vec2 hpp = toPolar(hp);
+  vec2 hpp = toPolar(hp+_uvc);
   float rn = modMirror1(hpp.y, TAU/rep);
 
   float sa = PI/rep - pabs(PI/rep - abs(hpp.y), sm);
@@ -106,6 +106,31 @@ float smoothKaleidoscope(inout vec2 p, float sm, float rep) {
 
 float circle(vec2 p, float r) {
   return length(p) - r;
+}
+float noise(vec2 p) {
+  float a = sin(p.x);
+  float b = sin(p.y);
+  float c = 0.5 + 0.5*cos(p.x + p.y);
+  float d = mix(a, b, c);
+  return d;
+}
+
+// https://iquilezles.org/articles/fbm
+float fbm(vec2 p, float aa) {
+  const mat2 frot = mat2(0.80, 0.60, -0.60, 0.80);
+
+  float f = 0.0;
+  float a = 1.0;
+  float s = 0.0;
+  float m = 2.0;
+  for (int x = 0; x < 2; ++x) {
+    f += a*noise(p); 
+    p = frot*p*m;
+    m += 0.01;
+    s += a;
+    a *= aa;
+  }
+  return f/s;
 }
 
 // Based on: https://iquilezles.org/articles/distfunctions2d
@@ -134,15 +159,18 @@ float outerEye(vec2 p, float th) {
 
 const vec2 iris_center = vec2(0.0, 0.28);
 vec4 completeEye(vec2 p, float th) {
+  float aa = 0.5;
   const float iris_outer = 0.622;
   const float iris_inner = 0.285;
-  
+
   float t0 = abs(0.9*p.x);
   t0 *= t0;
   t0 *= t0;
   t0 *= t0;
   t0 = clamp(t0, 0.0, 1.0);
   float dt0 = mix(0.0125, -0.0025, t0);
+  p.xy*=1.0+ Rotate*-.25*(-4.+_rotate(p.xy* _uvc*PI, smoothTimeC*0.2));
+  p.xy*=1.0+Warp*(-1+_rotate(_uvc,  fbm(_uvc, aa)* smoothTimeC*0.01));
 
   vec2 p0 = p;
   float d0 = outerEye(p, th);
@@ -178,6 +206,7 @@ vec4 completeEye(vec2 p, float th) {
   float d = d0;
   d = pmin(d, d1, 0.0125);
   return vec4(d, d6, d5, max(d4, d6));
+;
 }
 
 
@@ -202,31 +231,6 @@ vec3 ddoffset(float z) {
   return 0.125*(doffset(z + eps) - doffset(z - eps))/eps;
 }
 
-float noise(vec2 p) {
-  float a = sin(p.x);
-  float b = sin(p.y);
-  float c = 0.5 + 0.5*cos(p.x + p.y);
-  float d = mix(a, b, c);
-  return d;
-}
-
-// https://iquilezles.org/articles/fbm
-float fbm(vec2 p, float aa) {
-  const mat2 frot = mat2(0.80, 0.60, -0.60, 0.80);
-
-  float f = 0.0;
-  float a = 1.0;
-  float s = 0.0;
-  float m = 2.0;
-  for (int x = 0; x < 4; ++x) {
-    f += a*noise(p); 
-    p = frot*p*m;
-    m += 0.01;
-    s += a;
-    a *= aa;
-  }
-  return f/s;
-}
 
 // https://iquilezles.org/articles/warp
 float warp(vec2 p, out vec2 v, out vec2 w) {
@@ -239,7 +243,7 @@ float warp(vec2 p, out vec2 v, out vec2 w) {
   const float rep = 50.0;
   const float sm = 0.125*0.5*60.0/rep;
   float  n = smoothKaleidoscope(p, sm, rep);
-  p.y += TIME*0.125+1.5*g_th;
+  p.y += smoothTimeC*0.125+1.5*g_th;
 
   g_hf = f;
   vec2 pp = p;
@@ -252,7 +256,7 @@ float warp(vec2 p, out vec2 v, out vec2 w) {
 
 
   //float aa = mix(0.95, 0.25, tanh_approx(pp.x));
-  float aa = 0.5;
+  float aa = 10.5;
 
   v = vec2(fbm(p + vx, aa), fbm(p + vy, aa))*f;
   w = vec2(fbm(p + 3.0*v + wx, aa), fbm(p + 3.0*v + wy, aa))*f;
@@ -264,10 +268,10 @@ vec3 normal(vec2 p) {
   vec2 v;
   vec2 w;
   vec2 e = vec2(4.0/RESOLUTION.y, 0);
-  
   vec3 n;
+
   n.x = warp(p + e.xy, v, w) - warp(p - e.xy, v, w);
-  n.y = 2.0*e.x;
+  n.y = 12.0*e.x;
   n.z = warp(p + e.yx, v, w) - warp(p - e.yx, v, w);
   
   return normalize(n);
@@ -298,8 +302,13 @@ vec3 weird(vec2 p) {
   const vec3 up  = vec3(0.0, 1.0, 0.0);
   const vec3 lp1 = 1.0*vec3(1.0, 1.25, 1.0);
   const vec3 lp2 = 1.0*vec3(-1.0, 2.5, 1.0);
+  float aa = 0.5;
 
   vec3 ro = vec3(0.0, 10.0, 0.0);
+  p.xy+= FOV*PI*_uvc;
+  p.xy*=1.0+ Rotate*0.25*(-4.+_rotate(p.xy* _uvc*PI, smoothTimeC*0.2));
+  p.xy-=Warp*(_rotate(p.xy-_uvc,  fbm(p.xy*_uvc/PI, aa)* smoothTimeC*0.01));
+
   vec3 pp = vec3(p.x, 0.0, p.y);
 
   vec2 v;

@@ -44,7 +44,7 @@ float height_(vec2 p, float tm) {
 //  p.x = pabs(p.x, 0.025);
 //  p.x = abs(p.x);
   p *= ROT(-smoothTimeC*0.05-1.5*d-(-0.5*p.y+2*p.x)*1) ;
-  float c = 1E;
+  float c = 1E10;
   float x = pow(d, 0.1);
   float y = atan(p.x, p.y) / TAU;
   

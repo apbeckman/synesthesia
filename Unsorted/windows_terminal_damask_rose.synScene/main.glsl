@@ -102,10 +102,11 @@ float height(vec2 p) {
 
 vec3 normal(vec2 p) {
   vec2 e = vec2(4.0/RESOLUTION.y, 0);
-  
   vec3 n;
+
   n.x = height(p + e.xy) - height(p - e.xy);
   n.y = -2.0*e.x;
+  
   n.z = height(p + e.yx) - height(p - e.yx);
   
   return normalize(n);
@@ -130,6 +131,7 @@ vec3 color(vec2 p) {
   vec3 pp = vec3(p.x, 0.0, p.y);
 
   vec3 po = vec3(p.x, 0.0, p.y);
+
   vec3 rd = normalize(ro - po);
 
   vec3 ld1 = normalize(lp1 - po);
@@ -139,6 +141,7 @@ vec3 color(vec2 p) {
   float diff2 = max(dot(n, ld2), 0.0);
 
   vec3  rn    = n;
+
   vec3  ref   = reflect(rd, rn);
   float ref1  = max(dot(ref, ld1), 0.0);
   float ref2  = max(dot(ref, ld2), 0.0);
@@ -165,6 +168,7 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
   vec2 q = fragCoord/RESOLUTION.xy;
+
   vec2 p = -1. + 2. * q;
   p.x *= RESOLUTION.x/RESOLUTION.y;
   vec3 col = color(p);

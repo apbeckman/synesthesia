@@ -21,6 +21,69 @@ const vec3 std_gamma   = vec3(2.2, 2.2, 2.2);
 const vec3 planeCol    = vec3(1.0, 1.2, 1.5);
 const vec3 baseRingCol = pow(vec3(1.0, 0.65, 0.25), vec3(0.6));
 const vec3 sunCol      = vec3(1.25, 1.0, 1.1)/1.25;
+mat2 rot2(in float a){ float c = cos(a), s = sin(a); return mat2(c, -s, s, c); }
+
+
+// IQ's vec2 to float hash.
+float hash21(vec2 p){  return fract(sin(dot(p, vec2(27.619, 57.583)))*43758.5453); }
+
+
+// vec2 to vec2 hash.
+vec2 hash22B(vec2 p) { 
+
+    // Faster, but doesn't disperse things quite as nicely. However, when framerate
+    // is an issue, and it often is, this is a good one to use. Basically, it's a tweaked 
+    // amalgamation I put together, based on a couple of other random algorithms I've 
+    // seen around... so use it with caution, because I make a tonne of mistakes. :)
+    float n = sin(dot(p, vec2(1, 113)));
+    p = fract(vec2(262144, 32768)*n)*2. - 1.; 
+    #ifdef ANIMATE
+    return sin(p*6.2831853 + smoothTimeC/2.);
+    #else
+    return p;
+    #endif
+     
+}
+
+// vec2 to vec2 hash.
+vec2 hash22C(vec2 p) { 
+
+    // Faster, but doesn't disperse things quite as nicely. However, when framerate
+    // is an issue, and it often is, this is a good one to use. Basically, it's a tweaked 
+    // amalgamation I put together, based on a couple of other random algorithms I've 
+    // seen around... so use it with caution, because I make a tonne of mistakes. :)
+    float n = sin(dot(p, vec2(289, 41)));
+    return fract(vec2(262144, 32768)*n)*2. - 1.;
+    
+    // Animated.
+    p = fract(vec2(262144, 32768)*n)*2. - 1.; 
+    return sin(p*6.2831853 + smoothTime/5.); 
+}
+
+
+// Based on IQ's gradient noise formula.
+float n2D3G( in vec2 p ){
+   
+    // Cell ID and local coordinates.
+    vec2 i = floor(p); p -= i;
+    
+    // Four corner samples.
+    vec4 v;
+    v.x = dot(hash22C(i), p);
+    v.y = dot(hash22C(i + vec2(1, 0)), p - vec2(1, 0));
+    v.z = dot(hash22C(i + vec2(0, 1)), p - vec2(0, 1));
+    v.w = dot(hash22C(i + 1.), p - 1.);
+
+    // Cubic interpolation.
+    p = p*p*(3. - 2.*p);
+    
+    // Bilinear interpolation -- Along X, along Y, then mix.
+    return mix(mix(v.x, v.y, p.x), mix(v.z, v.w, p.x), p.y);
+    
+}
+
+// Two layers of noise.
+float fBm(vec2 p){ return n2D3G(p)*.57 + n2D3G(p*2.)*.28 + n2D3G(p*4.)*.15; }
 
 struct effect {
   float lw;
@@ -216,6 +279,7 @@ vec3 skyColor(vec3 ro, vec3 rd) {
 }
 
 vec4 plane(vec3 ro, vec3 rd, vec3 pp, float pd, vec3 off, float aa, float n) {
+
   int pi = int(mod(n/PLANE_PERIOD, float(effects.length())));
   current_effect = effects[pi];
   
@@ -288,6 +352,7 @@ vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
   
 
   vec3 rd = normalize(p.x*uu + p.y*vv + rdd*ww);
+
  // rd.xy *= rd.xy*FOV;
   vec3 nrd = normalize(np.x*uu + np.y*vv + rdd*ww);
  // nrd.xy *= nrd.xy*(FOV);

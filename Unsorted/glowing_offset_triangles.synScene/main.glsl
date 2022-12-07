@@ -47,7 +47,7 @@
 #define OFFSET_TRIS
 
 // Textured.
-//#define TEXTURE
+#define TEXTURE
 
 // Animate the triangles -- Technically, a metallic surface animating in such a
 // way isn't really realistic, so you may wish to keep the arrangement static.
@@ -75,7 +75,7 @@ vec2 hash22B(vec2 p) {
     float n = sin(dot(p, vec2(1, 113)));
     p = fract(vec2(262144, 32768)*n)*2. - 1.; 
     #ifdef ANIMATE
-    return sin(p*6.2831853 + smoothTime/2.);
+    return sin(p*6.2831853 + smoothTimeC/2.);
     #else
     return p;
     #endif
@@ -322,19 +322,24 @@ vec4 renderMainImage() {
     float iRes = min(RENDERSIZE.y, 800.);
     vec2 uv = (fragCoord - RENDERSIZE.xy*.5)/iRes; 
     
-    // Scene rotation.
-    uv.xy *= rot2(-3.14159/9.);
-    
-    
+    // Scene rotation.\
+
+   // uv.xy *= rot2(-3.14159/9.);
+    uv.xy*= 1.+Zoom;
+
+    uv.xy *=1.+ Rotate*_rotate((uv.xy*_uvc), 0.0125*PI*smoothTime)*0.5;
+    uv.xy *= 1.0-(_uvc*PI+PI*Fov*uv.xy+1.)*Fov;
+
+     uv.xy += fBm(_rotate(uv.xy*_uvc, 0.0125*smoothTimeC*PI)/PI)*(Noise);
+
     // Unit direction vector and camera origin. 
     // Used for some mock lighting.
     vec3 rd = normalize(vec3(uv, 1));
     vec3 ro = vec3(0);
-   
     
     // Scaling and translation.
     const float gSc = 1.;
-    vec2 p = uv*gSc - vec2(0, TIME/32.).yx;
+    vec2 p = uv*gSc - vec2(0, smoothTime/32.).yx;
     
     
     // Resolution and scale based smoothing factor.
@@ -364,13 +369,13 @@ vec4 renderMainImage() {
 
      
     // Light position, light direction and light distance.
-    vec3 lp = vec3(-.5, 1, -1);
+    vec3 lp = vec3(-.5, 1, -2);
     vec3 ld = lp - vec3(uv, 0);
     float lDist = length(ld);
     ld /= lDist;
     
     // Light attenuation.
-    float atten = 2./(1. + lDist*lDist*.5);
+    float atten = 2./(1. + lDist*lDist*.5)*(1.0+abs(Fov));
 
     // Triangle cell.
     float triCell = sdTri(rp, v[0], v[1], v[2]);
@@ -385,7 +390,7 @@ vec4 renderMainImage() {
 
 
     // Glow color.
-    vec3 glCol = vec3(1, .35, .2);
+    vec3 glCol = vec3(1.5, .75, 1.72);
     #if COLOR == 1
     glCol = mix(glCol.zyx, glCol.zxy, clamp(-uv.y*1.25 + .5, 0., 1.));
     #endif
@@ -413,7 +418,7 @@ vec4 renderMainImage() {
         float rndJ = hash21(svID + float(j)/9. + .13);
 
         // Open the triangle sides at random blinking intervals.
-        float open = smoothstep(.9, .966, sin(rnd*6.2831 + rndJ/6. + TIME/1.)*.5 + .5);
+        float open = smoothstep(.9, .966, sin(rnd*6.2831 + rndJ/6. + smoothTimeB*.1)*.5 + .5);
         //if(hash21(svID +.34)<.5) open = 0.;
         //if(gT.triID<.5) open = 0.;
         // If not showing the glowing light through the cracks, overide 
@@ -460,7 +465,7 @@ vec4 renderMainImage() {
         #ifdef TEXTURE
         // Texture color.
         vec3 tx2 = texture(image3, (rp - svID*s)*z).xyz; tx2 *= tx2;
-        //vec3 tx2 = texture(image3, svID*s).xyz; tx2 *= tx2;
+       // vec3 tx2 = texture(image3, svID*s).xyz; tx2 *= tx2;
 
         vec3 tCol = smoothstep(-.5, 1., tx2)*.1;
         //tCol = sqrt(tx2)*.1;

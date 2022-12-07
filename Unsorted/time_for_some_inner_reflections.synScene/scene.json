@@ -1,4 +1,36 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Kaleidescope",
+			"PARAMS" : 0.126,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.2,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.25,
+			"MIN" : 0,
+			"NAME" : "Flip",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "mrange",
 	"DESCRIPTION" : "CC0: Time for some inner reflections\nAn evolution of: https://www.shadertoy.com/view/7dKBDt\nAfter a tip from shane found knighty's shader: https://www.shadertoy.com/view/MsKGzw\nKnighty's shaders allows one to experiment with many cool polyhedras\n",
 	"GPU" : 0,

@@ -20,10 +20,19 @@
 			"UI_GROUP" : "default"
 		},
 		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "MediaImpact",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 0.5,
-			"MIN" : -0.5,
+			"MIN" : -0.25,
 			"NAME" : "Intensity",
 			"TYPE" : "slider",
 			"UI_GROUP" : "Geo"
@@ -76,31 +85,22 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "FX"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "MediaImpact",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Media"
 		}
 	],
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "Directional feedback system. ",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "local_interaction.png",
 	"PASSES" : 
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "Local Interaction",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

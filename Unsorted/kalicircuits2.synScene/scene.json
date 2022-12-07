@@ -57,7 +57,17 @@
 			"MAX" : 1.04,
 			"MIN" : 0.1,
 			"NAME" : "zoom",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.043,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0,
+			"NAME" : "Warp",
+			"PARAMS" : 0.137,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -65,9 +75,9 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Warp",
-			"PARAMS" : 0.137,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.131,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -97,6 +107,15 @@
 			"NAME" : "glow",
 			"TYPE" : "knob",
 			"UI_GROUP" : "Vibe"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Spin",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "by mojovideotech",

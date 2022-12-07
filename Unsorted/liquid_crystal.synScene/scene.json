@@ -1,0 +1,36 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Click to see a region close up! \n\nLiquid crystals are fascinating and beautiful and are used in cool applications (like the pixels of the LCD youre probably looking at)\nhttps://www.youtube.com/watch?v=DLluRjH_gWM",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "liquid_crystal.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Liquid Crystal",
+	"WIDTH" : 1280
+}

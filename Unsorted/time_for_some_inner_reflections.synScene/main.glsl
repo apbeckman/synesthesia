@@ -16,9 +16,9 @@
 const float poly_U        = 1.0;  // [0, inf]
 const float poly_V        = 1.0;  // [0, inf]
 const float poly_W        = 2.0;  // [0, inf]
-const int   poly_type     = 3;    // [2, 5]
+const int   poly_type     = 5;    // [2, 5]
 
-const float zoom = 3.0;
+float zoom = 3.0;
 // ------------------------------------------------------------------------------------
 
 //#define PI          3.141592654
@@ -395,12 +395,13 @@ vec3 effect(vec2 p) {
   */
   ro.yz *= ROT(a);
   ro.xz *= ROT(b);
-
+  ro.xy += Kaleidescope*(_uvc*PI);
   vec3 ww = normalize(la - ro);
   vec3 uu = normalize(cross(up, ww ));
   vec3 vv = normalize(cross(ww,uu));
   float fov = tan(TAU/6.0);
   vec3 rd = normalize(-p.x*uu + p.y*vv + fov*ww);
+  rd.xy +=(_uvc*PI*rd.xy)*Flip;
 
   vec3 col = render0(ro, rd);
   

@@ -12,7 +12,7 @@ float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.25)+(syn_Level*0.12
 
 
 // contrast
-#define SIGMOID_CONTRAST 15
+#define SIGMOID_CONTRAST 20
 
 vec3 contrast(vec3 x) {
 	return 1.0 / (1.0 + exp(-SIGMOID_CONTRAST * (x - 0.5)));    
@@ -441,7 +441,7 @@ vec4 renderPassD() {
 */
 
 // displacement (for texturing)
-#define DISP 0.02
+#define DISP 0.005
 
 // bump mapping scale
 #define BUMP 1.5
@@ -510,7 +510,7 @@ vec4 renderMainImage() {
         dxn[2] = d_w.x; 
     #endif
     
-    #define I(d_x,d_y) texture(image3, fract(vec2(0.5) + DISP * vec2(d_x,d_y)), MIP).xyz
+    #define I(d_x,d_y) texture(image3, fract(vec2(0.5) + (DISP+((syn_MidHighLevel*0.25 + syn_Intensity)*0.00125)) * vec2(d_x,d_y)), MIP).xyz
 
     vec3 i   = I(dxn[0],dyn[0]);
     vec3 i_n = I(dxn[1],dyn[1]);
@@ -519,7 +519,7 @@ vec4 renderMainImage() {
     vec3 i_w = I(dxn[2],dyn[0]);
     vec2 circ = vec2(cos(smoothTimeB/4.0), sin(smoothTimeB/4.0));
 //    vec3 ib = 0.4 * i + 0.15 * (i_n+i_e+i_s+i_w);
-    vec3 ib = .75 * i + 0.75 * (i_n+i_e+i_s+i_w);
+    vec3 ib = .8 * i + 0.85 * (i_n+i_e+i_s+i_w)+0.1;
 
     vec3 ld = normz(vec3(0.5+0.5 - uv, -.99));
     
@@ -528,12 +528,13 @@ vec4 renderMainImage() {
         for(int j = 0; j < 3; j++) {
             vec3 dxy = normalize(vec3(-BUMP*vec2(dxn[i], dyn[j]), -1.0));
             spec += ggx(dxy, vec3(0,0,-1), ld, 0.4, 0.1) / 25.0;
+            spec *= 0;
         }
     }
 
     // end bumpmapping section
 
-    vec3 tc = 0.9*contrast(0.9*ib);
+    vec3 tc = 0.86*contrast(0.75*ib);
 
 //    fragColor = vec4((tc + vec3(0.9, 0.85, 0.8)*spec),1.0);
     fragColor = vec4((tc + vec3(0.75, 0.7, 0.7)*spec),1.0);

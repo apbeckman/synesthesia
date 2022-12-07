@@ -46,7 +46,7 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -1,
-			"NAME" : "FOV",
+			"NAME" : "Fov",
 			"PARAMS" : 0.141,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
@@ -110,6 +110,24 @@
 			"MIN" : 0,
 			"NAME" : "ColorShift",
 			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Whoa",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flip",
+			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		}
 	],

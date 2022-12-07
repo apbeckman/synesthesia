@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Casting a Mobius shadow pattern from a spinning loxodromic spherical spiral object.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image8",
+			"PATH" : "images/prism.jpeg"
+		}
+	],
+	"IMAGE_PATH" : "loxodrome_spiral_projection.png",
+	"TITLE" : "Loxodrome Spiral Projection",
+	"WIDTH" : 1920
+}

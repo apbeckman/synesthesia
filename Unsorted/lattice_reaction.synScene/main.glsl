@@ -87,7 +87,7 @@ vec4 renderPassC() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 7; i++) {
         vec4 a = AB(U);
         U -= a.x*a.zw;
     }
@@ -101,14 +101,14 @@ vec4 renderPassC() {
         b = AB(U+vec2(1,-1)),
         c = AB(U-vec2(1,1)),
         d = AB(U-vec2(1,-1)),
-        dQ = 0.125*(n+e+s+w+a+b+c+d)-Q;
+        dQ = (0.0025*syn_Intensity+0.00125*syn_BassLevel+0.125)*(n+e+s+w+a+b+c+d)-Q;
     Q = AB(U);
     Q += vec4(0.5,1,1,1)*dQ;
     float x = .1*Q.y*Q.x*(1.-Q.x);
     Q.x = Q.x+x-0.00+(e.z*e.x-w.z*w.x+n.w*n.x-s.w*s.x);
     Q.y = Q.y-x+0.04*Q.y*(1.-Q.y);
     Q.xy = max(Q.xy,0.);
-    Q.zw = Q.zw - .025*vec2(e.y-w.y,n.y-s.y);
+    Q.zw = Q.zw - .0125*vec2(e.y-w.y,n.y-s.y);
     if (U.x < 1. || U.y < 1. || R.x-U.x<1. || R.y-U.y<1.)Q.x*=0.;
     if (_mouse.z>0.&&length(_mouse.xy-U)<40.)Q*=0.;
     if (FRAMECOUNT <= 1) Q = vec4(exp(-.1*length(U-0.5*R)),1,0,0);
@@ -134,7 +134,7 @@ vec4 renderPassD() {
    vec3 d = normalize(p-vec3(U,0));
    vec3 li = vec3(1.3*R,.3*R.x);
    p += d*dot(-p,vec3(0,0,1))/dot(d,vec3(0,0,1));
-   for (int i = 0; i < 10; i++) {
+   for (int i = 0; i < 20; i++) {
    	p += .6*d*(p.z-A1(p.xy));
    }
    vec3 q = li;

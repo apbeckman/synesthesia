@@ -19,6 +19,69 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 #define L2(x)           dot(x, x)
 
 const vec3 std_gamma        = vec3(2.2, 2.2, 2.2);
+mat2 rot2(in float a){ float c = cos(a), s = sin(a); return mat2(c, -s, s, c); }
+
+vec2 circ = vec2(cos(smoothTimeC*0.01), cos(smoothTimeC*0.01));
+// IQ's vec2 to float hash.
+float hash21(vec2 p){  return fract(sin(dot(p, vec2(27.619, 57.583)))*43758.5453); }
+
+
+// vec2 to vec2 hash.
+vec2 hash22B(vec2 p) { 
+
+    // Faster, but doesn't disperse things quite as nicely. However, when framerate
+    // is an issue, and it often is, this is a good one to use. Basically, it's a tweaked 
+    // amalgamation I put together, based on a couple of other random algorithms I've 
+    // seen around... so use it with caution, because I make a tonne of mistakes. :)
+    float n = sin(dot(p, vec2(1, 113)));
+    p = fract(vec2(262144, 32768)*n)*2. - 1.; 
+    #ifdef ANIMATE
+    return sin(p*6.2831853 + smoothTimeC/2.);
+    #else
+    return p;
+    #endif
+     
+}
+
+// vec2 to vec2 hash.
+vec2 hash22C(vec2 p) { 
+
+    // Faster, but doesn't disperse things quite as nicely. However, when framerate
+    // is an issue, and it often is, this is a good one to use. Basically, it's a tweaked 
+    // amalgamation I put together, based on a couple of other random algorithms I've 
+    // seen around... so use it with caution, because I make a tonne of mistakes. :)
+    float n = sin(dot(p, vec2(289, 41)));
+    return fract(vec2(262144, 32768)*n)*2. - 1.;
+    
+    // Animated.
+    p = fract(vec2(262144, 32768)*n)*2. - 1.; 
+    return sin(p*6.2831853 + smoothTime/5.); 
+}
+
+
+// Based on IQ's gradient noise formula.
+float n2D3G( in vec2 p ){
+   
+    // Cell ID and local coordinates.
+    vec2 i = floor(p); p -= i;
+    
+    // Four corner samples.
+    vec4 v;
+    v.x = dot(hash22C(i), p);
+    v.y = dot(hash22C(i + vec2(1, 0)), p - vec2(1, 0));
+    v.z = dot(hash22C(i + vec2(0, 1)), p - vec2(0, 1));
+    v.w = dot(hash22C(i + 1.), p - 1.);
+
+    // Cubic interpolation.
+    p = p*p*(3. - 2.*p);
+    
+    // Bilinear interpolation -- Along X, along Y, then mix.
+    return mix(mix(v.x, v.y, p.x), mix(v.z, v.w, p.x), p.y);
+    
+}
+
+// Two layers of noise.
+float fBm(vec2 p){ return n2D3G(p)*.57 + n2D3G(p*2.)*.28 + n2D3G(p*4.)*.15; }
 
 float hash(float co) {
   return fract(sin(co*12.9898) * 13758.5453);
@@ -87,7 +150,7 @@ vec3 hsv2rgb(vec3 c) {
 float apollian(vec4 p, float s) {
   float scale = 1.0;
 
-  for(int i=0; i<7; ++i) {
+  for(int i=0; i<9; ++i) {
     p = -1.0 + 2.0*fract(0.5*p+0.5);
 
     float r2 = dot(p,p);
@@ -126,7 +189,7 @@ float circle(vec2 p, float r) {
 // The path function
 vec3 offset(float z) {
   float a = z;
-  vec2 p = -0.10*(vec2(cos(a), sin(a*sqrt(2.0))) + vec2(cos(a*sqrt(0.75)), sin(a*sqrt(0.5))));
+  vec2 p = (-0.010+sin(fBm(circ)*0.001))*(vec2(cos(a), sin(a*sqrt(2.0))) + vec2(cos(a*sqrt(0.5)), sin(a*sqrt(0.5))));
   return vec3(p, z);
 }
 
@@ -201,6 +264,8 @@ vec2 df(vec2 p, float h) {
 //  aa is estimated pixel size at the plane
 //  n is plane number
 vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n) {
+  ro.xy += _uvc*PI;
+ 
   float h = hash(n);
   float s = 0.125*mix(0.5, 0.25, h)*(1/Size);
   float dd= length(pp-ro)*(1/Size);
@@ -221,6 +286,7 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n) {
   
   vec3 hn;
   vec2 p = (pp-off*vec3(1.0, 1.0, 0.0)).xy;
+  p += Noise*fBm(p*fBm(0.5*_rotate(_uvc, smoothTimeC*0.05)));
   p *= ROT(TAU*h);
   vec2 d2 = df(p/s, h)*s;   
 
@@ -250,14 +316,20 @@ vec3 skyColor(vec3 ro, vec3 rd) {
 }
 
 vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
+
+  p.xy += FOV*PI*_uvc;
+
+  p.xy += InsideOut*(p.xy-_uvc)*_rotate(p.xy*_uvc, smoothTimeC*0.5);
+
   float lp = length(p);
   vec2 np = p + 1.0/RESOLUTION.xy;
-  float rdd = (FOV*2.0-0.5*tanh_approx(lp));  // AB:added FOV
+  float rdd = (2.0-0.5*tanh_approx(lp));  // AB:added FOV
 
   //float rdd = (2.0+0.5*tanh_approx(lp));  // Playing around with rdd can give interesting distortions
   vec3 rd = normalize(p.x*uu + p.y*vv + rdd*ww);
+
   vec3 nrd = normalize(np.x*uu + np.y*vv + rdd*ww);
-  
+
   const float planeDist = 1.0-0.75;
   const int furthest = 8;
   const int fadeFrom = max(furthest-3, 0);
@@ -269,7 +341,7 @@ vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
   // Steps from nearest to furthest plane and accumulates the color
 
   vec4 acol = vec4(0.0);
-  const float cutOff = 0.95;
+  const float cutOff = 0.995;
   bool cutOut = false;
   
   for (int i = 1; i <= furthest; ++i) {

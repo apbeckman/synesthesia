@@ -36,7 +36,7 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : 0.45,
+			"MIN" : -1,
 			"NAME" : "FOV",
 			"PARAMS" : 0.211,
 			"TYPE" : "slider smooth",
@@ -50,6 +50,36 @@
 			"NAME" : "Size",
 			"PARAMS" : 0.249,
 			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.75,
+			"MIN" : 0,
+			"NAME" : "Noise",
+			"PARAMS" : 0.095,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "InsideOut",
+			"PARAMS" : 0.103,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		}
 	],

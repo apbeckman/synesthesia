@@ -13,7 +13,7 @@ float dt = 0.25*(0.5+growthFactor/2);
 float pspeed = 6.;
 
 //sensor distance 
-float sdist = 30.*(0.7+growthFactor*0.4);
+float sdist = 130.*(0.7+growthFactor*0.4);
 
 //sensor strenght
 float sst = 10.*(0.75+syn_Level*0.45);
@@ -232,7 +232,7 @@ vec4 renderPassB() {
     vec4 particle = texel(ch0, p);
     float distr = gauss(p - particle.xy, prad);
     //distr *= (1.0+basshits);
-    vec2 ss = vec2(textureSize(ch2,0))/size;
+    vec2 ss = vec2(textureSize(ch2,0))/(size);
     float video = length(Laplace(syn_UserImage, p*ss)*(1+growthFactor*1.5));
     
     //pheromone depositing
@@ -272,8 +272,8 @@ vec4 renderMainImage() {
 
 	vec4 particle = texel(ch0, pos);
     float distr = gauss(pos - particle.xy, prad);
-    vec4 pheromone = 1.35*texel(ch1, pos);
-    fragColor = vec4(sin(pheromone.xyz*vec3(1,1.2,1.5)), 1.1);
+    vec4 pheromone = 1.5*texel(ch1, pos);
+    fragColor = vec4(sin(pheromone.xyz*vec3(1,1.2,1.5)*(0.75)), 1.1);
 	return fragColor; 
  } 
 

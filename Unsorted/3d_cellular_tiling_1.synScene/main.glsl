@@ -67,7 +67,7 @@ vec3 tex3D( sampler2D tex, in vec3 p, in vec3 n ){
 }
 
 // More concise, self contained version of IQ's original 3D noise function.
-float noise3D(in vec3 p){
+float n3D(in vec3 p){
     
     // Just some random figures, analogous to stride. You can change this, if you want.
 	const vec3 s = vec3(7, 157, 113);
@@ -234,7 +234,7 @@ vec3 doBumpMap( sampler2D tx, in vec3 p, in vec3 n, float bf){
 // Surface bump function. Cheap, but with decent visual impact.
 float bumpSurf3D( in vec3 p){
     
-    float noi = noise3D(p*64.);
+    float noi = n3D(p*64.);
     float vor = cellTile2(p*.75);
     
     return vor*.98 + noi*.02;
@@ -399,7 +399,7 @@ float trig3(in vec3 p){
 
 // Basic low quality noise consisting of three layers of rotated, mutated 
 // trigonometric functions. Needs work, but it's OK for this example.
-float trigNoise3D(in vec3 p){
+float trign3D(in vec3 p){
 
     // 3D transformation matrix.
     const mat3 m3RotTheta = mat3(0.25, -0.866, 0.433, 0.9665, 0.25, -0.2455127, -0.058, 0.433, 0.899519 )*1.5;
@@ -442,7 +442,7 @@ float getMist(in vec3 ro, in vec3 rd, in vec3 lp, in float t){
         float sDi = length(lp-ro)/FAR; 
 	    float sAtt = min(1./(1. + sDi*0.25 + sDi*sDi*0.025), 1.);
 	    // Noise layer.
-        mist += trigNoise3D(ro/2.)*sAtt;
+        mist += trign3D(ro/2.)*sAtt;
         // Advance the starting point towards the hit point.
         ro += rd*t/4.;
     }
@@ -469,14 +469,15 @@ vec4 renderMainImage() {
  
     // Light positioning. One is a little behind the camera, and the other is further down the tunnel.
  	vec3 light_pos = camPos + vec3(0., 1, 8);// Put it a bit in front of the camera.
+	lookAt.xy+=(_uvc.xy/4.)*(Fov*PI+Fov*lookAt.xy/PI);
 
+	lookAt.xy+=(lookAt.xy*_uvc*Whoa*PI);
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
 	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
     lookAt.xy += path(lookAt.z);
 	camPos.xy += path(camPos.z);
 	light_pos.xy += path(light_pos.z);
-	lookAt.xy+=(_uvc.xy/4.)*(FOV*PI+FOV*lookAt.xy/PI);
 
     // Using the above to produce the unit ray-direction vector.
     float FOV = PI/2.; // FOV - Field of view.
@@ -490,7 +491,7 @@ vec4 renderMainImage() {
     
     vec3 rd = normalize(forward + FOV*uv.x*right + FOV*uv.y*up);
     rd.xy =  _rotate(rd.xy, Rotation*PI);
-    
+    rd.xy += _rotate(rd.xy*_uvc, PI*n3D(rd.xyz)+smoothTime*0.1)*Flip*n3D(vec3(smoothTime*0.1));
 
     rd.yz = _rotate(rd.yz, LookXY.y*PI);
     rd.xz = _rotate(rd.xz, LookXY.x*PI);
@@ -604,7 +605,7 @@ vec4 renderMainImage() {
         
         
         
-        //vec3 refCol = vec3(.5, .7, 1)*smoothstep(.2, 1., noise3D((sp + ref*2.)*2.)*.66 + noise3D((sp + ref*2.)*4.)*.34 );
+        //vec3 refCol = vec3(.5, .7, 1)*smoothstep(.2, 1., n3D((sp + ref*2.)*2.)*.66 + n3D((sp + ref*2.)*4.)*.34 );
         //sceneCol += refCol*.5;
 
 
@@ -617,8 +618,8 @@ vec4 renderMainImage() {
 	}
        
     // Blend the scene and the background with some very basic, 4-layered fog.
-    float mist = getMist(camPos, rd, light_pos, t)*pow(1.-highhits*0.9, 2.);
-    vec3 sky = (threeWaySin*ColorShift*vec3(1.0, 0.5, 1.0)+Mist* vec3(1.5125, 01.25025, 1.515))* mix(1., .72, mist)*(rd.y*1.25 + 1.);
+    float mist = getMist(camPos, rd, light_pos, t)*(1.0+pow(highhits*0.9, 2.));
+    vec3 sky = (threeWaySin*ColorShift*vec3(1.0, 0.5, 1.0)+Mist* vec3(1.5125, 01.25025, 1.515))* mix(1., .9972, mist)*(rd.y*1.25 + 1.);
     sky+=0.25*Mist;
     sceneCol = mix(sceneCol, sky, min(pow(t, 1.5)*.175/FAR, 1.));
 

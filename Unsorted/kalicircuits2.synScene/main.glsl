@@ -12,9 +12,67 @@
 #ifdef GL_ES
 precision highp float;
 #endif
+mat2 rot2(in float a){ float c = cos(a), s = sin(a); return mat2(c, -s, s, c); }
 
 
-#define 	pi   	3.141592653 	// pi
+// IQ's vec2 to float hash.
+float hash21(vec2 p){  return fract(sin(dot(p, vec2(27.619, 57.583)))*43758.5453); }
+
+
+// vec2 to vec2 hash.
+vec2 hash22B(vec2 p) { 
+
+    // Faster, but doesn't disperse things quite as nicely. However, when framerate
+    // is an issue, and it often is, this is a good one to use. Basically, it's a tweaked 
+    // amalgamation I put together, based on a couple of other random algorithms I've 
+    // seen around... so use it with caution, because I make a tonne of mistakes. :)
+    float n = sin(dot(p, vec2(1, 113)));
+    p = fract(vec2(262144, 32768)*n)*2. - 1.; 
+    return sin(p*6.2831853 + smoothTimeC/2.);   
+}
+
+// vec2 to vec2 hash.
+vec2 hash22C(vec2 p) { 
+
+    // Faster, but doesn't disperse things quite as nicely. However, when framerate
+    // is an issue, and it often is, this is a good one to use. Basically, it's a tweaked 
+    // amalgamation I put together, based on a couple of other random algorithms I've 
+    // seen around... so use it with caution, because I make a tonne of mistakes. :)
+    float n = sin(dot(p, vec2(289, 41)));
+    return fract(vec2(262144, 32768)*n)*2. - 1.;
+    
+    // Animated.
+    p = fract(vec2(262144, 32768)*n)*2. - 1.; 
+    return sin(p*6.2831853 + smoothTime/5.); 
+}
+
+
+// Based on IQ's gradient noise formula.
+float n2D3G( in vec2 p ){
+   
+    // Cell ID and local coordinates.
+    vec2 i = floor(p); p -= i;
+    
+    // Four corner samples.
+    vec4 v;
+    v.x = dot(hash22C(i), p);
+    v.y = dot(hash22C(i + vec2(1, 0)), p - vec2(1, 0));
+    v.z = dot(hash22C(i + vec2(0, 1)), p - vec2(0, 1));
+    v.w = dot(hash22C(i + 1.), p - 1.);
+
+    // Cubic interpolation.
+    p = p*p*(3. - 2.*p);
+    
+    // Bilinear interpolation -- Along X, along Y, then mix.
+    return mix(mix(v.x, v.y, p.x), mix(v.z, v.w, p.x), p.y);
+    
+}
+
+// Two layers of noise.
+float fBm(vec2 p){ return n2D3G(p)*.57 + n2D3G(p*2.)*.28 + n2D3G(p*4.)*.15; }
+
+
+#define 	pi   	PI 	// pi
 	
 float S = (101.0 + glow) * intensity;
 vec3 color = vec3(0.0);
@@ -60,7 +118,10 @@ vec4 renderMain() {
 	else  T = 8.0 * rate - N;
 	float Z = (1.05-zoom);
 	vec2 pos = _xy.xy / RENDERSIZE.xy - 0.5;
+		//pos *= (1.0+Warp*(((_uvc.xy))-1.));
+
 	pos.x *= RENDERSIZE.x/RENDERSIZE.y;
+
 	vec2 uv = pos + center;
 	float sph = length(uv)*0.1; 
 	sph = sqrt(1.0 - sph * sph) * 2.0 ;
@@ -69,9 +130,10 @@ vec4 renderMain() {
 	float c = cos(a) + sin(b);
 
 	uv *= mat2(cos(b), sin(b), -sin(b), cos(b));
+
+	uv *= 1.0+ Warp*(fBm(_rotate(_uvc*(fBm(vec2(_rotate(_uvc, smoothTime*0.05) ))), (smoothTime*0.0125))-1.));
 	uv *= mat2(cos(a),-sin(a), sin(a),cos(a));
 	uv -= vec2(sin(c), cos(c)) / pi;
-			uv *= (1.0+Warp*_uvc.xy);
 
 	uv *= Z;
 

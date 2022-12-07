@@ -19,10 +19,10 @@ vec4 renderPassA() {
     Q  =  A(U);
     image *= MediaImpact;
     // Neighborhood :
-    vec4 pX  =  A(U + vec2(1,0))+(image*growthFactor)*0.375;
-    vec4 pY  =  A(U + vec2(0,1))+(image*growthFactor)*0.375;
-    vec4 nX  =  A(U - vec2(1,0))-(image*growthFactor)*0.375;
-    vec4 nY  =  A(U - vec2(0,1))-(image*growthFactor)*0.375;
+    vec4 pX  =  A(U + vec2(1,0))+(image*(0.75+(0.25*growthFactor)))*0.375;
+    vec4 pY  =  A(U + vec2(0,1))+(image*(0.75+(0.25*growthFactor)))*0.375;
+    vec4 nX  =  A(U - vec2(1,0))-(image*(0.75+(0.25*growthFactor)))*0.375;
+    vec4 nY  =  A(U - vec2(0,1))-(image*(0.75+(0.25*growthFactor)))*0.375;
     vec4 m = 0.25*(pX+nX+pY+nY+Intensity);
     float b = mix(1.,abs(Q.z),.78+growthFactor*0.01);
     
@@ -33,9 +33,9 @@ vec4 renderPassA() {
     
     if (length(Q.xy)>0. || Reset > 0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1 || Reset > 0.) Q = sin(.01*length(U-(0.5*RENDERSIZE.xy))*vec4(1,2,3,4));
+    if(FRAMECOUNT <= 1 || Reset > 0.) Q = sin(.01*length(U-(0.5*RENDERSIZE.xy+PI*0.25*_uvc))*vec4(1,2,3,4));
     
-    if (_mouse.z>0.&&length(U-_mouse.xy)<(RENDERSIZE.y)*0.125) Q *= 0.;
+    if (_mouse.z>0.&&length(U-_uvc-_mouse.xy)<(RENDERSIZE.y)*0.125) Q *= 0.;
     
 	return Q; 
  } 
@@ -52,6 +52,8 @@ vec4 renderMainImage() {
 
     Q  =  A1(U);
     vec4 pX  =  A1(U + vec2(1,0));
+    pX.xy+= _uvc*PI;
+
     vec4 pY  =  A1(U + vec2(0,1));
     vec4 nX  =  A1(U - vec2(1,0));
     vec4 nY  =  A1(U - vec2(0,1));

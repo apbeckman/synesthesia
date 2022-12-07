@@ -1,0 +1,25 @@
+{
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "simple colorful particles system",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image14854",
+			"PATH" : ""
+		}
+	],
+	"IMAGE_PATH" : "particles_party.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Particles Party",
+	"WIDTH" : 1280
+}
