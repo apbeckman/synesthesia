@@ -64,7 +64,7 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 3,
+			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "Warp",
 			"PARAMS" : 0.137,
@@ -121,8 +121,8 @@
 	"CREDIT" : "by mojovideotech",
 	"DESCRIPTION" : "",
 	"GPU" : 0,
-	"HEIGHT" : 2160,
+	"HEIGHT" : 1440,
 	"IMAGE_PATH" : "kalicircuits2.png",
 	"TITLE" : "KaliCircuits2",
-	"WIDTH" : 3840
+	"WIDTH" : 2560
 }

@@ -132,21 +132,23 @@ vec4 renderMainImage() {
     vec2 uv = (fragCoord * 2. - RENDERSIZE.xy) / min(RENDERSIZE.x, RENDERSIZE.y);
 	vec2 mo = _mouse.xy / RENDERSIZE.xy * 2.0 - 1.0;
 
-	vec3 cameraPos = vec3(0., 0., 3. * TIME);
+	vec3 cameraPos = vec3(0.*_uvc.x,_uvc.y* 0., smoothTime);
+	cameraPos.xy*= _uvc*PI;
     
 	// angolo visuale
-	vec2 a = 0.8 * uv;
+	vec2 a = (FOV*0.8) * uv;
+	a.xy *=1.0-Warp*((_uvc*uv)+1);
 	vec3 rayDirection = normalize(vec3(sin(a.x) * cos(a.y), sin(a.y), cos(a.x) * cos(a.y)));
     
 	// rotazione vista
 	rayDirection = rotate(rayDirection, 0.25 * PI * mo.y, vec3(1., 0., 0.));
 	rayDirection = rotate(rayDirection, PI * mo.x, vec3(0., 1., 0.));
-    rayDirection.yz = _rotate(rayDirection.yz, lookXY.y*PI+0.75);
-    rayDirection.xy = _rotate(rayDirection.xy, lookXY.x*PI);
-    rayDirection.xz = _rotate(rayDirection.xz, lookZ*PI);
+    rayDirection.yz = _rotate(rayDirection.yz, -lookXY.y*PI+0.75);
+    rayDirection.xy = _rotate(rayDirection.xy, lookZ*PI);
+    rayDirection.xz = _rotate(rayDirection.xz, lookXY.x*PI);
 
 	const vec3 bgcol = vec3(0.5); // colore foschia
-	const vec3 lightcol = vec3(0.95, 0.9, 0.90); // colore luci
+	vec3 lightcol = vec3(0.95, 0.9, 0.90)+highhits; // colore luci
     
 	vec3 col = bgcol;
 	float depth = 0.0;
@@ -192,7 +194,7 @@ vec4 renderMainImage() {
 			}
 			// colonna
 			else if(colonnaDist(rayPos) < threshold) {
-				col = lerp(vec3(0.90, 0.90, 0.85), vec3(0.80, 0.60, 0.55), marble(rayPos));
+				col = lerp(vec3(0.90, 0.90, 0.85), vec3(01.740, 01.760, 01.55), marble(rayPos+vec3(smoothTimeC*0.1, smoothTimeC*0.1, 0.)));
 				vec2 v = mod(rayPos.xz, 4.0) - 2.0;
 				norm = normalize(vec3(v.x, 0.0, v.y));
 			}

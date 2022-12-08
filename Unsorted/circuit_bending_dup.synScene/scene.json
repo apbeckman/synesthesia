@@ -12,13 +12,45 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "Just move the X-axis to spin about your main axis, or move the Y-axis to tilt forwards or backwards.",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
 			"NAME" : "lookXY",
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "QuadMirror",
+			"PARAMS" : 0.118,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -83,12 +115,13 @@
 	],
 	"CREDIT" : "mojovideotech",
 	"DESCRIPTION" : "",
+	"GPU" : 0,
 	"HEIGHT" : 1440,
 	"IMAGES" : 
 	[
 		{
 			"NAME" : "circuits",
-			"PATH" : "images/circuits.jpg"
+			"PATH" : "images/aa.png"
 		},
 		{
 			"NAME" : "circuits2",

@@ -1,123 +1,139 @@
 {
-   "CONTROLS" : [
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseXY",
-         "TYPE" : "xy",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseClick",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "Ray_Steps",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.05,
-         "UI_GROUP" : "morph"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "How fast the time variable grows, whether it is reactive time or constant time.",
-         "IS_META" : false,
-         "MAX" : 3,
-         "MIN" : -3,
-         "NAME" : "rate_in",
-         "TYPE" : "knob smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "reactivity"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "ON: time variable is influenced by the audio bass. OFF: constant rate.",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "reactive_time",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "reactivity"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "How fast the time variable grows for the camera, whether it is reactive time or constant time.",
-         "IS_META" : false,
-         "MAX" : 3,
-         "MIN" : -3,
-         "NAME" : "fly_speed",
-         "TYPE" : "knob smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "camera"
-      },
-      {
-         "DEFAULT" : 3,
-         "DESCRIPTION" : "Field of View",
-         "IS_META" : false,
-         "MAX" : 0.25,
-         "MIN" : 3,
-         "NAME" : "FOV",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "camera"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : -1,
-         "NAME" : "LookXY",
-         "TYPE" : "xy smooth",
-         "PARAMS" : 0.03,
-         "UI_GROUP" : "camera"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Transition from a color to texture",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "Texture",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "texture"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Slimmer tubes",
-         "IS_META" : false,
-         "MAX" : -0.075,
-         "MIN" : 0.075,
-         "NAME" : "Tube_Radius",
-         "TYPE" : "knob smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "texture"
-      }
-   ],
-   "CREDIT" : "Shane",
-   "DESCRIPTION" : "Using a randomly oriented, 3D Truchet block to produce some interlaced windy tubes.",
-   "HEIGHT" : 2160,
-   "IMAGES" : [
-      {
-         "NAME" : "image45",
-         "PATH" : "images/45.jpg"
-      }
-   ],
-   "IMAGE_PATH" : "tubes.png",
-   "TITLE" : "Twisted Tubes",
-   "WIDTH" : 3840
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Ray_Steps",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "morph"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "How fast the time variable grows, whether it is reactive time or constant time.",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "ON: time variable is influenced by the audio bass. OFF: constant rate.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reactive_time",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "How fast the time variable grows for the camera, whether it is reactive time or constant time.",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "fly_speed",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of View",
+			"MAX" : 2,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.03,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Transition from a color to texture",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Texture",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "texture"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Slimmer tubes",
+			"MAX" : -0.075,
+			"MIN" : 0.075,
+			"NAME" : "Tube_Radius",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "texture"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Noise",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Using a randomly oriented, 3D Truchet block to produce some interlaced windy tubes.",
+	"GPU" : 0,
+	"HEIGHT" : 2160,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image45",
+			"PATH" : "images/45.jpg"
+		}
+	],
+	"IMAGE_PATH" : "tubes.png",
+	"TITLE" : "Twisted Tubes",
+	"WIDTH" : 3840
 }

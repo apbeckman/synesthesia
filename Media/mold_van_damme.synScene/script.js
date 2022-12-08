@@ -43,6 +43,17 @@ var highhits = 0.0;
 var basshits = 0.0;
 function update(dt) {
 
+
+  if (_click.x > 0.5) {
+    setControl('manual_position',[_muv.x*2-1, _muv.y*2-1])
+    setControl('mouse_on',1);
+    clicked = true;
+}
+ else if (clicked) {
+    setControl('manual_impulse',0);
+    clicked = false;
+}
+
   var bpm = inputs.syn_BPM/4.0;
   bpmcount.updateTime(bpm, dt);
 

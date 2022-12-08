@@ -74,15 +74,18 @@ float fBm(vec2 p){ return n2D3G(p)*.57 + n2D3G(p*2.)*.28 + n2D3G(p*4.)*.15; }
 
 #define 	pi   	PI 	// pi
 	
-float S = (101.0 + glow) * intensity;
+float S = (101.0*(1.0+highhits) + glow) * (intensity);
+
 vec3 color = vec3(0.0);
 
 void formula(vec2 z, float t) 
 {
+	S *= (1.0+0.05*highhits);
+	
 	float M = 0.0;
 	float o, ot2, ot=ot2=1000.0;
 	float K = floor(loops/4.0)+floor(5.0 * zoom);
-	for (int i=0; i<11; i++) {
+	for (int i=0; i<9; i++) {
 		z = abs(z) / clamp(dot(z, z), 0.1, 0.5) - t;
 		float l = length(z);
 		o = min(max(abs(min(z.x, z.y)), -l + 0.25), abs(l - 0.25));
@@ -97,7 +100,6 @@ void formula(vec2 z, float t)
 	float circ = pow(max(0.0, w - ot2) / w, 6.0);
 	S += max(pow(max(0.0, w - ot) / w, 0.25), circ);
 	vec3 col = normalize(0.1 + vec4(0.45, 0.75, M * 0.1, 1.0).rgb);
-	col *=(1.0+highhits);
 
 	color += col * (0.4 + mod(M / 9.0 - t * pulse + ot2 * 2.0, 1.0));
 	color += vec3(1.0, 0.7, 0.3) * circ * (10.0 - M) * 3.0;
@@ -122,7 +124,10 @@ vec4 renderMain() {
 
 	pos.x *= RENDERSIZE.x/RENDERSIZE.y;
 
-	vec2 uv = pos + center;
+	vec2 uv = pos ;
+	uv *= -1.0 + Warp * (1.0 - (_uvc*PI-uv));
+	uv += center;
+
 	float sph = length(uv)*0.1; 
 	sph = sqrt(1.0 - sph * sph) * 2.0 ;
 	float a = T * pi;
@@ -131,7 +136,7 @@ vec4 renderMain() {
 
 	uv *= mat2(cos(b), sin(b), -sin(b), cos(b));
 
-	uv *= 1.0+ Warp*(fBm(_rotate(_uvc*(fBm(vec2(_rotate(_uvc, smoothTime*0.05) ))), (smoothTime*0.0125))-1.));
+	//uv *= 1.0+ Warp*(_uvc*fBm(_rotate(_uvc*uv+(fBm(vec2(_rotate(_uvc, smoothTime*0.05) ))), (smoothTime*0.0125))-1.));
 	uv *= mat2(cos(a),-sin(a), sin(a),cos(a));
 	uv -= vec2(sin(c), cos(c)) / pi;
 

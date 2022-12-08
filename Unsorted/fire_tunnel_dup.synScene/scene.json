@@ -86,10 +86,43 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "slider traveler",
 			"UI_GROUP" : "rotation"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "aiekick",
 	"DESCRIPTION" : "Fire Tunnel",
+	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[

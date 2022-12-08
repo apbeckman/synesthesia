@@ -47,6 +47,42 @@
 	https://www.shadertoy.com/view/4d2GzV
 
 */
+float random (in float x) {
+	return fract(sin(x) * 1e4);
+}
+
+// Based on Morgan McGuire @morgan3d
+// https://www.shadertoy.com/view/4dS3Wd
+float noise (in vec3 p) {
+	const vec3 step = vec3(110.0, 241.0, 171.0);
+
+	vec3 i = floor(p);
+	vec3 f = fract(p);
+
+    // For performance, compute the base input to a
+    // 1D random from the integer part of the
+    // argument and the incremental change to the
+    // 1D based on the 3D -> 1D wrapping
+	float n = dot(i, step);
+
+	vec3 u = f * f * (3.0 - 2.0 * f);
+
+	return mix( mix(mix(random(n + dot(step, vec3(0,0,0))),
+                        random(n + dot(step, vec3(1,0,0))),
+                        u.x),
+                    mix(random(n + dot(step, vec3(0,1,0))),
+                        random(n + dot(step, vec3(1,1,0))),
+                        u.x),
+                u.y),
+                mix(mix(random(n + dot(step, vec3(0,0,1))),
+                        random(n + dot(step, vec3(1,0,1))),
+                        u.x),
+                    mix(random(n + dot(step, vec3(0,1,1))),
+                        random(n + dot(step, vec3(1,1,1))),
+                        u.x),
+                u.y),
+                u.z);
+}
 
 // Tri-Planar blending function. Based on an old Nvidia writeup:
 // GPU Gems 3 - Ryan Geiss: http://http.developer.nvidia.com/GPUGems3/gpugems3_ch01.html
@@ -189,12 +225,12 @@ float calculateAO(vec3 p, vec3 n){
 // Cheap shadows are hard. In fact, I'd almost say, shadowing repeat objects - in a setting like this - with limited
 // iterations is impossible... However, I'd be very grateful if someone could prove me wrong. :)
 float softShadow(vec3 ro, vec3 lp, float k){
-
+    
     // More would be nicer. More is always nicer, but not really affordable... Not on my slow test machine, anyway.
     const int maxIterationsShad = 16;
 
     vec3 rd = (lp-ro); // Unnormalized direction ray.
-
+    
     float shade = 1.0;
     float dist = 0.05;
     float end = max(length(rd), 0.001);
@@ -226,6 +262,7 @@ vec4 renderMainImage() {
 
     // Screen coordinates.
     vec2 u = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;
+    u.xy += _uvc*PI*FOV;
 
     // Unit direction ray vector: Note the absence of a divide term. I came across
     // this via a comment Shadertoy user "coyote" made. I'm pretty happy with this.
@@ -237,9 +274,12 @@ vec4 renderMainImage() {
     //rd.xz = rd.xz*mat2(m.xy, -m.y, m.x);
 
     // Ray origin, set off in the YZ direction. Note the "0.5." It's an old lattice trick.
-    vec3 ro = vec3(0.0, fly_time/4. + 0.5, fly_time/4.);
-    vec3 ro = camPath(fly_time);
-    vec3 lk = camPath(fly_time + .25); // MS: trying out my first "look" vector
+    vec3 ro = vec3(0.0, 0., fly_time/4.);
+    //vec3 ro = camPath(fly_time);
+    vec3 lk = camPath(fly_time); // MS: trying out my first "look" vector
+    lk.xy += _uvc*PI*FOV;
+    lk.xy += noise(vec3(smoothTime*0.1));
+
     vec3 lp = ro + vec3(0.2, 0.5, -0.5); // Light, near the ray origin.
 
     float FOV = 3.14159/FOV;
@@ -247,7 +287,11 @@ vec4 renderMainImage() {
     vec3 rgt = normalize(vec3(fwd.z, 0, -fwd.x ));
     vec3 up = cross(fwd, rgt);
     // Unit direction ray.
-    vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
+    vec3 r = normalize(fwd + (u.x*rgt + u.y*up));
+    r.xy = _rotate(r.xy, Rotate*PI);
+
+    r.xz = _rotate(r.xz, LookXY.x*PI);
+    r.yz = _rotate(r.yz, LookXY.y*PI);
 
     float t = trace(ro, r); // Raymarch.
 

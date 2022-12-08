@@ -19,7 +19,7 @@
 				-1
 			],
 			"NAME" : "lookXY",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.063,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
@@ -39,11 +39,29 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "flashy",
-			"PARAMS" : 0.01,
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.5,
+			"NAME" : "FOV",
+			"PARAMS" : 0.102,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : 0,
+			"NAME" : "Warp",
+			"PARAMS" : 0.118,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
-
 	],
 	"CREDIT" : "lucasassone",
 	"DESCRIPTION" : "Infinite columns.\nUse the mouse to look around",

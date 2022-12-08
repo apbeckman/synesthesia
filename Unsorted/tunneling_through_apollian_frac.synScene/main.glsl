@@ -150,7 +150,7 @@ vec3 hsv2rgb(vec3 c) {
 float apollian(vec4 p, float s) {
   float scale = 1.0;
 
-  for(int i=0; i<9; ++i) {
+  for(int i=0; i<4; ++i) {
     p = -1.0 + 2.0*fract(0.5*p+0.5);
 
     float r2 = dot(p,p);
@@ -237,8 +237,8 @@ float circles(vec2 p) {
 
 float onionize(float d) {
   d = abs(d) - 0.02;
-  d = abs(d) - 0.005;
   d = abs(d) - 0.0025;
+  d = abs(d) - 0.00125;
   return d;
 }
 
@@ -267,8 +267,8 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n) {
   ro.xy += _uvc*PI;
  
   float h = hash(n);
-  float s = 0.125*mix(0.5, 0.25, h)*(1/Size);
-  float dd= length(pp-ro)*(1/Size);
+  float s = 0.125*mix(0.5, 0.25, h);
+  float dd= length(pp-ro);
 
   const vec3 nor  = normalize(vec3(0.0, 0.0, 1.0));
   const vec3 loff = vec3(0.25*0.5, 0.125*0.5, -0.125);

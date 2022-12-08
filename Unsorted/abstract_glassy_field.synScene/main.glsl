@@ -22,7 +22,43 @@
 	free to let me know.
 
 */
+//modified from https://www.shadertoy.com/view/ltfXWS, tested a few different versions of this same function and this one seemed to have the nicest results
+vec4 texture2DAA(sampler2D tex, in vec3 p, vec2 uv) {
+    vec2 texsize = vec2(textureSize(tex,0));
+    vec2 uv_texspace = uv*texsize;
+    vec2 seam = floor(uv_texspace+.5);
+    uv_texspace = (uv_texspace-seam)/fwidth(uv_texspace)+seam;
+    uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
+    return texture(tex, uv_texspace/texsize);
+}
 
+
+vec4 texture2DAA1(sampler2D tex, in vec3 p, in vec3 n) {
+    vec2 uv = _xy;
+    vec2 texsize = vec2(textureSize(tex,0));
+    vec2 uv_texspace = uv*texsize;
+    vec2 seam = floor(uv_texspace+.5);
+    uv_texspace = (uv_texspace-seam)/fwidth(uv_texspace)+seam;
+    uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
+    return texture(tex, uv_texspace/texsize);
+}
+
+/*
+vec2 aliasTex(sampler2D t, in vec3 p, in vec3 n)
+{
+    vec2 fragCoord = _xy;
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/RENDERSIZE.xx;//*(sin(iTime*.2)+1.5)-vec2(.5, .5);
+    //uv *= mat2(sin(iTime * 0.1), cos(iTime * 0.1), -cos(iTime * 0.1), sin(iTime * 0.1));
+
+    //if(fragCoord.x/iResolution.x < .5){
+    vec2 tx = texture2DAA(image47, uv); //anti aliased scaling (iChannel0 is set to "linear" scaling)
+    //} else {
+      //  fragColor = texture(iChannel1, uv); //nearest neighbor scaling (iChannel1 is set to "nearest" scaling)
+    //}
+    return tx;
+}
+*/
 #define FAR 35. // Far plane, or maximum distance.
 vec2 hash( vec2 p ) // replace this by something better
 {
@@ -72,13 +108,19 @@ mat2 rot2( float a ){ vec2 v = sin(vec2(1.570796, 0) - a);	return mat2(v, -v.y, 
 // Tri-Planar blending function. Based on an old Nvidia writeup:
 // GPU Gems 3 - Ryan Geiss: https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch01.html
 vec3 tpl( sampler2D t, in vec3 p, in vec3 n ){
-    
+   //     vec3 ttx= texture2DAA(image47, p.zy ).xyz;
+   //     vec3 tty= texture2DAA(image47, p.xz ).xyz;
+   //     vec3 ttz= texture2DAA(image47, p.xy ).xyz;
+
     n = max(abs(n) - .2, 0.001);
     n /= dot(n, vec3(1));
 	vec3 tx = texture(t, p.zy).xyz;
     vec3 ty = texture(t, p.xz).xyz;
     vec3 tz = texture(t, p.xy).xyz;
-    
+    //vec3 tx = ttx.xyz;
+    //vec3 ty = tty.xyz;
+    //vec3 tz = ttz.xyz;
+
     // Textures are stored in sRGB (I think), so you have to convert them to linear space 
     // (squaring is a rough approximation) prior to working with them... or something like that. :)
     // Once the final color value is gamma corrected, you should see correct looking colors.
@@ -178,7 +220,7 @@ float trace(in vec3 ro, in vec3 rd){
         h = map(ro+rd*t);
         // Note the "t*b + a" addition. Basically, we're putting less emphasis on accuracy, as
         // "t" increases. It's a cheap trick that works in most situations... Not all, though.
-        if(abs(h)<0.001*(t*.25 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
+        if(abs(h)<0.001*(t*.125 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
         t += h;
         
         // Simple distance-based accumulation to produce some glow.
@@ -216,16 +258,21 @@ float sha(in vec3 ro, in vec3 rd, in float start, in float end, in float k){
 
 // Texture bump mapping. Four tri-planar lookups, or 12 texture lookups in total.
 vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
-   
+
     vec2 e = vec2(0.01255, 0);
-    
+
     // Three gradient vectors rolled into a matrix, constructed with offset greyscale texture values.    
-    mat3 m = mat3( tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n));
+    //mat3 m = mat3( tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n));
+    //mat3 m = mat3( tpl(tx, p + e.yxy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n));
+    mat3 m = mat3( texture2DAA1(tx, p + e.yxy, n), texture2DAA1(tx, p + e.yxy, n), texture2DAA1(tx, p + e.yxy, n));
     
-    vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
+    ///vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
+    vec3 g = vec3(0.2, 0.2, 0.2)*m; // Converting to greyscale.
+    
     g = (g - dot(tpl(tx,  p , n), vec3(0.299, 0.587, 0.114)) )/e.x; g -= n*dot(n, g);
                       
-    return normalize( n + g*bf ); // Bumped normal. "bf" - bump factor.
+    //return normalize(( n + g*bf)); // Bumped normal. "bf" - bump factor.
+    return normalize(( n + g*bf)); // Bumped normal. "bf" - bump factor.
 	
 }
 
@@ -305,8 +352,8 @@ vec4 renderMainImage() {
         
         // Texture bump the normal.
         float sz = (1./(5.)); 
-        n = db(image47, p*sz, n, .1/(1. + t*.25/FAR));
 
+        n = db(image47, p*sz, n, .1/(1. + t*.25/FAR));
         l -= p; // Light to surface vector. Ie: Light direction vector.
         float d = max(length(l), 0.001); // Light to surface distance.
         l /= d; // Normalizing the light direction vector.
@@ -355,7 +402,7 @@ vec4 renderMainImage() {
         // Obviously, the reflected\refracted colors will involve lit values from their respective
         // hit points, but this is fake, so we're just combining it with a portion of the surface 
         // diffuse value.
-        col += refCol*((di*di*.25+.75) + ao*.25)*5; // Add the reflected color. You could combine it in other ways too.
+        col += refCol*((di*di*1.25+.75) + ao*.25)*5; // Add the reflected color. You could combine it in other ways too.
         
         // Based on IQ's suggestion: Using the diffuse setting to vary the color slightly in the
         // hope that it adds a little more depth. It also gives the impression that Beer's Law is 
@@ -367,6 +414,7 @@ vec4 renderMainImage() {
         // Taking the accumulated color (see the raymarching function), tweaking it to look a little
         // hotter, then combining it with the object color.
         vec3 accCol = vec3(1, .3, .1)*accum;
+        
         vec3 gc = pow(min(vec3(1.5, 1, 1)*accum, 1.), vec3(1, 2.5, 12.))*.5 + accCol*.5;
         col += col*gc*12.;
         
@@ -399,7 +447,7 @@ vec4 renderMainImage() {
  
     
     // Rough gamma correction, and we're done.
-    fragColor = vec4(sqrt(clamp(col, 0., 1.)), 1);
+    fragColor = vec4(sqrt(clamp(col, 0., 1.25)), 1);
     
     
 	return fragColor; 

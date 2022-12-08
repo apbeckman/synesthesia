@@ -9,6 +9,42 @@
 ////////////////////////////////////////////////////////////
 
 //Modifications by Meebs
+float random (in float x) {
+	return fract(sin(x) * 1e4);
+}
+
+// Based on Morgan McGuire @morgan3d
+// https://www.shadertoy.com/view/4dS3Wd
+float n3D (in vec3 p) {
+	const vec3 step = vec3(110.0, 241.0, 171.0);
+
+	vec3 i = floor(p);
+	vec3 f = fract(p);
+
+    // For performance, compute the base input to a
+    // 1D random from the integer part of the
+    // argument and the incremental change to the
+    // 1D based on the 3D -> 1D wrapping
+	float n = dot(i, step);
+
+	vec3 u = f * f * (3.0 - 2.0 * f);
+
+	return mix( mix(mix(random(n + dot(step, vec3(0,0,0))),
+                        random(n + dot(step, vec3(1,0,0))),
+                        u.x),
+                    mix(random(n + dot(step, vec3(0,1,0))),
+                        random(n + dot(step, vec3(1,1,0))),
+                        u.x),
+                u.y),
+                mix(mix(random(n + dot(step, vec3(0,0,1))),
+                        random(n + dot(step, vec3(1,0,1))),
+                        u.x),
+                    mix(random(n + dot(step, vec3(0,1,1))),
+                        random(n + dot(step, vec3(1,1,1))),
+                        u.x),
+                u.y),
+                u.z);
+}
 
 
 #define 	twpi  	PI*2.0  	// two pi, 2*pi
@@ -26,7 +62,7 @@ vec3 tpl( sampler2D t, in vec3 p, in vec3 n ){
 }
 
 vec3 colGet(float t){
-    return _palette(_triWave(t, 1.0), vec3(0.340, 0.380-0.2*syn_BassLevel, -0.180), vec3(0.339, 0.040+0.2*syn_BassLevel, 0.670), vec3(0.555, 0.900, 0.315), vec3(0.500, 0.890, 0.000));
+    return _palette(_triWave(t, 1.0), vec3(0.340, 0.380-0.12*syn_BassLevel, -0.180), vec3(0.339, 0.040+0.2*syn_BassLevel, 0.670), vec3(0.2555, 0.900, 0.315), vec3(0.500, 0.890, 0.000));
 }
 
 vec4 renderMain() { 
@@ -39,17 +75,21 @@ vec4 renderMain() {
     vec3 sp = vec3( sin(ph) * cos(th), sin(th), cos(ph) * cos(th) );
     // sp.xy += lookXY;
     sp = mix(sp, normalize(vec3(_uvc, 1.0)), perspective);
-    sp.yz = _rotate(sp.yz, lookXY.y*PI);
-    sp.xy = _rotate(sp.xy, lookXY.x*PI);
-    vec3 camPos = vec3( pi, pi, smoothTime);
 
+    sp.yz = _rotate(sp.yz, lookXY.y*PI+0.05*n3D(vec3(smoothTime*0.05)));
+    sp.xz = _rotate(sp.xz, lookXY.x*PI+0.05*n3D(vec3(smoothTime*0.075)));
+
+    sp.xy = _rotate(sp.xy, Rotate*PI+0.025*n3D(vec3(smoothTime*0.01)));
+    sp.xy += sp.xy*_uvc*PI*QuadMirror*PI;
+
+    vec3 camPos = vec3( pi, pi, smoothTime);
     vec3 pos = camPos;
     vec3 dir = normalize(sp);
     vec3 signdir = sign(dir);
     float stepsize = 1.0;
     float dist = 0.0;
     vec3 normal;
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 40; i++) {
         vec3 p = mod(pos, twpi * stepsize) - pi * stepsize;
         p.z = mix(p.z, 0.0, mix(thin_structure, 0.78, fully_open));
         vec3 num = (stepsize - p * signdir) * step( abs(p), vec3(stepsize) ) / dir * signdir;

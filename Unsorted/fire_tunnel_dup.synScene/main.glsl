@@ -78,13 +78,18 @@ vec3 cam(vec2 uv, vec3 ro, vec3 cu, vec3 cv, float fov)
 {
 	vec3 rov = normalize(cv-ro);
     vec3 u = normalize(cross(cu, rov));
+	//u.xy += _uvc*PI;
+	
     vec3 v = normalize(cross(rov, u));
+	
     vec3 rd = normalize(rov + fov*u*uv.x + fov*v*uv.y);
-    return rd;
+
+	return rd;
 }
 
 vec4 march(vec4 f, vec3 ro, vec3 rd, float st)
 {
+	
 	float s = 1., h = .25*constriction, td = 0.0, d=1.,dl=0.2, w;
 	vec3 p = ro;
 	for(float i=0.;i<240.0;i++)
