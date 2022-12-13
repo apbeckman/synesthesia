@@ -14,7 +14,7 @@ vec4 renderPassA() {
         vec4 a = A(U);
         U -= a.x*a.zw;
     }
-    Q = A(U)+(image*growthFactor)*0.35;
+    Q = A(U);
     vec4 
         n = A(U+vec2(0,1)),
         e = A(U+vec2(1,0)),
@@ -50,7 +50,7 @@ vec4 renderPassB() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i <15; i++) {
         vec4 a = AA(U);
         U -= a.x*a.zw;
     }
@@ -71,7 +71,7 @@ vec4 renderPassB() {
     Q.x = Q.x+x-0.00+(e.z*e.x-w.z*w.x+n.w*n.x-s.w*s.x);
     Q.y = Q.y-x+0.04*Q.y*(1.-Q.y)*(1.0+basshits);
     Q.xy = max(Q.xy,0.);
-    Q.zw = Q.zw - .025*vec2(e.y-w.y,n.y-s.y);
+    Q.zw = Q.zw - .0125*vec2(e.y-w.y,n.y-s.y);
     if (U.x < 1. || U.y < 1. || R.x-U.x<1. || R.y-U.y<1.)Q.x*=0.;
     if (_mouse.z>0.&&length(_mouse.xy-U)<40.)Q*=0.;
     if (FRAMECOUNT <= 1) Q = vec4(exp(-.1*length(U-0.5*R)),1,0,0);
@@ -89,7 +89,7 @@ vec4 renderPassC() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 15; i++) {
         vec4 a = AB(U);
         U -= a.x*a.zw;
     }
@@ -137,7 +137,7 @@ vec4 renderPassD() {
    vec3 li = vec3(1.3*R,.3*R.x);
    li += vec3(sin(TIME), cos(TIME), 0.);
    p += d*dot(-p,vec3(0,0,1))/dot(d,vec3(0,0,1));
-   for (int i = 0; i < 10; i++) {
+   for (int i = 0; i < 20; i++) {
    	p += .6*d*(p.z-A1(p.xy));
    }
    vec3 q = li;
@@ -169,7 +169,7 @@ vec4 renderMainImage() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
 
-	   Q = 3.*D(U);
+	   Q = (4.*(1+highhits))*D(U);
     float d = 0.1;
     float a = -0.1, si = sin(a), co = cos(a);
     mat2 m = mat2(co,-si,si,co);
@@ -178,7 +178,7 @@ vec4 renderMainImage() {
         e = m*vec2(1,0),
         s = m*vec2(0,-1),
         w = m*vec2(-1,0);
-    for (float i = 0.; i < 15.; i++) {
+    for (float i = 0.; i < 20.; i++) {
     	Q += d*D(U+i*n)*exp(-.2*i);
     	Q += d*D(U-i*e)*exp(-.2*i);
     	Q += d*D(U+i*s)*exp(-.2*i);

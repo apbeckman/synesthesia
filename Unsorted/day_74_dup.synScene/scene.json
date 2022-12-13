@@ -42,21 +42,32 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 3.14,
-			"MIN" : -3.14,
+			"MAX" : 2,
+			"MIN" : -2,
 			"NAME" : "FOV",
 			"PARAMS" : 0.144,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 0.05,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				0.05,
+				0.05
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "WarpFurther",
-			"PARAMS" : 0.081,
-			"TYPE" : "slider smooth",
+			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		}
 	],

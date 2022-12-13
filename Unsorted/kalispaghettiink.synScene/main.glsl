@@ -31,8 +31,11 @@ float de(vec3 p) {
         p.xy=abs(p.xy); 
         p=p*s-1./sc;
         sc*=s;
+        p.xz = _rotate(p.xz, RotateXY.x*PI);
+        p.yz = _rotate(p.yz, RotateXY.y*PI);
+
         p.xz*=rotm+(RotateXY.x*0.125);
-        p.yz*=rot2D((30.+(RotateXY.y*4.5))+rot);
+        p.yz*=rot2D((30.)+rot);
         float d=length(p.xz+sin(p.y)*.5)-.2/sc;
 		mp=min(mp,abs(p));
         if (d<md) {
@@ -54,7 +57,7 @@ vec3 march(vec3 from, vec3 dir) {
         if (totdist>maxdist||length(col)>.3) break;
         col+=max(0.,det-d)*l;
     }
-	col=.96-col*2.5*vec3(3.,2.,1.);
+	col=.96-col*2.5*vec3(2.,3.,1.);
     return col;
 }
 
@@ -64,7 +67,10 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
     vec2 uv=fragCoord/RENDERSIZE.xy-.5;
+    
     uv.x*=RENDERSIZE.x/RENDERSIZE.y;
+        uv += uv*_uvc*PI*PI*Warp;
+
     rotm=rot2D(-90.);
     vec3 dir=normalize(vec3(uv,.7));
     vec3 from=vec3(1.,2.,-5.);
@@ -73,7 +79,7 @@ vec4 renderMainImage() {
     dir=lookat(-from,vec3(.5,1.,0.))*dir;
 	vec3 col=march(from, dir);   
 	col=mix(vec3(1.),col,min(1.,smoothTimeC*.12));
-    col=min(col,1.-smoothstep(.85,1.,abs(1.-mod(uv.y*1200.,2.)))*.4);
+  //  col=min(col,1.-smoothstep(.85,1.,abs(1.-mod(uv.y*1200.,2.)))*.4);
     fragColor = vec4(col,1.0);
 	return fragColor; 
  } 

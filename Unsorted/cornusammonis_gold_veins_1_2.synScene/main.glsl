@@ -521,7 +521,7 @@ vec4 renderMainImage() {
     vec3 ib = (0.64+0.35*syn_Intensity+.35*syn_Presence) * i + (0.5+0.05*syn_HighLevel) * (i_n+i_e+i_s+i_w);
     //vec3 ib = .75 * i + 0.75 * (i_n+i_e+i_s+i_w);
 
-    vec3 ld = normz(vec3(0.5+0.5*vec2(cos(smoothTimeB/4.0), sin(smoothTimeB/4.0)) - uv, -1.));
+    vec3 ld = normz(vec3(0.5+0.5*vec2(0.5*cos(smoothTimeB/4.0), 0.5*sin(smoothTimeB/4.0)) - uv, -1.));
     
     float spec = 0.0;    
     for(int i = 0; i < 2; i++) {

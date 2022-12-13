@@ -8,6 +8,7 @@
 #define D(u) texture(BuffD,(u)/RENDERSIZE.xy)
 #define D(u) texture(BuffD,(u)/RENDERSIZE.xy)
 #define T(u) texture(image46,(u)/RENDERSIZE.xy)
+float growthFactor = normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0));
 
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
@@ -15,7 +16,7 @@ vec4 renderPassA() {
 
     vec4  r = vec4(0);
     vec4  a = D(u);
-    float z = 6.;
+    float z = 6.*K;
     float t = 0.;
     for(float i=-z; i<=z; ++i){
     for(float j=-z; j<=z; ++j){
@@ -38,9 +39,10 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
-
     vec4  r = D(u);
     vec4  a = A(u);
+    a.xy += (_uvc*PI*Flow);
+
     float z = 6.;
     for(float i=-z; i<=z; ++i){
     for(float j=-z; j<=z; ++j){
@@ -109,9 +111,9 @@ vec4 renderPassD() {
         vec2 m = 42.*(u-_mouse.xy)/RENDERSIZE.y;
         a += vec4(m,0,0)*exp(-dot(m,m))*-.2;
     }
-    if(FRAMECOUNT<=1)
+    if(FRAMECOUNT<=1 || Reset > 0.)
     {
-        vec2 m = 42.*(u-RENDERSIZE.xy*.5)/RENDERSIZE.y;
+        vec2 m = (42.*Size)*(u-RENDERSIZE.xy*.5)/RENDERSIZE.y;
         a = vec4(m,1,1)*exp(-dot(m,m));
     }
     fragColor = a;

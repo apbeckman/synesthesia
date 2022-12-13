@@ -34,6 +34,24 @@
 #define TAU PI * 2.
 #define FAR 30.
 //#define PI 3.14159265
+vec2 hash( vec2 p ) // replace this by something better
+{
+	p = vec2( dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)) );
+	return -1.0 + 2.0*fract(sin(p)*43758.5453123);
+}
+// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
+// example that explains it, if you require it.
+float n3D(vec3 p){
+    
+	const vec3 s = vec3(7, 157, 113);
+	vec3 ip = floor(p); p -= ip; 
+    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
+    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
+    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
+    h.xy = mix(h.xz, h.yw, p.y);
+    return mix(h.x, h.y, p.z); // Range: [0, 1].
+}
+
 
 // Grey scale.
 float getGrey(vec3 p){ return p.x*0.299 + p.y*0.587 + p.z*0.114; }
@@ -432,6 +450,8 @@ vec4 renderMainImage() {
 	//vec3 camPos = lookAt + vec3(2., 1.5, -1.5); // Camera position, doubling as the ray origin.
 	
 	vec3 lookAt = vec3(0., 0.25, smoothTime*1.5);  // "Look At" position.
+    
+
 	vec3 camPos = lookAt + vec3(01.0, 1, -01); // Camera position, doubling as the ray origin.
 
  
@@ -441,14 +461,17 @@ vec4 renderMainImage() {
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
 	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
-	lookAt.xy+=(_uvc.xy*PI)*FOV;
+    //lookAt.xy+=(_uvc.xy*PI*uv.xy*PI)*Warp;
+	
+    lookAt.xy+=(_uvc.xy*PI)*FOV;
 
     lookAt.xy += (lookAt.z);
+
 	camPos.xy += (camPos.z);
 	light_pos.xy += (light_pos.z);
 
     // Using the above to produce the unit ray-direction vector.
-    float FOV = PI/2.; // FOV - Field of view.
+    float FOV;// = PI/2.; // FOV - Field of view.
     vec3 forward = normalize(lookAt-camPos);
     vec3 right = normalize(vec3(forward.z, 0., -forward.x )); 
     vec3 up = cross(forward, right);
@@ -457,7 +480,10 @@ vec4 renderMainImage() {
     //vec3 rd = normalize(forward + FOV*uv.x*right + FOV*uv.y*up);
     
     
-    vec3 rd = normalize(forward + uv.x*right + uv.y*up);
+    //vec3 rd = normalize(forward + uv.x*right + uv.y*up);
+    vec3 rd = (0.1+FOV)*(forward + (uv.x*right-FOV*_uvc.x - FOV*_uvc.y+uv.y*up));
+       rd.xy += _rotate(rd.xy*_uvc*0.5*PI, n3D(rd.xyz)+smoothTime*0.1)*Whoa*n3D(vec3(smoothTime*0.1));
+    rd = normalize(vec3(n3D(rd.xyz)+rd.xy*(1.0+(Flip*(-1+_uvc*PI))), (rd.z - length(rd.xy)*.125)));
 
 
     // Lazy way to construct a unit direction ray.
@@ -467,7 +493,7 @@ vec4 renderMainImage() {
     mat2 m2 = rot(smoothTime * 0.25);
     rd.yz = _rotate(rd.yz, lookXY.y*PI) ;
     rd.xz = _rotate(rd.xz, lookXY.x*PI);
-    rd.xy = _rotate(rd.xy, Rotate*PI);
+    rd.xy = _rotate(rd.xy, -Rotate*PI);
     
 
     // The light position. In this case, it's the quasi-distant sun position, which is situated about 30 units in front
@@ -480,7 +506,7 @@ vec4 renderMainImage() {
     // Standard way to put a light in the sky. Dot the unit direction vector with the unit light direction vector.
     // Normalize the result, then ramp up the power. In this case, I want to spread the brightness out, so a lower figure 
     // of about "4" is being chosen. For a more contrasty sky with intense sun, larger values are used. 
-    float bgShade = pow(max(dot(rd, normalize(lp - ro)), 0.)*0.5+0.5, 4.);
+    float bgShade = pow(max(dot(rd, normalize(lp - ro)), 0.)*0.45+0.5, 4.);
     // Background (or sky) color. Blend the shade between two colors. These two aren't very inspiring, but the coloring
     // is being done post process, so it's essentially dark to bright for now.
     vec3 bc = mix(vec3(.0, .0,.05), vec3(1.), bgShade);
@@ -563,7 +589,7 @@ vec4 renderMainImage() {
     
     // Combining the mist value, sky color (bgShade, etc) and fog to give a fog color.
     // Part science, part made up.
-    vec3 fogCol = mix(vec3(bgShade*0.8+0.2)*vec3(1., 0.85, 0.6), sc, mist*fog);
+    vec3 fogCol = mix(vec3(bgShade*0.8+0.2)*vec3(.5, 0.85, 01.26), sc, mist*fog);
     // Toning down the fog color. Totally made up. :)
     sc = sc*0.65 + fogCol*0.35;
      

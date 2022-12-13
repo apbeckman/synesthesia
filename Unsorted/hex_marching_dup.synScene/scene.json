@@ -2,10 +2,22 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "MouseXY",
 			"TYPE" : "xy",
 			"UI_GROUP" : "defaults"
@@ -18,27 +30,47 @@
 			"NAME" : "MouseClick",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 6,
+			"MIN" : -2,
+			"NAME" : "Shape",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "mrange",
 	"DESCRIPTION" : "License CC0: Hex Marching\nResults from saturday afternoon tinkering\n",
-	"HEIGHT" : 1080,
+	"GPU" : 0,
+	"HEIGHT" : 720,
 	"IMAGE_PATH" : "hex_marching_dup.png",
 	"PASSES" : 
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1080,
+			"HEIGHT" : 720,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1280
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1080,
+			"HEIGHT" : 720,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1920
+			"WIDTH" : 1280
 		}
 	],
 	"TITLE" : "Hex marching_dup",
-	"WIDTH" : 1920
+	"WIDTH" : 1280
 }

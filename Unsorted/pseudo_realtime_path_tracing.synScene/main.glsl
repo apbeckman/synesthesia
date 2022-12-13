@@ -302,10 +302,10 @@ vec2 sphereIntersect(in vec3 ro, in vec3 rd, in vec4 sph){
 	return vec2(-b - sqrt(h), 1.); 
     
 }
-
+vec3 noos = vec3(cos(smoothTimeC*0.1),sin(smoothTimeC*0.1), sin(smoothTimeC*0.1));
 
 // Sphere position and radius.
-vec4 sph4 = vec4(0.1*(1.0+cos(smoothTimeC*0.25+10.)*16.), -.32*(1.0+sin(smoothTimeC*0.25+0.5))+0.25, 1.35*(1.0+sin(smoothTimeC*0.25)*.2)-0.15, .68)* (1.0+ 0.25*vec4(n2D(vec2((TIME*0.1), (TIME*0.1))),n2D(vec2((TIME*0.1), (TIME*0.1))), n2D(vec2((TIME*0.1), (TIME*0.1))), n2D(vec2((TIME*0.1), (TIME*0.1))))); //AB: moving ball around, kinda like it
+vec4 sph4 = vec4(0.1*n3D(noos)*cos(smoothTimeC*0.25+10.)*10., -.32*(1.0+0.1*n3D(noos)*sin(smoothTimeC*0.25+0.5))+0.25, 1.35*(1.0+0.1*n3D(noos)*sin(smoothTimeC*0.25)*.2)-0.15, .68)* (1.0+ 0.25*vec4(n2D(vec2((TIME*0.1), (TIME*0.1))),n2D(vec2((TIME*0.1), (TIME*0.1))), n2D(vec2((TIME*0.1), (TIME*0.1))), n2D(vec2((TIME*0.1), (TIME*0.1))))); //AB: moving ball around, kinda like it
 
 //vec4 sph4 = vec4(0., -.32, 1.35, .68); //AB: og version, comment out above line and uncomment this for static ball
 
@@ -466,7 +466,7 @@ vec4 renderPassA() {
     lk.xy+=((_uvc.xy*PI)/2.)*Fov;
     lk.xy -= _rotate(_uvc*PI*n2D(lk.xy*n3D(lk.xyz)), smoothTimeC*0.1)*Whoa;
     
-    lk += n3D(vec3(TIME*0.2, TIME*0.05,TIME*0.1))*0.05;
+    lk += 0.125*n3D(vec3(TIME*0.2, TIME*0.05,TIME*0.1))*0.05;
     vec3 fwd = normalize(lk - ro);
     vec3 rgt = normalize(vec3(fwd.z, 0., -fwd.x )); 
     // "right" and "forward" are perpendicular, due to the dot product being zero. Therefore, I'm 
@@ -599,7 +599,7 @@ vec4 renderPassA() {
                     // Emissivity.
                     // Using a texture to color the emissive lights.
                     vec3 tx = texture(image10, sphID + smoothTimeB/128.).xyz; tx *= tx;
-            
+                    
                     // Fade out emissivity higher up the walls.
                     float st = clamp(sp.y/1.25 - 1., 0., 1.);
                     float rnd = smoothstep(st, 1., dot(tx, vec3(.299, .587, .114)));

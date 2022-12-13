@@ -26,8 +26,8 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 2,
+			"MIN" : -1,
 			"NAME" : "FOV",
 			"PARAMS" : 0.053,
 			"TYPE" : "slider smooth",

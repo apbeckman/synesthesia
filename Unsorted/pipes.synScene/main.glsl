@@ -11,7 +11,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 
 float cylinder( vec3 p )
 {
-    return length( p.xy ) - 0.9;
+    return length( p.xy ) - (0.9+Width);
 }
 
 vec3 opTwist( vec3 p )
@@ -41,7 +41,7 @@ vec2 opRep( vec2 p, float size, float start, float stop )
 
 float map( vec3 p )
 {
-    p = opTwist( p );
+    p = opTwist( p *Twist);
     p.xy = opRep( p.xy, 10.0, -7.0, 7.0 );
     float d = cylinder( p );
     return d;
@@ -125,7 +125,7 @@ vec4 renderMainImage() {
         vec2 off = vec2( 0.0 );
 #endif
         vec2 uv = ( fragCoord.xy + off - 0.5 * RENDERSIZE.xy ) / RENDERSIZE.y;
-        vec3 rd = cm * normalize( vec3( uv, 2.5 ) );
+        vec3 rd = cm * normalize( vec3( uv+FOV*_uvc*PI, 2.5 ) );
 
         col += render( eye, rd );
 #ifdef ANTIALIAS

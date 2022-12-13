@@ -606,7 +606,7 @@ float bumpFunc(vec3 p, vec3 n){
         // Truchet geometry, "a" needs to be a multiple of 12, in most cases. "a2" is more flexible, but needs
         // to be a multiple of 4, in this particular case... 6 might work with an offset.
 
-        c = sTruchet(vec2(a2*8., a*12.+(snaketime*((slither+(smoothTimeC*(1.0-slither)))+tan(jumpy*(smoothTimeC/5.5)*jumpyAmount))))/6.283);
+        c = sTruchet(vec2(a2*8., a*12.+(snaketime*((slither+(smoothTimeC))+tan(jumpy*(smoothTimeC/5.5)*jumpyAmount))))/6.283);
         //c = sTruchet(vec2(a2*12., a*24.)/6.283); // More detailed, but a little too busy.
         
 
@@ -807,15 +807,15 @@ vec4 renderMainImage() {
 	vec3 lk = vec3(0, 0+(yPos*1.75)-floorDistort, ((smoothTime*0.125)+(fly_in_out*0.4)));  // "Look At" position.
 	vec3 o = lk + vec3(0, .3+LookY, -.25); // Camera position, doubling as the ray origin.
     
-    
     // Light position. Set in the vicinity the ray origin.
     vec3 l = o + vec3(0, .5, 2.);
     
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
 	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
-	lk.xy += path(lk.z);
+	lk.xy += path(lk.z+_uvc.x*_uvc.y*PI*Warp);
 	o.xy += path(o.z);
+    o.xy +=Warp*_uvc/PI;
 	l.xy += path(l.z);
 
     // Using the above to produce the unit ray-direction vector.
@@ -887,7 +887,7 @@ vec4 renderMainImage() {
         // Golden coloring for the Truchet and greyish coloring for the ground.
         if(svID>.5){
             //col *= max(1. - bumpFunc(p, n)*1.5, 0.);
-        	col *= mix(vec3(2, 1, .3), vec3(.1, 0, 0), bumpFunc(p, n)*1.5);
+        	col *= mix(vec3(2.5, 1, .53), vec3(1.1, 0.25, 0), bumpFunc(p, n)*1.5);
             //col *= vec3(1, .1, .2)*1.5;
                  
         }

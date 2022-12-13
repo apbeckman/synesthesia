@@ -1,4 +1,3 @@
-//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 /*
@@ -22,16 +21,16 @@
 	free to let me know.
 
 */
-//modified from https://www.shadertoy.com/view/ltfXWS, tested a few different versions of this same function and this one seemed to have the nicest results
-vec4 texture2DAA(sampler2D tex, in vec3 p, vec2 uv) {
-    vec2 texsize = vec2(textureSize(tex,0));
-    vec2 uv_texspace = uv*texsize;
-    vec2 seam = floor(uv_texspace+.5);
-    uv_texspace = (uv_texspace-seam)/fwidth(uv_texspace)+seam;
-    uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
-    return texture(tex, uv_texspace/texsize);
-}
 
+#define FAR 50. // Far plane, or maximum distance.
+
+//float objID = 0.; // Object ID
+
+float accum; // Used to create the glow, by accumulating values in the raymarching function.
+
+// 2x2 matrix rotation. Note the absence of "cos." It's there, but in disguise, and comes courtesy
+// of Fabrice Neyret's "ouside the box" thinking. :)
+mat2 rot2( float a ){ vec2 v = sin(vec2(1.570796, 0) - a);	return mat2(v, -v.y, v.x); }
 
 vec4 texture2DAA1(sampler2D tex, in vec3 p, in vec3 n) {
     vec2 uv = _xy;
@@ -43,23 +42,6 @@ vec4 texture2DAA1(sampler2D tex, in vec3 p, in vec3 n) {
     return texture(tex, uv_texspace/texsize);
 }
 
-/*
-vec2 aliasTex(sampler2D t, in vec3 p, in vec3 n)
-{
-    vec2 fragCoord = _xy;
-    // Normalized pixel coordinates (from 0 to 1)
-    vec2 uv = fragCoord/RENDERSIZE.xx;//*(sin(iTime*.2)+1.5)-vec2(.5, .5);
-    //uv *= mat2(sin(iTime * 0.1), cos(iTime * 0.1), -cos(iTime * 0.1), sin(iTime * 0.1));
-
-    //if(fragCoord.x/iResolution.x < .5){
-    vec2 tx = texture2DAA(image47, uv); //anti aliased scaling (iChannel0 is set to "linear" scaling)
-    //} else {
-      //  fragColor = texture(iChannel1, uv); //nearest neighbor scaling (iChannel1 is set to "nearest" scaling)
-    //}
-    return tx;
-}
-*/
-#define FAR 35. // Far plane, or maximum distance.
 vec2 hash( vec2 p ) // replace this by something better
 {
 	p = vec2( dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)) );
@@ -96,31 +78,17 @@ float n2D( in vec2 p )
 }
 
 
-//float objID = 0.; // Object ID
-
-float accum; // Used to create the glow, by accumulating values in the raymarching function.
-
-// 2x2 matrix rotation. Note the absence of "cos." It's there, but in disguise, and comes courtesy
-// of Fabrice Neyret's "ouside the box" thinking. :)
-mat2 rot2( float a ){ vec2 v = sin(vec2(1.570796, 0) - a);	return mat2(v, -v.y, v.x); }
-
 
 // Tri-Planar blending function. Based on an old Nvidia writeup:
 // GPU Gems 3 - Ryan Geiss: https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch01.html
 vec3 tpl( sampler2D t, in vec3 p, in vec3 n ){
-   //     vec3 ttx= texture2DAA(image47, p.zy ).xyz;
-   //     vec3 tty= texture2DAA(image47, p.xz ).xyz;
-   //     vec3 ttz= texture2DAA(image47, p.xy ).xyz;
-
+    
     n = max(abs(n) - .2, 0.001);
     n /= dot(n, vec3(1));
 	vec3 tx = texture(t, p.zy).xyz;
     vec3 ty = texture(t, p.xz).xyz;
     vec3 tz = texture(t, p.xy).xyz;
-    //vec3 tx = ttx.xyz;
-    //vec3 ty = tty.xyz;
-    //vec3 tz = ttz.xyz;
-
+    
     // Textures are stored in sRGB (I think), so you have to convert them to linear space 
     // (squaring is a rough approximation) prior to working with them... or something like that. :)
     // Once the final color value is gamma corrected, you should see correct looking colors.
@@ -152,10 +120,15 @@ float map(vec3 p){
     p.xy -= camPath(p.z).xy; // Perturb the object around the camera path.
     
      
+	//p = cos(p*.315*1.25 + sin(p.zxy*.875*1.25)); // 3D sinusoidal mutation.
+    //
+    // Partial fix to alleviate artifacts after running the program for a while.
+    // Thanks to Reyparis and Ollj.
+    float PI = 3.14159265358979;
+    //p = cos(mod(p*.315*1.25 + sin(mod(p.zxy*.875*1.25, 2.*PI)), 2.*PI));
 	p = cos(p*.315*1.25 + sin(p.zxy*.875*1.25)*(0.9+n3D(p)*0.1)+ sin(smoothTimeC * 0.25 )*0.2); // 3D sinusoidal mutation.
 
-
-
+    
     float n = length(p); // Spherize. The result is some mutated, spherical blob-like shapes.
 
     // It's an easy field to create, but not so great to hone in one. The "1.4" fudge factor
@@ -188,21 +161,21 @@ float map(vec3 p){
 float cao(in vec3 p, in vec3 n)
 {
 	float sca = 1., occ = 0.;
-    for(float i=0.; i<3.; i++){
+    for(float i=0.; i<5.; i++){
     
         float hr = .01 + i*.35/4.;        
         float dd = map(n * hr + p);
         occ += (hr - dd)*sca;
-        sca *= 0.7;
+        sca *= .7;
     }
-    return clamp(1.0 - occ, 0., 1.);    
+    return clamp(1. - occ, 0., 1.);    
 }
 
 
 // Standard normal function. It's not as fast as the tetrahedral calculation, but more symmetrical.
 vec3 nr(vec3 p){
 
-	const vec2 e = vec2(0.002, 0);
+	const vec2 e = vec2(.002, 0);
 	return normalize(vec3(map(p + e.xyy) - map(p - e.xyy), 
                           map(p + e.yxy) - map(p - e.yxy), map(p + e.yyx) - map(p - e.yyx)));
 }
@@ -213,18 +186,17 @@ vec3 nr(vec3 p){
 float trace(in vec3 ro, in vec3 rd){
     
     accum = 0.;
-    //accum += highhits;
-    float t = 0.0, h;
-    for(int i = 0; i < 96-liquify*liquify*60; i++){
+    float t = 0., h;
+    for(int i = 0; i < 128; i++){
     
-        h = map(ro+rd*t);
+        h = map(ro + rd*t);
         // Note the "t*b + a" addition. Basically, we're putting less emphasis on accuracy, as
         // "t" increases. It's a cheap trick that works in most situations... Not all, though.
-        if(abs(h)<0.001*(t*.125 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
+        if(abs(h)<.001*(t*.25 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
         t += h;
         
         // Simple distance-based accumulation to produce some glow.
-        if(abs(h)<.135) accum += (.35-abs(h)+pow(0.5*syn_HighLevel+0.5*syn_MidHighLevel+syn_Intensity*0.4, 2.)*0.25)/24.;
+        if(abs(h)<.35) accum += (.35 - abs(h))/24.;
         
     }
 
@@ -235,7 +207,7 @@ float trace(in vec3 ro, in vec3 rd){
 // Shadows.
 float sha(in vec3 ro, in vec3 rd, in float start, in float end, in float k){
 
-    float shade = 1.0;
+    float shade = 1.;
     const int maxIterationsShad = 24; 
 
     float dist = start;
@@ -246,17 +218,31 @@ float sha(in vec3 ro, in vec3 rd, in float start, in float end, in float k){
         //shade = min(shade, k*h/dist);
         shade = min(shade, smoothstep(0.0, 1.0, k*h/dist));
 
-        dist += clamp(h, 0.01, 0.2);
+        dist += clamp(h, .01, .2);
         
         // There's some accuracy loss involved, but early exits from accumulative distance function can help.
         if (abs(h)<0.001 || dist > end) break; 
     }
     
-    return min(max(shade, 0.) + 0.4, 1.0); 
+    return min(max(shade, 0.) + .4, 1.); 
 }
 
-
+/*
 // Texture bump mapping. Four tri-planar lookups, or 12 texture lookups in total.
+vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
+   
+    const vec2 e = vec2(.001, 0);
+    
+    // Three gradient vectors rolled into a matrix, constructed with offset greyscale texture values.    
+    mat3 m = mat3( tpl(tx, p - e.xyy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yyx, n));
+    
+    vec3 g = vec3(.299, .587, .114)*m; // Converting to greyscale.
+    g = (g - dot(tpl(tx,  p , n), vec3(.299, .587, .114)) )/e.x; g -= n*dot(n, g);
+                      
+    return normalize(n + g*bf); // Bumped normal. "bf" - bump factor.
+	
+}
+*/
 vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
 
     vec2 e = vec2(0.01255, 0);
@@ -267,7 +253,7 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
     mat3 m = mat3( texture2DAA1(tx, p + e.yxy, n), texture2DAA1(tx, p + e.yxy, n), texture2DAA1(tx, p + e.yxy, n));
     
     ///vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
-    vec3 g = vec3(0.2, 0.2, 0.2)*m; // Converting to greyscale.
+    vec3 g = vec3(0.5, 0.5, 0.5)*m; // Converting to greyscale.
     
     g = (g - dot(tpl(tx,  p , n), vec3(0.299, 0.587, 0.114)) )/e.x; g -= n*dot(n, g);
                       
@@ -275,7 +261,6 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
     return normalize(( n + g*bf)); // Bumped normal. "bf" - bump factor.
 	
 }
-
 
 // Simple environment mapping.
 vec3 envMap(vec3 rd, vec3 n){
@@ -289,25 +274,20 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    float camTime = (smoothTime);
+    
     
 	// Screen coordinates.
 	vec2 u = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;
 	
 	// Camera Setup.
-    float speed = 0.785;
-    vec3 o = camPath( ( camTime)*speed ); // Camera position, doubling as the ray origin.
-    vec3 lk = camPath( ( camTime)*speed + .25 );  // "Look At" position.
-    vec3 l = camPath( ( camTime)*speed + 2. ) + vec3(0, 1, 0); // Light position, somewhere near the moving camera.
-   // lk.xy += n2D(vec2(cos(TIME*0.125), sin(TIME*0.2))*0.5)*0.25;
-
-	lk.xy+=((_uvc.xy*PI)/2.)*FOV;
-	//lk.xy+=(_uvc.xy/4.)*(FOV*PI+FOV*lk.xy/PI);
-    lk.xy += _rotate(_uvc.xy, Twist*PI);
+    float speed = 4.;
+    vec3 o = camPath(TIME*speed); // Camera position, doubling as the ray origin.
+    vec3 lk = camPath(TIME*speed + .25);  // "Look At" position.
+    vec3 l = camPath(TIME*speed + 2.) + vec3(0, 1, 0); // Light position, somewhere near the moving camera.
 
 
     // Using the above to produce the unit ray-direction vector.
-    float FOV; ///3. FOV - Field of view.
+    float FOV = 3.14159/2.; ///3. FOV - Field of view.
     vec3 fwd = normalize(lk-o);
     vec3 rgt = normalize(vec3(fwd.z, 0, -fwd.x )); 
     vec3 up = cross(fwd, rgt);
@@ -315,14 +295,8 @@ vec4 renderMainImage() {
     // Unit direction ray.
     //vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
     // Lens distortion.
-    vec3 r = (0.1+FOV)*(fwd + (u.x*rgt-FOV*_uvc.x - FOV*_uvc.y+u.y*up));
-       r.xy += _rotate(r.xy*_uvc*0.5*PI, n3D(r.xyz)+smoothTime*0.1)*Whoa*n3D(vec3(smoothTime*0.1));
-    r = normalize(vec3(n3D(r.xyz)+r.xy*(1.0+(Flip*(-1+_uvc*PI))), (r.z - length(r.xy)*.125)));
-    r.yz = _rotate(r.yz, lookXY.y*PI);
-    r.xz = _rotate(r.xz, -1.0*lookXY.x*PI);
- 
-    r.xy =  _rotate(r.xy, Rotation*PI);
-
+    vec3 r = fwd + FOV*(u.x*rgt + u.y*up);
+    r = normalize(vec3(r.xy, (r.z - length(r.xy)*.125)));
 
 
     // Raymarch.
@@ -351,9 +325,9 @@ vec4 renderMainImage() {
         vec3 svn = n;
         
         // Texture bump the normal.
-        float sz = (1./(5.)); 
-
+        float sz = 1./3.; 
         n = db(image47, p*sz, n, .1/(1. + t*.25/FAR));
+
         l -= p; // Light to surface vector. Ie: Light direction vector.
         float d = max(length(l), 0.001); // Light to surface distance.
         l /= d; // Normalizing the light direction vector.
@@ -363,7 +337,7 @@ vec4 renderMainImage() {
         
         // Ambient occlusion and shadowing.
         float ao =  cao(p, n);
-        float sh = sha(p, l, 0.04, d, 8.);
+        float sh = sha(p, l, 0.04, d, 16.);
         
         // Diffuse, specular, fresnel. Only the latter is being used here.
         float di = max(dot(l, n), 0.);
@@ -402,7 +376,7 @@ vec4 renderMainImage() {
         // Obviously, the reflected\refracted colors will involve lit values from their respective
         // hit points, but this is fake, so we're just combining it with a portion of the surface 
         // diffuse value.
-        col += refCol*((di*di*1.25+.75) + ao*.25)*5; // Add the reflected color. You could combine it in other ways too.
+        col += refCol*((di*di*.25+.75) + ao*.25)*1.5; // Add the reflected color. You could combine it in other ways too.
         
         // Based on IQ's suggestion: Using the diffuse setting to vary the color slightly in the
         // hope that it adds a little more depth. It also gives the impression that Beer's Law is 
@@ -414,13 +388,12 @@ vec4 renderMainImage() {
         // Taking the accumulated color (see the raymarching function), tweaking it to look a little
         // hotter, then combining it with the object color.
         vec3 accCol = vec3(1, .3, .1)*accum;
-        
         vec3 gc = pow(min(vec3(1.5, 1, 1)*accum, 1.), vec3(1, 2.5, 12.))*.5 + accCol*.5;
         col += col*gc*12.;
         
         
         // Purple electric charge.
-        float hi = abs(mod(t/1. + ((smoothTimeB*0.1)/1.), 8.) - 8./2.)*pow(2.-highhits, 2.);
+        float hi = abs(mod(t/1. + TIME/3., 8.) - 8./2.)*2.;
         vec3 cCol = vec3(.01, .05, 1)*col*1./(.001 + hi*hi*.2);
         col += mix(cCol.yxz, cCol, n3D(p*3.));
  		// Similar effect.
@@ -447,7 +420,7 @@ vec4 renderMainImage() {
  
     
     // Rough gamma correction, and we're done.
-    fragColor = vec4(sqrt(clamp(col, 0., 1.25)), 1);
+    fragColor = vec4(sqrt(clamp(col, 0., 1.)), 1);
     
     
 	return fragColor; 

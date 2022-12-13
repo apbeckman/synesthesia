@@ -110,13 +110,13 @@ float Voronoi(vec2 p){
 	
 	vec2 d = vec2(2); // 1.4, etc.
     
-	for(int y = -1; y <= 1; y++){
-		for(int x = -1; x <= 1; x++){
+	for(int y = -1; y <= 2; y++){
+		for(int x = -1; x <= 2; x++){
             
 			o = vec2(x, y);
             o += hash22(g + o) - p;
             
-			float h = dot(o, o*(1.0+cos(TIME*0.1)*0.001));
+			float h = dot(o, o*(1.0+cos(smoothTime*0.1)*0.001));
             d.y = max(d.x, min(d.y, h)); 
             d.x = min(d.x, h);            
 		}
@@ -268,13 +268,15 @@ vec2 LaplacianA(in vec2 uv) {
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
+    fragCoord.x+=(Voronoi(_uv*PI*FOV))*PI*Succ;
+    fragCoord.y-=0.125*(Voronoi(_uvc*_uv*PI))*PI*Succ;
+    fragCoord+=(Voronoi(_rotate(_uvc, smoothTimeC*0.5)))*PI*Warp;
 
-    
     // Screen coordinates. I can't remember why I didn't want aspect correctness here...
     // I'm sure there was a reason. Fixed size square buffers would make life a lot
     // easier -- I know that much. :)
     vec2 p = fragCoord.xy/RENDERSIZE.xy;
-    
+
 
     // Grab the reaction diffusion values from the previous frame. These values are
     // are representative of concentrations of hypothetical liquid, gas, etc, solutions,
@@ -411,7 +413,7 @@ vec4 renderPassA() {
     // concentration B, which from probability theory is: A*B*B. This results in a decrease
     // of concentration A and an increase in concentration B by that particular amount.
     // Hence, the negative and positive vector terms on the end.
-    rdVal.y*=(0.9975+growthFactor*0.0035);
+    rdVal.y*=(0.99875+growthFactor*0.00025);
     //rdVal.y *=(0.999875+growthFactor*0.00025);
     vec2 reaction = vec2(rdVal.x*rdVal.y*rdVal.y)*vec2(-1, 1);
     reaction.x *=1.-(Reaction*0.025);
@@ -483,7 +485,7 @@ vec4 renderPassA() {
     // necessary to initialize for the first few frames to give it a chance to catch on.
     // Also, check for changes in canvas size.
     //AB: added reinitialization trigger for 'Reset' control
-    if(FRAMECOUNT<10 || abs(rdVal.w - RENDERSIZE.y)>.001|| Reset > 0.)  {
+    if(FRAMECOUNT<=10 || abs(rdVal.w - RENDERSIZE.y)>.001|| Reset > 0.)  {
 
         //AB: adding some simple variance to the initial state so resetting multiple times looks better
 
@@ -692,8 +694,8 @@ float bumpFunc(vec2 p){
      
     
     // Subtly blend in a more detailed pattern over the top.
-    float difPat = texture(BuffA, p*6., -100.).x;
-    difPat = smoothstep(0., .5, difPat - .65);
+    float difPat = texture(BuffA, p*6.*_uvc, -100.).x;
+    difPat = smoothstep(0., .5, difPat - 1.65);
     //difPat *= (1.0+basshits);
     
     difPat *= smoothstep(0., .1, ggs - .525);
@@ -796,23 +798,24 @@ vec4 renderMainImage() {
 	vec3 ro = vec3(0., 0., -2/FOV); // Camera position, ray origin, etc.
 
 	// Plane normal -- Titled very slightly.
-    vec3 sn = normalize(vec3(.01+cos(smoothTime*0.1)*0.005, .01+sin(smoothTime*0.1)*0.005, -1)); 
+    vec3 sn = normalize(vec3(.0+cos(smoothTime*0.1)*0.005, .0+sin(smoothTime*0.1)*0.005, -1-FOV)); 
 	// Hit point on the plane.
 	float t = rayPlane(vec3(0), ro, sn, rd);
     vec3 sp = ro + rd*t;
-    float FOVlp = FOV*2.0;
-    vec3 lp = vec3(.125+cos(smoothTimeB*0.3), .35+sin(smoothTimeB*0.3), -1); // Light position - Back from the screen.
+    float FOVlp = FOV;
+    vec3 lp = vec3(.125+cos(smoothTimeB*0.3), .35+sin(smoothTimeB*0.3), -3.5); // Light position - Back from the screen.
     lp.xy/= vec2(FOVlp);
     sp.xy += Camera_Pos.xy;
-    sp.xy -= vec2(-5*sin(smoothTime*0.0025+TIME*0.01), -5.5*cos(smoothTime*0.0025+TIME*0.01));
-    lp.xy -= vec2(- 5*sin(smoothTime*0.0025+TIME*0.01), -5.5*cos(smoothTime*0.0025+TIME*0.01));
+    sp.xy -= vec2(-5*sin(smoothTime*0.0025+TIME*0.005), -5.5*cos(smoothTime*0.0025+TIME*0.005));
+    lp.xy -= vec2(- 5*sin(smoothTime*0.0025+TIME*0.005), -5.5*cos(smoothTime*0.0025+TIME*0.005));
 	
     //vec3 sn = vec3(0., 0., -1); // Plane normal. Z pointing toward the viewer.
     
     // Last term controls how much the bump is accentuated.
     float edge = 0.;
     sn = bump(sp, sn, 0.25, edge);
-    
+
+
     // The main bump mapped pattern. It has already been calculated in the "bump" function
     // above, so this double handling, but it's a pretty cheap example.
     float mainPat = bumpFunc(sp.xy);      
@@ -826,7 +829,7 @@ vec4 renderMainImage() {
 	ld /= lDist;
 
     // Light attenuation.    
-    float atten = min(1./(1. + lDist*0.125 + lDist*lDist*0.05), 1.);
+    float atten = min(1./(1. + lDist*0.0125 + lDist*lDist*0.045), 1.);
 	//float atten = min(1./(lDist*lDist*1.), 1.);
     
     // Using the bump function, "f," to darken the crevices. Completely optional, but I
@@ -860,14 +863,18 @@ vec4 renderMainImage() {
     
     // Coloring the main object yellow, and the ground brownish with some fine diffusion crevices,
     // or something to that effect.
-    texCol = mix(vec3(.6, .48, .42)*(difPat2*.25 + .75), vec3(1, .45, .05)*1.5, mainPat)*texCol;
+    texCol = mix(vec3(.4, .4, .4)*(difPat2*.25 + .75), vec3(0.4, .4, .45)*1.5, mainPat)*texCol;
+    //texCol = mix(vec3(.6, .48, .42)*(difPat2*.25 + .75), vec3(1, .45, .05)*1.5, mainPat)*texCol; //og
     
     // Darkening the fine grade diffusion crevices on the yellow object.
     texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*.6);//.525
+    //texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*.6);//.525 //og
+    
     //texCol *= mix(vec3(1), vec3(0), clamp(difPat2*mainPat*smoothstep(0., .05, ggs - .525)*.75, 0., 1.));
     
     // Applying some orangey patches.
     texCol = mix(texCol*1.5, texCol.xzy/4., dot(sin(sp.xy*12. - cos(sp.yx*8.)), vec2(.2*.5)) + .2);
+    //texCol = mix(texCol*1.5, texCol.xzy/4., dot(sin(sp.xy*12. - cos(sp.yx*8.)), vec2(.2*.5)) + .2); //og
     
     //texCol = mix(texCol, texCol.yxz*mainPat*.7, fBm(sp.xy*3.));
     // Greenish moldy weathering.

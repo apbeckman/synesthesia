@@ -161,13 +161,7 @@ vec4 renderPassA() {
 	vec2 pos = _xy;
 
     vec2 muv = _mouse.xy/size;
-    vec2 posCent = _uvc-brushPosition*0.5*vec2(RENDERSIZE.x/RENDERSIZE.y,1.0);
-    float mask = smoothstep(0.5,0.5+0.5,length(posCent));
-    distFunc = 1.0-mask;
-
-
-
-    /*
+    
     if(length(muv.xy) >0.)
     {
     	sdist *= muv.x;
@@ -175,16 +169,13 @@ vec4 renderPassA() {
     }
     else
     {
+        sdist *= 0.8;
+  		sst *= 0.05; 
     }
-   */
+   
     //this pixel value
-
-
-    
-    sdist *= 0.8;
-    sst *= 0.05; 
-
     U = texel(ch0, pos);
+    
     //check neighbours 
     CheckRadius(U, pos, 1.);
     //CheckRadius(U, pos, 2.);

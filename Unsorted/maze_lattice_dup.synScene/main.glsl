@@ -98,7 +98,7 @@ float map(in vec3 p) {
 // Very basic raymarching equation. I thought I might need to use something more sophisticated,
 // but it turns out that this structure raymarches reasonably well. Not all surfaces do.
 float trace(vec3 ro, vec3 rd){
-
+    
     float t = 0.0;
     for(int i=0; i< 72; i++){
         float d = map(ro + rd*t);
@@ -123,7 +123,6 @@ float refTrace(vec3 ro, vec3 rd){
 // The normal function with some edge detection rolled into it. Sometimes, it's possible to get away
 // with six taps, but we need a bit of epsilon value variance here, so there's an extra six.
 vec3 normal(in vec3 p, inout float edge) { 
-	
     vec2 e = vec2(.034, 0); // Larger epsilon for greater sample spread, thus thicker edges.
 
     // Take some distance function measurements from either side of the hit point on all three axes.
@@ -382,13 +381,11 @@ vec3 texEdges(in vec3 p, in vec3 n){
 vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
-
     
     
     // Unit direction ray vector: Note the absence of a divide term. I came across
     // this via a comment Shadertoy user "coyote" made. I'm pretty happy with this.
     vec3 rd = vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y);
-    
     // Barrel distortion;
     rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.))));
     
@@ -397,8 +394,9 @@ vec4 renderMainImage() {
     //rd.xy = rd.xy*mat2(m.xy, -m.y, m.x);
     //rd.xz = rd.xz*mat2(m.xy, -m.y, m.x);
     rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy-_uvc*FOV*PI*0.5, -1.0*lookXY.x*PI);
+    rd.xy = _rotate(rd.xy, -1.0*lookXY.x*PI);
     rd.xz = _rotate(rd.xz, lookZ*PI);
+    
     // Ray origin: Sending it along the Z-axis.
     //vec3 ro = vec3(0, 0, TIME*rate*0.25);
     vec3 ro = vec3(0, 0, (smoothTime*0.1 * Rate*-1.));
@@ -424,6 +422,7 @@ vec4 renderMainImage() {
         float edge;
         
         vec3 sp = ro + rd*t; // Surface position. 
+        
         vec3 sn = normal(sp, edge); // Surface normal.
 
     	// Saving a copy of the unbumped normal, since the texture routine require it.

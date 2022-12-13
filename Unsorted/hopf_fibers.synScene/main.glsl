@@ -116,6 +116,9 @@ vec4 getC(vec3 p, vec3 camPos, mat3 m) {
 // =============
 
 void march(in vec3 p, in vec3 nv, out vec4 color) {
+    nv.xy += _uvc*PI*nv.xy*MouseXY*PI;
+    p.xy += _uvc*PI*p.xy*MouseXY*PI;
+
     color = vec4(0.);
     vec2 tRange = vec2(mix(1., 2.75, PHASE), 6.);
 
@@ -143,7 +146,7 @@ vec4 renderMainImage() {
 
     vec4 objColor;
     march(camPos + rand(fragCoord)*nvCamDir*STEP_D, nvCamDir, objColor);
-    vec3 finalColor = objColor.rgb + (1. - objColor.a)*vec3(.2);
+    vec3 finalColor = objColor.rgb + (1. - objColor.a)*vec3(.0);
 
 
     fragColor = vec4(finalColor, 1.);

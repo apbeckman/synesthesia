@@ -20,7 +20,7 @@
 			"UI_GROUP" : "regime"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0.5,
 			"DESCRIPTION" : "Extra pulsing and shimmering with the music. Turn off to let it naturally progress.",
 			"MAX" : 1,
 			"MIN" : 0,
@@ -137,10 +137,22 @@
 			"UI_GROUP" : "advanced"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "This applies a flow direction to the simulation. This interacts in complex ways with the other parameters. Try to search for different stable flow regimes.",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "xy_flow",
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
@@ -158,6 +170,7 @@
 	],
 	"CREDIT" : "cornusammonis",
 	"DESCRIPTION" : "A variant of Stephan Rafler's SmoothLife that uses a separable Gaussian kernel to compute inner and outer fullness. The improvement in performance over full 2D convolution makes it possible to use a much larger kernel in realtime, without using FFT.",
+	"GPU" : 0,
 	"HEIGHT" : 1440,
 	"IMAGES" : 
 	[

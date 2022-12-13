@@ -26,7 +26,6 @@ float m(vec3 p){
     // Moving the scene itself forward, as opposed to the camera.
     // IQ does it in one of his small examples.
     p.z += TIME;
-    
     // Loop counter and variables.
     float i = 0., s = 1., k;
 
@@ -34,7 +33,7 @@ float m(vec3 p){
     // operations. Break up space, distort it, repeat, etc. More iterations
     // would be nicer, but this function is called a hundred times, so I've
     // used the minimum to give just enough intricate detail.
-    while(i++ < 6.) p *= k = 1.5/dot(p = mod(p - 1., 2.) - 1., p), s *= k;
+    while(i++ < 9.) p *= k = 1.5/dot(p = mod(p - 1., 2.) - 1., p), s *= k;
 		
 	// Render numerous little spheres, spread out to fill in the 
     // repeat Apollonian lattice-like structure you see.
@@ -42,7 +41,7 @@ float m(vec3 p){
     // Note the ".01" at the end. Most people make do without it, but
     // I like the tiny spheres to have a touch more volume, especially
     // when using low iterations.
-    return length(p)/s - .01; 
+    return length(p)/s - .0025; 
     
 }
 
@@ -55,6 +54,7 @@ vec4 renderMainImage() {
     // then do some shuffling around in the lighting calculation, but I didn't quite 
     // like the end result, so I'll leave it alone, for now anyway.
     vec3 d = vec3(u/RENDERSIZE.y - .5, 1)/4., o = vec3(1, 1, 0);
+    d.xy = _rotate(d.xy, Rotate*PI);
     //d.xy+= -.16;
 
     // Initialize to zero.

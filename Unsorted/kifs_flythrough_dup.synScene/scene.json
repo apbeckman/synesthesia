@@ -16,7 +16,7 @@
 			"MAX" : 1.5,
 			"MIN" : 0.5,
 			"NAME" : "x_param",
-			"PARAMS" : 0.2,
+			"PARAMS" : 0.12,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
@@ -24,9 +24,9 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "X, Y, and Z params control the shape of the fractal.",
 			"MAX" : 1.5,
-			"MIN" : 0.5,
+			"MIN" : 0,
 			"NAME" : "y_param",
-			"PARAMS" : 0.2,
+			"PARAMS" : 0.13,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
@@ -36,17 +36,18 @@
 			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "z_param",
-			"PARAMS" : 0.2,
+			"PARAMS" : 0.127,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "This controls the size of the blocks that form the fractal.",
-			"MAX" : -0.2,
-			"MIN" : 0.05,
+			"MAX" : 0.15,
+			"MIN" : -0.035,
 			"NAME" : "size",
-			"TYPE" : "slider",
+			"PARAMS" : 0.017,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
 		{
@@ -90,6 +91,26 @@
 			"UI_GROUP" : "camera"
 		},
 		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.15,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.101,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "Blue, reflective lighting. Turn down to use more alternate lighting.",
 			"MAX" : 1,
@@ -125,7 +146,7 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "liquify",
-			"PARAMS" : 0.28,
+			"PARAMS" : 0.246,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "render glitches"
 		},
@@ -143,10 +164,10 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "FOV",
-			"PARAMS" : 0.15,
-			"TYPE" : "slider smooth",
+			"MIN" : 0,
+			"NAME" : "Warp",
+			"PARAMS" : 0.231,
+			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -158,11 +179,11 @@
 	[
 		{
 			"NAME" : "image3",
-			"PATH" : "images/3.jpg"
+			"PATH" : "images/2.jpeg"
 		},
 		{
 			"NAME" : "image10",
-			"PATH" : "images/10.jpg"
+			"PATH" : "images/13.jpeg"
 		},
 		{
 			"NAME" : "geom",
@@ -174,9 +195,9 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1224,
 			"TARGET" : "fractalPass",
-			"WIDTH" : 1280
+			"WIDTH" : 2176
 		}
 	],
 	"TITLE" : "KIFS Flythrough_dup",

@@ -13,7 +13,7 @@ vec3 filter_() {
   vec3 u = texture(backbuffer, _uv + vec2(delta.x, 0.)).xyz;
   vec3 d = texture(backbuffer, _uv - vec2(delta.x, 0.)).xyz;
 
-  vec3 n = vec3(_rand(_uvc+TIME)) - 0.5;
+  vec3 n = vec3(_rand(_uvc+smoothTime)) - 0.5;
   
   vec3 bloom = max(val, max(max(l, r), max( u, d)));
   // bloom = bloom  + l + r + u + d;
@@ -69,7 +69,6 @@ vec2 cart(vec2 p) {
 
 
 vec2 DE(vec3 pos) {
-
   pos = pos * rotationMatrix(normalize(vec3(0., 0., 1.)), spin + TIME/10. + squiggle * sin(pos.z));
   
   // pos -= vec3(0., sin(TIME), cos(TIME));
@@ -107,7 +106,7 @@ vec3 palette( in float t)
 {
 vec3 a = vec3(0.600, 0.500, 0.500);
 vec3 b = vec3(1.000, 0.500, 0.500);
-vec3 c = vec3(0.500, 0.690, 0.750);
+vec3 c = vec3(01.500, 0.690, 0.750);
 vec3 d = vec3(0.500, 0.500, 0.500);
   
     return a + b*cos( 6.28318*(c*t+d) );
@@ -116,15 +115,16 @@ vec3 d = vec3(0.500, 0.500, 0.500);
 vec3 raycast() {
   
   vec3 camera = vec3( 0., 0., ((smoothTime)) * (1 + ( 0.5 + ((separation*1.1)-0.5) ) ) + fly_in_out);
+
   vec2 screenPos = -1.0 + 2.0 * _uv;
+      screenPos  += (_uvc*PI*FOV*screenPos)*PI;
+
   screenPos.x *= RENDERSIZE.x / RENDERSIZE.y;
+
   vec2 n = vec2(_rand(_uvc+(smoothTimeC*0.4))) - 0.5;
-  
   // screenPos += n/100.;
   vec3 ray = normalize(vec3( screenPos, 1.0));
   float thresh = exp(-termThres);
-
-  
   // raycasting parameter 
   float t  = 0.;
   vec3 point;
@@ -157,7 +157,7 @@ vec3 raycast() {
     if (greyscale > 0.5){
       color = vec3(1.0);
     } else {
-      color = _palette(_triWave(point.z/5.,3), vec3(1.445, 1.107, 0.460), vec3(0.760, 1.000, 0.470), vec3(0.870, 0.341, 0.894), vec3(0.440, 0.404, 0.916));
+      color = _palette(_triWave(point.z/5.,3), 0.95*vec3(1.445, 1.107, 0.460), vec3(0.760, 1.000, 0.470), vec3(0.870, 0.341, 0.894), vec3(0.440, 0.404, 0.916));
     }
   }
 

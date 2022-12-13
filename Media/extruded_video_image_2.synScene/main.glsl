@@ -284,7 +284,7 @@ float softShadow(vec3 ro, vec3 lp, vec3 n, float k){
     // More would be nicer. More is always nicer, but not really affordable... Not on my slow test machine, anyway.
     const int maxIterationsShad = 24; 
     
-    ro += n*.0015;
+    ro += n*.00125;
     vec3 rd = lp - ro; // Unnormalized direction ray.
     
 
@@ -361,7 +361,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ){
 
     // rd - Ray direction.
     vec3 rd = normalize(fwd + uv.x*rgt + uv.y*up);
-        rd.xy += (_uvc*FOV*PI);
+     rd.xy += (_uvc*FOV*PI);
 
     // Swiveling the camera about the XY-plane.
 	//rd.xy *= rot2( sin(iTime)/32. );

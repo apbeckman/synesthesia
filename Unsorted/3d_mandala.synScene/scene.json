@@ -7,7 +7,8 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "columns",
-			"TYPE" : "toggle",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -37,6 +38,37 @@
 			"NAME" : "MouseClick",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Stretch",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Warp",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "jeyko",

@@ -113,7 +113,7 @@ vec2 map(vec3 p){
     vec4 a = valueNoise((idb + (smoothTimeB) + idz*3.));
     
     //vec3 c = max(pal(0.7,1., vec3(3.7,0.3,0.6), 0.6,4.4 + sin(TIME) + sin(idz * idb)*0.2), 0.);
-    vec3 c = max(pal(0.7,1., vec3(3.,0.3,0.1), 0.6+highhits,4.4 + sin(smoothTimeB) + idz + sin(idz * idb)*0.2+highhits), 0.1);
+    vec3 c = max(pal(0.7,1., vec3(1.,0.3,0.1), 0.6+highhits,4.4 + sin(smoothTimeB) + idz + sin(idz * idb)*0.2+highhits), 0.1);
     glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(75. - a.x*20.))*att*c* pow(smoothstep(1.,0.,length(q.y*1.)), 5.);
     //glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(100. - a.x*20.))*att*c;
     //glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(90. - a.x*20.))*att*c* (smoothstep(1.,0.,length(q.y*1.6)));

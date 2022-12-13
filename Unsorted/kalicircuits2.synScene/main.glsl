@@ -96,7 +96,7 @@ void formula(vec2 z, float t)
 		K -= 1.0;
 	}
 	M += 1.0;
-	float w = (intensity * zoom) * M;
+	float w = (intensity) * M+highhits*0.025;
 	float circ = pow(max(0.0, w - ot2) / w, 6.0);
 	S += max(pow(max(0.0, w - ot) / w, 0.25), circ);
 	vec3 col = normalize(0.1 + vec4(0.45, 0.75, M * 0.1, 1.0).rgb);
@@ -126,7 +126,8 @@ vec4 renderMain() {
 
 	vec2 uv = pos ;
 	uv *= -1.0 + Warp * (1.0 - (_uvc*PI-uv));
-	uv += center;
+	uv -= center;
+	uv = _rotate(uv, Rotate);
 
 	float sph = length(uv)*0.1; 
 	sph = sqrt(1.0 - sph * sph) * 2.0 ;
@@ -146,14 +147,14 @@ vec4 renderMain() {
 	float dof = (zoom * focus) + (T * 0.25);
 	float L = floor(loops);
 	for (int aa=0; aa<24; aa++) {
-		vec2 aauv = floor(vec2(float(aa) / 6.0, mod(float(aa), 6.0)));
+		vec2 aauv = floor(vec2(float(aa) / 6.0, mod(float(aa), 6.0)+_uvc*PI));
 		formula(uv + aauv * pix * dof, T);
 		if (L <= 0.0) break;
 		L -= 1.0;
 	}
 	S /= floor(loops); 
 	color /= floor(loops);
-	vec3 colo = mix(vec3(0.15), color, S) * (1.0 - length(pos))*min(1.,abs(.5+mod(syn_HighTime+.5,1.))*10.);	
+	vec3 colo = mix(vec3(0.125), color, S) * (1.0 - length(pos))*min(1.,abs(.5+mod(smoothTimeB+.5,1.))*10.);	
 	//colo*= 1.0 +highhits*0.5;
 	colo *=vec3(1.2, 1.1, 1.0);
 

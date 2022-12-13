@@ -78,7 +78,7 @@ vec4 renderPassA() {
             vec2 target = vec2(0);
             
             // respawn
-            float t = TIME * 10.;
+            float t = smoothTime * 10.;
             float idd = id+floor(t) * count;
             if (hash11(idd) > .95 && fract(t) < .1)
             {
@@ -96,7 +96,7 @@ vec4 renderPassA() {
             }
             
             // curl
-            float noise = fbm(vec3(p, length(p) + TIME));
+            float noise = fbm(vec3(p, length(p) + smoothTimeC));
             float a = noise * 6.28;
             offset += vec2(cos(a), sin(a));
             
@@ -104,7 +104,7 @@ vec4 renderPassA() {
             offset += normalize(target.xy-p) * 2. * length(target.xy-p);
             
             // jitter
-            offset += (hash21(id)*2.-1.)*(.5+.5*sin(TIME));
+            offset += (hash21(id)*2.-1.)*(.5+.5*sin(smoothTimeC));
             
             // inertia
             vec2 velocity = frame.zw;
@@ -121,7 +121,7 @@ vec4 renderPassA() {
     {
         float matID = 0.;
         float dist = 100.;
-        float dither = texture(image14854, fragCoord/1024.).r;
+        float dither = texture(image14854, fragCoord/1920.).r;
 
         for (float i = 0.; i < count; ++i)
         {

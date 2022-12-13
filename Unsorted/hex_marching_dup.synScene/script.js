@@ -28,7 +28,6 @@ function CameraLook () {
   this.z = 0.0;
 }
 
-
 var bpmcount = new BPMCounter();
 var cPos = new CameraPos();
 var cLook = new CameraLook();
@@ -59,6 +58,9 @@ function update(dt) {
 
   var bpm = inputs.syn_BPM/4.0;
   bpmcount.updateTime(bpm, dt);
+  //timevar.updateTime(0.4, inputs.rate_in, dt);
+
+  //uniforms.bass_time = bassTimevar.time;
 
   uniforms.script_time = bpmcount.time;
 
@@ -75,12 +77,12 @@ function update(dt) {
 
   uniforms.low = Math.pow( (inputs.syn_BassLevel*0.5 + inputs.syn_MidLevel*0.375+inputs.syn_Level*0.125)*inputs.syn_Intensity, 2.0);
 
-  bassT = bassT + Math.pow(inputs.syn_BassLevel*0.35+inputs.syn_MidLevel*0.15,2.0);
+  bassT = bassT + Math.pow(inputs.syn_BassLevel*0.45+inputs.syn_MidLevel*0.35+syn_Intensity*0.2,2.0);
   uniforms.script_bass_time = bassT;
-  midT = midT + Math.pow(inputs.syn_MidLevel*0.25+inputs.syn_MidHighLevel*0.25,2.0);
+  midT = midT + Math.pow(inputs.syn_MidLevel*0.45+inputs.syn_MidHighLevel*0.35+syn_Intensity*0.2,2.0);
   uniforms.script_bass_time = bassT;
 
-  highT = highT + Math.pow(inputs.syn_MidHighLevel*0.25+inputs.syn_HighLevel*0.25,2.0);
+  highT = highT + Math.pow(inputs.syn_MidHighLevel*0.45+inputs.syn_HighLevel*0.35+syn_Intensity*0.2,2.0);
   uniforms.script_high_time = highT;
   uniforms.smooth_basstime = bpmcount.time*0.85+(bassT*0.35);
   uniforms.smooth_midtime = bpmcount.time*0.85+(midT*0.35);

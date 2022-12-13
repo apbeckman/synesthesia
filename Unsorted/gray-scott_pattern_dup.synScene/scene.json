@@ -7,53 +7,9 @@
 			"MAX" : 2.5,
 			"MIN" : -2.5,
 			"NAME" : "Rate",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Reaction_vars"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 5,
-			"MIN" : -5,
-			"NAME" : "Reaction",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Reaction_vars"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.01,
-			"MIN" : -0.002,
-			"NAME" : "Feed",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Reaction_vars"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.002,
-			"MIN" : -0.002,
-			"NAME" : "Kill",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Reaction_vars"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.085,
-			"MIN" : -0.025,
-			"NAME" : "DiffA",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Reaction_vars"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.075,
-			"MIN" : -0.0125,
-			"NAME" : "DiffB",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Reaction_vars"
+			"PARAMS" : 0.75,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
@@ -131,6 +87,83 @@
 			"NAME" : "auto_scroll",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Succ",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : -1.5,
+			"NAME" : "Reaction",
+			"PARAMS" : 0.75,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.01,
+			"MIN" : -0.002,
+			"NAME" : "Feed",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.002,
+			"MIN" : -0.002,
+			"NAME" : "Kill",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.085,
+			"MIN" : -0.025,
+			"NAME" : "DiffA",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.075,
+			"MIN" : -0.0125,
+			"NAME" : "DiffB",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Reaction_vars"
 		}
 	],
 	"CREDIT" : "Shane",

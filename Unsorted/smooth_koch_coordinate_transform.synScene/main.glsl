@@ -251,7 +251,6 @@ vec4 renderMainImage() {
   const vec3 lp2 = vec3(-1.0, 1.25, 1.0)*vec3(s, 1.0, s);
 
   vec2 q = fragCoord/RESOLUTION.xy;
-  
   vec2 p = -1. + 2. * q;
 
   p.x *= RESOLUTION.x/RESOLUTION.y;

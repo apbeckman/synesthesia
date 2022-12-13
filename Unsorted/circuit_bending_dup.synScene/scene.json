@@ -34,13 +34,25 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "QuadMirror",
-			"PARAMS" : 0.118,
-			"TYPE" : "slider smooth",
+			"PARAMS" : 0.066,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "camera"
 		},
 		{

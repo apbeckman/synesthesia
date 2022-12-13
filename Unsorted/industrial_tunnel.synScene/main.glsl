@@ -589,7 +589,7 @@ vec4 renderMainImage() {
 
     // Mixing in some fog.
     vec3 bg = vec3(.4, .35, .3);
-    fc = mix(fc, bg, smoothstep(0., .95, t/(FAR-48.5*pow(Fog,.1))));
+    fc = mix(fc, bg, smoothstep(0., .975, t/(FAR-48.5*pow(Fog,.1))));
 
 
     // Post processing.

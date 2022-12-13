@@ -12,6 +12,25 @@
 float random (in float x) {
 	return fract(sin(x) * 1e4);
 }
+vec4 texture2DAA(sampler2D tex, in vec3 p, vec2 uv) {
+    vec2 texsize = vec2(textureSize(tex,0));
+    vec2 uv_texspace = uv*texsize;
+    vec2 seam = floor(uv_texspace+.5);
+    uv_texspace = (uv_texspace-seam)/fwidth(uv_texspace)+seam;
+    uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
+    return texture(tex, uv_texspace/texsize);
+}
+
+
+vec4 texture2DAA1(sampler2D tex, in vec3 p, in vec3 n) {
+    vec2 uv = _xy;
+    vec2 texsize = vec2(textureSize(tex,0));
+    vec2 uv_texspace = uv*texsize;
+    vec2 seam = floor(uv_texspace+.5);
+    uv_texspace = (uv_texspace-seam)/fwidth(uv_texspace)+seam;
+    uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
+    return texture(tex, uv_texspace/texsize);
+}
 
 // Based on Morgan McGuire @morgan3d
 // https://www.shadertoy.com/view/4dS3Wd

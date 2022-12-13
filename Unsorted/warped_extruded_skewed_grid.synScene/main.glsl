@@ -128,13 +128,15 @@ vec2 path(in float z){
 vec3 getTex(in vec2 p){
     vec3 tx;
     // Strething things out so that the image fills up the window.
-    //p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
+//    p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
 
     if(_exists(syn_UserImage)){
              tx = texture(syn_UserImage, p+TIME*0.0025).xyz*(0.5);
 
     }
     else{
+         p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
+        
          tx = texture(image10, smoothTimeC*0.00095+p/16.).xyz;
 
     }

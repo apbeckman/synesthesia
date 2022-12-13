@@ -12,6 +12,36 @@
 			"UI_GROUP" : "camera"
 		},
 		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 4,
+			"MIN" : -2,
+			"NAME" : "FOVmod",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.95,
+			"MIN" : 0,
+			"NAME" : "yPos",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : -0.15,
+			"MIN" : 1.75,
+			"NAME" : "LookY",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
@@ -82,36 +112,17 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 4,
-			"MIN" : -2,
-			"NAME" : "FOVmod",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1.95,
+			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "yPos",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : -0.15,
-			"MIN" : 1.75,
-			"NAME" : "LookY",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
+			"NAME" : "Warp",
+			"PARAMS" : 0.101,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "Mapping a square Truchet pattern onto an overlapping, interwoven hexagonal Truchet object.",
+	"GPU" : 0,
 	"HEIGHT" : 1224,
 	"IMAGES" : 
 	[

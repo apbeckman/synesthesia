@@ -1,230 +1,223 @@
 {
-   "CONTROLS" : [
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Change scene brightness",
-         "IS_META" : false,
-         "MAX" : 2,
-         "MIN" : -2,
-         "NAME" : "Brightness",
-         "TYPE" : "slider",
-         "UI_GROUP" : "lighting"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Remove shadows",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "Remove_Shadows",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "lighting"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "How much the tube width responds to audio",
-         "IS_META" : false,
-         "MAX" : 2,
-         "MIN" : 0,
-         "NAME" : "Tube_Gain",
-         "TYPE" : "knob",
-         "UI_GROUP" : "audio"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Remove white tube surface",
-         "IS_META" : false,
-         "MAX" : 0.025,
-         "MIN" : 0,
-         "NAME" : "Remove_Surface",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Remove the texture completely",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "Remove_Texture",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Make it cartoony!",
-         "IS_META" : false,
-         "MAX" : 0.25,
-         "MIN" : 0,
-         "NAME" : "Cartoonize",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Switch to just one hole instead of four",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "Just_One_Hole",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Tweak tube surface detail",
-         "IS_META" : false,
-         "MAX" : 0.07,
-         "MIN" : 0,
-         "NAME" : "Slim",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "How much texture detail you want on the tubes",
-         "IS_META" : false,
-         "MAX" : 80,
-         "MIN" : -25,
-         "NAME" : "Texture_Detail",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Thickness of the inner tubing",
-         "IS_META" : false,
-         "MAX" : 0.7071067812,
-         "MIN" : 0,
-         "NAME" : "Inner_Width",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.9,
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Thickness of the outer tubing",
-         "IS_META" : false,
-         "MAX" : 0.1,
-         "MIN" : 0,
-         "NAME" : "Tube_Width",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "Reg RGB value for tube color",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "Red",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "tube_color"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "Green RGB value for tube color",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "Green",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "tube_color"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "Blue RGB value for tube color",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "Blue",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "tube_color"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "4 testing",
-         "IS_META" : false,
-         "MAX" : -0.7071067812,
-         "MIN" : 0,
-         "NAME" : "Shed_Outer",
-         "TYPE" : "slider",
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 11.313708499,
-         "DESCRIPTION" : "Make it all gloopy glorpy",
-         "IS_META" : false,
-         "MAX" : 2,
-         "MIN" : 11.313708499,
-         "NAME" : "Globular",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.1,
-         "UI_GROUP" : "tubes"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "Move the camera",
-         "IS_META" : false,
-         "MAX" : 1.8,
-         "MIN" : -1.8,
-         "NAME" : "LookXY",
-         "PARAMS" : 0.0299999993294477,
-         "TYPE" : "xy smooth",
-         "UI_GROUP" : "camera"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "Adds slightly bulbous warp",
-         "IS_META" : false,
-         "MAX" : 0,
-         "MIN" : 1,
-         "NAME" : "Fish_Eye_Lens",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "camera"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "Flip upside down!",
-         "IS_META" : false,
-         "MAX" : -1,
-         "MIN" : 1,
-         "NAME" : "Flip",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "camera"
-      },
-      {
-         "DEFAULT" : 4,
-         "DESCRIPTION" : "Level of fog coming from the farthest point",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 4,
-         "NAME" : "Fog",
-         "TYPE" : "slider smooth",
-         "PARAMS" : 0.5,
-         "UI_GROUP" : "camera"
-      },
-      {
-         "DEFAULT" : 1,
-         "DESCRIPTION" : "Flythrough Speed",
-         "IS_META" : false,
-         "MAX" : 10,
-         "MIN" : -10,
-         "NAME" : "Fly_Speed",
-         "TYPE" : "knob",
-         "UI_GROUP" : "camera"
-      }
-   ],
-   "CREDIT" : "Shane feat. Sieg Mattel",
-   "DESCRIPTION" : "A standard cubic Truchet pattern, rendered in a simplistic style. Nothing exciting. :)",
-   "HEIGHT" : 1080,
-   "IMAGE_PATH" : "cubic_truchet_pattern_2.png",
-   "TITLE" : "Cubic Truchet Pattern",
-   "WIDTH" : 1920
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Change scene brightness",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "Brightness",
+			"TYPE" : "slider",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Remove shadows",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Remove_Shadows",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "How much the tube width responds to audio",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "Tube_Gain",
+			"TYPE" : "knob",
+			"UI_GROUP" : "audio"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Remove white tube surface",
+			"MAX" : 0.025,
+			"MIN" : 0,
+			"NAME" : "Remove_Surface",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Remove the texture completely",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Remove_Texture",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Make it cartoony!",
+			"MAX" : 0.25,
+			"MIN" : 0,
+			"NAME" : "Cartoonize",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Switch to just one hole instead of four",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Just_One_Hole",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Tweak tube surface detail",
+			"MAX" : 0.07,
+			"MIN" : 0,
+			"NAME" : "Slim",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "How much texture detail you want on the tubes",
+			"MAX" : 80,
+			"MIN" : -25,
+			"NAME" : "Texture_Detail",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Thickness of the inner tubing",
+			"MAX" : 0.70711,
+			"MIN" : 0,
+			"NAME" : "Inner_Width",
+			"PARAMS" : 0.9,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Thickness of the outer tubing",
+			"MAX" : 0.1,
+			"MIN" : 0,
+			"NAME" : "Tube_Width",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "4 testing",
+			"MAX" : -0.70711,
+			"MIN" : 0,
+			"NAME" : "Shed_Outer",
+			"TYPE" : "slider",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 11.314,
+			"DESCRIPTION" : "Make it all gloopy glorpy",
+			"MAX" : 2,
+			"MIN" : 11.314,
+			"NAME" : "Globular",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tubes"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Reg RGB value for tube color",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Red",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tube_color"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Green RGB value for tube color",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Green",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tube_color"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Blue RGB value for tube color",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Blue",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tube_color"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Move the camera",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.03,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Adds slightly bulbous warp",
+			"MAX" : 0,
+			"MIN" : 1,
+			"NAME" : "Fish_Eye_Lens",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Flip upside down!",
+			"MAX" : -1,
+			"MIN" : 1,
+			"NAME" : "Flip",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 4,
+			"DESCRIPTION" : "Level of fog coming from the farthest point",
+			"MAX" : 1,
+			"MIN" : 4,
+			"NAME" : "Fog",
+			"PARAMS" : 0.5,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Flythrough Speed",
+			"MAX" : 10,
+			"MIN" : -10,
+			"NAME" : "Fly_Speed",
+			"TYPE" : "knob",
+			"UI_GROUP" : "camera"
+		}
+	],
+	"CREDIT" : "Shane feat. Sieg Mattel",
+	"DESCRIPTION" : "A standard cubic Truchet pattern, rendered in a simplistic style. Nothing exciting. :)",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "cubic_truchet_pattern_2.png",
+	"TITLE" : "Cubic Truchet Pattern",
+	"WIDTH" : 1920
 }

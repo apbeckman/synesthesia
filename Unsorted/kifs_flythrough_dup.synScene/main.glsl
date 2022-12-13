@@ -79,7 +79,8 @@ float map(vec3 p){
     // const vec3 offs = vec3(1.0, 0.75, 0.5);
     const vec2 a = sin(vec2(0, 1.57079632) + 1.57/2.);
     const mat2 m = mat2(a.y, -a.x, a);
-    vec2 a2 = sin(vec2(0, 1.57079632) + 1.57/4. + p.z*0.3+smoothTimeC*0.125*unfolding);
+    vec2 a2 = sin(vec2(0, 1.57079632) + 1.57/4. + p.z*0.3+smoothTimeC*0.05*unfolding);
+    //a2 +=Warp*_rotate(_uvc, PI*(smoothTimeC*0.01))/PI;
     mat2 m2 = mat2(a2.y, -a2.x, a2);
     
     const float s = 5.; // Scale factor.
@@ -138,7 +139,7 @@ float map(vec3 p){
         amp /= s; // Decrease the amplitude by the scaling factor.
     }
  
- 	return d - .035 + size; // .35 is analous to the object size.
+ 	return d - .035 - size; // .35 is analous to the object size.
 }
 
 
@@ -273,7 +274,7 @@ vec3 envMap(vec3 rd, vec3 n){
     uv = fract(uv);
    
     vec3 col = texture(image10, uv).zyx;//*(1.-lod*.8)
-    return smoothstep(.1, 1., col*col*2.);
+    return smoothstep(.01, 1., col*col*2.);
     
 }
 
@@ -299,9 +300,9 @@ vec4 renderMainImage() {
     vec3 rd = (vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y));
     // Barrel distortion;
     // rd = normalize(vec3(rd.xy, sqrt(rd.z*rd.z - dot(rd.xy, rd.xy)*disto_knob)));
-    // rd = mix(rd, normalize(vec3(_uvc, 1.0)), )
-    rd = normalize(vec3(_uvc+FOV*(_uvc*PI*0.25), 1.0));
-    rd.xy += rd.xy*FOV*_uvc;
+     rd = mix(rd, normalize(vec3(_uvc+_uvc*PI*FOV, 1.0)), 1.);
+    //rd = normalize(vec3(_uvc+FOV*(_uvc*PI)_uv, 1.0));
+    //rd.xy += PI*FOV*_uvc;
     
     
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
@@ -309,10 +310,11 @@ vec4 renderMainImage() {
     // rd.xy = rd.xy*mat2(m.xy, -m.y, m.x);
     // rd.xz = rd.xz*mat2(m.xy, -m.y, m.x);
     rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, lookXY.x*PI);
-    
+    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.xy = _rotate(rd.xy, Rotate*PI);
     // Ray origin, set off in the YZ direction. Note the "0.5." It's an old lattice trick.
-    vec3 ro = vec3(0.0, 0.0, mix(smoothTime, bass_time*1.0, reactive_time));
+    vec3 ro = vec3(0.0, 0.0, mix(smoothTime*0.35, bass_time*1.0, reactive_time));
+    
     vec3 lp = ro + vec3(0.0, .25, .25); // Light, near the ray origin.
 
     // Set the scene color to black.
@@ -323,8 +325,10 @@ vec4 renderMainImage() {
     
     // Surface hit, so light it up.
     if(t<FAR){
-    
+    //rd.xy += PI*FOV*_uvc;
+        
         vec3 sp = ro + rd*t; // Surface position.
+        
         vec3 sn = normal(sp); // Surface normal.
 
 
@@ -351,7 +355,7 @@ vec4 renderMainImage() {
         float atten = 1.0 / (1.0 + lDist*0.25 + lDist*lDist*.075); // Attenuation.
 
         // Combining the elements above to light and color the scene.
-        col = oCol*(diff + vec3(.4, .25, .2)) + vec3(1., .6, .2)*spec*2.*standard_lighting;
+        col = oCol*(diff + vec3(.4, 1.25, 1.2)) + vec3(1., .6, .2)*spec*2.*standard_lighting;
         
         // Faux environmental mapping.
         col += envMap(reflect(rd, sn), sn)*standard_lighting;
@@ -360,7 +364,7 @@ vec4 renderMainImage() {
             texo = 1.0-tex3D(syn_UserImage, sp*sz, vec3(1.0,1.0,0.0));
         }
 
-        vec3 colPal = _palette(fract(sp.z), vec3(0.620, 0.860, -0.040), vec3(0.500, 1.000, 0.500), vec3(0.500, 0.345, 0.750), vec3(0.500, 0.440, 0.220));
+        vec3 colPal = _palette(fract(sp.z), vec3(0.720, 0.860, -0.2040), vec3(0.500, 1.000, 0.500), vec3(0.500, 0.345, 0.750), vec3(0.500, 0.440, 0.220));
         col += (1.0-texo)*mix(colPal, vec3(0.0,0.4,0.8), sp.y)*10.0*_pulse(length(ro-sp)*10.0, scan_alt_light*50.0, 1.0*(1.0+alternate_lighting*50.0));
         // Environment mapping with a cubic texture, for comparison.
 
@@ -383,7 +387,7 @@ vec4 renderMainImage() {
     // // Mix the smokey haze with the object.
     // col = mix(sky, col, 1./(t*t/FAR/FAR*128. + 1.));
 
-      vec3 bg = mix(vec3(1.0, .0, 0.0), vec3(0.0, 0.0, 1.0), -rd.y*.35 + .35)*0.5;
+      vec3 bg = mix(vec3(.50, .250, 0.1250), vec3(0.120, 0.0, 1.0), -rd.y*.35 + .35)*0.5;
 
 
       col = mix(col, bg, smoothstep(0., FAR-15., t));//min(bg.zyx*vec3(1.3, .6, .2)*1.5, 1.)

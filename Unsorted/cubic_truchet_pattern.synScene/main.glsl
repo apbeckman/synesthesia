@@ -418,7 +418,7 @@ vec4 renderMainImage() {
 
     // Aspect correct screen coordinates.
 	vec2 uv = (fragCoord.xy - RENDERSIZE.xy*.5)/RENDERSIZE.y;
-
+    
     // Ray origin, or camera - Moving along the Z-axis.
     vec3 o = vec3(0., 0., fly_time);
     // Light. Situated near the camera whilst moving along with it.
@@ -437,9 +437,11 @@ vec4 renderMainImage() {
 		// MS: Removing this, since we want to have control over the camera with XY controller rather than leaving it up to a rotation based on time
     //r.xz *= rot2(sin(TIME/2.) * 0.4);
     //r.xy *= rot2(cos(TIME/2.) * 0.2);
-
-		// MS: Adding camera movement here
-		r.xy += LookXY.xy;
+        r.xz = _rotate(r.xz, LookXY.x*PI);
+        r.yz = _rotate(r.yz, LookXY.y*PI);
+		
+        // MS: Adding camera movement here
+		//r.xy += LookXY.xy;
 		//o.xy += LookXY.xy*Cam_Toggle; // MS: Just testing to see what happens if we map o as well
 
     // Trace out the scene.

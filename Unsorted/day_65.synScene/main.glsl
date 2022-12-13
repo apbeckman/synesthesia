@@ -148,7 +148,7 @@ float fbm(vec2 p) {
 
 
 #define mx (20.*_mouse.x/RENDERSIZE.x)
-#define TIME (TIME + mx)
+#define TIME (smoothTime)
 
 #define rot(x) mat2(cos(x),-sin(x),sin(x),cos(x))
 #define mx (20.*_mouse.x/RENDERSIZE.x)

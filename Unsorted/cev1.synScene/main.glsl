@@ -53,7 +53,7 @@ vec2 map(vec3 p){
     p.x -= 0.5+(sin(0.0125*smoothTimeC)*tog);
     
     float attd = pow(abs(sin(j.z*0.5 + smoothTimeB*0.4)), 10.);; 
-    float atte = pow(abs(sin(j.z*0.5 + smoothTimeB*5.4)), 100.+highhits*10.)*attd; 
+    float atte = pow(abs(sin(j.z*0.5 + smoothTimeB*.124)), 100.)*attd; 
     
     vec3 q = p;
     
@@ -69,8 +69,9 @@ vec2 map(vec3 p){
     d = dmin(d, vec2(dB, 2.));
     float att = pow(abs(sin(j.z*0.1 + smoothTimeB*0.5 + sin(j.x*4.)*0.2)), 400.);
     
+    //Beam Colors
     //glow += 0.9/(0.001 + dB*dB*2000.)*vec3(1.8 + attd*8.,0.9,0.7)*att;
-    glown += 0.9/(0.0001 + dB*dB*10.)*vec3(2.8 + attd*8.,0.9,0.7)*att;
+    glown += 0.9/(0.0001 + dB*dB*10.)*vec3(.8 + attd*8.,0.9,02.7)*att;
     
     p.z -= 1.5;
     
@@ -96,15 +97,16 @@ vec2 map(vec3 p){
     
     float dD = sdBox(p, vec3(0.02,1.7+basshits,0.02+basshits*0.1));
     d = dmin(d, vec2(dD, 2.));
-    float attc = pow(abs(sin(p.y*0.4 + smoothTimeB + 4.)), 10.);
+    float attc = pow(abs(sin(p.y*0.24 + smoothTimeB + 4.)), 10.);
     //glow += 10.9/(0.01 + dD*dD*2000.)*sin(vec3(0.1,0.8,0.7) + vec3(0,0,attd*2.))*attc;
     //glow += 0.7/(0.001 + dD*dD*100.)*sin(vec3(0.1,0.1,0.9) + vec3(0,0,attd*2.))*attc;
     
-    
+    //Geometry Colors
     //glown += 0.7/(0.0001 + dD*dD*100.)*sin(vec3(0.1,1.1,0.9) + vec3(0,0,attd*1.))*attc;
     //glown += 0.7/(0.001 + dD*dD*(60. - atte*59.))*sin(vec3(0.,1. - atte*0.6,1.9) + vec3(0,0,attd*1.))*attc*vec3(1,1,1.5)*0.8;
     //glown += 0.7/(0.001 + dD*dD*(60. - atte*59.))*sin(vec3(0.,0.4 - atte*0.6,1.9) + vec3(0,0,attd*1.))*attc*vec3(1,1,1.5)*0.8;
-    glown += 0.7/(0.001 + dD*dD*(60. - atte*59.))*sin(vec3(0.1,0.4 - atte*0.6,1.1) + vec3(0,0,attd*0.))*attc*vec3(1,1,1.)*0.8;
+    glown += 0.7/(0.001 + dD*dD*(60. - atte*59.))*sin(vec3(0.61,0.4 - atte*0.6,1.1) + vec3(0,0,attd*0.))*attc*vec3(1,1,1.)*0.8;
+    //glown += 0.7/(0.001 + dD*dD*(60. - atte*59.))*sin(vec3(0.1,0.4 - atte*0.6,.1) + vec3(0,0,attd*0.))*attc*vec3(1,1,1.)*0.8;
     
     d.x = abs(d.x) + 0.002;
     
@@ -139,6 +141,7 @@ vec2 march(vec3 ro, vec3 rd, inout vec3 p, inout float t, inout bool hit){
 }
 
 vec3 getRd(vec3 ro, vec3 lookAt, vec2 uv){
+    lookAt.xy += _uvc*FOV*PI;
     vec3 dir = normalize(lookAt - ro);
     vec3 right = normalize(cross(vec3(0,1,0), dir));
     vec3 up = normalize(cross(dir, right));
@@ -172,9 +175,9 @@ vec4 renderPassA() {
     vec3 lookAt = vec3(0);
     
     lookAt.z = ro.z + 2.;
-    
     vec3 rd = getRd(ro, lookAt, uv);
-    
+        rd.xy = _rotate(rd.xy, PI*Rotate);
+
     vec3 p; float t; bool hit;
     
     vec2 d = march(ro, rd, p, t, hit);

@@ -3,12 +3,18 @@
 			//******** BuffA Code Begins ********
 
 #define A(COORD) texture(BuffA,(COORD)/RENDERSIZE.xy)
+
 float growthFactor = normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0));
 vec4 image = texture(syn_UserImage,(_xy)/RENDERSIZE.xy);
-
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = (_xy);
+
+  vec3 logoCol = vec3(0.0);
+  if (_exists(syn_UserImage)){
+    logoCol = _loadUserImageAsMask().rgb;
+  }
+
 
     U-=.5*RENDERSIZE.xy;
     U *= (.997-growthFactor*Zoom*0.125)-Zoom;
@@ -18,6 +24,8 @@ vec4 renderPassA() {
     U.xy += Dir_XY.xy;
     Q  =  A(U);
     image *= MediaImpact;
+    image -=vec4(logoCol, 0.);
+
     // Neighborhood :
     vec4 pX  =  A(U + vec2(1,0))+(image*(0.75+(0.25*growthFactor)))*0.375;
     vec4 pY  =  A(U + vec2(0,1))+(image*(0.75+(0.25*growthFactor)))*0.375;

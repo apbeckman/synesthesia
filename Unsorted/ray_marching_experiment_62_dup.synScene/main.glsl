@@ -7,7 +7,7 @@ mat3 roty(float a){return mat3(cos(a),0.,sin(a),0.,1.,0.,-sin(a),0.,cos(a));}
 mat3 rotz(float a){return mat3(cos(a),-sin(a),0.,sin(a),cos(a),0.,0.,0.,1.);}
 
 float retreater_var = spiral_ridges*spiral_ridges;
-float rotTime = (script_time);
+float rotTime = (smoothTimeC*0.25);
 vec4 fragColor = vec4(0.0);
 
 // vec3 getTexCol(vec3 p, vec4 alt){
@@ -57,8 +57,8 @@ vec3 blackbody(float Temp)
     // return col;
     
     // thansk to public_int_i
-    float i1 = sin(TIME*0.45)*0.5+0.5,
-          i2 = cos(TIME*0.45)*0.5+0.5;
+    float i1 = sin(smoothTimeB*0.45)*0.5+0.5,
+          i2 = cos(smoothTimeB*0.45)*0.5+0.5;
    	return mix(col, col*max(0., 1.0-(i1+i2))+
            col.zxy*i1+
            col.yzx*i2, auto_hue);
@@ -95,7 +95,8 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;    
   vec2 g = fragCoord.xy;
 	vec2 si = RENDERSIZE.xy;
-	vec2 uv = (g+g-si)/si.y;
+	vec2 uv = (g+g-si)/si.y + _uvc*PI*FOV2;
+	//uv.xy;
 	float t = -speed_direction * 0.2;
 	vec3 ro = vec3(cos(t),0., sin(t)) * 12.; 
   vec3 cv = vec3(0); 
@@ -104,14 +105,17 @@ vec4 renderMainImage() {
   vec3 x = normalize(cross(cu,z));
 	vec3 y = cross(z,x);
   float fov = .9*2.5*pow(fov_mod,2.0);
-	vec3 rd = normalize(fov * (uv.x * x + uv.y * y) + z);
-    
+	vec3 rd = normalize(fov*((uv.x+_uvc.x*Warp.x*uv.x*pow(PI, 2)) * x + (uv.y+_uvc.y*Warp.y*uv.y*pow(PI, 2)) * y) + z);
+	
+    rd.xy = _rotate(rd.xy, LookXY.y*PI);
+    rd.yz = _rotate(rd.yz, Spin*PI);
+	rd.xz = _rotate(rd.xz, LookXY.x*PI);
   float s = 1., d = 0., extraLight = 0.0;
 	for (int i=0; i<200; i++) 
 	{
 		if (log(d*d/s/1e5)>0.) break;
 		d += (s=df(ro+rd*d).x)*.5;
-    extraLight += d/400.*(1.0-darker)+d/300.0*flashing*(pow(syn_Hits*0.25 + syn_HighHits *0.5); // new lighting try system
+    extraLight += d/400.*(1.0-darker)+d/300.0*flashing*pow(highhits, 2.); // new lighting try system
 	}
 
 	fragColor.rgb += extraLight;

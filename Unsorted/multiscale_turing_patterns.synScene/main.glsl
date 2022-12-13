@@ -282,8 +282,9 @@ vec4 renderPassD() {
     }
     
     vec4 p = vec4(sqrt(is.x*is.x*Pr + is.y*is.y*Pg + is.z*is.z*Pb));
-    vec4 desaturated = vec4(p) + (is - vec4(p)) * saturation;
-    
+//    vec4 desaturated = vec4(p) + (is - vec4(p)) * saturation;
+      vec4 desaturated = vec4(p) + (is - vec4(p)) * saturation;
+      
     vec4 eps = vec4(0.1);
     
     // initialize with noise

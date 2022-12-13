@@ -1,9 +1,43 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.078,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "LookXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "An Apollonian structure.",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "[sh17a]_apollonian_structure.png",
 	"TITLE" : "[SH17A] Apollonian Structure",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

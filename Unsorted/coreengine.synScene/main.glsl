@@ -43,8 +43,8 @@ float oct(vec3 p, float s)
 vec3 kifs(vec3 p) //room params
 {
     float s=1.;
-    float scale=3.5+middle;
-    for(int i=0;i<4;++i)
+    float scale=3.6+middle;
+    for(int i=0;i<6;++i)
     {
         p=scale*abs(p)-(scale-1.);
         p.xy*=rot(-0.4);
@@ -57,8 +57,8 @@ vec3 kifs(vec3 p) //room params
 
 vec3 kifs2(vec3 p)
 {
-    float s=.7;
-    for(int i=0;i<5;++i)
+    float s=.17;
+    for(int i=0;i<6;++i)
     {
         if(p.x+p.y<0.){p.xy = -p.yx;}
       	if(p.x+p.z<0.){p.xz = -p.zx;}
@@ -157,13 +157,13 @@ vec3 firecolor(float f)
 
 vec3 lightcolor(float t)
 {
-    return mix(firecolor(0.4), vec3(0.,1.0,0.5)*0.5, pow(abs(t),8.));
+    return mix(firecolor(0.4), vec3(0.,1.0,0.5)*0.5, pow(abs(t),6.));
 }
 
 float get_ao(vec3 p, vec3 n)
 {
     float r=0.0, w=1.0, d;
-    for(float i=1.; i<5.0+1.1; i++)
+    for(float i=1.; i<7.0+1.1; i++)
     {
         d=i/5.0;
         r+=w*(d-map(p+n*d));
@@ -238,17 +238,19 @@ vec4 renderMainImage() {
 
     vec2 q=fragCoord/RENDERSIZE.xy;
     vec2 p=q*2.-1.;
+    
     p.x*=RENDERSIZE.x/RENDERSIZE.y;
 
     rnd=hash12(fragCoord)*0.1+0.9;
     
-    vec3 ro=vec3(0.,-1.,10.+cos(script_time/3.0));
+    vec3 ro=vec3(0.,-1.,10.+cos(smoothTime/3.0));
     vec3 ta=vec3(0.,1.,0.);
-    
-    ro.xz*=rot(xRot+.125*smoothTime); 
+
+    ro.yz =_rotate(ro.yz, LookXY.y*0.25);
+    ro.xz*=rot(LookXY.x*PI+.125*smoothTime); 
      // debugging camera
-    float x_rot=-lookXY.x/RENDERSIZE.x*PI*2.0;
-    float y_rot=lookXY.y/RENDERSIZE.y*3.14*0.5 + PI/2.0;
+   // float x_rot=-lookXY.x/RENDERSIZE.x*PI*2.0;
+    //float y_rot=lookXY.y/RENDERSIZE.y*3.14*0.5 + PI/2.0;
     //if(iMouse.z>0.||iMouse.w>0.)
         //ro=vec3(0.,0,-3)+vec3(cos(y_rot)*cos(x_rot),cos(y_rot)*cos(x_rot),cos(y_rot)*sin(x_rot))*12.;
     
@@ -265,7 +267,11 @@ vec4 renderMainImage() {
 #else    
         p=(-RENDERSIZE.xy + 1.75*fragCoord)/RENDERSIZE.y;
 #endif
-        rd = cam(ro,ta)*normalize(vec3(p.xy,1.8-FOVmod));
+        p.xy *=1.0+Warp*(_uvc*PI-1.);
+    //p.xy+=(_uvc*PI*p.xy*Warp)*2.;
+
+        rd = cam(ro,ta)*normalize(vec3(p.xy+p.xy*PI*FOVmod,.8));
+
         vec3 col=vec3(0.);
 
         float t=intersect(ro,rd);

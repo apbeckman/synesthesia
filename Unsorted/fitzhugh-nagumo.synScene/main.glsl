@@ -24,7 +24,7 @@ vec4 renderPassA() {
     const float _K2 = 1.0/6.0; // vertex-neighbors
     float timestep = 0.97;
     const float a0 = -0.1;
-    const float a1 = 2.0;
+    float a1 = 2.0 ;
     const float epsilon = 0.05;
     const float delta = 4.0;
     const float k1 = 1.0;

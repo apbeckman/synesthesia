@@ -11,25 +11,25 @@
 			"MAX" : 
 			[
 				1,
-				1
+				0.75
 			],
 			"MIN" : 
 			[
 				-1,
-				-1
+				-0.25
 			],
-			"NAME" : "lookXY",
-			"PARAMS" : 0.01,
+			"NAME" : "LookXY",
+			"PARAMS" : 0.037,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1.5,
+			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "FOVmod",
-			"PARAMS" : 0.1,
+			"PARAMS" : 0.06,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
@@ -46,10 +46,11 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0,
-			"MIN" : 3,
+			"MAX" : 10,
+			"MIN" : -2,
 			"NAME" : "middle",
-			"TYPE" : "slider",
+			"PARAMS" : 0.148,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -74,16 +75,6 @@
 		{
 			"DEFAULT" : 0.2,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "xRot",
-			"PARAMS" : 0.1,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0.2,
-			"DESCRIPTION" : "",
 			"MAX" : 0.6,
 			"MIN" : -0.12,
 			"NAME" : "disturbFloor",
@@ -99,6 +90,28 @@
 			"NAME" : "react",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Warp",
+			"PARAMS" : 0.072,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "EvilRyu",

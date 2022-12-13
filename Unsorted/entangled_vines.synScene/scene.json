@@ -56,9 +56,32 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Warp",
-			"TYPE" : "slider",
+			"MIN" : 0,
+			"NAME" : "Whoa",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Flip",
+			"PARAMS" : 0.106,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -70,7 +93,7 @@
 	[
 		{
 			"NAME" : "image2",
-			"PATH" : "images/2.jpg"
+			"PATH" : "images/331.jpeg"
 		}
 	],
 	"IMAGE_PATH" : "entangled_vines.png",

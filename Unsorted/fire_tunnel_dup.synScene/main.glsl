@@ -83,7 +83,7 @@ vec3 cam(vec2 uv, vec3 ro, vec3 cu, vec3 cv, float fov)
     vec3 v = normalize(cross(rov, u));
 	
     vec3 rd = normalize(rov + fov*u*uv.x + fov*v*uv.y);
-
+	
 	return rd;
 }
 
@@ -122,8 +122,8 @@ vec4 renderMainImage() {
 		f = vec4(syn_MidPresence*0.25,0.15,0.32,1);
 	  vec2 q = g/RENDERSIZE.xy;
 	  vec3 ro = vec3(cos(t*.3), sin(t*.2),t )*vec3(8.5, 8.5, 5.)*0.4;
+	  
 		vec3 rd = cam((2.*g-RENDERSIZE.xy)/RENDERSIZE.y, ro, vec3(0,1,0), ro + vec3(0,0,1), 3.5*fov);
-
     rd.xy = _rotate(rd.xy, -spin*PI);
 
 		f = march(f, ro, rd, sharpness+0.01);

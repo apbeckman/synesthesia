@@ -20,14 +20,14 @@ vec3 colorPaletteChooser(float colReg, float var){
 
 			//******** BuffA Code Begins ********
 
-float sHighHits = syn_HighHits*audio_reactivity;
-float sBassHits = syn_BassHits*audio_reactivity;
+float sHighHits = (syn_HighHits*0.6+syn_HighLevel*0.4)*audio_reactivity;
+float sBassHits = (syn_BassHits+syn_HighLevel*0.4)*audio_reactivity;
 
 // ---------------------------------------------
 float or = 9.0*scale*scale;         // outer gaussian std dev
 float ir = 3.0*scale*scale;          // inner gaussian std dev
 float b1 = 0.19*birth_lower-        0.18*regime_toggle  ;                // birth1
-float b2 = 0.222*birth_upper+       0.15*regime_toggle*(1.0-sBassHits*3.5);// birth2
+float b2 = 0.222*birth_upper+       0.15*regime_toggle*(1.0-sBassHits*2.5) + sHighHits*0.03;// birth2
 float s1 = 0.267*survival_lower-                (1.0-sBassHits);                // survival1
 float s2 = 0.445*survival_upper+    regime_toggle*0.2+  sBassHits*0.2;                  // survival2
 float dt = (0.2*timestep+sHighHits*0.3);          // timestep
@@ -45,7 +45,7 @@ float alpha_m = 0.112*space_filling;   // sigmoid width for inner fullness
 // float alpha_m = 0.11;
 
 bool reset() {
-    return ((FRAMECOUNT < 2)||(reset_sim>0.5));
+    return ((FRAMECOUNT <= 1)||(reset_sim>0.5));
 }
 
 // the logistic function is used as a smooth step function

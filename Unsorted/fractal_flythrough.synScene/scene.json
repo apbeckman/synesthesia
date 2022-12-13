@@ -16,7 +16,7 @@
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "Moving a camera through a fractal object.",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
@@ -26,5 +26,5 @@
 	],
 	"IMAGE_PATH" : "fractal_flythrough.png",
 	"TITLE" : "Fractal Flythrough",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

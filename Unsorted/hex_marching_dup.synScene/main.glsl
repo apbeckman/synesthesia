@@ -1,3 +1,6 @@
+//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+
+
 			//******** BuffA Code Begins ********
 
 // License CC0: Hex Marching
@@ -7,6 +10,7 @@
 #define TAU         (2.0*PI)
 #define ROT(a)      mat2(cos(a), sin(a), -sin(a), cos(a))
 #define BPM         30.0
+
 const float planeDist = 1.0-0.2;
 
 // License: WTFPL, author: sam hocevar, found: https://stackoverflow.com/a/17897228/418488
@@ -47,7 +51,7 @@ float hash(float co) {
 
 vec3 offset(float z) {
   float a = z;
-  vec2 p = -0.15*(vec2(cos(a), sin(a*sqrt(2.0))) + vec2(cos(a*sqrt(0.75)), sin(a*sqrt(0.5))));
+  vec2 p = -0.125*(vec2(cos(a), sin(a*sqrt(2.0))) + vec2(cos(a*sqrt(0.75)), sin(a*sqrt(0.5))));
   return vec3(p, z);
 }
 
@@ -101,7 +105,7 @@ vec4 effect(vec2 p, float aa, float h) {
   const float w = 0.02;
   vec2 pp = toPolar(p);
   float a = pp.y;
-  float hn = mod1(pp.y, TAU/6.0);
+  float hn = mod1(pp.y, TAU/(6.0+Shape));
   vec2 hp = toRect(pp);
   float hd = hp.x-(w*10.0);
   
@@ -111,9 +115,9 @@ vec4 effect(vec2 p, float aa, float h) {
   
   float h0 = hash(10.0*(hhn.x+hhn.y)+2.0*h+n);
   float h1 = fract(8667.0*h0);
-  float cut = mix(-0.5, 0.999, 0.5+0.5*sin(smoothTimeB+TAU*h0));
+  float cut = mix(-0.5, 0.999, 0.5+0.5*sin(smoothTimeC*0.25+TAU*h0));
   const float coln = 6.0;
-  float t = smoothstep(aa, -aa, d)*smoothstep(cut, cut-0.005, sin(a+2.0*(h1-0.5)*smoothTime+h1*TAU))*exp(-150.0*abs(x));
+  float t = smoothstep(aa, -aa, d)*smoothstep(cut, cut-0.005, sin(a+2.0*(h1-0.5)*TIME+h1*TAU))*exp(-150.0*abs(x));
   vec3 col = hsv2rgb(vec3(floor(h0*coln)/coln, 0.8, 1.0))*t*1.75;
 
   t = mix(0.9, 1.0, t);
@@ -126,6 +130,7 @@ vec4 effect(vec2 p, float aa, float h) {
 }
 
 vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 npp, vec3 off, float n) {
+
   float h0 = hash(n);
   float h1 = fract(8667.0*h0);
 
@@ -154,7 +159,7 @@ vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
   vec3 rd = normalize(p.x*uu + p.y*vv + rdd*ww);
   vec3 nrd = normalize(np.x*uu + np.y*vv + rdd*ww);
 
-  const int furthest = 6;
+  const int furthest = 5;
   const int fadeFrom = max(furthest-2, 0);
 
   const float fadeDist = planeDist*float(furthest - fadeFrom);
@@ -164,7 +169,7 @@ vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
 
 
   vec4 acol = vec4(0.0);
-  const float cutOff = 0.975;
+  const float cutOff = 0.95;
   bool cutOut = false;
 
   float maxpd = 0.0;
@@ -207,7 +212,7 @@ vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
 }
 
 vec3 effect(vec2 p, vec2 q) {
-  float tm  = planeDist*smoothTimeC*BPM/120.0;
+  float tm  = planeDist*smoothTime*0.125;
   vec3 ro   = offset(tm);
   vec3 dro  = doffset(tm);
   vec3 ddro = ddoffset(tm);
@@ -247,16 +252,15 @@ const mat2 brot = ROT(2.399);
 //  simplyfied version of Dave Hoskins blur
 vec3 dblur(vec2 q,float rad) {
   vec3 acc=vec3(0);
-  const float m = 0.00;
+  const float m = 0.002;
   vec2 pixel=vec2(m*RESOLUTION.y/RESOLUTION.x,m);
   vec2 angle=vec2(0,rad);
   rad=1.;
-  const int iter = 40;
+  const int iter = 30;
   for (int j=0; j<iter; ++j) {  
     rad += 1./rad;
     angle*=brot;
     vec4 col=texture(BuffB,q+pixel*(rad-1.)*angle);
-    col *= pow(1.0+highhits*0.35, 2.);
     acc+=col.xyz;
   }
   return acc*(1.0/float(iter));
@@ -268,12 +272,12 @@ vec4 renderPassB() {
 
   vec2 q = fragCoord/RESOLUTION.xy;
   vec2 p = -1.0+2.0*q;
+  
   vec4 pcol = texture(BuffA,q);
   vec3 bcol = dblur(q, .75);
   
   vec3 col = pcol.xyz;
   col += vec3(0.9, .8, 1.2)*mix(0.5, 0.66, length(p))*(0.05+bcol);
-  
   
   fragColor = vec4(col, 1.0);
 	return fragColor; 
@@ -293,7 +297,7 @@ vec4 renderMainImage() {
   vec4 pcol = texture(BuffB, q);
   vec3 col = pcol.xyz;
   col = clamp(col, 0.0, 1.0);
-  col *= smoothstep(0.0, 2.0, smoothTime);
+  col *= smoothstep(0.0, 2.0, smoothTimeB);
   col = sqrt(col);
   fragColor = vec4(col, 1.0);
 	return fragColor; 
