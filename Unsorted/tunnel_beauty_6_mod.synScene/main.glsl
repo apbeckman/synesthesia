@@ -55,6 +55,7 @@ mat3 RotZ(float a)
 float df(vec3 p)
 {
 	vec3 q = p;
+	p.xy+=WeirdMirror.xy*_uvc*p.xy*PI*PI;
 
   q.xy += cos(1.0+smoothTimeB);
 	q *= RotZ(q.z * 0.1);
@@ -86,7 +87,7 @@ vec3 blackbody(float Temp)
 	vec3 col = vec3(255.);
     col.x = 560100000. * pow(Temp,(-3. / 2.)) + 148.;
    	col.y = 100.04 * log(Temp) - 623.6;
-   	if (Temp > 6500.) col.y = 35200000. * pow(Temp,(-3. / 2.)) + 184.;
+   	if (Temp > 6500.) col.y = 135200000. * pow(Temp,(-3. / 2.)) + 184.;
    	col.z = 194.18 * log(Temp) - 1448.6;
    	col = clamp(col, 0., 255.)/255.;
     if (Temp < 10.) col *= Temp/10.;
@@ -99,7 +100,7 @@ float SubDensity(vec3 surfPoint, float prec, float ms)
 {
 	vec3 n;
 	float s = 0.;
-    const int iter = 15;
+    const int iter = 25;
 	for (int i=0;i<iter;i++)
 	{
 		n = nor(surfPoint,prec); 
@@ -125,9 +126,9 @@ vec4 renderMainImage() {
 	vec2 si = RENDERSIZE.xy;
 	vec2 uv = (g+g-si)/si.y;
 	uv.xy += fov_in*PI*_uvc;
-	uv.xy += QuadMirror.xy*PI*_uvc*uv*2.-_uvc;
-
-	vec3 ro = vec3(0,0, smoothTime*0.4 * 15.); 
+	uv.xy += QuadMirror.xy*pow(PI, 2.)*_uvc*uv;
+	uv.y *=(1.0+pow(PI, 2)*QuadMirror.x);
+	vec3 ro = vec3(0,0, smoothTimeC * 10.); 
 	ro.xy += vec2(sin(ro.z)*(1.0+(_uvc*PI)));
   	vec3 cv = ro + vec3(0,0,1); 
 	vec3 cu = normalize(vec3(0,1,0));
@@ -141,7 +142,7 @@ vec4 renderMainImage() {
 	float s = 1., d = 0.;
 	for (int i=0; i<110; i++) 
 	{
-		ro = vec3(xyOffset*50.0, smoothTime*0.4 * 15.); 
+		ro = vec3(xyOffset*50.0, smoothTimeC * 10.); 
 		ro.xy += vec2(sin(d*0.25),cos(d*0.25))*5.0*perturbedAmt;
 		cv = ro + vec3(0,0,1); 
 		cu = normalize(vec3(0,1,0));
@@ -150,8 +151,8 @@ vec4 renderMainImage() {
 		y = cross(z,x);
 		fov = .9;
 		rd = normalize(fov * (uv.x * x + uv.y * y) + z);
-		rd.xz = _rotate(rd.xz, PI*xyLook.x);
-		rd.yz = _rotate(rd.yz,PI*xyLook.y);
+		rd.xz = _rotate(rd.xz, -PI*xyLook.x+PI*_uvc.x*Flip);
+		rd.yz = _rotate(rd.yz,-PI*xyLook.y);
 		rd.xy = _rotate(rd.xy, PI*Rotate);
 
 		if (log(d*d/s/1e5)>0.) break;

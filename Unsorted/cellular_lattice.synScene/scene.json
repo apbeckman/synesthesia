@@ -24,7 +24,7 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : -0.25,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -1,
@@ -61,6 +61,27 @@
 			"NAME" : "Twist",
 			"PARAMS" : 0.177,
 			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Warp",
+			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		}
 	],

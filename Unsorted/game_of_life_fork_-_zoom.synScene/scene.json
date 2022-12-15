@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "apb_0",
+	"DESCRIPTION" : "fork of Steve's Conway's Game of Life implementation. zooming in a bit closer to the action",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "game_of_life_fork_-_zoom.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Game Of Life Fork - Zoom",
+	"WIDTH" : 1280
+}

@@ -19,12 +19,12 @@
 				-1
 			],
 			"NAME" : "lookXY",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.033,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
 			"MIN" : -1,
@@ -38,19 +38,9 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -1,
-			"NAME" : "lookZ",
+			"NAME" : "Rotate",
 			"PARAMS" : 0.095,
 			"TYPE" : "knob smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Zoom",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -71,6 +61,16 @@
 			"PARAMS" : 0.104,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Flip",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",

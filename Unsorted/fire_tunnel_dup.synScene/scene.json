@@ -15,7 +15,7 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "Turn up to decrease diameter of tunnel, constricting it, or turn down to make it wider. Default: 50%.",
 			"MAX" : 2,
-			"MIN" : 0,
+			"MIN" : -0.25,
 			"NAME" : "constriction",
 			"TYPE" : "slider",
 			"UI_GROUP" : "tunnel"
@@ -61,31 +61,11 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "Field of view. Default: 50%.",
 			"MAX" : 2,
-			"MIN" : 0.03,
+			"MIN" : -1,
 			"NAME" : "fov",
 			"PARAMS" : 0.1,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "Add a twist to the tunnel's geometry.",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "twist",
-			"PARAMS" : 0.1,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "rotation"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "Add a spin to the camera, forward for clockwise. Default: 50%.",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "spin",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider traveler",
-			"UI_GROUP" : "rotation"
 		},
 		{
 			"DEFAULT" : 
@@ -107,17 +87,49 @@
 			"NAME" : "LookXY",
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
 		},
 		{
 			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
+			"DESCRIPTION" : "Add a twist to the tunnel's geometry.",
 			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Rotate",
-			"PARAMS" : 0.01,
+			"MIN" : -1,
+			"NAME" : "twist",
+			"PARAMS" : 0.056,
 			"TYPE" : "knob smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "rotation"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add a spin to the camera, forward for clockwise. Default: 50%.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "spin",
+			"PARAMS" : 0.056,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "rotation"
 		}
 	],
 	"CREDIT" : "aiekick",

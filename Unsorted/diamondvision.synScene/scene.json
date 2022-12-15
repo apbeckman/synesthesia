@@ -36,7 +36,7 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : 0.25,
+			"MIN" : -1,
 			"NAME" : "FOVmod",
 			"PARAMS" : 0.065,
 			"TYPE" : "slider smooth",
@@ -98,6 +98,15 @@
 			"NAME" : "test2",
 			"PARAMS" : 0.347,
 			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flip",
+			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		}
 	],

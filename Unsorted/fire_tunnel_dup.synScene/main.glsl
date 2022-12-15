@@ -40,7 +40,7 @@ vec3 getHotColor(float Temp)
 	vec3 col = vec3(255.);
 	col.x = 56100000. * pow(Temp,(-3. / 2.)) + 148.;
    	col.y = 100.04 * log(Temp) - 623.6;
-   	if (Temp > 6500.) col.y = 35200000. * pow(Temp,(-3. / 2.)) + 184.;
+   	if (Temp > 6500.) col.y = 45200000. * pow(Temp,(-3. / 2.)) + 184.;
    	col.z = 194.18 * log(Temp) - 1448.6;
    	col = clamp(col, 0., 255.)/255.;
 	if (Temp < 1000.) col *= Temp/1000.;
@@ -59,7 +59,7 @@ float pn( in vec3 x )
 float planesMod = pow(planes_only, 10.0);
 float df(vec3 p)
 {
-	float pnNoise = pn(p*.26)*1.98 + pn(p*.26)*.62 + pn(p*1.17)*.39;
+	float pnNoise = pn(p*.26)*1.98 + pn(p*.26)*(.62+syn_Intensity) + pn(p*1.17)*.39;
 	float path = sinPath(p ,vec3(5.704,0.3828,0.16));
     float bt = min(p.y, -p.y) + 12.;
 	float df;
@@ -92,16 +92,16 @@ vec4 march(vec4 f, vec3 ro, vec3 rd, float st)
 	
 	float s = 1., h = .25*constriction, td = 0.0, d=1.,dl=0.2, w;
 	vec3 p = ro;
-	for(float i=0.;i<240.0;i++)
+	for(float i=0.;i<275.0;i++)
 	{      
 		p.xy = mix(p.xy, _rotate(p.xy, p.z), twist);
-		if(s<0.01||d>60.||td>.95) break;
+		if(s<0.001||d>60.||td>.95) break;
         s = df(p) * .09 * i/60.;
 		if (s < h)
 		{
 			w = (1.-td) * (h-s) * i/60.;
-			f.rgb += texture(syn_UserImage, p.xz*0.01+p.y*0.01).rgb*0.02*(syn_HighPresence+syn_HighHits*2.0)*_pulse(fract(p.y*0.1-(smoothTimeB*0.5)), 0.5, 0.5);
-			f.rgb += getHotColor(td*i*70.)*mix(w, (0.05-w), syn_BassPresence*(syn_BassLevel+syn_BassHits)*_pulse(fract(p.z*0.1-(smoothTimeB*0.5)), 0.5, 0.5));
+			f.rgb += texture(syn_UserImage, p.xz*0.01+p.y*0.01).rgb*0.02*(syn_Intensity*0.5+syn_HighLevel*1.5)*_pulse(fract(p.y*0.1-(smoothTimeB*0.125)), 0.5, 0.5);
+			f.rgb += getHotColor(td*i*70.)*mix(w, (0.05-w), syn_Intensity*(syn_MidLevel*1.5+syn_MidHits*0.5)*_pulse(fract(p.z*0.1-(smoothTimeB*0.25)), 0.5, 0.5));
 			td += w;
 		}
 		dl += 1.01 - exp(-0.001 * log(d));	
@@ -118,14 +118,16 @@ vec4 renderMainImage() {
 	vec4 f = vec4(0.0);
 	vec2 g = _xy;
 
-		t = smoothTime+const_speed;
+		t = 0.5*smoothTime+const_speed;
 		f = vec4(syn_MidPresence*0.25,0.15,0.32,1);
 	  vec2 q = g/RENDERSIZE.xy;
 	  vec3 ro = vec3(cos(t*.3), sin(t*.2),t )*vec3(8.5, 8.5, 5.)*0.4;
 	  
 		vec3 rd = cam((2.*g-RENDERSIZE.xy)/RENDERSIZE.y, ro, vec3(0,1,0), ro + vec3(0,0,1), 3.5*fov);
+		rd.xy *=1.0+ Warp*(-1.+rd.xy +_uvc*PI);
     rd.xy = _rotate(rd.xy, -spin*PI);
-
+	rd.xz = _rotate(rd.xz, LookXY.x*PI);
+	rd.yz = _rotate(rd.yz, LookXY.y*PI);
 		f = march(f, ro, rd, sharpness+0.01);
 	  f.rgb *= 0.5 + 0.5*pow( 16.0*q.x*q.y*(1.0-q.x)*(1.0-q.y), 0.25 ); // iq vignette
 

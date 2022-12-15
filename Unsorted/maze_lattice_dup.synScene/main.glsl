@@ -387,19 +387,22 @@ vec4 renderMainImage() {
     // this via a comment Shadertoy user "coyote" made. I'm pretty happy with this.
     vec3 rd = vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y);
     // Barrel distortion;
-    rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.))));
+    rd = normalize(vec3(rd.xy*FOV, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.))));
     
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
     //vec2 m = sin(vec2(1.57079632, 0) + TIME/8.);
     //rd.xy = rd.xy*mat2(m.xy, -m.y, m.x);
     //rd.xz = rd.xz*mat2(m.xy, -m.y, m.x);
-    rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, -1.0*lookXY.x*PI);
-    rd.xz = _rotate(rd.xz, lookZ*PI);
+    //rd.yz = _rotate(rd.yz, lookXY.y*PI);
+    rd.xy = _rotate(rd.xy, -1.0*Rotate*PI);
+    //rd.xz = _rotate(rd.xz, lookZ*PI);
+    rd.xz = _rotate(rd.xz, -PI*lookXY.x-PI*_uvc.x*Flip);
+    rd.yz = _rotate(rd.yz, -PI*lookXY.y-PI*_uvc.y*Flip);
+
     
     // Ray origin: Sending it along the Z-axis.
     //vec3 ro = vec3(0, 0, TIME*rate*0.25);
-    vec3 ro = vec3(0, 0, (smoothTime*0.1 * Rate*-1.));
+    vec3 ro = vec3(0, 0, (-smoothTime*0.1 * Rate*-1.));
 
     // Alternate: Set off in the YZ direction. Note the ".5." It's an old lattice trick.
     //vec3 ro = vec3(0, TIME/2. + .5, TIME/2.);

@@ -109,7 +109,7 @@ float fBm(vec2 p){ return n2D3G(p)*.57 + n2D3G(p*2.)*.28 + n2D3G(p*4.)*.15; }
 
 
 
-#define FAR 20.
+#define FAR 25.
 
 
 
@@ -325,8 +325,8 @@ float map(in vec3 p){
     
 
     //float b = cellTile(p*3.); 
-
-    float b = cellTile(p +smoothTimeC*0.05); // Animation.
+    
+    float b = cellTile(p +smoothTimeC*0.025); // Animation.
 
 
 
@@ -428,7 +428,7 @@ float trace(in vec3 ro, in vec3 rd){
 
         // "t" increases. It's a cheap trick that works in most situations... Not all, though.
 
-        if(abs(h)<0.0015*(t*.125 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
+        if(abs(h)<0.0001*(t*.125 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
 
         t += (step(1., h)*.25 + .5)*h;
 
@@ -498,7 +498,7 @@ float bumpSurf3D( in vec3 p){
 
     
 
-    float vor = cellTile(p*27.);
+    float vor = cellTile(p*1.);
 
     
 
@@ -570,7 +570,7 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
 */ // Added my own version AB
 vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
 
-    vec2 e = vec2(0.01255, 0);
+    vec2 e = vec2(01.01255, 0);
 
     // Three gradient vectors rolled into a matrix, constructed with offset greyscale texture values.    
     //mat3 m = mat3( tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n));
@@ -578,7 +578,7 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
     mat3 m = mat3( texture2DAA(tx, p + e.yxy, n), texture2DAA(tx, p + e.yxy, n), texture2DAA(tx, p + e.yxy, n));
     
     ///vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
-    vec3 g = vec3(0.2, 0.2, 0.2)*m; // Converting to greyscale.
+    vec3 g = vec3(1.)*m; // Converting to greyscale.
     
     g = (g - dot(tpl(tx,  p , n), vec3(0.299, 0.587, 0.114)) )/e.x; g -= n*dot(n, g);
                       
@@ -618,8 +618,7 @@ vec4 renderMainImage() {
 
     u += sin(u*32. + cos(_uvc.yx*16. + smoothTimeB*2.))*.0015;
 
-
-
+    
 	
 
 	// Camera Setup.
@@ -629,32 +628,33 @@ vec4 renderMainImage() {
     vec3 lk = camPath((smoothTime)*.35 + .1);  // "Look At" position.
 
     //lk.xy = _rotate(lk.xy, Rotate*PI);
+    lk.xy += _rotate(_uvc.xy, Twist*PI);
 
-    lk.xy += _uvc*FOV*PI*0.25;
-    lk.xy += _rotate(_uvc.xy*Twist, Twist*PI);
 
     vec3 l = camPath((smoothTime)*.35 + 1.5) + vec3(.0, .0, 0.); // Light position, somewhere near the moving camera.
 
 
 
 
-
+    lk.xy += _uvc*FOV*PI;
+   // lk.xy +=_uvc*lk.xy*PI;
+    
     // Using the above to produce the unit ray-direction vector.
 
-    float FOV = 1.; // FOV - Field of view.
+   // float FOV = 1.; // FOV - Field of view.
 
     vec3 fwd = normalize(lk-o);
 
     vec3 rgt = normalize(vec3(fwd.z, 0., -fwd.x )); 
-
     vec3 up = cross(fwd, rgt);
 
+    //u.xy += _uvc*(FOV/PI);
 
 
     // Unit direction ray.
 
-    vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
-
+    vec3 r = normalize(fwd + (u.x*rgt + u.y*up));
+    r.xy = _rotate(r.xy, Rotate*PI);
     r.yz = _rotate(r.yz, lookXY.y*PI);
 
     r.xz = _rotate(r.xz, lookXY.x*PI);
@@ -703,7 +703,7 @@ vec4 renderMainImage() {
 
         float sz = 1./1.;
 
-        n = db(image45, p*sz, n, .02/(1. + t/FAR));
+        n = db(image45, p*sz, n, .012/(1. + t/FAR));
 
         
 
@@ -755,7 +755,8 @@ vec4 renderMainImage() {
 
         
 
-        float c = dot(tx, vec3(0.299, 0.587, 0.114));
+        float c = dot(tx, vec3(0.1299, 0.2587, 0.114));
+        //float c = dot(tx, vec3(0.299, 0.587, 0.114));
 
         
 
@@ -767,7 +768,7 @@ vec4 renderMainImage() {
 
 		// Very simple coloring. Fresnel and texture combination.
 
-        col = tx*(di + .1 + sp)+ tx*fr*2.;
+        col = tx*(di + .1 + sp)+ tx*fr*12.;
 
         col *= 1./(1. + d*.125 + d*d*.025)*ao*sh;
 
@@ -781,9 +782,9 @@ vec4 renderMainImage() {
 
     // Mixing in a simple blue background.
 
-    vec3 bg = vec3(.5, .7, 1);
+    vec3 bg = vec3(.00125, .0, .001);
 
-    col = mix(clamp(col, 0., 1.), bg, smoothstep(0., FAR-5., t));
+    col = mix(clamp(col, 0., 1.), bg, smoothstep(0., FAR-10., t));
 
     
 

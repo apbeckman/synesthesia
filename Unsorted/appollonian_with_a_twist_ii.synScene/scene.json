@@ -17,7 +17,7 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "Kaleido",
-			"PARAMS" : 0.119,
+			"PARAMS" : 0.088,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},

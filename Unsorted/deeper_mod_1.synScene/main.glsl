@@ -274,7 +274,6 @@ vec3 raycast() {
 
   screenPos.xy *= 1.0+WarpMirror*((_uvc*PI*PI+_uv)-1.);
 
-  screenPos.xy *= 1.0+Warp2*((_uvc*pow(PI, 2.)+_uv)-1.);
   vec3 ray = normalize(vec3( screenPos, 1.0));
   // ray = rotateX(ray, TIME);
 

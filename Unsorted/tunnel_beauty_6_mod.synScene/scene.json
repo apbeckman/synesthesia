@@ -5,7 +5,7 @@
 			"DEFAULT" : 0.35,
 			"DESCRIPTION" : "Diameter of the tunnel. Default: 35%.",
 			"MAX" : 1,
-			"MIN" : 0,
+			"MIN" : 0.225,
 			"NAME" : "diameter",
 			"PARAMS" : 0.1,
 			"TYPE" : "slider smooth",
@@ -124,8 +124,8 @@
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				2,
-				2
+				1,
+				1
 			],
 			"MIN" : 
 			[
@@ -135,7 +135,39 @@
 			"NAME" : "QuadMirror",
 			"PARAMS" : 0.043,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "camera"
+			"UI_GROUP" : "Warp"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "WeirdMirror",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "Warp"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Flip",
+			"PARAMS" : 0.118,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "Warp"
 		},
 		{
 			"DEFAULT" : 0.3,
@@ -166,15 +198,6 @@
 			"PARAMS" : 0.2,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "color"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "FOV",
-			"TYPE" : "slider",
-			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "aiekick",
@@ -186,9 +209,9 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1440,
+			"HEIGHT" : 1080,
 			"TARGET" : "toFilter",
-			"WIDTH" : 2560
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "Tunnel Beauty 6 Mod",
