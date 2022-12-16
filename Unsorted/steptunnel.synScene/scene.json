@@ -12,16 +12,27 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
 			"NAME" : "lookXY",
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
-
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
@@ -49,6 +60,26 @@
 			"NAME" : "MouseClick",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -2,
+			"NAME" : "Flip",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "FOV",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "apb_0",

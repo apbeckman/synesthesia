@@ -2,10 +2,11 @@
 
 			//******** BuffA Code Begins ********
 
-#define D(u) texture(BuffD,(u)/RENDERSIZE.xy)
 #define A(u) texture(BuffA,(u)/RENDERSIZE.xy)
 #define B(u) texture(BuffB,(u)/RENDERSIZE.xy)
 #define C(u) texture(BuffC,(u)/RENDERSIZE.xy)
+#define D(u) texture(BuffD,(u)/RENDERSIZE.xy)
+
 #define T(u) texture(image46,(u)/RENDERSIZE.xy)
 
 vec4 renderPassA() {
@@ -71,7 +72,7 @@ vec4 renderPassC() {
              +t.z*vec2(0,.0)
              -T(u).x*t.xy*.0;
     float s = 0.;
-    float z    = 6.;//kernel convolution size
+    float z    = 8.;//kernel convolution size
     for(float i=-z; i<=z; ++i){
     for(float j=-z; j<=z; ++j){
       vec2 c = (m+vec2(i,j))*1.;
@@ -95,7 +96,7 @@ vec4 renderPassD() {
 
     float tz = 0.;
     vec4 a = vec4(0);
-    float z    = 6.;//kernel convolution size
+    float z    = 8.;//kernel convolution size
     for(float i=-z; i<=z; ++i){
     for(float j=-z; j<=z; ++j){
       vec4 t = A(u+vec2(i,j)); //t.z = 1.;
@@ -111,7 +112,7 @@ vec4 renderPassD() {
     //a = A(u);
     if(_mouse.z>0.)
     {
-        vec2 m = 16.*(u-_mouse.xy)/RENDERSIZE.y;
+        vec2 m = 26.*(u-_mouse.xy)/RENDERSIZE.y;
         a += vec4(-1,0,0,0)*exp(-dot(m,m))*.1;
     }
     if(FRAMECOUNT==0)

@@ -76,11 +76,11 @@ vec2	_TexelSize;
 float	_Scale;
 float	_Tresh;
 
-#define FEED_DEFAULT .0550
-#define KILL_DEFAULT .0620
+//#define FEED_DEFAULT_ .0550
+//#define KILL_DEFAULT .0620
 
-#define FEED_MITOSIS .0367
-#define KILL_MITOSIS .0649
+//#define FEED_MITOSIS .0367
+//#define KILL_MITOSIS .0649
 
 vec2	laplacian_convolution(sampler2D tex, vec2 uv, vec2 texsize)
 {
@@ -110,18 +110,18 @@ vec4 gradient(sampler2D tex, vec2 uv, vec2 offset)
 vec4 optical_flow(vec2 f)
 {
     if (f.x == 0.0 || f.y == 0.0
-        || f.x >= iChannelResolution[1].x || f.y >= iChannelResolution[1].y)
+        || f.x >= RENDERSIZE.x || f.y >= RENDERSIZE.y)
         discard;
-    _TexelSize = 1./iChannelResolution[0].xy;
-    vec2 uv =    f /iChannelResolution[1].xy;
+    _TexelSize = 1./RENDERSIZE.xy;
+    vec2 uv =    f /RENDERSIZE.xy;
 	vec4 current = texture(syn_UserImage, uv);
-    _TexelSize = 1./iChannelResolution[1].xy;
-    uv = (f - .0*iChannelResolution[1].xy)/iChannelResolution[1].xy;
+    _TexelSize = 1./RENDERSIZE.xy;
+    uv = (f - .0*RENDERSIZE.xy)/RENDERSIZE.xy;
 	vec4 prev = texture(BuffA, uv);
-    _TexelSize = 1./iChannelResolution[0].xy;
+    _TexelSize = 1./RENDERSIZE.xy;
     vec2 dx = vec2(_TexelSize.x, 0);
     vec2 dy = vec2(0, _TexelSize.y);
-    _TexelSize = 1./iChannelResolution[1].xy;
+    _TexelSize = 1./RENDERSIZE.xy;
     vec2 ddx = vec2(_TexelSize.x, 0);
     vec2 ddy = vec2(0, _TexelSize.y);
 
@@ -153,7 +153,7 @@ vec4 renderPassA() {
 	vec4 o = vec4(0.0);
 	vec2 f = _xy;
 
-    vec2 R = iChannelResolution[0].xy;
+    vec2 R = RENDERSIZE.xy;
     _TexelSize = 1./R;
     _Scale = 1.;
     _Tresh = .003075;
@@ -174,7 +174,7 @@ vec4 renderPassA() {
 
 #define FEED_MITOSIS .0367
 #define KILL_MITOSIS .0649
-
+/*
 vec2	laplacian_convolution(sampler2D tex, vec2 uv, vec2 texsize)
 {
 	vec2	ret = vec2(0.);
@@ -194,7 +194,7 @@ vec2	laplacian_convolution(sampler2D tex, vec2 uv, vec2 texsize)
     ret += texture(tex, vec2(uv.x -texsize.x, uv.y +texsize.y) ).xy * (.05);
     return (ret);
 }
-
+*/
 vec2 do_life(sampler2D tex, vec2 uv, vec2 texsize)
 {
 	vec2 ret = vec2(.0);
@@ -338,6 +338,7 @@ vec4 renderMainImage() {
 	col.xyz = h;
     #endif
 	fragColor.xyz = col.xyz;
+    return fragColor;
 }
 
 float map(vec3 p)
@@ -346,13 +347,17 @@ float map(vec3 p)
     
     vec2 tcd;
     p.z += -15.;
-    rotate(p.xz, -.4+sin(TIME*.5)*.25);
-    rotate(p.zy, 5.4+TIME*.0);
-    rotate(p.xz, 1.+TIME*.0+3.4);
+    //rotate(p.xz, -.4+sin(TIME*.5)*.25);
+    p.xz = _rotate(p.xz, -.4+sin(TIME*.5)*.25);
+    p.zy = _rotate(p.zy,  5.4+TIME*.0);
+    p.xz = _rotate(p.xz,  1.+TIME*.0+3.4);
+    
+    //rotate(p.zy, 5.4+TIME*.0);
+    //rotate(p.xz, 1.+TIME*.0+3.4);
     
     vec3 np = normalize(p);
-    tcd.x = p.x*(9./iChannelResolution[0].x )+.5;
-    tcd.y = p.y*(9./iChannelResolution[0].y )+.5;//tcd = np.yx;
+    tcd.x = p.x*(9./RENDERSIZE.x )+.5;
+    tcd.y = p.y*(9./RENDERSIZE.y )+.5;//tcd = np.yx;
     #ifdef BALL
     rotate(np.xz, 1.5);
     tcd.x = .5+atan(np.z, np.x)/6.28;
@@ -366,8 +371,8 @@ float map(vec3 p)
     mind = max(mind, -(length(p)-8.5-to*10. ) );
     #else
     mind = max(p.z-.5, -p.z-.5)-to*10.;
-    mind = max(mind, abs(p.x)-16.+.0*-10000.0/iChannelResolution[0].x);
-    mind = max(mind, abs(p.y)-16.+.0*-10000.0/iChannelResolution[0].x);
+    mind = max(mind, abs(p.x)-16.+.0*-10000.0/RENDERSIZE.x);
+    mind = max(mind, abs(p.y)-16.+.0*-10000.0/RENDERSIZE.x);
     #endif
     h += 1.*vec3(.45, .5, .4)*1./max(.1, mind*mind*1. + 15.);
     float mint = max(mind, .01);
@@ -386,13 +391,13 @@ vec3 cam(vec2 u)
 
 float mylength(vec3 p) {return max(max(abs(p.x), abs(p.y)), abs(p.z));}
 float mylength(vec2 p) {return max(abs(p.x), abs(p.y) );}
-
-void rotate(inout vec2 v, float angle)
+/*
+vec2 rotate(inout vec2 v, float angle)
 {
 	v = vec2(cos(angle)*v.x+sin(angle)*v.y,-sin(angle)*v.x+cos(angle)*v.y);
-	return fragColor; 
+	return v; 
  } 
-
+*/
 
 
 vec4 renderMain(){

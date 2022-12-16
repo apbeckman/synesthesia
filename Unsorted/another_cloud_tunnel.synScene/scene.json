@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "XT95",
+	"DESCRIPTION" : "pouet",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "another_cloud_tunnel.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "another cloud tunnel",
+	"WIDTH" : 1920
+}

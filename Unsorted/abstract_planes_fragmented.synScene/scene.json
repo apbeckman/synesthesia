@@ -1,0 +1,20 @@
+{
+	"CREDIT" : "aiekick",
+	"DESCRIPTION" : "Abstract Planes Fragmented",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpg"
+		},
+		{
+			"NAME" : "image7",
+			"PATH" : "images/7.jpg"
+		}
+	],
+	"IMAGE_PATH" : "abstract_planes_fragmented.png",
+	"TITLE" : "Abstract Planes Fragmented",
+	"WIDTH" : 1280
+}

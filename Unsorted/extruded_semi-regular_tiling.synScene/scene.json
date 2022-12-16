@@ -2,19 +2,19 @@
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "Rendering an extruded 3.4.6.4 semi-regular tessellation onto some warped planes.",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
 			"NAME" : "image3",
-			"PATH" : "images/3.jpg"
+			"PATH" : "images/5.jpeg"
 		},
 		{
 			"NAME" : "image6",
-			"PATH" : "images/6.jpg"
+			"PATH" : "images/10.jpg"
 		}
 	],
 	"IMAGE_PATH" : "extruded_semi-regular_tiling.png",
 	"TITLE" : "Extruded Semi-regular Tiling",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

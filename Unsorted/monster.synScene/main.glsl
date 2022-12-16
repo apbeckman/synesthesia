@@ -98,7 +98,6 @@ vec4 renderMainImage() {
 	//			uv.xy += _uvc*FOV*PI;
 
 	
-	uv*=1.0+Mirror*(_uvc-1.0);
 
 	uv = rot(uv,TK*smoothTimeC*0.1);
 
@@ -106,9 +105,14 @@ vec4 renderMainImage() {
 
 	vec3 ro = vec3(0.0,0.0,0.1);
 
-	vec3 rd = normalize(vec3(uv,0.0)-ro);
-		rd.xz = _rotate(rd.xz, -PI*xyLook.x+PI*_uvc.x*Flip.x);
-		rd.yz = _rotate(rd.yz, -PI*xyLook.y+PI*_uvc.y*Flip.y);
+	vec3 rd = normalize(vec3(uv+_uvc*PI*FOV,0.0)-ro);
+	rd.xy = _rotate(rd.xy , Spin*PI);
+	
+	rd.xy*=1.0+Mirror*(rd.xy*PI*uv-1.0);
+
+	rd.xz = _rotate(rd.xz, -PI*xyLook.x+PI*_uvc.x*Flip.x);
+	rd.yz = _rotate(rd.yz, -PI*xyLook.y+PI*_uvc.y*Flip.y);
+
 	float t  =2.0;
 
 	float d = 0.0;

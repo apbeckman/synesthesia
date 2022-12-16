@@ -9,7 +9,7 @@
 			"NAME" : "Twist",
 			"PARAMS" : 0.143,
 			"TYPE" : "knob smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Geometry"
 		},
 		{
 			"DEFAULT" : 1,
@@ -19,27 +19,7 @@
 			"NAME" : "Complexity",
 			"PARAMS" : 0.058,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "FOV",
-			"PARAMS" : 0.104,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Rotate",
-			"PARAMS" : 0.037,
-			"TYPE" : "knob smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Geometry"
 		},
 		{
 			"DEFAULT" : 
@@ -55,13 +35,65 @@
 			],
 			"MIN" : 
 			[
-				-1,
-				-1
+				0,
+				0
 			],
 			"NAME" : "Flip",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.03,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "FX"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Mirror",
+			"PARAMS" : 0.107,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "FX"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"PARAMS" : 0.063,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.037,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.104,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
 		},
 		{
 			"DEFAULT" : 
@@ -83,28 +115,7 @@
 			"NAME" : "xyLook",
 			"PARAMS" : 0.049,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "Mirror",
-			"TYPE" : "xy",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Camera"
 		}
 	],
 	"CREDIT" : "butadiene",

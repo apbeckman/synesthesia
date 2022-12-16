@@ -10,18 +10,22 @@ vec4 renderMainImage() {
     vec2 r= RENDERSIZE.xy;
     vec3 p,c=vec3(0),
     d=normalize(vec3((C-.5*r.xy)/r.y,.7));
+    d.xy += _uvc*PI*FOV;
     float i=0.,s,e,g=0.,t=TIME;
 	for(;i++<120.;){
         p=R(g*d,normalize(H(smoothTimeC*.05)),g*.1);
-        //rotating the camera using what I think is fabrice's ray rotating matrix - it's used in a lot of Shane's stuff, and I've 
+        //AB:rotating the camera using what I think is fabrice's ray rotating matrix - it's used in a lot of Shane's stuff, and I've 
         //copied+pasted it from Maze Lattice and modified it to fit a shader more times than I can count
-        p.xy = _rotate(p.xy, lookXY.x*PI);//spins AB
-        p.yz = _rotate(p.yz, lookXY.y*PI);//up/down AB
+        //p.xy = _rotate(p.xy, lookXY.x*PI);//spins AB
+        //p.yz = _rotate(p.yz, lookXY.y*PI);//up/down AB
+        p.xz = _rotate(p.xz, PI*lookXY.x+PI*_uvc.x*Flip);
+		p.yz = _rotate(p.yz, PI*lookXY.y+PI*_uvc.y*Flip);
+
         p.z+=smoothTime*.5; //reactive camera movement - there are three of these uniforms in the script.js, smoothTime is bass, ' 'B is highs, and ' 'C is mids
         p=asin(.7*sin(p));
         s=2.5+sin(.5*smoothTime+3.*sin(t*1.)*0.125)*.5;
         for(int i=0;i++<(6+itera);p=p*e-vec3(3,2.5,3.5))
-            p=abs(p+test*PI),
+            p=abs(p),
             p=p.x<p.y?p.zxy:p.zyx,
             s*=e=2.+iter;
         g+=e=abs(length(p.xz)-.3)/s+2e-5;

@@ -152,16 +152,20 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
-    uv.xy += _uvc*PI*Stretch;
     uv *= 1. + dot(_uvc,_uvc)*0.1;
+    uv.xy += _uvc*PI*Stretch;
     
     vec3 col = vec3(0);
     dith = mix(0.9,1.,texture(image30, RENDERSIZE.x*(uv/256.)).x);
     
     vec3 ro = vec3(2.501,3,0.001);
-    vec3 lookAt = vec3(0.05);
-    lookAt.xz += vec2(sin(TIME)*1.2,cos(TIME)*0.5)*0.4;
+    vec3 lookAt = vec3(0.025);
+    //lookAt.xz += _rotate(lookAt.xz, PI* Orbit.x);
+    //lookAt.xy += _uvc*PI*Stretch;
+
+    lookAt.xz += vec2(sin(TIME)*.12,cos(TIME)*0.5)*0.4;
 	vec3 rd = getRd(ro, lookAt, uv); 
+    
     vec3 p;float t; bool hit;
     vec2 d = march(ro, rd, p, t, hit);
     
@@ -238,7 +242,7 @@ vec4 renderPassA() {
 
     col = mix(col,vec3(0.06,0.02,0.05), smoothstep(0.,1.,t*0.04));
     
-    //col *= 1. - dot(uv,uv)*0.7;
+    col *= 1. - dot(_uvc,_uvc)*0.7;
     
     // Output to screen
     fragColor = vec4(col,1.0);

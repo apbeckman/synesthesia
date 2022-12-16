@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "aiekick",
+	"DESCRIPTION" : "Sub Earth Tunnel",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image4",
+			"PATH" : "images/4.jpg"
+		}
+	],
+	"IMAGE_PATH" : "sub_earth_tunnel_mod.png",
+	"TITLE" : "Sub Earth Tunnel Mod",
+	"WIDTH" : 1280
+}

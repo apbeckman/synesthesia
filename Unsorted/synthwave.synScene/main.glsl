@@ -9,6 +9,36 @@ precision lowp float;
 #define N_HIDDEN 20
 vec4 bufA[N_HIDDEN/4];
 vec4 bufB[N_HIDDEN/2];
+// Simplex 2D noise
+//
+vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+
+float snoise(vec2 v){
+  const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+           -0.577350269189626, 0.024390243902439);
+  vec2 i  = floor(v + dot(v, C.yy) );
+  vec2 x0 = v -   i + dot(i, C.xx);
+  vec2 i1;
+  i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+  vec4 x12 = x0.xyxy + C.xxzz;
+  x12.xy -= i1;
+  i = mod(i, 289.0);
+  vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+  + i.x + vec3(0.0, i1.x, 1.0 ));
+  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
+    dot(x12.zw,x12.zw)), 0.0);
+  m = m*m ;
+  m = m*m ;
+  vec3 x = 2.0 * fract(p * C.www) - 1.0;
+  vec3 h = abs(x) - 0.5;
+  vec3 ox = floor(x + 0.5);
+  vec3 a0 = x - ox;
+  m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+  vec3 g;
+  g.x  = a0.x  * x0.x  + h.x  * x0.y;
+  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+  return 130.0 * dot(m, g);
+}
 vec4 cppn_fn(vec2 coordinate, float in0, float in1, float in2, float in3) {
     vec4 tmp;
     bufB[0] = vec4(coordinate.x, coordinate.y, 0., 0.);
@@ -175,10 +205,10 @@ bufA[3] = vec4(-0.013, -0.175, 0.064, -0.252) + mat4(vec4(-0.136, -0.026, -0.240
 bufA[4] = vec4(0.405, 0.074, -0.081, 0.422) + mat4(vec4(-0.239, -0.082, 0.113, 0.007), vec4(0.176, -0.095, -0.202, -0.115), vec4(0.392, -0.197, 0.048, -0.105), vec4(0.105, -0.141, -0.171, -0.167)) * bufB[0] + mat4(vec4(-0.066, 0.127, 0.271, -0.057), vec4(0.011, -0.111, 0.094, -0.194), vec4(0.074, -0.046, -0.203, -0.163), vec4(0.276, -0.026, 0.098, 0.015)) * bufB[1] + mat4(vec4(-0.202, -0.062, 0.066, 0.175), vec4(-0.032, -0.090, 0.163, 0.028), vec4(-0.217, 0.032, -0.070, 0.085), vec4(0.023, 0.144, 0.201, 0.108)) * bufB[2] + mat4(vec4(-0.248, -0.151, -0.050, 0.141), vec4(0.094, -0.158, 0.105, -0.024), vec4(-0.082, 0.049, 0.070, 0.482), vec4(-0.017, 0.210, -0.159, -0.080)) * bufB[3] + mat4(vec4(0.105, 0.371, -0.213, -0.462), vec4(-0.172, -0.012, -0.132, 0.081), vec4(-0.183, -0.184, 0.202, 0.081), vec4(-0.219, 0.137, -0.018, -0.166)) * bufB[4] + mat4(vec4(-0.118, 0.153, 0.154, -0.121), vec4(0.066, 0.328, 0.102, 0.142), vec4(-0.196, 0.294, 0.026, 0.021), vec4(0.202, -0.138, 0.175, -0.111)) * bufB[5] + mat4(vec4(0.170, 0.062, -0.338, -0.184), vec4(0.060, -0.196, 0.225, -0.060), vec4(0.006, 0.175, 0.058, 0.037), vec4(0.231, 0.022, 0.058, -0.088)) * bufB[6] + mat4(vec4(-0.075, -0.132, -0.181, 0.172), vec4(-0.171, -0.196, 0.150, -0.053), vec4(-0.075, -0.153, -0.103, 0.064), vec4(0.034, 0.178, -0.060, -0.136)) * bufB[7] + mat4(vec4(-0.238, 0.064, 0.182, -0.008), vec4(-0.298, 0.009, -0.078, 0.112), vec4(0.202, -0.222, 0.050, 0.047), vec4(0.024, 0.124, 0.020, -0.106)) * bufB[8] + mat4(vec4(0.151, -0.168, -0.044, 0.164), vec4(0.154, 0.088, -0.051, 0.006), vec4(-0.114, 0.154, 0.059, 0.085), vec4(-0.124, 0.066, -0.141, -0.268)) * bufB[9];
 tmp = atan(bufA[0]);
 bufB[0] = tmp/0.67;
-bufB[5] = (tmp*tmp - 0.45) / 0.396;
+bufB[5] = (tmp*tmp - 0.45+sin(smoothTimeB*0.1)*3.) / 0.396;
 tmp = atan(bufA[1]);
 bufB[1] = tmp/0.67;
-bufB[6] = (tmp*tmp - 0.45) / 0.396;
+bufB[6] = (tmp*tmp - 0.45+cos(smoothTimeB*0.1)*3.) / 0.396;
 tmp = atan(bufA[2]);
 bufB[2] = tmp/0.67;
 bufB[7] = (tmp*tmp - 0.45) / 0.396;
@@ -216,7 +246,7 @@ bufA[0] = vec4(-0.095, 0.232, 0.134, 0.000) + mat4(vec4(0.104, -0.173, -0.083, 0
 
  return vec4((1. / (1. + exp(-bufA[0]))).xyz, 1.0);
 }
-
+vec2 time = vec2(smoothTime, smoothTime);
 vec4 renderMain() { 
  	vec4 out_FragColor = vec4(0.0);
 
@@ -226,10 +256,11 @@ vec4 renderMain() {
     vec2 mouseNorm = (iMouse.xy / RENDERSIZE.xy) - vec2(0.5, 0.5);
     uv.x *= RENDERSIZE.x / RENDERSIZE.y;
     uv.x -= ((RENDERSIZE.x / RENDERSIZE.y) - 1.) /2.;
+    uv += _uvc*PI*FOV;
     // Shifted to the form expected by the CPPN
     uv = vec2(1., -1.) * 2. * (uv - vec2(0.5, 0.5));
     // Output to screen
-    out_FragColor = cppn_fn(uv, 0.*sin(smoothTime*0.125), 32*cos(0.125*smoothTimeB), 0.32*sin(0.44*smoothTimeC), 0.23*sin(.23*smoothTime));
+    out_FragColor = cppn_fn(uv, 0.*sin(smoothTime*0.125), 32*cos(0.25*smoothTimeC)+10., 0.32*sin(0.44*smoothTimeC), 0.23*sin(.23*smoothTime));
 
 return out_FragColor; 
  } 

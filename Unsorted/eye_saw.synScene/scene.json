@@ -1,0 +1,31 @@
+{
+	"CREDIT" : "shau",
+	"DESCRIPTION" : "2 scenes with font texture. Switches scene every 20 seconds",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image49",
+			"PATH" : "images/49.PNG"
+		}
+	],
+	"IMAGE_PATH" : "eye_saw.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Eye Saw",
+	"WIDTH" : 1920
+}

@@ -3,7 +3,7 @@
 // License CC0: Too many eyes
 // Continued tweaking on KIFS fractals
 
-#define PI              3.141592654
+//#define PI              3.141592654
 #define TAU             (2.0*PI)
 #define TIME            TIME
 #define RESOLUTION      RENDERSIZE
@@ -157,8 +157,12 @@ float df(vec3 p) {
     vec2 nn = mod2(pp.yz, vec2(sz*3.0));
     float rr = TAU*hash(nn+float(i));
     vec3 eyedir = normalize(vec3(1.0, 0.0, 0.0));
-    eyedir.xz *= ROT(0.5*smoothstep(-0.75, 0.75, sin(rr+smoothTimeC)));
-    eyedir.xy *= ROT(0.5*smoothstep(-0.75, 0.75, sin(rr+smoothTimeC*sqrt(2.0))));
+   // eyedir.xz *= ROT(0.5*smoothstep(-0.75, 0.75, sin(rr+smoothTimeC)));
+    //eyedir.xy *= ROT(0.5*smoothstep(-0.75, 0.75, sin(rr+smoothTimeC*sqrt(2.0))));
+
+    eyedir.xz = _rotate(eyedir.xz, 0.5*sin(smoothTimeC*0.25));
+    eyedir.xy = _rotate(eyedir.xy, cos(smoothTimeC*0.125));
+   
     float d2 = dot(normalize(pp), eyedir);
     float vv = mix(PCOS(10.0*TAU*d2-TAU*smoothTimeC), 1.0, smoothstep(1.0, 0.66, d2))*smoothstep(0.9, 0.80, d2);
     float dd1 = length(pp) - sz*0.9;

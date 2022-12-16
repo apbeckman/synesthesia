@@ -39,6 +39,16 @@
 			"NAME" : "tmpInputName2",
 			"TYPE" : "slider",
 			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.055,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "",

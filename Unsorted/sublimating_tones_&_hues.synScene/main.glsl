@@ -4,8 +4,8 @@
 
 #define iFeedbackColorShiftZoom 0.05
 //#define iFeedbackColorShiftImpact 0.001
-#define iBlob1ColorPulseSpeed 0.03456
-#define iBlob2ColorPulseSpeed -0.02345
+#define iBlob1ColorPulseSpeed 0.03456*(1.+(syn_BassLevel+syn_MidLevel)*(0.5+syn_Intensity))
+#define iBlob2ColorPulseSpeed -0.02345*(1.0+(syn_HighLevel+syn_MidHighLevel)*(0.5+syn_Intensity))
 #define Margins .0
 
 
@@ -37,15 +37,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-ivec2 boardSize = ivec2(125),
+ivec2 boardSize = ivec2(225),
     ci = ivec2(1,0);
 vec2 blockSize,
     xij;
 vec3 c = vec3(1,0,-1);
-float stepTimeDelta = .05+syn_Hits*0.1,
-    pi = 3.14159,
+float stepTimeDelta = .05+syn_Level*0.05,
+    pi = PI,
     fsaa = 288.,
-    bpm = 90.+syn_Hits*10.,
+    bpm = 90.+syn_Level*10.,
     spb = 60./90.,
     scale,
     nbeats,
@@ -56,6 +56,7 @@ float stepTimeDelta = .05+syn_Hits*0.1,
 // See https://www.shadertoy.com/view/4djSRW
 float hash12(vec2 p)
 {
+    //p+=_rotate(p, PI*smoothTime);
 	vec3 p3  = fract(p.xyx * .1031);
     p3 += dot(p3, p3.yzx + 33.33);
     return fract((p3.x + p3.y) * p3.z);
@@ -297,9 +298,9 @@ vec4 renderPassA() {
 	Simon Gladman | http://flexmonkey.blogspot.co.uk | September 2017
 */
 
-int sampleCount = 64;
+int sampleCount = 76;
 float blur = 1.0; 
-float falloff = 4.0; 
+float falloff = 4.0-0.5*syn_HighLevel; 
 
 // use BuffA for video, iChannel1 for test grid
 #define INPUT BuffA
@@ -344,10 +345,10 @@ vec4 renderPassB() {
 // feel free to play with them and if you will find something prettier than
 // the equilibrium I established, please send it back to me :)
 const vec2  iFeedbackZoomCenter       = vec2(0., 0.);
-const float iFeedbackZoomRate         = .001;
+float iFeedbackZoomRate         = .001+0.001*(syn_BassLevel+syn_MidLevel)*(0.5+syn_Intensity);
 const float iFeedbackFadeRate         = .999;
 //const float iFeedbackColorShiftZoom   = .05;
-const float iFeedbackColorShiftImpact = -0.00051;
+const float iFeedbackColorShiftImpact = -0.00051*(1.);
 const vec2  iDrawCenter               = vec2(0., 0.);
 const float iDrawIntensity            = .95;
 const float iBlobEdgeSmoothing        = .08;

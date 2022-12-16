@@ -116,13 +116,13 @@ vec4 renderPassC() {
     //a = A(u);
     if(_mouse.z>0.)
     {
-        vec2 m = 22.*(u-_mouse.xy)/RENDERSIZE.y;
+        vec2 m = 12.*(u-_mouse.xy)/RENDERSIZE.y;
         a += vec4(-normalize(m),0,0)*exp(-dot(m,m));
     }
     //float keyW = texture( _mouse.zzzz, vec2(87.5/256.,.25) ).x;
     if(int(FRAMECOUNT)==1||Reset == 1.)
     {
-        vec2 m = 22.*(u-RENDERSIZE.xy*.5)/450.;
+        vec2 m = 22.*(u-RENDERSIZE.xy*.5) ;
         a = vec4(0,0,.5,0)-vec4(8,8,0,0)*exp(-dot(m,m));
     }
     fragColor = a;
@@ -135,7 +135,7 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
     vec2 u = fragCoord/RENDERSIZE.xy;
-    u += _uvc*PI;
+    //u += _uvc*PI;
     vec4 a = texture(BuffC,u);
     fragColor = (+sin(a.x+vec4(0,1,2,4)+5.)*.5
                  +sin(a.y+vec4(5,3,1,4)+5.)*.5+1.)*a.z;

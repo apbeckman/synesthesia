@@ -60,11 +60,11 @@ vec4 renderMainImage() {
 		d = scene(p);
 	 	p += d*dir;
 	}
-	color = max(dot(getNormal(p),vec3(.1,.1,.0)), .0) + vec4(.3,cos(smoothTimeB*.5)*.5+.5,sin(smoothTimeB*.5)*.5+.5,1.)*min(length(p-org)*.04, 1.);
+	color = max(dot(getNormal(p),vec3(.1,.1,.0)), .0) + vec4(.3,cos(smoothTimeB*.125)*.5+.5,sin(smoothTimeB*.125)*.5+.5,1.)*min(length(p-org)*.04, 1.);
 
 	//Ribbon Color
 	if(tunnel(pp)>ribbon(pp))
-		color = mix(color, vec4(cos(smoothTimeB*.5)*.5+.5,cos(smoothTimeB*.5)*.5+.5,sin(smoothTimeB*.5)*.5+.5,1.),.3);
+		color = mix(color, vec4(cos(smoothTimeB*.125)*.5+.5,cos(smoothTimeB*.125)*.5+.5,sin(smoothTimeB*.125)*.5+.5,1.),.3);
 
 	//Final Color
 	vec4 fcolor = ((color+vec4(f))+(1.-min(pp.y+1.9,1.))*vec4(1.,.8,.7,1.))*min(TIME*.5,1.);
