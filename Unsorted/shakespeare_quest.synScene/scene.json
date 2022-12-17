@@ -7,7 +7,8 @@
 			"MAX" : 2,
 			"MIN" : -0.5,
 			"NAME" : "direction",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -17,6 +18,16 @@
 			"MIN" : -1,
 			"NAME" : "Height",
 			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.075,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}
 	],

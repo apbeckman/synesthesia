@@ -282,8 +282,8 @@ vec3 raycast() {
   //ray = rotateZ(ray, smoothTime*0.025*rotating);
     ray += 0.5*(fbm6( (ray.xy*_uvc))*pow(basshits*0.5, 1.4))*Distortion;
 
-  ray.xz =  _rotate(ray.xz, LookXY.x*PI);
-  ray.yz = _rotate(ray.yz, LookXY.y*PI);
+  ray.xz =  _rotate(ray.xz, LookXY.x*PI*PI+_uvc.y*PI*Perspective.x);
+  ray.yz = _rotate(ray.yz, LookXY.y*PI+_uvc.y*PI*Perspective.y);
   ray.xy = _rotate(ray.xy, Rotate*PI);
 
   // raycasting parameter 

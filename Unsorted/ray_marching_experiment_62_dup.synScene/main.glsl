@@ -7,7 +7,7 @@ mat3 roty(float a){return mat3(cos(a),0.,sin(a),0.,1.,0.,-sin(a),0.,cos(a));}
 mat3 rotz(float a){return mat3(cos(a),-sin(a),0.,sin(a),cos(a),0.,0.,0.,1.);}
 
 float retreater_var = spiral_ridges*spiral_ridges;
-float rotTime = (smoothTimeC*0.25);
+float rotTime = (smoothTimeC*0.35);
 vec4 fragColor = vec4(0.0);
 
 // vec3 getTexCol(vec3 p, vec4 alt){
@@ -49,7 +49,7 @@ vec3 blackbody(float Temp)
 {
 	vec3 col = vec3(255.);
     col.x = 56100000. * pow(Temp,(-3. / 2.)) + 148.;
-   	col.y = 100.04 * log(Temp) - 623.6;
+   	col.y = 100.04 * log(Temp) - 603.6;
    	if (Temp > 6500.) col.y = 35200000. * pow(Temp,(-3. / 2.)) + 184.;
    	col.z = 194.18 * log(Temp) - 1448.6;
    	col = clamp(col, 0., 255.)/255.;
@@ -107,9 +107,9 @@ vec4 renderMainImage() {
   float fov = .9*2.5*pow(fov_mod,2.0);
 	vec3 rd = normalize(fov*((uv.x+_uvc.x*Warp.x*uv.x*pow(PI, 2)) * x + (uv.y+_uvc.y*Warp.y*uv.y*pow(PI, 2)) * y) + z);
 	
-    rd.xy = _rotate(rd.xy, LookXY.y*PI);
+    rd.xy = _rotate(rd.xy, LookXY.y*PI+_uvc.y*PI*Psp.y);
     rd.yz = _rotate(rd.yz, Spin*PI);
-	rd.xz = _rotate(rd.xz, LookXY.x*PI);
+	rd.xz = _rotate(rd.xz, LookXY.x*PI+_uvc.x*PI*Psp.x);
   float s = 1., d = 0., extraLight = 0.0;
 	for (int i=0; i<200; i++) 
 	{

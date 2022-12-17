@@ -23,15 +23,6 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Flash",
-			"TYPE" : "toggle",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
 			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "WallHeight",
@@ -42,8 +33,8 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
+			"MAX" : 1,
+			"MIN" : -1,
 			"NAME" : "FOV",
 			"PARAMS" : 0.144,
 			"TYPE" : "slider smooth",
@@ -58,8 +49,8 @@
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				0.05,
-				0.05
+				1,
+				1
 			],
 			"MIN" : 
 			[
@@ -67,7 +58,40 @@
 				0
 			],
 			"NAME" : "WarpFurther",
-			"TYPE" : "xy",
+			"PARAMS" : 0.072,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -82,7 +106,7 @@
 			"PATH" : "images/30.png"
 		}
 	],
-	"IMAGE_PATH" : "day_74_dup.png",
+	"IMAGE_PATH" : "day_74_mod.png",
 	"PASSES" : 
 	[
 		{
@@ -92,6 +116,6 @@
 			"WIDTH" : 1840
 		}
 	],
-	"TITLE" : "Day 74_dup",
+	"TITLE" : "Day 74 Mod",
 	"WIDTH" : 1920
 }

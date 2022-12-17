@@ -33,7 +33,7 @@ float map(vec3 p)
 {
     float dist = 200.;
     float shape = 200.;
-    float t = 206.+smoothTimeC*.1;
+    float t = 206.+smoothTimeC*.05;
     float anim = fract(t);
     float index = floor(t);
     float signal = rng*sin(smoothTimeC*50.)*pow(anim,40.)*.1;

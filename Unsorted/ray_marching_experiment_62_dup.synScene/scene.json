@@ -189,6 +189,28 @@
 			"PARAMS" : 0.125,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Psp",
+			"PARAMS" : 0.072,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "aiekick",

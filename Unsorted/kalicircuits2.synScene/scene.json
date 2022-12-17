@@ -62,28 +62,6 @@
 			"UI_GROUP" : "Camera"
 		},
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "Warp",
-			"PARAMS" : 0.01,
-			"TYPE" : "xy smooth",
-			"UI_GROUP" : "Camera"
-		},
-		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
@@ -119,6 +97,15 @@
 			"NAME" : "glow",
 			"TYPE" : "knob",
 			"UI_GROUP" : "Vibe"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.25,
+			"MIN" : -2,
+			"NAME" : "Zoom2",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "by mojovideotech",

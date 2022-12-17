@@ -39,7 +39,7 @@ float map(vec3 p){
     
     // the tunnel is made by the next two lines, otherwise it's just to planes
 	p -= path(p.z);
-    vec2 try = vec2 (sin(smoothTimeC), cos(smoothTimeC));
+    vec2 try = vec2 (cos(smoothTimeC), sin(smoothTimeC));
     p.xy *= rot(
         sin(w.z*2.9 + p.z*0.7 + sin( w.x*2. + w.z*4. + smoothTimeC*0.15 + 0.5) + w.z*0.1)*(1.6)
     ); 
@@ -57,24 +57,25 @@ float map(vec3 p){
     vec3 z = p;
     // random attenuation to feed to the glowy lines
     float atten = pow(abs(sin(z.z*0.2 + (smoothTimeB*0.1))), 50.);
-    float attenC = pow(abs(sin(z.z*0.1  + sin(z.x + smoothTimeC)*0.1 + + sin(z.y*3.)*4. + smoothTimeB*0.1)), 100.);
-    float attenB = pow(abs(sin(w.z*0.2  + sin(w.x + smoothTimeB)*0.1 + sin(w.y*0.7)*4. + (w.y*20.) + (smoothTimeC*0.1))), 10.);
-    vec3 col = pal(0.1,0.6 - attenC*0.65,vec3(1.7  - atten*0.4,1.1,0.8),0.2 - atten*0.34 ,0.5 - attenB*0.56 );
-    col = max(col, 0.0125*(1.0+flash*Flash));
+    float attenC = pow(abs(sin(z.z*0.1  + sin(z.x + smoothTimeB)*0.1 + + sin(z.y*3.)*4. + smoothTimeB*0.1)), 100.);
+    float attenB = pow(abs(sin(w.z*0.2  + sin(w.x + smoothTimeB)*0.1 + sin(w.y*0.7)*4. + (w.y*20.) + (smoothTimeB*0.1))), 10.);
+    //vec3 col = pal(0.1,0.6 - attenC*0.65,vec3(1.7  - atten*0.4,1.1,0.8),0.2 - atten*0.34 ,0.5 - attenB*0.56 );
+    vec3 col = pal(0.16,0.16 - attenC*0.65,vec3(1.7  - atten*01.4,1.61,01.8),0.2 - atten*0.34 ,0.5 - attenB*0.56 );
+    col = max(col, 0.0125*(1.0+flash*0.75));
 
     
     float sc = 60. - atten*65.;
     
     // distance to the glowy lines
     float dGlowzers = max(floors,-abs(w.y) + sep*0.5) - 0.02;
-       
+       /*
         if(Flash == 0.) {
     glowB += exp(-dGlowzers*(70.))*reflAtten*col*40.;
     }
 
-    else {
-    glowB += exp(-dGlowzers*(70.))*reflAtten*col*40.*(0.25+flash);
-    }
+    else {*/
+    glowB += exp(-dGlowzers*(70.))*reflAtten*col*40.*(0.5+0.5*flash);
+   // }
     
 
     // glow
@@ -125,11 +126,10 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
+
     uv *= 1. - dot(uv,uv)*-0.2;
     
-    
-    uv.xy *=1.0+(_uvc*PI*FOV*uv.xy)*0.5;
-    uv.xy*= 1.0+(RENDERSIZE.xy*uv.xy*(WarpFurther));
+   // uv.xy *=1.0+(_uvc*PI*FOV*uv.xy)*0.5;
     //uv.xy *= rot(0.1)
     vec3 col = vec3(0);
     
@@ -143,10 +143,13 @@ vec4 renderPassA() {
     vec3 lookAt = vec3(0,0,ro.z + 1.);
 
     lookAt += path(lookAt.z);
-    lookAt.xy += (_uvc*PI*FOV*lookAt.xy);
+    //lookAt.xy += (_uvc*PI*FOV*lookAt.xy);
+   // uv *=1.0+ WarpFurther*(-1.+PI*uv*PI);
 
-    vec3 rd = getRd(ro, lookAt, uv);
-    
+    vec3 rd = getRd(ro, lookAt, (uv)+_uvc*PI*FOV);
+    rd.xz = _rotate(rd.xz, LookXY.x*PI+_uvc.x*PI*WarpFurther.x);
+    rd.xy = _rotate(rd.xy, Rotate*PI);
+    rd.yz = _rotate(rd.yz, LookXY.y*PI+_uvc.y*PI*WarpFurther.y*0.75);
     //rd.xy *= rot(sin(smoothTime)*0.05);
     
     bool hit; float t; vec3 p;
@@ -198,7 +201,7 @@ vec4 renderMainImage() {
     // Radial blur and chromatic abberation
     float steps = 24.;
     float scale = 0.00 + pow(length(uv - 0.5),3.4)*0.1;
-    float chromAb = pow(length(uv - 0.5),1.)*1.5;
+    float chromAb = pow(length(uv - 0.5),1.)*2.5;
     vec2 offs = vec2(0);
     vec4 radial = vec4(0);
     for(float i = 0.; i < steps; i++){

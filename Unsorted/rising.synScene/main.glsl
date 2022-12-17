@@ -39,11 +39,16 @@ vec4 renderMainImage() {
 	vec3 vp=normalize(vec3(p*vec2(1.77,1.0),0.75)); // screen ratio (x,y) fov (z)
 	//vp.yz=rotate(vp.yz,PI*0.125*sin(speed*0.5));	// rotation x
 	//vp.zx=rotate(vp.zx,PI*0.125*sin(speed*0.5));	// rotation y
-	vp.xy=rotate(vp.xy,Rotate*speed*0.25);					// rotation z
+	vp.yz = _rotate(vp.yz, LookXY.y*PI+_uvc.y*PI*Perspective);
+	vp.xz = _rotate(vp.xz, LookXY.x*PI);
+	vp.xy = _rotate(vp.xy, Rotate*PI);
+
+	//vp.xy=rotate(vp.xy,Rotate*speed*0.25);					// rotation z
 	float ground_x=0.0;//1.0+0.05*cos(PI*speed*0.25);
 	float ground_y=0.0;//1.0+0.05*sin(PI*speed*0.25);
 	float ground_z=speed*(0.125+0.375)+script_bass_time*0.01;
 	vec3 ray=vec3(ground_x,ground_y,ground_z);
+	ray.xy += Offset;
 	float t=0.0;
 	const int ray_n=124;
 	for(int i=0;i<ray_n;i++)

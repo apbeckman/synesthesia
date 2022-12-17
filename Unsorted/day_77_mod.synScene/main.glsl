@@ -10,7 +10,7 @@ vec4 iMouse = vec4(RENDERSIZE, 0, 0);
 vec3 glow = vec3(0);
 
 vec4 noise(vec2 u){
-	return texture(image30, (u)/256.);
+	return texture(image30, (u)/512.);
 }
 #define pmod(p,x) (mod(p,x) - 0.5*x)
 #define dmin(a,b) a.x < b.x ? a : b
@@ -54,7 +54,7 @@ vec3 pCoords = vec3(0);
 float tCoords = 0.;
 vec3 cCoords = vec3(1.);
 
-#define coolPal(a,b) pal(0.5,0.6,vec3(0.97 + sin((script_time*0.125) + p.z*0.04),3.4 + sin(b)*0.2,0.8),0.4 + (a),3.3 + (b))
+#define coolPal(a,b) pal(0.5,0.6,vec3(0.97 + 0.2*sin(p.z*0.04),3.4 + sin(b)*0.2,0.8),0.4 + (a),3.3 + (b))
 #define tunnW 0.8
 
 
@@ -69,7 +69,8 @@ vec2 map(vec3 p){
 	p -= path(p.z);
     p.xy *= rot(0. + sin(p.z)*0.24 + cos(p.y)*0.13);
     //p.xy *= rot(0.6);
-	float wave = pow(abs(sin(p.z*0.2 + 0.5*((smooth_basstime*0.457)+(TIME*0.125)))), 40.);
+	//float wave = pow(abs(sin(p.z*0.2 + 0.5*((smooth_basstime*0.457)+(TIME*0.125)))), 40.);
+    float wave = pow(abs(sin(p.z*0.2 + smoothTimeC*0.125 + 0.17)), 40.);
     
     pCoords = vec3(atan(p.y,p.x)/tau, length(p.xy), p.z);
     
@@ -91,14 +92,14 @@ vec2 map(vec3 p){
     float dCubeGlow = max(pCoordsB.x, max(pCoordsB.y,pCoordsB.z));
     
     
-    glow += max(exp(-dCubeGlow*10.)*0.04*pow(wave,0.4)*pal(0.5,0.5,vec3(1.6,2.9,0.9),0.5,0.5)*0.7, 0.);
+    glow += max(exp(-dCubeGlow*10.)*0.04*pow(wave,0.4)*pal(0.5,0.5,vec3(1.6,2.9,0.9),0.5,0.5)*(0.7+1.5*syn_HighLevel), 0.);
     
     float attA = pow(abs(sin(sin(p.z + (smoothTimeB*0.2)) + p.z*0.7 + sin(p.y*1.5)) ), 10.);
     float attB = pow(abs(sin(smoothTimeB*0.2 + sin(p.z + (smoothTimeB*0.2)) + p.z*0.4 + sin(p.y*1.5))), 10.);
-    glow += attB*smoothstep(0.,1.,length(p.xy)*0.8)*max(exp(-dCubeGlow*12.)*0.02*pal(0.8,0.6,vec3(0.3,0.6,0.5),0.5,0.4)*2.1, 0.);
+    glow += attB*smoothstep(0.,1.,length(p.xy)*0.8)*max(exp(-dCubeGlow*12.)*0.02*pal(0.8,0.6,vec3(0.3,0.6,0.5),0.5,0.4)*2.1, 0.)*(0.5+syn_HighLevel+syn_MidHighLevel*0.5);
 
     
-    vec3 c = max(coolPal(0.3, 1.5), 0.);
+    vec3 c = max(coolPal(01.3, 1.5), 0.);
     
     vec3 q = p;
     float pipe;
@@ -107,10 +108,10 @@ vec2 map(vec3 p){
     
     q = p;
     q.xy -= 0.4;
-    pipe = length(q.xy) - 0.06;
+    pipe = length(q.xy) - 0.076;
     d = dmin(d, vec2(pipe,10.));
     q.xy += 0.9;
-    pipe = length(q.xy) - 0.06;
+    pipe = length(q.xy) - 0.076;
     d = dmin(d, vec2(pipe,10.));
     
     
@@ -118,6 +119,8 @@ vec2 map(vec3 p){
     float dtt = 10e7;
     float dsqP = 10e6;
     q = p;
+    q.z -= 0.5*smoothTime;
+
     q.xy -= vec2(-0.6,0.2);
     vec3 z = abs(vec3(q.x,q.y,pmod(q.z, 0.4))) - vec3(0.1,0.04,0.2);
     z.xy *= rot(0.125*pi);
@@ -129,6 +132,8 @@ vec2 map(vec3 p){
     dsqP = min(dsqP, pipe);
     
     q = p;
+    q.z -= 0.5*smoothTime;
+
     q.xy += vec2(-0.4,0.4);
     z = abs(vec3(q.x,q.y,pmod(q.z, 0.4))) - vec3(0.1,0.04,0.2);
     z.xy *= rot(0.125*pi);
@@ -140,8 +145,8 @@ vec2 map(vec3 p){
     dsqP = min(dsqP, pipe);
     
     
-    glow += exp(-dtt*(10. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*1.*pow(abs(sin(p.z - (3.5*smoothTimeB))), 10.);
-    glow += exp(-dtt*(50. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*0.9;
+    glow += exp(-dtt*(10. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*1.*pow(abs(sin(p.z + (.5*smoothTimeB))), 10.);
+    glow += exp(-dtt*(50. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*(0.9+syn_HighLevel);
     
     d = dmin(d, vec2(dtt,6.));
     
@@ -161,7 +166,7 @@ vec2 map(vec3 p){
     net = length(pCoordsB.xy) - ww;
     net = min(net,length(pCoordsB.yz) - ww);
     
-    glow += exp(-net*(20. - pow(wave,0.4)*10. + sin(p.z)*4.))*max(coolPal(0.7, 1.8), 0.)*1.;
+    glow += exp(-net*(20. - pow(wave,0.4)*10. + sin(p.z)*4.))*max(coolPal(0.7, 1.8), 0.);
     d.x *= 0.7;
 	return d;
 }
@@ -212,24 +217,28 @@ vec4 renderPassA() {
 	//uv *= 1. + dot(uv,uv)*1.5;
     
     vec3 ro = vec3(0);
-    ro.z += (smoothTime)*SPEED*0.45;
+    ro.z += (smoothTime)*SPEED*0.245;
     ro.z += mx;
         
     ro += path(ro.z);
     
-    float wave = pow(abs(sin(ro.z*0.2 + smoothTimeB*0.75 + 0.17)), 20.);
+    float wave = pow(abs(sin(ro.z*0.2 + smoothTimeC*0.125 + 0.17)), 20.);
     
     vec3 lookAt = vec3(0,0,ro.z);
+
+    lookAt.xy += _uvc*PI*Fov*PI;
+    
     lookAt.z += 2.;
     lookAt += path(lookAt.z); 
 	vec3 rd = getRd(ro, lookAt, uv*(1. + wave*0.06));
     
-    ro -= rd*texture(image30,(uv)*16.).x*0.2; // remove banding from glow
+    ro -= rd*texture(image30,(uv)*256.).x*0.2; // remove banding from glow
     
     
-    rd.xy *= rot(sin(script_time + sin(script_time*0.4)*0.5 )*0.1);
-    rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, lookXY.x*PI);
+    //rd.xy *= rot(sin(script_time*0.12 + sin(script_time*0.14)*0.125 )*0.1);
+    
+    rd.yz = _rotate(rd.yz, lookXY.y*PI+PI*_uvc.y*Flip.y);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI+PI*_uvc.x*Flip.x);
 
     float t; vec3 p; bool hit;
     
@@ -280,10 +289,10 @@ vec4 renderPassA() {
             
         }
         if(d.y >= 10.){
-        	vec3 c = pal(0.6,0.1,vec3(0.7,2.4,3.3), 0.2,3.3 + sin(p.z*0.5)*0.5);
+        	vec3 c = pal(0.6,0.1,vec3(01.7,2.4,3.3), 0.2,3.3 + sin(p.z*0.5)*0.5);
             
             c = max(c, 0.);
-            float a = pmod(p.z + (smoothTimeC), 1.)/1.;
+            float a = pmod(p.z + (smoothTimeC*0.5), 1.)/1.;
             col += pow(1. - max(dot(n, -rd), 0.), 5.)*0.1;
 
             col += smoothstep(0.03,0.,abs(a) - 0.14)*c;
@@ -296,8 +305,8 @@ vec4 renderPassA() {
     col = max(col, 0.);
     //col = mix(col, vec3(0.4,0.5,0.9)*1.5,pow(smoothstep(0.,1.,t*0.08), 3.9));
  
-	col = mix(col, vec3(0.7,0.3,0.2)*3.5,pow(smoothstep(0.,1.,t*0.08), 3.9));   
-    col *= 0.96;
+	col = mix(col, vec3(0.7,0.3,0.2)*3.5,pow(smoothstep(0.,1.,t*0.08), 6.9));   
+    col *= 0.896;
     
     
     
@@ -322,10 +331,10 @@ vec4 renderMainImage() {
     //float m = pow(abs(sin(p.z*0.03)),10.);
 
     // Radial blur
-    float steps = 40.;
+    float steps = 20.;
     float scale = 0.00 + pow(dot(uvn,uvn),1.)*0.04;
     float chromAb = dot(uvn*1.5,uvn*1.5)*10.;
-    vec2 offs = vec2(0) + texture(BuffA, uv + TIME*4.).xz*0.0;
+    vec2 offs = vec2(0) + texture(BuffA, uv + smoothTimeC*.125).xz*0.0;
     vec4 radial = vec4(0);
     for(float i = 0.; i < steps; i++){
     

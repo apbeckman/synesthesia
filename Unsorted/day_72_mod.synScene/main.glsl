@@ -211,7 +211,7 @@ vec4 renderPassA() {
     
     
     
-    ro += rd*texture(image30, (uv*400. + smoothTime*1.)).x*2.;
+    ro += rd*texture(image30, (uv*512. + smoothTime*1.)).x*2.;
     
     bool hit; float t; vec3 p;
     

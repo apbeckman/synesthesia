@@ -24,7 +24,7 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : -0.25,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -1,
@@ -81,6 +81,27 @@
 				0
 			],
 			"NAME" : "Warp",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Perspective",
 			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		}

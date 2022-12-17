@@ -4,7 +4,71 @@
 
 #define size RENDERSIZE
 #define SHADOWS
+//perllin noise from madweedfall
+#define firstOctave 3
+#define octaves  8
+#define persistence 0.6
 
+//Not able to use bit operator like <<, so use alternative noise function from YoYo
+//
+//https://www.shadertoy.com/view/Mls3RS
+//
+//And it is a better realization I think
+float noise(int x,int y)
+{   
+    float fx = float(x);
+    float fy = float(y);
+    
+    return 2.0 * fract(sin(dot(vec2(fx, fy) ,vec2(12.9898,78.233))) * 43758.5453) - 1.0;
+}
+
+float smoothNoise(int x,int y)
+{
+    return noise(x,y)/4.0+(noise(x+1,y)+noise(x-1,y)+noise(x,y+1)+noise(x,y-1))/8.0+(noise(x+1,y+1)+noise(x+1,y-1)+noise(x-1,y+1)+noise(x-1,y-1))/16.0;
+}
+
+float COSInterpolation(float x,float y,float n)
+{
+    float r = n*3.1415926;
+    float f = (1.0-cos(r))*0.5;
+    return x*(1.0-f)+y*f;
+    
+}
+
+float InterpolationNoise(float x, float y)
+{
+    int ix = int(x);
+    int iy = int(y);
+    float fracx = x-float(int(x));
+    float fracy = y-float(int(y));
+    
+    float v1 = smoothNoise(ix,iy);
+    float v2 = smoothNoise(ix+1,iy);
+    float v3 = smoothNoise(ix,iy+1);
+    float v4 = smoothNoise(ix+1,iy+1);
+    
+   	float i1 = COSInterpolation(v1,v2,fracx);
+    float i2 = COSInterpolation(v3,v4,fracx);
+    
+    return COSInterpolation(i1,i2,fracy);
+    
+}
+
+float PerlinNoise2D(float x,float y)
+{
+    float sum = 0.0;
+    float frequency =0.0;
+    float amplitude = 0.0;
+    for(int i=firstOctave;i<octaves + firstOctave;i++)
+    {
+        frequency = pow(2.0,float(i));
+        amplitude = pow(persistence,float(i));
+        sum = sum + InterpolationNoise(x*frequency,y*frequency)*amplitude;
+    }
+    
+    return sum;
+}
+float timeNoise = PerlinNoise2D(smoothTime, smoothTime);
 float time;
 float time2;
 float time3;
@@ -64,10 +128,21 @@ float DE(vec3 p0){
  return min(0.16,min(d,min(d2-0.075,d3)));
 }
 
-float G(vec2 p){return smoothstep(0.0,0.05,min(max(abs(p.x-0.6)-0.15,abs(p.y-0.5)),max(min(p.x-p.y,p.y-0.5),abs(length(p-vec2(0.5))-0.25))));}
-float A(vec2 p){return smoothstep(0.0,0.05,min(max(0.25-p.y,abs(abs(p.x-0.5)+p.y*0.5-0.4)),max(abs(p.x-0.5)-0.1,abs(p.y-0.5))));}
-float C(vec2 p){return smoothstep(0.0,0.05,max(abs(length(p-vec2(0.5))-0.25),p.x-0.6));}
-float T(vec2 p){return smoothstep(0.0,0.05,min(max(abs(p.x-0.5),abs(p.y-0.5)-0.25),max(abs(p.x-0.5)-0.25,abs(p.y-0.75))));}
+float G(vec2 p){
+  return smoothstep(0.0,0.05,min(max(abs(p.x-0.6)-0.15,abs(p.y-0.5)),max(min(p.x-p.y,p.y-0.5),abs(length(p-vec2(0.5))-0.25))));
+  }
+
+float A(vec2 p){
+  return smoothstep(0.0,0.05,min(max(0.25-p.y,abs(abs(p.x-0.5)+p.y*0.5-0.4)),max(abs(p.x-0.5)-0.1,abs(p.y-0.5))));
+  }
+
+float C(vec2 p){
+  return smoothstep(0.0,0.05,max(abs(length(p-vec2(0.5))-0.25),p.x-0.6));
+  }
+  
+float T(vec2 p){
+  return smoothstep(0.0,0.05,min(max(abs(p.x-0.5),abs(p.y-0.5)-0.25),max(abs(p.x-0.5)-0.25,abs(p.y-0.75))));
+}
 
 vec3 getColor(vec3 p0){
  float tim=time-0.2;
@@ -94,7 +169,7 @@ vec3 getColor(vec3 p0){
  else if(d3<d){
   p0.z+=0.125;
   vec2 xz=abs(mod(p0.xz,0.25)-0.125);
-  col=(1.0-20.0*dot(xz,xz))*vec3(0.5,0.4,0.3);
+  col=(1.0-20.0*dot(xz,xz))*vec3(0.5,0.24,0.3);
   xz=floor(p0.xz*4.0);
   if(ft.y<0.1){//fat fingering :)
    if(mod(floor(ft.w*4.0),4.0)==mod(floor(ft.x*4.0),4.0) && fract(ft.z)<0.25)
@@ -106,7 +181,7 @@ vec3 getColor(vec3 p0){
   else if(i<2.0)col*=A(xz);
   else if(i<3.0)col*=C(xz);
   else col*=T(xz);
- }else col=vec3(0.2,0.3,0.4);
+ }else col=vec3(0.23,0.123,0.24);
  return col;
 }
 #ifdef SHADOWS
@@ -135,7 +210,7 @@ vec3 Light(vec3 p, vec3 rd, vec3 L){
  vec3 mcol=getColor(p);
  vec3 N=normalize(vec3(DE(p+v.xyy)-DE(p-v.xyy),DE(p+v.yxy)-DE(p-v.yxy),DE(p+v.yyx)-DE(p-v.yyx)));
  vec3 col=mix(mcol.yzx,mcol,abs(dot(rd,N)))*max(0.0,dot(N,L));
- col+=vec3(1.0,0.5,0.7)*pow(max(0.0,dot(reflect(rd,N),L)),16.0);
+ col+=vec3(1.0,0.85,0.7)*pow(max(0.0,dot(reflect(rd,N),L)),26.0);
 #ifdef SHADOWS
  col*=FuzzyShadow(p,L,0.5);
 #endif
@@ -145,17 +220,17 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
- time=smoothTime*1.;
+ time=smoothTimeC*.75;
  time2=smoothTimeB*1.;
- time3=smoothTimeC*1.;
+ time3=smoothTimeC*.75;
 
 #ifdef SHADOWS
  GoldenAngle=2.0-0.5*(1.0+sqrt(5.0));
  randSeed=fract(sin(dot(fragCoord.xy,vec2(13.434,77.2378))+time*0.1)*4132.34526);
 #endif
- vec3 ro=vec3(2.0*(1.0+sin(time*0.01)),1.5+direction,time*0.6+cos(time*0.025)*0.25);
+ vec3 ro=vec3(2.0*(1.0+sin(smoothTime*0.01)),1.5+direction,smoothTime*0.6+cos(smoothTime*0.025)*0.25);
  mat3 rotCam=lookat(vec3(0.0,0.3-0.5*ro.y,1.0),vec3(0.0,1.0,0.0));
- vec3 rd=rotCam*normalize(vec3((2.0*fragCoord.xy-size.xy)/size.y,1.5));
+ vec3 rd=rotCam*normalize(vec3(_uvc*PI*FOV+(2.0*fragCoord.xy-size.xy)/size.y,1.5));
  rd.x=-rd.x;
  float t=max(0.0,(0.875-ro.y)/rd.y),d=1.0,dm=d,tm=t;
  for(int i=0;i<24;i++){

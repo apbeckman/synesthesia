@@ -28,7 +28,7 @@ vec2 hash22B(vec2 p) {
     // seen around... so use it with caution, because I make a tonne of mistakes. :)
     float n = sin(dot(p, vec2(1, 113)));
     p = fract(vec2(262144, 32768)*n)*2. - 1.; 
-    return sin(p*6.2831853 + smoothTimeC/2.);   
+    return sin(p*6.2831853 + smoothTimeC*0.125);   
 }
 
 // vec2 to vec2 hash.
@@ -43,7 +43,7 @@ vec2 hash22C(vec2 p) {
     
     // Animated.
     p = fract(vec2(262144, 32768)*n)*2. - 1.; 
-    return sin(p*6.2831853 + smoothTime/5.); 
+    return sin(p*6.2831853 + smoothTime*0.0125); 
 }
 
 
@@ -96,13 +96,13 @@ void formula(vec2 z, float t)
 		K -= 1.0;
 	}
 	M += 1.0;
-	float w = (intensity) * M+highhits*0.025;
+	float w = (intensity) * M+highhits*0.00125;
 	float circ = pow(max(0.0, w - ot2) / w, 6.0);
 	S += max(pow(max(0.0, w - ot) / w, 0.25), circ);
-	vec3 col = normalize(0.1 + vec4(0.45, 0.75, M * 0.1, 1.0).rgb);
+	vec3 col = normalize(0.1 + vec4(01.45, 0.75, M * 0.1, 1.0).rgb);
 
 	color += col * (0.4 + mod(M / 9.0 - t * pulse + ot2 * 2.0, 1.0));
-	color += vec3(1.0, 0.7, 0.3) * circ * (10.0 - M) * 3.0;
+	color += vec3(1.0, 0.7, 0.3) * circ * (10.0 - M) * (3.0+highhits*0.25);
 }
 
 
@@ -110,22 +110,23 @@ vec4 renderMain() {
  	vec4 out_FragColor = vec4(0.0);
 
 	float R = 0.0;
-	float N = (smoothTimeC*0.125) * 0.01 * rate;
+	float N = (smoothTimeC*0.075) * 0.01 * rate;
 	float T = 2.0 * rate;
 	if (N > 6.0 * rate) { 
 		R += 1.0;
 		N -= (R * 8.0 * rate);
 	}
-	if (N < 4.0 * rate) T += N;
+	if (N < 6.0 * rate) T += N;
 	else  T = 8.0 * rate - N;
 	float Z = (1.05-zoom);
 	vec2 pos = _xy.xy / RENDERSIZE.xy - 0.5;
 		//pos *= (1.0+Warp*(((_uvc.xy))-1.));
 
 	pos.x *= RENDERSIZE.x/RENDERSIZE.y;
-
 	vec2 uv = pos ;
-	uv *= -1.0 + Warp * (1.0 - (_uvc*PI-uv));
+	uv -= _uvc*Zoom2*PI;
+
+	//uv *= -1.0 + Warp * (1.0 - (_uvc*PI-uv));
 	uv -= center;
 	uv = _rotate(uv, Rotate);
 

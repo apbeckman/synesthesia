@@ -627,6 +627,7 @@ vec4 renderMainImage() {
 
     vec3 lk = camPath((smoothTime)*.35 + .1);  // "Look At" position.
 
+    lk.xy -= _uvc*FOV*PI;
     //lk.xy = _rotate(lk.xy, Rotate*PI);
     lk.xy += _rotate(_uvc.xy, Twist*PI);
 
@@ -636,7 +637,6 @@ vec4 renderMainImage() {
 
 
 
-    lk.xy += _uvc*FOV*PI;
    // lk.xy +=_uvc*lk.xy*PI;
     
     // Using the above to produce the unit ray-direction vector.
@@ -655,9 +655,9 @@ vec4 renderMainImage() {
 
     vec3 r = normalize(fwd + (u.x*rgt + u.y*up));
     r.xy = _rotate(r.xy, Rotate*PI);
-    r.yz = _rotate(r.yz, lookXY.y*PI);
+    r.yz = _rotate(r.yz, lookXY.y*PI+_uvc.y*PI*Perspective.y);
 
-    r.xz = _rotate(r.xz, lookXY.x*PI);
+    r.xz = _rotate(r.xz, lookXY.x*PI+_uvc.x*PI*Perspective.x);
 
 
 

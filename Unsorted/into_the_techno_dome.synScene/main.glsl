@@ -244,8 +244,8 @@ vec3 effect3d(vec2 p, vec2 q) {
   p.x*=1.0-0.75* Mirror.x;
   
   vec3 rd = normalize((-p.x*uu+_uvc.x*p.x*uu*PI*PI*Mirror.x) + (p.y*vv+_uvc.y*p.y*vv*PI*PI*Mirror.y) + fov*ww );
-    rd.yz = _rotate(rd.yz, -lookXY.y*PI);
-    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.yz = _rotate(rd.yz, -lookXY.y*PI+_uvc.y*PI*Perspective.y*0.5);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI+_uvc.x*PI*Perspective.x);
 
   return render(ro, rd);
 }
