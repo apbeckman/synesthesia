@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "michael0884",
+	"DESCRIPTION" : "This just happend idk\n[url]JAVASCRIPT: H=location.host;E=(H?window:opener).Effect;P=E.prototype;if(!E.P)E.P=P.Paint;P.Paint=function(...A){for(i=0;i<8;i++)E.P.apply(this,A);};if(!H)close();[/url]",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "particle_superstorm.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Particle superstorm",
+	"WIDTH" : 1920
+}

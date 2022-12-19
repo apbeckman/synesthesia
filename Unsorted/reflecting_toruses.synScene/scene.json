@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Reflecting toruses\nNumerous examples on shadertoy already on how to do repeating toruses so nothing ground breaking.\nPart of an Amiga tribute demo released earlier. Every late Amiga demo had rotating toruses\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "reflecting_toruses.png",
+	"TITLE" : "Reflecting toruses",
+	"WIDTH" : 1280
+}

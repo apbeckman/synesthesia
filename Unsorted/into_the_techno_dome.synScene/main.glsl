@@ -6,14 +6,14 @@
 // Thought it turned out nice.
 // Based on: https://www.shadertoy.com/view/XsBXWt
 
-#define PI              3.141592654
+//#define PI              3.141592654
 #define TAU             (2.0*PI)
 #define TIME            TIME
 #define RESOLUTION      RENDERSIZE
 #define ROT(a)          mat2(cos(a), sin(a), -sin(a), cos(a))
-#define TOLERANCE       0.00001
-#define MAX_RAY_LENGTH  17.0
-#define MAX_RAY_MARCHES 70
+#define TOLERANCE       0.000001
+#define MAX_RAY_LENGTH  36.0
+#define MAX_RAY_MARCHES 130
 #define NORM_OFF        0.0001
 #define PCOS(x)         (0.5 + 0.5*cos(x))
 
@@ -24,6 +24,9 @@
 #define PATHB (0.5*vec2(13.0, 3.0))
 vec3 cam(float z)  {
     return vec3(sin(z*PATHA)*PATHB, z);
+}
+vec3 cam2(float z)  {
+    return vec3(sin(z*PATHA)*PATHB, -z);
 }
 
 vec3 dcam(float z)  {
@@ -94,10 +97,11 @@ float sphered(vec3 ro, vec3 rd, vec4 sph, float dbuffer) {
 // "Amazing Surface" fractal
 // https://www.shadertoy.com/view/XsBXWt
 vec4 formula(vec4 p) {
-  p.xz = abs(p.xz+1.)-abs(p.xz-1.)-p.xz;
+  p.xz = abs(p.xz+1.1)-abs(p.xz-1.)-p.xz;
   p.y-=.25;
   p.xy*=ROT(radians(30.0));
-  p=p*2.0/clamp(dot(p.xyz,p.xyz),0.24,1.0);
+  p=p*2.0/clamp(dot(p.xyz+cos(smoothTimeC*0.0125)*0.125,p.xyz+sin(smoothTimeC*0.0125)*0.125),(0.7524-Fractal),1.0-0.1*Fractal);
+  
   return p;
 }
 
@@ -112,7 +116,7 @@ float fractal(vec3 pos) {
   vec3 trap0pos = vec3(-2., 0.2, -3.0);
   vec3 trap0 = vec3(1E6);
   
-  for (int i=0; i < 5; ++i) {
+  for (int i=0; i < 3.25+Iters; ++i) {
     p = formula(p);
     trap0 = min(trap0, abs(p.xyz-trap0pos));
   }
@@ -137,7 +141,7 @@ float df(vec3 p) {
 #endif
 
   // Splits the tunnel
-  const float splitDist = 50.0;
+  const float splitDist = 75.0;
   float mz = mod(p.z, splitDist);
   float n  = floor(p.z/splitDist);
   float h  = hash(n);
@@ -174,21 +178,30 @@ vec3 normal(vec3 pos) {
 }
 
 vec3 render(vec3 ro, vec3 rd) {
-  vec3 lightPos = cam(ro.z+10.0);
-  float alpha   = 0.05*smoothTimeB;
+  vec3 lightPos = cam(ro.z+23.0);
+  //vec3 lightPos2 = cam2(ro.z+18.0);
+  float alpha   = 0.05*TIME;
   
   const vec3 skyCol = vec3(0.0);
 
   int iter    = 0;
   float t     = rayMarch(ro, rd, iter);
   vec3  trap0 = g_trap0;
+  
+  //float pulse = smoothstep(0.0, 1.0, sin(TAU*syn_BPMTwitcher*0.25));
 
-  float pulse = smoothstep(0.0, 1.0, pow(syn_HighLevel+syn_HighHits*0.5, 2.)*0.5);
+ float pulse = smoothstep(0.1, 1.0, 0.125*TAU*pow((syn_HighLevel*0.5+0.5*syn_MidHighLevel+syn_Level*0.125)*(1.0+0.5*syn_Intensity), 2.));
+  //float pulse = smoothstep(0.1, 1.0, pow((syn_HighLevel+syn_MidHighLevel+syn_Level*0.125)*0.5*syn_Intensity, 2.));
+  float pulseB = smoothstep(0.1, 1.0, pow(syn_HighLevel*syn_Intensity+syn_HighHits*syn_Intensity+syn_Level*0.125, 2.));
   float sr    = mix(2.0, 3.0, pulse);
   float sd    = sphered(ro, rd, vec4(lightPos, sr), t);
 
-  const vec3 bgcol  = vec3(1.750, 1.20, 0.975).zyx;
-  vec3 gcol   = mix(1.0, 1.75, pulse)*sd*sd*bgcol;
+  vec3 bgcol  = vec3(15.750, 15.30, 15.975).zyx;
+  vec3 bgcolA  = vec3(8.750, .8130, 01.75).zyx;
+  bgcolA.xz += 2.*_rotate(bgcolA.xy*0.4+trap0.xz*(_uvc/(PI*PI)), _uvc.x*pow(PI, -2))+0.1*tan(bgcolA.xy*trap0.xy);
+
+  vec3 gcol   = mix(2.0, 1.75, pulse)*sd*sd*bgcol;
+  vec3 gcolA   = mix(1.0, 1.75, 1.)*sd*sd*bgcol;
 
   if (t >= MAX_RAY_LENGTH) {
     return gcol;
@@ -207,12 +220,12 @@ vec3 render(vec3 ro, vec3 rd) {
   float fre = abs(dot(rd, nor));
   fre *= fre;
   fre *= fre;
-  float dm  = 4.0/ll2;
-  float dif = pow(max(dot(nor,ld),0.0), 1.0);  
-  float spe = fre*pow(max(dot(refl, ld), 0.), 10.);
-  float fo  = smoothstep(0.9, 0.4, t/MAX_RAY_LENGTH);
+  float dm  = 14.0/ll2;
+  float dif = pow(max(dot(nor*2.,ld),0.0), 4.0);  
+  float spe = fre*pow(max(dot(refl, ld), 0.), 49.);
+  float fo  = smoothstep(01.9, 0.124, t/MAX_RAY_LENGTH);
   float ao  = 1.0-ii;
-
+/*
   vec3 col = vec3(0.0);
   col += pow(smoothstep(0.5, 1.0, trap0.x*0.25)*1.3, mix(6.0, 2.0, pulse))*0.5*bgcol*mix(0.75, 2.25, pulse);
   col += smoothstep(0.7, 0.6, trap0.z)*smoothstep(0.4, 0.5, trap0.z)*ao*bgcol*mix(0.2, 1.4, pulse);
@@ -221,11 +234,25 @@ vec3 render(vec3 ro, vec3 rd) {
   col *= fo;
   col += gcol;
   return col;
+*/
+  vec3 col = vec3(0.0);
+  col += pow(smoothstep(0.25, 1.0, trap0.x*0.195*(1.0+max(0, 0.05*Iters)))*1.3, mix(6.0, 2.0, 0.25+0.5*pulse))*0.75*bgcolA*mix(0.25+.0115*pulse+0.5*pow(syn_HighHits*0.5, 2.), 12.25, .05+.0125*pulse);
+//    col += pow(smoothstep(0.5, 1.0, trap0.x*0.25)*1.3, mix(6.0, 2.0, pulse))*0.5*bgcol*mix(0.75, 2.25, pulse);
+
+  //col += smoothstep(0.7, 0.65, trap0.z)*smoothstep(0.4, 0.5, trap0.z)*ao*bgcol*mix(0.2, 1.4, .5*pulse);
+  col += smoothstep(0.7, 01.6, trap0.z)*smoothstep(0.124, 0.105, trap0.z)*ao*bgcol*mix(0.2, 1.4,0.2+ pulse);
+  
+  col += spe*bgcol*mix(01.66, 2.75, pulse);
+  col *= 2.0-sd*sd;
+  col *= fo;
+ // col += gcol;
+  return col;
 }
 
 vec3 effect3d(vec2 p, vec2 q) {
-  p.xy += _uvc*FOV*PI;
-  float z   = smoothTime;
+  p.xy += q+_uvc*FOV*PI;
+  q.xy += p+_uvc*FOV*PI;
+  float z   = bass_time;
   
   vec3 cam = cam(z);
 
@@ -243,7 +270,7 @@ vec3 effect3d(vec2 p, vec2 q) {
   p.y*=1.0-0.75* Mirror.y;
   p.x*=1.0-0.75* Mirror.x;
   
-  vec3 rd = normalize((-p.x*uu+_uvc.x*p.x*uu*PI*PI*Mirror.x) + (p.y*vv+_uvc.y*p.y*vv*PI*PI*Mirror.y) + fov*ww );
+  vec3 rd = normalize((-p.x*uu-_uvc.x*p.x*uu*PI*PI*Mirror.x) + (p.y*vv+_uvc.y*p.y*vv*PI*PI*Mirror.y) + fov*ww );
     rd.yz = _rotate(rd.yz, -lookXY.y*PI+_uvc.y*PI*Perspective.y*0.5);
     rd.xz = _rotate(rd.xz, lookXY.x*PI+_uvc.x*PI*Perspective.x);
 
@@ -251,7 +278,7 @@ vec3 effect3d(vec2 p, vec2 q) {
 }
 
 // License: Unknown, author: nmz (twitter: @stormoid), found: https://www.shadertoy.com/view/NdfyRM
-float sRGB(float t) { return mix(1.055*pow(t, 1./2.4) - 0.055, 12.92*t, step(t, 0.0031308)); }
+float sRGB(float t) { return mix(1.055*pow(t, 1./2.4) - 0.0255, 12.92*t, step(t, 0.0031308)); }
 // License: Unknown, author: nmz (twitter: @stormoid), found: https://www.shadertoy.com/view/NdfyRM
 vec3 sRGB(in vec3 c) { return vec3 (sRGB(c.x), sRGB(c.y), sRGB(c.z)); }
 

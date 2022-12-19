@@ -47,6 +47,16 @@
     https://www.shadertoy.com/view/MdVGRc
 
 */
+vec4 texture2DAA(sampler2D tex, in vec3 p, vec3 n) {
+    vec2 uv = _xy;
+
+    vec2 texsize = vec2(textureSize(tex,0));
+    vec2 uv_texspace = uv*texsize;
+    vec2 seam = floor(uv_texspace+.5);
+    uv_texspace = (uv_texspace-seam)/fwidth(uv_texspace)+seam;
+    uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
+    return texture(tex, uv_texspace/texsize);
+}
 
 const float FAR = 50.0; // Far plane.
 
@@ -320,7 +330,8 @@ vec3 texBump( sampler2D tx, in vec3 p, in vec3 n, float bf){
     const vec2 e = vec2(0.001, 0);
     
     // Three gradient vectors rolled into a matrix, constructed with offset greyscale texture values.    
-    mat3 m = mat3( tex3D(tx, p - e.xyy, n), tex3D(tx, p - e.yxy, n), tex3D(tx, p - e.yyx, n));
+    //mat3 m = mat3( tex3D(tx, p - e.xyy, n), tex3D(tx, p - e.yxy, n), tex3D(tx, p - e.yyx, n));
+    mat3 m = mat3( texture2DAA(tx, p - e.xyy, n), tex3D(tx, p - e.yxy, n), tex3D(tx, p - e.yyx, n));
     
     vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
     g = (g - dot(tex3D(tx,  p , n), vec3(0.299, 0.587, 0.114)) )/e.x; g -= n*dot(n, g);
@@ -339,7 +350,7 @@ vec4 renderMainImage() {
 	// Screen coordinates.
 	vec2 u = (fragCoord - RENDERSIZE.xy*0.5)/RENDERSIZE.y;
     
-    float speed = smoothTime*0.1 + 8.;
+    float speed = smoothTime*0.1 + 6.;
     
     // Initiate the camera path spline points. Kind of wasteful not making this global, but I wanted
     // it self contained... for better or worse. I'm not really sure what the GPU would prefer.
@@ -391,7 +402,7 @@ vec4 renderMainImage() {
         
         
         // Apply some subtle texture bump mapping to the panels and the metal tubing.
-        nor = texBump(image6, pos*ts, nor, 0.002); // + step(saveObjID, 1.5)*0.002
+        nor = texBump(image4, pos*ts*.5, nor, 0.0075); // + step(saveObjID, 1.5)*0.002
     
         // Reflected ray. Note that the normal is only half bumped. It's fake, but it helps
         // taking some of the warping effect off of the reflections.

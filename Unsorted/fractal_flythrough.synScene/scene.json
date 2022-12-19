@@ -22,6 +22,10 @@
 		{
 			"NAME" : "image6",
 			"PATH" : "images/6.jpeg"
+		},
+		{
+			"NAME" : "image4",
+			"PATH" : "images/SHPN1.jpg"
 		}
 	],
 	"IMAGE_PATH" : "fractal_flythrough.png",

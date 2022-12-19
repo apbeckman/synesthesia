@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: DragonEye II\nA year or so ago I played with quasi crystals and I found they looked like \"dragon eyes\" with certain parameters\nThis is an evolution of that idea.\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "dragoneye_ii.png",
+	"TITLE" : "DragonEye II",
+	"WIDTH" : 1280
+}

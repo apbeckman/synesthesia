@@ -73,11 +73,11 @@ float dist(vec2 p, float h, float sz){
     
     // Height factor. More height looks more interesting, but too much
     // sends the blocks out of the cell range and causes artifacts.
-    const float hFact = .75;
+    float hFact = .125+(syn_Intensity*0.45+syn_Presence*0.275);
     
     // Moving the blocks down a bit to maximize the range. I've hack a 
     // number in, but you could probably calculate something.
-    p.y -= -.1;
+    p.y -= .1;
     
     
     // I should be rendering three calculated polygons consisting of
@@ -119,7 +119,7 @@ float height(vec2 p){
 
     //float rnd = hash21(p);
     //return smoothstep(.5, .95, sin(rnd*6.2831 + TIME)*.5 + .5);
-    float tm = mod(smoothTimeC/1.5, 6.2831);
+    float tm = mod(smoothTimeC*0.5, 6.2831);
     float h = dot(sin(p*.73/1.25 - cos(p.yx*.97/1.25 - tm)*2.3), vec2(.25)) + .5;
     p *= 2.;
     float h2 = dot(sin(p*.73/1.25 - cos(p.yx*.97/1.25 - tm*2.)*2.3), vec2(.25)) + .5;
@@ -142,7 +142,7 @@ vec4 renderMainImage() {
     
     
     // Scaling and translation.
-    vec2 p = uv*sc + s*smoothTime/2.;
+    vec2 p = uv*sc + s*smoothTime*0.6;
     // Including rotation for a side wall perpective.
     //vec2 p = rot2(-3.14159/2.)*uv*vec2(-1, 1)*sc + s.yx*TIME/4.;
     
@@ -231,7 +231,7 @@ vec4 renderMainImage() {
 
     
     // Initiate the scene color to the background.
-    vec3 col = vec3(.3, .25, .2);
+    vec3 col = vec3(.143, .0125, .252);
     
  
     // Rendering the object shadows onto the background. 
@@ -253,7 +253,7 @@ vec4 renderMainImage() {
         float rnd = hash21(id);
         float fn = dot(sin(id*s/3.5/1.5 - cos(id.yx*s/2.3/1.5)*2.), vec2(.25)) + .5;
         fn = smoothstep(.1, .9, fn);  
-        vec3 oCol = .6 + .4*cos(6.2831*mix(fn, rnd, .65)/3. + vec3(0, 1, 2)/1.65);  
+        vec3 oCol = .6 + .4*cos(6.2831*mix(fn, rnd, .65)/3. + vec3(01.25, 2, 2.75)/.25);  
         oCol = mix(oCol, oCol.xzy, fn*(hash21(id + .3)*.25 + .25));
         if(hash21(id + .27)<.33) oCol = oCol*.6;
         if(hash21(id + .37)<.66) oCol = min(oCol*1.4, 1.);

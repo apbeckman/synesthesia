@@ -4,8 +4,10 @@
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 // Tuned via Noodlesplate (https://github.com/aiekick/NoodlesPlate)
 
-const vec3 uColor0 = vec3(0.2,0.8,0.3);
-const vec3 uColor1 = vec3(0.8,0.2,0.37);
+//const vec3 uColor0 = vec3(0.42,0.8,0.3);
+const vec3 uColor0 = vec3(0.85,0.15,0.25);
+//const vec3 uColor1 = vec3(0.8,0.2,0.37);
+const vec3 uColor1 = vec3(0.25,0.45,0.65);
 
 mat3 rotx(float a){return mat3(1.,0.,0.,0.,cos(a),-sin(a),0.,sin(a),cos(a));}
 mat3 roty(float a){return mat3(cos(a),0.,sin(a),0.,1.,0.,-sin(a),0.,cos(a));}
@@ -42,8 +44,8 @@ float sdf(vec3 p)
 	float dist1 = (1.-clamp(d1,0.,1.))*d0;
 	float sp = 1. - cos(p.z * 1.5) * 0.1 - abs(p.y) + dist0*0.75 + dist1*2.25;
 	p.xz = mod(p.xz, 1.5) - 0.75;
-	float ct = (cos(TIME * 0.5) * 0.5 + 0.5) * 2.0;
-	float st = (sin(TIME * 0.5) * 0.5 + 0.5) * 2.0;
+	float ct = (cos(TIME * 0.5) * 0.25 + 0.5);
+	float st = (sin(TIME * 0.5) * 0.25 + 0.5);
 	float bo = length(max(abs(p) - vec3(ct,1000.0,st), 0.0)) - 0.1;
 	
 	return max(bo,sp);
@@ -61,8 +63,8 @@ float mat(vec3 p)
 	float dist1 = (1.-clamp(d1,0.,1.))*d0;
 	float sp = 1. - cos(p.z * 1.5) * 0.1 - abs(p.y) + dist0*0.75 + dist1*2.25;
 	p.xz = mod(p.xz, 1.5) - 0.75;
-	float ct = (cos(TIME * 0.5) * 0.5 + 0.5) * 2.0;
-	float st = (sin(TIME * 0.5) * 0.5 + 0.5) * 2.0;
+	float ct = (cos(TIME * 0.5) * 0.25 + 0.5);
+	float st = (sin(TIME * 0.5) * 0.25 + 0.5);
 	float bo = length(max(abs(p) - vec3(ct,1000.0,st), 0.0)) - 0.1;
 	
 	if (bo > sp)
@@ -141,7 +143,7 @@ vec4 renderMainImage() {
 	float ca = 3.0;
     float ce = 8.0;
     float cd = 20.0;
-	float maxd = 1000.0;
+	float maxd = 800.0;
 	
 	ca = _mouse.x / RENDERSIZE.x * 6.28318;
 	ce = _mouse.y / RENDERSIZE.y * 30.0;
@@ -167,9 +169,9 @@ vec4 renderMainImage() {
     m2 = m1 * m1;
 	
 	float d = 0.0, s = 1.0;
-	for (float i = 0.0; i < 500.0; i++)
+	for (float i = 0.0; i < 250.0; i++)
 	{
-		if (log(d/1e7) > 0.0 || d > maxd) break;
+		if (log(d/1e6) > 0.0 || d > maxd) break;
 		s = sdf(ro + rd * d);
 		d += s * 1.0;
 	}
@@ -189,11 +191,11 @@ vec4 renderMainImage() {
 			
 		if (mt < 0.5) // top
 		{
-			n = doBumpMap(image7, -p*0.5, n, 0.018);
+			n = doBumpMap(image3, -p*0.5, n, 0.018);
 			vec3 refl = reflect(rd,n);
 			float diff = clamp( dot( n, ld ), 0.0, 1.0 );
-			float fre = pow( clamp( 1. + dot(n,rd),0.0,1.0), 16. );
-			float spe = pow(clamp( dot( refl, ld ), 0.0, 1.0 ),25.);
+			float fre = pow( clamp( 1. + dot(n,rd),0.0,1.0), 64. );
+			float spe = pow(clamp( dot( refl, ld ), 0.0, 1.0 ),50.);
 			float sha = 0.5 + 0.5 * getSha(p, n, 2.0);
 			float ao = getAO(p, n);
 			fragColor = vec4(
@@ -203,14 +205,20 @@ vec4 renderMainImage() {
 		}
 		else // wall
 		{
-			n = doBumpMap(image3, -p*0.5, n, 0.1);
+			n = doBumpMap(image7, -p*0.5, n, 0.1);
 			vec3 refl = reflect(rd,n);
 			float diff = clamp( dot( n, ld ), 0.0, 1.0 );
-			float spe = pow(clamp( dot( refl, ld ), 0.0, 1.0 ),25.);
+						float fre = pow( clamp( 1. + dot(n,rd),0.0,1.0), 64. );
+
+			float spe = pow(clamp( dot( refl, ld ), 0.0, 1.0 ),50.);
 			float sha = 0.5 + 0.5 * getSha(p, n, 2.0);
 			float ao = getAO(p, n);
-    
-			fragColor = vec4(uColor0 * ao + spe * sha, 1);
+    			fragColor = vec4(
+				(diff + fre) * 0.8 + diff * ao,
+				(diff + fre) * uColor1 + spe * sha
+			) * 1.0;
+
+			//fragColor = vec4(uColor0 * ao + spe * sha, 1);
 		}
 
 		fragColor = fragColor.zyww + fragColor.x*0.1;

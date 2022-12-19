@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Crystal skull\nPerhaps it's just me that sees a glowing skull captured in a crystal?\nResult after continued experimenting with marble fractals and different kinds of trap functions\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "crystal_skull.png",
+	"TITLE" : "Crystal skull",
+	"WIDTH" : 1280
+}

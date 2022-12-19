@@ -76,13 +76,13 @@ function update(dt) {
 
   var bpm = inputs.syn_BPM/4.0;
   bpmcount.updateTime(bpm, dt);
-  bassTimevar.updateTime(0.1, Math.pow((inputs.syn_BassLevel*1.5+inputs.syn_MidLevel*0.75+syn_Intensity*0.25), 2.0)*(inputs.rate_in+inputs.syn_Intensity), dt);
+  bassTimevar.updateTime(1.,  Math.pow(0.125+inputs.syn_BassLevel*0.45+inputs.syn_MidLevel*0.35+syn_Intensity*0.75,2.0)*(inputs.rate_in), dt);
   //timevar.updateTime(0.4, inputs.rate_in, dt);
   //timevar.updateTime(0.4, inputs.rate_in, dt);
 
-  uniforms.bass_time = bassTimevar.time;
 
   uniforms.script_time = bpmcount.time;
+  uniforms.bass_time = bassTimevar.time;
 
   // if (bpmcount.didIncrement == 1.0){
   //   tAtLast0 = bpmTime;

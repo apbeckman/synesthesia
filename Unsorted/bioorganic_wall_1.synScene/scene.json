@@ -1,0 +1,21 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Raymarching a textured XY plane. Basically, just an excuse to try out the new pebbled texture.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image47",
+			"PATH" : "images/rdn.jpg"
+		},
+		{
+			"NAME" : "image12",
+			"PATH" : "images/47.jpg"
+		}
+
+	],
+	"IMAGE_PATH" : "bioorganic_wall.png",
+	"TITLE" : "Bioorganic Wall",
+	"WIDTH" : 1920
+}

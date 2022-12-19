@@ -359,7 +359,7 @@ vec4 renderMainImage() {
         
         // Faux environmental mapping.
         col += envMap(reflect(rd, sn), sn)*standard_lighting;
-        vec3 texo = tex3D(geom, sp*sz*0.5, vec3(1.0,1.0,0.0));
+        vec3 texo = tex3D(geom, sp*sz*0.25, vec3(1.0,1.0,0.0));
         if (syn_MediaType>0.5){
             texo = 1.0-tex3D(syn_UserImage, sp*sz, vec3(1.0,1.0,0.0));
         }

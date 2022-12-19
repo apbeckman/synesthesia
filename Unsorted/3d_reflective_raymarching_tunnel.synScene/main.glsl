@@ -1,4 +1,4 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 // ##############################
@@ -177,7 +177,7 @@ vec3 getShadedColor( vec3 hitPosition, vec3 normal, vec3 cameraPosition )
 	 }
 
 	//	ambient component
-    vec3 lightColor = vec3(abs(0.5+cos(smoothTimeB*0.125+10.)*0.125+0.9125), abs(sin(smoothTimeB*0.125)*0.125+0.925), 0.2525+abs(sin(smoothTimeB*0.125)*0.125+0.925))*0.65;
+    vec3 lightColor = vec3(abs(0.5+cos(smoothTimeB*0.125+10.)*0.125+0.49125), abs(sin(smoothTimeB*0.125)*0.125+0.925), 0.2525+abs(sin(smoothTimeB*0.125)*0.125+0.925))*0.65;
 	vec3 ambientColor = surfaceColor * lightColor * 0.0; // ambient factor
 
 	//	diffuse component
@@ -248,8 +248,9 @@ vec4 renderMainImage() {
 	//camP += vec3( repSpacing.x/2.0+sin( -smoothTime*0.125 )*0.25, repSpacing.y/2.0+cos( -smoothTime*0.125 )*0.25, 2.5*smoothTime );
 	camP += vec3( repSpacing.x/2.0+sin( smoothTime*0.25 )*(0.5), repSpacing.y/2.0+cos( smoothTime*0.25 )*(0.5), 2.0*smoothTime );
 
-	vec3 camDir = calcCameraRayDir( 90.0, fragCoord.xy, RENDERSIZE.xy ); // Camera view direction
-
+	vec3 camDir = calcCameraRayDir( 110.0, fragCoord.xy, RENDERSIZE.xy ); // Camera view direction
+	camDir.xz = _rotate(camDir.xz, LookXY.x*PI+_uvc.x*PI*Perspective.x);
+	camDir.yz = _rotate(camDir.yz, LookXY.y*PI+_uvc.y*PI*Perspective.y);
 	//	Set up ray
 	vec3 point;		// Set in trace()
 	bool objectHit;	// Set in trace()
@@ -263,7 +264,6 @@ vec4 renderMainImage() {
 		//	Lighting calculations
 		vec3 normal = getNormal(point);
 		color = getShadedColor( point, normal, camP );
-
 		//	Reflections
 		for(int i = 0; i < reflectionBounces; i++)
 		{
@@ -274,6 +274,8 @@ vec4 renderMainImage() {
 			{
 				// Get color of reflection
 				color += 0.3 * getShadedColor( pointRef, getNormal(pointRef), point );
+		color += highhits*0.125;
+
 			}
 			point = pointRef;
 		}
@@ -281,7 +283,8 @@ vec4 renderMainImage() {
 
 	//	fog
 	//vec3 fogColor = vec3( 0.1*(1.0-sin(smoothTimeB)*0.25), 0.1+0.1*(1.0-sin(smoothTimeB)*0.25), 0.1+0.1*(1.0-sin(smoothTimeB)*0.25) );
-	vec3 fogColor = vec3(abs(0.45+cos(smoothTimeB*0.125+10.)*0.125+0.9125), abs(sin(smoothTimeB*0.125)*0.125+0.925), 0.525)*1.5*(1.0+pow(normalize(highhits), 2.0)*0.125);
+	//vec3 fogColor = vec3(abs(0.45+cos(smoothTimeB*0.125+10.)*0.125+0.9125), abs(sin(smoothTimeB*0.125)*0.125+0.925), 0.525)*1.5*(1.0+pow(normalize(highhits), 2.0)*0.125);
+	vec3 fogColor = vec3(0.2);
 	float FogDensity = 0.025*(1.0+pow(syn_HighLevel*0.875+syn_Hits*0.125, 2.0)*0.5);
 	float fogFactor = 1.0 /exp(t * FogDensity);
 	fogFactor = clamp( fogFactor, 0.0, 1.0 );

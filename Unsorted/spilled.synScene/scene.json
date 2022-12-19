@@ -2,10 +2,22 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "MouseXY",
 			"TYPE" : "xy",
 			"UI_GROUP" : "defaults"
@@ -13,15 +25,25 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
+			"MAX" : 3,
 			"MIN" : 0,
-			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
+			"NAME" : "Reset",
+			"TYPE" : "bang",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 1,
+			"NAME" : "Impact",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "flockaroo",
 	"DESCRIPTION" : "fast version of single pass cfd (https://www.shadertoy.com/view/MdKXRy) - with shading.\nthe randomness changes per frame, therefore no texture caching problems\npress <i>-key to init the image (e.g. in fullscreen)\n",
+	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGES" : 
 	[

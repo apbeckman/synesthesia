@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Into the techno dome\nA simple extension of \"Follow the Light\" I made earlier.\nThe tunnel forks and the fork is picked randomly.\nBased on: https://www.shadertoy.com/view/XsBXWt",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "into_the_techno_dome_1.png",
+	"TITLE" : "Into the techno dome_1",
+	"WIDTH" : 1280
+}

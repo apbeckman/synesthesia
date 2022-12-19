@@ -1,4 +1,16 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.625,
+			"MIN" : -0.625,
+			"NAME" : "Mod1",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "mrange",
 	"DESCRIPTION" : "License CC0: Fortress Harkonnen\nInspired by: http://www.fractalforums.com/new-theories-and-research/very-simple-formula-for-fractal-patterns/\n",
 	"GPU" : 0,

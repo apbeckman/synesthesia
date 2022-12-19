@@ -1,0 +1,36 @@
+{
+	"CREDIT" : "michael0884",
+	"DESCRIPTION" : "quantum mechanical wibbly-wobbly wave function simulation\nThe color represents the phase of the wave function, the opacity - probability density\nThis is a simulation of a single free particle inside a box. The wave function is not normalized though",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "the_schrodinger_equation.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "The Schrodinger equation",
+	"WIDTH" : 1280
+}

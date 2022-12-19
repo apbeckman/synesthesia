@@ -21,9 +21,9 @@
 
 #define TOLERANCE       0.0001
 #define MAX_RAY_LENGTH  20.0
-#define MAX_RAY_MARCHES 60
+#define MAX_RAY_MARCHES 50
 #define NORM_OFF        0.001
-#define MAX_BOUNCES     6
+#define MAX_BOUNCES     4
 
 mat3 g_rot  = mat3(1.0); 
 vec3 g_mat  = vec3(0.0);

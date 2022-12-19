@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "License CC0: Mandelbox crystal\nWas reminded by some great additions lately that refraction is pretty cool to play around with\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "mandelbox_crystal.png",
+	"TITLE" : "Mandelbox crystal",
+	"WIDTH" : 1280
+}

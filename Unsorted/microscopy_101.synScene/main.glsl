@@ -15,10 +15,10 @@
 // Window of Samples
 #define W 90.
 // Number of Samples
-#define N 60.
+#define N 80.
 
 // Brightness Decay
-#define Z mix(0.,.999,step(.01,mod(T*.2,1.)))
+#define Z mix(0.,.999,step(.01,mod(T/.2,1.)+0.05*syn_Hits))
 // Adjust for Brightness
 #define F .06
 
@@ -73,7 +73,7 @@ vec4 renderPassA()
 	vec2 U = _xy;
 
     R = RENDERSIZE.xy;
-    T = smoothTime;
+    T = smoothTimeC;
     Q = A(U);
     vec3 eye = vec3(U,R.y);
     for (float i = 0.; i<N; i++)

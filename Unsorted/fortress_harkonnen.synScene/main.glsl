@@ -7,11 +7,11 @@
 #define LESS(a,b,c) mix(a,b,step(0.,c))
 #define SABS(x,k)   LESS((.5/k)*x*x+k*.5,abs(x),abs(x)-k)
 
-#define PI      3.141592654
-#define TAU     (2.0*3.141592654)
+//#define PI      3.141592654
+#define TAU     (2.0*PI)
 #define TIME    TIME
 #define PERIOD  55.0
-#define PERIODS 5.0
+#define PERIODS 55.0
 
 void rot(inout vec2 p, float a) {
   float c = cos(a);
@@ -49,8 +49,8 @@ float nfield(vec2 p, vec2 c) {
   
   for (int i = 0; i < 25; ++i) {
     float m = dot(u,u);
-    u = SABS(u, 0.0125)/m + c;
-    u *= pow(s, 0.65);
+    u = SABS(u, 0.0125*(1.0+cos(smoothTime*.01)*.5))/m + c;
+    u *= pow(s, 0.65+Mod1);
     a += pow(s, 1.0)*m;
     s *= 0.75;
   }

@@ -1,4 +1,4 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 			//******** BuffA Code Begins ********
@@ -17,7 +17,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 // try changing "RotNum" for different accuracies of rotation calculation
 // for even RotNum uncomment the line #define SUPPORT_EVEN_ROTNUM
 
-#define RotNum 5
+#define RotNum 7
 //#define SUPPORT_EVEN_ROTNUM
 
 #define Res  RENDERSIZE
@@ -26,7 +26,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 #define keyTex iChannel3
 #define KEY_I texture(keyTex,vec2((105.5-32.0)/256.0,(0.5+0.0)/3.0)).x
 
-const float ang = 2.0*3.1415926535/float(RotNum);
+const float ang = 2.0*3.141592653589793238462643383279502884197/float(RotNum);
 mat2 m = mat2(cos(ang),sin(ang),-sin(ang),cos(ang));
 mat2 mh = mat2(cos(ang*0.5),sin(ang*0.5),-sin(ang*0.5),cos(ang*0.5));
 
@@ -74,14 +74,22 @@ vec4 renderPassA() {
         b*=2.0;
     }
     
-    fragColor=texture(BuffA,fract((pos+v*vec2(-1,1)*2.0)/Res.xy));
-    
+    fragColor=texture(BuffA,fract((pos+v*vec2(-1,1)*(.1250+Impact*(syn_MidLevel*0.125+0.25* syn_BassLevel)))/(Res.xy+_uvc)));
+    // /fragColor.rgb += 0.01*(_loadUserImageAsMask().rgb);
+
+//    /fragColor *=1.0+0.00125* texture(syn_UserImage,fragCoord.xy/(Res.xy))*syn_Intensity;
     // add a little "motor" in the center
     vec2 scr=(fragCoord.xy/Res.xy)*2.0-vec2(1.0);
-    fragColor.xy += (0.01*scr.xy / (dot(scr,scr)/0.1+0.3));
-    
-    if(FRAMECOUNT<=4 || KEY_I>0.5) fragColor=texture(image5,fragCoord.xy/Res.xy);
-	return fragColor; 
+    fragColor.xy += ((0.001)*scr.xy / (dot(scr,scr)/0.1+0.3));
+    if(FRAMECOUNT<=4 || Reset>0.5) 
+          if (_exists(syn_UserImage)){
+            
+        fragColor=texture(syn_UserImage,fragCoord.xy/(Res.xy));
+          }
+    else{
+    fragColor=texture(image5,fragCoord.xy/(Res.xy));
+    }
+    return fragColor; 
  } 
 
 
@@ -119,14 +127,14 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
 	vec2 uv = fragCoord.xy / RENDERSIZE.xy;
-    vec3 n = vec3(getGrad(uv,1.0/RENDERSIZE.y),150.0);
+    vec3 n = vec3(getGrad(uv,1.0/RENDERSIZE.y),250.0);
     //n *= n;
     n=normalize(n);
     fragColor=vec4(n,1);
     vec3 light = normalize(vec3(1,1,2));
     float diff=clamp(dot(n,light),0.5,1.0);
     float spec=clamp(dot(reflect(light,n),vec3(0,0,-1)),0.0,1.0);
-    spec=pow(spec,36.0)*2.5;
+    spec=pow(spec,64.0)*2.5;
     //spec=0.0;
 	fragColor = texture(BuffA,uv)*vec4(diff)+vec4(spec);
 	return fragColor; 

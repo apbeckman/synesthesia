@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "michael0884",
+	"DESCRIPTION" : "More random sims!\n[url]JAVASCRIPT: H=location.host;E=(H?window:opener).Effect;P=E.prototype;if(!E.P)E.P=P.Paint;P.Paint=function(...A){for(i=0;i<8;i++)E.P.apply(this,A);};if(!H)close();[/url]",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "butterfly_particles.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Butterfly particles",
+	"WIDTH" : 1280
+}
