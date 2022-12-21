@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "jeyko",
+	"DESCRIPTION" : "potato",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "day_94.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Day 94",
+	"WIDTH" : 1280
+}

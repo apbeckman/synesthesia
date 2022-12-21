@@ -1,0 +1,219 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Applies extra constant rotational motion to the fractal.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "unfolding",
+			"TYPE" : "slider",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 
+			[
+				1,
+				1
+			],
+			"DESCRIPTION" : "X, Y, and Z params control the shape of the fractal.",
+			"MAX" : 
+			[
+				1.5,
+				1.5
+			],
+			"MIN" : 
+			[
+				0.5,
+				0
+			],
+			"NAME" : "xy_param",
+			"PARAMS" : 0.13,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "X, Y, and Z params control the shape of the fractal.",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "z_param",
+			"PARAMS" : 0.127,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "This controls the size of the blocks that form the fractal.",
+			"MAX" : 0.15,
+			"MIN" : -0.035,
+			"NAME" : "size",
+			"PARAMS" : 0.017,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "fractal"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Move the X-axis to spin about your main axis, or move the Y-axis to tilt forwards or backwards.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "lookXY",
+			"PARAMS" : 0.03,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "How fast the time variable grows, whether it is reactive time or constant time.",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.095,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.031,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.156,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"PARAMS" : 0.069,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flip",
+			"PARAMS" : 0.03,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Blue, reflective lighting. Turn down to use more alternate lighting.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "standard_lighting",
+			"PARAMS" : 0.1,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Alternate lighting pattern, using built-in texture or user selected media. Scan it in and out with 'scan alt light'.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "alternate_lighting",
+			"PARAMS" : 0.2,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Moves the 'alternate lighting' source further from the camera.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "scan_alt_light",
+			"PARAMS" : 0.137,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "A rendering glitch that causes a strange liquifying effect near hard edges.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "liquify",
+			"PARAMS" : 0.246,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "render glitches"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Brings in the far wall, resulting in very interesting patterns when brought up close.",
+			"MAX" : 1,
+			"MIN" : 0.35,
+			"NAME" : "far_wall",
+			"PARAMS" : 0.39,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "render glitches"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Warp",
+			"PARAMS" : 0.231,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Constructing a basic fractal object with Knighty's Kaleidoscopic IFS procedure.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/2.jpeg"
+		},
+		{
+			"NAME" : "image10",
+			"PATH" : "images/13.jpeg"
+		},
+		{
+			"NAME" : "geom",
+			"PATH" : "images/geoalt2.jpg"
+		}
+	],
+	"IMAGE_PATH" : "kifs_flythrough_mod.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1224,
+			"TARGET" : "fractalPass",
+			"WIDTH" : 2176
+		}
+	],
+	"TITLE" : "KIFS Flythrough Mod",
+	"WIDTH" : 1920
+}

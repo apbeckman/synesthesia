@@ -2,72 +2,23 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "columns",
-			"PARAMS" : 0.01,
-			"TYPE" : "toggle smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 15,
-			"DESCRIPTION" : "",
-			"MAX" : 35,
-			"MIN" : 3,
-			"NAME" : "iterations",
-			"TYPE" : "slider",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.3,
-			"MIN" : -0.3,
-			"NAME" : "blockWidth",
-			"PARAMS" : 0.01,
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.072,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
-			"UI_GROUP" : "defaults"
+			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -1,
-			"NAME" : "Stretch",
+			"NAME" : "FOV",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "Warp",
-			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -85,10 +36,10 @@
 			"MIN" : 
 			[
 				-1,
-				-1
+				0
 			],
 			"NAME" : "Orbit",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.037,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		},
@@ -112,6 +63,67 @@
 			"NAME" : "Flip",
 			"TYPE" : "xy",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Mirror",
+			"PARAMS" : 0.072,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.25,
+			"MIN" : -0.25,
+			"NAME" : "Pattern_Rot",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "columns",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 4,
+			"DESCRIPTION" : "",
+			"MAX" : 20,
+			"MIN" : 2,
+			"NAME" : "iterations",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.2,
+			"DESCRIPTION" : "",
+			"MAX" : 0.4,
+			"MIN" : -0.3,
+			"NAME" : "blockWidth",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
 		}
 	],
 	"CREDIT" : "jeyko",

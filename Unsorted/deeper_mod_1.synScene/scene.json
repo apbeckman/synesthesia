@@ -2,13 +2,13 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "Fly deeper quickly or go slowly backwards.",
-			"MAX" : 2,
-			"MIN" : 0,
-			"NAME" : "fly_in_out",
-			"PARAMS" : 0.15,
-			"TYPE" : "slider traveler",
+			"MAX" : 2.5,
+			"MIN" : -2.5,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.113,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -208,6 +208,25 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "Flip",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : -10,
+			"NAME" : "Diameter",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		}

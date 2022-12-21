@@ -1,16 +1,16 @@
 {
-	"CREDIT" : "Trixelized",
-	"DESCRIPTION" : "there he is",
+	"CREDIT" : "jeyko",
+	"DESCRIPTION" : "potato",
 	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGES" : 
 	[
 		{
-			"NAME" : "image7",
-			"PATH" : "images/7.jpg"
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
 		}
 	],
-	"IMAGE_PATH" : "there_he_is_dup.png",
+	"IMAGE_PATH" : "day_111.png",
 	"PASSES" : 
 	[
 		{
@@ -20,6 +20,6 @@
 			"WIDTH" : 1280
 		}
 	],
-	"TITLE" : "there he is_dup",
+	"TITLE" : "Day 111",
 	"WIDTH" : 1280
 }

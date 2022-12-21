@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Seven Segment Display\nWanted to create a seven segment display to show digits\nI have seen versions of this on shadertoy before but gave it a go myself\nas a fun little challenge.\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "my_ssd.png",
+	"TITLE" : "My SSD",
+	"WIDTH" : 1280
+}

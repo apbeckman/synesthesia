@@ -43,12 +43,12 @@ vec2 map(vec3 p){
     q.z += exp(-length(p.xz)*4.)*0.4;
     //q.y *=  1. - exp(-length(p.xz)*5.)*6.4;
     q.y *= reps/tau;
-    q.y += smoothTime*0.15;
+    q.y -= bass_time*0.5;
     
     float id = floor(q.y);
     //q *= 1.;
     
-    q.x += smoothTime*0.15 + id*0.6 + q.y*0.1;
+    q.x += bass_time*0.5 + id*0.6 + q.y*0.1;
     
     //q.xy *= rot(0.1 + id);
     idG = floor(q.xy/modD);
@@ -94,10 +94,10 @@ vec2 map(vec3 p){
     q.z -= 0.4;
     float dD = sdBox(q, vec3(bW*s*1., bW*s*1.,bW*20.5));
     
-    glow += (0.8/(0.01 + dD*dD*20.)*pal(0., 0.9,vec3(0.9,0.4,0.8), 0.7,1.2)*columns*highhits*0.45);
+    glow += (0.8/(0.01 + dD*dD*20.)*pal(0., 0.9,vec3(0.9,0.4,0.8), 0.7,1.2)*columns*highhits*0.65);
     p.y -= h;
 
-    glow += 1.8/(0.01 + dD*dD*200.)*sin(vec3(0.8,0.5,0.1) + vec3(0,-0. - length(p.xz)*0.1,0))*pow(abs(sin((smoothTimeB*0.6) + idG.y)), 30.)* smoothstep(1.,0.,length(p.y)*0.6);
+    glow += 1.8/(0.01 + dD*dD*200.)*sin(vec3(0.8,0.5,0.1) + vec3(0,-0. - length(p.xz)*0.1,0))*pow(abs(sin((smoothTimeB*0.25) + idG.y)), 30.)* smoothstep(1.,0.,length(p.y)*0.6);
     dD = abs(dD) + 0.006 + smoothstep(0.,1.,length(p.y)*0.05);
     d = dmin(d, vec2(dD, 3.));
     //= dmin(d, vec2(length(p)- 0.1, 2.));
@@ -140,9 +140,12 @@ vec3 getNormal(vec3 p){
 }
 
 vec3 getRd(vec3 ro, vec3 lookAt, vec2 uv){
+
 	vec3 dir = normalize(lookAt - ro);
 	vec3 right = normalize(cross(vec3(0,1,0), dir));
 	vec3 up = normalize(cross(dir, right));
+    uv += pow(_uvc*PI, vec2(2.))*Mirror;
+
     return normalize(dir + right*uv.x + up*uv.y);
 }
 
@@ -153,19 +156,23 @@ vec4 renderPassA() {
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
     uv *= 1. + dot(_uvc,_uvc)*0.1;
-    uv.xy += _uvc*PI*Stretch;
-    
+    uv += _uvc*PI*FOV;
+
     vec3 col = vec3(0);
     dith = mix(0.9,1.,texture(image30, RENDERSIZE.x*(uv/256.)).x);
     
     vec3 ro = vec3(2.501,3,0.001);
-    vec3 lookAt = vec3(0.025);
-    //lookAt.xz += _rotate(lookAt.xz, PI* Orbit.x);
+    vec3 lookAt = vec3(0.);
+    ro.xz = _rotate(ro.xz, PI*Orbit.x);
+    ro.yz = _rotate(ro.yz, PI*Orbit.y);
     //lookAt.xy += _uvc*PI*Stretch;
 
-    lookAt.xz += vec2(sin(TIME)*.12,cos(TIME)*0.5)*0.4;
+    lookAt.xz += vec2(sin(TIME)*.012,cos(TIME)*0.125)*0.4;
+
 	vec3 rd = getRd(ro, lookAt, uv); 
-    
+
+    rd.xz = _rotate(rd.xz, _uvc.x*PI*Flip.x*FOV);
+    rd.yz = _rotate(rd.yz, _uvc.y*PI*Flip.y*FOV);
     vec3 p;float t; bool hit;
     vec2 d = march(ro, rd, p, t, hit);
     
@@ -189,7 +196,6 @@ vec4 renderPassA() {
         
         float modD = 0.1;
         q = abs(q);
-        
         q.xy *= rot(0.25*pi);
         q.y -= 0.5;
         
@@ -198,18 +204,28 @@ vec4 renderPassA() {
         q = abs(q);
         q.x -= 0.5;
         q.xy *= rot(-0.25*pi);
+
+        /*
+        q.xy *= rot(0.25*pi);
+        q.y -= 0.5;
         
+        q = abs(q);
+        q.xy *= rot(0.25*pi);
+        q = abs(q);
+        q.x -= 0.5;
+        q.xy *= rot(-0.25*pi);
+        */
         
         float ao = mix(0.4,AO(0.1)*AO(0.2)/0.26,smoothstep(0.,1.,length(p.xz)*1.));
         //float ao = AO(0.2)*AO(0.4)*AO(0.3)/0.16;
         //float ao = AO(0.2)*AO(2.4)*AO(0.8)/0.3*3.;
-        float idc = floor(max(q.x,q.y)/ modD + smoothTimeB*0.35);
+        float idc = floor(max(q.x,q.y)/ modD + smoothTimeB*0.035);
         
         
         
         if(d.y == 2. || d.y == 1.){
             //col += pal(0.5,1., vec3(.7,0.1,-0.3),0.8,idc*1.5 + idG.y*0.5 + TIME*0.1);
-            col += pal(0.,0.9, vec3(.7,0.1,-0.3),0.8,idc*1.5 + length(p.xz)*1. + smoothTimeC*0.125);
+            col += pal(0.,0.9, vec3(-.67,0.1,0.43),0.48,idc*1.5 + length(p.xz)*1. + smoothTimeB*0.0125);
 		
 
             col = max(col, 0.);
@@ -272,11 +288,11 @@ vec4 renderMainImage() {
     // Radial blur
     float steps = 30.;
     float scale = 0.00 + pow(dot(uvn,uvn),5.5)*0.4;
-    float chromAb = pow(length(uv - 0.5),2.9)*0.1;
+    float chromAb = pow(length(uv - (syn_Intensity*(syn_MidLevel+syn_BassLevel))),2.9)*0.1;
     vec2 offs = vec2(0);
     vec4 radial = vec4(0);
     for(float i = 0.; i < steps; i++){
-        scale *= 0.97;
+        scale *= 0.9;
         vec2 target = uv + offs;
         offs -= normalize(uvn)*scale/steps;
     	radial.r += texture(BuffA, target + chromAb*1.4/RENDERSIZE.xy).x;

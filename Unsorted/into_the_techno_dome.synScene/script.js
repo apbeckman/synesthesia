@@ -76,7 +76,7 @@ function update(dt) {
 
   var bpm = inputs.syn_BPM/4.0;
   bpmcount.updateTime(bpm, dt);
-  bassTimevar.updateTime(1.,  Math.pow(0.125+inputs.syn_BassLevel*0.45+inputs.syn_MidLevel*0.35+syn_Intensity*0.75,2.0)*(inputs.rate_in), dt);
+  bassTimevar.updateTime(1.,  Math.pow(0.25+inputs.syn_BassLevel*0.45+inputs.syn_MidLevel*0.35+syn_Intensity*0.75,2.0)*(inputs.rate_in), dt);
   //timevar.updateTime(0.4, inputs.rate_in, dt);
   //timevar.updateTime(0.4, inputs.rate_in, dt);
 

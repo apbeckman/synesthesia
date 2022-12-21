@@ -96,7 +96,7 @@ vec2 path(in float z){
     
     //return vec2(sin(z * 0.15)*1.2, cos(z * 0.25)*.85); 
     
-    return vec2(sin(z * 0.15)*2.4, 0);
+    return vec2(sin(z * 0.00125)*.4, 0);
 }
 
 // Standard float to float hash -- Based on IQ's original.
@@ -301,7 +301,7 @@ vec4 Truchet(vec2 p){
     
     
     // Randomly rotate the tile.
-    float rFactor = floor(rnd.x*6.)*3.14159265/3.;
+    float rFactor = floor(rnd.x*6.)*PI/3.;
     p = r2(rFactor)*p;
     
     float hDir = rnd.y>.5? -1.: 1.;
@@ -337,7 +337,7 @@ vec4 Truchet(vec2 p){
     //a = mod(a/3.14159265, 2.) - 1.;
 
     // Small arc two.
-    p2 = p - vec2(-.5, .8660254/3.);
+    p2 = p - vec2(-1.5, .8660254/3.);
     d.y = torDist(p2) - rSm;
 
     d.y = abs(d.y);
@@ -429,7 +429,7 @@ vec4 Truchet(vec2 p){
     // Holding the joiner block distance field value in a global variable to be 
     // used elsewhere.
     // The weird mix function gives the joins a slight pinch at the ends to feed the illusion a little more.
-    //d.w = mix(length(q) - .04, max(q.x - .15, q.y - .04), .9);
+    d.w = mix(length(q) - .04, max(q.x - .15, q.y - .04), .9);
     d.w = max(q.x - .2, q.y - .02);//
     //d.w = length(q.xy) - .2;//.06333;//
     //float blocks = mix(length(q) - .04, min(max(q.x - .15, q.y - .04), 0.) + length(max(q - vec2(.15, .04), 0.)), .9);
@@ -455,7 +455,7 @@ float m(vec3 p){
     //float sf = .5;//dot(sin(p*3. - cos(p.yzx*3.)), vec3(.333));
     
     // Moving the scene down a bit... I should probably move the camera up. :)
-    p.y += (1.5+floorDistort);
+    p.y += (1.5);
     
     
     // The floor plane. Set roughly at the bottom of the Truchet object.
@@ -549,7 +549,7 @@ float m2(vec3 p){
     
     // Hacky hexagonal grid display.
     #ifdef SHOW_GRID
-    d.w = max(d.w/sc, p.y - .25);
+    d.w = max(d.w/sc, p.y - .125);
     fl = min(fl, d.w);
     #endif
  
@@ -606,7 +606,7 @@ float bumpFunc(vec3 p, vec3 n){
         // Truchet geometry, "a" needs to be a multiple of 12, in most cases. "a2" is more flexible, but needs
         // to be a multiple of 4, in this particular case... 6 might work with an offset.
 
-        c = sTruchet(vec2(a2*8., a*12.+(snaketime*((slither+(smoothTimeC))+tan(jumpy*(smoothTimeC/5.5)*jumpyAmount))))/6.283);
+        c = sTruchet(vec2(a2*8., a*12.+(slither+(mid_time)+tan(jumpy*(mid_time/5.5)*jumpyAmount)))/6.283);
         //c = sTruchet(vec2(a2*12., a*24.)/6.283); // More detailed, but a little too busy.
         
 
@@ -649,7 +649,7 @@ vec3 doBumpMap(in vec3 p, in vec3 n, float bumpfactor, inout float edge, inout f
      
     // The gradient vector. Making use of the extra samples to obtain a more locally
     // accurate value. It has a bit of a smoothing effect, which is a bonus.
-    vec3 grad = vec3(fx - fx2, fy - fy2, fz - fz2)/(e.x*(2.0-texxx));  
+    vec3 grad = vec3(fx - fx2, fy - fy2, fz - fz2)/(e.x*(2.0));  
     //vec3 grad = (vec3(fx, fy, fz ) - f)/e.x;  // Without the extra samples.
 
 
@@ -704,7 +704,6 @@ float shad(vec3 ro, vec3 lp, float k, float t){
     const int maxIterationsShad = 24; 
     
     vec3 rd = lp - ro; // Unnormalized direction ray.
-
     float shade = 1.;
     float dist = .001*(t*.125 + 1.);  // Coincides with the hit condition in the "trace" function.  
     float end = max(length(rd), 0.0001);
@@ -776,21 +775,21 @@ vec3 eMap(vec3 rd, vec3 sn){
     vec3 sRd = rd; // Save rd, just for some mixing at the end.
     
     // Add a time component, scale, then pass into the noise function.
-    rd.xy -= (smoothTimeB);
+    rd.xy -= (smoothTimeB*0.1);
     rd *= 3.;
     
     //vec3 tx = tex3D(image3, rd/3., sn);
     //float c = dot(tx*tx, vec3(.299, .587, .114));
     
-    float c = n3D(rd)*(surfacenoise+.57) + n3D(rd*2.)*(surfacenoise+.28) + n3D(rd*4.)*(surfacenoise+.15); // Noise value.
+    float c = n3D(rd)*(.157) + n3D(rd*2.)*(.028) + n3D(rd*4.)*(.015); // Noise value.
     c = smoothstep(0.5, 1., c); // Darken and add contast for more of a spotlight look.
     
-    //vec3 col = vec3(c, c*c, c*c*c*c).zyx; // Simple, warm coloring.
+    vec3 col = vec3(c, c*c, c*c*c*c).zyx; // Simple, warm coloring.
     //vec3 col = vec3(min(c*1.5, 1.), pow(c, 2.5), pow(c, 12.)).zyx; // More color.
-    vec3 col = pow(vec3(1.5, 1, 1)*c, vec3(1, 2.5, 12)).zyx; // More color.
+    //vec3 col = pow(vec3(1.5, 1, 2)*c, vec3(12, 2.5, 12)).zyx; // More color.
     
     // Mix in some more red to tone it down and return.
-    return mix(col, col.yzx, sRd*.25 + .25); 
+    return mix(col, col.yzx, sRd*1.25 + 1.25); 
     
 }
 
@@ -801,11 +800,13 @@ vec4 renderMainImage() {
 
     // Screen coordinates.
 	vec2 u = (fCoord - RENDERSIZE.xy*.5) / RENDERSIZE.y;
-    
+    u += FOVmod*_uvc*PI;
 	// /u *= normalize(u/RENDERSIZE*_uvc);
 	// Camera Setup.
-	vec3 lk = vec3(0, 0+(yPos*1.75)-floorDistort, ((smoothTime*0.125)+(fly_in_out*0.4)));  // "Look At" position.
-	vec3 o = lk + vec3(0, .3+LookY, -.25); // Camera position, doubling as the ray origin.
+	vec3 lk = vec3(0, 0, ((bass_time)));  // "Look At" position.
+    lk.xy += lk.xy*_uvc;
+
+    vec3 o = lk + vec3(0, .6, -.25); // Camera position, doubling as the ray origin.
     
     // Light position. Set in the vicinity the ray origin.
     vec3 l = o + vec3(0, .5, 2.);
@@ -813,20 +814,22 @@ vec4 renderMainImage() {
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
 	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
-	lk.xy += path(lk.z+_uvc.x*_uvc.y*PI*Warp);
-	o.xy += path(o.z);
-    o.xy +=Warp*_uvc/PI;
-	l.xy += path(l.z);
-
+	//lk.xy += path(lk.z+_uvc.x*_uvc.y*PI*Warp);
+	//o.xy += path(o.z);
+   // o.xy +=Warp*_uvc/PI;
+	//l.xy += path(l.z);
+    
     // Using the above to produce the unit ray-direction vector.
-    float FOV = (FOVmod+3.14159)/3.; // FOV - Field of view.
+    float FOV = (PI)/3.; // FOV - Field of view.
     vec3 forward = normalize(lk-o);
     vec3 right = normalize(vec3(forward.z, 0., -forward.x )); 
     vec3 up = cross(forward, right);
 
     // r - Ray direction.
-    vec3 r = normalize(forward + FOV*u.x*right + FOV*u.y*up);
+    vec3 r = normalize(forward + u.x*right + FOV*u.y*up);
     /////////
+    r.yz = _rotate(r.yz, LookXY.y*PI-PI*0.125*_uvc.x*Warp);
+    r.xz = _rotate(r.xz, LookXY.x*PI+PI*0.125*_uvc.y*Warp+spin_time);
     
     // Standard raymarching routine.
     float d, t = 0.;
@@ -856,7 +859,7 @@ vec4 renderMainImage() {
         vec3 p = o + r*t, n = nr(p);
         
         // Bump mapping with bumped edging and curvature -- The latter isn't used here.
-        float edge2 = 0., crv2 = 1., bf = .25; 
+        float edge2 = 0., crv2 = 1., bf = .5; 
         //if(svID<.5) bf = .5;
         n = doBumpMap(p, n, bf, edge2, crv2); ///(1. + t/FAR*.125)
         
@@ -874,26 +877,31 @@ vec4 renderMainImage() {
         // texture a bit.
         float txSc = .5;
         vec3 tx = tex3D(image3, (p*txSc), n);
-        tx = smoothstep(.0, .5, tx);
+        tx = smoothstep(.0, .0125, tx);
 
        
-        col = tx; //vec3(1)*fBm; // Initializing to the texture color.
+       // col = tx; //vec3(1)*fBm; // Initializing to the texture color.
+        col = vec3(0.6); //vec3(1)*fBm; // Initializing to the texture color.
          
         // Addind a sprinking of noise. The scene looks a little too clean without it.
         float fBm = n3D(p*128.)*.66 + n3D(p*256.)*.34;
-        col *= mix(vec3(0), vec3(1), fBm*2.*.5 + .5);
+        //col *= mix(vec3(0), vec3(1), fBm*2.*.5 + .5);
         
  
         // Golden coloring for the Truchet and greyish coloring for the ground.
         if(svID>.5){
-            //col *= max(1. - bumpFunc(p, n)*1.5, 0.);
-        	col *= mix(vec3(2.5, 1, .53), vec3(1.1, 0.25, 0), bumpFunc(p, n)*1.5);
+            vec3 truchetColor1 = vec3(.77, .44, .24);
+            vec3 truchetColor2 = vec3(.87, .57, .14);
+
+           // col *= max(1. - bumpFunc(p, n)*1.5, 0.);
+        	//col *= mix(vec3(.55, 0.542, .453)*(1.0+syn_HighLevel), vec3(.01681, 0.0125, .14682), bumpFunc(p, n)*1.5);
+        	col *= mix(truchetColor1*(3.0+syn_HighLevel), truchetColor2*0.001, bumpFunc(p, n)*1.5);
             //col *= vec3(1, .1, .2)*1.5;
                  
         }
         else {
             //col *= max(1. - bumpFunc(p, n)*1.5, 0.);
-            col *= vec3(.8, .6, .4);
+            col *= vec3(.08, .06, .024);
         }
         
         
@@ -904,7 +912,7 @@ vec4 renderMainImage() {
         
         
 		// Applying some diffuse and specular lighting to the surface.
-        col = col*(df + .5*ao) + vec3(1, .97, .92)*sp*2.;
+        col = col*(df + .5*ao) + vec3(1, .7, .92)*sp*2.;
         
         // Add the fake environmapping. Not as good as a reflective pass, but it gives that
         // impresssion for just a fraction of the cost.

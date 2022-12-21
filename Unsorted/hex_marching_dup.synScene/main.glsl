@@ -15,6 +15,7 @@ const float planeDist = 1.0-0.2;
 
 // License: WTFPL, author: sam hocevar, found: https://stackoverflow.com/a/17897228/418488
 const vec4 hsv2rgb_K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+//const vec4 hsv2rgb_K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
 vec3 hsv2rgb(vec3 c) {
   vec3 p = abs(fract(c.xxx + hsv2rgb_K.xyz) * 6.0 - hsv2rgb_K.www);
   return c.z * mix(hsv2rgb_K.xxx, clamp(p - hsv2rgb_K.xxx, 0.0, 1.0), c.y);
@@ -152,8 +153,10 @@ vec3 skyColor(vec3 ro, vec3 rd) {
 
 vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
   float lp = length(p);
+  p.xy += _uvc*PI*FOV;
+
   vec2 np = p + 2.0/RESOLUTION.y;
-  float rdd = (2.-0.5*tanh_approx(lp));  // Playing around with rdd can give interesting distortions
+  float rdd = ((2.+Fisheye)-(0.5+Fisheye)*tanh_approx(lp));  // Playing around with rdd can give interesting distortions
 //  float rdd = 2.;
   
   vec3 rd = normalize(p.x*uu + p.y*vv + rdd*ww);

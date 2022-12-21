@@ -78,8 +78,8 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 1.5,
+			"MIN" : -1.5,
 			"NAME" : "Rotate",
 			"PARAMS" : 0.037,
 			"TYPE" : "knob smooth",
@@ -116,6 +116,15 @@
 			"PARAMS" : 0.049,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "butadiene",

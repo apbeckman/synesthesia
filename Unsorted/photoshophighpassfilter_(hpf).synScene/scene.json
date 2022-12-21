@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "apb_0",
+	"DESCRIPTION" : "Implementing of Photoshop Highpass filter",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "photoshophighpassfilter_(hpf).png",
+	"TITLE" : "PhotoshopHighpassFilter (HPF)",
+	"WIDTH" : 1280
+}

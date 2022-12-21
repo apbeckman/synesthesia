@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "airtight",
+	"DESCRIPTION" : "Aztec Alien Fractal Text Transmission on a flag. Good at fullscreen.\nUses letter pattern shader by @_kzr: [url]https://github.com/keijiro/ShaderSketches/blob/master/Fragment/Text.glsl[/url]\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "fractal_alien_text.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Fractal Alien Text",
+	"WIDTH" : 1280
+}

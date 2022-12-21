@@ -401,7 +401,7 @@ vec4 renderMainImage() {
     rd.xz = _rotate(rd.xz, lookZ*PI);
     // Ray origin: Sending it along the Z-axis.
     //vec3 ro = vec3(0, 0, TIME*rate*0.25);
-    vec3 ro = vec3(0, 0, ((smooth_basstime*0.25) * rate));
+    vec3 ro = vec3(0, 0, ((bass_time)));
 
     // Alternate: Set off in the YZ direction. Note the ".5." It's an old lattice trick.
     //vec3 ro = vec3(0, TIME/2. + .5, TIME/2.);

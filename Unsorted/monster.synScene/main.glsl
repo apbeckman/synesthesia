@@ -45,10 +45,10 @@ float cube(vec3 p,vec3 s){
 
 
 float dist(vec3 p){
-	p.xy = _rotate(p.xy,Rotate*PI);
+	p.xy = _rotate(p.xy,Spin*PI);
 	p.xy = rot(p.xy,Twist*p.z);
 
-	p.z -= .25*TK*smoothTime;
+	p.z -= TK*bass_time;
 
 
 	p.xy = pmod(p.xy*Complexity,6.0);
@@ -59,15 +59,15 @@ float dist(vec3 p){
 
 	p = mod(p,k)-0.5*k;
 
-	for(int i = 0;i<4;i++){
+	for(int i = 0;i<6;i++){
 
 		p = abs(p)-0.3;
 
 
 
-		p.xy = rot(p.xy,1.0+zid+0.1*TK*smoothTimeC*0.125);
+		p.xy = rot(p.xy,1.0+zid+0.1*TK*spin_time*0.125);
 
-		p.xz = rot(p.xz,1.0+4.7*zid+0.3*TK*smoothTimeC*0.125);
+		p.xz = rot(p.xz,1.0+4.7*zid+0.3*TK*spin_time*0.125);
 
 	}
 
@@ -99,14 +99,14 @@ vec4 renderMainImage() {
 
 	
 
-	uv = rot(uv,TK*smoothTimeC*0.1);
+	//uv = _rotate(uv, spin_time);
 
 	uv += _rotate(uv, Rotate);
 
 	vec3 ro = vec3(0.0,0.0,0.1);
 
 	vec3 rd = normalize(vec3(uv+_uvc*PI*FOV,0.0)-ro);
-	rd.xy = _rotate(rd.xy , Spin*PI);
+	rd.xy = _rotate(rd.xy , spin_time);
 	
 	rd.xy*=1.0+Mirror*(rd.xy*PI*uv-1.0);
 
@@ -139,7 +139,7 @@ vec4 renderMainImage() {
 
 	float kn = 0.5;
 
-	pn.z += -1.5*smoothTimeB*TK*0.1;
+	pn.z += -smoothTimeB*0.1;
 
 	pn.z = mod(pn.z,kn)-0.5*kn;
 

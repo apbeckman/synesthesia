@@ -26,15 +26,6 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : -1,
-			"MIN" : 1,
-			"NAME" : "rate",
-			"TYPE" : "slider",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0.25,
 			"NAME" : "FOVmod",
@@ -61,6 +52,16 @@
 			"PARAMS" : 0.05,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "effects"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -1,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.091,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",

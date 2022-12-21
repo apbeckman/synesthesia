@@ -19,7 +19,7 @@ float fbm6( vec2 p )
     return f/(0.96875);
 }
 
-float cameraZ = fly_in_out + smoothTime*1.50;
+float cameraZ = bass_time*2.;
 
 float lengthRep = 1500;
 
@@ -162,7 +162,7 @@ vec3 DE(vec3 pos) {
   //Corridor
   vec3 corridorPos = pos;
   corridorPos.xy = _rotate(corridorPos.xy+_uvc*FOV, corridorPos.z*2*PI/30.0);
-  float corridor = 15.0 - abs(corridorPos.y);
+  float corridor = (15.0+Diameter) - abs(corridorPos.y);
 
   if (undulating > 0.5){
     corridor -= (0.5+0.4*sin(pos.z*0.05+0.05*smoothTimeC*PI))*10.0;
@@ -284,7 +284,7 @@ vec3 raycast() {
 
   ray.xz =  _rotate(ray.xz, LookXY.x*PI*PI+_uvc.y*PI*Perspective.x);
   ray.yz = _rotate(ray.yz, LookXY.y*PI+_uvc.y*PI*Perspective.y);
-  ray.xy = _rotate(ray.xy, Rotate*PI);
+  ray.xy = _rotate(ray.xy, Spin*PI+Rotate*bass_time);
 
   // raycasting parameter 
   float t  = 0.;

@@ -8,13 +8,13 @@
 
 #define PI              3.141592654
 #define TAU             (2.0*PI)
-#define TIME            TIME
+#define TIME            bass_time
 #define RESOLUTION      RENDERSIZE
 #define ROT(a)          mat2(cos(a), sin(a), -sin(a), cos(a))
-#define TOLERANCE       0.00001
-#define MAX_RAY_LENGTH  17.0
-#define MAX_RAY_MARCHES 70
-#define NORM_OFF        0.0001
+#define TOLERANCE       0.000001
+#define MAX_RAY_LENGTH  36.0
+#define MAX_RAY_MARCHES 100
+#define NORM_OFF        0.001
 #define PCOS(x)         (0.5 + 0.5*cos(x))
 
 #define TWISTS
@@ -93,11 +93,21 @@ float sphered(vec3 ro, vec3 rd, vec4 sph, float dbuffer) {
 
 // "Amazing Surface" fractal
 // https://www.shadertoy.com/view/XsBXWt
+/*
 vec4 formula(vec4 p) {
   p.xz = abs(p.xz+1.)-abs(p.xz-1.)-p.xz;
   p.y-=.25;
   p.xy*=ROT(radians(30.0));
   p=p*2.0/clamp(dot(p.xyz,p.xyz),0.24,1.0);
+  return p;
+}
+*/
+vec4 formula(vec4 p) {
+  p.xz = abs(p.xz+1.)-abs(p.xz-1.)-p.xz;
+  p.y-=.25;
+  p.xy*=ROT(radians(30.0));
+  p=p*2.0/clamp(dot(p.xyz+cos(smoothTimeC*0.0125)*0.125,p.xyz+sin(smoothTimeC*0.0125)*0.125),(0.7524-Fractal),1.0-0.1*Fractal);
+  
   return p;
 }
 
@@ -112,7 +122,7 @@ float fractal(vec3 pos) {
   vec3 trap0pos = vec3(-2., 0.2, -3.0);
   vec3 trap0 = vec3(1E6);
   
-  for (int i=0; i < 4; ++i) {
+  for (int i=0; i < 3+(Iters); ++i) {
     p = formula(p);
     trap0 = min(trap0, abs(p.xyz-trap0pos));
   }
@@ -129,10 +139,15 @@ float df(vec3 p) {
   vec3 wrapDeriv = normalize(dcam(p.z));
   p.xy -= wrap.xy;
   p -= wrapDeriv*dot(vec3(p.xy, 0), wrapDeriv)*0.5*vec3(1,1,-1);
-
+/*
 #if defined(TWISTS)
   vec3 ddcam = ddcam(p.z);
   p.xy *= ROT(-16.0*ddcam.x);
+#endif
+*/
+#if defined(TWISTS)
+  vec3 ddcam = ddcam(p.z);
+  p.xy *= ROT((-16.0*(1.0+PI*Twist))*ddcam.x);
 #endif
 
   // Splits the tunnel
@@ -173,7 +188,7 @@ vec3 normal(vec3 pos) {
 }
 
 vec3 render(vec3 ro, vec3 rd) {
-  vec3 lightPos = cam(ro.z+10.0);
+  vec3 lightPos = cam(ro.z+20.0);
   float alpha   = 0.05*TIME;
   
   const vec3 skyCol = vec3(0.0);
@@ -181,12 +196,18 @@ vec3 render(vec3 ro, vec3 rd) {
   int iter    = 0;
   float t     = rayMarch(ro, rd, iter);
   vec3  trap0 = g_trap0;
+  float highs =pow ((syn_HighLevel*0.5+0.5*syn_MidHighLevel+syn_Level*0.25)*(1.0+0.5*syn_Intensity), 2.);
+  float pulse = smoothstep(0.1, 1.0, (sin(smoothTime)*0.)+(TAU*highs));
 
-  float pulse = smoothstep(0.0, 1.0, sin(TAU*TIME*0.25));
-  float sr    = mix(2.0, 3.0, pulse);
+  //float pulse = smoothstep(0.0, 1.0, sin(TAU*TIME*0.25));
+  float sr    = mix(2.0, 3.0,  pulse);
   float sd    = sphered(ro, rd, vec4(lightPos, sr), t);
 
-  const vec3 bgcol  = vec3(2.0, 1.0, 0.75).zyx;
+  vec3 bgcol  = vec3(2.750, 2.730, 2.975).zyx;
+
+  //vec3 bgcol  = vec3(2.0, 1.0, 0.75).zyx;
+ // bgcol.xz = _rotate(bgcol.xz*0.4+trap0.xz*(sin(_uvc)/(PI*PI)), sin(_uvc.x)*pow(PI, -2));
+
   vec3 gcol   = mix(1.0, 1.75, pulse)*sd*sd*bgcol;
 
   if (t >= MAX_RAY_LENGTH) {
@@ -213,12 +234,14 @@ vec3 render(vec3 ro, vec3 rd) {
   float ao  = 1.0-ii;
 
   vec3 col = vec3(0.0);
-  col += pow(smoothstep(0.5, 1.0, trap0.x*0.25)*1.3, mix(6.0, 2.0, pulse))*0.5*bgcol*mix(0.75, 2.25, pulse);
-  col += smoothstep(0.7, 0.6, trap0.z)*smoothstep(0.4, 0.5, trap0.z)*ao*bgcol*mix(0.2, 1.4, pulse);
+  col += pow(smoothstep(0.5, 1.0, trap0.x*0.25)*1.3, mix(6.0, 2.0, pulse+highs*0.1))*0.5*bgcol*mix(0.75, 2.25, pulse);
+  col.xy = 2.0*_rotate(col.xy*0.4*trap0.xz*(sin(_uvc)/pow(PI, 2.5)), sin(_uvc.x)*pow(PI, -2));
+
+  //col += smoothstep(0.7, 0.6, trap0.z)*smoothstep(0.4, 0.5, trap0.z)*ao*bgcol*mix(0.2, 1.4, pulse);
   col += spe*bgcol*mix(0.66, 1.75, pulse);
   col *= 1.0-sd*sd;
   col *= fo;
-  col += gcol;
+  //col += gcol;
   return col;
 }
 
@@ -228,13 +251,17 @@ vec3 effect3d(vec2 p, vec2 q) {
   vec3 cam = cam(z);
   vec3 dcam = dcam(z);
   vec3 ddcam= ddcam(z);
-  
+  p.y*=1.0-0.75* Mirror.y;
+  p.x*=1.0-0.75* Mirror.x;
+
   vec3 ro = cam;
   vec3 ww = normalize(dcam);
   vec3 uu = normalize(cross(vec3(0.0,1.0,0.0)+ddcam*06.0, ww ));
   vec3 vv = normalize(cross(ww,uu));
-  const float fov = 2.0/tanh(TAU/6.0);
+  float fov = (2.0-FOV)/tanh(TAU/6.0);
   vec3 rd = normalize(-p.x*uu + p.y*vv + fov*ww );
+    rd.yz = _rotate(rd.yz, -lookXY.y*PI+_uvc.y*PI*Perspective.y*0.5);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI+_uvc.x*PI*Perspective.x);
 
   return render(ro, rd);
 }

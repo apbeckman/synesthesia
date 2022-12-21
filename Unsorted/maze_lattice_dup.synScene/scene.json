@@ -44,12 +44,13 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 0.1,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
+			"MAX" : 2,
 			"MIN" : -1,
-			"NAME" : "Rate",
-			"TYPE" : "slider speed",
+			"NAME" : "rate_in",
+			"PARAMS" : 0.068,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -63,13 +64,24 @@
 			"UI_GROUP" : "effects"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "Flip",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
+			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		}
 	],

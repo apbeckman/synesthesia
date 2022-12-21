@@ -16,7 +16,7 @@
 			"MAX" : 1.5,
 			"MIN" : 0.5,
 			"NAME" : "x_param",
-			"PARAMS" : 0.12,
+			"PARAMS" : 0.2,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
@@ -24,9 +24,9 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "X, Y, and Z params control the shape of the fractal.",
 			"MAX" : 1.5,
-			"MIN" : 0,
+			"MIN" : 0.5,
 			"NAME" : "y_param",
-			"PARAMS" : 0.13,
+			"PARAMS" : 0.2,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
@@ -36,17 +36,17 @@
 			"MAX" : 2,
 			"MIN" : 0,
 			"NAME" : "z_param",
-			"PARAMS" : 0.127,
+			"PARAMS" : 0.2,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "This controls the size of the blocks that form the fractal.",
-			"MAX" : 0.15,
-			"MIN" : -0.035,
+			"MAX" : -0.2,
+			"MIN" : 0.05,
 			"NAME" : "size",
-			"PARAMS" : 0.017,
+			"PARAMS" : 0.2,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
@@ -91,26 +91,6 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "FOV",
-			"PARAMS" : 0.15,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Rotate",
-			"PARAMS" : 0.101,
-			"TYPE" : "knob smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "Blue, reflective lighting. Turn down to use more alternate lighting.",
 			"MAX" : 1,
@@ -136,7 +116,7 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "scan_alt_light",
-			"PARAMS" : 0.137,
+			"PARAMS" : 0.1,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "lighting"
 		},
@@ -146,8 +126,7 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "liquify",
-			"PARAMS" : 0.246,
-			"TYPE" : "slider smooth",
+			"TYPE" : "slider",
 			"UI_GROUP" : "render glitches"
 		},
 		{
@@ -156,28 +135,8 @@
 			"MAX" : 1,
 			"MIN" : 0.01,
 			"NAME" : "far_wall",
-			"PARAMS" : 0.39,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "render glitches"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Warp",
-			"PARAMS" : 0.231,
-			"TYPE" : "toggle smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Flip",
 			"TYPE" : "slider",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "render glitches"
 		}
 	],
 	"CREDIT" : "Shane",
@@ -188,11 +147,11 @@
 	[
 		{
 			"NAME" : "image3",
-			"PATH" : "images/2.jpeg"
+			"PATH" : "images/3.jpg"
 		},
 		{
 			"NAME" : "image10",
-			"PATH" : "images/13.jpeg"
+			"PATH" : "images/10.jpg"
 		},
 		{
 			"NAME" : "geom",
@@ -204,9 +163,9 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1224,
+			"HEIGHT" : 720,
 			"TARGET" : "fractalPass",
-			"WIDTH" : 2176
+			"WIDTH" : 1280
 		}
 	],
 	"TITLE" : "KIFS Flythrough_dup",

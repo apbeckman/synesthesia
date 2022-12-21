@@ -24,7 +24,7 @@ vec4 renderPassA() {
     
     normal = normalize(normal + vec3(0.0, gravity, 0.0));
     
-    float turbulence = pow(texture(iChannel1, vec3(uv / 3.0 + TIME * 0.04, TIME * 0.05)).r, 1.25);
+    float turbulence = pow(texture(image7, vec3(uv / 3.0 + TIME * 0.04, TIME * 0.05)).r, 1.25);
     
     float val = texture(BuffA, uv + ((off.xy * normal.xy) * spread * turbulence)).r;
     
