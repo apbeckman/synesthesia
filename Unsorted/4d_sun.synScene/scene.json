@@ -1,38 +1,51 @@
 {
-   "CONTROLS" : [
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseXY",
-         "TYPE" : "xy",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseClick",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "defaults"
-      }
-   ],
-   "CREDIT" : "Klems",
-   "DESCRIPTION" : "Rotating/translating 4D grid with motion blur and analytical fog.",
-   "HEIGHT" : 1080,
-   "IMAGE_PATH" : "4d_sun.png",
-   "PASSES" : [
-      {
-         "FLOAT" : true,
-         "HEIGHT" : 900,
-         "TARGET" : "BuffA",
-         "WIDTH" : 1600
-      }
-   ],
-   "TITLE" : "4D Sun",
-   "WIDTH" : 1920
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "Klems",
+	"DESCRIPTION" : "Rotating/translating 4D grid with motion blur and analytical fog.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "4d_sun.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 900,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1600
+		}
+	],
+	"TITLE" : "4D Sun",
+	"WIDTH" : 1920
 }

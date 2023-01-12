@@ -1,4 +1,4 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 /*
@@ -74,7 +74,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 #define RAISED
 
 // Putting a ridge decoraction on the pylon tops.        
-//#define RIDGES
+#define RIDGES
 
 // Originally for debug purposes, but it's decorative in its own way
 //#define VERT_LINES
@@ -385,7 +385,7 @@ float map(vec3 p){
    
     // Rotation about the XY plane. Equivalent to a 2D complex multiplication operation.
     //vec2 z = rot2(-sin(TIME/3.)*.65)*p.xy; // Same as: cmul(vec2(cos(a), sin(a))*c, z2);
-    vec2 z = rot2(-sin((smoothTimeC*0.25)*0.1)*.65)*p.xy; // Same as: cmul(vec2(cos(a), sin(a))*c, z2);
+    vec2 z = rot2(-sin((bass_time)*0.1)*.65)*p.xy; // Same as: cmul(vec2(cos(a), sin(a))*c, z2);
     // Tempering the extrusion height toward the spiral origins to lessen Moire effects
     // and general artifacts.
     const float sc = 1.5; // Effects spiral distance.
@@ -395,7 +395,7 @@ float map(vec3 p){
  
     
     #ifdef DOUBLE_SPIRAL
-    vec2 z2 = rot2(-cos((smoothTimeC*0.125)/3.)*.65*2.)*p.xy;    
+    vec2 z2 = rot2(-cos((spin_time)/3.)*.65*2.)*p.xy;    
     // Performing another inverse hyperbolic tangent operation. It's very simple
     // to do, once someone shows you the answer. :)
     const float sc2 = .75;
@@ -409,7 +409,7 @@ float map(vec3 p){
     tempR = smoothstep(.1, .5, tempR);
 
     // More movement. Not necessary, but it looks more interesting.
-    z.y = fract(z.y + smoothTimeC*.05);
+    z.y = fract(z.y + spin_time*0.2);
     // More scaling.
     z = cMul(rDim, z);
     
@@ -531,7 +531,7 @@ vec4 renderMainImage() {
     
     #ifdef ROW_OFFSET
     #if SHAPE >= 1
-    scale *= vec2(2./1.732, 1);
+    scale *= vec2((2.-Number)/1.732, 1-(Number*0.5));
     #endif
     #endif
     
@@ -539,7 +539,6 @@ vec4 renderMainImage() {
     // Slightly tilted camera, just to prove it's 3D. :)
     vec3 ro = vec3(0, -1, -2.2); // Camera position, doubling as the ray origin.
 	vec3 lk = ro + vec3(0, .1, .25); // "Look At" position.
- 
     // Light positioning. One is just in front of the camera, and the other is in front of that.
  	vec3 lp = ro + vec3(-.5, 1, 1);// Put it a bit in front of the camera.
 	
@@ -558,7 +557,7 @@ vec4 renderMainImage() {
     vec3 rd = normalize(uv.x*rgt + uv.y*up + fwd/FOV);
     
     // Swiveling the camera about the XY-plane.
-	rd.xy *= rot2( sin(smoothTime*0.125)/32. );
+	rd.xy *= rot2( sin(bass_time)/32. );
     
 	 
     
@@ -638,7 +637,7 @@ vec4 renderMainImage() {
 
             // Using the color index to produce two different colors.
             vec3 col1 = .5 + .45*cos(6.2831*index.y + vec3(0, 1, 2)*2.);
-            vec3 col2 = .5 + .45*cos(6.2831*index.y + 3.14159/2.5 + vec3(0, 1, 2)*1.35);
+            vec3 col2 = .5 + .45*cos(6.2831*index.y + PI/2.5 + vec3(0, 1, 2)*1.35);
             
             texCol = col1;
 

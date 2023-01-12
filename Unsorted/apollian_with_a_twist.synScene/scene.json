@@ -7,6 +7,7 @@
 			"MAX" : 0.8,
 			"MIN" : -0.8,
 			"NAME" : "test",
+			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
@@ -16,6 +17,7 @@
 			"MAX" : 0.8,
 			"MIN" : -0.8,
 			"NAME" : "test2",
+			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}

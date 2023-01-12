@@ -251,8 +251,8 @@ vec3 effect3d(vec2 p, vec2 q) {
   vec3 cam = cam(z);
   vec3 dcam = dcam(z);
   vec3 ddcam= ddcam(z);
-  p.y*=1.0-0.75* Mirror.y;
-  p.x*=1.0-0.75* Mirror.x;
+ // p.y*=1.0-0.75* Mirror.y;
+ // p.x*=1.0-0.75* Mirror.x;
 
   vec3 ro = cam;
   vec3 ww = normalize(dcam);

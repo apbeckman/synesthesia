@@ -1,8 +1,57 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Shake",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "ModDist",
+			"PARAMS" : 0.101,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.7,
+			"MIN" : -0.06,
+			"NAME" : "Diameter",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -2,
+			"NAME" : "FOV",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "jeyko",
 	"DESCRIPTION" : "potato",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
@@ -15,11 +64,11 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "Day 71",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

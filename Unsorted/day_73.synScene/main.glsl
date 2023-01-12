@@ -274,7 +274,7 @@ vec4 renderMainImage() {
 
     // Radial blur
     float steps = 10.;
-    float scale = 0.00 + dot(uvn,uvn)*0.05;
+    float scale = 0.00 + dot(uvn,uvn)*0.025;
     float chromAb = dot(uvn,uvn)*4.;
     vec2 offs = vec2(0) + texture(BuffA, uv + smoothTimeC*4.).xz*0.001;
     vec4 radial = vec4(0);

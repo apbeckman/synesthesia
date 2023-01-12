@@ -88,7 +88,7 @@ float map(vec3 p, float t){
     da = abs(da) + 0.003;
     db = abs(db) + 0.003;
     glow += 0.9/(0.01 + da*da*1500.)*c;
-    glow -= 0.9/(0.01 + db*db*2000.)*c*vec3(0.,0.8,2.);
+    glow -= 0.9/(0.01 + db*db*2000.)*c*vec3(0.,0.8,4.)*(1.0+0.5*syn_HighLevel+0.5*syn_Intensity);
     return d;
 }
 vec3 getRd(vec3 ro, vec3 lookAt, vec2 uv){
@@ -107,7 +107,7 @@ vec4 renderMainImage() {
     vec3 col = vec3(0.9,0.6,0.4);
 
     vec3 ro = vec3(0);
-    ro.z += smoothTime*0.05;
+    ro.z += bass_time;
     
     float T = smoothTime*0.05;
     ro.xy += vec2(cos(T), sin(T))*3.;
@@ -136,7 +136,7 @@ vec4 renderMainImage() {
     
     col -= glow*0.001;
     
-    col = pow(col, vec3(0.454545))*(1.0+highhits*0.8);
+    col = pow(col, vec3(0.454545));
     
     fragColor = vec4(col,1.0);
 	return fragColor; 

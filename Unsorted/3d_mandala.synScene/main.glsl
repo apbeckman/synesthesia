@@ -30,25 +30,25 @@ vec2 map(vec3 p){
     vec3 q = p;
     
     float modD = 1.;
-    float reps = floor(iterations);
+    float reps = int(iterations);
     
     q = vec3(reps*atan(q.z,q.x)/tau ,log(length(q.xz)) ,q.y);
     
     //q.
     
     //q.z += length(p.xz)*0.6;
-    q.z += exp(length(p.xz)*0.4)*0.1;
+    //q.z += exp(length(p.xz)*0.4)*0.1;
     float h = exp(length(p.xz)*0.7)*0.2;
     q.z -= h;
     q.z += exp(-length(p.xz)*4.)*0.4;
     //q.y *=  1. - exp(-length(p.xz)*5.)*6.4;
     q.y *= reps/tau;
-    q.y -= bass_time*0.5;
+    q.y += bass_time*0.5;
     
     float id = floor(q.y);
     //q *= 1.;
     
-    q.x += bass_time*0.5 + id*0.6 + q.y*0.1;
+    q.x += mid_time*0.5 + id*0.6 + q.y*0.1;
     
     //q.xy *= rot(0.1 + id);
     idG = floor(q.xy/modD);
@@ -71,7 +71,7 @@ vec2 map(vec3 p){
     
     s *= 2.;
     
-    q.xy *= rot(0.25);
+    q.xy *= rot(0.5);
     float dBb = sdBox(q, vec3(bW*s, bW*s,bW*1.1));
     d = dmin(d,vec2(dBb, 1.) );
     
@@ -163,7 +163,7 @@ vec4 renderPassA() {
     
     vec3 ro = vec3(2.501,3,0.001);
     vec3 lookAt = vec3(0.);
-    ro.xz = _rotate(ro.xz, PI*Orbit.x);
+    ro.xz = _rotate(ro.xz, Orbit.x);
     ro.yz = _rotate(ro.yz, PI*Orbit.y);
     //lookAt.xy += _uvc*PI*Stretch;
 
@@ -171,8 +171,8 @@ vec4 renderPassA() {
 
 	vec3 rd = getRd(ro, lookAt, uv); 
 
-    rd.xz = _rotate(rd.xz, _uvc.x*PI*Flip.x*FOV);
-    rd.yz = _rotate(rd.yz, _uvc.y*PI*Flip.y*FOV);
+    //rd.xz = _rotate(rd.xz, 0.+_uvc.x*PI*Flip.x*FOV);
+   // rd.yz = _rotate(rd.yz, _uvc.y*PI*Flip.y*FOV);
     vec3 p;float t; bool hit;
     vec2 d = march(ro, rd, p, t, hit);
     
@@ -196,7 +196,7 @@ vec4 renderPassA() {
         
         float modD = 0.1;
         q = abs(q);
-        q.xy *= rot(0.25*pi);
+        q.xy *= rot(0.25*pi+Pattern_Rot);
         q.y -= 0.5;
         
         q = abs(q);
@@ -225,7 +225,7 @@ vec4 renderPassA() {
         
         if(d.y == 2. || d.y == 1.){
             //col += pal(0.5,1., vec3(.7,0.1,-0.3),0.8,idc*1.5 + idG.y*0.5 + TIME*0.1);
-            col += pal(0.,0.9, vec3(-.67,0.1,0.43),0.48,idc*1.5 + length(p.xz)*1. + smoothTimeB*0.0125);
+            col += pal(0.,0.9, vec3(-.67,0.21,0.43),-0.48,idc*1.5 + length(p.xz)*1. + smoothTimeB*0.0125);
 		
 
             col = max(col, 0.);

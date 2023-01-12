@@ -24,9 +24,9 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0.75,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
+			"MAX" : 1.5,
 			"MIN" : -1,
 			"NAME" : "FOV",
 			"PARAMS" : 0.053,
@@ -39,7 +39,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Rotate",
-			"PARAMS" : 0.095,
+			"PARAMS" : 0.03,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -81,7 +81,8 @@
 				0
 			],
 			"NAME" : "Flip",
-			"TYPE" : "xy",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		}
 	],

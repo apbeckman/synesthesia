@@ -222,7 +222,7 @@ vec4 renderMainImage() {
     vec2 mo = (3.0*_mouse.xy - 1.5*RENDERSIZE.xy)/RENDERSIZE.y;
     if(_mouse.z <= 0.0) mo = vec2(0);
     // camera animation.
-    float at = smoothTime*0.05;
+    float at = bass_time;
     vec3 ro = vec3(path(at), at);
     vec3 la = vec3(path(at + 1.0) + mo, at + 1.0);
     la.xy += _uvc*PI*FOV;
@@ -232,8 +232,8 @@ vec4 renderMainImage() {
     vec3 uu = normalize(cross(vec3(0, 1, 0), ww));
     vec3 vv = normalize(cross(ww, uu));
     vec3 rd = normalize(mat3(uu, vv, ww)*vec3(uv, 01.));
-    rd.xz = _rotate(rd.xz, LookXY.x*PI+PI*_uvc.x*Perspective.x);
-    rd.yz = _rotate(rd.yz, LookXY.y*PI+PI*_uvc.y*Perspective.y);
+    rd.xz = _rotate(rd.xz, (LookXY.x*PI)+PI*_uvc.x*Perspective*FOV);
+    rd.yz = _rotate(rd.yz, (LookXY.y)*PI);
    // rd.xy = _rotate(rd.xy, Rotate*PI);
 
     vec3 col = texture(image3, uv).rgb;
@@ -265,7 +265,7 @@ vec4 renderMainImage() {
     }
     
     col = mix(col, vec3(0), 1.0 - exp(-0.1*t.x)); // some black fog.  lazy attenuation.
-    col = 1.0 - exp(-0.8*col); // contrast/tone mapping.
+    col = 1.0 - exp(-0.9*col); // contrast/tone mapping.
     fragColor = vec4(pow(col, vec3(0.454545)), 1); // some gamma correction, and that's it.
 	return fragColor; 
  } 

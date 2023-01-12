@@ -38,12 +38,17 @@
     https://www.shadertoy.com/view/4sSXDG
 
 */
-
+// Based on Morgan McGuire @morgan3d
+// https://www.shadertoy.com/view/4dS3Wd
+vec2 NOISE = vec2(0.);
+vec2 valueNoise(float p){
+	vec2 a = texture(image30, vec2(floor(p))/1024.).xy;
+	vec2 b = texture(image30, vec2(floor(p) + 1.)/1024.).xy;
+    return mix(a,b,smoothstep(0.,1.,fract(p)));
+}
 // The far plane. I'd like this to be larger, but the extra iterations required to render the
 // additional scenery starts to slow things down on my slower machine.
 #define FAR 65. - Fog
-float smoothTime = (smooth_basstime * 0.75 + TIME * 0.125 + syn_Time * 0.25);
-float smoothTime2 = (smooth_hightime * 0.75 + TIME * 0.125 + syn_Time * 0.25);
 
 
 // Frequencies and amplitudes of the "path" function, used to shape the tunnel and guide the camera.
@@ -82,9 +87,9 @@ float smaxP(float a, float b, float s){
 // The path is a 2D sinusoid that varies over time, depending upon the frequencies, and amplitudes.
 vec2 path(in float z) {
 
-  float morphTime = smoothTime2 * 0.1 * Morph_Time;
-  float morphGain = Morph_Gain * Morph_Time;
-  return vec2(ampA*sin(z * freqA * morphGain*sin(morphTime)), ampB*cos(z * freqB * morphGain*cos(morphTime)) + 3.*(sin(z*0.025)  - 1.));
+  float morphTime = mid_time;
+  //float morphGain = Morph_Gain * Morph_Time;
+  return vec2(0.5*(z * freqA + sin(morphTime*0.51)), 0.9*(z * freqB * cos(morphTime*0.6)) + 3.*(sin(z*0.025)  - 1.));
 }
 
 // The canyon, complete with hills, gorges and tunnels. I would have liked to provide a far
@@ -103,7 +108,7 @@ float map(in vec3 p){
 
 
     // The terrain, so to speak. Just a flat XZ plane, at zero height, with some hills added.
-    float d = p.y + h*6. - Terrain_Height - Height_Reactivity*syn_BassLevel;
+    float d = p.y + h*6. - Terrain_Height - Height_Reactivity*syn_Intensity;
 
     // Reusing "h" to provide an undulating base layer on the tunnel walls.
     q = sin(p*.5 + h);
@@ -402,9 +407,11 @@ vec4 renderMainImage() {
 	vec2 u = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;
 
 	// Camera Setup.
-  float camZ = smoothTime * 2 * Fly_Speed * Reverse_Fly;
+    float camZ = bass_time*2.0;
 	vec3 lookAt = vec3(0, 0, camZ);  // "Look At" position.
-	vec3 ro = lookAt + vec3(LookXY*-1*Cam_Reset, -.25); // Camera position, doubling as the ray origin.
+    u.xy = _rotate(u.xy, Rotate*PI);
+
+	vec3 ro = lookAt + vec3(0.0, 0.0, -.25); // Camera position, doubling as the ray origin.
 
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera and "look at" vectors down the tunnel. The "path" function is
@@ -420,7 +427,9 @@ vec4 renderMainImage() {
 
     // rd - Ray direction.
     vec3 rd = normalize(forward + FOV*u.x*right + FOV*u.y*up);
-
+    rd.xz = _rotate(rd.xz, LookXY.x*PI);
+    rd.yz = _rotate(rd.yz, LookXY.y*PI);
+    
     // Swiveling the camera about the XY-plane (from left to right) when turning corners.
     // Naturally, it's synchronized with the path in some kind of way.
 	rd.xy = rot2( path(lookAt.z).x/64. )*rd.xy;

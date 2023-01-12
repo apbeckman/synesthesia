@@ -128,7 +128,7 @@ vec2 path(in float z){
 vec3 getTex(in vec2 p){
     vec3 tx;
     // Strething things out so that the image fills up the window.
-//    p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
+    p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
 
     if(_exists(syn_UserImage)){
              tx = texture(syn_UserImage, p+TIME*0.0025).xyz*(0.5);
@@ -137,7 +137,7 @@ vec3 getTex(in vec2 p){
     else{
          p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
         
-         tx = texture(image10, smoothTimeC*0.00095+p/16.).xyz;
+         tx = texture(image10, smoothTimeC*0.00025+p/32.).xyz;
 
     }
     //vec3 tx = textureLod(image10, p, 0.).xyz;
@@ -346,7 +346,7 @@ float map(vec3 p){
 
     
     // Turning one plane into two. It's an old trick.
-    p.y = abs(p.y) - 1.25;
+    p.y = abs(p.y) - Height;
   
     // There are gaps between the pylons, so a floor needs to go in
     // to stop light from getting though.
@@ -367,7 +367,8 @@ float map(vec3 p){
     float rnd = hash21(gID.xy);
     //
     // Standard blinking lights animation.
-    gGlow.w = smoothstep(.992, .997, sin(rnd*6.2831 + smoothTimeC/16.)*.5 + .5);
+    gGlow.w = smoothstep(.992, .997, sin(rnd*6.2831 + smoothTimeB*0.01)*.5 + .5);
+    gGlow.w *=(1.0+((syn_HighLevel+syn_MidHighLevel)*syn_Intensity));
     //gGlow.w = rnd>.05? 0. : 1.; // Static version.
  
  
@@ -546,14 +547,14 @@ vec4 renderMainImage() {
 	vec2 uv = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;
 	
 	// Camera Setup.
-	vec3 ro = vec3(0, 0, smoothTime); // Camera position, doubling as the ray origin.
+	vec3 ro = vec3(0, 0, bass_time); // Camera position, doubling as the ray origin.
     ro.xy += path(ro.z); 
     vec2 roTwist = vec2(0, 0);
     roTwist *= rot2(-getTwist(ro.z));
     ro.xy += roTwist;
     
 	vec3 lk = vec3(0, 0, ro.z + .5); // "Look At" position.
-    lk.xy+=(PI*_uvc.xy/2.)*FOV;
+    lk.xy+=(PI*_uvc.xy/2.)*Fov;
 
     lk.xy += path(lk.z); 
     vec2 lkTwist = vec2(0, -.1); // Only twist horizontal and vertcal.
@@ -583,9 +584,9 @@ vec4 renderMainImage() {
     // Unit direction ray.
     vec3 rd = normalize(uv.x*cu + uv.y*cv + fw/FOV);	
 	 
-    rd.yz = _rotate(rd.yz, lookXY.y*PI);
+    rd.yz = _rotate(rd.yz, lookXY.y*PI + _uvc.y*PI*Perspective*Fov);
     rd.xz = _rotate(rd.xz, -1.0*lookXY.x*PI);
-    rd.xy = _rotate(rd.xy, -1.0*Rotation*PI+smoothTime*MouseClick*0.1);
+    rd.xy = _rotate(rd.xy, -1.0*Rotate*PI+spin_time);
 
     // Raymarch to the scene.
     float t = trace(ro, rd);
@@ -627,10 +628,10 @@ vec4 renderMainImage() {
         if(svObjID<.5){
             
             // Coloring the individual blocks with the saved ID.
-            vec3 tx = getTex(svGID.xy);
+            vec3 tx = getTex(svGID.xy)*(1.0+syn_MidHighLevel);
             
             // Ramping the shade up a bit.
-            texCol = smoothstep(-.5, 1., tx)*vec3(1, .8, 1.8);
+            texCol = smoothstep(-.5, 1., tx)*vec3(0.76, .468, .8);
             
             
             // Very fake, but very cheap, bump mapping. Render some equispaced horizontal
@@ -643,7 +644,7 @@ vec4 renderMainImage() {
             //float vLn = min(abs(txP.x - svGID.x), abs(txP.z - svGID.y));
             
             // Horizontal lines (planes, technically) around the pylons.
-            float yDist = (1.25 + abs(txP.y) + svGID.z*2.);
+            float yDist = (2.25 + abs(txP.y) + svGID.z*2.);
             float hLn = abs(mod(yDist  + .5/lvls, 1./lvls) - .5/lvls);
             float hLn2 = abs(mod(yDist + .5/lvls - .008, 1./lvls) - .5/lvls);
             
@@ -660,8 +661,8 @@ vec4 renderMainImage() {
             // Render a dot on the face center of each extruded block for whatever reason...
             // They were there as markers to begin with, so I got used to them. :)
             float fDot = length(txP.xz - svGID.xy) - .0086;
-            texCol = mix(texCol, texCol*2., 1. - smoothstep(0., .005, fDot - .0035));
-            texCol = mix(texCol, vec3(0), 1. - smoothstep(0., .005, fDot));
+            //texCol = mix(texCol, texCol*2., 1. - smoothstep(0., .005, fDot - .0035));
+            //texCol = mix(texCol, vec3(0), 1. - smoothstep(0., .005, fDot));
   
 
  
@@ -695,19 +696,19 @@ vec4 renderMainImage() {
     	
     	// Diffuse lighting.
 	    float diff = max( dot(sn, ld), 0.);
-        diff *= diff*1.35; // Ramping up the diffuse.
+        diff *= diff*1.; // Ramping up the diffuse.
     	
     	// Specular lighting.
 	    float spec = pow(max(dot(reflect(ld, sn), rd ), 0.), 32.); 
 	    
 	    // Fresnel term. Good for giving a surface a bit of a reflective glow.
-        float fre = pow(clamp(1. - abs(dot(sn, rd))*.5, 0., 1.), 4.);
+       // float fre = pow(clamp(1. - abs(dot(sn, rd))*.5, 0., 1.), 4.);
         
 		// Schlick approximation. I use it to tone down the specular term. It's pretty subtle,
         // so could almost be aproximated by a constant, but I prefer it. Here, it's being
         // used to give a hard clay consistency... It "kind of" works.
-		//float Schlick = pow( 1. - max(dot(rd, normalize(rd + ld)), 0.), 5.);
-		//float freS = mix(.15, 1., Schlick);  //F0 = .2 - Glass... or close enough.        
+		float Schlick = pow( 1. - max(dot(rd, normalize(rd + ld)), 0.), 5.);
+		float fre = mix(.15, 1., Schlick);  //F0 = .2 - Glass... or close enough.        
         
         // Combining the above terms to procude the final color.
         col = texCol*(diff + ao*.25 + vec3(1, .4, .2)*fre*.25 + vec3(1, .4, .2)*spec*4.);
@@ -741,10 +742,10 @@ vec4 renderMainImage() {
     // it's about as cheap an operation as you could hope for, but has virtually
     // no impact on the frame rate. With that in mind, it's definitely worth taking
     // the time to get it looking the way you'd like it to look.
-    vec3 fog =  mix(vec3(4, 1, 2), vec3(4, 2, 1), rd.y*.5 + .5);
+    vec3 fog =  mix(vec3(4, 1, 2), vec3(4, 2, 1), rd.y*.5 + .5)*(1.0+0.5*syn_HighLevel*(syn_Intensity));
     fog = mix(fog, fog.zyx, smoothstep(0., .35, uv.y - .35));
     col = mix(col, fog/1.5, smoothstep(0., .99, t*t/FAR/FAR));
-     col *= (1.0+highhits*0.25);
+    col *= (1.0+highhits*0.25);
     
     #ifdef GRAYSCALE
     // Grayscale... or almost grayscale. :)

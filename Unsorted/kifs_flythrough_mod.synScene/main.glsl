@@ -275,7 +275,7 @@ vec3 envMap(vec3 rd, vec3 n){
     uv = fract(uv);
    
     vec3 col = texture(image10, uv).zyx;//*(1.-lod*.8)
-    return smoothstep(.01, 1., col*col*.5);
+    return smoothstep(.01, 1., col*col*.85);
     
 }
 

@@ -7,7 +7,7 @@
 			"MAX" : 2,
 			"MIN" : -2,
 			"NAME" : "rate_in",
-			"PARAMS" : 0.072,
+			"PARAMS" : 0.101,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
@@ -94,6 +94,15 @@
 			"NAME" : "Pattern_Rot",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"TYPE" : "knob",
 			"UI_GROUP" : "default"
 		},
 		{

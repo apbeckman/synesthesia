@@ -1,0 +1,116 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Choose from one of four different patterns for the scene.",
+			"MAX" : 3,
+			"MIN" : 0,
+			"NAME" : "pattern",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "pattern"
+		},
+		{
+			"DEFAULT" : 4,
+			"DESCRIPTION" : "Number of axes of symmetry. Careful, increasing this can lower FPS.",
+			"MAX" : 7,
+			"MIN" : 0,
+			"NAME" : "stacked_layers",
+			"TYPE" : "slider",
+			"UI_GROUP" : "geometry"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Barrel distortion in or out.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "distortion",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "geometry"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Relocate the camera position to be off-center.",
+			"MAX" : 
+			[
+				300,
+				300
+			],
+			"MIN" : 
+			[
+				-300,
+				-300
+			],
+			"NAME" : "move_xy",
+			"PARAMS" : 0.04,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Reverse direction of zoom, to be traveling in or out.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "reverse",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0.8,
+			"DESCRIPTION" : "How fast to zoom in or out.",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0.2,
+			"DESCRIPTION" : "Really intense spin effect. Default: 50%.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "pearlescence",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "colorize"
+		}
+	],
+	"CREDIT" : "Meebs",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "colorNoise",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "stained_glass_mod.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "firstBuff",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Stained Glass Mod",
+	"WIDTH" : 1920
+}

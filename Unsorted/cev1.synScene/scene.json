@@ -44,25 +44,6 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 5,
-			"MIN" : -5,
-			"NAME" : "test2",
-			"TYPE" : "slider",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 2.5,
-			"MIN" : -2.5,
-			"NAME" : "test",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "tog",
@@ -85,6 +66,16 @@
 			"MIN" : -1,
 			"NAME" : "Rotate",
 			"PARAMS" : 0.096,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"PARAMS" : 0.01,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		}

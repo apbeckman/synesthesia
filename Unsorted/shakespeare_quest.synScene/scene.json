@@ -2,22 +2,34 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : -0.5,
-			"NAME" : "direction",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Height",
-			"TYPE" : "slider",
+			"MAX" : 
+			[
+				2,
+				2.5
+			],
+			"MIN" : 
+			[
+				-2,
+				0
+			],
+			"NAME" : "Orbit",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -26,7 +38,27 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "FOV",
-			"PARAMS" : 0.075,
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.25,
+			"MIN" : 0,
+			"NAME" : "FingerMod",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}
@@ -35,6 +67,13 @@
 	"DESCRIPTION" : "re-up. Monkeys can't write Shakespeare if their lives depended on it. I already did the research. Trust me you don't want to repeat it. I think I'll have better luck randomly reconstituting his DNA.",
 	"GPU" : 0,
 	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
 	"IMAGE_PATH" : "shakespeare_quest.png",
 	"TITLE" : "Shakespeare Quest",
 	"WIDTH" : 1280

@@ -4,7 +4,7 @@
 float growthFactor = (pow((syn_BassLevel*0.35)+(syn_MidLevel*0.35)+(syn_Intensity*0.3), 2.0));
 
 //simulation variables
-#define dt 0.25*(1.+0.5*syn_MidLevel)
+#define dt 0.25
 #define prad .24+growthFactor //1.4
 #define decay 0.02
 

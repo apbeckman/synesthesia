@@ -848,8 +848,10 @@ vec4 renderMainImage() {
 	
     // TEXTURE COLOR
     //
-    vec3 texCol = mix(vec3(.5), vec3(.6, .4, .2), dot(sin(sp.xy*4. - cos(sp.yx*4.)), vec2(.25)) + .5);//doColor(vor);
-    
+    //vec3 texCol = mix(vec3(.5), vec3(.6, .4, .2), dot(sin(sp.xy*4. - cos(sp.yx*4.)), vec2(.25)) + .5);//doColor(vor);
+    //vec3 texCol = mix(vec3(.5), vec3(0., 0., 0.), dot(sin(sp.xy*8. - cos(sp.yx*8.)), vec2(.25)) + .5);//doColor(vor);
+    vec3 texCol = mix(vec3(.5), vec3(0., 0., 0.), dot(sin(sp.xy*8.*_uv.xy - cos(sp.yx*8.*_uvc.yx)), vec2(.25)) + .5);//doColor(vor);
+
     
     // Lightening the ground a little.
     texCol = mix(vec3(1), texCol, mainPat);
@@ -863,7 +865,9 @@ vec4 renderMainImage() {
     
     // Coloring the main object yellow, and the ground brownish with some fine diffusion crevices,
     // or something to that effect.
-    texCol = mix(vec3(.4, .4, .4)*(difPat2*.25 + .75), vec3(0.4, .4, .45)*1.5, mainPat)*texCol;
+    texCol = mix(vec3(.0, .0, .0)*(difPat2*.5 + .75)*sp.x, vec3(.25, .25, .25)*2.5, mainPat)*texCol*(1.0+syn_HighLevel*syn_Intensity);
+
+    //texCol = mix(vec3(.4, .4, .4)*(difPat2*.25 + .75), vec3(0.4, .4, .45)*1.5, mainPat)*texCol;
     //texCol = mix(vec3(.6, .48, .42)*(difPat2*.25 + .75), vec3(1, .45, .05)*1.5, mainPat)*texCol; //og
     
     // Darkening the fine grade diffusion crevices on the yellow object.
@@ -878,7 +882,7 @@ vec4 renderMainImage() {
     
     //texCol = mix(texCol, texCol.yxz*mainPat*.7, fBm(sp.xy*3.));
     // Greenish moldy weathering.
-    texCol = mix(texCol, texCol.yxz*mix(.2, .7, mainPat), smoothstep(.35, 1., fBm(sp.xy*7.))*.7);
+    //texCol = mix(texCol, texCol.yxz*mix(.2, .7, mainPat), smoothstep(.35, 1., fBm(sp.xy*7.))*.7);
     
     // Extra combinations.
     //texCol = mix(texCol, texCol.xzy, smoothstep(.6, .8, fBm(sp.xy*3. + .5))*mainPat*.7);
@@ -888,7 +892,9 @@ vec4 renderMainImage() {
     
     // FINAL COLOR
     // Using the values above to produce the final color.   
-    vec3 col = (texCol*(diff*2. + 0.25) + (texCol*.5 + .5)*vec3(.25, .5, 1)*spec)*atten;
+    vec3 col = (texCol*(diff*2. + 0.5) + (texCol*.5 + 1.5)*vec3(.4, .4, .4)*spec)*atten;
+
+    //vec3 col = (texCol*(diff*2. + 0.25) + (texCol*.5 + .5)*vec3(.25, .5, 1)*spec)*atten;
     
     // Lightening the edges a bit -- Very subtle, but it enhances the pseudo 3D look a fraction.
     col += col*vec3(1)*diff*edge;

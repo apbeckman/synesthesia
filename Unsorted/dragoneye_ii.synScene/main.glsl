@@ -10,7 +10,7 @@
 #define PI          3.141592654
 #define TAU         (2.0*PI)
 #define ROT(a)      mat2(cos(a), sin(a), -sin(a), cos(a))
-#define LAYERS      6
+#define LAYERS      8
 #define FBM         3
 #define DISTORT     1.4
 #define PCOS(x)     (0.5+0.5*cos(x))
@@ -283,7 +283,6 @@ vec3 psy_weird(vec2 p) {
   vec3 lcol2 = lightCol2;
   vec3 po  = vec3(p.x, 0.0, p.y);
   vec3 rd  = normalize(po - ro);
-  
   float diff1 = max(dot(n, lightDir1), 0.0);
   float diff2 = max(dot(n, lightDir2), 0.0);
 
@@ -455,6 +454,8 @@ vec4 renderMainImage() {
   vec2 q = fragCoord/RESOLUTION.xy;
   vec2 p = -1. + 2. * q;
   p.x *= RESOLUTION.x/RESOLUTION.y;
+  p.xy = _rotate(p.xy, sin(TIME*0.125)*0.05-0.5);
+
   float a = PCOS(TTIME/60.0);
   p *= mix(0.8, 1.2, 1.0-a);
   vec3 col = color(p);

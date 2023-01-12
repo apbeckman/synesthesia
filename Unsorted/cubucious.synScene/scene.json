@@ -96,28 +96,6 @@
 			"PARAMS" : 0.134,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "Mirror",
-			"PARAMS" : 0.089,
-			"TYPE" : "xy smooth",
-			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "leon",

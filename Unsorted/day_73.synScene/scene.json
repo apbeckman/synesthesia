@@ -50,9 +50,9 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "day 73",

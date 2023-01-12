@@ -1,8 +1,29 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "jeyko",
 	"DESCRIPTION" : "potato",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
@@ -15,29 +36,29 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffC",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "Day 67",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

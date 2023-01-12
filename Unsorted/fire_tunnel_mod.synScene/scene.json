@@ -1,0 +1,157 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "Turn down for softer look, up for crisper edges. Default: 50%.",
+			"MAX" : 0,
+			"MIN" : 0.5,
+			"NAME" : "sharpness",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Turn up to decrease diameter of tunnel, constricting it, or turn down to make it wider. Default: 50%.",
+			"MAX" : 2,
+			"MIN" : -0.25,
+			"NAME" : "constriction",
+			"TYPE" : "slider",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Turn up for noisier tunnel, or all the way down for just the smooth geometric tunnel, no cloud-like noise.",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "noise",
+			"TYPE" : "slider",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Turn up to change it from a tunnel to just two planes. Once it is planes, try playing with the 'twist' slider.",
+			"MAX" : 0.5,
+			"MIN" : 1,
+			"NAME" : "planes_only",
+			"TYPE" : "slider",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 0.2,
+			"DESCRIPTION" : "Determines how much the bass will make you travel forward. Default: 25%.",
+			"MAX" : 0.8,
+			"MIN" : 0,
+			"NAME" : "auto_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "speed"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "speed"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Field of view. Default: 50%.",
+			"MAX" : 2,
+			"MIN" : -1,
+			"NAME" : "fov",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add a twist to the tunnel's geometry.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "twist",
+			"PARAMS" : 0.056,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "rotation"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add a spin to the camera, forward for clockwise. Default: 50%.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "spin",
+			"PARAMS" : 0.056,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "rotation"
+		}
+	],
+	"CREDIT" : "aiekick",
+	"DESCRIPTION" : "Fire Tunnel",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "fire_tunnel_mod.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "tunnelPass",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Fire Tunnel Mod",
+	"WIDTH" : 1920
+}

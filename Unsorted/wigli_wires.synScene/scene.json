@@ -9,6 +9,24 @@
 			"NAME" : "Reset",
 			"TYPE" : "bang",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Succ",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Split",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "lomateron",

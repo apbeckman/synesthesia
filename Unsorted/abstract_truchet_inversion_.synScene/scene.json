@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "byt3_m3chanic",
+	"DESCRIPTION" : "Just taking a play day and pushing out some i've been kicking around - concept from older shader. Two woven truchet tile patterns, with some glow effects. Using buffer tab to feed in color for Fog to get trail effect.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "abstract_truchet_inversion_.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Abstract Truchet Inversion ",
+	"WIDTH" : 1280
+}

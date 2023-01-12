@@ -19,9 +19,28 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 #define r2(a)  mat2(cos(a), sin(a), -sin(a), cos(a))
 #define hash(a, b) fract(sin(a*1.2664745 + b*.9560333 + 3.) * 14958.5453)
 
+vec2 _hash( vec2 p ) // replace this by something better
+{
+	p = vec2( dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)) );
+	return -1.0 + 2.0*fract(sin(p)*43758.5453123);
+}
+// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
+// example that explains it, if you require it.
+float n3D(vec3 p){
+    
+	const vec3 s = vec3(7, 157, 113);
+	vec3 ip = floor(p); p -= ip; 
+    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
+    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
+    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
+    h.xy = mix(h.xz, h.yw, p.y);
+    return mix(h.x, h.y, p.z); // Range: [0, 1].
+}
+float Noise = n3D(vec3(smoothTimeC*0.1));
 // gyroid function
 float sdGry(vec3 p, float s, float t, float b) {
-    p *=s+sin(clamp(smoothTimeC, 0., 2.0))*2.0-2.0;
+ 
+   p *=s+(clamp(1., -1., 1.0))*12.0-12.0+Noise*4.;
    	float g = abs(dot(sin(p), cos(p.zxy))-b)/(s)-t;
     return g;
 }

@@ -108,7 +108,7 @@ vec3 hsl2rgb(float H, float S, float L){
 		
 float lum(vec4 rgb)
 {
-  return dot(rgb, vec4(0.3, 0.59, 0.11, 0.));
+  return dot(rgb, vec4(0.3, 0.159, 0.11, 0.));
 }
 
 vec2 gradient(sampler2D sampler, vec2 uv, vec2 d, vec4 selector)
@@ -208,8 +208,8 @@ vec4 advance()
 
   // uv += _rotate(vec2(1.0,0.0), 3*PI*_fbm(vec3(_uvc*0.5, syn_BassTime*0.5)))*0.01*melter*syn_BassLevel;
 
-  uv += _rotate(vec2(1.0,0.0), 3*PI*_fbm(vec3(_uvc*0.25, smoothTimeC*0.4)))*0.0035*warper*pow(syn_BassLevel, 1.5);
-  uv += prev.r*_rotate(vec2(1.0,0.0), 8*PI*pow(_fbm(vec3(_uvc*8.0, smoothTimeC)), 2.0))*0.005*fritzer*pow(syn_HighHits,1.5);
+  uv += _rotate(vec2(1.0,0.0), 3*PI*_fbm(vec3(_uvc*01.25, smoothTimeC*0.4)))*0.0035*warper*pow(syn_BassLevel, 1.5);
+  uv += prev.r*_rotate(vec2(1.0,0.0), 4*PI*pow(_fbm(vec3(_uvc*32.0, smoothTimeC)), 2.0))*0.005*fritzer*pow(syn_HighHits*0.5+syn_MidHighLevel*0.5,1.25);
 
 
   prev = texture(sampler_prev, uv); // sample with warped lookup vector

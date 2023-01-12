@@ -68,10 +68,10 @@ vec4 calc(float vFrame, vec2 vCoord, vec2 vSize, sampler2D vChannel)
 
 vec2 df(vec3 p)
 {
-	float z = p.z *( .13 + test);
+	float z = p.z *( .213 + test);
 	p.xy *= mat2(cos(z),-sin(z),sin(z),cos(z));
 	float mesh = length(cos(p.xz)) - 1.;
-	float tri = max(abs(p.x)+p.y,-p.y) - 5. - Open;
+	float tri = max(abs(p.x*_uv.x)+p.y,-p.y) - 5. - Open;
 	return vec2(length(vec2(mesh,tri)) - 0.15, 0);
 }
 
@@ -123,7 +123,8 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
 	vec2 uv = (2.*fragCoord.xy-RENDERSIZE.xy)/RENDERSIZE.y;
-	float t = (smooth_basstime * 0.75 + TIME * 0.125 + syn_Time * 0.25) * .25 * 5.;
+	uv.xy += _uvc*FOVmod*PI;
+	float t = (bass_time) * 5.;
 
     vec3 ld = vec3(0.,1., .5);
 
@@ -137,8 +138,9 @@ vec4 renderMainImage() {
 	vec3 y = normalize(cross(z, x));
 	vec3 rd = normalize(z + fov * (uv.x * x + uv.y * y));
 	//added fabrice's cost cutting matrix 
-    rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, lookXY.x*PI);
+    rd.yz = _rotate(rd.yz, lookXY.y*PI+Flip*FOVmod*_uvc.y*PI);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.xy = _rotate(rd.xy, Rotate*PI);
 
 	float s = 1., d = 1.;
 	float dm = 200.;
@@ -149,13 +151,13 @@ vec4 renderMainImage() {
 		d += (s = df(ro + rd * d).x) * .3;
 	}
 
-    fragColor.rgb = Background*GetSky(rd, ld, vec3(1.5));
+    fragColor.rgb = 0.*GetSky(rd, ld, vec3(1.5));
 
 	if (d<dm)
 	{
 		vec2 sh = shade(ro, rd, d, ro, ld, 1.);
 		fragColor.rgb = mix(
-            vec3(.49,1,.32) * sh.y * .6 + vec3(.45,0,.72) * sh.x * 1.2,
+            vec3(.849,0.45,.432) * sh.y * .6 + vec3(.45,0,.72)*(1.0+syn_HighLevel*syn_Intensity) * sh.x * 1.2,
             fragColor.rgb,
             1.0 - exp( -0.001*d*d ) );
 	}

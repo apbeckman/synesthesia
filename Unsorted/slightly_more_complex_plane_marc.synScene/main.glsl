@@ -159,7 +159,7 @@ float truchet_cell0(vec2 p) {
 float truchet_cell1(vec2 p) {
   float d0  = abs(p.x);
   float d1  = abs(p.y);
-  float d2 = circle(p, 0.25+sin(smoothTimeC*.125)*0.25);
+  float d2 = circle(p, 0.25+sin(smoothTimeC*.0125)*0.25);
 
   float d = 1E6;
   d = min(d, d0);
@@ -176,8 +176,8 @@ vec2 truchet(vec2 p, float h, out vec3 n) {
   float sm = mix(0.05, 0.125, fract(h*17.0))*24.0/rep;
   float kn = 0.0;
   kn = smoothKaleidoscope(hp, sm, rep);
-  hp *= ROT(0.02*smoothTime);
-  hp += smoothTimeC*0.05;
+  hp *= ROT(-0.02*smoothTimeC);
+  hp += smoothTimeC*0.0125;
   vec2 hn = mod2_1(hp);
   float r = hash(vec3(hn, h));
   hp *= truchet_rots[int(r*4.0)];
@@ -232,7 +232,7 @@ const float scale = 4.0;
 vec2 distortCoords(vec2 p, float h) {
   p *= scale;
   p.x = SABS(p.x, 0.1*abs(p.y)+0.001);
-  p*=ROT(smoothTimeC*0.075);
+  p*=ROT(smoothTimeC*0.0125);
   p*=ROT(-PI*tanh_approx(0.125*(L2(p)-0.25)));
   
   return p;
@@ -316,7 +316,7 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float np) {
   float ref1  = max(dot(ref, ld1), 0.0);
   float ref2  = max(dot(ref, ld2), 0.0);
 
-  baseCol1 *= mix(0.0, 4.0, 1.0/L2(lp1 - po));
+  baseCol1 *= mix(0.0, 14.0, 1.0/L2(lp1 - po));
   baseCol2 *= mix(0.0, 3.0, 1.0/L2(lp2 - po));
 
   vec3 col = vec3(0.0);
@@ -337,7 +337,7 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float np) {
 
 vec3 skyColor(vec3 ro, vec3 rd) {
   float ld = max(dot(rd, vec3(0.0, 0.0, 1.0)), 0.0);
-  return vec3(1.0, 0.0, 0.25)*tanh_approx(5.0*pow(ld, 200.0));
+  return vec3(.10, 0.160, 0.89)*tanh_approx(15.0*pow(ld, 200.0));
 }
 
 vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
@@ -410,7 +410,7 @@ vec3 postProcess(vec3 col, vec2 q) {
 
 vec3 effect(vec2 p, vec2 q) {
   float tm  = TIME*0.4;
-  vec3 ro   = offset(smoothTime*0.25);
+  vec3 ro   = offset(bass_time);
   vec3 dro  = doffset(tm);
   vec3 ddro = ddoffset(tm);
 

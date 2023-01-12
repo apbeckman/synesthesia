@@ -63,6 +63,7 @@ vec4 noised( vec3 x )
     
     vec3 u = w*w*w*(w*(w*6.0-15.0)+10.0);
     vec3 du = 30.0*w*w*(w*(w-2.0)+1.0);
+    du.xy += _uvc*PI;
 
     float a = hash( p+vec3(0,0,0) );
     float b = hash( p+vec3(1,0,0) );
@@ -214,18 +215,19 @@ vec3 path(vec3 p)
 }
 float angle(vec2 p, float d)
 {
-    return abs(fract(atan(p.x, p.y)/3.14159*10.*sin(d*0.1))-.5);
+    return abs(fract(atan(p.x, p.y)/PI*10.*sin(d*0.1))-.5);
 }
 
 float df(vec3 p)
 {
 	p += path(p);
-    p *= RotZ(cos(p.z * 0.5)*0.3);
+
+    p *= RotZ(cos(p.z * (0.5+Squiggle))*(0.3));
     
     float ca = angle(p.xy, p.z);
     float la = angle(last_p.xy, last_p.z);
     last_p = p;
-    return mix(3.,6.,mix(la,ca,sin(p.z*0.1)*0.55+0.45)) - length(p.xy);
+    return mix(3.,6.,mix(la,ca,sin(p.z*0.1)*0.55+0.45)) - length(p.xy+_uvc);
 }
 
 vec3 nor( vec3 pos, float prec )
@@ -287,7 +289,7 @@ vec4 renderMainImage() {
 
 	float time = TIME*1.2;
 	
-	vec3 ro = vec3(0,0, time*5.);
+	vec3 ro = vec3(0,0, bass_time*2.);
 	ro -= path(ro);
 	
 	vec3 cv = ro + vec3(0,0,10); // cam view

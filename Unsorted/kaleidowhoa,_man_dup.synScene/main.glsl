@@ -76,7 +76,7 @@ float map(vec3 p)
         
         p_s = p_s + vec3(
             sin(blockID * 11.0)* 0.1 + 0.3 -0.01*pow(syn_OnBeat,0.3)*beat_reaction,
-            sin(q.z * sin(q.z+ rotTime* 0.01)) * sin(p.z* 4.0),
+            sin(q.z * sin(q.z+ rotTime* 0.01+0.01*sin(TIME*0.1))) * sin(p.z* 4.0),
             0.0);
          
         p_s = p_s * rotationMatrix(vec3(0.0, 0.0, 1.0), 1.1 *  rotTime * 0.05  );
@@ -101,7 +101,7 @@ void getCamPos(inout vec3 ro, inout vec3 rd)
 }
 
  vec3 gradient(vec3 p, float t) {
-			vec2 e = vec2(0., t);
+			vec2 e = vec2(0., t)+PI*p.xy*_uvc;
 
 			return normalize( 
 				vec3(
@@ -117,7 +117,7 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    if (_toPolarTrue(_uvc).y>1.0/6.0){
+    if (_toPolarTrue(_uvc*PI).y>1.0/6.0){
         discard;
     }
 	time = time_forward*0.5;
@@ -133,8 +133,8 @@ vec4 renderMainImage() {
     for( int i = 0; i < 80; i ++)
     {
     	p = depth * ray + cam;
+
         d = map(p);
-                  
         if (d < 0.0005) {
 			hit = true;
             break;
@@ -189,12 +189,12 @@ vec4 renderMain(){
         uv *= 0.5;
         uv += 0.5;
         vec4 img = texture(backTex, uv);
-        vec2 RENDERSIZE_FIRST = vec2(1408, 792);
+        
+        vec2 RENDERSIZE_FIRST = vec2(1920, 1080);
         vec4 imgn = texture(backTex, uv+vec2(0,1)/RENDERSIZE_FIRST);
         vec4 imgs = texture(backTex, uv+vec2(0,-1)/RENDERSIZE_FIRST);
         vec4 imgw = texture(backTex, uv+vec2(1,0)/RENDERSIZE_FIRST);
         vec4 imge = texture(backTex, uv+vec2(-1,0)/RENDERSIZE_FIRST);
-
 
         vec3 finalCol = vec3(0.0);
         vec4 dat = (img*6.0+imgn*1.0+imgs*1.0+imgw*1.0+imge*1.0)/10.0;

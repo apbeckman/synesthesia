@@ -34,25 +34,13 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
+			"MAX" : 1,
+			"MIN" : 0,
 			"NAME" : "Perspective",
 			"PARAMS" : 0.01,
-			"TYPE" : "xy smooth",
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -82,6 +70,15 @@
 			"NAME" : "Open",
 			"PARAMS" : 0.032,
 			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		}
 	],

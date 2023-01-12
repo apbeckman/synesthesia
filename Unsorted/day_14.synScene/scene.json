@@ -1,5 +1,6 @@
 {
-   "CONTROLS" : [
+	"CONTROLS" : 
+	[
 		{
 			"DEFAULT" : 
 			[
@@ -22,61 +23,72 @@
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1.5,
-         "MIN" : -0.5,
-         "NAME" : "geometry",
-         "TYPE" : "xy smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1.5,
-         "MIN" : -0.5,
-         "NAME" : "geometryZ",
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 10,
-         "MIN" : -10.5,
-         "NAME" : "expand",
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 4,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 9,
-         "MIN" : 3,
-         "NAME" : "iterations",
-         "TYPE" : "slider",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseClick",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "defaults"
-      }
-   ],
-   "CREDIT" : "jeyko",
-   "DESCRIPTION" : "potato",
-   "HEIGHT" : 1080,
-   "IMAGE_PATH" : "day_14.png",
-   "TITLE" : "Day 14",
-   "WIDTH" : 1920
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1.5,
+				1.5
+			],
+			"MIN" : 
+			[
+				-0.5,
+				-0.5
+			],
+			"NAME" : "geometry",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -0.5,
+			"NAME" : "geometryZ",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : -10.5,
+			"NAME" : "expand",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 4,
+			"DESCRIPTION" : "",
+			"MAX" : 9,
+			"MIN" : 3,
+			"NAME" : "iterations",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "jeyko",
+	"DESCRIPTION" : "potato",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "day_14.png",
+	"TITLE" : "Day 14",
+	"WIDTH" : 1920
 }

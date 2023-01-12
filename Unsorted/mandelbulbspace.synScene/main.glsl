@@ -19,7 +19,7 @@ bool flip = (flip_bool > 0.5);
 vec4 renderMain() { 
  	vec4 out_FragColor = vec4(0.0);
   
-	float k = 0.0, T = smoothTime*0.1;
+	float k = 0.0, T = bass_time;
 	vec2 R = RENDERSIZE.xy;
 	float TW = (tan(smoothTime/(3.5+warpfastorslow))/2.5);
 	float IF = (((smoothTimeC)/10.)/5.);

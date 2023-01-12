@@ -1,0 +1,36 @@
+{
+	"CREDIT" : "rcargou",
+	"DESCRIPTION" : "Huge credit to sonicether his bloom implementation that is essential for this shader: https://www.shadertoy.com/view/lstSRS\nWould be glad to get some feedback if you have some bug or about how I can improve this shader :)\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "space_rainbow_road.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Space Rainbow Road",
+	"WIDTH" : 1280
+}

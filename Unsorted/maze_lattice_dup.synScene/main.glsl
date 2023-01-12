@@ -284,7 +284,7 @@ float bumpFunc(vec3 p, vec3 n){
 // Standard function-based bump mapping function.
 vec3 bumpMap(in vec3 p, in vec3 n, float bumpfactor){
     
-    const vec2 e = vec2(0.002, 0);
+    const vec2 e = vec2(0.0062, 0);
     float ref = bumpFunc(p, n);                 
     vec3 grad = (vec3(bumpFunc(p - e.xyy, n),
                       bumpFunc(p - e.yxy, n),
@@ -331,7 +331,7 @@ float n2D(vec2 p) {
 	vec2 i = floor(p); p -= i; p *= p*(3. - p*2.);  
     
 	return dot(mat2(fract(sin(vec4(0, 41, 289, 330) + dot(i, vec2(41, 289)))*43758.5453))*
-                vec2((whiteout*10.+1.) - p.y, p.y), vec2(whiteout*10.+1. - p.x, p.x) );
+                vec2((0.+1.) - p.y, p.y), vec2(1. - p.x, p.x) );
 
 }
 
@@ -343,7 +343,8 @@ vec3 texFaces(in vec3 p, in vec3 n){
     p.xy = n.x>.5? p.yz : n.y>.5? p.xz : p.xy; 
 
     // Some fBm noise based bluish red coloring.
-    n = mix(vec3(.3, .1, .02), vec3(.35, .5, .65), n2D(p.xy*8.)*.66 + n2D(p.xy*16.)*.34);
+   // n = mix(vec3(.3, .1, .02), vec3(.35, .5, .65), n2D(p.xy*8.)*.66 + n2D(p.xy*16.)*.34);
+    n = mix(vec3(.3, .1, .02), vec3(.35, .5, .65), n2D(p.xy*16.)*.66 + n2D(p.xy*32.)*.34);
     n *= n2D(p.xy*512.)*1.2 + 1.4;
     
     //n =  n*.3 + min(n.zyx*vec3(1.3, .6, .2)*.75, 1.)*.7;
@@ -396,8 +397,8 @@ vec4 renderMainImage() {
     //rd.yz = _rotate(rd.yz, lookXY.y*PI);
     rd.xy = _rotate(rd.xy, -1.0*Rotate*PI);
     //rd.xz = _rotate(rd.xz, lookZ*PI);
-    rd.xz = _rotate(rd.xz, -PI*lookXY.x+PI*_uvc.x*Flip.x);
-    rd.yz = _rotate(rd.yz, -PI*lookXY.y+PI*_uvc.y*Flip.y);
+    rd.xz = _rotate(rd.xz, -PI*lookXY.x+PI*_uvc.x*Flip.x*FOV-_uvc.x*0.5*Flip.x);
+    rd.yz = _rotate(rd.yz, -PI*lookXY.y+PI*_uvc.y*Flip.y*FOV-_uvc.y*0.5*Flip.y);
 
     
     // Ray origin: Sending it along the Z-axis.
@@ -407,7 +408,7 @@ vec4 renderMainImage() {
     // Alternate: Set off in the YZ direction. Note the ".5." It's an old lattice trick.
     //vec3 ro = vec3(0, TIME/2. + .5, TIME/2.);
     
-    vec3 lp = ro + vec3(.2+cos(smoothTimeB*0.1)*0.05, 1.+sin(smoothTimeB*0.1)*0.05, .3); // Light, near the ray origin.
+    vec3 lp = ro + vec3(.2+cos(smoothTimeB*0.03)*0.25, 1.+sin(smoothTimeB*0.03)*0.25, .3); // Light, near the ray origin.
     
     // Set the initial scene color to black.
     vec3 col = vec3(0);
@@ -434,7 +435,7 @@ vec4 renderMainImage() {
 		
     	// Bump mapping the faces and edges. The bump factor is reduced with distance
     	// to lessen artifacts.
-        if(edge<.001) sn = bumpMap(sp, sn, .01/(1. + t*.25));
+        if(edge<.001) sn = bumpMap(sp, sn, .01/(2. + t*.25));
         else sn = bumpMap2(sp, sn, .03/(1. + t*.25));
 
         vec3 ref = reflect(rd, sn); // Reflected ray.
@@ -443,15 +444,17 @@ vec4 renderMainImage() {
         if(edge>.001) oCol = texEdges(sp, svn);
 
 
-        float sh = softShadow(sp, lp, 16.); // Soft shadows.
+        float sh = softShadow(sp, lp, 32.); // Soft shadows.
         float ao = calcAO(sp, sn); // Self shadows. Not too much.
 
         vec3 ld = lp - sp; // Light direction.
+        ld.xy = _rotate(ld.xy, -1.0*TIME*0.2);
+
         float lDist = max(length(ld), 0.001); // Light to surface distance.
         ld /= lDist; // Normalizing the light direction vector.
         
         float diff = max(dot(ld, sn), 0.); // Diffuse component.
-        float spec = pow(max(dot(reflect(-ld, sn), -rd), 0.), 32.); // Specular.
+        float spec = pow(max(dot(reflect(-ld, sn), -rd), 0.), 64.); // Specular.
 
         float atten = 1.25/(1.0 + lDist*0.1 + lDist*lDist*.05); // Attenuation.
 
@@ -499,13 +502,13 @@ vec4 renderMainImage() {
     //}
     
     // Mixing in some hazy bluish orange background.
-    vec3 bg = mix(vec3(.5, .7, 1).zyx, vec3(1, .7, .3).zyx, -rd.y*.35 + .35)+pow(0.5*highhits, 2.);
+    vec3 bg = mix(vec3(.75, .7, 1).zyx, vec3(1, .37, .3).zyx, -rd.y*.35 + .35)*(1.0+pow(0.5*syn_HighLevel*0.5+0.5*syn_MidHighLevel+ syn_Intensity*0.25, 2.));
     col = mix(col, bg, smoothstep(0., FAR-25., t));//min(bg.zyx*vec3(1.3, .6, .2)*1.5, 1.)
     
     // Postprocesing - A subtle vignette with a bit of warm coloring... I wanted to warm the atmosphere up
     // a bit. Uncomment it, if you want to see the bluer -possibly more natural looking - unprocessed version.
     vec2 uv = (fragCoord/RENDERSIZE.xy);
-    float vig = pow(16.*uv.x*uv.y*(1.-uv.x)*(1.-uv.y), 0.125);
+    float vig = pow(32.*uv.x*uv.y*(1.-uv.x)*(1.-uv.y), 0.125);
     col *= vec3(1.2, 1.1, .85)*vig;
 
     // Rough gamma correction.

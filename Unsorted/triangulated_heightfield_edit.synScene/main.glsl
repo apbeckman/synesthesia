@@ -60,15 +60,13 @@ const mat2 mt = (1. / sqrt(2.)) * mat2(2., 0., 0., 2. / e) * transpose(rm);
 // Normals of the 3 line directions in the equilateral triangle grid
 const vec2 ns[3] = vec2[3](vec2(1, 0), vec2(cos(th), sin(th)), vec2(cos(th * 2.), sin(th * 2.)));
 
-const float maxHeight = 6.;
-float smoothTime = (smooth_basstime * 0.75 + TIME * 0.125 + syn_Time * 0.125)*0.95;
-float smoothTime2 = (smooth_hightime * 0.75 + TIME * 0.125 + syn_Time * 0.25)*0.95;
+float maxHeight = 3.*(1.+syn_Intensity);
 
 // Heightfield
 float sampleHeightfield(vec2 p)
 {
-    float h = 	textureLod(image8, p / 80. + smoothTime2 / 400., 2.).b *
-    			textureLod(image30, p / 8. , 2. + smoothTime2 / 400.).r * 1.6;
+    float h = 	textureLod(image8, p / 80. + smoothTimeC / 400., 2.).b *
+    			textureLod(image30, p / 8. , 2. + smoothTimeC / 400.).r * 1.6;
     
     return clamp(h, 0., 1. - 1e-4) * maxHeight;
 }
@@ -236,7 +234,7 @@ float trace(vec3 ro, vec3 rd, out vec3 triNorm, out vec3 bary)
 vec3 rfunc(vec2 uv)
 {
     vec3 r = normalize(vec3(uv.xy, -1.5));
-    mat3 m = rotX(-.75) * rotZ(sin(smoothTime / 6.) * .1);
+    mat3 m = rotX(-.75) * rotZ(sin(smoothTime*0.001) * .1);
     return m * r;
 }
 
@@ -252,7 +250,7 @@ vec4 renderMainImage() {
 
     // Setup primary ray.
     //vec3 o = vec3(cos(TIME / 4.) * 4., 10., -TIME), r = rfunc(uv);
-        vec3 o = vec3((smoothTime / 4.) * 4., 10., -smoothTime), r = rfunc(uv);
+        vec3 o = vec3((bass_time) * 4., 10., -smoothTime), r = rfunc(uv);
 
     vec3 triNorm, bary;
     float t = trace(o, r, triNorm, bary);
@@ -273,7 +271,7 @@ vec4 renderMainImage() {
     // Ambient light
     col += max(0., n.y) * vec3(.3);
     
-    col *= cos((rp.y + 6.5) * vec3(1.5, 2, .5) / 3.) * .5 + .5;
+    col *= cos((rp.y+_uv.y*PI + 6.5) * vec3(1.5, 2, .5) / 3.) * .5 + .5;
     float w = t / 800. + pow(max(0., 1. - dot(-r, n)), 4.) * .2;
     col *= mix(1.4, 1., smoothstep(.02 - w, .02 + w, min(bary.x, min(bary.y, bary.z))));
 

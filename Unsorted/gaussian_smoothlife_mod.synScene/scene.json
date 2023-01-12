@@ -1,0 +1,206 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "OFF for quick splitting cells or ON for slow moving worms.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "regime_toggle",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "regime"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Concentric circles feed or poison the simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "cycling_rings",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "regime"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Extra pulsing and shimmering with the music. Turn off to let it naturally progress.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "audio_reactivity",
+			"TYPE" : "slider",
+			"UI_GROUP" : "regime"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Removes the blur effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "no_blur",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "colorize"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Choose from one of 7 color palettes.",
+			"MAX" : 6.5,
+			"MIN" : 0,
+			"NAME" : "color_regime",
+			"TYPE" : "slider",
+			"UI_GROUP" : "colorize"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Mix to greyscale for a more minimal look.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "greyscale",
+			"TYPE" : "slider",
+			"UI_GROUP" : "colorize"
+		},
+		{
+			"DEFAULT" : 1.3,
+			"DESCRIPTION" : "Lower for a lot of smaller cells. Higher for fewer, big cells.",
+			"MAX" : 2,
+			"MIN" : 0.2,
+			"NAME" : "scale",
+			"TYPE" : "slider",
+			"UI_GROUP" : "parameters"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Affects how fast it naturally travels.",
+			"MAX" : 3,
+			"MIN" : 0.8,
+			"NAME" : "flow_resistance",
+			"TYPE" : "slider",
+			"UI_GROUP" : "parameters"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Affects how eagerly it occupies empty space.",
+			"MAX" : 3,
+			"MIN" : 0.8,
+			"NAME" : "space_filling",
+			"TYPE" : "slider",
+			"UI_GROUP" : "parameters"
+		},
+		{
+			"DEFAULT" : 1.5,
+			"DESCRIPTION" : "Contrast of the feeding media.",
+			"MAX" : 4,
+			"MIN" : 0.5,
+			"NAME" : "contrast",
+			"TYPE" : "slider",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Lower bound for the birth parameter.",
+			"MAX" : 2,
+			"MIN" : 0.8,
+			"NAME" : "birth_lower",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Higher bound for the birth parameter (more important).",
+			"MAX" : 2,
+			"MIN" : 0.8,
+			"NAME" : "birth_upper",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 0.7,
+			"DESCRIPTION" : "Lower bound for the survival parameter.",
+			"MAX" : 3,
+			"MIN" : 0.2,
+			"NAME" : "survival_lower",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 0.7,
+			"DESCRIPTION" : "Higher bound for the survival parameter. (Turn this up if you're getting frequent black outs).",
+			"MAX" : 3,
+			"MIN" : 0.2,
+			"NAME" : "survival_upper",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Timestep. Turn this up for faster, glitchier action.",
+			"MAX" : 3,
+			"MIN" : 0.8,
+			"NAME" : "timestep",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "This applies a flow direction to the simulation. This interacts in complex ways with the other parameters. Try to search for different stable flow regimes.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "xy_flow",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "If the simulation dies, return to default parameters and press this button.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reset_sim",
+			"TYPE" : "bang",
+			"UI_GROUP" : "utility"
+		}
+	],
+	"CREDIT" : "cornusammonis",
+	"DESCRIPTION" : "A variant of Stephan Rafler's SmoothLife that uses a separable Gaussian kernel to compute inner and outer fullness. The improvement in performance over full 2D convolution makes it possible to use a much larger kernel in realtime, without using FFT.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image47",
+			"PATH" : "images/47.jpg"
+		}
+	],
+	"IMAGE_PATH" : "gaussian_smoothlife_mod.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Gaussian SmoothLife Mod",
+	"WIDTH" : 1920
+}

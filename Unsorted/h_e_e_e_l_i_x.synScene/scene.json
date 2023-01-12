@@ -23,12 +23,13 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 0.125,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -0.5,
-			"NAME" : "rate",
-			"TYPE" : "slider speed",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.096,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -48,6 +49,16 @@
 			"NAME" : "distortion",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.6,
+			"MIN" : -0.275,
+			"NAME" : "Flop",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "tdhooper",

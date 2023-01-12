@@ -21,17 +21,7 @@
 			"NAME" : "lookXY",
 			"PARAMS" : 0.033,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.1,
-			"MIN" : -0.02,
-			"NAME" : "width",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "defaults"
+			"UI_GROUP" : "Camera"
 		},
 		{
 			"DEFAULT" : 0,
@@ -39,30 +29,27 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Fov",
-			"PARAMS" : 0.071,
+			"PARAMS" : 0.049,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Camera"
 		},
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
 			"NAME" : "Flip",
-			"PARAMS" : 0.037,
-			"TYPE" : "xy smooth",
+			"PARAMS" : 0.026,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -82,6 +69,16 @@
 			"MIN" : 0,
 			"NAME" : "Tunnel",
 			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 20,
+			"MIN" : 0,
+			"NAME" : "Twist",
+			"PARAMS" : 0.75,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}
 	],

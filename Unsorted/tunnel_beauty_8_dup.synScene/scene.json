@@ -2,25 +2,37 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"IS_META" : false,
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
 			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
-		 },   
+		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"IS_META" : false,
 			"MAX" : 0.05,
 			"MIN" : -0.05,
 			"NAME" : "test",
+			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
-		 },   
+		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
@@ -34,15 +46,47 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "FOVmod",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "Background",
-			"TYPE" : "slider",
-			"UI_GROUP" : "defaults"
+			"NAME" : "Flip",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "aiekick",
 	"DESCRIPTION" : "Tunnel Beauty 8",
+	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "tunnel_beauty_8_dup.png",
 	"TITLE" : "Tunnel Beauty 8_dup",

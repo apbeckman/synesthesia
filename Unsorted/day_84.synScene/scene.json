@@ -1,54 +1,76 @@
 {
-   "CONTROLS" : [
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseXY",
-         "TYPE" : "xy",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "test",
-         "TYPE" : "slider",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "jumpy",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "defaults"
-      }
-   ],
-   "CREDIT" : "jeyko",
-   "DESCRIPTION" : "poto",
-   "HEIGHT" : 1080,
-   "IMAGES" : [
-      {
-         "NAME" : "image30",
-         "PATH" : "images/30.jpg"
-      }
-   ],
-   "IMAGE_PATH" : "day_84.jpg",
-   "PASSES" : [
-      {
-         "FLOAT" : true,
-         "HEIGHT" : 1080,
-         "TARGET" : "BuffA",
-         "WIDTH" : 1920
-      }
-   ],
-   "TITLE" : "Day 84",
-   "WIDTH" : 1920
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "test",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Bounce",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "jeyko",
+	"DESCRIPTION" : "poto",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.jpg"
+		}
+	],
+	"IMAGE_PATH" : "day_84.jpg",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Day 84",
+	"WIDTH" : 1920
 }

@@ -465,7 +465,7 @@ vec3 postProcess(vec3 col, vec2 q) {
 vec3 effect(vec2 p, vec2 q) {
   compute_globals();
   
-  float tm  = smoothTime*0.25;
+  float tm  = bass_time;
   vec3 ro   = offset(tm);
   vec3 dro  = doffset(tm);
   vec3 ddro = ddoffset(tm);

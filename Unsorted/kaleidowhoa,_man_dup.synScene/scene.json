@@ -7,7 +7,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "rate_color",
-			"TYPE" : "slider",
+			"TYPE" : "knob",
 			"UI_GROUP" : "speed"
 		},
 		{
@@ -16,7 +16,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "rate_forward",
-			"TYPE" : "slider",
+			"TYPE" : "knob",
 			"UI_GROUP" : "speed"
 		},
 		{
@@ -85,31 +85,49 @@
 			"UI_GROUP" : "color"
 		},
 		{
-			"DEFAULT" : 0,
-			"DEF_COLOR" : 
+			"DEFAULT" : 
 			[
 				1,
 				0,
 				0
 			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0,
+				0
+			],
 			"NAME" : "col1",
 			"TYPE" : "color",
 			"UI_GROUP" : "color"
 		},
 		{
-			"DEFAULT" : 0,
-			"DEF_COLOR" : 
+			"DEFAULT" : 
 			[
 				0,
 				1,
 				1
 			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0,
+				0
+			],
 			"NAME" : "col2",
 			"TYPE" : "color",
 			"UI_GROUP" : "color"
@@ -145,17 +163,18 @@
 	],
 	"CREDIT" : "Meebs",
 	"DESCRIPTION" : "kalidescopes whoa",
-	"HEIGHT" : 1080,
+	"GPU" : 0,
+	"HEIGHT" : 1440,
 	"IMAGE_PATH" : "kaleidowhoa,_man_dup.png",
 	"PASSES" : 
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 990,
+			"HEIGHT" : 1080,
 			"TARGET" : "backTex",
-			"WIDTH" : 1760
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "KaleidoWHOA, MAN_dup",
-	"WIDTH" : 1920
+	"WIDTH" : 2560
 }

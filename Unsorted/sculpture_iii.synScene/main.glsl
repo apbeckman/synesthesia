@@ -29,7 +29,7 @@ const float PHI = 1.6180339887498948482045868343656;
 vec3 forwardSF( float i, float n) 
 {
     float phi = 2.0*PI*fract(i/PHI);
-    float zi = 1.0 - (2.0*i+1.0)/n;
+    float zi = 1.0 - (2.0*i+21.0)/n;
     float sinTheta = sqrt( 1.0 - zi*zi);
     return vec3( cos(phi)*sinTheta, sin(phi)*sinTheta, zi);
 }
@@ -38,10 +38,13 @@ vec4 grow = vec4(1.0);
 
 vec3 mapP( vec3 p )
 {
-    p.xyz += 1.000*sin(  2.0*p.yzx +(smoothTimeC*0.251))*grow.x;
-    p.xyz += 0.500*sin(  4.0*p.yzx +(smoothTimeC*0.1575) )*grow.y;
-    p.xyz += 0.250*sin(  8.0*p.yzx + (smoothTime*0.251075))*grow.z;
-    p.xyz += 0.050*sin( 16.0*p.yzx + (smoothTime * 0.375) )*grow.w;
+    p.xyz += 1.000*sin(  (2.0+Split)*p.yzx +(smoothTimeC*0.04))*grow.x;
+    p.xz = _rotate(p.xz, x_time*0.1);
+    p.yz = _rotate(p.yz, y_time*0.1);
+    p.xy = _rotate(p.xy, rot_time*0.6);
+    p.xyz += 0.500*sin(  (4.0*(1.0+Split2))*p.yzx +(smoothTimeC*0.01) )*grow.y;
+    p.xyz += 0.250*sin(  8.0*p.yzx + (smoothTime*0.061))*grow.z;
+    p.xyz += 0.0750*sin( (1.0+syn_Intensity)*16.0*p.yzx + (smoothTime * 0.1) )*grow.w;
     return p;
 }
 
@@ -137,17 +140,23 @@ vec4 renderMainImage() {
 #endif
 
     
-        grow = smoothstep( 0.0, 1.0, (smoothTimeC*0.25-vec4(0.0,1.0,2.0,3.0))/3.0 );
+        grow = smoothstep( 0.0, 1.0, (bass_time*0.25-vec4(0.0,1.0,2.0,3.0))/3.0 );
 
 
         //-----------------------------------------------------
         // camera
         //-----------------------------------------------------
 
-        float an = 1.1 + 0.05*((smoothTimeC*0.495)-10.0);
+        float an = 1.1 + 0.05*(-10.0);
 
-        vec3 ro = vec3(4.5*sin(an)-Zoom,1.0,(4.5-closeness)*cos(an)+rotateX);
+        vec3 ro = vec3(4.5*sin(an),1.0,(4.5)*cos(an));
+        ro.z -= Zoom;
+        ro.x = _rotate(ro.xz, RotateXY.x*PI).x;
+        ro.y = _rotate(ro.xy, RotateXY.y*PI).y;
         vec3 ta = vec3(0.0,0.2,0.0);
+        ta.x = _rotate(ta.xz, RotateXY.x).x;
+        ta.y = _rotate(ta.xy, RotateXY.y).y;
+
         // camera matrix
         vec3 ww = normalize( ta - ro );
         vec3 uu = normalize( cross(ww,vec3(0.0,1.0,0.0) ) );
@@ -160,7 +169,7 @@ vec4 renderMainImage() {
         // render
         //-----------------------------------------------------
 
-        vec3 col = vec3(0.07)*clamp(1.0-length(q-0.5),0.0,1.0);
+        vec3 col = vec3(0.0)*clamp(1.0-length(q-10.5),0.0,1.0);
 
         // raymarch
         float t = intersect(ro,rd);
@@ -185,7 +194,7 @@ vec4 renderMainImage() {
 
 
             col *= 1.0*mix( vec3(2.0,0.4,0.2), vec3(1.0), occ2*occ2*occ2 );
-            float ks = texCube( image4, pos*1.5, nor, 4.0 ).x;
+            float ks = texCube( image4, pos*.5, nor, 4.0 ).x;
             ks = 0.5 + 1.0*ks;
             ks *= (1.0-ar);
 
@@ -195,17 +204,17 @@ vec4 renderMainImage() {
             float spe = pow(max( dot(-rd,nor),0.0),8.0);
             // lights
             vec3 lin  = vec3(0.0);
-                 lin += 3.0*vec3(0.7,0.80,1.00)*sky*occ;
-                 lin += 1.0*fre*vec3(1.2,0.70,0.60)*(0.1+0.9*occ);
-            col += 0.3*ks*4.0*vec3(0.7,0.8,1.00)*smoothstep(0.0,0.2,ref.y)*(0.05+0.95*pow(fre,5.0))*(0.5+0.5*nor.y)*occ;
-            col += 4.0*ks*1.5*spe*occ*col.x;
+                 lin += 3.0*vec3(0.7,0.180,1.00)*sky*occ;
+                 lin += 1.0*fre*vec3(1.,0.70,0.60)*(0.1+0.9*occ);
+            //col += 0.3*ks*4.0*vec3(0.7,0.8,1.00)*smoothstep(0.0,0.2,ref.y)*(0.05+0.95*pow(fre,5.0))*(0.5+0.5*nor.y)*occ;
+            col += 4.0*ks*1.5*spe*occ*col.x*(1.0+pow(0.7*syn_HighLevel+0.7*syn_Intensity, 2.0)*syn_Intensity);
             col += 2.0*ks*1.0*pow(spe,8.0)*occ*col.x;
             col = col * lin;
 
             // dust
-            col = mix( col, 0.2*fre*fre*fre+0.6*vec3(0.6,0.55,0.5)*sky*(flashing+0.8+0.4*texCube( image4, pos*8.0, nor, 4.0 ).xyz), 0.6*smoothstep(0.3,0.7,nor.y)*sqrt(occ) );
+            col = mix( col, 0.2*fre*fre*fre+0.6*vec3(0.6,0.255,0.5)*sky*(flashing+0.8+0.4*texCube( image4, pos*18.0, nor, 4.0 ).xyz), 0.6*smoothstep(0.3,0.7,nor.y)*sqrt(occ) );
 
-            col *= 2.6*exp(-0.32*t);
+            col *= 2.6*exp(-0.132*t);
         }
 
         col = pow(col,vec3(0.4545));
@@ -216,7 +225,7 @@ vec4 renderMainImage() {
     tot /= float(AA*AA);
 #endif
 
-    tot = pow( tot, vec3(1.0,1.0,1.4) ) + vec3(0.0,0.02,0.14);
+    tot = pow( tot, vec3(1.0,1.0,1.4) ) + vec3(0.01,0.01,0.01);
     
     tot += (1.0/255.0)*hash1( fragCoord );
     

@@ -284,7 +284,7 @@ vec3 raycast() {
 
   ray.xz =  _rotate(ray.xz, LookXY.x*PI*PI+_uvc.y*PI*Perspective.x);
   ray.yz = _rotate(ray.yz, LookXY.y*PI+_uvc.y*PI*Perspective.y);
-  ray.xy = _rotate(ray.xy, Spin*PI+Rotate*bass_time);
+  ray.xy = _rotate(ray.xy, Spin*PI+spin_time);
 
   // raycasting parameter 
   float t  = 0.;

@@ -4,18 +4,18 @@
 		{
 			"DEFAULT" : 
 			[
-				0,
+				0.5,
 				0
 			],
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				1,
+				1.5,
 				1
 			],
 			"MIN" : 
 			[
-				-1,
+				-0.5,
 				-1
 			],
 			"NAME" : "lookXY",
@@ -26,17 +26,18 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 1,
-			"NAME" : "rate",
-			"TYPE" : "slider speed",
+			"MAX" : 2,
+			"MIN" : -1,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.055,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : -1,
+			"MIN" : 0.5,
 			"NAME" : "FOVmod",
 			"PARAMS" : 0.065,
 			"TYPE" : "slider smooth",
@@ -45,9 +46,9 @@
 		{
 			"DEFAULT" : 0.5,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "lookZ",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "Rotate",
 			"PARAMS" : 0.01,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "camera"
@@ -62,16 +63,6 @@
 			"UI_GROUP" : "geometry"
 		},
 		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 10,
-			"MIN" : 0,
-			"NAME" : "coler",
-			"PARAMS" : 0.025,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "geometry"
-		},
-		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 10,
@@ -79,15 +70,6 @@
 			"NAME" : "test",
 			"PARAMS" : 0.025,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "geometry"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "geoMorph",
-			"TYPE" : "toggle",
 			"UI_GROUP" : "geometry"
 		},
 		{
@@ -106,7 +88,39 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "Flip",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "GeoMorph",
 			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Mirror",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		}
 	],

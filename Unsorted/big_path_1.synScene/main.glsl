@@ -97,6 +97,7 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 	vec2 uv = (fragCoord.xy-.5*RENDERSIZE.xy)/RENDERSIZE.y;
+
     vec3 look = vec3(0.);
     vec3 rayOrigin = vec3(_uvc + vec2(0.,sin(smoothTime*0.1)*3.+3.0+16.*CamHeight), -1. );
     vec3 rayDir = normalize(vec3(_uvc*FOV , 1.));

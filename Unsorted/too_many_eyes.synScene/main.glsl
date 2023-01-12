@@ -19,7 +19,7 @@
 
 const vec3  std_gamma  = vec3(2.2);
 //making the eyes melt together
-float smoothing  = 0.07125*(1- ( sin( smoothTimeC*0.25 )*0.35 ))*(1.0- ( cos( smoothTimeC*0.25 )*0.35 )); //check script.js for custom 'smoothTime' uniforms
+float smoothing  = 0.07125*(1- ( sin( smoothTimeC*0.125 )*0.35 ))*(1.0- ( cos( smoothTimeC*0.125 )*0.35 )); //check script.js for custom 'smoothTime' uniforms
 
 float g_v = 0.0;
 
@@ -103,8 +103,10 @@ float solidAngle(vec3 p, vec2 c, float ra) {
 
 
 vec2 mod2(inout vec2 p, vec2 size) {
+  p = _rotate(p, smoothTimeC*0.035);
+  
   vec2 c = floor((p + size*0.5)/size);
-  p = mod(p + size*(0.25+sin(smoothTimeC*0.125)*0.75),(size)) - size*0.5;
+  p = mod(p + size*(0.125),(size)) - size*0.5;
   return c;
 }
 
@@ -160,8 +162,8 @@ float df(vec3 p) {
    // eyedir.xz *= ROT(0.5*smoothstep(-0.75, 0.75, sin(rr+smoothTimeC)));
     //eyedir.xy *= ROT(0.5*smoothstep(-0.75, 0.75, sin(rr+smoothTimeC*sqrt(2.0))));
 
-    eyedir.xz = _rotate(eyedir.xz, 0.5*sin(smoothTimeC*0.25));
-    eyedir.xy = _rotate(eyedir.xy, cos(smoothTimeC*0.125));
+    eyedir.xz = _rotate(eyedir.xz, 0.5*sin(smoothTimeC*0.05));
+    eyedir.xy = _rotate(eyedir.xy, cos(smoothTimeC*0.025));
    
     float d2 = dot(normalize(pp), eyedir);
     float vv = mix(PCOS(10.0*TAU*d2-TAU*smoothTimeC), 1.0, smoothstep(1.0, 0.66, d2))*smoothstep(0.9, 0.80, d2);
@@ -226,11 +228,11 @@ vec3 render(vec3 ro, vec3 rd) {
   int iter    = 0;
   float t     = rayMarch(ro, rd, iter);
 
-  float beat  = smoothstep(0.25, 1.0, sin(TAU*smoothTimeB*10.0/60.0));
+  float beat  = smoothstep(0.25, 1.0, sin(TAU*10.0/10.0)*(1.0+syn_HighLevel*(.10+syn_Intensity)*syn_Intensity*20.));
   float sr    = mix(0.45, 0.5, beat);
   float sd    = sphered(ro, rd, vec4(vec3(0.0), sr), t);
 
-  vec3 gcol   = sd*mix(1.5*vec3(2.25, 0.75, 0.5), 3.5*vec3(2.0, 1.0, 0.75), beat);
+  vec3 gcol   = sd*mix(1.5*vec3(2.25, 0.75, 0.5), 3.5*vec3(2.50, 1.0, 0.75), syn_HighLevel*(.10+syn_Intensity))*(1.0+2*syn_MidHighLevel);
 
   if (t >= MAX_RAY_LENGTH) {
     return gcol;
@@ -267,7 +269,7 @@ vec3 render(vec3 ro, vec3 rd) {
 vec3 effect3d(vec2 p, vec2 q) {
   float z   = smoothTime;
   vec3 cam  = 1.75*vec3(1.0, 0.5, 0.0);
-  float rt  = TAU*smoothTime/90.0;;
+  float rt  = TAU*smoothTime/300.0;;
   cam.xy   *= ROT(sin(rt*sqrt(0.5))*0.5+0.0);
   cam.xz   *= ROT(sin(rt)*1.0-0.75);
   vec3 la   = vec3(0.0);
@@ -290,6 +292,7 @@ vec4 renderMainImage() {
   vec2 q = fragCoord/RESOLUTION.xy;
   vec2 p = -1. + 2. * q;
   p.x *= RESOLUTION.x/RESOLUTION.y;
+  p += _uvc*FOV;
 
   vec3 col = effect3d(p, q);
 

@@ -2,7 +2,6 @@
 
 // Created by Stephane Cuillerdier - @Aiekick/2018
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-
 mat3 getRotXMat(float a){return mat3(1.,0.,0.,0.,cos(a),-sin(a),0.,sin(a),cos(a));}
 mat3 getRotYMat(float a){return mat3(cos(a),0.,sin(a),0.,1.,0.,-sin(a),0.,cos(a));}
 mat3 getRotZMat(float a){return mat3(cos(a),-sin(a),0.,sin(a),cos(a),0.,0.,0.,1.);}
@@ -118,10 +117,11 @@ vec4 shade(vec3 ro, vec3 rd, float d, vec3 lp)
 {
 	vec3 p = ro + rd * d;											// surface point
 	float sb = SubDensity(p, 0.01, 0.1);							// deep subdensity (10 iterations)
-	vec3 bb = blackbody(100.*sb+100.);								// bb
+	vec3 bb = blackbody(11011000.);	
+	bb.xyz +=_uvc.xyy*PI*0.1;							// bb
 	vec3 ld = normalize(lp-p); 										// light dir
-	vec3 n = nor(p, .01);											// normal at surface point
-	n = doBumpMap(image4, -p*0.5, n, 0.015);
+	vec3 n = nor(p, .001);											// normal at surface point
+	n = doBumpMap(image4, -p*0.75, n, 0.0125);
 	vec3 refl = reflect(rd,n);										// reflected ray dir at surf point 
 	float amb = 0.08; 												// ambiance factor
 	float diff = clamp( dot( n, ld ), 0.0, 1.0 ); 					// diffuse
@@ -177,7 +177,7 @@ vec4 renderMainImage() {
     m1 = mx * my * mz;
     m2 = m1 * m1;
 	
-    float time = TIME * 5.;
+    float time = bass_time;
     
     vec3 cu = vec3(0,1,0);
   	vec3 cv = vec3(path(time + .1),time + .1);

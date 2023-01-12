@@ -223,8 +223,11 @@ vec4 renderPassA() {
     Q.z += (m/8.-Q).z+.05*Q.w - .00001*Q.z;
     Q.w -= 0.0001*Q.w;
     Q.zw = max(Q.zw,vec2(2,1)*smoothstep(4.,0.0,length(U-c)));
+	Q.xy += _uvc*Zoom*PI;
+
     Q.xy -= (0.25+growthFactor)*g;
-    if (length(U-_mouse.xy)<.1*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
+	
+    if (length(U-_mouse.xy)<.05*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
     if (FRAMECOUNT <= 1) Q = vec4(clamp(floor(U/2.)*2.,0.5*R-2.,0.5*R+2.),0,0);
     
 	return Q; 
@@ -261,11 +264,13 @@ vec4 renderPassB() {
     X(c,m,U,vec2(-1,-1));
     vec2 g = vec2(e.z-w.z,n.z-s.z);
     Q.xy = c;
+	
     Q.z += (m/8.-Q).z+.05*Q.w - .0001*Q.z;
     Q.w -= 0.001*Q.w;
     Q.zw = max(Q.zw,vec2(2,1)*smoothstep(4.,0.0,length(U-c)));
+	
     Q.xy -= 0.25*g;
-    if (length(U-_mouse.xy)<.1*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
+    if (length(U-_mouse.xy)<.01*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
     if (FRAMECOUNT <= 1) Q = vec4(clamp(floor(U/2.)*2.,0.5*R-2.,0.5*R+2.),0,0);
     
 	return Q; 
@@ -302,11 +307,11 @@ vec4 renderPassC() {
     X(c,m,U,vec2(-1,-1));
     vec2 g = vec2(e.z-w.z,n.z-s.z);
     Q.xy = c;
-    Q.z += (m/8.-Q).z+.05*Q.w - .0001*Q.z;
+    Q.z += (m/8.-Q).z+.025*Q.w - .0001*Q.z;
     Q.w -= 0.001*Q.w;
     Q.zw = max(Q.zw,vec2(2,1)*smoothstep(4.,0.0,length(U-c)));
     Q.xy -= 0.25*g;
-    if (length(U-_mouse.xy)<.1*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
+    if (length(U-_mouse.xy)<.01*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
     if (FRAMECOUNT <= 1) Q = vec4(clamp(floor(U/2.)*2.,0.5*R-2.,0.5*R+2.),0,0);
     
 	return Q; 
@@ -341,13 +346,15 @@ vec4 renderPassD() {
     X(c,m,U,vec2(1,-1));
     X(c,m,U,vec2(-1,1));
     X(c,m,U,vec2(-1,-1));
+	
     vec2 g = vec2(e.z-w.z,n.z-s.z);
     Q.xy = c;
-    Q.z += (m/8.-Q).z+.05*Q.w - .0001*Q.z+basshits;
+    
+	Q.z += (m/8.-Q).z+.05*Q.w - .0001*Q.z+basshits;
     Q.w -= 0.001*Q.w;
     Q.zw = max(Q.zw,vec2(2,1)*smoothstep(4.,0.0,length(U-c)));
-    Q.xy -= 0.25*g;
-    if (length(U-_mouse.xy)<.1*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
+    Q.xy -= 0.125*g;
+    if (length(U-_mouse.xy)<.01*R.y&&_mouse.z>0.) Q = vec4(-R,Q.z,0);
     if (FRAMECOUNT <= 1) Q = vec4(clamp(floor(U/2.)*2.,0.5*R-2.,0.5*R+2.),0,0);
     
 	return Q; 
@@ -379,7 +386,7 @@ vec4 renderMainImage() {
     float d = dot(g,normalize(vec3(0,1,.5)));
     Q = (exp(-4.*d*d))*m.w*abs(sin(2.+vec4(1,2,3,4)*(1.+2.*m.z)));
 
-    Q = .8+.2*g.x-.8*(1.+0.5*(b.x+b.y)) * a.w * sin(2.+0.5*(g.z)*vec4(1,2,3,4));
+    Q = .0+.2*g.x-.8*(1.+0.5*(b.x+b.y)) * a.w * sin(2.+0.5*(g.z)*vec4(2,3,2,2)*2.);
 	return Q; 
  } 
 

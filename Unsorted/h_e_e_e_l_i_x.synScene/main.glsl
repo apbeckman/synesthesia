@@ -5,7 +5,7 @@
 #define ANOTHER_LEVEL
 
 
-float guiLead = 0.6;
+float guiLead = 0.6+Flop;
 float guiInnerRatio = 0.4407892623709694;
 float guiFocal = 3.;
 float guiRotateModel = 0.4560833039600971;
@@ -540,7 +540,7 @@ vec4 renderMainImage() {
     background = mix(bgA, bgB, dot(p, normalize(vec2(.2,-.6))) * .5);
     //background = mix(vec3(.4,.3,.5) * .9, vec3(.6), -.2);
 
-    time = smoothTime*rate*0.5;
+    time = bass_time;
     time *= .26;
     time += .53;
     time = mod(time, 1.);

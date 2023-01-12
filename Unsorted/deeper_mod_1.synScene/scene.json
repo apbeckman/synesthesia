@@ -12,16 +12,6 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "Constant rotation, spinning the scene.",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "rotating",
-			"PARAMS" : 0.321,
-			"TYPE" : "toggle smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
 			"DEFAULT" : 
 			[
 				0,

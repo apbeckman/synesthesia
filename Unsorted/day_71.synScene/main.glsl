@@ -7,7 +7,7 @@ vec3 glow = vec3(0);
 vec3 glowF = vec3(0);
     
 #define TIME (TIME + 10.)
-#define mx (TIME*4.9 + 20.*_mouse.x/RENDERSIZE.x)
+#define mx (bass_time*1.9)
 #define my (20.*_mouse.y/RENDERSIZE.x)
 #define pal(a,b,c,d,e) (a + b*sin(c*d + e))
     
@@ -19,18 +19,18 @@ vec3 glowF = vec3(0);
 
 vec2 NOISE = vec2(0.);
 vec2 valueNoise(float p){
-	vec2 a = texture(image30, vec2(floor(p))/256.).xy;
-	vec2 b = texture(image30, vec2(floor(p) + 1.)/256.).xy;
+	vec2 a = texture(image30, vec2(floor(p))/1024.).xy;
+	vec2 b = texture(image30, vec2(floor(p) + 1.)/1024.).xy;
     return mix(a,b,smoothstep(0.,1.,fract(p)));
 }
 
 vec3 path(float z){
     z *= 0.44;
 	return vec3(
-    	sin(z + cos(z)*0.6),
-    	cos(z + sin(z*0.8)*0.5),
+    	sin(z + cos(z)*0.016),
+    	cos(z + sin(z*0.8)*0.025),
     	0.
-    )*0.4;
+    )*0.376;
 }
 float opSmoothUnion(float d1, float d2, float k) {
     float h = clamp(0.5 + 0.5 * (d2 - d1)/k,0.,1.);
@@ -197,8 +197,8 @@ vec4 renderPassA() {
     
     ro.xyz += rd * texture(image30, (uv+ TIME)*20.).xyz*0.7;
     
-    NOISE = valueNoise(TIME*10.);
-    ro.xy += NOISE*0.025;
+    NOISE = valueNoise(smoothTime*.5);
+    ro.xy += NOISE*(0.025+syn_BassLevel*0.125)*Shake;
     float t; bool hit;
     vec3 p;
     
@@ -211,16 +211,16 @@ vec4 renderPassA() {
         col += fres*1.;
         
         
-    	col *= glow*(0.021 + sin(TIME*2. + t*0.6)*0.01);
+    	col *= glow*(0.021 + sin(smoothTimeB + t*0.6)*0.01);
     }
     
     
-    col += glowF*0.1*smoothstep(0.,1., t*0.01);
+    col += glowF*0.1*smoothstep(0.,1., t*(0.01+highhits*0.025));
         
-    col *= 0.5;
+    col *= 0.5+syn_HighLevel;
     //col = mix(col, vec3(0.1,0.4,0.3),pow(smoothstep(0.,1.,t*0.05), 2.)*0.56);
     col = max(col, 0.);
-    col = pow(col,vec3(0.45));
+    col = pow(col,vec3(0.4545));
     
     uv *= 0.8;
     col *= 1. - dot(uv,uv);
@@ -251,7 +251,7 @@ vec4 renderMainImage() {
     // Radial blur
     float steps = 100.;
     float scale = 0.00 + dot(uvn,uvn)*0.5;
-    float chromAb = dot(uvn,uvn)*13.;
+    float chromAb = dot(uvn,uvn)*4.*(2.0+syn_BassLevel*2.);
     vec2 offs = vec2(0) + texture(image30, uv + TIME*4.).xz*0.001;
     vec4 radial = vec4(0);
     for(float i = 0.; i < steps; i++){
@@ -269,7 +269,7 @@ vec4 renderMainImage() {
     radial /= steps;
     
     fragColor = texture(BuffA, uv)*0.1 + radial*1.5;
-    fragColor *= 0.7;
+    fragColor *= 0.97;
     //fragColor = mix(fragColor,smoothstep(0.,1.,fragColor), 0.5);
     //fragColor *= 1. - dot(uvn,uvn)*2.;
     

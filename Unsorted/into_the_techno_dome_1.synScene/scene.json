@@ -56,28 +56,6 @@
 				0,
 				0
 			],
-			"NAME" : "Mirror",
-			"PARAMS" : 0.066,
-			"TYPE" : "xy smooth",
-			"UI_GROUP" : "Effects"
-		},
-		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
 			"NAME" : "Perspective",
 			"PARAMS" : 0.03,
 			"TYPE" : "xy smooth",

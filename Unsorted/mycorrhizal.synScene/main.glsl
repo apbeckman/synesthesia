@@ -114,7 +114,7 @@ vec4 renderMainImage() {
     vec4 a = A(U);
     vec4 d = D(U);
     float l = ln(U,a.xy,a.zw);
-    Q = max(cos(d.z*vec4(1,2,3,4)),.1)*(exp(-l));
+    Q = max(cos(d.z*_uvc.x*vec4(1,2,3,4)),.1)*(exp(-l));
 	return Q; 
  } 
 

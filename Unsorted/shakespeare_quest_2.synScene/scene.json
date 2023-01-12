@@ -1,0 +1,41 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -0.5,
+			"NAME" : "direction",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Height",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.075,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "eiffie",
+	"DESCRIPTION" : "re-up. Monkeys can't write Shakespeare if their lives depended on it. I already did the research. Trust me you don't want to repeat it. I think I'll have better luck randomly reconstituting his DNA.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "shakespeare_quest_2.png",
+	"TITLE" : "Shakespeare Quest 2",
+	"WIDTH" : 1280
+}

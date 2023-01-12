@@ -1,0 +1,219 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Adds falling objects that morph into the ceiling and floor.",
+			"MAX" : 0,
+			"MIN" : 1,
+			"NAME" : "droppers",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Add cylinders that cut through the room and out into the sky above.",
+			"MAX" : 0,
+			"MIN" : 1,
+			"NAME" : "cylinders",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Jumps when it detects a beat.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "beat_twitching",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Lights in certain ridges flash on drum hits.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flashing",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Removes the walls and ceiling to reveal full sky. Warning: This plus cylinders or droppers can get very laggy!",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "astral_plane",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Size of ceiling hole",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Hole",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Render the scene in 3D-pixels for a low-fi look.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "voxelate",
+			"PARAMS" : 0.3,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "voxelation"
+		},
+		{
+			"DEFAULT" : 50,
+			"DESCRIPTION" : "Increase to make the voxelation effect much more pronounced, with larger voxels.",
+			"MAX" : 1,
+			"MIN" : 50,
+			"NAME" : "voxel_size",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "voxelation"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "If manual_camera is on, use this XY to look around.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "camera_look",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Camera automatically rotates around the room, but turn this on to take manual control.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "manual_camera",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "FOV",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "knob",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flip",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Instead of the default color scheme, turning this up lets you select slight variations.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "color_mod",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Once color_mod is all the way up, select from one of 6 color schemes here.",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "palette_select",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Mirror",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "aiekick",
+	"DESCRIPTION" : "Alien Cavern",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "alien_cavern_mod.png",
+	"TITLE" : "Alien Cavern Mod",
+	"WIDTH" : 1280
+}

@@ -31,18 +31,18 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -0.25,
-			"NAME" : "Intensity",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Geo"
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flash",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.0125,
-			"MIN" : -0.0125,
-			"NAME" : "Zoom",
+			"MAX" : 0.5,
+			"MIN" : -0.25,
+			"NAME" : "Intensity",
 			"TYPE" : "slider",
 			"UI_GROUP" : "Geo"
 		},
@@ -68,15 +68,6 @@
 			"UI_GROUP" : "Geo"
 		},
 		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Spin",
-			"TYPE" : "knob",
-			"UI_GROUP" : "Geo"
-		},
-		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 1.275,
@@ -84,7 +75,25 @@
 			"NAME" : "Diffusion",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "FX"
+			"UI_GROUP" : "Geo"
+		},
+		{
+			"DEFAULT" : 0.0025,
+			"DESCRIPTION" : "",
+			"MAX" : 0.0125,
+			"MIN" : -0.0125,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Cam"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"TYPE" : "knob",
+			"UI_GROUP" : "Cam"
 		}
 	],
 	"CREDIT" : "wyatt",

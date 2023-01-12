@@ -1,0 +1,24 @@
+{
+	"CREDIT" : "apb_0",
+	"DESCRIPTION" : "GEHENNA\n-\nTribute to Doom Eternal",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "gehenna_-_fork.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "GEHENNA - Fork",
+	"WIDTH" : 1280
+}

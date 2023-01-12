@@ -25,11 +25,11 @@ vec4 renderPassA() {
 
     Q = C(U);
     vec4 
-        n = D(U+vec2(0,1)),
-        e = D(U+vec2(1,0)),
-        s = D(U-vec2(0,1)),
+        n = D(U+vec2(0,1+Height)),
+        e = D(U+vec2(1+Height+distortion,0)),
+        s = D(U-vec2(0,1+Height+distortion)),
         w = D(U-vec2(1,0)),
-        m = 0.25*(n+e+s+w)-0.2*Ca(U);
+        m = 0.25*(n+e+s+w);
     
     float d = 0.25*(n.y-s.y+e.x-w.x);
     float c = 0.25*(n.x-s.x-e.y+w.y);
@@ -37,7 +37,7 @@ vec4 renderPassA() {
     Q.z = m.z*.9999 - mix(d,c,length(U-0.5*R)/R.y);
     Q.w = d;
     
-    if (FRAMECOUNT <= 1) Q = vec4(sin(U.x)*cos(U.y));
+    if (FRAMECOUNT <= 1 || Reset != 0.) Q = vec4(sin(U.x)*cos(U.y));
 	return Q; 
  } 
 
@@ -56,6 +56,7 @@ vec4 renderPassB() {
         w = A(U-vec2(1,0)),
         m = 0.25*(n+e+s+w);
     Q.xy = 0.25*vec2(e.z-w.z,n.z-s.z);
+    Q.xy*_uvc;
     if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.125);
     
 	return Q; 
@@ -70,18 +71,18 @@ vec4 renderPassC() {
 
     Q = A(U);
     vec4 
-        n = B(U+vec2(0,1)),
-        e = B(U+vec2(1,0)),
-        s = B(U-vec2(0,1)),
-        w = B(U-vec2(1,0)),
+        n = B(U+vec2(0,1+distortion)),
+        e = B(U+vec2(1+distortion,0)),
+        s = B(U-vec2(0,1+distortion)),
+        w = B(U-vec2(1+distortion,0)),
         m = 0.25*(n+e+s+w);
     
     float d = 0.25*(n.y-s.y+e.x-w.x);
     float c = 0.25*(n.x-s.x-e.y+w.y);
     
-    Q.z = m.z*.9999 - mix(d,c,.1);
+    Q.z = m.z*.9999 - mix(d,c,.01);
     
-    if (FRAMECOUNT <= 1) Q = vec4(sin(U.x)*cos(U.y));
+    if (FRAMECOUNT <= 1 || Reset != 0.) Q = vec4(sin(U.x)*cos(U.y));
 	return Q; 
  } 
 
@@ -94,21 +95,25 @@ vec4 renderPassD() {
 
     vec2 c = ((R));
     c.xy *= (0.5+moveXY.xy);
-    if (_mouse.z>0.) c = _mouse.xy;
+   // if (_mouse.z>0.) c = _mouse.xy;
     
     U -= c;
+//    U += _uvc*PI;
+    
 //    U *= (.99325*(1.-growthFactor*Zoom*0.00675)-Zoom*0.01);
-    U *= (.99325*(1.-growthFactor*Zoom*0.00325*2.)-Zoom*0.0675);
+    U *= (.99325*(1.-growthFactor*Zoom*0.0035*2.-syn_Intensity*0.0025*Zoom)-Zoom*0.025);
 
     U += c;
     Q = C(U);
+
     vec4 
-        n = C(U+vec2(0,1)+Height), 
-        e = C(U+vec2(1,0)+Height),
-        s = C(U-vec2(0,1)+Height),
-        w = C(U-vec2(1,0)+Height),
-        m = 0.25*(n+e+s+w);
+        n = C(U+vec2(0,1+Height)), 
+        e = C(U+vec2(1+Height,0)),
+        s = C(U-vec2(0,1+Height)),
+        w = C(U-vec2(1+Height,0)),
+        m = 0.125*(n+e+s+w);
     Q.xy = 0.25*vec2(e.z-w.z,n.z-s.z);
+    
     if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.1);
     
 	return Q; 
@@ -124,27 +129,35 @@ vec4 renderMainImage() {
 	vec2 U = _xy;
 
     vec3 
-        p = vec3(0.5*R,.62*R.y),
-        d = normalize(vec3((U-0.5*R)/R.y,-1)),
+        p = vec3(0.5*R+_uvc,.62*R.y+_uvc.y*PI),
+        d = normalize(vec3((U+_uvc-0.5*R)/R.y,-1)),
         o = vec3(0.5,.1,.5)*R.xyy;
     if (_mouse.z>0.) o.xy = _mouse.xy;
-    mat2 m = r(4./9.);
+    mat2 m = r(.44);
+   d.yz =_rotate(d.yz, Look);
+//   d.xy =_rotate(d.xy, Rotate*PI);
+   p.yz =_rotate(p.yz, Look);
+   //p.xy =_rotate(p.xy, Rotate);
+
     p.y -= .19*R.y;
     d.yz *= m;
     p.yz *= m;
 
-    for (int i = 0; i<30; i++){ 
+    for (int i = 0; i<35; i++){ 
+        
     	p += (.2)*d*(p.z-(4.)*A(p.xy).z);
     }
+    float highs = (0.35*pow(syn_HighLevel*0.35+syn_MidHighLevel*0.35+syn_Intensity*.2, 2));
     d = normalize(o-p);
     float z = A(p.xy).z;
-    vec3 n = normalize(vec3(B(p.xy).xy,-.25));
+    vec3 n = normalize(vec3(B(p.xy).xy,-.4));
     vec3 q = d;
     p += .1*d;
-    for (int i = 0; i<30; i++){ 
+    for (int i = 0; i<35; i++){ 
     	p += .5*d*min(p.z-4.*A(p.xy).z,length(p-o)-1.);
     }
-    Q = (exp(-length(p-o)+1.)*(1.)*(cos(-.015*smoothTimeC*.2+(.15*(1.)) * z + .5*vec4(1,2,3,4)))*.5*(dot(reflect(n,d),q)-dot(n,d)))*(1.0+pow(syn_HighLevel, 2)*0.1);
+    //Q = (exp(-length(p-o)+1.)*(1.)*(cos(-.015*smoothTimeC*.2+(.15*(1.)) * z + .5*vec4(1,2,3,4)*-1.))*.5*(dot(reflect(n,d),q)-dot(n,d)))*(1.0+pow(syn_HighLevel, 2)*0.1);
+    Q = (exp(-length(p-o)+1.)*(1.+highs)*(cos(-.065*smoothTimeB+(.15*(1.5)) * z + .5*vec4(1,2,3,4)*-1.))*.5*(dot(reflect(n,d),q)-dot(n,d)));
 	Q*=Q;
 	return Q; 
  } 

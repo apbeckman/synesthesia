@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "flockaroo",
+	"DESCRIPTION" : "some genuary loop doodling...",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "genuary1_-_perfect_lada_loop.png",
+	"TITLE" : "Genuary1 - perfect lada loop",
+	"WIDTH" : 1280
+}

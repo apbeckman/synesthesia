@@ -27,8 +27,11 @@ vec2 rotate2D(vec2 position, float theta)
 //from https://github.com/keijiro/ShaderSketches/blob/master/Text.glsl
 float letter(vec2 coord, float size)
 {
+
     vec2 gp = floor(coord / size * 7.); // global
+    
     vec2 rp = floor(fract(coord / size) * 7.); // repeated
+
     vec2 odd = fract(rp * 0.5) * 2.;
     float rnd = random2d(gp);
     float c = max(odd.x, odd.y) * step(0.5, rnd); // random lines
@@ -43,17 +46,20 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
 
-    vec2 uv = fragCoord.xy / RENDERSIZE.xy;    
+    vec2 uv = fragCoord.xy / RENDERSIZE.xy;
+
+
     //correct aspect ratio
     uv.x *= RENDERSIZE.x/RENDERSIZE.y;
+
 
     float t = TIME;
     float scrollSpeed = 0.3;
     float dims = 2.0;
-    int maxSubdivisions = 3;
+    int maxSubdivisions = 5;
     
     uv = rotate2D(uv,PI/12.0);
-    uv.y -= TIME * scrollSpeed;
+//    uv.y -= TIME * scrollSpeed;
     
     float cellRand;
     vec2 ij;

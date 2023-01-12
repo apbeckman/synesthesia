@@ -23,12 +23,12 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
 			"UI_GROUP" : "defaults"
 		},
 		{

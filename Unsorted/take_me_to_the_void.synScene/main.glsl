@@ -9,7 +9,7 @@
 #define T TIME * .5
 
 // toggle for psychedelic madness
-#define ENABLE_COLOR_CYCLE 0
+//#define ENABLE_COLOR_CYCLE 0
 
 // FabriceNeyret2 
 #define hue(v)  (.5 + cos(6.3 * (v) + vec4(0, 23, 21, 0)))
@@ -44,7 +44,7 @@ float fbm(in vec2 p) {
 	for(int i = 0; i < 8; i++) {
 		s += a * noise(p);
 		m += a;
-		a *= .5;
+		a *= .35;
 		p *= 2.;
 	}
 	return s / m;
@@ -57,7 +57,7 @@ vec3 renderFractal(vec2 uv) {
 	
     // per channel iters
     float t = T;
-    for (int c = 0; c < 3; c++) {
+    for (int c = 0; c < 2; c++) {
     
         t += .1; // time offset per channel
         
@@ -69,7 +69,7 @@ vec3 renderFractal(vec2 uv) {
             p -= s;
             p *= rotate(t * .5);
             s *= .8;
-            l += (s  * .08) / length(p);
+            l += (s  * .08) / length(p)*syn_HighLevel;
         }
         color[c] += l;
     
@@ -84,9 +84,9 @@ float map(vec3 p) {
     float m = 1000.;
     
     vec3 q = p;
-    float k = fbm(q.xz + fbm(q.xz + T *2.));
+    float k = fbm(q.xz + fbm(q.xz + smoothTimeC *0.125));
    	
-    q.y += .1;
+    q.y += 1.1;
     float d = dot(q, vec3(0., 1., 0.)) + k;
 	d = min(5. - d, d);
     if (d < m) { 
@@ -117,16 +117,16 @@ vec3 render(vec3 ro, vec3 rd) {
 		if (d < .001 || t > 50.) break;
 		t += .5 * d;
 #if ENABLE_COLOR_CYCLE 
-        col += .02 * hue(d * .5 + T * .8).rgb;
+        col += .012 * hue(d * .5 + T * .8).rgb;
 #else
-        col += .02 * hue(d).rgb;
+        col += .0075 * hue(d).rgb;
 #endif
 	}
     col /= 1.5;
     
     vec3 tex =  renderFractal(fract(.1 * p.xz) - .5);
     if (id == 1) col += tex / (1. + t * t * .5);
-    if (id == 2) col += abs(.1 / sin(10. * p.y + T)) * vec3(0., 1., 1.);
+    if (id == 2) col += abs(.1 / sin(2. * abs(pow(p.y+_uv.y, 2.)) - T*3.)) * vec3(0., 1., 1.)*(1.0+pow(syn_HighLevel*0.5+syn_MidHighLevel*0.5, 1.0+syn_Intensity));
     
 	return col;
 
@@ -141,7 +141,7 @@ vec4 renderMainImage() {
         / R.y;
 	vec3 col = vec3(0.);
 	
-	vec3 ro = vec3(2., 1., T * 2.);
+	vec3 ro = vec3(2., 1., bass_time * 2.);
 	vec3 rd = vec3(uv, 1.);
 	
     vec3 pc = render(ro, rd);

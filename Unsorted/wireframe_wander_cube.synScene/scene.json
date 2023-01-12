@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "Tater",
+	"DESCRIPTION" : "Use more steps to march deeper into the cube fractal\nOriginal parts:\nhttps://www.shadertoy.com/view/7sdGRr\nhttps://www.shadertoy.com/view/Nst3RH",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "wireframe_wander_cube.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Wireframe Wander Cube",
+	"WIDTH" : 1280
+}

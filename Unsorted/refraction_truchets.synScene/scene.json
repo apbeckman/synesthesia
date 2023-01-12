@@ -1,0 +1,21 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "byt3_m3chanic",
+	"DESCRIPTION" : "Overhaul of an one of my early shaders, going back to update marching loop/normals/refraction etc. (mouseable)",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "refraction_truchets.png",
+	"TITLE" : "Refraction Truchets",
+	"WIDTH" : 1280
+}

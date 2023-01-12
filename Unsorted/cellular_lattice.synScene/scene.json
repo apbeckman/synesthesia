@@ -19,8 +19,17 @@
 				-1
 			],
 			"NAME" : "lookXY",
-			"PARAMS" : 0.039,
+			"PARAMS" : 0.02,
 			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -29,7 +38,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "FOV",
-			"PARAMS" : 0.07,
+			"PARAMS" : 0.027,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
@@ -39,7 +48,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Rotate",
-			"PARAMS" : 0.057,
+			"PARAMS" : 0.021,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		},
@@ -102,7 +111,8 @@
 				0
 			],
 			"NAME" : "Perspective",
-			"TYPE" : "xy",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		}
 	],

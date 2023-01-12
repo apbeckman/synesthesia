@@ -1,6 +1,6 @@
 
 
-const float tmax = 20.0;
+float tmax = 20.0;
 
 float hash(float n) {
 	return fract(sin(n)*43758.5453);
@@ -52,7 +52,7 @@ float map(vec3 p) {
 	vec4 q = vec4(p, 1.0);
 	q.x += 1.0;
 
-	for(int i = 0; i < 6; i++) {
+	for(int i = 0; i < 8; i++) {
 		q.xyz = -1.0 + 2.0*fract(0.5 + 0.5*q.xyz);
 		q = 1.2*q/max(dot(q.xyz, q.xyz), 0.1);
 	}
@@ -85,7 +85,7 @@ vec3 normal(vec3 p) {
 }
 
 float ao(vec3 p, vec3 n) {
-    float o = 0.0, s = 0.005;
+    float o = 0.0, s = 0.0025;
     for(int i = 0; i< 15; i++) {
         float d = map(p + n*s);
         o += (s - d);
@@ -117,7 +117,7 @@ vec3 material(vec3 p) {
 
 		v += v2;
 
-		f *= 3.0;
+		f *= 13.0;
 		a *= 0.5;
 	}
 

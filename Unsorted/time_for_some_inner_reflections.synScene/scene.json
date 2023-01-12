@@ -14,10 +14,11 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0.2,
+			"MAX" : 1,
+			"MIN" : -0.5,
 			"NAME" : "Zoom",
-			"TYPE" : "slider",
+			"PARAMS" : 0.066,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -28,6 +29,28 @@
 			"NAME" : "Flip",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Mirror",
+			"PARAMS" : 0.037,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		}
 	],

@@ -18,7 +18,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 #define SHADOW_STEPS 50
 #define LIGHT_COLOR vec3(.97,.92,.82)
 #define AMBIENT_COLOR vec3(.57,.55,.6)
-#define FLOOR_COLOR vec3(.35,.25,.2)
+#define FLOOR_COLOR vec3(.135,.125,.12)
 #define ENERGY_COLOR vec3(1.,.7,.4)
 #define BRIGHTNESS 1.5
 #define GAMMA 1.2
@@ -26,7 +26,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 
 
 
-#define detail .000025
+#define detail .0000125
 #define t TIME*.1
 
 
@@ -254,7 +254,7 @@ vec4 renderMainImage() {
 	color=pow(abs(color),vec3(GAMMA))*BRIGHTNESS;
 	color=mix(vec3(length(color)),color,SATURATION);
 	color*=1.2-length(pow(abs(uv2),vec2(4.)))*.3;
-	float fadein=clamp(TIME-.5,0.,1.);
+	float fadein=clamp(TIME-.125,0.,1.);
     fragColor = vec4(color*vec3(.93,.95,.91),1.)*fadein;
 	return fragColor; 
  } 

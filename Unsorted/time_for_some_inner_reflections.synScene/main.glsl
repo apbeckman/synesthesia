@@ -192,8 +192,8 @@ vec3 skyColor(vec3 ro, vec3 rd) {
   const vec3 gcol = HSV2RGB(vec3(0.45, 0.6, 1.0));
   vec3 col = clamp(vec3(0.0025/abs(rd.y))*gcol, 0.0, 1.0);
   
-  float tp0  = rayPlane(ro, rd, vec4(vec3(0.0, 1.0, 0.0), 4.0));
-  float tp1  = rayPlane(ro, rd, vec4(vec3(0.0, -1.0, 0.0), 6.0));
+  float tp0  = rayPlane(ro, rd, vec4(vec3(0.0, 1.0, 0.0), 14.0));
+  float tp1  = rayPlane(ro, rd, vec4(vec3(0.0, -1.0, 0.0), 16.0));
   float tp = tp1;
   tp = max(tp0,tp1);
   if (tp > 0.0) {
@@ -236,6 +236,7 @@ float dfExclusion(vec3 p, out vec3 pp) {
 }
 
 float shape(vec3 p) {
+  
   vec3 pp;
   return poly_planes(p/zoom, pp)*zoom;
 }
@@ -380,6 +381,9 @@ vec3 render0(vec3 ro, vec3 rd) {
 }
 
 vec3 effect(vec2 p) {
+  p += Mirror*p*_uvc*PI*PI;
+  p += _uvc*PI*Zoom;
+
   vec3 ro = 0.8*vec3(0.0, 4.0, 5.0);
   const vec3 la = vec3(0.0, 0.0, 0.0);
   const vec3 up = vec3(0.0, 1.0, 0.0);
@@ -417,7 +421,7 @@ vec4 renderMainImage() {
   p.x *= RESOLUTION.x/RESOLUTION.y;
   vec3 col = vec3(0.0);
   col = effect(p);
-  col *= smoothstep(0.0, 4.0, smoothTimeB);
+  col *= smoothstep(0.0, 1.0, smoothTimeB);
   col = aces_approx(col); 
   col = sRGB(col);
   fragColor = vec4(col, 1.0);

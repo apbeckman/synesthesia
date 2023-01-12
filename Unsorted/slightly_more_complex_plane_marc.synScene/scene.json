@@ -1,4 +1,16 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "mrange",
 	"DESCRIPTION" : "Licence CC0: Slightly more complex plane marcher\nI had fun messing around with \"plane marching\" and FBMs\n",
 	"GPU" : 0,

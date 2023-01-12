@@ -62,12 +62,10 @@ vec2 hash22(vec2 p) {
     return sin(p*6.2831853 + smoothTime)*0.5 + 0.5;
 }
 
-/*
 vec3 hash33(in vec2 p){ 
     float n = sin(dot(p, vec2(41, 289)));    
     return fract(vec3(2097152, 262144, 32768)*n); 
 }
-*/
 
 /*
 vec3 sTexture(sampler2D smp, vec2 uv) {
@@ -83,6 +81,17 @@ vec3 sTexture(sampler2D smp, vec2 uv) {
     
 }
 */
+
+float n3D(vec3 p){
+    
+	const vec3 s = vec3(7, 157, 113);
+	vec3 ip = floor(p); p -= ip; 
+    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
+    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
+    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
+    h.xy = mix(h.xz, h.yw, p.y);
+    return mix(h.x, h.y, p.z); // Range: [0, 1].
+}
 
 
 // IQ's value noise formula.
@@ -280,6 +289,7 @@ vec3 sTexture(sampler2D smp, vec2 uv) {
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
+//fragCoord.xy = _rotate(fragCoord+Zoom*_uvc, syn_BassLevel*0.001)+_uvc;
 
     fragCoord.x-=0.5*sin(noise(_uvc*PI))*PI*(Distort.x*(1.0+growthFactor));
     fragCoord.y-=0.5*cos(noise(0.5*_uvc*PI))*PI*(Distort.y*(1.0+growthFactor));
@@ -288,7 +298,6 @@ vec4 renderPassA() {
     // I'm sure there was a reason. Fixed size square buffers would make life a lot
     // easier -- I know that much. :)
     vec2 p = fragCoord.xy/RENDERSIZE.xy;
-    
 
     // Grab the reaction diffusion values from the previous frame. These values are
     // are representative of concentrations of hypothetical liquid, gas, etc, solutions,
@@ -467,7 +476,7 @@ vec4 renderPassA() {
     // Sometimes, the application won't recognize the first frame -- or something, so it's 
     // necessary to initialize for the first few frames to give it a chance to catch on.
     // Also, check for changes in canvas size.
-    if(FRAMECOUNT<=10 || abs(rdVal.w - RENDERSIZE.y)>.001|| Reset > 0.)  {
+    if(FRAMECOUNT<=10 || Reset > 0. ||abs(rdVal.w - RENDERSIZE.y)>.001 )  {
         //AB: adding option for user media
         
         if (_exists(syn_UserImage)){
@@ -477,7 +486,7 @@ vec4 renderPassA() {
         else{
         // Required multi-channel noise texture in "iChannel1."
         //fragColor.xy =  vec2(1, 0) +  texture(image30, fragCoord.xy/RENDERSIZE.y).xy -.5;   
-        fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5)+basshits*  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5);
+        fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5)+syn_BassLevel*  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5);
         }
 
         //fragColor.xy =  vec2(1, 0) +  (vec2(Voronoi(p*64.), Voronoi(p*64. + vec2(2.93, 19.37))) - .5);
@@ -768,7 +777,7 @@ vec4 renderMainImage() {
     // Centered, aspect-correct, screen coordinates. Only one line is necessary to
     // accomplish this.
 	vec2 uv = (fragCoord - RENDERSIZE.xy*.5)/gResY;
-    uv.xy -= (_uvc*Fov*PI*0.25);
+    uv.xy -= (_uvc*Fov*PI*0.5);
     // BASIC SETUP - surface postion, ray origin, unit direction vector, and light postion.
     //
 	// Setup for a raytraced plane. Not all that necessary, since you could effect a tiled
@@ -785,12 +794,12 @@ vec4 renderMainImage() {
 	// Hit point on the plane.
 	float t = rayPlane(vec3(0), ro, sn, rd);
     vec3 sp = ro + rd*t;
-     
+    float Noise = n3D(vec3(smoothTime));
 
     vec3 lp = vec3(.125+0.5*cos(smoothTimeB*0.123), .35+0.5*sin(smoothTimeB*0.123), -1); // Light position - Back from the screen.
     lp.xy += Camera_Pos.xy;
-    sp.xy -= vec2(-5*sin(smoothTime*0.00125+TIME*0.01), -5.5*cos(smoothTime*0.00125+TIME*0.01));
-    lp.xy -= vec2(- 5*sin(smoothTime*0.00125+TIME*0.01), -5.5*cos(smoothTime*0.00125+TIME*0.01));
+    sp.xy -= vec2(-5*sin(smoothTime*0.0005+TIME*0.01), -5.5*cos(smoothTime*0.0005+TIME*0.01));
+    lp.xy -= vec2(- 5*sin(smoothTime*0.0005+TIME*0.01), -5.5*cos(smoothTime*0.0005+TIME*0.01));
 	
     //vec3 sn = vec3(0., 0., -1); // Plane normal. Z pointing toward the viewer.
     
@@ -847,14 +856,14 @@ vec4 renderMainImage() {
     
     // Coloring the main object yellow, and the ground brownish with some fine diffusion crevices,
     // or something to that effect.
-     texCol = mix(vec3(.6, .48, .42)*(difPat2*.25 + .75), vec3(.8, .75, .85)*1.5, mainPat)*texCol;
+     texCol = mix(vec3(.0, .0, .0)*(difPat2*.5 + .75)*sp.x, vec3(.25, .25, .25)*2.5, mainPat)*texCol*(1.0+syn_HighLevel*syn_Intensity);
     //texCol = mix(vec3(.4, .4, .4)*(difPat2*.25 + .75), vec3(0.43, .4, .46)*1.5, mainPat)*texCol;
     //texCol = mix(vec3(.6, .48, .42)*(difPat2*.25 + .75), vec3(1, .45, .05)*1.5, mainPat)*texCol;
     
     // Darkening the fine grade diffusion crevices on the yellow object.
     //texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*-.9);//.525
-    texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*.6);//.525
-    
+    texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .105, ggs - .525)*.75);//.525
+    texCol.xy += 0.0975*(_uvc-_uv/PI);
     //texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*.6);//.525
     
     //texCol *= mix(vec3(1), vec3(0), clamp(difPat2*mainPat*smoothstep(0., .05, ggs - .525)*.75, 0., 1.));
@@ -876,22 +885,22 @@ vec4 renderMainImage() {
     
     // FINAL COLOR
     // Using the values above to produce the final color.   
-    vec3 col = (texCol*(diff*2. + 0.25) + (texCol*.5 + 1.5)*vec3(.4, .4, .4)*spec)*atten;
+    vec3 col = (texCol*(diff*2. + 0.5) + (texCol*.5 + 1.5)*vec3(.4, .4, .4)*spec)*atten;
     //vec3 col = (texCol*(diff*2. + 0.25) + (texCol*.5 + .5)*vec3(.25, .5, 1)*spec)*atten;
     
     // Lightening the edges a bit -- Very subtle, but it enhances the pseudo 3D look a fraction.
-    col += col*vec3(1)*diff*edge;
+    col += col*vec3(1.5*(1.0+pow(syn_HighLevel*0.3+0.4*syn_Intensity+ 0.3*syn_MidHighLevel, 2.)))*diff*edge;
     
     // Extra dark edging. Not needed here.
-    col *= vec3(1)*(1. - edge*.75);
+   // col *= vec3(1)*(1. - edge*.75);
     
     
     // Fake shadows. Just a bit of sampling and masking trickery. I made it up on the spot,
     // but it works well enough. Obviously, the fake shadows are there to add false depth.
     vec3 lp2 = lp + vec3(.5, 1.4, -.125);
-    vec2 dir = normalize(lp2 - sp).xy*1./min(800., RENDERSIZE.y);
-    float shad = max(1. - bumpFunc(sp.xy + dir*16.), mainPat);
-    float shad2 = max(bumpFunc(sp.xy - dir*16.), 1. - mainPat);
+    vec2 dir = normalize(lp2 - sp).xy*1./min(1600., RENDERSIZE.y);
+    float shad = max(1. - bumpFunc(sp.xy + dir*32.), mainPat);
+    float shad2 = max(bumpFunc(sp.xy - dir*32.), 1. - mainPat);
     shad = min(shad, shad2);
     // Applying the shadow layer. Comment this line out to see the difference. The image becomes
     // very flat looking.

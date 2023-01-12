@@ -10,7 +10,7 @@
 #define t(uv) texture(iChannel0, (uv)/R)
 
 vec4 gaussian(sampler2D chan, vec2 uv, vec2 RENDERSIZE, float mip){
-    float st = 4.;
+    float st = 6.;
     vec3 t = vec3(st, 0., -st);
     vec4 C = vec4(0);
 	#define TC(uv) texture(chan, (uv)/R, mip) 
@@ -19,7 +19,7 @@ vec4 gaussian(sampler2D chan, vec2 uv, vec2 RENDERSIZE, float mip){
     C += 2.*TC(uv - t.xy) + 2.*TC(uv + t.xy) + 2.*TC(uv - t.yx) + 2.*TC(uv - t.yx);
     C += 1.*TC(uv - t.xx) + 1.*TC(uv + t.xx) + 2.*TC(uv - t.xz) + 2.*TC(uv - t.xz);
 
-    return C / 16.;
+    return C / 32.;
 }
 
 
@@ -62,7 +62,7 @@ vec2 map(vec3 p){
 	// Scale to fit in the ]-pi,pi] interval
 	p *= lpscale;
 	// Apply rho-translation, which yields zooming
-	p.x -= 0. + TIME;
+	p.x -= 0. + bass_time;
 	
     
 	// Turn tiled coordinates into single-tile coordinates
@@ -73,7 +73,7 @@ vec2 map(vec3 p){
     // 
     p = abs(p);	
     p.xz *= rot(0.2*pi);
-    float thickness = 0.1 ;
+    float thickness = 0.125 ;
     
 
     
@@ -183,7 +183,7 @@ float calcSoftshadow( in vec3 ro, in vec3 rd, in float mint, in float tmax, int 
     return clamp( res, 0., 1.0 );
 }
 
-#define T (TIME*0.25)
+#define T (spin_time)
 #define mx (10.*_mouse.x/RENDERSIZE.x)
 #define my (10.*_mouse.y/RENDERSIZE.x)
 vec4 renderPassA() {
@@ -203,22 +203,23 @@ vec4 renderPassA() {
     ro.y -= cos(2.*T/pi)*(0.9);
     
     vec3 lookAt = vec3(0);
+
     vec3 rd = getRd(ro, lookAt, uv);
-    rd.xz *= rot(sin(TIME*0.5)*0.1);
-    rd.xy *= rot(sin(TIME*0.5)*0.1);
+    rd.xz *= rot(sin(spin_time*0.75)*0.1);
+    rd.xy *= rot(sin(spin_time*0.75)*0.1);
     //rd.xz *= rot(0.5);
     vec3 p; float t; bool hit;
     vec2 d = march(ro, rd, p, t,hit);
     #define ao(d) clamp(map(p+n*d).x/d,0.,1.)
 
-    vec3 lightColA = vec3(0.1,0.4,0.9);
-    vec3 lightColB = vec3(0.25,0.2,0.20)*0.1;
+    vec3 lightColA = vec3(0.5,0.2,0.415);
+    vec3 lightColB = vec3(0.625,0.32,0.420)*0.1;
     if(hit){
         // do lighting from two light sources
         vec3 l = normalize(-p);
         
-        l.xz *= rot(sin(TIME*0.12 + 0.2)*0.1 + 0.3);
-        l.xy *= rot(sin(TIME*0.08 + 0.4)*0.1);
+        l.xz *= rot(sin(smoothTimeB*0.12 + 0.2)*0.1 + 0.3);
+        l.xy *= rot(sin(smoothTimeB*0.08 + 0.4)*0.1);
         
         float shad = calcSoftshadow( p,l, 0.1, 100., 1 );
         
@@ -257,7 +258,7 @@ vec4 renderPassA() {
         
         col = col*shad;
     }
-    col = mix(col, col + glow*0.03*vec3(0.1,0.4,0.9),
+    col = mix(col, col + glow*0.03*vec3(0.6,0.4,0.9),
               pow( smoothstep(0.,1.,exp(-length(p)*1.5)), 4.)
              ); 
     col = mix(col,lightColB, smoothstep(0.,1.,t*0.1 ));

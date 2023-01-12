@@ -13,17 +13,18 @@
 #ifdef GL_ES
 precision highp float;
 #endif
-
-#define    	c30    	0.866025     	// cos 30
-#define    	twpi   	6.2831853       // two pi, 2*pi
+#define		eConst  2.7182818284590452353602874713527
+#define    	c30    	cos(30.)     	// cos 30
+#define    	twpi   	PI*2.0       // two pi, 2*pi
 #define 	pi   	PI 		// pi
+#define		phi		2.61803398875
 #define		piphi	pi * phi		// pi*phi
-#define 	sqpi 	sqrt(pi)		// square root of pi
+#define 	sqpi 	pow(pi, 0.5)		// square root of pi
 //#define 	phi   	phi		// golden ratio
-#define 	cucuphi	1.0549232		// cube root of cube root of phi
-#define		epi		0.8652559		// e/pi
-#define 	time2	smoothTime*0.05+50.0
-#define 	time3	smoothTimeC*0.1+50.0
+#define 	cucuphi	pow(pow(phi, 1.0/3.0), 1.0/3.0)		// cube root of cube root of phi
+#define		epi		eConst/PI		// e/pi
+#define 	time2	bass_time*2.0+50.0
+#define 	time3	smoothTimeC*0.0125+50.0
 
 
 vec2 rotate(in vec2 r, in float o) { return vec2(cos(o)*r.x + sin(o)*r.y, -sin(o)*r.x + cos(o)*r.y); }
@@ -34,7 +35,7 @@ float torus(in vec3 pos, in vec2 tor) {
 }
 
 float trap(in vec3 tp) {
-	return abs(min(torus(tp, vec2(epi, 0.125)), max(abs(tp.z)-0.125, abs(tp.x)-0.125)))-0.005;
+	return abs(min(torus(tp, vec2(epi, 0.125)), max(abs(tp.z)-0.125, abs(tp.x)-0.125)))-0.0025;
 }
 
 float map(in vec3 pm) {
@@ -45,7 +46,7 @@ float map(in vec3 pm) {
 	for (float i = 0.0; i < 4.0+its; i++) {
 		m.xz = rotate(m.xz, radians(i*(1./3.)+time3));
 		m.zy = rotate(m.yz, radians((i+i)*(2./3.)+time3*phi));
-		m = abs(1.0-mod(m+i/(3.0+test+(geoMorph*sin(smoothTimeC*0.0125))*2.),2.0));
+		m = abs(1.0-mod(m+i/(3.0+test+(0.5*sin(spin_time*0.5))*2.),2.0));
 		m *=abs(sqrt(m)*sqpi);
 		f *= 0.5;
 		e = min(e, trap(m) * f);
@@ -73,9 +74,9 @@ vec3 intersect(in vec3 rayOrigin, in vec3 rayDir) {
 		float y = (d-0.01)/0.01/(49.0);
 		float z = (0.01-d)/0.01/49.0;
 		float q = 1.0-x-y*2.+z;
-		col = hsv(q*0.2+0.5, 1.0-q*epi, q);
+		col = hsv(q*0.82+0.5, 1.0-q*epi, q);
 	} 
-		col += hsv(d, 1.0, 1.0)*md*(28.0+coler*10.);
+		col += hsv(d, 1.0,2.0)*md*(28.0);
 	return col;
 }
 /*
@@ -112,17 +113,18 @@ vec4 renderMain() {
 	ps.x *= RENDERSIZE.x / RENDERSIZE.y;
 	vec3 up = vec3(0, -1, 0);
 	vec3 cd = vec3(1, 0, 0);
-	vec3 co = vec3(( smoothTime*0.125+50.), 0, 0);
+	vec3 co = vec3(( bass_time*0.125+50.), 0, 0);
 	vec3 uw = normalize(cross(up, co));
 	vec3 vw = normalize(cross(cd, uw));
 	//vec3 rd = normalize(uw * ps.x + vw * ps.y + cd*(1.0-length(ps)*phi));
     vec3 rd = vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y);
 
-	rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.)*FOVmod)*FOVmod));
+	rd = normalize(vec3(rd.xy*(1.0+(Mirror*(-1+_uvc*PI))), sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.)*(FOVmod-Flip*0.5))*FOVmod));
+//    rd = normalize(vec3(rd.xy*(1.0+(Mirror*(-1+_uvc*PI))), (rd.z - length(rd.xy-_uvc*PI*Fisheye)*.125)));
 
-	rd.yz = _rotate(rd.yz, lookXY.y*PI);
+	rd.yz = _rotate(rd.yz, lookXY.y*PI+_uvc.y*Flip*PI);
     rd.xy = _rotate(rd.xy, lookXY.x*PI);
-    rd.xz = _rotate(rd.xz, lookZ*PI);
+    rd.xz = _rotate(rd.xz, Rotate*PI);
 
 	out_FragColor = vec4(vec3(intersect(co, rd)),1.0);
 

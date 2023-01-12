@@ -170,7 +170,7 @@ float curve(in vec3 p){
 
 vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
-	vec2 fragCoord{ = _xy;
+	vec2 fragCoord = _xy;
 
 
 	vec2 u = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;

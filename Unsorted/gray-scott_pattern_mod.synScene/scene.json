@@ -82,16 +82,34 @@
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				1,
-				1
+				0.25,
+				0.25
 			],
 			"MIN" : 
 			[
-				-1,
-				-1
+				-0.25,
+				-0.25
 			],
 			"NAME" : "Distort",
 			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		},
 		{

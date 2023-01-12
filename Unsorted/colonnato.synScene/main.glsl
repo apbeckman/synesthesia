@@ -132,7 +132,7 @@ vec4 renderMainImage() {
     vec2 uv = (fragCoord * 2. - RENDERSIZE.xy) / min(RENDERSIZE.x, RENDERSIZE.y);
 	vec2 mo = _mouse.xy / RENDERSIZE.xy * 2.0 - 1.0;
 
-	vec3 cameraPos = vec3(0.*_uvc.x,_uvc.y* 0., smoothTime);
+	vec3 cameraPos = vec3(0.*_uvc.x,_uvc.y* 0., bass_time);
 	cameraPos.xy*= _uvc*PI;
     
 	// angolo visuale
@@ -194,7 +194,7 @@ vec4 renderMainImage() {
 			}
 			// colonna
 			else if(colonnaDist(rayPos) < threshold) {
-				col = lerp(vec3(0.90, 0.90, 0.85), vec3(01.740, 01.760, 01.55), marble(rayPos+vec3(smoothTimeC*0.1, smoothTimeC*0.1, 0.)));
+				col = lerp(vec3(0.90, 0.90, 0.85), vec3(01.740, 01.760, 01.55), marble(rayPos+vec3(smoothTimeC*0.01, smoothTimeC*0.01, 0.)));
 				vec2 v = mod(rayPos.xz, 4.0) - 2.0;
 				norm = normalize(vec3(v.x, 0.0, v.y));
 			}
@@ -210,7 +210,7 @@ vec4 renderMainImage() {
 
 			// luci
 			col = col * (lightcol+highhits*flashy) * illuminazione(rayPos, norm);
-			if (mirror) colPav = colPav * (lightcol+highhits*flashy) * illuminazione(rayPosPav, vec3(0.0, 0.3, 0.0));
+			if (mirror) colPav = colPav * (lightcol+highhits*flashy) * illuminazione(rayPosPav, vec3(0.0, 0.125+syn_HighLevel*0.25+syn_MidHighLevel*0.2, 0.0));
             
 			col /= 0.6 + 0.03 * float(i); // accentua i bordi
 			break;

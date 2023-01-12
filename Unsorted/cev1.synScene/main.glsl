@@ -44,30 +44,31 @@ vec2 map(vec3 p){
     
     p = abs(p);
     p.xy -= 0.3;
-    
+    float hightime = smoothTimeB*0.2;
     p = abs(p);
+    p.xy = _rotate(p.xy, spin_time);
     p.y -= 0.2+(sin(0.0125*smoothTimeC)*tog);
     p = abs(p);
-    p.x -= 0.5+test;
+    p.x -= 0.5;
     p = abs(p);
     p.x -= 0.5+(sin(0.0125*smoothTimeC)*tog);
     
-    float attd = pow(abs(sin(j.z*0.5 + smoothTimeB*0.4)), 10.);; 
-    float atte = pow(abs(sin(j.z*0.5 + smoothTimeB*.124)), 100.)*attd; 
+    float attd = pow(abs(sin(j.z*0.5 + hightime*0.4)), 10.);; 
+    float atte = pow(abs(sin(j.z*0.5 + hightime*.124)), 100.)*attd; 
     
     vec3 q = p;
-    
+
     q.x -= 0.4;
     q = abs(q);
     q.x -= 0.4;
 
-    q.y -= 0.4;
+    q.y -= 0.14;
     
-    vec3 sz = vec3(0.02,0.02+test2,20.5+test2);
+    vec3 sz = vec3(0.02,0.02,20.5);
     float dB = sdBox(q, sz)*1.2;
     
     d = dmin(d, vec2(dB, 2.));
-    float att = pow(abs(sin(j.z*0.1 + smoothTimeB*0.5 + sin(j.x*4.)*0.2)), 400.);
+    float att = pow(abs(sin(j.z*0.1 + hightime*0.5 + sin(j.x*4.)*0.2)), 400.);
     
     //Beam Colors
     //glow += 0.9/(0.001 + dB*dB*2000.)*vec3(1.8 + attd*8.,0.9,0.7)*att;
@@ -80,7 +81,7 @@ vec2 map(vec3 p){
     //p.xz *= rot(0.5);
     float dC = sdBox(p, vec3(0.02,2000.7,0.02));
     d = dmin(d, vec2(dC, 2.));
-    float attb = pow(abs(sin(p.x*0.4 + smoothTimeB - 1.)), 10.);
+    float attb = pow(abs(sin(p.x*0.4 + hightime - 1.)), 10.);
     //glown += 7.9/(0.04 + dC*dC*2000.)*vec3(1.,1.,1.7)*attb;
 	glown += 2.9/(0.001 - - atte*2. + dC*dC*400.)*vec3(1.,1.,1.7)*attb;
 
@@ -97,7 +98,7 @@ vec2 map(vec3 p){
     
     float dD = sdBox(p, vec3(0.02,1.7+basshits,0.02+basshits*0.1));
     d = dmin(d, vec2(dD, 2.));
-    float attc = pow(abs(sin(p.y*0.24 + smoothTimeB + 4.)), 10.);
+    float attc = pow(abs(sin(p.y*0.24 + hightime + 4.)), 10.);
     //glow += 10.9/(0.01 + dD*dD*2000.)*sin(vec3(0.1,0.8,0.7) + vec3(0,0,attd*2.))*attc;
     //glow += 0.7/(0.001 + dD*dD*100.)*sin(vec3(0.1,0.1,0.9) + vec3(0,0,attd*2.))*attc;
     
@@ -176,7 +177,7 @@ vec4 renderPassA() {
     
     lookAt.z = ro.z + 2.;
     vec3 rd = getRd(ro, lookAt, uv);
-        rd.xy = _rotate(rd.xy, PI*Rotate);
+        rd.xy = _rotate(rd.xy, PI*Spin);
 
     vec3 p; float t; bool hit;
     
@@ -199,7 +200,7 @@ vec4 renderPassA() {
     
     
     col += glow*0.001;
-    col = mix(col, vec3(0.1,0.1,0.16 + (uv.x + 0.5)*0.1)*0.02, smoothstep(0.,1.,t*0.04 ));
+    col = mix(col, vec3(0.1,0.1,0.1 + (uv.x + 0.5)*0.1)*0.02, smoothstep(0.,1.,t*0.04 ));
 
     
     
@@ -228,7 +229,7 @@ vec4 renderMainImage() {
 	fragColor = vec4(0);
     // Radial blur
     float steps = 26.;
-    float scale = 0.00 + pow(dot(uvn,uvn),1.1)*0.04;
+    float scale = 0.00 + pow(dot(uvn,uvn),1.1)*0.024;
     //float chromAb = smoothstep(0.,1.,pow(length(uv - 0.5), 0.3))*1.1;
     float chromAb = pow(length(uv - 0.5),1.5)*0.4+basshits;
     vec2 offs = vec2(0);

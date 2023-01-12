@@ -38,16 +38,16 @@
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				2,
+				4,
 				2
 			],
 			"MIN" : 
 			[
-				-2,
+				-4,
 				-2
 			],
 			"NAME" : "center",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.026,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -104,7 +104,8 @@
 			"MAX" : 0.25,
 			"MIN" : -2,
 			"NAME" : "Zoom2",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}
 	],

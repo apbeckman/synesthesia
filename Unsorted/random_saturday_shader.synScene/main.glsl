@@ -3,7 +3,7 @@
 // License CC0: Random saturday shader
 // Result after a bit of random coding on saturday afternoon
 
-#define PI              3.141592654
+//#define PI              3.141592654
 #define TAU             (2.0*PI)
 #define RESOLUTION      RENDERSIZE
 #define ROT(a)          mat2(cos(a), sin(a), -sin(a), cos(a))
@@ -218,8 +218,9 @@ vec3 render(vec3 ro, vec3 rd) {
 
 vec3 effect3d(vec2 p, vec2 q) {
   float z   = TIME;
-  vec3 cam  = 1.2*vec3(1.0, 0.5, 0.0);
+  vec3 cam  = 1.2*vec3(1.0, 0.25, 0.0);
   float rt  = TAU*TIME/20.0;;
+
   cam.xy   *= ROT(sin(rt*sqrt(0.5))*0.5+0.0);
   cam.xz   *= ROT(sin(rt)*1.0-0.75);
   vec3 la   = vec3(0.0);

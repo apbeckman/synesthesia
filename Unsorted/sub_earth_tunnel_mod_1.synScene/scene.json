@@ -1,4 +1,16 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "aiekick",
 	"DESCRIPTION" : "Sub Earth Tunnel",
 	"GPU" : 0,
@@ -7,7 +19,7 @@
 	[
 		{
 			"NAME" : "image4",
-			"PATH" : "images/4.jpg"
+			"PATH" : "images/asrd.jpg"
 		}
 	],
 	"IMAGE_PATH" : "sub_earth_tunnel_mod.png",

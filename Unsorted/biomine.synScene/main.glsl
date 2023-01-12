@@ -138,11 +138,11 @@ float map(vec3 p){
     // pretty cool looking and simple to produce.
     float d = dot(cos(p*1.5707963), sin(p.yzx*1.5707963+Vein_Twist+warp_time)) + 1.;
 	// Biotube lattice. The final time-based term makes is heave in and out.
-    float bio = d + .25 - syn_Hits*Vein_Gain*.01 + dot(sin(p*1. + TIME*6.283 + syn_Hits*Vein_Gain + sin(p.yzx*.5)), vec3(.033)); // MS: Width of tubes
+    float bio = d + .25 - syn_Hits*Vein_Gain*.01 + dot(sin(p*1. + TIME*PI*2. + syn_Hits*Vein_Gain + sin(p.yzx*.5)), vec3(.033)); // MS: Width of tubes
 
     // The tunnel. Created with a bit of trial and error. The smooth maximum against the gyroid rounds it off
     // a bit. The abs term at the end just adds some variation via the beveled edges. Also trial and error.
-    float tun = Tunnel_Reveal + smaxP(3.25 - length(p.xy - vec2(0, 1)) + .5*cos(p.z*3.14159/32.), .75-d, 1.) - abs(1.5-d)*.375;;// - sf*.25;
+    float tun = Tunnel_Reveal + smaxP(3.25 - length(p.xy - vec2(0, 1)) + .5*cos(p.z*PI/32.), .75-d, 1.) - abs(1.5-d)*.375;;// - sf*.25;
 
 
     objID = step(tun, bio); // Tunnel and biolattice IDs, for coloring, lighting, bumping, etc, later.
@@ -512,7 +512,7 @@ vec4 renderMainImage() {
     // Blend the scene and the background; It's commented out, but you could also integrate some some
     // very basic, 8-layered smokey haze.
     //float mist = getMist(camPos, rd, lightPos, t);
-    vec3 sky = vec3(2., .9, .8);//* mix(1., .75, mist);//*(rd.y*.25 + 1.);
+    vec3 sky = vec3(1., 1., 1.28);//* mix(1., .75, mist);//*(rd.y*.25 + 1.);
     sceneCol = mix(sky, sceneCol, 1./(t*t/FAR/FAR*8. + 1.));
 
     // Clamp and present the pixel to the screen.

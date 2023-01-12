@@ -623,16 +623,16 @@ vec4 renderMainImage() {
 
 	// Camera Setup.
 
-    vec3 o = camPath((smoothTime)*.35); // Camera position, doubling as the ray origin.
+    vec3 o = camPath((bass_time)*.35); // Camera position, doubling as the ray origin.
 
-    vec3 lk = camPath((smoothTime)*.35 + .1);  // "Look At" position.
+    vec3 lk = camPath((bass_time)*.35 + .1);  // "Look At" position.
 
-    lk.xy -= _uvc*FOV*PI;
+    lk.xy += _uvc*FOV*PI*0.5;
     //lk.xy = _rotate(lk.xy, Rotate*PI);
     lk.xy += _rotate(_uvc.xy, Twist*PI);
 
 
-    vec3 l = camPath((smoothTime)*.35 + 1.5) + vec3(.0, .0, 0.); // Light position, somewhere near the moving camera.
+    vec3 l = camPath((bass_time)*.35 + 1.5) + vec3(.0, .0, 0.); // Light position, somewhere near the moving camera.
 
 
 

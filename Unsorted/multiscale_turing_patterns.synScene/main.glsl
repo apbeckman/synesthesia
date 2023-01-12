@@ -9,8 +9,8 @@
 #define B BuffB
 #define C BuffC
 #define D BuffD
-#define o0 1.0*(1.0+0.01*syn_Intensity)
-#define o1 3.0*(1.0+0.01*syn_Intensity)
+#define o0 1.0*(1.0+0.1*syn_Intensity*syn_BassLevel)
+#define o1 3.0*(1.0+0.1*syn_Intensity)
 #define stddev 3.5
 
 float gaussian(float x, float s) {
@@ -139,8 +139,8 @@ vec4 renderPassB() {
 #define G(ic,x) texture(ic, x)
 //#define iC0 BuffB
 //#define iC1 BuffC
-#define o02 o01*(9.*Mod)
-#define o12 o02*(9.*(Mod))
+#define o02 o01*(9.)
+#define o12 o02*(9.)
 //#define stddev 2.5
 /*
 float gaussian(float x, float s) {
@@ -203,12 +203,12 @@ vec4 renderPassC() {
 
 #define Pr 0.1
 #define Pg 0.187
-#define Pb 0.1814
-#define saturation 0.995*(1.0++syn_Level*0.00125)
-#define darkening 0.0875
+#define Pb 01.814
+#define saturation 0.995
+#define darkening 0.0075
 #define BIAS(x,b) (x / ((1./b - 2.)*(1.-x))+1. )
-#define rate 0.0035*(1.0+Test)// +sin(smoothTime*0.001)
-#define blur 0.012
+#define rate 0.0035// +sin(smoothTime*0.001)
+#define blur 0.00812
 
 float hash( vec2 p ) {
 	float h = dot(p,vec2(127.1,311.7));	
@@ -292,8 +292,9 @@ vec4 renderPassD() {
         fragColor = vec4(hash(uv));
     } else {
         
-        if(distance(fragCoord.xy, _mouse.xy) < 15.0) {
+        if(distance(fragCoord.xy, RENDERSIZE.xy) < 15.0) {
             fragColor = (vec4(1.0) - eps) * is + eps;    
+            fragColor -= distance(fragCoord, _mouse.xy)*fragColor;
         } else {
             fragColor = clamp(desaturated + rate *(1.0+basshits)* vec4(diff, 0.0) + blur * lapl - darkening, -1.0, 1.0);
         }

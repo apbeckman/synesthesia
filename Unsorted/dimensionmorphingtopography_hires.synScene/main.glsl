@@ -12,7 +12,7 @@
 
 
 vec3	lux;
-float tc = ((smoothTimeB)*0.25+cycle);
+float tc = ((smoothTimeB*0.2)*0.25+cycle);
 float distanceToL,ii,m;
 
 float sdTorus( vec3 p, vec2 tx ) {
@@ -37,10 +37,11 @@ float	scene(vec3 p) {
     m = r2;
     //float aa = ((TIME+syn_Time*0.3)*0.5)*rate*0.025;
    // float aa = rate*(-0.5)+(script_time*0.06+script_bass_time*0.015);
-    float aa = ((smoothTime)+rate);
-    aa *= 0.025;
+    float aa = ((bass_time));
+    float bb = ((smoothTimeB));
+    aa *= 0.05;
     p.z+=5.0;
-    float tr = (smoothTimeC*0.1)+roto;
+    float tr = (spin_time);
     rotate(p.zx, rXY.x+cos(tr)/4.);
     rotate(p.zy, rXY.y+sin(tr)/4.);
     rotate(p.xy, rZ-sin(tr)/4.+tr/4.);
@@ -75,8 +76,8 @@ float	scene(vec3 p) {
 }
 
 vec3 evaluateLight(in vec3 pos) {
-    vec3 lightCol = vec3(blend.x,length(blend),blend.y)+sin(tc);
-    return vec3(lightCol * 1.0/(distanceToL*distanceToL)/(31.0-(light+(12.*highhits))))*mix(lightCol+pos+highhits,lightCol-pos-highhits,sin(tc))*1.0;
+    vec3 lightCol = vec3(blend.x+_uvc.x,length(blend),blend.y*_uvc.y)+sin(tc);
+    return vec3(lightCol * 1.0/(distanceToL*distanceToL)/(31.0-(light+(12.*syn_HighLevel*syn_Intensity))))*mix(lightCol+pos+syn_HighLevel*syn_Intensity,lightCol-pos,sin(tc))*1.0;
 }
 
 vec2	march(vec3 pos, vec3 dir) {
@@ -95,7 +96,7 @@ vec2	march(vec3 pos, vec3 dir) {
 }
 
 vec3	camera(vec2 uv) {
-    float   fov = (zoom)/floor(subdivisions*1.50);
+    float   fov = (2.2)/floor(subdivisions*1.50);
 	vec3    forw  = vec3(0.0, 0.0, -1.0);
 	vec3    right = vec3(1.0, 0.0, 0.0);
 	vec3    up    = vec3(0.0, 1.0, 0.0);
@@ -107,6 +108,7 @@ vec4 renderMain() {
 
     vec4 o = vec4(0.0,0.0,0.0,1.0);
     vec2 uv  = vec2(_xy.xy - RENDERSIZE.xy/2.0) / RENDERSIZE.y;
+    uv.xy -= _uvc*PI*zoom;
 	vec3 dir = camera(uv);
     vec3 pos = vec3(0.0, 0.0, 0.0);
     vec2 inter = (march(pos, dir));

@@ -293,7 +293,7 @@ float SubDensity(vec3 p, float s)
 }
 
 // from shane
-vec3 tex3D( sampler2D tex, in vec3 p, in vec3 n )
+vec3 tex3D1( sampler2D tex, in vec3 p, in vec3 n )
 {
     n = max((abs(n) - .2)*7., .001);
     n /= (n.x + n.y + n.z );  
@@ -305,9 +305,9 @@ vec3 tex3D( sampler2D tex, in vec3 p, in vec3 n )
 vec3 doBumpMap( sampler2D tx, in vec3 p, in vec3 n, float bf)
 {
     const vec2 e = vec2(0.001, 0);
-    mat3 m = mat3( tex3D(tx, p - e.xyy, n), tex3D(tx, p - e.yxy, n), tex3D(tx, p - e.yyx, n));
+    mat3 m = mat3( tex3D1(tx, p - e.xyy, n), tex3D(tx, p - e.yxy, n), tex3D(tx, p - e.yyx, n));
     vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
-    g = (g - dot(tex3D(tx,  p , n), vec3(0.299, 0.587, 0.114)) )/e.x; g -= n*dot(n, g);
+    g = (g - dot(tex3D1(tx,  p , n), vec3(0.299, 0.587, 0.114)) )/e.x; g -= n*dot(n, g);
     return normalize( n + g*bf ); // Bumped normal. "bf" - bump factor.
 }
 
@@ -390,8 +390,9 @@ vec4 renderMainImage() {
   	vec3 rd = normalize(z + uv.x*x*fov.x + uv.y*y*fov.y);
     
     fragColor = render(ro, rd, time);
+    return fragColor;
 }
-
+/*
 void mainVR(out vec4 fragColor, vec2 fc, vec3 ro, vec3 rd) 
 {
     mat3 mx = getRotXMat(-7.);
@@ -409,7 +410,7 @@ void mainVR(out vec4 fragColor, vec2 fc, vec3 ro, vec3 rd)
 	return fragColor; 
  } 
 
-
+*/
 vec4 renderMain(){
 	if(PASSINDEX == 0){
 		return renderMainImage();

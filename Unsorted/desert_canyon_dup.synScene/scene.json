@@ -4,41 +4,32 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 4,
-			"MIN" : 0.25,
-			"NAME" : "Fly_Speed",
-			"PARAMS" : 0.1,
-			"TYPE" : "knob smooth",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : -1,
-			"MIN" : 1,
-			"NAME" : "Reverse_Fly",
-			"PARAMS" : 0.01,
-			"TYPE" : "toggle smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 3,
-			"MIN" : -3,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
 			"NAME" : "LookXY",
 			"PARAMS" : 0.033,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 0,
-			"MIN" : 1,
-			"NAME" : "Cam_Reset",
-			"PARAMS" : 0.033,
-			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -52,11 +43,21 @@
 			"UI_GROUP" : "camera"
 		},
 		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
 			"DEFAULT" : 0.5,
 			"DESCRIPTION" : "",
 			"MAX" : 3,
 			"MIN" : 0,
-			"NAME" : "Morph_Gain",
+			"NAME" : "Perspective",
 			"PARAMS" : 0.1,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "morph"
@@ -77,8 +78,7 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "Morph_Time",
-			"PARAMS" : 0.1,
-			"TYPE" : "toggle smooth",
+			"TYPE" : "slider",
 			"UI_GROUP" : "morph"
 		},
 		{
@@ -104,6 +104,7 @@
 	],
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "Traversing a desert canyon.",
+	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
@@ -114,7 +115,12 @@
 		{
 			"NAME" : "image47",
 			"PATH" : "images/47.jpg"
+		},
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
 		}
+
 	],
 	"IMAGE_PATH" : "desert_canyon_dup.png",
 	"TITLE" : "Desert Canyon_dup",

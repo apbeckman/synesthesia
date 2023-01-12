@@ -21,14 +21,14 @@ float time;
 // Config
 // --------------------------------------------------------
 
-float stepScale = .275;
+float stepScale = .175;
 float stepMove = 2.;
-float stepDuration = 2.;
+float stepDuration = 1.;
 float ballSize = 1.5;
 
 // How far into the subdivision animation do we start animating
 // the next subdivision
-float transitionPoint = .5; 
+float transitionPoint = .975; 
 
 // #define DEBUG_ANIMATION
 
@@ -219,7 +219,7 @@ float kink(float x, vec2 p, float e1, float e2) {
 
 float wobble(float x, float freq) {
     float w = sin(x * PI * 2. * freq - PI * .5) * .5 + .5;
-    w *= sin(x * PI + PI * .5) * .5 + .5;
+    w *= sin(x * PI + PI * .25) * .5 + .5;
     return w;
 }
 
@@ -754,10 +754,10 @@ vec4 renderMainImage() {
 
     vec2 p = (-RENDERSIZE.xy + 2. * fragCoord.xy) / RENDERSIZE.y;
 
-    float loopDuration = 3. * stepDuration;
+    float loopDuration = 4. * stepDuration;
 
-    time = smoothTime;
-    time *= 0.35;
+    time = bass_time;
+   // time *= 0.35;
     time = time/loopDuration;
     time = mod(time, 1.);
 

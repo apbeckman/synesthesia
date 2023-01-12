@@ -152,7 +152,7 @@ float map(vec3 p){
     p.xy -= camPath(p.z).xy; // Perturb the object around the camera path.
     
      
-	p = cos(p*.315*1.25 + sin(p.zxy*.875*1.25)*(0.9+n3D(p)*0.1)+ sin(smoothTimeC * 0.125 )*0.2); // 3D sinusoidal mutation.
+	p = cos(p*.125*2.25+sin(TIME*0.1)*0.3 + sin(p.zxy*.875*1.25)*(0.3+n3D(p+_uvc.xyx+smoothTimeC*0.012)*0.7)+ sin(smoothTimeC * 0.0125 )*0.2); // 3D sinusoidal mutation.
 
 
 
@@ -215,7 +215,7 @@ float trace(in vec3 ro, in vec3 rd){
     accum = 0.;
     //accum += highhits;
     float t = 0.0, h;
-    for(int i = 0; i < 96-liquify*liquify*60; i++){
+    for(int i = 0; i < 96-liquify*62; i++){
     
         h = map(ro+rd*t);
         // Note the "t*b + a" addition. Basically, we're putting less emphasis on accuracy, as
@@ -267,9 +267,9 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
     mat3 m = mat3( texture2DAA1(tx, p + e.yxy, n), texture2DAA1(tx, p + e.yxy, n), texture2DAA1(tx, p + e.yxy, n));
     
     ///vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
-    vec3 g = vec3(0.2, 0.2, 0.2)*m; // Converting to greyscale.
+    vec3 g = vec3(0.25)*m; // Converting to greyscale.
     
-    g = (g - dot(tpl(tx,  p , n), vec3(0.299, 0.587, 0.114)) )/e.x; g -= n*dot(n, g);
+    g = (g - dot(tpl(tx,  p , n), vec3(0.299)) )/e.x; g -= n*dot(n, g);
                       
     //return normalize(( n + g*bf)); // Bumped normal. "bf" - bump factor.
     return normalize(( n + g*bf)); // Bumped normal. "bf" - bump factor.
@@ -280,7 +280,7 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
 // Simple environment mapping.
 vec3 envMap(vec3 rd, vec3 n){
     
-    vec3 col = tpl(image10, rd*4., n);
+    vec3 col = tpl(image10, rd*2., n);
     return smoothstep(0., 1., col);
 }
 
@@ -289,10 +289,11 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    float camTime = (smoothTime*0.25);
+    float camTime = (1.5*bass_time);
     
 	// Screen coordinates.
 	vec2 u = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;
+	//u.xy+=((_uvc.xy*PI)/2.)*FOV;
 	
 	// Camera Setup.
     float speed = 0.785;
@@ -301,7 +302,7 @@ vec4 renderMainImage() {
     vec3 l = camPath( ( camTime)*speed + 2. ) + vec3(0, 1, 0); // Light position, somewhere near the moving camera.
    // lk.xy += n2D(vec2(cos(TIME*0.125), sin(TIME*0.2))*0.5)*0.25;
 
-	lk.xy+=((_uvc.xy*PI)/2.)*FOV;
+	lk.xy+=(_uvc.xy*PI)*FOV;
 	//lk.xy+=(_uvc.xy/4.)*(FOV*PI+FOV*lk.xy/PI);
     lk.xy += _rotate(_uvc.xy, Twist*PI);
 
@@ -315,10 +316,10 @@ vec4 renderMainImage() {
     // Unit direction ray.
     //vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
     // Lens distortion.
-    vec3 r = (0.1+FOV)*(fwd + (u.x*rgt-FOV*_uvc.x - FOV*_uvc.y+u.y*up));
-       r.xy += _rotate(r.xy*_uvc*0.5*PI, n3D(r.xyz)+smoothTime*0.1)*Whoa*n3D(vec3(smoothTime*0.1));
-    r = normalize(vec3(n3D(r.xyz)+r.xy*(1.0+(Flip*(-1+_uvc*PI))), (r.z - length(r.xy)*.125)));
-    r.yz = _rotate(r.yz, lookXY.y*PI);
+    vec3 r = (0.05)*(fwd + (u.x*rgt-FOV*_uvc.x - FOV*_uvc.y+u.y*up));
+       r.xy += _rotate(r.xy, n3D(r.xyz)+smoothTime*0.01)*Whoa*n3D(vec3(smoothTime*0.01));
+    r = normalize(vec3(n3D(r.xyz)+r.xy*(1.0+(Mirror*(-1+_uvc*PI))), (r.z - length(r.xy-_uvc*PI*Fisheye)*.125)));
+    r.yz = _rotate(r.yz, lookXY.y*PI+_uvc.y*PI*Flip*FOV);
     r.xz = _rotate(r.xz, -1.0*lookXY.x*PI);
  
     r.xy =  _rotate(r.xy, Rotation*PI);
@@ -374,18 +375,19 @@ vec4 renderMainImage() {
         
         // Texturing - or coloring - the surface. The "color"' of glass is provide by the surrounds...
         // of it's contents, so just make it dark.
-        vec3 tx = vec3(.05); // tpl(image47, p*sz, n);
+        vec3 tx = vec3(.0125); // tpl(image47, p*sz, n);
          
 
 		// Very simple coloring.
-        col = tx*(di*.1 + ao*.25) + vec3(.5, .7, 1)*sp*2. + vec3(1, .7, .4)*pow(fr, 8.)*.25;
+        //col = tx*(di*.1 + ao*.125) + vec3(.5, .7, 1)*sp*2. + vec3(1, .7, .4)*pow(fr, 8.)*.25;
+        col = tx*(di*.1 + ao*.125) + vec3(1.5, .7, 1)*sp*2. + vec3(1, .7, .4)*pow(fr, 8.)*.25;
  
         // Very cheap, and totally fake, reflection and refraction. Obtain the reflection and
         // refraction vectors at the surface, then pass them to the environment mapping function.
         // Note that glass and fluid have different refractive indices, so I've fudged them into 
         // one figure.
-        vec3 refl = envMap(normalize(reflect(r, svn*.5 + n*.5)), svn*.5 + n*.5);
-        vec3 refr = envMap(normalize(refract(r, svn*.5 + n*.5, 1./1.35)), svn*.5 + n*.5);
+        vec3 refl = envMap(normalize(reflect(r, svn*.5 + n*.5)), svn*.25 + n*.25);
+        vec3 refr = envMap(normalize(refract(r, svn*.5 + n*.25, 1./1.35)), svn*.25 + n*.125);
         
         /*
 		// You can also index into a 3D texture, but I prefer the above.
@@ -408,7 +410,7 @@ vec4 renderMainImage() {
         // hope that it adds a little more depth. It also gives the impression that Beer's Law is 
         // taking effect, even though it clearly isn't. I might try to vary with curvature - or some other
         // depth guage - later to see if it makes a difference.
-        col = mix(col.xzy, col, di*.85 + .15); 
+        col = mix(col.xzy, col, di*.125 + .15); 
         
         // Glow.
         // Taking the accumulated color (see the raymarching function), tweaking it to look a little
@@ -420,8 +422,10 @@ vec4 renderMainImage() {
         
         
         // Purple electric charge.
-        float hi = abs(mod(t/1. + ((smoothTimeB*0.35)/1.), 8.) - 8./2.)*pow(2.-highhits, 2.);
+        float hi = abs(mod(t/-4. - ((smoothTimeB*0.025)), 4.) - 4./2.)*(1.0+pow(2.-highhits, 2.));
+        hi += _uvc.x*PI*0.001;
         vec3 cCol = vec3(.01, .025, .5)*col*1./(.001 + hi*hi*.12);
+       
         col += mix(cCol.yxz, cCol, n3D(p*3.));
  		// Similar effect.
         //vec3 cCol = vec3(.01, .05, 1)*col*abs(tan(t/1.5 + TIME/3.));
@@ -436,7 +440,7 @@ vec4 renderMainImage() {
     
     
     // Blend in a bit of light fog for atmospheric effect.
-    vec3 fog = vec3(.125, .04, .05)*(r.y*.5 + .5);    
+    vec3 fog = vec3(.125, .04, .05)*(r.y*.25 + .5);    
     col = mix(col, fog, smoothstep(0., .95, t/FAR)); // exp(-.002*t*t), etc. fog.zxy
 
     
@@ -447,7 +451,7 @@ vec4 renderMainImage() {
  
     
     // Rough gamma correction, and we're done.
-    fragColor = vec4(sqrt(clamp(col, 0., 1.25)), 1);
+    fragColor = vec4(sqrt(clamp(col, 0., 1.)), 1);
     
     
 	return fragColor; 

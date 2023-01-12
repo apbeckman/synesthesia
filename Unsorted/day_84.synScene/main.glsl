@@ -75,7 +75,7 @@ vec2 map(vec3 p){
     z = q;
     z.x += 0.02;
     z = abs(z) ;
-    z -= vec3(0.01+highhits*0.125*jumpy,0.3,0.02+highhits*0.5*jumpy);
+    z -= vec3(0.01+highhits*0.125*Bounce,0.3,0.02+highhits*0.5*Bounce);
     float dCb = max(z.z, max(z.y, z.x));
     d = dmin(d, vec2(dCb, 1.));
     
@@ -164,14 +164,14 @@ vec4 renderPassA() {
     //
 	uv *= 1. - dot(uv,uv)*0.14;
     
-    uv.xy *= rot((smoothTime*0.5 - 3.6)*0.1);
+    uv.xy *= rot((bass_time*0.5 - 3.6)*0.1);
     
     vec3 col = vec3(0);
 
     dith = mix(0.8,1., texture(image30, 20.*uv*256.).x);
     vec3 ro = vec3(0);
     
-    ro.z += smoothTime*1.5;
+    ro.z += bass_time*2.5;
     
     vec3 rd = normalize(vec3(uv,2.));
     //rd.yz *= rot(TIME);

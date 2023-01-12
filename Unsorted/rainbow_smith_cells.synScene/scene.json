@@ -1,0 +1,22 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "FOV",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Rainbow smith cells\nContinuation of earlier experiments\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "rainbow_smith_cells.png",
+	"TITLE" : "Rainbow smith cells",
+	"WIDTH" : 1280
+}

@@ -38,15 +38,16 @@ float pReflect(inout vec3 p, vec3 planeNormal, float offset) {
     return sign(t);
 }
 
-int Type=5;
+int Type=int(ttype);
 vec3 nc,pab,pbc,pca;
 void initIcosahedron() {
     float cospin=cos(PI/float(Type)), scospin=sqrt(0.75-cospin*cospin);
-	nc=vec3(-0.5+test2,-cospin,scospin);
+	nc=vec3(-0.5,-cospin,scospin);
 	pab=vec3(0.,0.,1.);
 	pbc=vec3(scospin,0.,0.5);
 	pca=vec3(0.,scospin,cospin);
-	pbc=normalize(pbc+vec3(0., 0.+Fold*0.5,Fold));	pca=normalize(pca+vec3(0., 0+Fold*0.5,Fold));
+	//pbc=normalize(pbc+vec3(0., 0.+Fold*0.5,0.));	pca=normalize(pca+vec3(0., 0+Fold*0.5,0.));
+    pbc=normalize(pbc);	pca=normalize(pca);
 }
 
 vec3 bToC(vec3 A, vec3 B, vec3 C, vec3 barycentric) {
@@ -65,7 +66,7 @@ vec3 pIcosahedron(inout vec3 p, int subdivisions) {
     p.xy = abs(p.xy);
 
 	pReflect(p, nc, 0.);
-    float smoothSin = (sin(smoothTimeC*0.125)+sin(smoothTimeC*0.125+1.)-1.)*0.25+0.5;
+    float smoothSin = (sin(smoothTimeC)+sin(smoothTimeC+1.)-1.)*0.25+0.5;
     if (subdivisions > 0) {
 
         vec3 A = pbc;
@@ -89,13 +90,13 @@ vec3 pIcosahedron(inout vec3 p, int subdivisions) {
             C = p2-smoothSin*0.4*Sin;
 
             p1 = bToC(A, B, C, vec3(.5, .0, .5));
-            p2 = bToC(A, B, C, vec3(.5, .5, .0));
+            p2 = bToC(A, B, C, vec3(.25, .5, .0));
             n = normalize(cross(p1, p2));
             pReflect(p, n, 0.);
             
 
 			p2 = bToC(A, B, C, vec3(.0, .5, .5));
-            p1 = bToC(A, B, C, vec3(.5, .5, .0));
+            p1 = bToC(A, B, C, vec3(.51, .5, .0));
             n = normalize(cross(p1, p2));
             pReflect(p, n, 0.);
         }
@@ -115,7 +116,7 @@ vec3 pIcosahedron(inout vec3 p, int subdivisions) {
 #define pal(a,b,c,d,e) ((a) + (b)*sin((c)*(d) + (e)))
 #define rot(x) mat2(cos(x),-sin(x),sin(x),cos(x))
 float kick;
-vec4 r11(float x){return texture(image30,vec2(x)/512.);}
+vec4 r11(float x){return texture(image30,vec2(x)/1024.);}
 float noise( in vec2 x )
 {
     vec2 p = floor(x);
@@ -123,7 +124,7 @@ float noise( in vec2 x )
 	f = f*f*(3.0-2.0*f);
 	
 	vec2 uv = (p.xy) + f.xy;
-	return textureLod( image30, (uv+ 0.5)/512.0, 0.0 ).x;
+	return textureLod( image30, (uv+ 0.5)/1024.0, 0.0 ).x;
 }
 
 float noise( in vec3 x )
@@ -133,7 +134,7 @@ float noise( in vec3 x )
 	f = f*f*(3.0-2.0*f);
 	
 	vec2 uv = (p.xy+vec2(37.0,17.0)*p.z) + f.xy;
-	vec2 rg = textureLod( image30, (uv+ 0.5)/512.0, 0.0 ).yx;
+	vec2 rg = textureLod( image30, (uv+ 0.5)/1024.0, 0.0 ).yx;
 	return mix( rg.x, rg.y, pow(f.z, 0.05) );
 }
 vec3 glow = vec3(0);
@@ -158,7 +159,7 @@ vec2 map(vec3 p, float t){
     
 	
     
-    p.z = log(p.z + 0.) - (smoothTime*0.1);
+    p.z = log(p.z + 0.) - (bass_time*0.5);
     
     p.z = sin(0.5*p.z*6.28) - 0.5;
     
@@ -197,7 +198,7 @@ vec2 map(vec3 p, float t){
     
     //vec3 c = pal(0.1, 0.5, vec3(0.9,0.2,0.1), 0.6,4.7 + t*6. + TIME + p.z*0.2);
     //vec3 c = pal(0.4, 0.5, vec3(0.9,0.2,0.05), 1.4, t*2. + TIME + p.z*0.2);
-    vec3 c = pal(0.4, 0.5, vec3(1.4,0.9,0.3), 1.4, t*2. + smoothTimeB*1.25 + p.z*0.2);
+    vec3 c = pal(0.4, 0.5, vec3(1.4+_uvc.y,0.9,0.63-_uvc.x*0.25), 1.4, t*2. + smoothTimeC*.25 + p.z*0.12);
     c = max(c, 0.);
     vec3 ga = 0.0007/(0.1 + d.x*d.x*d.x*d.x*d.x*20000000000.) * c;
     
@@ -207,10 +208,10 @@ vec2 map(vec3 p, float t){
     glow += ga;
     
     d.x =  min(d.x, abs(dP) + 0.01);
-    float at = pow(abs(sin(q.z - (smoothTimeB*0.00125) + n.y)), 100.)*smoothstep(0.,1.,length(q.z)*0.4);
+    float at = pow(abs(sin(q.z - (smoothTimeB*0.125) + n.y)), 100.)*smoothstep(0.,1.,length(q.z)*0.4);
     //glow  += 0.001/(0.006 + dP*dP*dP*100.) * pal(0.5,0.5, vec3(0.7,0.2,0.5),0.67,0.2)*at;
     
-    d.x *= 0.6;
+    d.x *= (0.6+Complexity);
     
     return d;
 }
@@ -237,7 +238,7 @@ vec3 getRd(vec3 ro,vec3 lookAt,vec2 uv){
 	vec3 dir = normalize(lookAt - ro);
     vec3 right = normalize(cross(vec3(0,1,0), dir));
     vec3 up = normalize(cross(dir, right));
-	return normalize(dir + (right*uv.x + up *uv.y)*0.8);
+	return normalize(dir + (right*uv.x + up *uv.y)*(01.8+Zoom));
 }
 
 
@@ -251,8 +252,9 @@ vec4 renderPassA() {
     
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
 
-    dith = mix(0.9,1.,texture(image30, 4000.*(uv + 0.5 + smoothTimeC*0.15)/256.).x);
+    dith = mix(0.99,1.,texture(image30, 4000.*(uv + 0.5 + TIME)/256.).x);
     uv *= 1. + dot(uv,uv)*0.2;
+    uv += _uvc*PI;
     vec3 col = vec3(0);
 
     
@@ -261,7 +263,7 @@ vec4 renderPassA() {
     
     float sp = 0.3;
     
-    float tt = ((smoothTime*0.35))*sp ;
+    float tt = ((spin_time*0.35))*sp ;
     ro = vec3(cos(tt+ iMouse.x/RENDERSIZE.x*2.),sin(tt+ iMouse.y/RENDERSIZE.x*2.)*1.6,sin(tt+ iMouse.x/RENDERSIZE.x*2.))*(4.1);
     
     vec3 lookAt = vec3(0);
@@ -277,6 +279,8 @@ vec4 renderPassA() {
     
     glow = smoothstep(0.,1.,glow*1.);
     //glow = smoothstep(0.,1.,glow*1.);
+    
+    col *= 1.0+syn_HighLevel;
     col += glow;
     
     
@@ -313,14 +317,14 @@ vec4 renderMainImage() {
     float steps = 16.;
     float scale = 0.00 + pow(dot(uvn,uvn),1.1)*0.04;
     //float chromAb = smoothstep(0.,1.,pow(length(uv - 0.5), 0.3))*1.1;
-    float chromAb = pow(length(uv - 0.5),1.)*2.2;
+    float chromAb = pow(length(uv - 0.5),1.)*(1.2*(1.0+syn_Level*(1.0+syn_Intensity)));
     vec2 offs = vec2(0);
     vec4 radial = vec4(0);
     for(float i = 0.; i < steps; i++){
         scale *= 0.97;
         vec2 target = uv + offs;
         offs -= normalize(uvn)*scale/steps;
-    	radial.r += texture(BuffA, target + chromAb*1.4/RENDERSIZE.xy).x;
+    	radial.r += texture(BuffA, target + chromAb*1.4/RENDERSIZE.xy).x*(1.0+syn_HighLevel);
     	radial.g += texture(BuffA, target).y;
     	radial.b += texture(BuffA, target - chromAb*1./RENDERSIZE.xy).z;
     }
@@ -336,8 +340,8 @@ vec4 renderMainImage() {
     
     fragColor = pow(fragColor, vec4(0.4545));
     
-    fragColor.b *= 1. + uv.x*0.2;
-    fragColor.g *= 1. + uv.t*0.05;
+    fragColor.b *= 1. + _uvc.x*0.2;
+    fragColor.g *= 1. + _uvc.t*0.05;
     
     fragColor = max(fragColor, 0.);
     fragColor *= 1. - dot(uvn,uvn)*1.   ;

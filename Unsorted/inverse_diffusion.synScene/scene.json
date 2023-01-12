@@ -37,25 +37,24 @@
 				-1
 			],
 			"NAME" : "moveXY",
-			"PARAMS" : 0.247,
+			"PARAMS" : 0.037,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 0.5,
+			"MIN" : -0.5,
 			"NAME" : "Height",
-			"PARAMS" : 0.205,
-			"TYPE" : "slider smooth",
+			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0,
+			"MAX" : 0.75,
+			"MIN" : -0.75,
 			"NAME" : "distortion",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
@@ -63,32 +62,39 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.125,
-			"MIN" : -0.25,
+			"MAX" : 0.5,
+			"MIN" : -0.5,
 			"NAME" : "Zoom",
-			"PARAMS" : 0.199,
+			"PARAMS" : 0.087,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				-1,
-				-1
-			],
-			"NAME" : "DistortXY",
-			"TYPE" : "xy",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Look",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Reset",
+			"TYPE" : "bang",
 			"UI_GROUP" : "default"
 		}
 	],

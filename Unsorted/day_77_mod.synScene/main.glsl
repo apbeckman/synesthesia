@@ -66,20 +66,21 @@ vec2 map(vec3 p){
 	vec2 d = vec2(10e6);
     
     //p.xy *= rot(0. + sin(p.z)*0.24 + cos(p.y)*0.13);
+    
 	p -= path(p.z);
     p.xy *= rot(0. + sin(p.z)*0.24 + cos(p.y)*0.13);
     //p.xy *= rot(0.6);
 	//float wave = pow(abs(sin(p.z*0.2 + 0.5*((smooth_basstime*0.457)+(TIME*0.125)))), 40.);
-    float wave = pow(abs(sin(p.z*0.2 + smoothTimeC*0.125 + 0.17)), 40.);
+    //float wave = pow(abs(sin(p.z*0.2 + smoothTimeC*0.125 + 0.17)), 40.);
+    float wave = pow(abs(sin(p.z*0.2 + smoothTimeC*0.125 + 0.17)), 20.)*(0.5+syn_HighLevel);
     
     pCoords = vec3(atan(p.y,p.x)/tau, length(p.xy), p.z);
     
-    float tunn = -length(p.xy + normalize(p.xy)*wave*0.15) + tunnW + width;
+    float tunn = -length(p.xy + normalize(p.xy)*wave*0.15) + tunnW;
     
     //tunn = max(tunn, - max(abs(p.x)- 0.86,abs(p.y) - 0.3 ));
     
     d = dmin(d, vec2(tunn, 2.));
-    
     
     p.xy *= rot(0.5 + sin(p.z*0.2 + p.y*0.4)*1.);
     
@@ -92,7 +93,7 @@ vec2 map(vec3 p){
     float dCubeGlow = max(pCoordsB.x, max(pCoordsB.y,pCoordsB.z));
     
     
-    glow += max(exp(-dCubeGlow*10.)*0.04*pow(wave,0.4)*pal(0.5,0.5,vec3(1.6,2.9,0.9),0.5,0.5)*(0.7+1.5*syn_HighLevel), 0.);
+    glow += max(exp(-dCubeGlow*10.)*0.024*pow(wave,0.14)*pal(0.5,0.5,vec3(1.6,2.9,0.9),0.5,0.5)*(0.7+.5*syn_Intensity), 0.);
     
     float attA = pow(abs(sin(sin(p.z + (smoothTimeB*0.2)) + p.z*0.7 + sin(p.y*1.5)) ), 10.);
     float attB = pow(abs(sin(smoothTimeB*0.2 + sin(p.z + (smoothTimeB*0.2)) + p.z*0.4 + sin(p.y*1.5))), 10.);
@@ -119,7 +120,7 @@ vec2 map(vec3 p){
     float dtt = 10e7;
     float dsqP = 10e6;
     q = p;
-    q.z -= 0.5*smoothTime;
+    q.z -= 0.125*smoothTime;
 
     q.xy -= vec2(-0.6,0.2);
     vec3 z = abs(vec3(q.x,q.y,pmod(q.z, 0.4))) - vec3(0.1,0.04,0.2);
@@ -132,7 +133,7 @@ vec2 map(vec3 p){
     dsqP = min(dsqP, pipe);
     
     q = p;
-    q.z -= 0.5*smoothTime;
+    q.z -= 0.125*smoothTime;
 
     q.xy += vec2(-0.4,0.4);
     z = abs(vec3(q.x,q.y,pmod(q.z, 0.4))) - vec3(0.1,0.04,0.2);
@@ -143,7 +144,6 @@ vec2 map(vec3 p){
     pipe = max(q.x,q.y);
     pipe = max(pipe, -rc);
     dsqP = min(dsqP, pipe);
-    
     
     glow += exp(-dtt*(10. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*1.*pow(abs(sin(p.z + (.5*smoothTimeB))), 10.);
     glow += exp(-dtt*(50. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*(0.9+syn_HighLevel);
@@ -174,7 +174,7 @@ vec2 map(vec3 p){
 vec2 march(vec3 ro, vec3 rd,inout vec3 p,inout float t,inout bool hit){
 	vec2 d = vec2(10e6);
 	t = 0.; hit = false; p = ro;
-    for(int i = 0; i < 112; i++){
+    for(int i = 0; i < 96; i++){
     	d = map(p);
         glow += exp(-max(d.x, 0.)*20.)*0.01;
         if(d.x < 0.001){
@@ -217,12 +217,12 @@ vec4 renderPassA() {
 	//uv *= 1. + dot(uv,uv)*1.5;
     
     vec3 ro = vec3(0);
-    ro.z += (smoothTime)*SPEED*0.245;
+    ro.z += (bass_time);
     ro.z += mx;
         
     ro += path(ro.z);
     
-    float wave = pow(abs(sin(ro.z*0.2 + smoothTimeC*0.125 + 0.17)), 20.);
+    float wave = pow(abs(sin(ro.z*0.2 + smoothTimeC*0.125 + 0.17)), 40.);
     
     vec3 lookAt = vec3(0,0,ro.z);
 
@@ -230,15 +230,15 @@ vec4 renderPassA() {
     
     lookAt.z += 2.;
     lookAt += path(lookAt.z); 
-	vec3 rd = getRd(ro, lookAt, uv*(1. + wave*0.06));
-    
+	vec3 rd = getRd(ro, lookAt, uv*(1. + wave*0.016));
+        rd.xy = _rotate(rd.xy, Rotate*PI);
+
     ro -= rd*texture(image30,(uv)*256.).x*0.2; // remove banding from glow
     
     
     //rd.xy *= rot(sin(script_time*0.12 + sin(script_time*0.14)*0.125 )*0.1);
-    
-    rd.yz = _rotate(rd.yz, lookXY.y*PI+PI*_uvc.y*Flip.y);
-    rd.xz = _rotate(rd.xz, lookXY.x*PI+PI*_uvc.x*Flip.x);
+    rd.yz = _rotate(rd.yz, lookXY.y*PI+PI*_uvc.y*Flip*Fov);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI);
 
     float t; vec3 p; bool hit;
     
@@ -255,7 +255,7 @@ vec4 renderPassA() {
             
             float md = 0.1 ;
             
-            float formula = hc.y + 0.4*sin(p.z*0.03 + (smoothTimeB*0.3));
+            float formula = hc.y + 0.8*sin(p.z*0.03 + (smoothTimeC*0.0125))+0.4*cos(p.z+0.0125*smoothTimeC);
             formula += hc.w*0.1;
             float id = floor(formula/md);
             hc.y = (pmod(formula, md))/md;
@@ -292,7 +292,7 @@ vec4 renderPassA() {
         	vec3 c = pal(0.6,0.1,vec3(01.7,2.4,3.3), 0.2,3.3 + sin(p.z*0.5)*0.5);
             
             c = max(c, 0.);
-            float a = pmod(p.z + (smoothTimeC*0.5), 1.)/1.;
+            float a = pmod(p.z + (smoothTimeC*0.0125), 1.)/1.;
             col += pow(1. - max(dot(n, -rd), 0.), 5.)*0.1;
 
             col += smoothstep(0.03,0.,abs(a) - 0.14)*c;

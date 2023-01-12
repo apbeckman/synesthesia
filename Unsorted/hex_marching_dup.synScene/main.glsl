@@ -215,7 +215,7 @@ vec3 color(vec3 ww, vec3 uu, vec3 vv, vec3 ro, vec2 p) {
 }
 
 vec3 effect(vec2 p, vec2 q) {
-  float tm  = planeDist*smoothTime*0.125;
+  float tm  = planeDist*bass_time;
   vec3 ro   = offset(tm);
   vec3 dro  = doffset(tm);
   vec3 ddro = ddoffset(tm);

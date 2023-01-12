@@ -32,8 +32,8 @@ vec3 hsv2rgb(vec3 c) {
 //  Macro version of above to enable compile-time constants
 #define HSV2RGB(c)  (c.z * mix(hsv2rgb_K.xxx, clamp(abs(fract(c.xxx + hsv2rgb_K.xyz) * 6.0 - hsv2rgb_K.www) - hsv2rgb_K.xxx, 0.0, 1.0), c.y))
 
-const float zoomOuter = 1.0;
-const float zoomInner = 0.2;
+const float zoomOuter = .75;
+const float zoomInner = 0.12;
 
 float tanh_approx(float x) {
 //  return tanh(x);
@@ -178,10 +178,10 @@ vec4 plane(vec3 pro, vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n_, ou
   float ref2  = max(dot(ref, ld2), 0.0);
 
   const vec3 mat   = HSV2RGB(vec3(0.55, 0.45, 0.05));
-  const vec3 lcol1 = HSV2RGB(vec3(0.6, 0.5, 0.9));
+  const vec3 lcol1 = HSV2RGB(vec3(0.6, 0.25, 0.9));
   const vec3 lcol2 = HSV2RGB(vec3(0.1, 0.65, 0.9));
   
-  float hf = smoothstep(0.0, 0.0002, -he);
+  float hf = smoothstep(0.0, 0.00012, -he);
   vec3 lpow1 = 1.0*lcol1/DOT2(ld1);
   vec3 lpow2 = 1.0*lcol2/DOT2(ld2);
   vec3 col = vec3(0.0);
@@ -192,7 +192,7 @@ vec4 plane(vec3 pro, vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n_, ou
   col += pow(ref2, spes)*lcol2;
 
   float t = 1.0;
-  t *= smoothstep(aa, -aa, -(hd-hsz/4.0));
+  t *= smoothstep(aa, -aa, -(hd-hsz/2.0)); //last term is center thiccness
   t *= mix(1.0, 0.75, hf);
   
   return vec4(col, t);

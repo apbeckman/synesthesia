@@ -30,13 +30,16 @@ float m(vec3 p)
     // calculations later on. IQ does it in one of his small examples. "TIME" - IQ's suggestion.
     // I didn't know that was an option... I need to read more. :)
     // p.xy = _rotate(p.xy, p.z*roto_amt*sin(TIME+p.z));
-    p.z += script_time; 
+    p.z += bass_time; 
+    p.yz = _rotate(p.yz, camera_direction.y*PI);
+    p.xz = _rotate(p.xz, camera_direction.x*PI);
 
     
     // Chopping the field into horizontal strips. It's quite a brutal approach, and it only works
     // because of the volumetric-like traversal. By the way, if you comment the line out, the 
     // isolines disappear, along with 22 characters, but it wasn't the look I was after.
     p.y += 1/24.0;
+    
     p.y = mix(p.y, ceil(p.y*12.0)/12.0, mix(sqrt(syn_OnBeat)*beat_slice, 1.0, always_sliced));
     // p.xy += 1/size_voxels*0.5;
     p = mix(p, ceil(0.5+p*size_voxels)/size_voxels, 1.0*voxelate);
@@ -52,7 +55,7 @@ float m(vec3 p)
 	// p = mix(p, floor(p)+smoothstep(vec3(0.0), vec3(1.0), fract(p)), ridges);
     // p *= _triWave(p.z+bumpIn_scr*10.0-bumpOut_scr*10.0, 100.0);
     // Return the absolute field value to ensure that the ray doesn't backtrack.
-    float dist = abs(dot(p = cos(p*.6 + sin(p.zxy*1.8-morph_time*0.05)+sin(p.z*0.1+morph_time*0.1)), p) - 1.1);
+    float dist = abs(dot(p = cos(p*.6 + sin(p.zxy*1.8-morph_time*0.25)+sin(p.z*0.1+morph_time*0.125)), p) - 1.1);
     // dist = mix(dist, sdTorus(p, vec2(10.0))*0.1, ridges);
     return dist;
 }
@@ -65,8 +68,10 @@ vec4 renderMain(){
     // to zero. Characters can be saved by dropping "d" directly into the loop, but this way
     // feels cleaner to me.
     vec3 d = vec3(u/RENDERSIZE.y - .6, 1), o = d - d;
-    d.xz = _rotate(d.xz, camera_direction.x*0.7);
-    d.yz = _rotate(d.yz, camera_direction.y);
+    d.xy += _uvc*PI*0.2;
+
+    d.xz = _rotate(d.xz, camera_direction.x*0.25);
+    d.yz = _rotate(d.yz, camera_direction.y*0.25);
 
     // Initializing "c" to zero... in a less than satisfactory way.
     c -= c;
@@ -89,7 +94,7 @@ vec4 renderMain(){
     // Slower "float" based loop, but uses fewer charaters. "i" is declared with "j"... It was 
     // BigWings's suggestion to  Nesvi7, so if it doesn't work, blame him. D
     //for(; i++<1e2;) 
-    for (int i = 0; i<50; i++) // Cleaner Web 2.0 suggestion, but Abje.
+    for (int i = 0; i<75; i++) // Cleaner Web 2.0 suggestion, but Abje.
         
         // The distance function. Normally, the "/3." wouldn't be there, but things have 
         // been shuffled around to save a few characters. By the way, the return distance, "m(o),"
@@ -120,7 +125,7 @@ vec4 renderMain(){
 
     // Cheap color... I'd need to cut this down further to fit it in, but I prefer the black and 
     // white look anyway.
-    c.xyz += (d/o.z)*(syn_MidPresence+syn_MidLevel*syn_MidPresence+syn_MidLevel)*0.5*mids_color;
+    c.xyz += (d/o.z)*(syn_Intensity+syn_MidLevel*syn_Intensity+syn_MidHighLevel)*0.5*mids_color;
     c.zyx += (.1 + o*.2*sin(o.z))*colorize; //Etc.
     c += _loadImage(texIn, sin(_uv*10.0+TIME)*0.1+o.xy*0.2*(0.8+0.2*sin(TIME+_uvc.y*PI+_uv.x))+vec2(TIME*0.05, 0.0))*watery_tex;
     c += texture(texIn2, 0.5+o.xy*0.1*(0.8+0.2*sin(TIME+_uvc.y*PI+_uv.x))+vec2(TIME*0.05, 0.0))*digital_tex;
@@ -130,7 +135,7 @@ vec4 renderMain(){
         c += texture(syn_UserImage, 0.5+o.xy*0.1*(0.8+0.2*sin(TIME+_uvc.y*PI+_uv.x))+vec2(TIME*0.05, 0.0));
     }
 
-    c += pow(c, vec4(3.0))*syn_HighHits*50.0*_pulse(sin(o.z*1.0-syn_HighTime), 1.0, 0.1)*flashing;
+    c += pow(c, vec4(3.0))*syn_HighLevel*50.0*_pulse(sin(o.z*1.0-smoothTimeB*0.125), 1.0, 0.1)*flashing;
     // c *= (0.25+syn_FadeInOut*0.75);
 	return c; 
  } 

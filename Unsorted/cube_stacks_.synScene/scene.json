@@ -1,0 +1,45 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				-0.5
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "LookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "byt3_m3chanic",
+	"DESCRIPTION" : "Mostly a homage to @Shane's techniques for multi-tap and cube mapping. Playing with truchet tiles in bmp+texture in a single layered grid. \nAA = 2 suggested ",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image1",
+			"PATH" : "images/crdn.jpg"
+		},
+		{
+			"NAME" : "image6",
+			"PATH" : "images/6.jpg"
+		}
+	],
+	"IMAGE_PATH" : "cube_stacks_.png",
+	"TITLE" : "Cube Stacks ",
+	"WIDTH" : 1280
+}

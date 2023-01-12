@@ -17,7 +17,9 @@ vec4 renderPassA() {
 
 
     U-=.5*RENDERSIZE.xy;
-    U *= (.997-growthFactor*Zoom*0.125)-Zoom;
+    U *= (.997-growthFactor*Zoom)-Zoom*0.5;
+    U+= _uvc*PI*0.1;
+
     float a = .003*sin(.125*smoothTimeC-2.*length(U-0.5*RENDERSIZE.xy*Zoom*_uvc)/RENDERSIZE.y)*Spin;
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
     U+=.5*RENDERSIZE.xy;
@@ -32,7 +34,7 @@ vec4 renderPassA() {
     vec4 nX  =  A(U - vec2(1,0))-(image*(0.75+(0.25*growthFactor)))*0.375;
     vec4 nY  =  A(U - vec2(0,1))-(image*(0.75+(0.25*growthFactor)))*0.375;
     vec4 m = 0.25*(pX+nX+pY+nY+Intensity);
-    float b = mix(1.,abs(Q.z),.78+growthFactor*0.01);
+    float b = mix(1.,abs(Q.z),.78);
     
     Q.xyz += (1.-b+0.0125*basshits)*(0.25*vec3(pX.z-nX.z,pY.z-nY.z,-pX.x+nX.x-pY.y+nY.y)- Q.xyz)*(Diffusion+growthFactor*0.125);
 
@@ -59,6 +61,8 @@ vec4 renderMainImage() {
 	vec2 U = _xy;
 
     Q  =  A1(U);
+    U+= _uvc*PI*0.1;
+
     vec4 pX  =  A1(U + vec2(1,0));
     pX.xy+= _uvc*PI;
 
@@ -66,10 +70,10 @@ vec4 renderMainImage() {
     vec4 nX  =  A1(U - vec2(1,0));
     vec4 nY  =  A1(U - vec2(0,1));
     vec3 n = normalize(vec3(pX.z-nX.z,pY.z-nY.z,1));
-    vec3 r = reflect(n,vec3(0,0,-1));
-    Q = (0.5+0.5*sin(smoothTimeB*0.5+atan(Q.x,Q.y)*vec4(3,2,1,4)));
-    float d = ln(vec3(.4,.4,6)*RENDERSIZE.xyy,
-                 vec3(U,0),vec3(U,0)+r)/RENDERSIZE.y-(0.25*pow(syn_HighLevel*0.4 + syn_MidHighLevel*0.4 + syn_Hits*0.2, 2.));
+    vec3 r = reflect(n,vec3(0,0,-2));
+    Q = (0.5+0.5*sin(smoothTimeB*0.25+atan(Q.x,Q.y)*vec4(3,2,1,4)));
+    float d = ln(vec3(.4,.4,6)*RENDERSIZE.xyy+_uvc.xyy,
+                 vec3(U,0),vec3(U,0)+r)/RENDERSIZE.y-(syn_Intensity*pow(syn_HighLevel*0.4 + syn_MidHighLevel*0.4 + syn_Hits*0.2, 2.))*Flash;
     Q *= exp(-d*d)*.5+.5*exp(-3.*d*d);
 	return Q; 
  } 
