@@ -50,6 +50,25 @@
 			"NAME" : "LookXY",
 			"TYPE" : "xy",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Bump",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",

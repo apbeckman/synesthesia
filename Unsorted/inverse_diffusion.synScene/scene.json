@@ -28,24 +28,24 @@
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				1,
-				1
+				2,
+				2
 			],
 			"MIN" : 
 			[
-				-1,
-				-1
+				-2,
+				-2
 			],
 			"NAME" : "moveXY",
-			"PARAMS" : 0.037,
+			"PARAMS" : 0.124,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -0.5,
+			"MAX" : 0.975,
+			"MIN" : -0.975,
 			"NAME" : "Height",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
@@ -54,16 +54,16 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 0.75,
-			"MIN" : -0.75,
+			"MIN" : -0.975,
 			"NAME" : "distortion",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -0.5,
+			"MAX" : 2,
+			"MIN" : -2,
 			"NAME" : "Zoom",
 			"PARAMS" : 0.087,
 			"TYPE" : "slider smooth",

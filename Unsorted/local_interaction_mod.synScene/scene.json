@@ -1,0 +1,115 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Reset",
+			"TYPE" : "bang",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "MediaImpact",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flash",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.25,
+			"NAME" : "Intensity",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Geo"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Dir_XY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "Geo"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.275,
+			"MIN" : 0.75,
+			"NAME" : "Diffusion",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Geo"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Cam"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"TYPE" : "knob",
+			"UI_GROUP" : "Cam"
+		}
+	],
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Directional feedback system. ",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "local_interaction_mod.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920
+		}
+	],
+	"TITLE" : "Local Interaction Mod",
+	"WIDTH" : 1920
+}

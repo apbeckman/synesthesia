@@ -290,10 +290,9 @@ vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 //fragCoord.xy = _rotate(fragCoord+Zoom*_uvc, syn_BassLevel*0.001)+_uvc;
-
     fragCoord.x-=0.5*sin(noise(_uvc*PI))*PI*(Distort.x*(1.0+growthFactor));
     fragCoord.y-=0.5*cos(noise(0.5*_uvc*PI))*PI*(Distort.y*(1.0+growthFactor));
-
+    
     // Screen coordinates. I can't remember why I didn't want aspect correctness here...
     // I'm sure there was a reason. Fixed size square buffers would make life a lot
     // easier -- I know that much. :)
@@ -848,7 +847,7 @@ vec4 renderMainImage() {
     
     // Using the diffusion texture to create a more refined diffusion pattern to decorate the main object.
     float difPat2 = texture(BuffA, sp.xy/2.25*450./gResY*6.).x;
-    difPat2 = smoothstep(0., .05, -difPat2 + .5);
+    difPat2 =-4*(1.0*DifPatCol*(1.0+syn_MidHighLevel+syn_HighLevel))* smoothstep(0., .05, -difPat2 + .5);
     
     // Small pattern edges. Comment it out to see what it does.
     texCol = mix(texCol, vec3(0), (2. - smoothstep(0., .05, max(ggs - .525 - .025, -(ggs - .525 + .025))))*.135);
@@ -856,14 +855,14 @@ vec4 renderMainImage() {
     
     // Coloring the main object yellow, and the ground brownish with some fine diffusion crevices,
     // or something to that effect.
-     texCol = mix(vec3(.0, .0, .0)*(difPat2*.5 + .75)*sp.x, vec3(.25, .25, .25)*2.5, mainPat)*texCol*(1.0+syn_HighLevel*syn_Intensity);
+     texCol = mix(vec3(.0, .0, .0)*(difPat2*.5 + .75)*sp.x, vec3(.1)*2.5, mainPat)*texCol*(1.0+syn_HighLevel*syn_Intensity);
     //texCol = mix(vec3(.4, .4, .4)*(difPat2*.25 + .75), vec3(0.43, .4, .46)*1.5, mainPat)*texCol;
     //texCol = mix(vec3(.6, .48, .42)*(difPat2*.25 + .75), vec3(1, .45, .05)*1.5, mainPat)*texCol;
     
     // Darkening the fine grade diffusion crevices on the yellow object.
     //texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*-.9);//.525
     texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .105, ggs - .525)*.75);//.525
-    texCol.xy += 0.0975*(_uvc-_uv/PI);
+    texCol.xy += 0.0975*(_uvc*-_uv.y/PI);
     //texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*.6);//.525
     
     //texCol *= mix(vec3(1), vec3(0), clamp(difPat2*mainPat*smoothstep(0., .05, ggs - .525)*.75, 0., 1.));

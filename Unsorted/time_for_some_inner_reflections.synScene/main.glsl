@@ -44,7 +44,7 @@ const vec3  poly_p        = normalize((poly_U*poly_pab+poly_V*poly_pbc_+poly_W*p
 const vec3  poly_pbc      = normalize(poly_pbc_);
 const vec3  poly_pca      = normalize(poly_pca_);
 
-const float initt = 0.125; 
+const float initt = 01.125; 
 
 // License: WTFPL, author: sam hocevar, found: https://stackoverflow.com/a/17897228/418488
 const vec4 hsv2rgb_K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
@@ -214,7 +214,7 @@ vec3 skyColor(vec3 ro, vec3 rd) {
     vec3 pcol = 1.5*hsv2rgb(hsv)*exp(-mix(30.0, 10.0, m)*dp);
     
     float f = 1.0-tanh_approx(0.1*length(pos.xz));
-    col = mix(col, pcol , f);
+    col = mix(col*0, pcol , f);
   }
 
 
@@ -322,7 +322,7 @@ vec3 render1(vec3 ro, vec3 rd) {
     float de = dfExclusion(sp, spp);
     vec3 sn = normal1(sp);
     
-    float si = cos(5.0*TAU*zoom*spp.z-0.5*sp.y+smoothTimeC);
+    float si = cos(51.0*TAU*zoom*spp.z-0.5*sp.y+smoothTimeC);
     const vec3 lcol = vec3(1.0, 1.5, 2.0)*0.8;
     float lf = mix(0.0, 1.0, smoothstep(0., 0.9, si));
     
@@ -399,13 +399,13 @@ vec3 effect(vec2 p) {
   */
   ro.yz *= ROT(a);
   ro.xz *= ROT(b);
-  ro.xy += Kaleidescope*(_uvc*PI);
+ // ro.xy += Kaleidescope*(_uvc*PI);
   vec3 ww = normalize(la - ro);
   vec3 uu = normalize(cross(up, ww ));
   vec3 vv = normalize(cross(ww,uu));
   float fov = tan(TAU/6.0);
   vec3 rd = normalize(-p.x*uu + p.y*vv + fov*ww);
-  rd.xy +=(_uvc*PI*rd.xy)*Flip;
+  //rd.xy +=(_uvc*PI*rd.xy)*Flip;
 
   vec3 col = render0(ro, rd);
   

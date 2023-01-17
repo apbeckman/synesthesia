@@ -23,6 +23,7 @@ vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
 
+    U -= _uvc*PI*Zoom*(growthFactor);
     Q = C(U);
     vec4 
         n = D(U+vec2(0,1+Height)),
@@ -92,16 +93,17 @@ vec4 renderPassC() {
 vec4 renderPassD() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
+    U += ((moveXY.xy*(1.0+0.5*growthFactor)));
 
     vec2 c = ((R));
-    c.xy *= (0.5+moveXY.xy);
+    c.xy *=1.0+ ((moveXY.xy*(1.0+0.5*growthFactor)));
    // if (_mouse.z>0.) c = _mouse.xy;
     
     U -= c;
 //    U += _uvc*PI;
     
 //    U *= (.99325*(1.-growthFactor*Zoom*0.00675)-Zoom*0.01);
-    U *= (.99325*(1.-growthFactor*Zoom*0.0035*2.-syn_Intensity*0.0025*Zoom)-Zoom*0.025);
+    U *= (.999);
 
     U += c;
     Q = C(U);

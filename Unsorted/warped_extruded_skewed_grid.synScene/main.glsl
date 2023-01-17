@@ -101,6 +101,18 @@
 // Scene object ID to separate the floor object from the pylons.
 float objID;
 
+// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
+// example that explains it, if you require it.
+float n3D(vec3 p){
+    
+	const vec3 s = vec3(7, 157, 113);
+	vec3 ip = floor(p); p -= ip; 
+    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
+    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
+    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
+    h.xy = mix(h.xz, h.yw, p.y);
+    return mix(h.x, h.y, p.z); // Range: [0, 1].
+}
 
 // Standard 2D rotation formula.
 mat2 rot2(in float a){ float c = cos(a), s = sin(a); return mat2(c, -s, s, c); }
@@ -137,7 +149,7 @@ vec3 getTex(in vec2 p){
     else{
          p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
         
-         tx = texture(image10, smoothTimeC*0.00025+p/32.).xyz;
+         tx = texture(image10, smoothTimeC*0.0025+p/32.).xyz;
 
     }
     //vec3 tx = textureLod(image10, p, 0.).xyz;
@@ -367,7 +379,7 @@ float map(vec3 p){
     float rnd = hash21(gID.xy);
     //
     // Standard blinking lights animation.
-    gGlow.w = smoothstep(.992, .997, sin(rnd*6.2831 + smoothTimeB*0.01)*.5 + .5);
+    gGlow.w = smoothstep(.992, .997, sin(rnd*8.2831 + smoothTimeB*0.1)*.5 + .5);
     gGlow.w *=(1.0+((syn_HighLevel+syn_MidHighLevel)*syn_Intensity));
     //gGlow.w = rnd>.05? 0. : 1.; // Static version.
  
@@ -498,19 +510,6 @@ float calcAO(in vec3 p, in vec3 n)
     return clamp(1. - occ, 0., 1.);  
 }
 
-/*
-// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
-// example that explains it, if you require it.
-float n3D(in vec3 p){
-    
-	const vec3 s = vec3(7, 157, 113);
-	vec3 ip = floor(p); p -= ip; 
-    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
-    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
-    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
-    h.xy = mix(h.xz, h.yw, p.y);
-    return mix(h.x, h.y, p.z); // Range: [0, 1].
-}
 
 // Very basic pseudo environment mapping... and by that, I mean it's fake. :) However, it 
 // does give the impression that the surface is reflecting the surrounds in some way.
@@ -534,7 +533,7 @@ vec3 envMap(vec3 p){
     return mix(p, p.xzy, n3D2*.4); // Mixing in a bit of purple.
 
 }
-*/ 
+
  
 
 vec4 renderMainImage() {
@@ -545,7 +544,6 @@ vec4 renderMainImage() {
     
     // Screen coordinates.
 	vec2 uv = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;
-	
 	// Camera Setup.
 	vec3 ro = vec3(0, 0, bass_time); // Camera position, doubling as the ray origin.
     ro.xy += path(ro.z); 
@@ -554,9 +552,11 @@ vec4 renderMainImage() {
     ro.xy += roTwist;
     
 	vec3 lk = vec3(0, 0, ro.z + .5); // "Look At" position.
-    lk.xy+=(PI*_uvc.xy/2.)*Fov;
 
+    lk.xy+=(PI*_uvc.xy/2.)*Fov;
+ 
     lk.xy += path(lk.z); 
+
     vec2 lkTwist = vec2(0, -.1); // Only twist horizontal and vertcal.
     lkTwist *= rot2(-getTwist(lk.z));
     lk.xy += lkTwist;
@@ -583,7 +583,8 @@ vec4 renderMainImage() {
     
     // Unit direction ray.
     vec3 rd = normalize(uv.x*cu + uv.y*cv + fw/FOV);	
-	 
+    rd = normalize(vec3(rd.xy, (rd.z - length(rd.xy-_uvc*PI*Fisheye)*.25)));
+
     rd.yz = _rotate(rd.yz, lookXY.y*PI + _uvc.y*PI*Perspective*Fov);
     rd.xz = _rotate(rd.xz, -1.0*lookXY.x*PI);
     rd.xy = _rotate(rd.xy, -1.0*Rotate*PI+spin_time);
@@ -716,8 +717,8 @@ vec4 renderMainImage() {
        
         // Fake environmental lighting: Interesting, but I couldn't justify it, both
         // from a visual and logical standpoint.
-        //vec3 cTex = envMap(reflect(rd, sn)); // Be sure to uncomment the function above.
-        //col += col*cTex.zyx*4.;
+        vec3 cTex = envMap(reflect(rd, sn)); // Be sure to uncomment the function above.
+        col += col*cTex.zyx*4.;
 
     
         // Shading.
@@ -742,7 +743,7 @@ vec4 renderMainImage() {
     // it's about as cheap an operation as you could hope for, but has virtually
     // no impact on the frame rate. With that in mind, it's definitely worth taking
     // the time to get it looking the way you'd like it to look.
-    vec3 fog =  mix(vec3(4, 1, 2), vec3(4, 2, 1), rd.y*.5 + .5)*(1.0+0.5*syn_HighLevel*(syn_Intensity));
+    vec3 fog =  mix(vec3(4, 1, 2), vec3(4, 2, 1), rd.y*.5 + .5)*(0.25+0.5*syn_HighLevel*(syn_Intensity));
     fog = mix(fog, fog.zyx, smoothstep(0., .35, uv.y - .35));
     col = mix(col, fog/1.5, smoothstep(0., .99, t*t/FAR/FAR));
     col *= (1.0+highhits*0.25);

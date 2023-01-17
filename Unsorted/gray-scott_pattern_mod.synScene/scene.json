@@ -95,20 +95,11 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : -0.25,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Rotate",
-			"TYPE" : "slider",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Zoom",
+			"MIN" : -0.25,
+			"NAME" : "DifPatCol",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		},
@@ -118,7 +109,7 @@
 			"MAX" : 0.5,
 			"MIN" : -1,
 			"NAME" : "Fov",
-			"PARAMS" : 0.124,
+			"PARAMS" : 0.02,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Camera"
 		},

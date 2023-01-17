@@ -15,11 +15,12 @@
 			],
 			"MIN" : 
 			[
-				0,
-				0
+				-1,
+				-1
 			],
 			"NAME" : "MouseXY",
-			"TYPE" : "xy",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{

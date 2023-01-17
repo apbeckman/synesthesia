@@ -280,7 +280,7 @@ vec4 renderPassA() {
     float spec=clamp(dot(reflect(light,n),vec3(0,0,-1)),0.0,1.0);
     spec=pow(spec,36.0)*2.5;
     //spec=0.0;
-	fragColor = texture(BuffD,uv)*vec4(diff)+vec4(spec);
+	fragColor = texture(BuffD,uv-_uvc*PI)*vec4(diff)+vec4(spec);
 	return fragColor; 
  } 
 

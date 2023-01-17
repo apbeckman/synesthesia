@@ -126,7 +126,7 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
     vec2 u = fragCoord/RENDERSIZE.xy;
-    vec4 a = texture(BuffD,u);
+    vec4 a = texture(BuffD,u)*(1.0+syn_HighLevel*syn_Intensity);
     fragColor =+sin(a.x*4.+vec4(1,3,5,4))*.25
                +sin(a.y*4.+vec4(1,3,2,4))*.25
                +.5;

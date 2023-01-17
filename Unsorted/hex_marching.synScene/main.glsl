@@ -118,7 +118,7 @@ vec4 effect(vec2 p, float aa, float h) {
   float cut = mix(-0.5, 0.999, 0.5+0.5*sin(TIME+TAU*h0));
   const float coln = 6.0;
   float t = smoothstep(aa, -aa, d)*smoothstep(cut, cut-0.005, sin(a+2.0*(h1-0.5)*TIME+h1*TAU))*exp(-150.0*abs(x));
-  vec3 col = hsv2rgb(vec3(floor(h0*coln)/coln, 0.8, 1.0))*t*1.75;
+  vec3 col = hsv2rgb(vec3(floor(h0*coln)/coln, 0.8, 1.0))*t*1.*(1.0+syn_HighLevel);
 
   t = mix(0.9, 1.0, t);
   t *= smoothstep(aa, -aa, -hd);

@@ -22,17 +22,17 @@ float map (vec3 p) {
     grp=p*0.01;
     
     p = mm*p;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
         float t = abs(p.y);
-        p.y = p.x;
+        p.y = p.x+_uvc.y;
         p.x = t; //zoom??
-        p = mm*(p-.1*multiply);
+        p = mm*(p-.2*multiply);
     }
     float q = 5.;
     
-    float a = 1.5*((atan(p.x,p.z)))+0.05*(ui);
+    float a = (1.5+Twist)*((atan(p.x,p.z)))+01.05*(ui);
     mat2 mn = mat2(sin(a),cos(a),-cos(a),sin(a));
-    vec2 u = mn*vec2(length(p.xz)-2.-expand,p.y);
+    vec2 u = mn*vec2(length(p.xz+_uvc)-2.-expand,p.y);
     float d1 = d;
     vec2 w = max(abs(u)-vec2(0.1,0.5),0.);
     d = min(d,length(w)-0.1-0.01*(sin(50.*(dot(u,u))+sin(20.*atan(p.x,p.z)))));
@@ -54,17 +54,19 @@ vec3 dive (vec3 p, vec3 d) {
     return p;
 }
 vec3 color (vec3 no, vec3 p) {
-    return vec3(.8+0.2*(sin((30.)*p*p.zxy+no)*0.5+0.5))*0.9;
+    return vec3(.75+0.26*(sin((5.)*p*p.zxy-PI*_uvc.xyx+no*12+smoothTimeB*0.3)*0.5+0.25))*0.9;
 }
 vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
     	vec2 fragCoord = _xy;
     vec2 v = (-RENDERSIZE.xy + 2.0*fragCoord.xy)/RENDERSIZE.y;
-    ui = (rate*script_time*0.5)*20.;
+    ui = (bass_time)*5.;
+    v += _uvc*PI*Zoom;
     vec3 r = vec3(1-(1.5*moveXY.x),0-moveXY.y,-15.);
-    light = vec4(10.*sin(0.005*ui),2,-23,1);
-    vec3 d = normalize(vec3(v,3.+zoom));
-    mm = rot((0.005*ui)+vec3(1,2,3));
+    light = vec4(1.*sin(0.005*ui),2,-23,1);
+    vec3 d = normalize(vec3(v,3.));
+    
+    mm = rot((0.0205*ui)+vec3(2,2,PI));
     vec3 p = dive(r,d);
     d = normalize(light.xyz-p);
     vec3 no = norm(p);

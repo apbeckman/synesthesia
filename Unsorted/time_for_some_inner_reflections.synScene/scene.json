@@ -2,32 +2,12 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Kaleidescope",
-			"PARAMS" : 0.126,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -0.5,
 			"NAME" : "Zoom",
 			"PARAMS" : 0.066,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.25,
-			"MIN" : 0,
-			"NAME" : "Flip",
-			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},

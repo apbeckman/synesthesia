@@ -8,24 +8,24 @@
 vec4 Q = vec4(0.0);
 vec2 U = _xy;
 vec2 mouse = (_mouse.xy*_uvc);
-float a = .001*sin(.005*smoothTime)/(1.+length(U-0.5*RENDERSIZE.xy*_uvc)/RENDERSIZE.y+syn_BassLevel*0.001);
-float b = .3*(1.0-growthFactor*0.12)+growthFactor*0.0001;
+float a = .001*sin(.005*smoothTime)/(1.+length(U-0.5*RENDERSIZE.xy*_uvc)/RENDERSIZE.y);
+float b = .225;
 vec2 aa = _uvc*growthFactor;
 vec4 image = texture(syn_UserImage,(_xy)/RENDERSIZE.xy);
 
 vec4 renderPassA() {
-	//vec4 Q = vec4(0.0);
-	//vec2 U = _xy;
+	vec4 Q = vec4(0.0);
+	vec2 U = _xy;
+    U+=(Zoom*growthFactor*0.00125);
 
     vec2 X = 0.5*RENDERSIZE.xy*moveXY;
     //X += moveXY;
     if (_mouse.z>0.) X = _mouse.xy;
     U-=X;
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
-    //U *= .999;
-    U*=(1.0-(Zoom*growthFactor*0.00125)-Zoom*0.00125);
+    U *= .999;
     U+=X;
-    Q  =  D(U+_uvc);
+    Q  =  D(U);
     // Neighborhood :
     vec4 pX  =  D(U + vec2(1,0)+aa);
     vec4 pY  =  D(U + vec2(0,1)+aa);
@@ -58,17 +58,17 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
+    U+=(Zoom*growthFactor*0.00125);
 
     vec2 X = 0.5*RENDERSIZE.xy*moveXY;
     if (_mouse.z>0.) X = _mouse.xy;
-    U-=X;
+    U-=X-_uvc;
     //float a = .001*sin(.1*TIME)/(1.+length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y);
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
     //U *= .999;
-    U*=(1.0-(Zoom*growthFactor*0.005)-Zoom*0.00125);
 
-    U+=X;
-    Q  =  A(U+_uvc);
+    U+=X+_uvc;
+    Q  =  A(U);
     // Neighborhood :
     vec4 pX  =  A(U + vec2(1,0))*image;
     vec4 pY  =  A(U + vec2(0,1))*image;
@@ -101,6 +101,7 @@ vec4 renderPassB() {
 vec4 renderPassC() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
+    U+=(Zoom*growthFactor*0.00125);
 
     vec2 X = 0.5*RENDERSIZE.xy*moveXY;
     if (_mouse.z>0.) X = _mouse.xy;
@@ -108,10 +109,9 @@ vec4 renderPassC() {
     //float a = .001*sin(.1*TIME)/(1.+length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y);
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
     //U *= .999;
-    U*=(1.0-(Zoom*growthFactor*0.0025)-Zoom*0.00125);
 
     U+=X;
-    Q  =  B(U+_uvc);
+    Q  =  B(U);
     // Neighborhood :
     vec4 pX  =  B(U + vec2(1,0))+growthFactor*image;
     vec4 pY  =  B(U + vec2(0,1))+growthFactor*image;

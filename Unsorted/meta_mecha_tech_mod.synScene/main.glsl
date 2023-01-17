@@ -22,6 +22,13 @@ vec3 hash33(vec3 p3) {
     return fract((p3.xxy + p3.yxx)*p3.zyx);
 }
 
+vec3 colGet(float t){
+    return _palette(_triWave(t, 1.0), vec3(0.340, 0.380-0.12*syn_HighLevel, -0.180), vec3(0.339, 0.040+0.2*syn_MidHighLevel, 0.670), vec3(0.2555, 0.900, 0.315), vec3(0.500, 0.890, 0.000));
+}
+
+void rotate(inout vec2 v, float angle) { v = vec2(cos(angle)*v.x+sin(angle)*v.y,-sin(angle)*v.x+cos(angle)*v.y); }
+
+
 			//******** BuffA Code Begins ********
 
 
@@ -41,7 +48,7 @@ float map(vec3 p)
     float t = 206.+0.5*bass_time;
     float anim = fract(t);
     float index = floor(t);
-    float signal = rng*sin(smoothTimeC*50.)*pow(anim,40.)*.1;
+    float signal = rng*sin(smoothTimeC*5.)*pow(anim,40.)*.1;
     t = pow(anim,0.1)+index+signal;
     float twitch = 1.0+pow((syn_BassLevel*0.5+syn_MidLevel*0.35)*Twitch, 2.0);
     float a = 1.;
@@ -55,7 +62,7 @@ float map(vec3 p)
         p.xz *= rot(t/a+i);
         p.yz *= rot(t/a+i);
         p = p - clamp(p, -e*a, e*a);
-        p.xy = _rotate(p.xy, y_time*0.5+x_time*0.5);
+        p.xy = _rotate(p.xy, y_time*0.125+x_time*0.125);
         dist = min(dist, length(p.xy)-.01*a);
         a /= 1.75;
     }
@@ -72,7 +79,7 @@ void coloring (inout vec3 color, in vec3 pos, in vec3 normal, in vec3 ray, in ve
 {
     // Inigo Quilez color palette
     // https://iquilezles.org/www/articles/palettes/palettes.htm
-    vec3 tint = .5+.5*cos(vec3(0,.3,.6)*6.283+smoothTimeB*.012+uv.y*2.);
+    vec3 tint = .5+.5*cos(vec3(01,.3,.6)*6.283+smoothTimeB*.012+uv.y*2.);
     vec3 rf = reflect(ray, normal);
     
     if (material == 0.)
@@ -101,14 +108,17 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
     vec2 uv = (fragCoord-RENDERSIZE.xy/2.)/RENDERSIZE.y;
+    uv.xy += Zoom*_uvc*PI;
+    
     vec3 color = vec3(.0)*smoothstep(2.,.5,length(uv));
     material = 0.;
     
     // coordinates
     vec3 pos = vec3(0,0,1.2);
+    pos.xy += _uvc*PI*pos.xy;
     vec3 at = vec3(0);
-    pos.xz *= rot(cos(smoothTimeC*.1)*.2);
-    pos.zy *= rot(sin(smoothTimeC*.2)*.1);
+    pos.xz *= rot(sin(xRotTime)*.6);
+    pos.zy *= rot(cos(yRotTime)*.6);
     vec3 ray = lookAt(pos, at, uv, 1.);
     
     // noise
@@ -120,7 +130,7 @@ vec4 renderPassA() {
     pos += ray * white.z * .2;
     
     // blur edges
-    float dof = .0125*smoothstep(.001, 12., length(uv));
+    float dof = .001*smoothstep(.001, 32., length(uv));
     ray.xy += vec2(cos(blue.x*6.28),sin(blue.x*6.28))*white.z*dof*0.001;
     
     // raymarch
@@ -132,14 +142,14 @@ vec4 renderPassA() {
         float dist = map(pos);
         if (dist < total/RENDERSIZE.y || total > maxDist) break;
         dist *= 0.9999+0.0001*blue.z;
-        ray += white * total*(.0001);
+        ray += white * total*(.00001);
         pos += ray * dist;
         total += dist;
     }
     
     // coloring
     float shade = steps/count;
-    if (shade > .001 && total < maxDist) {
+    if (shade > .0001 && total < maxDist) {
         // NuSan
         // https://www.shadertoy.com/view/3sBGzV
         vec2 noff = vec2(.0001,0);

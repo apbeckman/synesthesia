@@ -72,7 +72,7 @@ float map(vec3 pos) {
    	float size = 20.;
 	float rep_half = size/2.;
     // get center vec and some movement
-    vec3 center = vec3(0.,0., 0.- TIME * 5.);
+    vec3 center = vec3(0.,0., 0.- bass_time * 5.);
     vec3 pp = pos-center;
 	// make the id's for beams
     vec3 pi = vec3(
@@ -87,7 +87,7 @@ float map(vec3 pos) {
     // SHAKKADOO!! movement change based on time mod
     // hash/noise vector direction.
     // Using a mod of time < segment flip direction
-    if(mod(script_time+script_bass_time*0.25,6.)<2.){
+    if(mod(smoothTimeC*0.125,2.)<2.){
         //up-down
         // fhs gets the hash of the other vec2 
         // its not moving in.
@@ -192,9 +192,9 @@ vec4 renderMainImage() {
 	float ftime = TIME * 5.5;
     float ftm = .5 + .5 * sin(TIME*.1);
     
-    vec3 ta = vec3(0.0,0.0,0.);
+    vec3 ta = vec3(0.0,0.0,0.+TIME);
     
-    vec3 ro = vec3(0, 0, (script_bass_time*0.125+script_time*0.25)+rate);
+    vec3 ro = vec3(0, 0, (bass_time));
     
     mat3 cameraMatrix = get_camera(ro, ta, 0. );
     vec3 rd = cameraMatrix * normalize( vec3(uv.xy, .85) );

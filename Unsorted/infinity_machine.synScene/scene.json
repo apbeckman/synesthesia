@@ -23,11 +23,11 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : -0.25,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -0.5,
-			"NAME" : "rate",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
 			"TYPE" : "slider",
 			"UI_GROUP" : "defaults"
 		},

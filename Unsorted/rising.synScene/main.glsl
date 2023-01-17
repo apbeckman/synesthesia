@@ -17,11 +17,11 @@ float scene1(vec3 p)
 	float dot_w=dot_p*0.625;
 	float dot=length(mod(p.xyz,dot_p)-dot_p*0.5)-dot_w;
 	float ball_p=1.0;
-	ball_p *= (1.0+0.00125*morph*(atan(smoothTimeC)+1.5+tan(TIME)));
+	ball_p *= (1.0+0.00125*morph*(atan(smoothTimeC)+.5+tan(smoothTimeC)));
 
 	float ball_w=ball_p*(0.6625-0.075*(1.0-value));
 	float ball=length(mod(p.xyz,ball_p)-ball_p*0.5)-ball_w;
-	float hole_w=ball_p*(0.625+0.0125*value);
+	float hole_w=ball_p*(0.6125+0.0125*value);
 	//hole_w *= 1.0+morph*0.0125*(atan(script_time*.25+script_high_time*.125)-1.);
 	float hole=length(mod(p.xyz,ball_p)-ball_p*0.5)-hole_w;
 	float hole2_p=0.125;
@@ -41,12 +41,12 @@ vec4 renderMainImage() {
 	//vp.zx=rotate(vp.zx,PI*0.125*sin(speed*0.5));	// rotation y
 	vp.yz = _rotate(vp.yz, LookXY.y*PI+_uvc.y*PI*Perspective);
 	vp.xz = _rotate(vp.xz, LookXY.x*PI);
-	vp.xy = _rotate(vp.xy, Rotate*PI);
+	vp.xy = _rotate(vp.xy, Spin*PI-spin_time);
 
 	//vp.xy=rotate(vp.xy,Rotate*speed*0.25);					// rotation z
 	float ground_x=0.0;//1.0+0.05*cos(PI*speed*0.25);
 	float ground_y=0.0;//1.0+0.05*sin(PI*speed*0.25);
-	float ground_z=speed*(0.125+0.375)+script_bass_time*0.01;
+	float ground_z=(0.125+0.375)+bass_time;
 	vec3 ray=vec3(ground_x,ground_y,ground_z);
 	ray.xy += Offset;
 	float t=0.0;

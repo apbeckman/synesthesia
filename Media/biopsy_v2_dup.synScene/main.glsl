@@ -160,7 +160,7 @@ vec2 autoSliceTransform(vec2 uv)
     case 3: gridder = tinyGridY*vec2(1.0,0.0); break;
     }
 // gridder = _rotate(gridder, PI*0.25);
-    return uv+gridder*pow(syn_HighHits,2.0)*0.01*singer*pow(syn_HighPresence+syn_BassPresence,2.0);
+    return uv+gridder*pow(syn_HighHits,2.0)*0.01*singer*pow(syn_Intensity*syn_HighPresence+syn_Intensity*syn_BassPresence,2.0);
 }
 
 // *************** PASS 0 *****************
@@ -247,7 +247,7 @@ vec4 blur_horizontal(sampler2D channel, vec2 uv, float scale)
     sum += texture(channel, fract(vec2(uv.x + 3.0*h, uv.y)) ) * 0.09;
     sum += texture(channel, fract(vec2(uv.x + 4.0*h, uv.y)) ) * 0.05;
 
-    return sum/0.98; // normalize
+    return sum/0.998; // normalize
 }
 
 vec4 blur_horizontal_left_column(vec2 uv, int depth)
@@ -530,8 +530,7 @@ void mainImage4( out vec4 fragColor, in vec2 fragCoord )
 
     vec2 uv = fragCoord.xy / RENDERSIZE.xy;
 
-    uv /= (1.0+length(_uvc)*(0.5+0.5*sin(smoothTimeC*0.135))*distort);
-
+    uv /= (1.0+length(_uvc*PI)*(0.5+0.5*sin(smoothTimeC*0.135))*distort);
     // if (uv.x*mod(syn_BeatTime*5.0+syn_RandomOnBeat*2.0,8.0)*0.5+uv.y*mod(syn_BeatTime*13.0+syn_RandomOnBeat*1.7,8.0)*0.5 > 1.0){
     //     uv = 1.0-uv;
     // }
@@ -558,9 +557,9 @@ void mainImage4( out vec4 fragColor, in vec2 fragCoord )
     // *** Color Regime 1 ***
     midHighCol = mix(midHighCol, _normalizeRGB(46, 9, 39), color_palette);
     bassCol1 = mix(bassCol1, vec3(0.7,0.3,0.1), color_palette);
-    highCol1 = mix(highCol1, _normalizeRGB(4, 117, 111), color_palette);
-    bassCol2 = mix(bassCol2, _normalizeRGB(255, 45, 0), color_palette);
-    highCol2 = mix(highCol2, _normalizeRGB(255, 140, 0), color_palette);
+    highCol1 = mix(highCol1, _normalizeRGB(4, 10, 111), color_palette);
+    bassCol2 = mix(bassCol2, _normalizeRGB(255, 12, 0), color_palette);
+    highCol2 = mix(highCol2, _normalizeRGB(255, 140, 255), color_palette);
     midCol = mix(midCol, _normalizeRGB(4, 117, 111), color_palette);
 
     mixer = color_palette - 1.0;
@@ -580,12 +579,12 @@ void mainImage4( out vec4 fragColor, in vec2 fragCoord )
 
     midHighCol *= mix(1.0,(0.4+0.7*syn_MidHighPresence*distance(zoneMidHighs, _uvc)*0.5), 1.0-no_shading);
     bassCol1 *= mix(1.0,(0.3+0.7*pow(syn_BassLevel,2.0)), 1.0-no_shading);
-    bassCol2 *= mix(1.0,(0.2+0.9*syn_BassPresence*1.0), 1.0-no_shading);
-    highCol1 *= mix(1.0,(0.2+0.9*syn_HighPresence), 1.0-no_shading);
+    bassCol2 *= mix(1.0,(0.2+0.9*syn_BassPresence*1.0*syn_Intensity), 1.0-no_shading);
+    highCol1 *= mix(1.0,(0.2+0.9*syn_HighPresence*syn_Intensity), 1.0-no_shading);
     midCol *= mix(1.0,(0.2+0.9*distance(zoneMids, _uvc)*syn_MidPresence), 1.0-no_shading);
 
     if (flashing > 0.5){
-        highCol2 *= (0.1+0.9*syn_HighHits*(0.5+syn_Presence*0.5)*distance(zoneHighs, _uvc));
+        highCol2 *= (0.1+0.9*syn_HighLevel*(0.5+syn_Intensity*0.5+syn_HighHits*0.25)*distance(zoneHighs, _uvc));
     } else {
         highCol2 *= ((0.5+syn_Presence*0.5)*distance(zoneHighs, _uvc));
     }

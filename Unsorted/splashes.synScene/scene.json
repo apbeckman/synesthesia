@@ -1,36 +1,49 @@
 {
-   "CONTROLS" : [
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseXY",
-         "TYPE" : "xy",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseClick",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "defaults"
-      }
-   ],
-   "CREDIT" : "apb_0",
-   "DESCRIPTION" : "credit to ddsol, wanted to save some edits",
-   "HEIGHT" : 900,
-   "IMAGES" : [
-      {
-         "NAME" : "image2",
-         "PATH" : "images/2.jpg"
-      }
-   ],
-   "IMAGE_PATH" : "splashes.png",
-   "TITLE" : "Splashes",
-   "WIDTH" : 1600
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "rate_in",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "apb_0",
+	"DESCRIPTION" : "credit to ddsol, wanted to save some edits",
+	"GPU" : 0,
+	"HEIGHT" : 900,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image2",
+			"PATH" : "images/2.jpg"
+		}
+	],
+	"IMAGE_PATH" : "splashes.png",
+	"TITLE" : "Splashes",
+	"WIDTH" : 1600
 }

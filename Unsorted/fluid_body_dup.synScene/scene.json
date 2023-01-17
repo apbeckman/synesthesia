@@ -1,0 +1,218 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "fluid-like motion",
+			"MAX" : 1,
+			"MIN" : 0.02,
+			"NAME" : "flow",
+			"TYPE" : "slider",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "modulate flow by audio",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "pulse",
+			"TYPE" : "knob",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 
+			[
+				1,
+				1
+			],
+			"DESCRIPTION" : "damp motion at largest scale",
+			"MAX" : 
+			[
+				2,
+				2
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "drift",
+			"TYPE" : "xy",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "smooth out motion in time",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "momentum",
+			"TYPE" : "knob",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "emphasize smaller or large scale motion",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "scale_factor",
+			"TYPE" : "knob",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "cycle colors",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "color_rotate",
+			"TYPE" : "xy",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "color mutation",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "coruscate",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "auto color rotate - x",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flash_x",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "auto color rotate - y",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flash_y",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "change color palette",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "chromatic",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "impulse to flow, push, momentum",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "zap",
+			"PARAMS" : 0.2,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "perform"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "instantaneous circular distortion",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "lens",
+			"PARAMS" : 0.001,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "perform"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "reset to horizontal bars",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "bars",
+			"TYPE" : "bang",
+			"UI_GROUP" : "perform"
+		}
+	],
+	"CREDIT" : "Victor S.",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "fluid_body_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1024,
+			"TARGET" : "fb0",
+			"WIDTH" : 1792
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1024,
+			"TARGET" : "fb1",
+			"WIDTH" : 1792
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 1024,
+			"TARGET" : "flow1",
+			"WIDTH" : 1792
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 256,
+			"TARGET" : "flow2",
+			"WIDTH" : 448
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 128,
+			"TARGET" : "flow3",
+			"WIDTH" : 224
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 64,
+			"TARGET" : "flow4",
+			"WIDTH" : 112
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 32,
+			"TARGET" : "flow5",
+			"WIDTH" : 56
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 16,
+			"TARGET" : "flow6",
+			"WIDTH" : 28
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 8,
+			"TARGET" : "flow7",
+			"WIDTH" : 14
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 8,
+			"TARGET" : "flow8",
+			"WIDTH" : 14
+		}
+	],
+	"TITLE" : "Fluid Body_dup",
+	"WIDTH" : 1920
+}

@@ -4,8 +4,8 @@
 		{
 			"DEFAULT" : 0.35,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 2,
+			"MIN" : -2,
 			"NAME" : "Zoom",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"

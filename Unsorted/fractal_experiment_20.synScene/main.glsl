@@ -4,8 +4,12 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 // Created by Stephane Cuillerdier - Aiekick/2015 (twitter:@aiekick)
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 // Tuned via XShade (http://www.funparadigm.com/xshade/)
+vec3 colGet(float t){
+    return _palette(_triWave(t, 1.0), vec3(0.340, 0.380-0.12*syn_HighLevel, -0.180), vec3(0.339, 0.040+0.2*syn_MidHighLevel, 0.670), vec3(0.2555, 0.900, 0.315), vec3(0.500, 0.890, 0.000));
+}
 
-const vec3 ld = vec3(0.,1., .5);
+
+const vec3 ld = vec3(0.,1., .25);
 
 float t = 0., ts = 0.;
 
@@ -14,7 +18,8 @@ mat3 getRotZMat(float a){return mat3(cos(a),-sin(a),0.,sin(a),cos(a),0.,0.,0.,1.
 float fractus(vec3 p)
 {
 	vec2 z = p.xy;
-    vec2 c = vec2(0.28,-0.56) * sin(p.z+cos(p.z));
+	z =_rotate(z, midtime*0.5);
+    vec2 c = vec2(0.28+sin(TIME)*0.12,-0.56) * sin(p.z+cos(p.z));
 	float k = 1., h = 1.0;    
     for (float i=0.;i<6.;i++)
     {
@@ -29,7 +34,7 @@ float fractus(vec3 p)
 float df(vec3 p)
 {
     if (length(p.xy) < 1.8)
-		p *= getRotZMat(p.z*0.5);
+		p *= getRotZMat(p.z*0.25+_uvc.x);
 	return fractus(p);
 }
 
@@ -78,7 +83,7 @@ float calcAO( in vec3 pos, in vec3 nor )
 vec3 lighting(vec3 p, vec3 lp, vec3 rd, float prec) 
 {
     vec3 l = lp - p;
-    float d = max(length(l), 0.01);
+    float d = max(length(l), 0.001);
     float atten = 1.0-exp( -0.01*d*d );
     if (iMouse.z> 0.) atten = exp( -0.001*d*d )-0.5;
     l /= d;
@@ -109,7 +114,9 @@ vec3 GetSky(in vec3 rd, in vec3 sunDir, in vec3 sunCol)
 {
 	float sunAmount = max( dot( rd, sunDir), 0.0 );
 	float v = pow(1.0-max(rd.y,0.0),6.);
-	vec3  sky = vec3(0.5,0.49,0.72);
+	vec3  sky = vec3(0.01, 0., 0.21);
+	sky.xy *= _uvc*PI+syn_HighHits;
+	//vec3  sky = vec3(0.5,0.49,0.72);
 	sky = sky + sunCol * sunAmount * sunAmount * .25;
 	sky = sky + sunCol * min(pow(sunAmount, 800.0)*1.5, .3);
 	return clamp(sky, 0.0, 1.0);
@@ -125,12 +132,12 @@ vec4 renderMainImage() {
 	t = smoothTime;
 	ts = sin(t)*.5+.5;
     
-    vec3 ro = vec3(2.1*vec2(cos(t*.1),sin(t*.1)),t);
+    vec3 ro = vec3(2.1*vec2(cos(spin_time*.1),sin(spin_time*.1)),bass_time*2.0);
 
     vec3 cu = vec3(0,1,0);
     vec3 co = ro + vec3(0.,0,1);
 	
-	float fov = .5;
+	float fov = .65;
 	vec3 z = normalize(co - ro);
 	vec3 x = normalize(cross(cu, z));
 	vec3 y = normalize(cross(z, x));
@@ -139,7 +146,7 @@ vec4 renderMainImage() {
 	float s = 0.01;
 	float d = 0.;
 	vec3 p = ro + rd * d;
-	float dMax = 20.;
+	float dMax = 50.;
 	for (float i=0.; i<250.; i++)
 	{
 		if (s<0.025*log((d*d)/s/500.) || d>dMax) break;
@@ -153,8 +160,10 @@ vec4 renderMainImage() {
 	if (d<dMax)
 	{
         vec3 p =ro+rd*d;
-		f.rgb = vec3(0.47,0.6,0.76) * lighting(p, ro, rd, .000001);
-		f.rgb = mix( f.rgb, sky, 1.0-exp( -0.03*d*d ) ); 
+		f.rgb = vec3(01.47,0.6,0.976)*(1.0+syn_MidHighLevel*syn_Intensity*2.) * lighting(p, ro, rd, .000001);
+		f.rgb = mix( f.rgb*1.5, sky, 1.0-exp( -0.03*d*d )-syn_HighLevel*0.01 ); 
+		f.rgb *=1.0+ pow(syn_MidHighLevel*0.5+ syn_HighLevel*0.25, 2);
+
 	}
 	else
 	{

@@ -1,7 +1,16 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 			//******** Common Code Begins ********
+vec4 texture2DAA(sampler2D tex, in vec3 p, in vec3 n) {
+    vec2 uv = _xy;
+    vec2 texsize = vec2(textureSize(tex,0));
+    vec2 uv_texspace = uv*texsize;
+    vec2 seam = floor(uv_texspace+.5);
+    uv_texspace = (uv_texspace-seam)/fwidth(uv_texspace)+seam;
+    uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
+    return texture(tex, uv_texspace/texsize);
+}
 
 mat3 rotX(float a)
 {
@@ -104,8 +113,8 @@ vec2 path(in float z){
     //return vec2(0); // Debug: Straight path.
     
     // Windy path.
-    vec2 a = vec2(sin(z*.055), cos(z*.07));
-    return vec2(a.x - a.y*.75, a.y*1.275 + a.x*1.125); 
+    vec2 a = vec2(sin(z*.001255), cos(z*.0027));
+    return vec2(a.x - a.y*.5, a.y*1.275 + a.x*1.125); 
 }
 
 
@@ -140,7 +149,7 @@ float sBox(vec3 p, vec3 b){
 
 // Individual tile scale. Values ranging from ".5" to "2.5" look interesting, but it doesn't 
 // really work for values outside that.
-const float gSc = 1.5;
+const float gSc = 2.5;
 
 // The overlapping random block distance field: In order to render repeat objects that either
 // sit up against one another, or slightly overlap, you have to render more than one cell to
@@ -221,7 +230,7 @@ float map(vec3 p){
     
     const float sc = 32.; // Section Z spacing.
     float ipZ = floor(p.z/sc); // Unique section ID.
-    vec3 rnd3 = floor(vec3(4, 2, 4)*hash13(ipZ)); // Variable sized rooms.
+    vec3 rnd3 = floor(vec3(6, 5, 8)*hash13(ipZ)); // Variable sized rooms.
     
     // We're using an "abs" operation to render two X, Y and Z walls at once, but we keep note
     // of their polarity to feed to a random generator to give different patterns on each side.
@@ -229,9 +238,9 @@ float map(vec3 p){
 
  
     // Repeat Z sections.
-    vec3 q = vec3(p.xy, mod(p.z, sc) - sc/2.);
+    vec3 q = vec3(p.xy, mod(p.z, sc) - sc/4.);
     
-    vec3 walls = abs(q - vec3(2, .5, 0)) - vec3(5, 3, 6) - rnd3;
+    vec3 walls = abs(q - vec3(2, .5, 0)) - vec3(5, 3, 3) - rnd3;
     float s2 = walls.z;
     
     // Scene distance: Initially set to a base room structure.
@@ -241,7 +250,7 @@ float map(vec3 p){
     walls -= gSc/2.;
     
     // Left and right random block walls.
-    float blX = blocks(vec3(q.yz, walls.x), sq.x);
+    float blX = blocks(vec3(q.yz - gSc/4., walls.x), sq.x);
     // Top and bottom random block walls -- offset half a tile width, because I thought it looked
     // more interesting that way.
     float blY = blocks(vec3(q.xz - gSc/4., walls.y), sq.y);
@@ -259,7 +268,7 @@ float map(vec3 p){
     /////
     q = p;
     // Left and right block walls in the small square tube.
-    float blXSm = blocks(vec3(q.yz - gSc/4., abs(q.x) - 1.5 - gSc/2.), sq.x);
+    float blXSm = blocks(vec3(q.yz - gSc/2., abs(q.x) - 1.5 - gSc/2.), sq.x);
     // Top and bottom block walls in the small square tube.
     float blYSm = blocks(vec3(q.xz, abs(q.y) - 1.5 - gSc/2.), sq.y);
 
@@ -285,12 +294,12 @@ float map(vec3 p){
 }
 
 
-/*
+
 // Texture bump mapping. Four tri-planar lookups, or 12 texture lookups in total. I tried to 
 // make it as concise as possible. Whether that translates to speed, or not, I couldn't say.
 vec3 doBumpMap(sampler2D tx, in vec3 p, in vec3 n, float bf){
    
-    const vec2 e = vec2(0.001, 0);
+    const vec2 e = vec2(0.0001, 0);
     
     // Three gradient vectors rolled into a matrix, constructed with offset greyscale texture values.    
     mat3 m = mat3(tex3D(tx, p - e.xyy, n), tex3D(tx, p - e.yxy, n), tex3D(tx, p - e.yyx, n));
@@ -301,7 +310,7 @@ vec3 doBumpMap(sampler2D tx, in vec3 p, in vec3 n, float bf){
     return normalize(n + g*bf); // Bumped normal. "bf" - bump factor.
     
 }
-*/
+
 
 
 // Basic raymarcher.
@@ -385,15 +394,15 @@ vec4 renderMainImage() {
 	
 	// Screen coordinates.
 	vec2 uv = (fragCoord - RENDERSIZE.xy*0.5)/RENDERSIZE.y;
-	
+
 	// Camera Setup.
-    vec3 ro = vec3(0, 0, smooth_basstime); // Camera position, doubling as the ray origin.
+    vec3 ro = vec3(0, 0, bass_time); // Camera position, doubling as the ray origin.
 	vec3 lk = ro + vec3(0, 0, .25);  // "Look At" position.
-	
+	lk.xy += _uvc*PI*0.5*Fov;
  
     // Light positioning. 
  	vec3 lp = ro + vec3(0., .25, 6); // Put it a bit in front of the camera.
- 	vec3 lp2 = ro + vec3(0., .125, 18); // Put it further in front of the camera.
+ 	vec3 lp2 = ro + vec3(0., .125, 15); // Put it further in front of the camera.
 
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
@@ -404,18 +413,22 @@ vec4 renderMainImage() {
 	lp2.xy += path(lp2.z);
 
     // Using the above to produce the unit ray-direction vector.
-    float FOV = 3.14159265/3.; // FOV - Field of view.
+    float FOV = PI/3.1; // FOV - Field of view.
     vec3 fwd = normalize(lk - ro);
     vec3 rgt = normalize(vec3(fwd.z, 0., -fwd.x )); 
     vec3 up = cross(fwd, rgt);
 
     // rd - Ray direction.
-    vec3 rd = normalize(fwd + (uv.x*rgt + uv.y*up)*FOV);
-    
+    //vec3 rd = normalize(fwd + (uv.x*rgt + uv.y*up)*FOV);
+
+
     // Fish eye lens.
-    //vec3 rd = normalize(forward + (uv.x*right + uv.y*up)*FOV);
-    //rd = normalize(vec3(rd.xy, rd.z - dot(rd.xy, rd.xy)*.15));    
-    
+    vec3 rd = normalize(fwd + (uv.x*rgt + uv.y*up)*FOV);
+    rd = normalize(vec3(rd.xy, rd.z - dot(rd.xy, rd.xy)*.15));    
+    rd.yz = _rotate(rd.yz, lookXY.y*PI + _uvc.y*PI*Perspective*Fov);
+    rd.xz = _rotate(rd.xz, -1.0*lookXY.x*PI);
+    rd.xy = _rotate(rd.xy, -1.0*Spin*PI+spin_time);
+
     // Swiveling the camera about the XY-plane (from left to right) when turning corners.
     // Naturally, it's synchronized with the path in some kind of way.
 	rd.xy = r2( path(lk.z).x/32. )*rd.xy;
@@ -441,11 +454,12 @@ vec4 renderMainImage() {
         
         
         // Texture positioning.
-        const float txSc0 = .25; // Texture scale.
+        const float txSc0 = .5; // Texture scale.
         vec3 txP = vec3(sp.xy - path(sp.z), sp.z); // Line it up with the camera path. Optional.
         
         // Texture based bump mapping.
-        //sn = doBumpMap(image3, txP*txSc0, sn, .01);
+        sn = doBumpMap(image3, txP*txSc0, sn, .01);
+        
         
         // Shadows and ambient occlusion. We're only including shadows from the back light.
         // Shadows from both lights would be better, but it's a little expensive, so the idea is 
@@ -453,7 +467,7 @@ vec4 renderMainImage() {
         // contributes more, so... Computer rendering is far from an exact science. :)
 	    float ao = getAO(sp, sn);
         float sh = getShad(sp, sn, lp2);
-        sh = min(sh + ao*.3, 1.);
+        sh = min(sh + ao*.23, 1.);
     	
     	// Light direction vectors.
 	    vec3 ld = lp - sp;
@@ -469,7 +483,7 @@ vec4 renderMainImage() {
 	    
 	    // Light attenuation, based on the distances above.
 	    float atten = 1.5/(1. + distlpsp*distlpsp*.25); // + distlpsp*distlpsp*0.025
-	    float atten2 = 3./(1. + distlpsp2*distlpsp2*.25); // + distlpsp*distlpsp*0.025
+	    float atten2 = 2./(1. + distlpsp2*distlpsp2*.25); // + distlpsp*distlpsp*0.025
 
     	
     	// Ambient light.
@@ -487,7 +501,7 @@ vec4 renderMainImage() {
 	    float spec2 = pow(max( dot( reflect(-ld2, sn), -rd ), 0.0 ), 32.);
 
 	    // Fresnel term. Good for giving a surface a bit of a reflective glow.
-        //float fre = clamp(dot(sn, rd) + 1., .0, 1.);
+        float fre = clamp(dot(sn, rd) + 1., .0, 1.);
         
         // Object texturing and coloring.
         vec3 oCol = tex3D(image3, txP*txSc0, sn);
@@ -496,9 +510,13 @@ vec4 renderMainImage() {
     	
     	// Combining the above terms to produce the final color. It was based more on acheiving a
         // certain aesthetic than science.
-        col = (oCol*(diff*vec3(.4, .6, 1) + amb + vec3(.4, .6, 1)*spec*4.))*atten; // Light one.
-        col += (oCol*(diff2*vec3(1, .4, .2) + amb + vec3(1, .4, .2)*spec2*4.))*atten2; // Light two.
+        //col = (oCol*(diff*vec3(.4, .6, 1) + amb + vec3(.4, .6, 1)*spec*4.))*atten; // Light one.
+        col = (oCol*(diff*vec3(.4, .6, 1) + amb + vec3(.4, .6, 1)*spec*4.))*atten*(1.0+syn_HighLevel); // Light one.
+        //col += (oCol*(diff2*vec3(1, .4, .2) + amb + vec3(1, .4, .2)*spec2*4.))*atten2; // Light two.
+        col += (oCol*(diff2*vec3(1, .4, .2) + amb + vec3(.75, .4, .8)*spec2*4.))*atten2; // Light two.
+        
         //col += oCol*vec3(1, .05, .15)*pow(fre, 4.)*2.*(atten + atten2);
+        col += oCol*vec3(0.6, .105, .615)*pow(fre, 4.)*2.*(atten + atten2);  //fresnel
 
  
 	    // Applying the ambient occlusion and shadows.
@@ -510,7 +528,7 @@ vec4 renderMainImage() {
     //col = mix(col, vec3(1.8, 1, .9), smoothstep(.2, .99, t/FAR));
     
     // Cooler colors... as in, less warm. :)
-    //col *= vec3(.85, .95, 1.25);
+    col *= vec3(.85, .95, 1.25);
     
     // Vignette.
     uv = fragCoord/RENDERSIZE.xy;

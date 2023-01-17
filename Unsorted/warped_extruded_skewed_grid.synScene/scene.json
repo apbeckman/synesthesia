@@ -81,6 +81,38 @@
 			"PARAMS" : 0.026,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "Mirror",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",

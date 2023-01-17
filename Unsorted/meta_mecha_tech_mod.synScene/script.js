@@ -41,8 +41,10 @@ var bpmcount = new BPMCounter();
 var bassTimevar = new Timer();
 var midTimevar = new Timer();
 var timevar = new Timer();
-var spinTimevar = new Timer();
-var _spinTimevar = new Timer();
+var xTime = new Timer();
+var yTime = new Timer();
+var x_rot_time = new Timer();
+var y_rot_time = new Timer();
 var _spinTimevar1 = new Timer();
 
 var decimator = 0;
@@ -65,8 +67,10 @@ function update(dt) {
     bassTimevar.updateTime(0.2, Math.pow((0.5+inputs.syn_BassLevel+inputs.syn_MidLevel*0.75+syn_Intensity*0.25), 2.0)*(inputs.rate_in), dt);
 
     midTimevar.updateTime(0.125, Math.pow((inputs.syn_BassLevel*0.785+inputs.syn_MidHighLevel*0.9+inputs.syn_MidLevel*1.5+inputs.syn_Intensity*0.5), 2.0)*(inputs.mid_time), dt);
-    spinTimevar.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Fold.x), dt);
-    _spinTimevar.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Fold.y), dt);
+    xTime.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Fold.x), dt);
+    x_rot_time.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.rotate_xy.x), dt);
+    y_rot_time.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.rotate_xy.y), dt);
+    yTime.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Fold.y), dt);
     _spinTimevar1.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Spin), dt);
 
     timevar.updateTime(0.4, inputs.rate_in, dt);
@@ -74,9 +78,11 @@ function update(dt) {
     uniforms.script_time = timevar.time;
     uniforms.bass_time = bassTimevar.time;
     uniforms.mid_time = midTimevar.time;
-    uniforms.x_time = spinTimevar.time;
-    uniforms.y_time = _spinTimevar.time;
-    uniforms.rot_time = _spinTimevar.time;
+    uniforms.x_time = xTime.time;
+    uniforms.y_time = yTime.time;
+    uniforms.xRotTime = x_rot_time.time;
+    uniforms.yRotTime = y_rot_time.time;
+    uniforms.rot_time = _spinTimevar1.time;
 
     uniforms.highhits = Math.pow( (inputs.syn_HighLevel*0.5 + inputs.syn_Hits*0.125+inputs.syn_HighHits*0.375)*inputs.syn_Intensity, 2.0);
     uniforms.basshits = Math.pow( (inputs.syn_BassLevel*0.5 + inputs.syn_Level*0.125+inputs.syn_BassHits*0.375)*inputs.syn_Intensity, 2.0);

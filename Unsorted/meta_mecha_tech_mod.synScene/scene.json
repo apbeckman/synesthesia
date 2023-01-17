@@ -32,12 +32,22 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0.5,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : 0.1,
+			"MIN" : 0.01,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.109,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -0.25,
 			"NAME" : "Zoom",
-			"PARAMS" : 0.75,
+			"PARAMS" : 0.02,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
@@ -60,13 +70,24 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0,
-			"NAME" : "rate_in",
-			"PARAMS" : 0.109,
-			"TYPE" : "slider smooth",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "rotate_xy",
+			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		}
 	],

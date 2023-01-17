@@ -1,0 +1,31 @@
+{
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "🌼",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image14854",
+			"PATH" : ""
+		}
+	],
+	"IMAGE_PATH" : "frooty.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Frooty",
+	"WIDTH" : 1280
+}

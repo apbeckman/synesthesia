@@ -19,6 +19,47 @@
 			"NAME" : "Drips",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.125,
+			"MIN" : -1,
+			"NAME" : "Succ",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				2,
+				2
+			],
+			"MIN" : 
+			[
+				-2,
+				-2
+			],
+			"NAME" : "MoveXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Reset",
+			"TYPE" : "bang",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "wyatt",
@@ -30,27 +71,27 @@
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffC",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "Lattice Reaction_dup",

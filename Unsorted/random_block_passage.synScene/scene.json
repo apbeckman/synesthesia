@@ -1,36 +1,90 @@
 {
-   "CONTROLS" : [
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseXY",
-         "TYPE" : "xy",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "MouseClick",
-         "TYPE" : "toggle",
-         "UI_GROUP" : "defaults"
-      }
-   ],
-   "CREDIT" : "Shane",
-   "DESCRIPTION" : "A simple random block geometric flythrough with a dark tomb feel. ",
-   "HEIGHT" : 900,
-   "IMAGES" : [
-      {
-         "NAME" : "image3",
-         "PATH" : "images/3.jpg"
-      }
-   ],
-   "IMAGE_PATH" : "random_block_passage.png",
-   "TITLE" : "Random Block Passage",
-   "WIDTH" : 1600
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "lookXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Fov",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Spin",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Perspective",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "const_rot",
+			"PARAMS" : 0.081,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "A simple random block geometric flythrough with a dark tomb feel. ",
+	"GPU" : 0,
+	"HEIGHT" : 900,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/geoaltrd.jpg"
+		}
+	],
+	"IMAGE_PATH" : "random_block_passage.png",
+	"TITLE" : "Random Block Passage",
+	"WIDTH" : 1600
 }

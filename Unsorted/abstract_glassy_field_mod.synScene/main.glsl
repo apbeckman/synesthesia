@@ -23,19 +23,9 @@
 
 */
 //modified from https://www.shadertoy.com/view/ltfXWS, tested a few different versions of this same function and this one seemed to have the nicest results
-vec4 texture2DAA(sampler2D tex, in vec3 p, vec2 uv) {
-    vec2 uv = _xy;
-
-    vec2 texsize = vec2(textureSize(tex,0));
-    vec2 uv_texspace = uv*texsize;
-    vec2 seam = floor(uv_texspace+.5);
-    uv_texspace = (uv_texspace-seam)/fwidth(uv_texspace)+seam;
-    uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
-    return texture(tex, uv_texspace/texsize);
-}
 
 
-vec4 texture2DAA1(sampler2D tex, in vec3 p, in vec3 n) {
+vec4 texture2DAA(sampler2D tex, in vec3 p, in vec3 n) {
     vec2 uv = _xy;
     vec2 texsize = vec2(textureSize(tex,0));
     vec2 uv_texspace = uv*texsize;
@@ -154,7 +144,7 @@ float map(vec3 p){
     p.xy -= camPath(p.z).xy; // Perturb the object around the camera path.
     
      
-	p = cos(p*.315*1.25 + sin(p.zxy*.875*1.25)*(0.9+n3D(p)*0.1)+ sin(smoothTimeC * 0.125 )*0.2); // 3D sinusoidal mutation.
+	p = cos(p*.315*1.25*(1.0+Convolution) + sin(p.zxy*.875*1.25)*(0.9+n3D(p)*0.1+Convolution)+ sin(smoothTimeC * 0.075 )*0.2); // 3D sinusoidal mutation.
 
 
 
@@ -266,7 +256,7 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
     // Three gradient vectors rolled into a matrix, constructed with offset greyscale texture values.    
     //mat3 m = mat3( tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n));
     //mat3 m = mat3( tpl(tx, p + e.yxy, n), tpl(tx, p - e.yxy, n), tpl(tx, p - e.yxy, n));
-    mat3 m = mat3( texture2DAA1(tx, p + e.yxy, n), texture2DAA1(tx, p + e.yxy, n), texture2DAA1(tx, p + e.yxy, n));
+    mat3 m = mat3( texture2DAA(tx, p + e.yxy, n), texture2DAA(tx, p + e.yxy, n), texture2DAA(tx, p + e.yxy, n));
     
     ///vec3 g = vec3(0.299, 0.587, 0.114)*m; // Converting to greyscale.
     vec3 g = vec3(0.2, 0.2, 0.2)*m; // Converting to greyscale.
@@ -291,7 +281,7 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    float camTime = (smoothTime*0.25);
+    float camTime = (bass_time);
     
 	// Screen coordinates.
 	vec2 u = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;
@@ -318,8 +308,9 @@ vec4 renderMainImage() {
     //vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
     // Lens distortion.
     vec3 r = (0.1+FOV)*(fwd + (u.x*rgt-FOV*_uvc.x - FOV*_uvc.y+u.y*up));
-       r.xy += _rotate(r.xy*_uvc*0.5*PI, n3D(r.xyz)+smoothTime*0.1)*Whoa*n3D(vec3(smoothTime*0.1));
-    r = normalize(vec3(n3D(r.xyz)+r.xy*(1.0+(Flip*(-1+_uvc*PI))), (r.z - length(r.xy)*.125)));
+    r = normalize(vec3(n3D(r.xyz)*0.1+r.xy*(1.0+(Mirror*(-1+_uvc*PI))), (r.z - length(r.xy-_uvc*PI*Fisheye)*.125)));
+
+//    r = normalize(vec3(n3D(r.xyz)+r.xy*(1.0+(Flip*(-1+_uvc*PI))), (r.z - length(r.xy)*.125)));
     r.yz = _rotate(r.yz, lookXY.y*PI);
     r.xz = _rotate(r.xz, -1.0*lookXY.x*PI);
  
@@ -422,12 +413,14 @@ vec4 renderMainImage() {
         
         
         // Purple electric charge.
-        float hi = abs(mod(t/1. + ((smoothTimeB*0.35)/1.), 8.) - 8./2.)*pow(2.-highhits, 2.);
+        
+        float hi = abs(mod(t/1. - ((smoothTimeB*0.2)/1.), 8.) - 8./2.)*pow(2.-highhits, 2.);
         vec3 cCol = vec3(.01, .025, .5)*col*1./(.001 + hi*hi*.12);
         col += mix(cCol.yxz, cCol, n3D(p*3.));
- 		// Similar effect.
-        //vec3 cCol = vec3(.01, .05, 1)*col*abs(tan(t/1.5 + TIME/3.));
-        //col += cCol;
+ 		
+        // Similar effect.
+        vec3 _cCol = vec3(.01, .05, 1)*(1.0+syn_HighLevel)*col*abs(tan(t/(6.5) - smoothTimeB*0.05));
+        col += _cCol;
  
         
         // Apply some shading.
@@ -438,7 +431,7 @@ vec4 renderMainImage() {
     
     
     // Blend in a bit of light fog for atmospheric effect.
-    vec3 fog = vec3(.125, .04, .05)*(r.y*.5 + .5);    
+    vec3 fog = vec3(.05, .04, .05)*(r.y*.5 + .5);    
     col = mix(col, fog, smoothstep(0., .95, t/FAR)); // exp(-.002*t*t), etc. fog.zxy
 
     

@@ -75,7 +75,7 @@ vec4 renderMainImage() {
     vec2 st = (fragCoord.xy / RENDERSIZE.xy) * 2.1 - 1.;
     st.x *= RENDERSIZE.x / RENDERSIZE.y;
     vec3 ro = vec3(st, 3.0);
-    vec3 rd = normalize(vec3(st + vec2(0.), -0.35938));
+    vec3 rd = normalize(vec3(st + vec2(0.), 1.));
     vec3 mp;
     mp = ro;
     float md;

@@ -85,7 +85,7 @@ void formula(vec2 z, float t)
 	float M = 0.0;
 	float o, ot2, ot=ot2=1000.0;
 	float K = floor(loops/4.0)+floor(5.0 * zoom);
-	for (int i=0; i<9; i++) {
+	for (int i=0; i<11; i++) {
 		z = abs(z) / clamp(dot(z, z), 0.1, 0.5) - t;
 		float l = length(z);
 		o = min(max(abs(min(z.x, z.y)), -l + 0.25), abs(l - 0.25));

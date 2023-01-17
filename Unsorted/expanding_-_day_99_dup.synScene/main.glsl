@@ -66,7 +66,7 @@ vec3 pIcosahedron(inout vec3 p, int subdivisions) {
     p.xy = abs(p.xy);
 
 	pReflect(p, nc, 0.);
-    float smoothSin = (sin(smoothTimeC)+sin(smoothTimeC+1.)-1.)*0.25+0.5;
+    float smoothSin = (sin(smoothTimeC*0.5)+sin(smoothTimeC+1.)-1.)*0.5+0.5;
     if (subdivisions > 0) {
 
         vec3 A = pbc;
@@ -121,7 +121,7 @@ float noise( in vec2 x )
 {
     vec2 p = floor(x);
     vec2 f = fract(x);
-	f = f*f*(3.0-2.0*f);
+	f = f*f*(13.0-2.0*f);
 	
 	vec2 uv = (p.xy) + f.xy;
 	return textureLod( image30, (uv+ 0.5)/1024.0, 0.0 ).x;
@@ -135,7 +135,7 @@ float noise( in vec3 x )
 	
 	vec2 uv = (p.xy+vec2(37.0,17.0)*p.z) + f.xy;
 	vec2 rg = textureLod( image30, (uv+ 0.5)/1024.0, 0.0 ).yx;
-	return mix( rg.x, rg.y, pow(f.z, 0.05) );
+	return mix( rg.x, rg.y, pow(f.z, 0.025) );
 }
 vec3 glow = vec3(0);
 

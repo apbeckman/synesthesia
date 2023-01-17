@@ -2,12 +2,12 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0.1,
+			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "rate",
-			"TYPE" : "slider speed",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -31,6 +31,16 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",
@@ -41,7 +51,11 @@
 	[
 		{
 			"NAME" : "image2",
-			"PATH" : "images/2.jpeg"
+			"PATH" : "images/21.jpg"
+		},
+		{
+			"NAME" : "image3",
+			"PATH" : "images/geoaltI.jpg"
 		}
 	],
 	"IMAGE_PATH" : "winding_menger_tunnel.png",

@@ -152,8 +152,8 @@ float map(vec3 p){
     p.xy -= camPath(p.z).xy; // Perturb the object around the camera path.
     
      
-	p = cos(p*.125*2.25+sin(TIME*0.1)*0.3 + sin(p.zxy*.875*1.25)*(0.3+n3D(p+_uvc.xyx+smoothTimeC*0.012)*0.7)+ sin(smoothTimeC * 0.0125 )*0.2); // 3D sinusoidal mutation.
-
+	p = cos(p*.125*2.25+sin(smoothTimeC*0.06)*0.3 + sin(p.zxy*.875*1.25)*(0.3)+ sin(smoothTimeC * 0.0125 )*0.5); // 3D sinusoidal mutation.
+    p.xz += 0.25*n3D(p+_uvc.xyx+smoothTimeC*0.05)*0.7;
 
 
     float n = length(p); // Spherize. The result is some mutated, spherical blob-like shapes.
@@ -280,7 +280,7 @@ vec3 db( sampler2D tx, in vec3 p, in vec3 n, float bf){
 // Simple environment mapping.
 vec3 envMap(vec3 rd, vec3 n){
     
-    vec3 col = tpl(image10, rd*2., n);
+    vec3 col = tpl(image10, rd*3., n);
     return smoothstep(0., 1., col);
 }
 
@@ -316,9 +316,8 @@ vec4 renderMainImage() {
     // Unit direction ray.
     //vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
     // Lens distortion.
-    vec3 r = (0.05)*(fwd + (u.x*rgt-FOV*_uvc.x - FOV*_uvc.y+u.y*up));
-       r.xy += _rotate(r.xy, n3D(r.xyz)+smoothTime*0.01)*Whoa*n3D(vec3(smoothTime*0.01));
-    r = normalize(vec3(n3D(r.xyz)+r.xy*(1.0+(Mirror*(-1+_uvc*PI))), (r.z - length(r.xy-_uvc*PI*Fisheye)*.125)));
+    vec3 r = (0.05)*(fwd + (u.x*rgt-FOV*_uvc.x*0.5 - 0.5*FOV*_uvc.y+u.y*up));
+    r = normalize(vec3(n3D(r.xyz)*0.125+r.xy*(1.0+(Mirror*(-1+_uvc*PI))), (r.z - length(r.xy-_uvc*PI*Fisheye)*.125)));
     r.yz = _rotate(r.yz, lookXY.y*PI+_uvc.y*PI*Flip*FOV);
     r.xz = _rotate(r.xz, -1.0*lookXY.x*PI);
  
@@ -352,7 +351,7 @@ vec4 renderMainImage() {
         vec3 svn = n;
         
         // Texture bump the normal.
-        float sz = (1./(5.)); 
+        float sz = (1./(6.)); 
 
         n = db(image47, p*sz, n, .1/(1. + t*.25/FAR));
         l -= p; // Light to surface vector. Ie: Light direction vector.
@@ -360,11 +359,11 @@ vec4 renderMainImage() {
         l /= d; // Normalizing the light direction vector.
 
         
-        float at = 1./(1. + d*.05 + d*d*.0125); // Light attenuation.
+        float at = 1./(1. + d*.05 + d*d*.025); // Light attenuation.
         
         // Ambient occlusion and shadowing.
         float ao =  cao(p, n);
-        float sh = sha(p, l, 0.04, d, 8.);
+        float sh = sha(p, l, 0.04, d, 16.);
         
         // Diffuse, specular, fresnel. Only the latter is being used here.
         float di = max(dot(l, n), 0.);
@@ -375,13 +374,13 @@ vec4 renderMainImage() {
         
         // Texturing - or coloring - the surface. The "color"' of glass is provide by the surrounds...
         // of it's contents, so just make it dark.
-        vec3 tx = vec3(.0125); // tpl(image47, p*sz, n);
+        vec3 tx = vec3(.05); // tpl(image47, p*sz, n);
          
 
 		// Very simple coloring.
         //col = tx*(di*.1 + ao*.125) + vec3(.5, .7, 1)*sp*2. + vec3(1, .7, .4)*pow(fr, 8.)*.25;
-        col = tx*(di*.1 + ao*.125) + vec3(1.5, .7, 1)*sp*2. + vec3(1, .7, .4)*pow(fr, 8.)*.25;
- 
+        col = tx*(di*.1 + ao*.125) + vec3(.5, .7, 1)*sp*2. + vec3(1, .7, .4)*pow(fr, 8.)*.25;
+        
         // Very cheap, and totally fake, reflection and refraction. Obtain the reflection and
         // refraction vectors at the surface, then pass them to the environment mapping function.
         // Note that glass and fluid have different refractive indices, so I've fudged them into 
@@ -410,7 +409,7 @@ vec4 renderMainImage() {
         // hope that it adds a little more depth. It also gives the impression that Beer's Law is 
         // taking effect, even though it clearly isn't. I might try to vary with curvature - or some other
         // depth guage - later to see if it makes a difference.
-        col = mix(col.xzy, col, di*.125 + .15); 
+        col = mix(col.xzy, col, di*.95 + .15); 
         
         // Glow.
         // Taking the accumulated color (see the raymarching function), tweaking it to look a little
@@ -422,14 +421,14 @@ vec4 renderMainImage() {
         
         
         // Purple electric charge.
-        float hi = abs(mod(t/-4. - ((smoothTimeB*0.025)), 4.) - 4./2.)*(1.0+pow(2.-highhits, 2.));
+        float hi = abs(mod(t/-4. - ((smoothTimeB*0.125)), 4.) - 4./2.)*(1.0+pow(2.-highhits, 2.));
         hi += _uvc.x*PI*0.001;
         vec3 cCol = vec3(.01, .025, .5)*col*1./(.001 + hi*hi*.12);
        
         col += mix(cCol.yxz, cCol, n3D(p*3.));
  		// Similar effect.
-        //vec3 cCol = vec3(.01, .05, 1)*col*abs(tan(t/1.5 + TIME/3.));
-        //col += cCol;
+        vec3 _cCol = vec3(.01, .05, 1)*col*abs(tan(t/11.5 + smoothTimeB*-0.05));
+        col += _cCol;
  
         
         // Apply some shading.

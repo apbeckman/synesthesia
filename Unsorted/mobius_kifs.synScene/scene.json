@@ -1,74 +1,92 @@
 {
-   "CONTROLS" : [
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 6,
-         "MIN" : -4,
-         "NAME" : "zoom",
-         "PARAMS" : 0.00999999977648258,
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "camera"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 4,
-         "MIN" : -4,
-         "NAME" : "expand",
-         "PARAMS" : 0.00999999977648258,
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0.5,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0.1,
-         "NAME" : "rate",
-         "TYPE" : "slider",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 2,
-         "MIN" : -2,
-         "NAME" : "moveXY",
-         "PARAMS" : 0.00999999977648258,
-         "TYPE" : "xy smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 2,
-         "MIN" : 0,
-         "NAME" : "multiply",
-         "PARAMS" : 0.00999999977648258,
-         "TYPE" : "slider smooth",
-         "UI_GROUP" : "defaults"
-      },
-      {
-         "DEFAULT" : 0.5,
-         "DESCRIPTION" : "",
-         "IS_META" : false,
-         "MAX" : 1,
-         "MIN" : 0,
-         "NAME" : "reactivity",
-         "TYPE" : "knob",
-         "UI_GROUP" : "defaults"
-      }
-   ],
-   "CREDIT" : "Shane",
-   "DESCRIPTION" : "An extruded video image with one level of subdivision.",
-   "HEIGHT" : 1080,
-   "IMAGE_PATH" : "mobius_kifs.png",
-   "TITLE" : "mobius kifs",
-   "WIDTH" : 1920
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.5,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 4,
+			"MIN" : -4,
+			"NAME" : "expand",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				2,
+				2
+			],
+			"MIN" : 
+			[
+				-2,
+				-2
+			],
+			"NAME" : "moveXY",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "multiply",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reactivity",
+			"TYPE" : "knob",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 4,
+			"MIN" : -4,
+			"NAME" : "Twist",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "An extruded video image with one level of subdivision.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "mobius_kifs.png",
+	"TITLE" : "mobius kifs",
+	"WIDTH" : 1920
 }

@@ -1,4 +1,4 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 // Created by inigo quilez - iq/2015
@@ -127,12 +127,12 @@ vec4 map2( vec3 p )
 {
     float v = 2.0;
     
-    float wiggle = script_time * 0.125;
+    float wiggle = smoothTime * 0.0125;
     
     //wiggle -= floor(p.z*5.3)*0.1;
     float bT1 = (script_bass_time*0.35+script_time*0.75)*0.0125;
     float wiggle1 = wiggle * 2.0 + pow(bT1, 1.25);
-    float wiggle2 = wiggle * 3.0+(script_high_time*0.025);
+    float wiggle2 = wiggle * 3.0+(smoothTimeC*0.025);
     float wiggle3 = wiggle * 5.0;
     
     //p.z += cnoise(p*2.0)*0.1;
@@ -244,14 +244,14 @@ vec4 renderMainImage() {
     vec2 p = -1.0 + 2.0 * q;
     p.x *= RENDERSIZE.x/RENDERSIZE.y;
     vec2 m = vec2(0.5);
-	if( iMouse.z>0.0 ) m = iMouse.xy/RENDERSIZE.xy;
+	//if( iMouse.z>0.0 ) m = iMouse.xy/RENDERSIZE.xy;
 
 	
     //-----------------------------------------------------
     // camera
     //-----------------------------------------------------
 	
-	float an = 0.005*TIME + 7.5 - 5.0*m.x;
+	float an = .0025*bass_time + 7.5 - 5.0*m.x;
 
 	vec3 ro = vec3(4.5*sin(an),0.5,4.5*cos(an));
     vec3 ta = vec3(0.0,0.5,0.0);

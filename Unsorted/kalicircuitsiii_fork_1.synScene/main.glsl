@@ -15,22 +15,23 @@ vec3 hsv2rgb(vec3 c)
 
 
 vec3 fractal(vec2 p) {
-    float o=100.,l=o;
-    p*=rot(-.3);
-    p.x*=1.+p.y*.7;
+    float o=200.,l=o;
+    p*=rot(-Rotate);
+    p.x*=1.+p.y*(Curl);
     p*=.5+sin(TIME*.1)*.3;
-    p+=TIME*.02;
+    p.y+=bass_time*0.25;
+    p.x += spin_time;
     p=fract(p);
-    for (int i=0; i<10; i++) {
-        p*=rot(radians(90.));
+    for (int i=0; i<9; i++) {
+        p*=rot(radians(-270.));
         p.y=abs(p.y-.25);
         p=p/clamp(abs(p.x*p.y),0.,3.)-1.;
-        o=min(o,abs(p.y-1.)-.2)+fract(p.x+TIME*.3)*.5;
-        l=min(l,length(max(vec2(0.),abs(p)-.5)));
+        o=min(o,abs(p.y-1.)-.1-syn_HighLevel*0.1)+fract(p.x+smoothTimeC*.05)*.5;
+        l=min(l,length(max(vec2(0.),abs(p)-1.5)));
         
     }
-	o=exp(-5.*o);
-	l=smoothstep(.1,.11,l);
+	o=exp((-5.-syn_Intensity*2.)*o);
+	l=smoothstep(.01,.11,l);
     return hsv2rgb(vec3(o*.5+.6,.8,o+.1))+l*vec3(.4,.3,.2);
 }
 
@@ -42,6 +43,8 @@ vec4 renderMainImage() {
     vec2 uv = fragCoord/RENDERSIZE.xy;
     uv-=.5;
     uv.x*=RENDERSIZE.x/RENDERSIZE.y;
+    uv += _uvc*PI*Fov*0.56;
+
     vec3 col=vec3(0.);
     float aa=4.;
     vec2 eps=1./RENDERSIZE.xy/aa;

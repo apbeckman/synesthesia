@@ -35,14 +35,14 @@ mat2 rot(float a) { return mat2(cos(a),-sin(a),sin(a),cos(a)); }
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-
+    U += _uvc*PI*Zoom;
     vec2 u = .5+.1*vec2(sin(.01*smoothTime),cos(.01*smoothTime));
     if (_mouse.z>0.) u = _mouse.xy/R;
     U -= u*R; 
     float r = length(U)/R.y,
         a = .01*sin(.0125*smoothTime)/(1.+5.*r);
 
-    U *= (.999*(1.0-basshits*0.05))*mat2(cos(a),-sin(a),sin(a),cos(a));
+    U *= (.999)*mat2(cos(a),-sin(a),sin(a),cos(a));
     U += u*R;
     Q = A(U);
     vec4

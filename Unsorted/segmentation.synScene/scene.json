@@ -1,4 +1,16 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "[url]javascript: H=location.host;E=(H?window:opener).Effect;P=E.prototype;if(!E.P)E.P=P.Paint;P.Paint=function(...A){for(i=0;i<3;i++)E.P.apply(this,A);};if(!H)close();[/url]",
 	"GPU" : 0,

@@ -357,12 +357,12 @@ vec3 intersect(vec3 ro, vec3 rd){
 vec3 distField(vec2 p){
     
     // Scale.
-    vec2 sc = vec2(1)/5.;//vec2(6./5., 4./5.)/5.;
+    vec2 sc = vec2(1)/6.;//vec2(6./5., 4./5.)/5.;
     
     // Edge width.
     const float ew = .0125;
     
-    vec2 q = p;
+    vec2 q = p-_uvc*syn_BassHits*Bump;
     // Partitioning into cells and providing the local cell ID
     // and local coordinates.
     //p.x += floor(hash21(floor(p.yy/sc.yy))*1.9999)/2.*sc.x;
@@ -374,7 +374,7 @@ vec3 distField(vec2 p){
     
     // Random subdivision.
     if(hash21(ip + .1/sc)<.5){
-        sc /= 2.;
+        sc /= 3.;
         p = q;
         ip = floor(p/sc);
         p -= (ip + .5)*sc;
@@ -401,8 +401,8 @@ vec3 distField(vec2 p){
     //d = max(d, -(length(p) - .2*sc.x));
     
     // Rings.
-    d = abs(d + .25*sc.x) - .25*sc.x;
-    d *= Background;
+    d = abs(d + .25*sc.x*sin(_uvc.x*PI+_uvc.y*PI+syn_HighHits+smoothTimeB*0.1)) - .25*sc.x;
+    d *= Background*(1.0+syn_HighLevel);
     
     // Returning the distance and local cell ID. Note that the 
     // distance has been rescaled by the scaling factor.
@@ -494,7 +494,7 @@ vec4 renderPassA() {
 
         // Using the above to produce the unit ray-direction vector.
         vec3 rd = mCam*normalize(vec3(uv, 1./FOV));
-
+        rd.xy = _rotate(rd.xy, Spin*PI);
         // Camera position. Initially set to the ray origin.
         vec3 cam = ro;
         // Surface postion. Also initially set to the ray origin.
@@ -601,7 +601,7 @@ vec4 renderPassA() {
                     vec3 tx = texture(image10, sphID + smoothTimeB/128.).xyz; tx *= tx;
                     
                     // Fade out emissivity higher up the walls.
-                    float st = clamp(sp.y/1.25 - 1., 0., 1.);
+                    float st = clamp(sp.y/.25 - 1., 0., 1.);
                     float rnd = smoothstep(st, 1., dot(tx, vec3(.299, .587, .114)));
               
         
@@ -609,13 +609,13 @@ vec4 renderPassA() {
                     emissive = vec3(0);
                     // Color a limited set of bands around the equator.
                     //if(abs(b0 - .25)<6./aNum0/2.) { emissive = oCol*(rnd*.99 + .01)*2.;  }
-                    if(abs(y0 - .25)<4./aNum0/2.) { emissive = oCol*tx*tx*rnd*16.;  }
+                    if(abs(y0 - .25)<4./aNum0/(PI-2.5*syn_BassLevel*syn_Intensity)) { emissive = oCol*tx*tx*rnd*32.;  }
                     emissive = mix(emissive, vec3(0), d);
-                    emissive = mix(emissive, emissive.zyx, clamp((sp.y + .5)*3., 0., 1.));
+                    emissive = mix(emissive, emissive.zyx, clamp((sp.y + .5)*3., 0., 1.))*(1.0+syn_HighLevel);
                     
                     
                     // Roughness.
-                    rough = hash21(vec2(sphID.x*aNum, sphID.y) + .23)*.25; //(clamp(.5 - d3.x/.2, 0., 1.))*
+                    rough = hash21(vec2(sphID.x*aNum, sphID.y) + .23)*.125; //(clamp(.5 - d3.x/.2, 0., 1.))*
                 
                }
                else {
@@ -625,11 +625,10 @@ vec4 renderPassA() {
                     // parts to act as emitters.
                     
                     // Back wall or not.
-                    float sgn = (abs(sn.z)>.5)? 1. : -1.;
+                    float sgn = (abs(sn.z)>.25)? 1. : -1.;
                     
                     // UV coordinates for the walls and floors.
                     vec2 uv = sgn>.5? sp.xy : abs(sn.x)>.5? sp.yz : sp.xz;
-
                     // Distance field pattern:
                     // Returns the distance field and cell ID.
                     vec3 d3 = distField(uv);
@@ -637,18 +636,18 @@ vec4 renderPassA() {
                     d3.x = smoothstep(0., sf, d3.x);
  
                     // Render the pattern on the walls, ceiling and floor.
-                    oCol = mix(vec3(1), vec3(.1), d3.x);
+                    oCol = mix(vec3(1)*(1.0+pow(syn_HighLevel*0.5+syn_Intensity*0.5, 2.0)*syn_Intensity), vec3(.1), d3.x);
                     
                     // Emissivity.
                     // Using a texture to color the emissive lights.
-                    vec3 tx = texture(image10, d3.yz/16. - vec2(-1, 2)*smoothTimeB/64.).xyz; tx *= tx;
+                    vec3 tx = texture(image10, d3.yz/32. - _rotate(vec2(1.0), smoothTimeB*0.01)+vec2(-1, 2)*smoothTimeB/64.).xyz; tx *= tx;
                     // Fade out emissivity higher up the walls.
                     float st = clamp(d3.z/1.25 - 1., 0., 1.);
                     float rnd = smoothstep(st, 1., dot(tx, vec3(.299, .587, .114)));
                     if(sgn<.5) rnd = 0.; // No lights on the floor or ceiling.
                     //if(sn.z>.5) rnd = 0.;
                     // Pattern based emissivity -- It doesn't always have to be object based.
-                    emissive = mix(oCol*tx*tx*rnd*16., vec3(0), d3.x);
+                    emissive = mix(oCol*tx*tx*rnd*32., vec3(0), d3.x);
                     emissive = mix(emissive, emissive.zyx, clamp(sp.y, 0., 1.));
                     
                     // Roughness.
@@ -754,6 +753,7 @@ vec4 renderMainImage() {
     //
     float maxRes = 1080.;
     vec2 uv = fragCoord/RENDERSIZE.xy;
+    
     // If the resolution exceeds the maximum, upscale.
     if(RENDERSIZE.y>maxRes) uv = (uv - .5)*maxRes/RENDERSIZE.y + .5;
     

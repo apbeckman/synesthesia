@@ -103,7 +103,6 @@ vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-
     vec2 p = fragCoord.xy;
     
     vec2 uv = (p.xy) / RENDERSIZE.xy;
@@ -223,7 +222,7 @@ vec4 renderPassB() {
     vec2 st = (fragCoord * 2. - RENDERSIZE.xy) / iMinDimension;
 
     vec2  drawDelta = st - iDrawCenter;
-    float drawAngle = atan(drawDelta.x, drawDelta.y);
+    float drawAngle = atan(drawDelta.x+_uvc.x, drawDelta.y);
     float drawDist = length(drawDelta);
 
 vec3 feedbk = repeatedTexture(BuffC, uv - st).rgb;

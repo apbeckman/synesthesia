@@ -21,16 +21,27 @@
 			"NAME" : "lookXY",
 			"PARAMS" : 0.029,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "defaults"
+			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : -0.5,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Speed",
-			"TYPE" : "slider",
-			"UI_GROUP" : "defaults"
+			"MIN" : -1.5,
+			"NAME" : "FOV",
+			"PARAMS" : 0.029,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
 		},
 		{
 			"DEFAULT" : 0,
@@ -41,16 +52,6 @@
 			"PARAMS" : 0.228,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "render glitches"
-		},
-		{
-			"DEFAULT" : -0.5,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1.5,
-			"NAME" : "FOV",
-			"PARAMS" : 0.088,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
@@ -89,7 +90,7 @@
 				0,
 				0
 			],
-			"NAME" : "Flip",
+			"NAME" : "Mirror",
 			"PARAMS" : 0.153,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
@@ -97,20 +98,20 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 3.14,
+			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "Whoa",
+			"NAME" : "Fisheye",
 			"PARAMS" : 0.118,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 100,
-			"MIN" : 0.01,
-			"NAME" : "TexWeight",
-			"PARAMS" : 0.5,
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Convolution",
+			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}

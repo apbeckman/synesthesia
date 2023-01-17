@@ -1,0 +1,32 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Mind flowers\nSaw some twitter art that inspired me to do weird colorful stuff\nTurn on, tune in, drop out!\nAnd full screen!\n\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "mind_flowers.png",
+	"TITLE" : "Mind flowers",
+	"WIDTH" : 1280
+}

@@ -53,6 +53,13 @@ vec3 tex3D( sampler2D tex, in vec3 p, in vec3 n ){
 	return (texture(tex, p.yz)*n.x + texture(tex, p.zx)*n.y + texture(tex, p.xy)*n.z).xyz;
     
 }
+vec3 _tex3D( sampler2D tex, in vec3 p, in vec3 n ){
+   
+    n = max(abs(n), 0.001); // n = max((abs(n) - 0.2)*7., 0.001); // n = max(abs(n), 0.001), etc.
+    //n /= (n.x + n.y + n.z); 
+	return (texture(tex, p.xy)*n.x + texture(tex, p.xy)*n.y + texture(tex, p.xy)*n.z).xyz;
+    
+}
 
 // Common formula for rounded squares, for all intended purposes.
 float lengthN(in vec2 p, in float n){ p = pow(abs(p), vec2(n)); return pow(p.x + p.y, 1.0/n); }
@@ -62,7 +69,7 @@ vec2 path(in float x){
     
     //return vec2(0); // Trivial, straight path.
     //return vec2(cos(x*0.25)*1.8 + cos(x*0.15)*2., 0); // Perturbing "X" only.
-    return vec2(cos(x*0.25)*1.8 + cos(x*0.15)*1.5, sin(x*0.25)*1.2 + sin(x*0.15)); // Perturbing "X" and "Y."
+    return vec2((x*0.25) + cos(x*0.15)*1.5, sin(x*0.25)*1.2 + sin(x*0.15)); // Perturbing "X" and "Y."
     
     
 }
@@ -169,10 +176,12 @@ float map(in vec3 p){
     
     // Again a little expensive, but it's a surprisingly effective way to bump the tunnel walls.
     // This is a variation, but you can thank "aeikick" for this little snippet. :)
-    //vec3 u = p;
-    //p.x -= sign(u.x)*(texture(image2, u.yz/8.).x - .0)*.03;//-.2;
-	//p.y -= sign(u.y)*(texture(image2, u.xz/8.).x - .0)*.03;  
-
+    if (objID == 2.)
+    {
+    vec3 u = p;
+    p.x -= sign(u.x)*(texture(image3, u.yz/2.).x - .0)*.03;//-.2;
+	p.y -= sign(u.y)*(texture(image3, u.xz/2.).x - .0)*.03;  
+    }
     
     // The walls. I have another Menger example, if you'd like to look into that more closely.
     float walls = Menger(p);
@@ -185,7 +194,7 @@ float map(in vec3 p){
     // stuff... Add this, take that, etc. Fiddly, hacky, not all that interesting, and probably not the
     // best way to do it. Chipping away at a cylinder might raymarch better. 
     //
-    p += vec3(sign(p.x)*(-.11 + (sin(p.z*3.14159*2. + 1.57/1.))*.05), 0., 0.); // Screen curve, and repositioning.
+    p += vec3(sign(p.x)*(-.11 + (sin(p.z + 1.57/1.))*.05), 0., 0.); // Screen curve, and repositioning.
     vec3 q = abs(mod(p + vec3(.0, .5, 0.), vec3(1., 1., 2.)) - vec3(.5, .5, 1.)); // Repeat space.
     float screen = max(max(q.y, q.z) - .22, q.x-.05); // Box.
     screen = max(screen, max(abs(p.x) - .5, abs(p.y) - .22)); // Chopping off anything outside the tunnel... Kind of.
@@ -202,7 +211,7 @@ float map(in vec3 p){
     // Returning the minimum of the three objects.
     return min(min(tube, walls), screen);
     
-/*    
+
     //Two object combinations. Spoils the illusion, but helps visualize things.
 
     //objID = 2. + step(screen, tube);
@@ -214,7 +223,7 @@ float map(in vec3 p){
         
     objID = 1. + step(screen, walls)*2.;
     return min(screen, walls);    
-*/     
+     
     
     
 }
@@ -255,7 +264,7 @@ float calcAO(in vec3 pos, in vec3 nor)
 
 // Texture bump mapping. Four tri-planar lookups, or 12 texture lookups in total. I tried to 
 // make it as concise as possible. Whether that translate to speed, or not, I couldn't say.
-/*vec3 texBump( sampler2D tx, in vec3 p, in vec3 n, float bf){
+vec3 texBump( sampler2D tx, in vec3 p, in vec3 n, float bf){
    
     const vec2 e = vec2(0.002, 0);
     
@@ -268,7 +277,7 @@ float calcAO(in vec3 pos, in vec3 nor)
     return normalize( n + g*bf ); // Bumped normal. "bf" - bump factor.
 	
 }
-*/
+
 // Standard hue rotation formula.
 vec3 rotHue(vec3 p, float a){
 
@@ -323,9 +332,9 @@ vec4 renderMainImage() {
 	vec2 u = (fragCoord - RENDERSIZE.xy*0.5)/RENDERSIZE.y;
 	
 	// Camera Setup.
-    vec3 ro = camPath(rate+smoothTime*0.5); // Camera position, doubling as the ray origin.
+    vec3 ro = camPath(bass_time*0.5); // Camera position, doubling as the ray origin.
     vec3 lk = vec3(0,0,1);  // "Look At" position.
-    vec3 lp = camPath(smoothTime*1.5 + 2.) + vec3(0, 2, 0); // Light position, somewhere near the moving camera.
+    vec3 lp = vec3(0, 2, 0); // Light position, somewhere near the moving camera.
 
 
     // Using the above to produce the unit ray-direction vector.
@@ -339,7 +348,7 @@ vec4 renderMainImage() {
  
     vec2 a = (vec2(1.5707963, 0) - camPath(lk.z).x/12.); 
     mat2 rM = mat2(a, -a.y, a.x);
-    rd.xy = rd.xy*rM; // Apparently, "rd.xy *= rM" doesn't work on some setups. Crazy.
+    //rd.xy *= rM; // Apparently, "rd.xy *= rM" doesn't work on some setups. Crazy.
     
     // Mouse controls, as per Dave Hoskins's suggestion. A bit hacky, but I'll fix them.    
 	/*vec2 ms = vec2(0);
@@ -352,7 +361,8 @@ vec4 renderMainImage() {
     rd.yz = rd.yz*rM;
     */
     rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, lookXY.x*PI);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.xy = _rotate(rd.xy, Rotate*PI);
 
     
     // Raymarching.
@@ -390,7 +400,7 @@ vec4 renderMainImage() {
         
         // Apply some subtle texture bump mapping to the walls and the metal tubing, but not the screen.
         // I should probably get rid of that "if" statement later, but it seems OK for now.
-        //if(saveObjID<2.5) nor = texBump(image2, pOffs*ts, nor, 0.002 + step(saveObjID, 1.5)*0.012);
+        if(saveObjID<2.5) nor = texBump(image2, pOffs*ts, nor, 0.012 + step(saveObjID, 1.5)*0.012);
         
         
 		col = tex3D(image2, pOffs*ts, nor); // Texture pixel at the scene postion.
@@ -418,7 +428,7 @@ vec4 renderMainImage() {
         if(saveObjID>1.5){ 
 			
             // Grey out the limestone wall color.
-            col = vec3(1)*dot(col*.7+.2, vec3(.150, .150, .120));
+            col = vec3(1)*dot(col*.7+1.2, vec3(.150, .150, .120));
             // Add some fake reflection. Not reliable, but it's subtle.
             rCol = tex3D(image2, (pOffs + reflect(rd, nor))*ts, nor);
             col += rCol*.25 + spot*.125;
@@ -433,10 +443,11 @@ vec4 renderMainImage() {
 
             // For the screen image, we're interested in the offset height and depth positions. Ie: pOffs.zy.
             
-            // Pixelized dot pattern shade.
+            if(!_exists(syn_UserImage)){
+                            // Pixelized dot pattern shade.
             float c = dotPattern(pOffs.zy*36.+.5)+highhits;
             
-            // Applying some color to the shade.
+            //color
             col = vec3(min(c*1.5, 1.), pow(c, 2.5), pow(c, 12.));
             // Mixing the colors around a little. Made up.
             col = mix(col.zyx, col, sin(dot(pos, vec3(.333))*3.14159*6.)*.34+.66);
@@ -446,6 +457,16 @@ vec4 renderMainImage() {
             
             // Use the screen ID to give it a different random hue.
             col = rotHue(col, floor(id*12.)/12.*6.283/2.); 
+
+        }
+        else{
+                        
+        col = _tex3D(syn_UserImage, (pOffs), nor);
+        //col = _loadUserImage().rgb+nor;
+         
+
+        }
+
             
             col += rCol*rCol*.5; // Screen reflection.            
             

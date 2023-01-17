@@ -96,7 +96,7 @@ vec2 map(vec3 q){
     vec2 qr = rot(-a*PI2)*pp; 
     qr.x -= hl;
 
-    vec3 bq = vec3(qr.x, p.y+.15, qr.y);
+    vec3 bq = vec3(qr.x, p.y+.125, qr.y);
    
     float sph = length(bq)-.1;
     
