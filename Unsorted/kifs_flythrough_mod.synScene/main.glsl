@@ -360,7 +360,7 @@ vec4 renderMainImage() {
         
         // Faux environmental mapping.
         col += envMap(reflect(rd, sn), sn)*standard_lighting;
-        vec3 texo = tex3D(geom, sp*sz*0.35, vec3(1.0,1.0,0.0));
+        vec3 texo = tex3D(geom, sp*sz*0.5, vec3(1.0,1.0,0.0));
         if (syn_MediaType>0.5){
             texo = 1.0-tex3D(syn_UserImage, sp*sz, vec3(11.0,1.0,0.0));
         }
@@ -371,7 +371,7 @@ vec4 renderMainImage() {
 
 
         // Shading the scene color, clamping, and we're done.
-        col = min(col*atten*pow(ao,10.0), 1.);
+        col = min(col*atten*pow(ao,10.0)*(1.0+syn_HighLevel), 1.);
         
         
 
@@ -388,7 +388,7 @@ vec4 renderMainImage() {
     // // Mix the smokey haze with the object.
     // col = mix(sky, col, 1./(t*t/FAR/FAR*128. + 1.));
 
-      vec3 bg = mix(vec3(1.750, .250, 0.1250), vec3(0.120, 0.0, 1.0), -rd.y*.35 + .35)*0.5;
+      vec3 bg = mix(vec3(1.750, .250, 0.1250), vec3(0.120, 0.0, 1.0), -rd.y*.35 + .35)*0.5*(1.0+syn_HighLevel);
 
 
       col = mix(col, bg, smoothstep(0., FAR-15., t));//min(bg.zyx*vec3(1.3, .6, .2)*1.5, 1.)

@@ -5,7 +5,7 @@
 #define R RENDERSIZE.xy
 //#define Main void mainImage(out vec4 Q, in vec2 U)
 #define box for(int x=-1;x<=1;x++)for(int y=-1;y<=1;y++)
-float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.25)+(syn_Level*0.125), 2.0);
+float growthFactor = pow((syn_BassLevel*0.45)+(syn_MidLevel*0.4)+(syn_Intensity*0.15), 2.0);
 
 float dt = .2*(1.0+growthFactor);
 float _a = .05*(1.+pow(syn_MidLevel, 2.));
@@ -28,8 +28,9 @@ vec4 renderPassA()
 {
 	vec4 Q = vec4(0.0);
     vec2 U = _xy;
-
     Q = A(U);
+    U += _uvc*Zoom*growthFactor;
+
     vec4 b = B(U);
     Q.w = b.w;
     vec4 T = Q;
@@ -168,7 +169,7 @@ vec4 renderMainImage()
     vec4 f = A1(U), c = A3(U);
     Q = c*min(f.w,1.3);
     Q = ((.5-.5*cos(5.*c.x+c.y*vec4(1.,2,3,4))))*atan(f.wwww);
-    Q += f.z*f.w*vec4(1,.5,0,1);
+    Q += f.z*f.w*vec4(1,.5,0,1)*(.80+0.2*syn_HighLevel);
 	return Q; 
  } 
 

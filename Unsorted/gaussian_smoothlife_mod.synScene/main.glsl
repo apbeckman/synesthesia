@@ -79,6 +79,8 @@ float s(float n,float m)
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
+  fragCoord -= _uvc*PI*Zoom;
+  fragCoord -= xy_flow*PI;
 
     vec2 tx = 1.0 / RENDERSIZE.xy;
     vec2 uv = fragCoord.xy * tx;
@@ -167,10 +169,8 @@ vec2 gaussian1d1(sampler2D sam, vec2 sigma, vec2 uv, vec2 tx) {
 vec4 renderPassB() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
-
     vec2 tx = 1.0 / RENDERSIZE.xy;
     vec2 uv = fragCoord.xy * tx;
-        uv += xy_flow*1;
 
     tx = (mod(float(FRAMECOUNT),2.0) < 1.0) ? vec2(tx.x,0) : vec2(0,tx.y);
     vec2 x_pass = gaussian1d1(BuffA, vec2(or, ir), uv, tx);
@@ -222,7 +222,6 @@ vec4 renderPassC() {
 
     vec2 tx = 1.0 / RENDERSIZE.xy;
     vec2 uv = fragCoord.xy * tx;
-            uv += xy_flow*1;
 
     tx = (mod(float(FRAMECOUNT),2.0) < 1.0) ? vec2(0,tx.y) : vec2(tx.x,0);
     vec2 y_pass = gaussian1d(BuffB, vec2(or, ir), uv, tx);
@@ -242,7 +241,7 @@ vec4 renderMainImage() {
     float blur = col.g;
     float hard = col.r;
 
-    float colSel = mix(mix(blur, semiBlur, syn_Presence*audio_reactivity), hard, syn_HighHits*audio_reactivity);
+    float colSel = mix(mix(blur, semiBlur, syn_Presence*syn_Intensity), hard, 0.);
     colSel = mix(colSel, (col.b+col.g+col.r)*(0.33+syn_BassLevel*0.3), max(no_blur, 1.0-audio_reactivity));
     // vec3 palCol = vec3(0.0,0.0,blur)*syn_BassLevel+colSel*_palette(colSel, vec3(1.439, -0.012, 0.314), vec3(0.746, 0.702, 0.276), vec3(0.680, 0.321, 1.190), vec3(0.407, 0.661, 0.759));
     vec3 palCol = vec3(0.0,0.0,blur)*syn_BassLevel+colSel*colorPaletteChooser(color_regime, colSel);

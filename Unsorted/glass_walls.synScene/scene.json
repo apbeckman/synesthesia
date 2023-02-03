@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "byt3_m3chanic",
+	"DESCRIPTION" : "Glass / Refractive surface - moving textured wall behind glass.\n",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "glass_walls.png",
+	"TITLE" : "Glass Walls",
+	"WIDTH" : 1280
+}

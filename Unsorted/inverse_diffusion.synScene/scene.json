@@ -22,7 +22,7 @@
 		{
 			"DEFAULT" : 
 			[
-				0,
+				-0.35,
 				0
 			],
 			"DESCRIPTION" : "",
@@ -95,6 +95,27 @@
 			"MIN" : 0,
 			"NAME" : "Reset",
 			"TYPE" : "bang",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Stretch",
+			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		}
 	],

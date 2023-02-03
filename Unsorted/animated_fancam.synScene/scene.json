@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "MysteryPancake",
+	"DESCRIPTION" : "My first real experiment using raymarching :)",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "animated_fancam.png",
+	"TITLE" : "Animated Fancam",
+	"WIDTH" : 1280
+}

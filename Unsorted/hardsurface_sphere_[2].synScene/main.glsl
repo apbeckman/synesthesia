@@ -4,7 +4,7 @@
 
 //#define LOOP
 //#define LOOP2
-
+#define HW_PERFORMANCE 1
 // skaplun https://www.shadertoy.com/view/7tf3Ws
 float easeOutBack(float x, float t) {
     float c1 = t;
@@ -126,6 +126,7 @@ vec2 mul(vec2 p, mat3 m) {
 }
 
 void calcAngleOffset(float tf, float ts, out float angle, out vec2 offset) {
+    //float time = tf + ts;
     float time = tf + ts;
     angle = time;
     offset = vec2(0, time);
@@ -330,7 +331,7 @@ vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    initTime(smoothTimeC*0.5);
+    initTime(smoothTimeC*0.25);
 
     vec2 uv = fragCoord.xy / RENDERSIZE.xy;
     uv *= vec2(1,-1);
@@ -533,7 +534,7 @@ Model map(vec3 p) {
     int id = int(data.g);
     float mask = data.a;
 
-    float o = mix(-.25, .0, pow(tile/2., .5));
+    float o = mix(-.125, .0, pow(tile/2., .5));
    
     float ito = ((linearstep(.2, .6 + o, tFract(gTime)) - pow(linearstep(.8 + o, .9 + o, tFract(gTime)), 4.)));
  
@@ -577,40 +578,40 @@ Model map(vec3 p) {
     col = vec3(.6);
     
     if (id == 1 && tile == 1.) {
-        col *= .4;
+        col *= .14;
     }
     
     if (id == 1 && tile == 0.) {
-        col *= .7;
+        col *= .27;
     }
     
     if (id == 1 && tile == 2.) {
-        col *= 1.1;
+        col *= .351;
     }
 
-    col = mix(col, vec3(.15), (1.-smoothstep(.01 * ws*1.5, .04*ws*1.5, abs(border * 6. - inn))));
+    col = mix(col, vec3(.15), (1.-smoothstep(.01 * ws*1.5, .047*ws*1.5, abs(border * 2. - inn))));
     
     ito= max(ito, 0.);
     col = mix(col, vec3(0), smoothstep(r + .025 - ito, r - .025 - ito, length(p)) * step(border, w + .01));
         
-    col *= clamp(border * 5. + .7, 0., 1.);
+    col *= clamp(border * 5. + .1, 0., 1.);
     
     
     vec3 emissive = vec3(0);
     if (tile == 1.) {
         float l = (1. - clamp(abs(border - .2) * 100., 0., 1.)) * 2.;
         l += (1. - clamp(abs(border - .2) * 15., 0., 1.)) * .1;
-        emissive += vec3(0,.8,.5) * l;
+        emissive += vec3(0.5,1.58,1.5) * l;
         
         float lt = tFract(gTime - .4);
-        float ramp = 1. - linearstep(.025, .07, lt);
+        float ramp = 1. - linearstep(.0125, .07, lt);
         ramp += linearstep(.8, .9, lt);
-        ramp *= mix(1., sin(lt * 150.) * .5 + .5, linearstep(1.2, .9, lt));
+        ramp *= mix(1., sin(lt * 1150.) * .5 + .5, linearstep(1.2, .9, lt));
         
         emissive *= ramp;
     }
     
-    col *= .95;
+    col *= .5;
     
     if (id == 1) {
         col *= .4;
@@ -647,7 +648,7 @@ vec3 calcNormal(vec3 pos){
     for( int i=0; i<4; i++ )
     {
         vec3 e = 0.5773*(2.0*vec3((((i+3)>>1)&1),((i>>1)&1),(i&1))-1.0);
-        n += e*map(pos+0.0005*e).d;
+        n += e*map(pos+0.000125*e).d;
     }
     return normalize(n);
 }
@@ -679,7 +680,7 @@ vec3 render( vec2 p )
     
     //tuv *= .333;
     //pR(tuv, PI / 12.);
-    vec3 col = (vec3(.8) - p.y * .33) * .65;
+    vec3 col = (vec3(.018) - p.y * .33) * .0165;
     float w = fwidth(length(p)) / 2.;
 
     #ifndef LOOP
@@ -688,14 +689,14 @@ vec3 render( vec2 p )
     #ifdef LOOP2
     tuv += vec2(0,1) * fract(gTime / gDuration / gSpeed + .2) * 1.73;
     #else
-    tuv += vec2(-.25,.5) * gTime * .25 * .5;
+    tuv += vec2(-.25,RotateBG) * bass_time * 1.25 ;
     #endif
     tuv = triTile(tuv);
-    vec4 data = texture(BuffA, tuv * vec2(1,-1) * vec2(1,2.) * 1.43);
+    vec4 data = texture(BuffA, tuv * vec2(1,-1) * vec2(1,2.) * (1.243+syn_MidHighLevel*0.2));
     
-    float lp = length(p) - .05;
+    float lp = length(p) - 1.05+cos(0.2*smoothTimeB)*0.125+0.885;
     
-    float ga = smoothstep(.9, 1.1, lp);
+    float ga = smoothstep(.9/Zoom, 1.1*Zoom, lp);
     ga *= smoothstep(1.9, 1.1, lp);
     ga = .01 * ga - .005;
 
@@ -707,7 +708,7 @@ vec3 render( vec2 p )
     float g = smoothstep(ga + w, ga - w, abs(data.x));
     g += smoothstep(gb + w, gb - w, abs(data.x - .1));
     
-    col += vec3(0,.8,.5) * g;
+    col += (vec3(0,.8,.5)+0.5*syn_HighLevel*syn_Intensity) * g;
 
     //col = vec3(.03);
     
@@ -718,7 +719,7 @@ vec3 render( vec2 p )
     //data.r /= k;
 
     float ms = smoothstep(1.8, .9, length(p));
-    col += vec3(1) * step(e, data.r) * .15 * ms;
+    col += vec3(1) * step(e, data.r) * -.1 * ms;
     #else
     col = vec3(.5);
     #endif
@@ -734,24 +735,24 @@ vec3 render( vec2 p )
     
     vec3 camPos = vec3(0,0,9);
     
-    vec2 im = _mouse.xy / RENDERSIZE.xy - .5;
-    
+    vec2 im = RotateXY*PI;
+    /*
     if (_mouse.x <= 0.)
     {
         im = vec2(0);
     }
-    
-    im += vec2(.66,.3);
+    */
+    im += vec2(.66,.33);
     
     pR(camPos.yz, (.5 - im.y) * PI / 2.);
     pR(camPos.xz, (.5 - im.x) * PI * 1.5);
     
     mat3 camMat = calcLookAtMatrix(camPos, vec3(0), vec3(0,1,0));
     
-    float focalLength = 3.;
+    float focalLength = 3.*Zoom;
     vec3 rayDirection = normalize(camMat * vec3(p.xy, focalLength));
     
-    vec2 bound = iSphere(camPos, rayDirection, 2.3);
+    vec2 bound = iSphere(camPos, rayDirection, 2.);
     if (bound.x < 0.) {
     	return col;
     }
@@ -837,7 +838,7 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    initTime(smoothTime*0.5);
+    initTime(smoothTimeC*0.25);
 
     #ifdef SHOW_DATA
         vec4 data = texture(BuffA, fragCoord.xy / RENDERSIZE.xy);
@@ -875,7 +876,7 @@ vec4 renderMainImage() {
     vec3 uOffset = vec3(-.225);
     vec3 uGamma = vec3(.3);
     col = pow(max(vec3(0.0), col * (1.0 + uGain - uLift) + uLift + uOffset), max(vec3(0.0), 1.0 - uGamma));
-    col = pow( col, vec3(1./2.2) );
+    col = pow( col, vec3(1./1.2) );
     
     fragColor = vec4(col, 0);
 	return fragColor; 

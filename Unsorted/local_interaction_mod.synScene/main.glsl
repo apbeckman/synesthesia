@@ -5,16 +5,18 @@
 #define A(COORD) texture(BuffA,(COORD)/RENDERSIZE.xy)
 
 float growthFactor =0.25+2*normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.25)+(syn_Intensity*0.25), 2.0));
-vec4 image = texture(syn_UserImage,(_xy)/RENDERSIZE.xy);
+//vec4 image = texture(syn_UserImage,(_xy)/RENDERSIZE.xy);
+vec4 image = vec4(0.);
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = (_xy);
-    U-= _uvc*Zoom*(2*growthFactor);
+  U-= _uvc*Zoom*(2*growthFactor);
 
   vec3 logoCol = vec3(0.0);
   if (_exists(syn_UserImage)){
     logoCol = _loadUserImageAsMask().rgb;
   }
+    U += _uvc*Stretch*PI*2.;
 
 
     U-=.5*RENDERSIZE.xy;
@@ -26,13 +28,13 @@ vec4 renderPassA() {
     U.xy += Dir_XY.xy*growthFactor*0.85;
     Q  =  A(U);
     image *= MediaImpact;
-    image -=vec4(logoCol, 0.);
+    image =vec4(logoCol, 0.);
 
     // Neighborhood :
-    vec4 pX  =  A(U + vec2(1,0))+(image*(0.75+(0.25*growthFactor)))*0.375;
-    vec4 pY  =  A(U + vec2(0,1))+(image*(0.75+(0.25*growthFactor)))*0.375;
-    vec4 nX  =  A(U - vec2(1,0))-(image*(0.75+(0.25*growthFactor)))*0.375;
-    vec4 nY  =  A(U - vec2(0,1))-(image*(0.75+(0.25*growthFactor)))*0.375;
+    vec4 pX  =  A(U + vec2(1,0))+(image*(0.975+(0.25*growthFactor)))*0.375;
+    vec4 pY  =  A(U + vec2(0,1))+(image*(0.975+(0.25*growthFactor)))*0.375;
+    vec4 nX  =  A(U - vec2(1,0))-(image*(0.975+(0.25*growthFactor)))*0.375;
+    vec4 nY  =  A(U - vec2(0,1))-(image*(0.975+(0.25*growthFactor)))*0.375;
     vec4 m = 0.25*(pX+nX+pY+nY+Intensity);
     float b = mix(1.,abs(Q.z),.78);
     
@@ -74,8 +76,8 @@ vec4 renderMainImage() {
     vec3 r = reflect(n,vec3(0,0,-2));
     Q = (0.5+0.5*sin(smoothTimeB*0.25+atan(Q.x,Q.y)*vec4(3,2,1,4)));
     float d = ln(vec3(.4,.4,6)*RENDERSIZE.xyy+_uvc.xyy,
-                 vec3(U,0),vec3(U,0)+r)/RENDERSIZE.y-(syn_Intensity*pow(syn_HighLevel*0.4 + syn_MidHighLevel*0.4 + syn_Hits*0.2, 2.))*Flash;
-    Q *= exp(-d*d)*.5+.5*exp(-3.*d*d);
+                 vec3(U,0),vec3(U,0)+r)/RENDERSIZE.y;
+    Q *= exp(-d*d)*.5+.5*exp(-3.*d*d)+(syn_Intensity*pow(syn_HighLevel*0.4 + syn_MidHighLevel*0.4 + syn_Hits*0.2, 2.))*Flash;
 	return Q; 
  } 
 

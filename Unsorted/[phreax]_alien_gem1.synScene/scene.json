@@ -1,0 +1,28 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "phreax",
+	"DESCRIPTION" : "More iridescent gems",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpg"
+		}
+	],
+	"IMAGE_PATH" : "[phreax]_alien_gem1.png",
+	"TITLE" : "[phreax] alien gem1",
+	"WIDTH" : 1280
+}

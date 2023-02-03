@@ -20,15 +20,6 @@
 			"UI_GROUP" : "regime"
 		},
 		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "Extra pulsing and shimmering with the music. Turn off to let it naturally progress.",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "audio_reactivity",
-			"TYPE" : "slider",
-			"UI_GROUP" : "regime"
-		},
-		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "Removes the blur effect.",
 			"MAX" : 1,
@@ -150,11 +141,11 @@
 			],
 			"MIN" : 
 			[
-				0,
-				0
+				-1,
+				-1
 			],
 			"NAME" : "xy_flow",
-			"PARAMS" : 0.01,
+			"PARAMS" : 0.029,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "advanced"
 		},
@@ -166,6 +157,45 @@
 			"NAME" : "reset_sim",
 			"TYPE" : "bang",
 			"UI_GROUP" : "utility"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Stretch",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "audio_reactivity",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "cornusammonis",

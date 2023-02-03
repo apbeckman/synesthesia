@@ -97,15 +97,15 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 	vec2 uv = (fragCoord.xy-.5*RENDERSIZE.xy)/RENDERSIZE.y;
-
     vec3 look = vec3(0.);
-    vec3 rayOrigin = vec3(_uvc + vec2(0.,sin(smoothTime*0.1)*3.+3.0+16.*CamHeight), -1. );
+    vec3 rayOrigin = vec3(vec2(0.,sin(smoothTime*0.1)*3.+3.0+16.*CamHeight), -1. );
     vec3 rayDir = normalize(vec3(_uvc*FOV , 1.));
     
    	rayDir.zy = normalize(getRot(.05*Distance) * rayDir.zy);
-   	rayDir.xy = (getRot(.075+Spin*-PI*2+sin(smoothTime*0.1)*0.0125) * rayDir.xy);
-    rayDir.xy+=normalize(FOV*_uvc.xy/4.)*Spin2*(_uv*_uvc.xy/4.)/(-_uvc.xy*0.25);
+   	rayDir.xy = (getRot(.075+-PI*2+sin(smoothTime*0.1)*0.0125) * rayDir.xy);
+    rayDir.xz = _rotate(rayDir.xz, _uvc.x*PI*FOV*Perspective-_uvc.x*PI*Perspective);
     //rayDir.xy+=_uvc*FOV;
+    rayDir.xy = _rotate(rayDir.xy, Spin*PI);
     
     vec3 position = rayOrigin;
     

@@ -1,0 +1,25 @@
+{
+	"CREDIT" : "flockaroo",
+	"DESCRIPTION" : "some pixel tile experiment (slightly inspired by fabrice's polka dots)\nbuffer a records the video histroy,\nimage shader flips pixels",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		}
+	],
+	"IMAGE_PATH" : "polka_pixels.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "polka pixels",
+	"WIDTH" : 1280
+}

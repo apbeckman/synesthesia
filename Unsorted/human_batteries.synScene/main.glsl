@@ -346,7 +346,7 @@ vec3 march(vec3 ro, vec3 rd) {
 			);
 
 	return c // Base color.
-		   + gg.x * vec3(.4, .6, 1) // Lighting bolt glow.
+		   + gg.x * vec3(.4, .6, 1)*(1.0+syn_HighLevel) // Lighting bolt glow.
 		   + gg.y * vec3(1, .32, .27); // Faint pod glow.
 }
 
@@ -354,7 +354,7 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fc = _xy;
 
-	T = mod(smoothTime, 40.) + 1.3;
+	T = mod(smoothTime*0.5, 40.) + 1.3;
 
 	float dim = 1. - abs(cos(clamp(T, -1., 1.) * 1.57)),
 		  t = .5 + .5 * cos(.157 * T);

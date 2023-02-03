@@ -1,0 +1,21 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0.5,
+			"NAME" : "Size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "netgrind",
+	"DESCRIPTION" : "inspired by the work of chuck close I saw at the sf moma",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "chuck_close_effect.png",
+	"TITLE" : "Chuck Close Effect",
+	"WIDTH" : 1280
+}

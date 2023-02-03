@@ -38,6 +38,27 @@
 			"UI_GROUP" : "default"
 		},
 		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Stretch",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 0.5,

@@ -48,6 +48,8 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
+    U += _uvc*Stretch*PI;
+    U -= _uvc*PI*Zoom*(growthFactor);
 
     Q = A(U);
     vec4 
@@ -93,9 +95,9 @@ vec4 renderPassC() {
 vec4 renderPassD() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-    U += ((moveXY.xy*(1.0+0.5*growthFactor)));
+    //U += ((moveXY.xy*(1.0+0.5*growthFactor)));
 
-    vec2 c = ((R));
+    vec2 c = (R);
     c.xy *=1.0+ ((moveXY.xy*(1.0+0.5*growthFactor)));
    // if (_mouse.z>0.) c = _mouse.xy;
     
@@ -113,7 +115,7 @@ vec4 renderPassD() {
         e = C(U+vec2(1+Height,0)),
         s = C(U-vec2(0,1+Height)),
         w = C(U-vec2(1+Height,0)),
-        m = 0.125*(n+e+s+w);
+        m = 0.25*(n+e+s+w);
     Q.xy = 0.25*vec2(e.z-w.z,n.z-s.z);
     
     if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.1);

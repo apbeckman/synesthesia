@@ -1,4 +1,16 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "Semi-physical model of combustion.",
 	"GPU" : 0,

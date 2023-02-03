@@ -92,7 +92,7 @@ vec2 hash22(vec2 p) {
     // up the cells ever so slightly for a more even spread. In fact, lower numbers work 
     // even better, but then the random movement would become too restricted. Zero would 
     // give you square cells.
-    p = sin( p*6.2831853 + script_time*0.5)*.45 + .5; 
+    p = sin( p*6.2831853 + bass_time*0.5)*.45 + .5; 
     return mix(p, vec2(0.0), grid_growth*(1.0-syn_Presence));
 }
 

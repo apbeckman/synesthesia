@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "aiekick",
+	"DESCRIPTION" : "Julia Revolute Simple",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image6",
+			"PATH" : "images/6.jpg"
+		}
+	],
+	"IMAGE_PATH" : "julia_revolute_simple.png",
+	"TITLE" : "Julia Revolute Simple",
+	"WIDTH" : 1280
+}

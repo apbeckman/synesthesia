@@ -402,7 +402,7 @@ vec4 renderMainImage() {
         
         
         // Apply some subtle texture bump mapping to the panels and the metal tubing.
-        nor = texBump(image4, pos*ts*.5, nor, 0.0075); // + step(saveObjID, 1.5)*0.002
+        nor = texBump(image6, pos*ts*.5, nor, 0.0075); // + step(saveObjID, 1.5)*0.002
     
         // Reflected ray. Note that the normal is only half bumped. It's fake, but it helps
         // taking some of the warping effect off of the reflections.

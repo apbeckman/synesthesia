@@ -3,9 +3,9 @@
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
 // Contact the author for other licensing options
 
-#define BASE_ANGLE 3.5
-#define ANGLE_DELTA 0.02
-#define XOFF .7
+#define BASE_ANGLE PI
+#define ANGLE_DELTA 0.012
+#define XOFF 1.7
 
 #define time TIME*0.5
 mat2 mm2(in float a){float c = cos(a), s = sin(a);return mat2(c,-s,s,c);}
@@ -30,9 +30,9 @@ vec4 renderMainImage() {
 	p.y = abs(p.y+_uvc.y);
 
 	vec3 col = vec3(0);
-	for(float i=0.;i<26.;i++)
+	for(float i=0.;i<16.;i++)
 	{
-		vec3 col2 = (sin(vec3(3.75,2.65,2.2)*(1.0+syn_Intensity*syn_HighLevel)+i*0.25)*0.5+0.54)*(1.-f(p,featureSize));
+		vec3 col2 = (sin(vec3(3.75,2.65,2.2)*(1.0+syn_Intensity*syn_HighLevel)+i*0.25)*0.5+0.54)*(1.-f(p,featureSize))*(1.0+syn_Intensity*syn_HighLevel);
 		col = max(col,col2);
 		
         p.x -= (XOFF+expand);

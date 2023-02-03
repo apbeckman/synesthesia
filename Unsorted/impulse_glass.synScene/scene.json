@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "Messing around with refractions. I am quite new to shader programming\n  and raymarching so while I think the code might not be very good I also think that\n  what makes ShaderToy.com so good is that programmers are sharing what they do, \n  big and small.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "impulse_glass.png",
+	"TITLE" : "impulse_glass",
+	"WIDTH" : 1280
+}

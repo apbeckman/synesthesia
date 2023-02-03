@@ -528,7 +528,7 @@ vec4 renderMainImage() {
         
         
         // Function based bump mapping.
-        sn = doBumpMap(sp, sn, .2);///(1.+t*.5/FAR)
+        sn = doBumpMap(sp, sn, .012);///(1.+t*.5/FAR)
 	    
 	    // Ambient occlusion.
 	    float ao = calculateAO(sp, sn);
@@ -619,7 +619,7 @@ vec4 renderMainImage() {
        
     // Blend the scene and the background with some very basic, 4-layered fog.
     float mist = getMist(camPos, rd, light_pos, t)*(1.0+pow(highhits*0.9, 2.));
-    vec3 sky = (threeWaySin*ColorShift*vec3(1.0, 0.5, 1.0)+Mist* vec3(1.5125, 01.25025, 1.515))* mix(1., .9972, mist)*(rd.y*1.25 + 1.);
+    vec3 sky = (threeWaySin*ColorShift*vec3(1.0, 0.75, 1.0)+Mist* vec3(1.5125, 0.925025, 1.515))* mix(1., .9972, mist)*(rd.y*1.25 + 1.);
     sky+=0.25*Mist;
     sceneCol = mix(sceneCol, sky, min(pow(t, 1.5)*.175/FAR, 1.));
 

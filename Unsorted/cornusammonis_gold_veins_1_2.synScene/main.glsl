@@ -8,14 +8,14 @@
 #extension GL_ARB_shading_language_packing : enable     
 #define pack(d) uintBitsToFloat(packHalf2x16(d))
 #define unpack(d) unpackHalf2x16(floatBitsToUint(d))
-float growthFactor = pow((syn_BassLevel*0.5)+(syn_MidLevel*0.25)+(syn_Level*0.125), 2.0);
+float growthFactor = pow((syn_BassLevel*0.45)+(syn_MidLevel*0.3)+(syn_Intensity*0.25), 2.0);
 
 
 // contrast
-#define SIGMOID_CONTRAST 15
+#define SIGMOID_CONTRAST 16
 
 vec3 contrast(vec3 x) {
-	return 1.0 / (1.0 + exp(-SIGMOID_CONTRAST * (x - 0.5)));    
+	return 1.0 / (1.0 + exp(-SIGMOID_CONTRAST * (x + ColorMod+0.025*syn_MidHighLevel+0.025*syn_HighLevel)));    
 }
 
 vec3 normz(vec3 x) {
@@ -95,12 +95,12 @@ float ggx(vec3 n, vec3 v, vec3 l, float rough, float f0){
 #define ds -0.4/(Divergence)   // divergence scale
 #define dp -0.03  // divergence update scale
 #define pl 0.3    // divergence smoothing
-#define amp 1.0*(0.999+growthFactor*0.001)   // self-amplification
-#define upd 0.4   // update smoothing
+#define amp 1.0*(0.999+growthFactor*0.0005)   // self-amplification
+#define upd 0.4125   // update smoothing
 
-#define _D 0.6    // diagonal weight
+#define _D 0.65   // diagonal weight
 
-#define _K0 -20.0/6.0 // laplacian center weight
+#define _K0 (-20.0)/6.0 // laplacian center weight
 #define _K1 4.0/6.0   // laplacian edge-neighbors
 #define _K2 1.0/6.0   // laplacian vertex-neighbors
 
@@ -117,21 +117,24 @@ vec2 normz(vec2 x) {
 }
 
 #define T(d) texture(BuffA, fract(aUv+d)).xyz
-
+#define uT(d) mix(texture(BuffA, fract(aUv+d)).xyz, texture(syn_UserImage, fract(aUv+d)).xyz)
 vec3 advect(vec2 ab, vec2 vUv, vec2 texel, out float curl, out float div, out vec3 lapl, out vec3 blur) {
     
     vec2 aUv = vUv - ab * texel;
     vec4 t = vec4(texel, -texel.y, 0.0);
-
-    vec3 uv =    T( t.ww); vec3 uv_n =  T( t.wy); vec3 uv_e =  T( t.xw);
-    vec3 uv_s =  T( t.wz); vec3 uv_w =  T(-t.xw); vec3 uv_nw = T(-t.xz);
-    vec3 uv_sw = T(-t.xy); vec3 uv_ne = T( t.xy); vec3 uv_se = T( t.xz);
+    vec3 uv, uv_n, uv_e, uv_s, uv_w, uv_nw, uv_sw, uv_ne, uv_se;
+    uv =    T( t.ww); uv_n =  T( t.wy); uv_e =  T( t.xw);
+    uv_s =  T( t.wz); uv_w =  T(-t.xw); uv_nw = T(-t.xz);
+    uv_sw = T(-t.xy); uv_ne = T( t.xy); uv_se = T( t.xz);
     
     curl = uv_n.x - uv_s.x - uv_e.y + uv_w.y + _D * (uv_nw.x + uv_nw.y + uv_ne.x - uv_ne.y + uv_sw.y - uv_sw.x - uv_se.y - uv_se.x);
     div  = uv_s.y - uv_n.y - uv_e.x + uv_w.x + _D * (uv_nw.x - uv_nw.y - uv_ne.x - uv_ne.y + uv_sw.x + uv_sw.y + uv_se.y - uv_se.x);
     lapl = _K0*uv + _K1*(uv_n + uv_e + uv_w + uv_s) + _K2*(uv_nw + uv_sw + uv_ne + uv_se);
     blur = _G0*uv + _G1*(uv_n + uv_e + uv_w + uv_s) + _G2*(uv_nw + uv_sw + uv_ne + uv_se);
-    
+    if(_exists(syn_UserImage)){
+    uv *=1.0- 0.75* syn_MidLevel * _loadUserImage().rgb*Media;
+
+    }
     return uv;
 }
 
@@ -142,15 +145,17 @@ vec2 rot(vec2 v, float th) {
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
-
+    fragCoord += MoveXY;
+    fragCoord += Stretch*_uvc;
+    fragCoord -= _uvc*Zoom*(1.0+growthFactor);
 
     vec2 vUv = fragCoord.xy / RENDERSIZE.xy;
-    vec2 texel = 1. / RENDERSIZE.xy;
     
+    vec2 texel = 1. / RENDERSIZE.xy;
     vec3 lapl, blur;
     float curl, div;
     
-    vec3 uv = advect(vec2(0), vUv, texel, curl, div, lapl, blur)*(0.9995+syn_MidLevel*0.00025+syn_BassLevel*0.00025);
+    vec3 uv = advect(vec2(0), vUv, texel, curl, div, lapl, blur)*(0.9995+(syn_MidLevel*0.00025+syn_BassLevel*0.00025)*syn_Intensity);
 
     float sp = ps * lapl.z;
     float sc = (cs * curl);
@@ -178,7 +183,7 @@ vec4 renderPassA() {
     
     if (_mouse.z > 0.0) {
     	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy;
-        vec2 m = (0.25) * normz(d) * exp(-length(d) / (0.0125/(1.0-Size)));
+        vec2 m = (0.095) * normz(d) * exp(-length(d) / (0.0125/(1.0-Size)));
         m*=vec2(.5, 01.5);
        //m *= Size;
         abd.xy += m;
@@ -207,7 +212,7 @@ vec4 renderPassA() {
 #define _G1 0.125     // gaussian edge-neighbors
 #define _G2 0.0625    // gaussian vertex-neighbors
 */
-#define _D 0.6    // diagonal weight
+//#define _D 0.6    // diagonal weight
 
 #define TB(d) texture(BuffA, fract(vUv+d)).xyz
 
@@ -244,6 +249,8 @@ bool resetC() {
 vec4 renderPassC() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
+    fragCoord += MoveXY;
+    fragCoord -= _uvc*Zoom*(1.0+growthFactor);
 
     vec2 uv = fragCoord / RENDERSIZE.xy;
     vec2 texel = 1.0 / RENDERSIZE.xy;
@@ -441,10 +448,10 @@ vec4 renderPassD() {
 */
 
 // displacement (for texturing)
-#define DISP 0.02
+#define DISP 0.025
 
 // bump mapping scale
-#define BUMP 1.5
+#define BUMP 2.125
 
 // mip level
 #define MIP 0.0
@@ -455,7 +462,6 @@ vec4 renderPassD() {
 vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
-
     vec2 texel = 1. / RENDERSIZE.xy;
     vec2 uv = fragCoord.xy / RENDERSIZE.xy;
 
@@ -510,7 +516,7 @@ vec4 renderMainImage() {
         dxn[2] = d_w.x; 
     #endif
     
-    #define I(d_x,d_y) texture(image3, fract(vec2(0.5) + DISP * vec2(d_x,d_y)), MIP).xyz
+    #define I(d_x,d_y) texture(image3, fract(vec2(0.125) + DISP * vec2(d_x,d_y)), MIP).xyz
 
     vec3 i   = I(dxn[0],dyn[0]);
     vec3 i_n = I(dxn[1],dyn[1]);
@@ -518,13 +524,13 @@ vec4 renderMainImage() {
     vec3 i_s = I(dxn[1],dyn[2]);
     vec3 i_w = I(dxn[2],dyn[0]);
     
-    vec3 ib = (0.64+0.35*syn_Intensity+.35*syn_Presence) * i + (0.5+0.05*syn_HighLevel) * (i_n+i_e+i_s+i_w);
+    vec3 ib = (0.7) * i + (0.5) * (i_n+i_e+i_s+i_w);
     //vec3 ib = .75 * i + 0.75 * (i_n+i_e+i_s+i_w);
 
-    vec3 ld = normz(vec3(0.5+0.5*vec2(0.5*cos(smoothTimeB/4.0), 0.5*sin(smoothTimeB/4.0)) - uv, -1.));
+    vec3 ld = normz(vec3(0.5+0.5*vec2(0.5*cos(smoothTimeB*0.1), 0.5*sin(smoothTimeB*0.1)) - uv, -1.));
     
     float spec = 0.0;    
-    for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < 3; i++) {
         for(int j = 0; j < 1; j++) {
             vec3 dxy = normalize(vec3(-BUMP*vec2(dxn[i], dyn[j]), -1.0));
             spec += ggx(dxy, vec3(0,0,-1), ld, 0.4, 0.1) / 9.0;
@@ -533,11 +539,10 @@ vec4 renderMainImage() {
 
     // end bumpmapping section
 
-    vec3 tc = 0.9*contrast(0.9*ib);
+    vec3 tc = 0.8*contrast(0.8*ib)*(1.+0.15*syn_HighLevel);
 
-    fragColor = vec4((tc + vec3(0.9, 0.85, 0.8)*spec),1.0);
+    fragColor = vec4((tc + vec3(0.979, 0.9, 0.59)*spec),1.0);
 //    fragColor = vec4((tc + vec3(0.9, 0.85, 0.8)*spec),1.0);
-
 	return fragColor; 
  } 
 

@@ -139,7 +139,7 @@ vec4 renderMain() {
    // finalCol.rgb += tpl(circuits2, pos*0.149, normal)*vec3(0.2,0.8,1.0)*(syn_HighLevel+syn_MidHighLevel)*sin(pos.z+0.125*smoothTimeB);
     finalCol.rgb += tpl(circuits2, pos*0.24, normal)*vec3(01.2,01.75,01.50)*(syn_HighLevel+syn_HighHits+syn_MidHighLevel)*sin(pos.z+0.125*smoothTimeB);
 
-    finalCol.rgb += tpl(circuits, pos*0.17+vec3(0.0, 0.0, -syn_BPMTwitcher*0.05), normal)*vec3(1.40,0.764,01.27370)*pow(_fbm(pos+smoothTimeB*0.06),2.50)*(0.850+syn_Intensity+.85*syn_HighLevel+syn_MidHighHits);
+    finalCol.rgb += tpl(circuits, pos*0.17+vec3(0.0, 0.0, syn_BPMTwitcher*0.0125), normal)*vec3(1.40,0.764,01.27370)*pow(_fbm(pos+smoothTimeB*0.06),2.50)*(0.850+syn_Intensity+.85*syn_HighLevel+syn_MidHighHits);
 
     if (syn_MediaType > 0.5){
         vec3 mediaCol = tpl(syn_UserImage, pos*media_scale, normal*10.0);

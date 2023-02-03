@@ -7,7 +7,8 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "unfolding",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "fractal"
 		},
 		{
@@ -201,7 +202,7 @@
 		},
 		{
 			"NAME" : "geom",
-			"PATH" : "images/geoalt2.jpg"
+			"PATH" : "images/geoalt.jpg"
 		}
 	],
 	"IMAGE_PATH" : "kifs_flythrough_mod.png",

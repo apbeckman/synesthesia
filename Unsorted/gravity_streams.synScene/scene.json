@@ -1,0 +1,37 @@
+{
+	"CREDIT" : "Lorenzo_Vannuccini",
+	"DESCRIPTION" : "Let's make art from gravity!\n\nBuffA stores and updates particles positions & inertia.\nBuffB & BuffC exploit accumulation to track particles trails, generating scene albedo & normals.\nImage Shader computes lighting, glow & vignetting (final compositing).",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image16",
+			"PATH" : "images/15.png"
+		}
+	],
+	"IMAGE_PATH" : "gravity_streams.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Gravity Streams",
+	"WIDTH" : 1280
+}

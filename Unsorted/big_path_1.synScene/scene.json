@@ -51,9 +51,9 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -0.5,
-			"NAME" : "Spin2",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Perspective",
 			"PARAMS" : 0.123,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
@@ -71,7 +71,7 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 4,
+			"MAX" : 2,
 			"MIN" : 0.5,
 			"NAME" : "FOV",
 			"PARAMS" : 0.065,

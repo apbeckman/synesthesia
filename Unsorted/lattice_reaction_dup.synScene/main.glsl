@@ -11,11 +11,16 @@ vec4 renderPassA() {
 	vec2 U = _xy;
     U += _uvc*PI*Succ*growthFactor;
     U += MoveXY;
-    for (int i = 0; i < 15; i++) {
+    U += _uvc*Stretch*PI;
+    
+    for (int i = 0; i < 10; i++) {
         vec4 a = A(U);
         U -= a.x*a.zw;
     }
     Q = A(U);
+    //Q *=(1.0 + 0.025* _loadUserImageAsMask());
+    Q += Q*0.025* _loadUserImageAsMask()*(1.0+syn_BassLevel);
+    
     vec4 
         n = A(U+vec2(0,1)),
         e = A(U+vec2(1,0)),
@@ -52,7 +57,7 @@ vec4 renderPassB() {
 	vec2 U = _xy;
     U += _uvc*PI*Succ*growthFactor;
 
-    for (int i = 0; i <17; i++) {
+    for (int i = 0; i <12; i++) {
         vec4 a = AA(U);
         U -= a.x*a.zw;
     }
@@ -92,7 +97,7 @@ vec4 renderPassC() {
 	vec2 U = _xy;
     U += _uvc*PI*Succ*growthFactor;
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 15; i++) {
         vec4 a = AB(U);
         U -= a.x*a.zw;
     }
@@ -147,7 +152,7 @@ vec4 renderPassD() {
    vec3 q = li;
    q.xy += _uvc*PI*PI;
    vec3 c = normalize(p-li);
-   for (int i = 0; i < 40; i++) {
+   for (int i = 0; i < 30; i++) {
     q += .6*c*(q.z-A1(q.xy));
    }
     U = p.xy;

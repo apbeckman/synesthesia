@@ -45,7 +45,6 @@ vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-
     vec2 uv = fragCoord.xy / RENDERSIZE.xy;
 
 
