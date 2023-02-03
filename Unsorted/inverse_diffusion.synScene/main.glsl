@@ -131,7 +131,6 @@ mat2 r (float a) {
 vec4 renderMainImage() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-
     vec3 
         p = vec3(0.5*R+_uvc,.62*R.y+_uvc.y*PI),
         d = normalize(vec3((U+_uvc-0.5*R)/R.y,-1)),
@@ -149,15 +148,16 @@ vec4 renderMainImage() {
 
     for (int i = 0; i<35; i++){ 
         
-    	p += (.2)*d*(p.z-(4.)*A(p.xy).z);
+    	p += (.125)*d*(p.z-(4.)*A(p.xy).z);
     }
     float highs = (0.35*pow(syn_HighLevel*0.35+syn_MidHighLevel*0.35+syn_Intensity*.2, 2));
     d = normalize(o-p);
     float z = A(p.xy).z;
-    vec3 n = normalize(vec3(B(p.xy).xy,-.4));
+    vec3 n = normalize(vec3(B(p.xy+_uvc).xy,-.4));
     vec3 q = d;
+
     p += .1*d;
-    for (int i = 0; i<35; i++){ 
+    for (int i = 0; i<24; i++){ 
     	p += .5*d*min(p.z-4.*A(p.xy).z,length(p-o)-1.);
     }
     //Q = (exp(-length(p-o)+1.)*(1.)*(cos(-.015*smoothTimeC*.2+(.15*(1.)) * z + .5*vec4(1,2,3,4)*-1.))*.5*(dot(reflect(n,d),q)-dot(n,d)))*(1.0+pow(syn_HighLevel, 2)*0.1);

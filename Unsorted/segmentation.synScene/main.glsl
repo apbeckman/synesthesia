@@ -35,12 +35,14 @@ mat2 rot(float a) { return mat2(cos(a),-sin(a),sin(a),cos(a)); }
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-    U += _uvc*PI*Zoom;
-    vec2 u = .5+.1*vec2(sin(.01*smoothTime),cos(.01*smoothTime));
+    U += Drift;
+    U += Stretch*_uvc*PI+Zoom*_uvc*PI*0.5;
+    U += _uvc*Zoom*PI*0.5;
+    vec2 u = .5+.1*vec2(sin(.025*smoothTimeC),cos(.025*smoothTimeC));
     if (_mouse.z>0.) u = _mouse.xy/R;
     U -= u*R; 
     float r = length(U)/R.y,
-        a = .01*sin(.0125*smoothTime)/(1.+5.*r);
+        a = .01*sin(.005*smoothTimeC)/(1.+5.*r);
 
     U *= (.999)*mat2(cos(a),-sin(a),sin(a),cos(a));
     U += u*R;
@@ -53,7 +55,8 @@ vec4 renderPassA() {
     Q = mix(Q,0.25*(n+e+s+w),.1);
     Q = mix(Q,D(U),.0005);
     if (FRAMECOUNT <= 1) Q = vec4(.0005)*sin(U.y/R.y*60.+U.x/R.x);
-    if (_mouse.z>0.&&length(U-_mouse.xy)<2.) Q=vec4(.01);
+    if (_mouse.z>0.&&length(U-_mouse.xy)<2.) Q=vec4(.03);
+    
 	return Q; 
  } 
 
@@ -77,7 +80,8 @@ vec4 renderPassB() {
         s = A(U-vec2(0,1)),
         w = A(U-vec2(1,0));
     Q.xy = vec2(-e.x+w.x,-n.x+s.x);
-    if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.0123);
+
+    if (length(Q.xy)>0.) Q.xy = mix(Q.xy,normalize(Q.xy),.023);
 	return Q; 
  } 
 
@@ -100,7 +104,9 @@ vec4 renderPassC() {
         e = B(U+vec2(1,0)),
         s = B(U-vec2(0,1)),
         w = B(U-vec2(1,0));
+        
     Q = .25*(n+e+s+w);
+    
 	return Q; 
  } 
 
@@ -137,17 +143,15 @@ vec4 renderPassD() {
 vec4 renderMainImage() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-
     vec4
         n = A(U+vec2(0,1)),
         e = A(U+vec2(1,0)),
         s = A(U-vec2(0,1)),
         w = A(U-vec2(1,0));
-    vec3 no = normalize(vec3(-e.x+w.x,-n.x+s.x,.00001));
+    vec3 no = normalize(vec3(-e.x+w.x,-n.x+s.x,.000001));
     vec3 re = reflect(normalize(vec3(0,0,1)),no);
     
-    Q = vec4(0.7+0.5*no.x)*(0.5+.5*sin(60.*D(U).x*vec4(1,2,3,4)));
-    
+    Q = vec4(0.7+0.5*no.x)*(0.25+.25*sin(120.*D(U).x*vec4(1,2,3,4))*(1.0+syn_HighLevel*(1.0*syn_Intensity)));
 	return Q; 
  } 
 

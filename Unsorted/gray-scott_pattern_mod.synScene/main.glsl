@@ -668,6 +668,7 @@ float bumpFunc(vec2 p){
     
  
     p = p/2.25*450./gResY;//*vec2(RENDERSIZE.y/ RENDERSIZE.x, 1)
+    
 	float gs = 1. - (texture(BuffA, (p)).x);//*.9 + bump*.1; // Range: [0, 1]
     
 
@@ -838,7 +839,7 @@ vec4 renderMainImage() {
 	
     // TEXTURE COLOR
     //
-    vec3 texCol = mix(vec3(.5), vec3(0., 0., 0.), dot(sin(sp.xy*4. - cos(sp.yx*4.)), vec2(.25)) + .5);//doColor(vor);
+    vec3 texCol = mix(vec3(.5), vec3(0., 0., 0.), dot(sin(sp.xy*1. - cos(sp.yx*1.)), vec2(.25)) + .5);//doColor(vor);
     //vec3 texCol = mix(vec3(.5), vec3(.6, .4, .2), dot(sin(sp.xy*4. - cos(sp.yx*4.)), vec2(.25)) + .5);//doColor(vor);
     
     
@@ -862,7 +863,7 @@ vec4 renderMainImage() {
     // Darkening the fine grade diffusion crevices on the yellow object.
     //texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*-.9);//.525
     texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .105, ggs - .525)*.75);//.525
-    texCol.xy += 0.0975*(_uvc*-_uv.y/PI);
+    //texCol.xy += 0.0975*(_uvc*-_uv.y/PI);
     //texCol *= mix(vec3(1), vec3(0), difPat2*smoothstep(0., .05, ggs - .525)*.6);//.525
     
     //texCol *= mix(vec3(1), vec3(0), clamp(difPat2*mainPat*smoothstep(0., .05, ggs - .525)*.75, 0., 1.));

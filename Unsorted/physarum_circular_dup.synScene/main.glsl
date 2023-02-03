@@ -221,7 +221,6 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 Q = vec4(0.0);
 	vec2 p = _xy;
-
     Q = texel(BuffB, p);
    
     //diffusion equation

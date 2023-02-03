@@ -74,7 +74,7 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.48,
+			"MAX" : 0.648,
 			"MIN" : -1,
 			"NAME" : "Scale",
 			"PARAMS" : 0.01,
@@ -112,35 +112,35 @@
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "The more I understand the sadder I am. I am afraid that humans are amoral selfish automatons reacting to their situation. Maybe that's not a bad thing, I like automata.",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "react.png",
 	"PASSES" : 
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffC",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		},
 		{
 			"FLOAT" : true,
 			"HEIGHT" : 720,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1280
+			"WIDTH" : 1920
 		}
 	],
 	"TITLE" : "React",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "dracusa",
+	"DESCRIPTION" : "It's very dense, there's an infinity of cubes in a single point.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "cube_singularity.png",
+	"TITLE" : "Cube Singularity",
+	"WIDTH" : 1280
+}

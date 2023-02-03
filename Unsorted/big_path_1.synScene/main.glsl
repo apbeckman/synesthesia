@@ -59,7 +59,7 @@ float idk = pow(syn_BassLevel*0.4+syn_MidLevel*0.4+syn_Level*0.2, 2.);
 float swingPlane(float height)
 {
     vec3 pos = _position + vec3(0.+sin(smoothTime*0.1)*0.5,0.+cos(smoothTime*0.1)*0.5,smoothTime * 7.5);
-    float def =  fbm6(pos.xz * (.125)*1.+0.35*smoothTimeC) * 1.;
+    float def =  fbm6((_uvc+pos.xz) * (.125)*1.+0.35*smoothTimeC) * 1.;
     
     float way = pow(abs(pos.x) * (17.*(NoiseStretch)) ,2.5) *.0000125;
     def *= way;

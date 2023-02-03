@@ -534,14 +534,13 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
     vec2 p = (-RENDERSIZE.xy + 2.0*fragCoord.xy)/RENDERSIZE.y;
-
     vec3 bgA = vec3(.6,.5,.8) * .55;
     vec3 bgB = vec3(.7,.9,1.) * .5;
-    background = mix(bgA, bgB, dot(p, normalize(vec2(.2,-.6))) * .5);
+    background = mix(bgA, bgB, dot(p, normalize(vec2(.2,-.6))) * .5)*Flash*syn_HighLevel;
     //background = mix(vec3(.4,.3,.5) * .9, vec3(.6), -.2);
-
+    p = _rotate(p, Rotate*PI);
     time = bass_time;
-    time *= .26;
+    time *= .6;
     time += .53;
     time = mod(time, 1.);
     
@@ -550,7 +549,7 @@ vec4 renderMainImage() {
     mat4 camMat = cameraMatrix;
     float focalLength = guiFocal;
     vec3 rd = normalize(
-        (vec4(p, -focalLength, 1) * camMat).xyz
+        (vec4(p+_uvc*PI*Angle, -focalLength, 1) * camMat).xyz
     );
     
     vec3 color = raymarch(CastRay(camPosition, rd));	

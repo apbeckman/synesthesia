@@ -21,7 +21,16 @@
 			"NAME" : "lookXY",
 			"PARAMS" : 0.063,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "defaults"
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "camera"
 		},
 		{
 			"DEFAULT" : 0,
@@ -31,7 +40,17 @@
 			"NAME" : "lookZ",
 			"PARAMS" : 0.01,
 			"TYPE" : "knob smooth",
-			"UI_GROUP" : "defaults"
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.5,
+			"NAME" : "FOV",
+			"PARAMS" : 0.102,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
 		},
 		{
 			"DEFAULT" : 0,
@@ -43,16 +62,6 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0.5,
-			"NAME" : "FOV",
-			"PARAMS" : 0.102,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1.5,
@@ -60,15 +69,6 @@
 			"NAME" : "Warp",
 			"PARAMS" : 0.118,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
-			"NAME" : "rate_in",
-			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		}
 	],

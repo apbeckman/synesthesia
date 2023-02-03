@@ -116,6 +116,16 @@
 			"UI_GROUP" : "camera"
 		},
 		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
 			"DEFAULT" : 
 			[
 				0,
@@ -163,7 +173,7 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
+			"MIN" : 0,
 			"NAME" : "Flip",
 			"PARAMS" : 0.118,
 			"TYPE" : "knob smooth",

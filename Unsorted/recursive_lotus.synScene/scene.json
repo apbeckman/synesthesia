@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "dracusa",
+	"DESCRIPTION" : "Shadertoy version of a shader I made to demonstrate the log-spherical mapping for this article: \n\nhttps://www.osar.fr/notes/logspherical/\n\nThe log-spherical mapping allows the creation of self-similar SDFs, without loops.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "recursive_lotus.png",
+	"TITLE" : "Recursive Lotus",
+	"WIDTH" : 1280
+}

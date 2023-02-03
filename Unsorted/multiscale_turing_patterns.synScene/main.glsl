@@ -28,7 +28,7 @@ vec2 wrap(vec2 x) {
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
-
+    fragCoord+= _uvc*(1.+syn_Intensity)*Zoom;
     vec2 uv = fragCoord.xy / RENDERSIZE.xy;
     
     vec2 ix = vec2(1.0 / RENDERSIZE.x, 0.0);

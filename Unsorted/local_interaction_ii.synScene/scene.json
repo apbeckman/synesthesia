@@ -2,10 +2,10 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0.35,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
+			"MAX" : 0.5,
+			"MIN" : -1.25,
 			"NAME" : "Zoom",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
@@ -13,66 +13,78 @@
 		{
 			"DEFAULT" : 
 			[
-				1,
-				1
+				0,
+				0
 			],
 			"DESCRIPTION" : "",
 			"MAX" : 
 			[
-				3,
-				3
+				1,
+				1
 			],
 			"MIN" : 
 			[
 				-1,
 				-1
 			],
-			"NAME" : "moveXY",
+			"NAME" : "MoveXY",
 			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Reset",
-			"TYPE" : "bang",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Stretch",
+			"TYPE" : "xy",
 			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "I wish I could tell you what this is, but I have no idea",
 	"GPU" : 0,
-	"HEIGHT" : 1080,
+	"HEIGHT" : 720,
 	"IMAGE_PATH" : "local_interaction_ii.png",
 	"PASSES" : 
 	[
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1080,
+			"HEIGHT" : 720,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1280
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1080,
+			"HEIGHT" : 720,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1920
+			"WIDTH" : 1280
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1080,
+			"HEIGHT" : 720,
 			"TARGET" : "BuffC",
-			"WIDTH" : 1920
+			"WIDTH" : 1280
 		},
 		{
 			"FLOAT" : true,
-			"HEIGHT" : 1080,
+			"HEIGHT" : 720,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1920
+			"WIDTH" : 1280
 		}
 	],
 	"TITLE" : "Local Interaction II",
-	"WIDTH" : 1920
+	"WIDTH" : 1280
 }

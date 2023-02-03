@@ -95,8 +95,8 @@ float ggx(vec3 n, vec3 v, vec3 l, float rough, float f0){
 #define ds -0.4/(Divergence)   // divergence scale
 #define dp -0.03  // divergence update scale
 #define pl 0.3    // divergence smoothing
-#define amp 1.0*(0.999+growthFactor*0.0005)   // self-amplification
-#define upd 0.4125   // update smoothing
+#define amp 1.0*(0.999+growthFactor*0.00025)   // self-amplification
+#define upd 0.125   // update smoothing
 
 #define _D 0.65   // diagonal weight
 
@@ -131,10 +131,8 @@ vec3 advect(vec2 ab, vec2 vUv, vec2 texel, out float curl, out float div, out ve
     div  = uv_s.y - uv_n.y - uv_e.x + uv_w.x + _D * (uv_nw.x - uv_nw.y - uv_ne.x - uv_ne.y + uv_sw.x + uv_sw.y + uv_se.y - uv_se.x);
     lapl = _K0*uv + _K1*(uv_n + uv_e + uv_w + uv_s) + _K2*(uv_nw + uv_sw + uv_ne + uv_se);
     blur = _G0*uv + _G1*(uv_n + uv_e + uv_w + uv_s) + _G2*(uv_nw + uv_sw + uv_ne + uv_se);
-    if(_exists(syn_UserImage)){
-    uv *=1.0- 0.75* syn_MidLevel * _loadUserImage().rgb*Media;
 
-    }
+ 
     return uv;
 }
 
@@ -176,7 +174,7 @@ vec4 renderPassA() {
     	ab += blur / float(STEPS);  
     }
     
-    vec2 tab = (amp * ab.xy*(0.9925+growthFactor*0.0725) + (ls * lapl.xy + norm * sp)*0.99999+syn_Level*0.00001 + (uv.xy * ds * sd)*(0.999125+syn_MidLevel*0.000895));    
+    vec2 tab = (amp * ab.xy + (ls * lapl.xy + norm * sp) + (uv.xy * ds * sd)*(0.999125+syn_Intensity* syn_MidLevel*0.000895));    
     vec2 rab = rot(tab,sc)*impulse;
     
     vec3 abd = mix(vec3(rab,sd), uv, upd);
@@ -184,7 +182,7 @@ vec4 renderPassA() {
     if (_mouse.z > 0.0) {
     	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy;
         vec2 m = (0.095) * normz(d) * exp(-length(d) / (0.0125/(1.0-Size)));
-        m*=vec2(.5, 01.5);
+        m*=vec2(.5, 01.5);  
        //m *= Size;
         abd.xy += m;
         uv.xy += m;
@@ -196,9 +194,10 @@ vec4 renderPassA() {
         fragColor = vec4(rnd, 0);
     } else {
         abd.z = clamp(abd.z, -1.0, 1.0);
-        abd.xy = clamp(length(abd.xy) > 1.0 ? normz(abd.xy) : abd.xy, -1.0, 1.0)*(0.99+normalize(growthFactor)*0.01);
+        abd.xy = clamp(length(abd.xy) > 1.0 ? normz(abd.xy) : abd.xy, -1.0, 1.0)*(0.99+(growthFactor)*0.01);
         fragColor = vec4(abd, 0.0);
     }
+    fragColor *=1.0- 0.125 * _loadUserImageAsMask()*Media*(1.0+syn_MidLevel);
 
 	return fragColor; 
  } 
@@ -539,9 +538,9 @@ vec4 renderMainImage() {
 
     // end bumpmapping section
 
-    vec3 tc = 0.8*contrast(0.8*ib)*(1.+0.15*syn_HighLevel);
+    vec3 tc = 0.8*contrast(0.8*ib)*(1.+syn_Intensity*0.125*syn_HighLevel);
 
-    fragColor = vec4((tc + vec3(0.979, 0.9, 0.59)*spec),1.0);
+    fragColor = vec4((tc + vec3(0.4979, 0.69, 0.459)*spec),1.0);
 //    fragColor = vec4((tc + vec3(0.9, 0.85, 0.8)*spec),1.0);
 	return fragColor; 
  } 

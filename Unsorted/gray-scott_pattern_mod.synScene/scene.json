@@ -100,7 +100,7 @@
 			"MAX" : 1,
 			"MIN" : -0.25,
 			"NAME" : "DifPatCol",
-			"TYPE" : "slider",
+			"TYPE" : "knob",
 			"UI_GROUP" : "default"
 		},
 		{

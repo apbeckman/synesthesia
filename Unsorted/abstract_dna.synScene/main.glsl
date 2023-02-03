@@ -23,7 +23,7 @@ vec3	h; 			// light amount
 #define I_MAX		200.
 #define E			0.0001
 #define FAR			200.
-#define PI			3.14159
+//#define PI			3.14159
 #define TAU			PI*2.
 
 /*
@@ -50,7 +50,8 @@ vec4 renderMainImage() {
 	vec2 R = RENDERSIZE.xy,
           uv  = vec2(f-R/2.) / R.y;
 	vec3	dir = camera(uv);
-    rotate(dir.xz, _mouse.x*.01);
+    rotate(dir.xz, -LookXY.x*PI);
+    rotate(dir.yz, -LookXY.y*PI);
     vec3	pos = vec3(.0, .0, 0.0);
 
     h*=0.;
@@ -60,31 +61,16 @@ vec4 renderMainImage() {
     col += h*.005;
 
     c_out =  vec4(col,1.0);
+    return c_out;
 }
 
-void mainVR( out vec4 c_out, in vec2 f, in vec3 fragRayOri, in vec3 fragRayDir )
-{
-    t  = TIME*.125;
-    vec3	col = vec3(0., 0., 0.);
-	vec2 R = RENDERSIZE.xy,
-          uv  = vec2(f-R/2.) / R.y;
-	vec3	dir = fragRayDir;
-    vec3	pos = fragRayOri;
-
-    h*=0.;
-    vec2	inter = (march(pos, dir));
-    ret_col = vec3(.490, .482, .470);
-    col.xyz = ret_col*((1.-inter.x*.005)+inter.y*.005);
-    col += h*.005;
-    c_out =  vec4(col,1.0);
-}
 
 float	scene(vec3 p)
 {
     float	var;
     float	mind = 1e5;
 
-    p.z-=TIME*2.;
+    p.z-=bass_time*2.;
 
     p.y-= -4.;
     p.z -= -3.;
@@ -100,7 +86,7 @@ float	scene(vec3 p)
 	op.zy = fract(op.zy*dd)-.5;
     op.zy /=dd;
 
-    rotate(op.yz, -TIME*.25 + op.x*.15);
+    rotate(op.yz, -smoothTimeC*.05 + op.x*.15);
     float num = .5;
     vec3 rp = op;
     op.x = fract(op.x*num)-.5;
@@ -112,7 +98,7 @@ float	scene(vec3 p)
     float mada = max(max(abs(p.x)-.9, abs(p.y)-.8), abs(p.z)-.62 );
     float light_wave = length(p.zy-vec2(-4.0,-8.))-1.*sin(rp.x*.25+TIME);
     light_wave = abs(light_wave)+.05;
-    float light_wave2 = mylength( (fract((sp-vec3(.0+TIME*4.,.0,0.) ).xyz*.03125)-.5)/.03125 )-16.;
+    float light_wave2 = mylength( (fract((sp-vec3(.0+smoothTimeB,.0,0.) ).xyz*.03125)-.5)/.03125 )-16.;
     mada = min(mada, light_wave);
     light_wave2 = abs(light_wave2)+.05;
 
@@ -126,7 +112,7 @@ float	scene(vec3 p)
     p.z = fract(p.z*3.)-.5;
     p.z /= 3.;
 
-    rotate(p.xy, (op.z*1.)*1.+TIME*1. );
+    rotate(p.xy, (op.z*1.)*1.+smoothTimeC*.5 );
 
     float ming = mylength(vec3(abs(p.y)-.5, p.xz))-.105;
 
@@ -226,13 +212,14 @@ vec3	camera(vec2 uv)
 
 vec3 calcNormal( in vec3 pos, float e, vec3 dir)
 {
+    vec4 c_out = vec4(0.);
     vec3 eps = vec3(e,0.0,0.0);
 
     return normalize(vec3(
            march(pos+eps.xyy, dir).y - march(pos-eps.xyy, dir).y,
            march(pos+eps.yxy, dir).y - march(pos-eps.yxy, dir).y,
            march(pos+eps.yyx, dir).y - march(pos-eps.yyx, dir).y ));
-	return c_out; 
+	return c_out.rgb; 
  } 
 
 

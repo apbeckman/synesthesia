@@ -18,9 +18,9 @@
 #define N 32.
 #define For for (float i = -(N); i<=(N); i++)
 #define S vec4(2,2,7.+12,8)
-#define Gaussian(i) (0.39989422804*GaussianMod)/S*exp(Scale*0.5+(-.5+Scale)*(i)*(i)/S/S)
+#define Gaussian(i) (0.39989422804*GaussianMod)/S*exp(Scale*0.5+(-.5)*(i)*(i)/S/S)
 #define Init if (FRAMECOUNT <= 1 || Reset > 0.) 
-#define Mouse if (_mouse.z>0.&&abs(length(U-_mouse.xy))<30.*abs(Scale+1.250)) 
+#define Mouse if (_mouse.z>0.&&abs(length(U-_mouse.xy))<30.) 
 vec4 image = vec4(0.);
 
 			//******** BuffA Code Begins ********
@@ -29,11 +29,6 @@ vec4 renderPassA(){
     vec4 Q = vec4(0.);
     vec2 U = _xy;
     U += moveXY;
-  vec3 logoCol = vec3(0.0);
-  if (_exists(syn_UserImage)){
-    logoCol = _loadUserImageAsMask().rgb;
-  }
-
 
     U-=0.5*R;
     float a = 0.02*sin(.01225*smoothTimeC)*exp(-3.*length(U)/R.y);
@@ -41,10 +36,10 @@ vec4 renderPassA(){
     U+=0.5*R;
     NeighborhoodD
     
-    Q = A(U+.25*rot(Flip)*D(U+_uvc).xy)-div;
+    Q = A(U+.25*rot(Flip)*D(U).xy)-div;
     
     Q = sin(Q);
-    Q *= 1.0 + (0.25*_loadUserImage()+0.2*Q*_loadUserImageAsMask());
+    Q *= 1.0 + (0.35*_loadUserImage()-0.4*_loadUserImageAsMask()*(1.0+0.5*syn_Intensity));
 
     Mouse Q.x = 1.;
     Init Q = sin((.1+syn_BassLevel)*U.xxxx)*cos(U.y);
@@ -85,7 +80,7 @@ vec4 renderPassD(){
     NeighborhoodC
     Q.xy = 
         10.*vec2(e.x-w.x,n.x-s.x)+
-        3.*vec2(e.y-w.y,n.y-s.y)+
+        6.*vec2(e.y-w.y,n.y-s.y)+
         7.*vec2(e.z-w.z,n.z-s.z)+
         1.*vec2(e.w-w.w,n.w-s.w);
 	return Q; 

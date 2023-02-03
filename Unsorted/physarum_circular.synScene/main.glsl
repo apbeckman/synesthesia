@@ -153,7 +153,6 @@ void CheckRadius(inout vec4 U, vec2 pos, float r)
 vec4 renderPassA() {
 	vec4 U = vec4(0.0);
 	vec2 pos = _xy;
-
     vec2 muv = _mouse.xy/size;
     
     if(length(muv.xy) >0.)

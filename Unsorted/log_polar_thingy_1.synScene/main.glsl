@@ -9,7 +9,7 @@
 
 #define I_MAX		400
 #define E			0.0001
-#define FAR			20.
+#define FAR			10.
 
 #define	FUDGE		1.
 
@@ -20,7 +20,7 @@ void	rotate(inout vec2 v, float angle);
 float	mylength(vec2 p);
 float	mylength(vec3 p);
 
-#define PI			3.14159
+//#define PI			3.14159
 #define TAU			PI*2.
 
 /*
@@ -156,10 +156,13 @@ vec4 renderMainImage() {
 		float	diffuse  = max(0.0, 1.-dot(vl, n))+.0*max(0.0, dot(vl, n));
 		float	specular = pow(max(0.0, dot(vl, ref_ev)), 3.);
         col.xyz += light_color * (specular*1.0)+ diffuse * vec3(.51,.515, .53);
+
     }
     else
         col *= .0;
     c_out =  vec4(col, 1.);
+          	return c_out; 
+
 }
 
 vec4	march(vec3 pos, vec3 dir)
@@ -228,13 +231,15 @@ vec3 calcNormal( in vec3 pos, float e, vec3 dir)
 
 vec3	camera(vec2 uv)
 {
+  	vec4 c_out = vec4(0.0);
+
     float		fov = 1.;
 	vec3		forw  = vec3(0.0, 0.0, -1.0);
 	vec3    	right = vec3(1.0, 0.0, 0.0);
 	vec3    	up    = vec3(0.0, 1.0, 0.0);
 
     return (normalize((uv.x) * right + (uv.y) * up + fov * forw));
-	return c_out; 
+	return c_out.rgb; 
  } 
 
 

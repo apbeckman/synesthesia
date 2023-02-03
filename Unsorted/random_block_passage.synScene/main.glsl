@@ -454,7 +454,7 @@ vec4 renderMainImage() {
         
         
         // Texture positioning.
-        const float txSc0 = .5; // Texture scale.
+        const float txSc0 = .25; // Texture scale.
         vec3 txP = vec3(sp.xy - path(sp.z), sp.z); // Line it up with the camera path. Optional.
         
         // Texture based bump mapping.
@@ -513,7 +513,7 @@ vec4 renderMainImage() {
         //col = (oCol*(diff*vec3(.4, .6, 1) + amb + vec3(.4, .6, 1)*spec*4.))*atten; // Light one.
         col = (oCol*(diff*vec3(.4, .6, 1) + amb + vec3(.4, .6, 1)*spec*4.))*atten*(1.0+syn_HighLevel); // Light one.
         //col += (oCol*(diff2*vec3(1, .4, .2) + amb + vec3(1, .4, .2)*spec2*4.))*atten2; // Light two.
-        col += (oCol*(diff2*vec3(1, .4, .2) + amb + vec3(.75, .4, .8)*spec2*4.))*atten2; // Light two.
+        col += (oCol*(diff2*vec3(1, .74, .2) + amb + vec3(.75, .4, .8)*spec2*4.))*atten2; // Light two.
         
         //col += oCol*vec3(1, .05, .15)*pow(fre, 4.)*2.*(atten + atten2);
         col += oCol*vec3(0.6, .105, .615)*pow(fre, 4.)*2.*(atten + atten2);  //fresnel

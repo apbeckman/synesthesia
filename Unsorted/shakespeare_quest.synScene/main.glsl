@@ -55,7 +55,7 @@ mat3 lookat(vec3 fw,vec3 up){
  return mat3(rt,cross(rt,fw),fw);
 }
 float Tube(vec3 pa, vec3 ba, float r){//mod from iq's
- float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0-FingerMod );
+ float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
  return length(pa - ba*h)-r+h*0.015;
  //return length(pa-ba*clamp(dot(pa,ba)/dot(ba,ba),0.0,1.0))-r;
 }
@@ -126,7 +126,7 @@ vec3 getColor(vec3 p0){
   else if(i<2.0)col*=A(xz);
   else if(i<3.0)col*=C(xz);
   else col*=T(xz);
- }else col=vec3(0.3,0.3,0.3);//finger color
+ }else col=vec3(0.52,0.4,0.53);//finger color
  return col;
 }
 #ifdef SHADOWS

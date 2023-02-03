@@ -127,8 +127,7 @@ vec4 renderMainImage() {
 	vec2 uv = (g+g-si)/si.y;
 	uv.xy += fov_in*PI*_uvc;
 	uv.xy += QuadMirror.xy*pow(PI, 2.)*_uvc*uv;
-	uv.y *=(1.0+pow(PI, 2)*QuadMirror.x);
-	vec3 ro = vec3(0,0, smoothTimeC * 10.); 
+	vec3 ro = vec3(0,0, bass_time * 10.); 
 	ro.xy += vec2(sin(ro.z)*(1.0+(_uvc*PI)));
   	vec3 cv = ro + vec3(0,0,1); 
 	vec3 cu = normalize(vec3(0,1,0));
@@ -142,7 +141,7 @@ vec4 renderMainImage() {
 	float s = 1., d = 0.;
 	for (int i=0; i<110; i++) 
 	{
-		ro = vec3(xyOffset*50.0, smoothTimeC * 10.); 
+		ro = vec3(xyOffset*50.0, bass_time * 10.); 
 		ro.xy += vec2(sin(d*0.25),cos(d*0.25))*5.0*perturbedAmt;
 		cv = ro + vec3(0,0,1); 
 		cu = normalize(vec3(0,1,0));
@@ -151,7 +150,7 @@ vec4 renderMainImage() {
 		y = cross(z,x);
 		fov = .9;
 		rd = normalize(fov * (uv.x * x + uv.y * y) + z);
-		rd.xz = _rotate(rd.xz, -PI*xyLook.x+PI*_uvc.x*Flip);
+		rd.xz = _rotate(rd.xz, -PI*xyLook.x+PI*_uvc.x*Flip*fov_in);
 		rd.yz = _rotate(rd.yz,-PI*xyLook.y);
 		rd.xy = _rotate(rd.xy, PI*Rotate);
 
@@ -179,7 +178,7 @@ vec4 renderMainImage() {
 
   // fragColor.rgb*=0.5;
   if (sb>0.05){
-  	fragColor.rgb*=mix(syn_BassPresence*_pulse(fract(smoothTimeB*0.25+p.z*0.01)*1.5, 0.8, 0.2),1.0,col_presence);
+  	fragColor.rgb*=mix(syn_BassPresence*_pulse(fract(smoothTimeB*0.125+p.z*0.01)*1.5, 0.8, 0.2),1.0,col_presence);
   }
   if (sb<0.05){
   	fragColor.rgb*=mix(syn_OnBeat,1.0,col_presence);

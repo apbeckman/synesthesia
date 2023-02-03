@@ -14,7 +14,8 @@
 #define gradient_eps 0.01
 
 //shape parameters
-#define TWO_PI PI*2.
+#define PI 3.1415926
+#define TWO_PI 6.28318530718
 #define min_rings 3.
 #define max_rings 10.
 #define ratio 0.4
@@ -246,9 +247,8 @@ vec4 renderMainImage() {
     fragColor = vec4(shadedcolor, 1.);
 	return fragColor; 
  } 
-
 vec4 renderMain(){
-	if(PASSINDEX == 0){
-		return renderMainImage();
-	}
+    if (PASSINDEX == 0){
+        return renderMainImage();
+    }
 }

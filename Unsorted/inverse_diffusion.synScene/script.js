@@ -43,7 +43,7 @@ var highhits = 0.0;
 var basshits = 0.0;
 var growthFactor = 0.0;
 function update(dt) {
-  uniforms.growthFactor = 0.75+Math.pow((inputs.syn_BassLevel*0.4)+(inputs.syn_MidLevel*0.35)+(inputs.syn_Intensity*0.25), 2.0);
+  uniforms.growthFactor = Math.pow((0.75+inputs.syn_BassLevel*0.4)+(inputs.syn_MidLevel*0.35)+(inputs.syn_Intensity*0.25), 2.0);
 
   var bpm = inputs.syn_BPM/4.0;
   bpmcount.updateTime(bpm, dt);

@@ -20,7 +20,7 @@ vec4 renderPassA() {
         fragColor = texture(BuffA,uv0);
     else
         fragColor = texture(syn_UserImage,fract(uv0*vec2(Xnum,Ynum)));
-    if(FRAMECOUNT<5)
+    if(FRAMECOUNT<=5)
         fragColor = texture(syn_UserImage,fract(uv0*vec2(Xnum,Ynum)));
 	return fragColor; 
  } 
@@ -36,16 +36,16 @@ vec4 renderPassA() {
 #define Ynum 10
 
 // tile size in pixels (proportional sqrt(Res), otherwise pixels get too small in preview)
-#define TileSize (20.*sqrt(RENDERSIZE.y/1080.))
+#define TileSize (10.*sqrt(RENDERSIZE.y/1080.))
 // take every DFrame'th frame
 #define DFrame 30
 
 
-#define Res1 iChannelResolution[1].xy
+#define Res1 RENDERSIZE.xy
 
 float rectMask(float b, float w, vec2 uv)
 {
-	vec4 e=smoothstep(vec4(-b-.5*w),vec4(-b+.5*w),vec4(uv,vec2(1)-uv));
+	vec4 e=smoothstep(vec4(-b-1.5*w),vec4(-b+.5*w),vec4(uv,vec2(1)-uv));
     return e.x*e.y*e.z*e.w;
 }
 
@@ -99,8 +99,8 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    int actFrame=(FRAMECOUNT/DFrame)*DFrame;
-    int prevFrame=(FRAMECOUNT/DFrame-1)*DFrame;
+    int actFrame=(int(FRAMECOUNT)/DFrame)*DFrame;
+    int prevFrame=(int(FRAMECOUNT)/DFrame-1)*DFrame;
     vec4 rand = texture(image30,(floor(fragCoord/TileSize+float(FRAMECOUNT/DFrame)*1.*13.)+.5)/Res1);
     
     vec2 uvQ = (floor(fragCoord/TileSize)*TileSize)/RENDERSIZE.xy;

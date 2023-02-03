@@ -29,9 +29,9 @@ vec4 renderPassA()
 	vec4 Q = vec4(0.0);
     vec2 U = _xy;
     Q = A(U);
-    U += _uvc*Zoom*growthFactor;
 
     vec4 b = B(U);
+    
     Q.w = b.w;
     vec4 T = Q;
     box if(abs(x)!=abs(y))
@@ -64,8 +64,8 @@ vec4 renderPassB()
 {
     vec4 Q = vec4(0.0);
     vec2 U = _xy;
-
     Q = A1(U);
+    
     vec4 dQ = vec4(0);
     box if(abs(x)!=abs(y))
     {
@@ -99,8 +99,12 @@ vec4 renderPassC()
 {
     vec4 Q = vec4(0.0);
     vec2 U = _xy;
+        U += _uvc*Zoom*(1.0+growthFactor);
+
 
     Q = A(U);
+
+    U -= Drift;
     vec4 Qb = B(U);
     vec4 dQ = vec4(0);
     box if(abs(x)!=abs(y))

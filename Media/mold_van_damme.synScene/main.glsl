@@ -3,10 +3,10 @@
 			//******** Common Code Begins ********
 
 //simulation variables
-float growthFactor = pow((syn_BassLevel*0.35)+(syn_MidLevel*0.35)+(syn_Level*0.2), 2.0)*syn_Intensity;
+float growthFactor = pow((syn_BassLevel*0.35)+(syn_MidLevel*0.35)+(syn_Level*0.15)+syn_Intensity*0.15, 2.0)*(0.5+0.5*syn_Intensity);
 
-float dt = 0.25*(0.5+growthFactor/2);
-#define prad 1.4 +growthFactor
+float dt = 0.25*(0.5+0.5*growthFactor);
+#define prad 1.4*(1.0+growthFactor*0.5) 
 #define decay 0.3
 
 //cell speed
@@ -196,7 +196,7 @@ vec4 renderPassA() {
     float dangl = (pixel(ch1, sleft).x - pixel(ch1, sright).x);
     U.z += dt*sst*tanh(3.*dangl);
    
-    vec2 pvel = pspeed*vec2(cos(U.z), sin(U.z))*(0.8+basshits/2.) + 0.1*(hash22(U.xy+smoothTime*0.3)-0.5);;
+    vec2 pvel = pspeed*vec2(cos(U.z), sin(U.z))*(0.8+basshits/2.) + 0.1*(hash22(U.xy)-0.5);;
     
     //update the particle
     U.xy += dt*pvel;
@@ -225,6 +225,10 @@ vec4 renderPassB() {
    
     //diffusion equation
     Q += dt*Laplace(ch1, p);
+    p -= _uvc*PI*Zoom*(1.+0.5*growthFactor); //zoom
+    p += Stretch*PI*_uvc; //drift
+    p += Drift*PI; //drift
+
     
     vec4 particle = texel(ch0, p);
     float distr = gauss(p - particle.xy, prad);
@@ -251,6 +255,10 @@ vec4 renderPassB() {
 vec4 renderPassC() {
 	vec4 Q = vec4(0.0);
 	vec2 p = _xy;
+    p -= _uvc*PI*Zoom*(1+0.5*growthFactor); //zoom
+    p += Stretch*PI*_uvc; //drift
+    p += Drift*PI; //drift
+
 
     Q = texel(ch1, p);
     
