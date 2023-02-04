@@ -13,8 +13,8 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 6,
-			"MIN" : -6,
+			"MAX" : 1,
+			"MIN" : -1,
 			"NAME" : "Zoom",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
@@ -62,6 +62,24 @@
 			"NAME" : "Stretch",
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : -0.2,
+			"NAME" : "Density",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "senStr",
+			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		}
 	],

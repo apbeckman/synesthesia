@@ -8,10 +8,10 @@
 #define C(U) texture(BuffC, (U)/R)
 #define D(U) texture(BuffD, (U)/R)
 
-#define N 3.
+#define N 15.
 
 #define PRECIPITATION 1.*(1.0+syn_Intensity)//*(1.+basshits)
-#define EVAPORATION .0001*(1.0+syn_BassLevel)
+#define EVAPORATION .0001
 
 			//******** BuffA Code Begins ********
 
@@ -19,7 +19,8 @@
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-
+    U += _uvc*PI*Flow_in_out;
+    U -= Flow_direction;
     Q = B(U);
     vec4 
         n = B(U+vec2(0,1)),
@@ -44,9 +45,10 @@ vec4 renderPassA() {
     // curl
     Q.w = 0.25*(s.x-n.x+w.y-e.y)+basshits;
     if (length(Q.xy) > .8) Q.xy = .8*normalize(Q.xy);
+    Q.x -= _loadUserImageAsMask().r*Media;
     
     //Boundary conditions
-    if (FRAMECOUNT<=1) Q = vec4(0);
+    if (FRAMECOUNT<=1 || Reset != 0.) Q = vec4(0);
     
 	return Q; 
  } 
@@ -91,6 +93,9 @@ vec4 renderPassC() {
 vec4 renderPassD() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
+    U -= _uvc*PI*Zoom;
+    U -= _uvc*PI*Stretch;
+    U += MoveXY;
 
     Q = C(U);
     // neighborhood
@@ -114,13 +119,17 @@ vec4 renderPassD() {
     float l = m-me;
    	Q.x = me + 0.03*l*l*l;
     if (_mouse.z>0.) Q.x += .25/(1.+.0005*dot(U-_mouse.xy,U-_mouse.xy));
+        U -= _uvc*PI*Zoom;
+    U -= _uvc*PI*Stretch;
+    U += MoveXY;
+
     float x = .01*(Q.y*length(a.xy)*(1.-Q.z)+.01*Q.z);
     Q.z += x;
     Q.x -= x;
     Q.y = Q.y*(1.-EVAPORATION) + PRECIPITATION/R.x;
     Q = max(Q,0.);
     // boundary conditions
-    if (FRAMECOUNT<5)Q = vec4(10.+1.-U.y/R.y+.5*B(U).x+10.*exp(-length(U-0.5*R)/R.y),.3,0,0);
+    if (FRAMECOUNT<5 || Reset != 0.)Q = vec4(10.+1.-U.y/R.y+.5*B(U).x+10.*exp(-length(U-0.5*R)/R.y),.3,0,0);
     if (U.x<2.||U.y<2.||R.y-U.y<2.||R.x-U.x<2.) Q*=0.;
 
 	return Q; 
@@ -132,7 +141,6 @@ vec4 renderPassD() {
 vec4 renderMainImage() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-
     vec4 
         n = (C(U+vec2(0,1))),
         e = (C(U+vec2(1,0))),
@@ -141,7 +149,7 @@ vec4 renderMainImage() {
     vec4 c = C(U);
     vec3 no = normalize(vec3(e.x-w.x+e.y-w.y,n.x-s.x+n.y-s.y,.5));
     Q = abs(sin(1.+3.*c.z+sqrt(c.y)*(1.+.5*vec4(1,2,3,4))));
-    float a = .5;
+    float a = .75;
     no.zy *= mat2(cos(a),-sin(a),sin(a),cos(a));
     no.zx *= mat2(cos(a),-sin(a),sin(a),cos(a));
     Q*=max(0.,.2+.8*no.z);

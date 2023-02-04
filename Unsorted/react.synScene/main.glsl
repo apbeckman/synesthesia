@@ -20,7 +20,7 @@
 #define S vec4(2,2,7.+12,8)
 #define Gaussian(i) (0.39989422804*GaussianMod)/S*exp(Scale*0.5+(-.5)*(i)*(i)/S/S)
 #define Init if (FRAMECOUNT <= 1 || Reset > 0.) 
-#define Mouse if (_mouse.z>0.&&abs(length(U-_mouse.xy))<30.) 
+#define Mouse if (_mouse.z>0.&&abs(length(U-_mouse.xy))<30.*Paint) 
 vec4 image = vec4(0.);
 
 			//******** BuffA Code Begins ********
@@ -29,7 +29,7 @@ vec4 renderPassA(){
     vec4 Q = vec4(0.);
     vec2 U = _xy;
     U += moveXY;
-
+    
     U-=0.5*R;
     float a = 0.02*sin(.01225*smoothTimeC)*exp(-3.*length(U)/R.y);
     U *= (1.-(Zoom)*(.0024*(1.0+syn_BassLevel*syn_MidLevel*syn_Intensity))*exp(exp(-length(U)/(R.y+R.y))))*rot(a*0.1);

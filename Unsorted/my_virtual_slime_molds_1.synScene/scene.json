@@ -46,12 +46,66 @@
 			"NAME" : "Reset",
 			"TYPE" : "bang",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Drift",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Stretch",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "michael0884",
 	"DESCRIPTION" : "Virtual biological stuff, much slime, so wow *doge.png*",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "my_virtual_slime_molds_1.png",
 	"PASSES" : 
 	[
@@ -69,5 +123,5 @@
 		}
 	],
 	"TITLE" : "My virtual slime molds_1",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

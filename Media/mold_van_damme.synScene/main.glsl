@@ -3,7 +3,7 @@
 			//******** Common Code Begins ********
 
 //simulation variables
-float growthFactor = pow((syn_BassLevel*0.35)+(syn_MidLevel*0.35)+(syn_Level*0.15)+syn_Intensity*0.15, 2.0)*(0.5+0.5*syn_Intensity);
+float growthFactor = pow((syn_BassLevel*0.35)+(syn_MidLevel*0.35)+syn_Intensity*0.3, 2.0)*(0.5+0.35*syn_Intensity);
 
 float dt = 0.25*(0.5+0.5*growthFactor);
 #define prad 1.4*(1.0+growthFactor*0.5) 
@@ -16,7 +16,7 @@ float pspeed = 6.;
 float sdist = 10.*(1.0+growthFactor);
 
 //sensor strenght
-float sst = 10.*(0.75+syn_Level);
+float sst = 10.*(0.75+0.5*syn_MidLevel*syn_Intensity);
 
 //sensor angle
 float sangl = 0.3; //radians
@@ -30,7 +30,6 @@ float sangl = 0.3; //radians
 #define ch1 BuffB
 #define ch2 BuffC
 //#define ch3 iChannel3
-#define PI 3.14159265
 
 //hash functions
 //https://www.shadertoy.com/view/4djSRW
@@ -175,7 +174,6 @@ vec4 renderPassA() {
    
     //this pixel value
     U = texel(ch0, pos);
-    
     //check neighbours 
     CheckRadius(U, pos, 1.);
     //CheckRadius(U, pos, 2.);
@@ -220,7 +218,7 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 Q = vec4(0.0);
 	vec2 p = _xy;
-
+    
     Q = texel(ch1, p);
    
     //diffusion equation
@@ -234,7 +232,7 @@ vec4 renderPassB() {
     float distr = gauss(p - particle.xy, prad);
     //distr *= (1.0+basshits);
     vec2 ss = vec2(textureSize(ch2,0))/size;
-    float video = length(Laplace(syn_UserImage, p*ss)*(1+growthFactor));
+    float video = length(Laplace(syn_UserImage, p*ss))*0.5;
     
     //pheromone depositing
        

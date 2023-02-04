@@ -1,4 +1,106 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Reset",
+			"TYPE" : "bang",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Flow_in_out",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Flow_direction",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "MoveXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Stretch",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Media",
+			"TYPE" : "bang",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "hold mouse to make mountains\n\n\n[url]javascript:  (function(){if(Effect.prototype.Paint.toString().length>1000){_Paint=Effect.prototype.Paint;} Effect.prototype.Paint = function(...args){for(var i=0; i<4;i++){_Paint.apply(this,args);}}})()[/url]",
 	"GPU" : 0,

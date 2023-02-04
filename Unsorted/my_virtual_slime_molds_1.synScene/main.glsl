@@ -6,9 +6,9 @@
 #define Bi(p) ivec2(mod(p,R))
 #define texel(a, p) texelFetch(a, Bi(p), 0)
 #define pixel(a, p) texture(a, (p)/R)
-#define ch0 iChannel0
+#define ch0 BuffA
 #define ch1 iChannel1
-#define ch2 iChannel2
+#define ch2 BuffB
 #define ch3 iChannel3
 float growthFactor = normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_Level*0.15), 2.0));
 
@@ -17,14 +17,14 @@ float growthFactor = normalize(pow((syn_BassLevel*0.5)+(syn_MidLevel*0.35)+(syn_
 #define loop(i,x) for(int i = 0; i < x; i++)
 #define range(i,a,b) for(int i = a; i <= b; i++)
 
-#define dt 1.5*(0.95+growthFactor*0.05)
+#define dt 1.5
 
 #define border_h 5.
 vec2 R;
 vec4 Mouse;
 float time;
 
-#define mass 1.5+growthFactor
+#define mass 1.5
 
 #define fluid_rho 0.2
 
@@ -33,7 +33,7 @@ float time;
 #define sense_ang 0.4*(1.0+Sense_Ang)
 #define sense_dis 2.5*(1.0+Sense_Dist)
 #define sense_force 0.1*(1.0+Sense_Force)
-#define trailing 0.
+#define trailing 0.1
 #define acceleration 0.01*(1.0+growthFactor)
 
 
@@ -64,7 +64,7 @@ float sdBox( in vec2 p, in vec2 b )
 float border(vec2 p)
 {
     float bound = -sdBox(p - R*0.5, R*vec2(0.5, 0.5)); 
-    float box = sdBox(Rot(0.*time)*(p - R*vec2(1.5, 0.6)) , R*vec2(0.05, 0.01));
+    float box = sdBox(Rot(0.*smoothTime)*(p - R*vec2(1.5, 0.6)) , R*vec2(0.05, 0.01));
     float drain = -sdBox(p - R*vec2(0.5, 0.7), R*vec2(0., 0.));
     return max(drain,min(bound, box));
 }
@@ -121,6 +121,11 @@ particle getParticle(vec4 data, vec2 pos)
     return P;
 }
 
+float gauss(vec2 x, float r)
+{
+    return exp(-pow(length(x)/r,2.));
+}
+
 vec4 saveParticle(particle P, vec2 pos)
 {
     P.X = clamp(P.X - pos, vec2(-0.5*(0.95+growthFactor*0.05)), vec2(0.5*(0.95+growthFactor*0.085)));
@@ -142,6 +147,12 @@ float G(vec2 x)
 float G0(vec2 x)
 {
     return exp(-length(x));
+}
+//Laplacian operator
+vec4 Laplace(sampler2D ch, vec2 p)
+{
+    vec3 dx = vec3(-1,0.,1);
+    return texel(ch, p+dx.xy)+texel(ch, p+dx.yx)+texel(ch, p+dx.zy)+texel(ch, p+dx.yz)-4.*texel(ch, p);
 }
 
 //diffusion amount
@@ -263,7 +274,6 @@ void Simulation(sampler2D ch, inout particle P, vec2 pos)
 vec4 renderPassA() {
 	vec4 U = vec4(0.0);
 	vec2 pos = _xy;
-
     R = RENDERSIZE.xy; time = TIME; Mouse = _mouse;
     ivec2 p = ivec2(pos);
 
@@ -292,6 +302,9 @@ vec4 renderPassA() {
             P.M = vec2(1e-6);
         }
     }
+    pos += _uvc*PI*Zoom;
+    pos += _uvc*PI*Stretch;
+    pos += Drift;
     
     U = saveParticle(P, pos);
 	return U; 
@@ -303,20 +316,23 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 U = vec4(0.0);
 	vec2 pos = _xy;
+    
+    //pheromone depositing
+       
+
 
     R = RENDERSIZE.xy; time = TIME; Mouse = _mouse;
     ivec2 p = ivec2(pos);
-        
+    
     vec4 data = texel(BuffA, pos); 
-    
     particle P = getParticle(data, pos);
-    
     if(P.M.x != 0.) //not vacuum
     {
         Simulation(BuffA, P, pos);
     }
     
-    U = saveParticle(P, pos);
+
+    U = saveParticle(P, pos*(1.0+_uv*_loadUserImageAsMask().rg*0.125));
 	return U; 
  } 
 
@@ -366,12 +382,12 @@ vec4 renderMainImage() {
     vec4 rho = vec4(P0.V, P0.M)*G((pos - x0)/0.75); 
     vec3 dx = vec3(-5., 0., 5.);
  
-    float a = pow(smoothstep(fluid_rho*0., fluid_rho*2., rho.z),0.1);
-    float b = exp(-1.7*smoothstep(fluid_rho*1., fluid_rho*7.5, rho.z));
+    float a = pow(smoothstep(fluid_rho*0., fluid_rho*2., rho.z),0.1)*(1.0+pow(syn_HighLevel*0.35+syn_MidHighLevel*0.35+syn_Intensity*0.3, 2));
+    float b = exp(-1.7*smoothstep(fluid_rho*1., fluid_rho*7.5, rho.z))*(1.0+pow(syn_HighLevel*0.35+syn_MidHighLevel*0.35+syn_Intensity*0.3, 2));
     vec3 col0 = vec3(1., 0.7, 0.7);
     vec3 col1 = vec3(0., 0.9, 1.);
     // Output to screen
-    col.xyz += 0.2*a+pow(syn_HighLevel*0.15+syn_MidHighLevel*0.15+syn_Intensity*0.05, 2);
+    col.xyz += 0.2*a;
 //    col.xyz += 0.5 - 0.5*cos(8.*vec3(0.2,0.8,0.6)*rho.w);
     //col.xyz += vec3(1,1,1)*bord;
    col.xyz += 0.5 - 0.5*cos(8.*vec3(0.25*(1.0+cos(smoothTimeB*0.25)*0.025+0.25),0.29,0.3*(1.0+sin(smoothTimeB*0.5)*0.0125+0.125))*rho.w);

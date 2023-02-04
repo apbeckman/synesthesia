@@ -90,8 +90,8 @@ float ggx(vec3 n, vec3 v, vec3 l, float rough, float f0){
 
 #define ts 0.25*Amp    // advection curl
 #define cs -2.0   // curl scale
-#define ls 0.05*Amp   // laplacian scale
-#define ps -2.0*pow(Divergence, 01.25)   // laplacian of divergence scale
+#define ls 0.05   // laplacian scale
+#define ps -2.0   // laplacian of divergence scale
 #define ds -0.4/(Divergence)   // divergence scale
 #define dp -0.03  // divergence update scale
 #define pl 0.3    // divergence smoothing
