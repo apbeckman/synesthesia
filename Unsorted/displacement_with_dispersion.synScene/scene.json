@@ -1,0 +1,35 @@
+{
+	"CREDIT" : "cornusammonis",
+	"DESCRIPTION" : "Displacement mapping with chromatic dispersion. The displacement vectors are supplied by an underlying dynamical system. Click to paint.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image5",
+			"PATH" : "images/5.jpg"
+		},
+		{
+			"NAME" : "image16",
+			"PATH" : "images/16.png"
+		}
+	],
+	"IMAGE_PATH" : "displacement_with_dispersion.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Displacement with Dispersion",
+	"WIDTH" : 1280
+}

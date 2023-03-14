@@ -80,6 +80,7 @@ vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
   fragCoord -= _uvc*PI*Zoom;
+  fragCoord -= _uvc*PI*Stretch;
   fragCoord -= xy_flow*PI;
 
     vec2 tx = 1.0 / RENDERSIZE.xy;

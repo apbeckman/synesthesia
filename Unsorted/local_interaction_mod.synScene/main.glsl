@@ -25,7 +25,7 @@ vec4 renderPassA() {
     float a = .003*sin(.125*smoothTimeC-2.*length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y)*Spin;
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
     U+=.5*RENDERSIZE.xy;
-    U.xy += Dir_XY.xy*growthFactor*0.85;
+    U.xy += Dir_XY.xy*growthFactor*0.5;
     Q  =  A(U);
     image *= MediaImpact;
     image =vec4(logoCol, 0.);
@@ -61,7 +61,7 @@ float ln (vec3 p, vec3 a, vec3 b) {return length(p-a-(b-a)*min(dot(p-a,b-a),0.)/
 vec4 renderMainImage() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-    U-= _uvc*Zoom*(2*growthFactor);
+    //U-= _uvc*Zoom*(2*growthFactor);
 
     Q  =  A1(U);
     //U+= _uvc*PI*0.1;
@@ -74,10 +74,10 @@ vec4 renderMainImage() {
     vec4 nY  =  A1(U - vec2(0,1));
     vec3 n = normalize(vec3(pX.z-nX.z,pY.z-nY.z,1));
     vec3 r = reflect(n,vec3(0,0,-2));
-    Q = (0.5+0.5*sin(smoothTimeB*0.25+atan(Q.x,Q.y)*vec4(3,2,1,4)));
-    float d = ln(vec3(.4,.4,6)*RENDERSIZE.xyy+_uvc.xyy,
+    Q = (0.25+0.75*sin(smoothTimeB*0.25+atan(Q.x,Q.y)*vec4(3,2,1,4)));
+    float d = ln(vec3(.4,.4,16)*RENDERSIZE.xyy+_uvc.xyy,
                  vec3(U,0),vec3(U,0)+r)/RENDERSIZE.y;
-    Q *= exp(-d*d)*.5+.5*exp(-3.*d*d)+(syn_Intensity*pow(syn_HighLevel*0.4 + syn_MidHighLevel*0.4 + syn_Hits*0.2, 2.))*Flash;
+    Q *= exp(-d*d)*.5+.5*exp(-3.*d*d)+(syn_Intensity*pow(syn_HighLevel*0.4 + syn_MidHighLevel*0.4 + syn_Intensity*0.2, 2.))*Flash;
 	return Q; 
  } 
 

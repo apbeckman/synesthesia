@@ -87,7 +87,8 @@
 				-1
 			],
 			"NAME" : "rotate_xy",
-			"TYPE" : "xy",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
 		}
 	],

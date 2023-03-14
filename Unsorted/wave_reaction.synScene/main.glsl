@@ -3,7 +3,7 @@
 			//******** BuffA Code Begins ********
 
 #define R RENDERSIZE.xy
-#define A(U) texture(BuffA, (U)/R)
+#define A(U) texture(BuffA, (U+_uvc*PI*Zoom+_uvc*Stretch)/R)
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
@@ -13,6 +13,7 @@ vec4 renderPassA() {
         U -= a.x*a.zw;
     }
     Q = A(U);
+
     vec4 
         n = A(U+vec2(0,1)),
         e = A(U+vec2(1,0)),
@@ -50,7 +51,6 @@ vec4 renderMainImage() {
 	vec4 Q = vec4(0.0);
 
 	vec2 U = _xy;
-
     vec3 p = vec3(U,0),n,u;
 
     for (int x = -3; x <= 3; x++)

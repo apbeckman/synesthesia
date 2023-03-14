@@ -20,14 +20,23 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 10,
-			"MIN" : 0.5,
-			"NAME" : "Iterations",
-			"PARAMS" : 0.118,
-			"TYPE" : "slider smooth",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.032,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Camera"
 		},
 		{
 			"DEFAULT" : 0,
@@ -37,7 +46,7 @@
 			"NAME" : "FOV",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Camera"
 		},
 		{
 			"DEFAULT" : 
@@ -59,17 +68,17 @@
 			"NAME" : "lookXY",
 			"PARAMS" : 0.046,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Camera"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : -1,
-			"NAME" : "Rotate",
-			"PARAMS" : 0.032,
+			"NAME" : "Spin",
+			"PARAMS" : 0.01,
 			"TYPE" : "knob smooth",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Camera"
 		}
 	],
 	"CREDIT" : "jeyko",

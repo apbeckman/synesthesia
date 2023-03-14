@@ -425,7 +425,6 @@ vec4 stepFlow(in sampler2D state, in sampler2D fine, bool init){
 
 vec4 aggregate(sampler2D fb){
   vec2 p = _uv;
-
   vec2 d[8];
   d[0] = texture(flow1, p).xy;
   d[1] = texture(flow2, p).xy;
@@ -471,6 +470,7 @@ vec4 aggregate(sampler2D fb){
     vec2 ts = textureSize(fb, 0);
     vec2 ar = mix(ts.xx, ts.yy, step(ts.x, ts.y))/ts.yx;
     p = _uv - .5;
+    p += _uvc*PI;
     p *= ar;
     float lp = length(p);
     p *= lp < .5 ? 2-1/(lp+1e-5) : (1-lp)/(lp+1e-5);

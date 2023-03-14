@@ -55,7 +55,6 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-    U += _uvc*PI*Succ*growthFactor;
 
     for (int i = 0; i <12; i++) {
         vec4 a = AA(U);

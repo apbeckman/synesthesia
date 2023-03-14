@@ -181,7 +181,7 @@ vec4 renderMainImage() {
     float d = dot(g,normalize(vec3(0,1,.5)));
     Q = (exp(-4.*d*d))*m.w*abs(sin(2.+vec4(1+_uvc.y,2,3,4)*(1.+2.*m.z)))*3;
 
-    Q = .0+.2*g.x-1.8*(1.+0.5*(b.x+b.y)) * a.w * sin(2.+0.75*(g.z)*vec4(1+_uvc.x,2,3,8)*1.5);
+    Q = .0+.2*g.x-1.8*(1.+0.5*(b.x+b.y)) * a.w * sin(1.75+0.75*(g.z)*vec4(1+_uvc.x,2,3,8)*1.75);
 	return Q; 
  } 
 

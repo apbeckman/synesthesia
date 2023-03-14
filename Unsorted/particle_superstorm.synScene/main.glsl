@@ -152,6 +152,7 @@ vec4 renderPassA() {
    
     //this pixel value
     U = texel(ch0, pos);
+    pos -= _uvc*Zoom;
     
     //check neighbours 
     CheckRadius(U, pos, 1.);

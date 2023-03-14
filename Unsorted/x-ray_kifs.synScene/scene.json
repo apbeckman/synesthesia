@@ -1,0 +1,9 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Fractal ",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "x-ray_kifs.png",
+	"TITLE" : "X-Ray KIFS",
+	"WIDTH" : 1280
+}

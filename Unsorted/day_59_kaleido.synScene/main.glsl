@@ -90,14 +90,14 @@ vec4 valueNoise(float i, float tol){
 
 
 vec2 sUv = vec2(0);
-#define mx (smoothTime*1.)
+#define mx (bass_time)
 vec3 sumonTheDemon( vec2 p, float id )
 {
     vec3 col = vec3(0);
 
-    #define spacing (0.04 + sin(smoothTime*0.25)*0.02)
+    #define spacing (0.04 + sin(bass_time*0.25)*0.012)
     #define PLANES 50.
-    #define W 0.00023*(pow(1.0+syn_BassLevel, 2.0))
+    #define W 0.00023*(pow(1.0+syn_BassLevel*syn_Intensity, 2.0))
     
     float rA = texture(image30, vec2(sin(id*0.01)*200.,id )).x;
     float rB = texture(image30, vec2(sin(id*0.03 + 0.2)*200.,id*1.4 )).x;
@@ -114,7 +114,7 @@ vec3 sumonTheDemon( vec2 p, float id )
     //p.x += 0.1*nScreen.z*exp(-(500.+nScreen.y*500.)*abs(sUv.y - nScreen.x + 0.5))*0.2*sin(sUv.y*200. + TIME*50.);
     
     #ifdef KALEIDOMODE
-    for(int i = 0; i < 10*Iterations; i++){
+    for(int i = 0; i < 10; i++){
 		p = abs(p);
         p *= rot(0.1 + sin(id*0.1)*0.2);
         p -= 0.05 + sin(smoothTimeC*0.25 + id*0.1)*0.0;
@@ -132,7 +132,7 @@ vec3 sumonTheDemon( vec2 p, float id )
     //p.y += valueNoise(syn_BassHits*1.25 + idx*120.5 + id, 0.1).y*0.04*Glitch;
 
     p = abs(p);
-    p *= rot(0.25*pi);
+    p *= rot(0.25*pi+(spin_time));
     if(rA < 0.5){
     	p = abs(p);
     	p *= rot(0.25*pi);
@@ -144,20 +144,20 @@ vec3 sumonTheDemon( vec2 p, float id )
     fig = min(fig, outline( length(p.y*1.) - 0.4, 0.4    )*(1.0-sin(smoothTimeC/1000)*0.75));
     fig = mix(fig, outline( length(p.y*1.) - 0.4, 0.4    ), 3.*(1.0-cos(smoothTimeC/1000)*0.75));
     
-    fig = onion(fig , (20. + 5.*sin(smoothTimeC*0.25 + id)));
+    fig = onion(fig , (25. + 5.*sin(smoothTimeC*0.25 + id)));
     
     
     col += smoothstep(0.01,0.,fig)*vec3(1)*1.;    
     col *= pow(1.0+highhits, 2.);
 
-    col *= pal(1.4,vec3(1.,1.,1.)*0.7,vec3(.87,4.4*(1.0+cos(smoothTimeC)*0.0025),1.8*(1.0+sin(smoothTimeC)*0.0025)), vec3(3.7,2.5,1.1), id*0.1);
+    col *= pal(1.4,vec3(1.,1.,1.)*0.7,vec3(.87,4.4,1.8), vec3(.7,2.5,1.1), id*0.1);
     
     
     k += id;
     for(int i = 0; i < 4; i++){
     	k = abs(k);
     	
-        k.x -= 0.6;
+        k.x -= 01.6;
         k *= rot(2.);
     }
     k *= 20.;
@@ -199,7 +199,7 @@ vec4 renderPassA() {
     
     ro.z;
     vec3 rd = normalize(vec3(uv,1));
-    rd.xy=  _rotate (rd.xy, Rotate*PI);
+    rd.xy=  _rotate (rd.xy, Spin*PI);
     rd.xz= _rotate (rd.xz, lookXY.x*PI*0.25);
     rd.yz= _rotate (rd.yz, lookXY.y*PI*0.25);
     #define fog(a) smoothstep(1., 0., a*1.4)
@@ -227,7 +227,7 @@ vec4 renderMainImage() {
 
     vec2 uv = (fragCoord/RENDERSIZE.xy);
 
-    #define chromaticAbberationAmt (0.00 + sin(smoothTime)*0.005)
+    #define chromaticAbberationAmt (0.00 + syn_BassLevel*0.005)
     //float f = length(uv  - 0.5);
     float f = dot(uv  - 0.5,uv  - 0.5);
     fragColor.x = T(uv + f*chromaticAbberationAmt).x;

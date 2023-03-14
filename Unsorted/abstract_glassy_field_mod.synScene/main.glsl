@@ -144,7 +144,7 @@ float map(vec3 p){
     p.xy -= camPath(p.z).xy; // Perturb the object around the camera path.
     
      
-	p = cos(p*.315*1.25*(1.0+Convolution) + sin(p.zxy*.875*1.25)*(0.9+n3D(p)*0.1+Convolution)+ sin(smoothTimeC * 0.075 )*0.2); // 3D sinusoidal mutation.
+	p = cos(p*.315*1.25 + sin(p.zxy*.875*1.25)+ sin(smoothTimeC * 0.075 )*0.2); // 3D sinusoidal mutation.
 
 
 

@@ -1,0 +1,190 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.7,
+			"DESCRIPTION" : "The most important slider. 50% is zero aberration. 100% is full, 0% is negative full. Be careful very far from 0, your FPS may drop.",
+			"MAX" : 1.2,
+			"MIN" : -1.2,
+			"NAME" : "aberration_amount",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "If aberration_amount isn't set to zero, this will switch between negative and positive aberration.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "switch_direction",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "Media"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Generally, just keep one of these four regime toggles selected at a time.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "clouds",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "regimes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Generally, just keep one of these four regime toggles selected at a time.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "snakes",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "regimes"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Generally, just keep one of these four regime toggles selected at a time.",
+			"MAX" : 0,
+			"MIN" : 1,
+			"NAME" : "backwards_ripples",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "regimes"
+		},
+		{
+			"DEFAULT" : 0.99,
+			"DESCRIPTION" : "Generally, just keep one of these four regime toggles selected at a time.",
+			"MAX" : 1,
+			"MIN" : 0.99,
+			"NAME" : "smooth_glass",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "regimes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "If you get lost, go back to 'clouds' and click this button to restart the simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reset_sim",
+			"TYPE" : "bang",
+			"UI_GROUP" : "regimes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Modifies the flow of the scene so that every time a drum hits, it will bounce backward.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "drum_flow",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "With media selected, this will use your media as a flow source on audio hits.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_hits",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "reactivity"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Set this to automatically have audio-reactive extra distortion, or use the slider to manually control.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_distortion",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "extra_distortion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add an extra level of distortion to the scene, or just use the auto toggle to have the distortion on drum hits.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "distortion",
+			"TYPE" : "slider",
+			"UI_GROUP" : "extra_distortion"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "XY Position of the brush.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "xyPaint1",
+			"PARAMS" : 0.1,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "brush1"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "When the simulation is looking a little dead, paint some new flow into it by toggling this brush on.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "paint1_on",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "brush1"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "A different, smoother style of painting that will leave streaks instead of forming ripples.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "paint2_on",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "brush2"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "XY Position of the brush.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "xyPaint2",
+			"PARAMS" : 0.05,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "brush2"
+		}
+	],
+	"CREDIT" : "cornusammonis",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "dispersion_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 576,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1024
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 576,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1024
+		}
+	],
+	"TITLE" : "Dispersion_dup",
+	"WIDTH" : 1280
+}

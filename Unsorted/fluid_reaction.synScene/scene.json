@@ -1,0 +1,36 @@
+{
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Cool reaction from combining forces from 2 substances. ",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "fluid_reaction.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Fluid Reaction",
+	"WIDTH" : 1280
+}

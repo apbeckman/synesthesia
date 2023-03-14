@@ -32,8 +32,8 @@
 #define reflections 1
 #define reflection_albedo 0.3
 #define light_dir vec3(0.436436,0.872872,0.218218)
-//#define n1 1.0
-//#define n2 1.0
+#define n1 1.0
+#define n2 1.0
 #define plane_height -2.
 #define shadow_step 0.1
 #define shadow_eps 0.01
@@ -43,7 +43,7 @@
 #define ambient 0.2
 
 
-//float R0 = (n1-n2)/(n1+n2);
+float R0 = (n1-n2)/(n1+n2);
 
 vec3 viridis_quintic( float x )
 {
@@ -156,8 +156,8 @@ vec3 skycol(vec3 rd) {
 }
 
 float schlick(vec3 rd, vec3 n) {
-    //return 1.-(R0+(1.-R0)*pow(max(dot(n.xyz, -rd), 0.), 5.0));
-    return 1.-pow(max(dot(n.xyz, -rd), 0.), 5.0);
+    return 1.-(R0+(1.-R0)*pow(max(dot(n.xyz, -rd), 0.), 5.0));
+    //return 1.-pow(max(dot(n.xyz, -rd), 0.), 5.0);
 }
 
 vec3 material(vec3 ro, vec3 rd, vec4 n, vec2 record) {
@@ -230,7 +230,7 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
     
-    //R0*=R0;
+    R0*=R0;
     //camera position
     float s = sin(TIME*0.5);
     float ww = TIME*0.2;

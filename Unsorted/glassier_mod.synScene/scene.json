@@ -1,0 +1,213 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Click to pull the simulation backwards a bit, or click many times to completely black it out and let it pour forward at the right moment.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "shock_back",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "shock"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Push the simulation forward, dulling it out a bit in the process.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "shock_forward",
+			"PARAMS" : 0.2,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "shock"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Choose whether the image should be a hard boundary in the simulation (ON) or have a subtle effect (OFF).",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "image_block",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "general"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "ON Allows dark parts of the simulation to be filled in with inverted colors rather than just black.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "color_inv",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "general"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Let the stirrer move around the screen constantly, or turn off to take manual control.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_position",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "position"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "auto position MUST BE SET TO OFF. Manually set the position of the 'stirrer'.",
+			"MAX" : 
+			[
+				0.8,
+				0.8
+			],
+			"MIN" : 
+			[
+				-0.8,
+				-0.8
+			],
+			"NAME" : "manual_position",
+			"PARAMS" : 0.05,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "position"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Choose whether impulses should happen automatically (ON) or only on your manual command.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_impulse",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "impulse"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Manually cause the stirrer to receive an impulse. Depends on 'motion mode', 'manual position' and 'impulse power'.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "manual_impulse",
+			"PARAMS" : 0.095,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "impulse"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Choose how powerful the automatic and manual impulses are.",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "impulse_power",
+			"TYPE" : "slider",
+			"UI_GROUP" : "impulse"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Choose whether the stirrer creates vortices on high hits (OFF) or pushes the fluid up on bass hits (ON).",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "motion_mode",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Cause the simulation to slowly move inwards or outwards based on the position of the slider. Centered is zero. Careful when maxing out upward, if there is no User Image feeding it, you could kill the simulation and you'd have to restart the scene.",
+			"MAX" : 5,
+			"MIN" : -5,
+			"NAME" : "in_out",
+			"TYPE" : "slider",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "MoveXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Stretch",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Felix Woitzel",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "glassier_mod.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 900,
+			"TARGET" : "buffA",
+			"WIDTH" : 1600
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 900,
+			"TARGET" : "buffB",
+			"WIDTH" : 1600
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 900,
+			"TARGET" : "buffC",
+			"WIDTH" : 1600
+		}
+	],
+	"SMOOTH_TRANSITIONS" : 
+	[
+		{
+			"DURATION" : 5,
+			"UNIFORMS" : 
+			[
+				"cReg4",
+				"cReg0",
+				"cReg2",
+				"cReg3",
+				"cReg1"
+			]
+		}
+	],
+	"TITLE" : "Glassier Mod",
+	"WIDTH" : 1920
+}

@@ -22,8 +22,8 @@
 		{
 			"DEFAULT" : 
 			[
-				-0.35,
-				0
+				-0.2,
+				-0.1
 			],
 			"DESCRIPTION" : "",
 			"MAX" : 
@@ -60,10 +60,10 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0.25,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
+			"MAX" : 1,
+			"MIN" : -1,
 			"NAME" : "Zoom",
 			"PARAMS" : 0.087,
 			"TYPE" : "slider smooth",

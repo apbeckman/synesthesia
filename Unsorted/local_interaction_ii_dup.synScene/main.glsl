@@ -28,9 +28,9 @@ vec4 renderPassA() {
     vec4 m = 0.25*(pX+nX+pY+nY);
 
     //float b = .3;
-        float b = .29-syn_BassLevel*0.05;
+        float b = .3+Size;
 
-    Q += (1.-b)*(0.245*vec4(
+    Q += (1.-b)*(0.25*vec4(
        
         (pX.z-nX.z) - 5.*Q.z*(pY.z-nY.z),
        	(pY.z-nY.z) + 5.*Q.z*(pX.z-nX.z),
@@ -41,7 +41,7 @@ vec4 renderPassA() {
     
     if (length(Q.xy)>0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1) Q = sin(.1*U.xxxx +_uvc.xxxx);
+    if(FRAMECOUNT <= 1 || Reset != 0.) Q = sin(.1*U.xxxx +_uvc.xxxx);
      
 	return Q; 
  } 
@@ -68,7 +68,7 @@ vec4 renderPassB() {
     U+=X;
     Q  =  A(U);
     // Neighborhood :
-    vec4 pX  =  A(U + vec2(1,0));
+    vec4 pX  =  A(U + vec2(1,0))*(1.0+Test);
     vec4 pY  =  A(U + vec2(0,1));
     vec4 nX  =  A(U - vec2(1,0));
     vec4 nY  =  A(U - vec2(0,1));
@@ -86,7 +86,7 @@ vec4 renderPassB() {
     
     if (length(Q.xy)>0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1) Q = sin(.1*U.xxxx);
+    if(FRAMECOUNT <= 1 || Reset != 0.) Q = sin(.1*U.xxxx);
     
      
 	return Q; 
@@ -106,22 +106,18 @@ vec4 renderPassC() {
     vec2 X = 0.5*RENDERSIZE.xy;
     if (_mouse.z>0.) X = _mouse.xy;
     U-=X;
-    
     float a = .001*sin(.01*smoothTimeC)/(1.+length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y);
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
     U *= .999;
     U+=X;
-
     Q  =  B(U);
-    Q += (_loadUserImageAsMask().r*0.5*syn_Intensity);
-    
     // Neighborhood :
     vec4 pX  =  B(U + vec2(1,0));
     vec4 pY  =  B(U + vec2(0,1));
     vec4 nX  =  B(U - vec2(1,0));
     vec4 nY  =  B(U - vec2(0,1));
     vec4 m = 0.25*(pX+nX+pY+nY);
-    float b = .29-syn_BassLevel*0.025;
+    float b = .3;
     Q += (1.-b)*(0.25*vec4(
        
         (pX.z-nX.z) - 5.*Q.z*(pY.z-nY.z),
@@ -134,7 +130,7 @@ vec4 renderPassC() {
     
     if (length(Q.xy)>0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1) Q = sin(.1*U.xxxx);
+    if(FRAMECOUNT <= 1 || Reset != 0.) Q = sin(.1*U.xxxx);
     
      
 	return Q; 
@@ -152,7 +148,7 @@ vec4 renderPassD() {
     vec2 X = 0.5*RENDERSIZE.xy;
     if (_mouse.z>0.) X = _mouse.xy;
     U-=X;
-    float a = .001*sin(.05*smoothTimeC)/(1.+length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y);
+    float a = .001*sin(.01*smoothTimeC)/(1.+length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y);
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
     U *= .999;
     U+=X;
@@ -165,7 +161,7 @@ vec4 renderPassD() {
     vec4 nX  =  C(U - vec2(1,0));
     vec4 nY  =  C(U - vec2(0,1));
     vec4 m = 0.25*(pX+nX+pY+nY);
-    float b = .27;
+    float b = .3;
     Q += (1.-b)*(0.25*vec4(
        
         (pX.z-nX.z) - 5.*Q.z*(pY.z-nY.z),
@@ -178,7 +174,7 @@ vec4 renderPassD() {
     
     if (length(Q.xy)>0.) Q.xy = normalize(Q.xy);
     
-    if(FRAMECOUNT <= 1) Q = sin(.1*U.xxxx);
+    if(FRAMECOUNT <= 1 || Reset != 0.) Q = sin(.1*U.xxxx);
     
      
 	return Q; 
@@ -200,10 +196,10 @@ vec4 renderMainImage() {
     vec4 nY  =  A(U - vec2(0,1));
     vec3 n = normalize(vec3(pX.z-nX.z,pY.z-nY.z,2));
     vec3 r = reflect(n,vec3(0,0,-1));
-    Q = 0.125+0.5*sin((5.)*vec4(1,2,3,4)*(Q.z)+0.22*pow(syn_HighLevel*0.45*(1.0 +syn_Intensity), 2.));
-    float d = ln(vec3(X-.5,10)*RENDERSIZE.xyy,
+    Q = 0.125+0.5*sin((2.5)*vec4(1,2,3,4)*(Q.z));
+    float d = ln(vec3(X-.5,8)*RENDERSIZE.xyy,
                  vec3(U,0),vec3(U,0)+r)/RENDERSIZE.y;
-    Q *= exp(-(.5)*d*d)+0.5*pow(syn_HighLevel*syn_Intensity, 2.);
+    Q *= exp(-(.5)*d*d)+0.5*pow(syn_HighLevel*0.5+0.5*syn_Intensity, 2.);
 	return Q; 
  } 
 

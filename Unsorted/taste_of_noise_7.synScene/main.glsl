@@ -1,6 +1,5 @@
 vec4 iMouse = vec4(MouseXY*RENDERSIZE, 0.0, 0.0); 
 float highs = pow((syn_HighHits*0.0125), 2);
-float hits = pow((syn_Hits*0.0125), 2);
 			//******** Common Code Begins ********
 
 
@@ -41,7 +40,7 @@ float rng;
 float map (vec3 p)
 {
     // time stretched with noise
-    float t = smooth_basstime*1. + rng*0.9;
+    float t = smooth_basstime*.1 + rng*0.9;
     
     // domain repetition
     float grid = 6. -0.5*sin(TIME);
@@ -55,7 +54,7 @@ float map (vec3 p)
     vec3 angle = vec3(.1,-.5,.1) + dp*.5 + p*.1 + cell;
     
     // shrink sphere size
-    float size = sin(rng*3.14);
+    float size = sin(rng*PI);
     
     // stretch sphere
     float wave = sin(-dp*1.+t+hash13(cell)*6.28)*.5;
@@ -63,7 +62,7 @@ float map (vec3 p)
     // kaleidoscopic iterated function
     const int count = 5;
     float a = 1.0 + Blur;
-    float scene = 1000.;
+    float scene = 100000.;
     float shape = 1000.;
     for (int index = 0; index < count; ++index)
     {
@@ -82,7 +81,7 @@ float map (vec3 p)
         material = mix(material, float(index), smoothing(shape, scene, 0.3*a));
         
         // add with a blend
-        scene = smin(scene, shape, 1.*a);
+        scene = smin(scene, shape, .5*a);
         
         // falloff transformations
         a /= 1.69;

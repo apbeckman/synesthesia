@@ -47,7 +47,7 @@ vec4 renderPassA()
     Q.y -= .1/R.y;
     if (_mouse.z>0.&&length(U-_mouse.xy)<75.*(1.0+basshits))
         Q.x = .5;
-    if (FRAMECOUNT <= 1)Q = vec4(0,0,.1,.1);
+    if (FRAMECOUNT <= 1 || Reset != 0.)Q = vec4(0,0,.1,.1);
     if (U.x < 4.||R.x-U.x<4.) Q.xyz *= 0.;
     if (U.y < 4.||R.y-U.y<4.) Q.xyz *= 0.;
     Q = clamp(Q,vec4(-.5,-.5,0,0),vec4(.5,.5,2,Q.w));
@@ -148,7 +148,7 @@ vec4 renderPassD() {
     Q.w += (1.-_a-_b)*M*(1.0+basshits);
     
     
-    if (FRAMECOUNT<=1) {
+    if (FRAMECOUNT<=1 || Reset != 0.) {
         float l = length(U-vec2(.5,.1)*R);
         Q = vec4(step(l,.1*R.y),
                  1,

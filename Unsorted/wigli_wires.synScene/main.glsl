@@ -24,14 +24,12 @@
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
-
     vec4  r = vec4(0);
     vec4  a = D(u);
     a.xy += _uvc*Succ*syn_Intensity;
     float z    = 4.;//kernel convolution size
     float blur = 3./z;
     a += syn_Level*0.006;
-    z += syn_BassLevel;
     for(float i=-z; i<=z; ++i){
     for(float j=-z; j<=z; ++j){
         vec2  c = vec2(i,j)*blur; //c = c.yx*vec2(-1,1);
@@ -53,6 +51,8 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
+    u += _uvc*PI*Zoom;
+    u += Drift*PI;
 
     vec4  r = D(u);
     float z    = 4.;//kernel convolution size
@@ -83,7 +83,7 @@ vec4 renderPassC() {
              +t.z*vec2(0,.0)
              -T(u).x*t.xy*.0;
     float s = 0.;
-    float z    = 6.;//kernel convolution size
+    float z    = 4.;//kernel convolution size
     for(float i=-z; i<=z; ++i){
     for(float j=-z; j<=z; ++j){
       vec2 c = (m+vec2(i,j))*1.;
@@ -141,8 +141,8 @@ vec4 renderMainImage() {
     vec4 a = texture(BuffD,u);
     //fragColor = a.z+a.z*sin(length(a.xy)+vec4(1,2,3,4)+0.);
     fragColor = +sin(a.x*2.+vec4(2,3,5,8)+0.)*(.25)
-                +sin(a.y*2.+vec4(2,3,3,4)+0.)*.25
-                +.5;
+                +sin(a.y*2.+vec4(2,3,3,4)+0.)*.25*(1.+0.5*syn_HighLevel)
+                +.5*(1.+0.1*syn_HighLevel);
 	return fragColor; 
  } 
 

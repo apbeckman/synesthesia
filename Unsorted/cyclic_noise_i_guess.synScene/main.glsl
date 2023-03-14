@@ -20,7 +20,7 @@ float pspeed = 6.;
 #define ch1 iChannel1
 #define ch2 iChannel2
 #define ch3 iChannel3
-#define PI 3.14159265
+//#define PI 3.14159265
 
 //hash functions
 //https://www.shadertoy.com/view/4djSRW
@@ -109,7 +109,6 @@ float angle_between(vec2 a,vec2 b)
     return atan(a.x*b.y-a.y*b.x,dot(a,b));
 }
 
-#define pi 3.14159265
 #define iterations 13
 
 vec3 function(vec3 x){
@@ -127,7 +126,7 @@ mat2 ROT(float ang)
 #define SHIFT vec3(2.3, -5.2, 1.0)
 
 vec3 fractal(vec3 x){
-    x *= pi;
+    x *= PI;
     vec3 v = vec3(0.0);
     float a = 0.5;
     mat2 rmZ = SCALE*ROT(0.35);

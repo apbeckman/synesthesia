@@ -47,7 +47,7 @@ float dstepf = 0.0;
 #define uScreenSize RENDERSIZE.xy
 #define uTime TIME
 
-const vec2 RMPrec = vec2(0.6, 0.01); // ray marching tolerance precision // low, high
+const vec2 RMPrec = vec2(0.3, 0.01); // ray marching tolerance precision // low, high
 const vec2 DPrec = vec2(1e-3, 30.); // ray marching distance precision // low, high
     
 // light

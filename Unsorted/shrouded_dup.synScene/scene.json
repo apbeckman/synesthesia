@@ -1,0 +1,172 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Send a colorful shimmer through the fluid. Careful, too much shimmering can kill the simulation.",
+			"MAX" : -10,
+			"MIN" : 1,
+			"NAME" : "shimmer",
+			"PARAMS" : 0.05,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "surface"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Send a vertical shock through the fluid, pulsing the color as well. Careful, too many shocks can kill it.",
+			"MAX" : -1,
+			"MIN" : 0,
+			"NAME" : "shock",
+			"PARAMS" : 0.05,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "surface"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Feeds the center of the scene. Push if your simulation dies, or the screen is all black.",
+			"MAX" : 0.15,
+			"MIN" : 0,
+			"NAME" : "reset_center",
+			"PARAMS" : 0.05,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "surface"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Change the motion of the fluid. When OFF, it will be more constant. When ON it will move back and forth with the BPM of the song.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "bpm_oscillate",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 2,
+			"DESCRIPTION" : "UserImage MUST BE SELECTED to see effects. Changes the paint color of the user selected texture.",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "media_color",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Bottom Left is OFF. Moving this causes a 'tunneling' effect. Can be great with bpm oscillate ON.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "tunnel",
+			"PARAMS" : 0.25,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "motion"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Apply some triangularly arranged mirrors to the scene.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "pyramid",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "mirrors"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Mirror the scene (including UserImage).",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "mirrors"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Stretch",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Felix Woitzel ft. Meebs",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "colornoise",
+			"PATH" : "images/colornoise.jpg"
+		}
+	],
+	"IMAGE_PATH" : "shrouded_dup.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 800,
+			"TARGET" : "buffA",
+			"WIDTH" : 1600
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 800,
+			"TARGET" : "buffC",
+			"WIDTH" : 1600
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 800,
+			"TARGET" : "buffD",
+			"WIDTH" : 1600
+		}
+	],
+	"SMOOTH_TRANSITIONS" : 
+	[
+		{
+			"DURATION" : 10,
+			"UNIFORMS" : 
+			[
+				"cReg0",
+				"cReg1",
+				"cReg2",
+				"cReg3",
+				"cReg4"
+			]
+		}
+	],
+	"TITLE" : "Shrouded_dup",
+	"WIDTH" : 1920
+}

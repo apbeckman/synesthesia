@@ -44,7 +44,8 @@ float n2D( in vec2 p )
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
-
+    u += _uvc*Zoom;
+    u += _uvc*Stretch;
     vec4  r = vec4(0);
     vec4  a = C(u);
     float z = 6.;//kernel convolution size

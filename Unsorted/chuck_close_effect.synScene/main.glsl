@@ -17,7 +17,7 @@ vec4 renderMainImage() {
             x++;
         }
     }
-    float t = smoothTimeC*0.6;
+    float t = smoothTimeC*0.1;
     float f = length(m-float(size)*.5)*.666*syn_Intensity-t;
     int i = int(mod(f, float(x)));
     int j = int(mod(f+1., float(x)));

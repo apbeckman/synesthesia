@@ -21,11 +21,13 @@ vec2 hash23(vec3 p3) {  // Dave H
 vec4 renderPassA() {
   	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-
+	//U += _uvc*PI*Zoom*(1.0+low);
+	U += Drift;
+	
     Q = vec4(0);
     U = 4.*(U-.5*R)/R.y;
     for (float i = 0.; i < 9.; i++) {
-        U = vec2(U.x*U.x-U.y*U.y,2.*U.x*U.y)-vec2(-.6-(cos(smoothTime*0.085)*0.25-0.5),sin(.085*smoothTime));
+        U = vec2(U.x*U.x-U.y*U.y,2.*U.x*U.y)-vec2(-.6-(cos(smoothTime*0.0185)*0.25-0.5),sin(.0185*smoothTime));
         U /= .5+0.3*dot(U,U);
         Q += .05*length(U)*vec4(.5+sin(2.*U.x+vec3(1,2,3)),1);
     }
@@ -39,8 +41,10 @@ vec4 renderPassA() {
 vec4 renderPassB() {
    	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
+	//U += _uvc*PI*Zoom*(1.0+low);
+	U += Drift;
 
-    Q = .99*B(U);
+    Q = .99*B(U+_uvc*PI*Zoom*(1.0+low));
     for (int i = 0; i < 30; i++) {
         vec2 h = 20.*(hash23(vec3(U+R,i+30*FRAMECOUNT))*2.-1.);
         vec4 c = A(U+h),
@@ -60,8 +64,8 @@ vec4 renderPassB() {
 vec4 renderMainImage() {
    	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-
-    Q = .05*B(U);
+	//U += _uvc*PI*Zoom*(1.0+low);
+    Q = (.065+syn_HighLevel*0.0125)*B(U+_uvc*PI*Zoom*(1.0+low));
 
 	return Q; 
  } 

@@ -23,7 +23,7 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.125,
+			"MAX" : 0.25,
 			"MIN" : -1,
 			"NAME" : "Succ",
 			"PARAMS" : 0.01,

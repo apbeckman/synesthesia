@@ -1,4 +1,28 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				2,
+				2
+			],
+			"MIN" : 
+			[
+				-2,
+				-2
+			],
+			"NAME" : "Flow",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "xenn",
 	"DESCRIPTION" : " ~ like onion skin layers of smokey glass marbles , sort of, but maybe not ~\n\n. Try going full screen then Alt-1 (to refresh/force 100% pixel canvas extents\nmouse click influences general direction ",
 	"GPU" : 0,

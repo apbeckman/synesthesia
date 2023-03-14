@@ -39,6 +39,8 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
+    u += PI*MoveXY;
+
     vec4  r = D(u);
     vec4  a = A(u);
     a.xy += (_uvc*PI*Flow);
@@ -65,6 +67,7 @@ vec4 renderPassB() {
 vec4 renderPassC() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
+    u -= PI*_uvc*Zoom;
 
     vec4 t = B(u);
     vec2 m = +t.xy
@@ -126,7 +129,7 @@ vec4 renderMainImage() {
 	vec2 fragCoord = _xy;
 
     vec2 u = fragCoord/RENDERSIZE.xy;
-    vec4 a = texture(BuffD,u)*(1.0+syn_HighLevel*syn_Intensity);
+    vec4 a = texture(BuffD,u);
     fragColor =+sin(a.x*4.+vec4(1,3,5,4))*.25
                +sin(a.y*4.+vec4(1,3,2,4))*.25
                +.5;

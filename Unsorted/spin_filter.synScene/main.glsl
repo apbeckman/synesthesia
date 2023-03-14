@@ -6,7 +6,6 @@
 #define B(u) texture(BuffB,(u)/RENDERSIZE.xy)
 #define C(u) texture(BuffC,(u)/RENDERSIZE.xy)
 #define D(u) texture(BuffD,(u)/RENDERSIZE.xy)
-
 #define T(u) texture(image46,(u)/RENDERSIZE.xy)
 
 vec4 renderPassA() {
@@ -25,7 +24,7 @@ vec4 renderPassA() {
         vec4  a2= D(u+vec2(i,j));
         vec4  b = a2-a;
         vec2  b2= b.yx*vec2(-1,1);
-        r.xy += length(b.xy)*sin(dot(c,b2)*6.);
+        r.xy += length(b.xy)*sin(dot(c,b2)*8.);
         r.z  += dot(n,b2);
     }}
     fragColor = r;
@@ -40,7 +39,6 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
-
     vec4  r = D(u);
     float z    = 8.;//kernel convolution size
     float blur = 1./z;
@@ -65,6 +63,9 @@ vec4 renderPassB() {
 vec4 renderPassC() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
+    u -= _uvc*PI*Stretch;
+    u -= _uvc*PI*Zoom*(1.0+low);
+    u += Drift;
 
     vec4 t = B(u);
     vec2 m = +t.xy
@@ -79,7 +80,7 @@ vec4 renderPassC() {
       s += exp(-dot(c,c));
     }}
     if(s==0.){s = 1.;}
-    s = 1./s;
+    s = 2./s;
     
     fragColor = vec4(m,s,0);
 	return fragColor; 
@@ -113,13 +114,13 @@ vec4 renderPassD() {
     if(_mouse.z>0.)
     {
         vec2 m = 26.*(u-_mouse.xy)/RENDERSIZE.y;
-        a += vec4(-1,0,0,0)*exp(-dot(m,m))*.1;
+        a += vec4(-1,0,0,0)*exp(-dot(m,m))*(.1+0.2*low);
     }
     if(FRAMECOUNT==0)
     {
         vec2 m;
         m = 6.*(u-RENDERSIZE.xy*.5)/RENDERSIZE.y-vec2(2,1);
-        a+= vec4(+2,0,0,0)*exp(-dot(m,m));
+        a+= vec4(+2,0,0,0)*exp(-dot(m,m*2.));
         m = 6.*(u-RENDERSIZE.xy*.5)/RENDERSIZE.y+vec2(2,1);
         a+= vec4(-2,0,0,0)*exp(-dot(m,m));
     }
@@ -134,7 +135,7 @@ vec4 renderMainImage() {
 
     vec2 u = fragCoord/RENDERSIZE.xy;
     vec4 a = texture(BuffD,u);
-    fragColor = .5+vec4(0,a.xy,0)*.7;
+    fragColor = .5+vec4(0,a.xy,0)*.9;
 	return fragColor; 
  } 
 

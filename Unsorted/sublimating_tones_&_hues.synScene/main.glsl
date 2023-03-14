@@ -269,7 +269,7 @@ vec2 getGrad(vec2 uv,float delta)
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
-
+    
 	vec2 uv = fragCoord.xy / RENDERSIZE.xy;
     vec3 n = vec3(getGrad(uv,1.0/RENDERSIZE.y),(550.0 * abs(sin(smoothTimeB / 13.0)))+100.);
     //n *= n;
@@ -400,7 +400,7 @@ vec4 renderPassC() {
     );
     vec2 iFeedbackShiftVector =
         (_mouse.x > 0. && _mouse.y > 0.)
-            ? (_mouse.xy * 2. - RENDERSIZE.xy) / iMinDimension * (iFeedbackMouseShiftFactor * (2.0 * sin(smoothTimeC / 2.0)))
+            ? (Flow/RENDERSIZE) / iMinDimension * (iFeedbackMouseShiftFactor * (2.0 * sin(smoothTimeC / 2.0)))
             : vec2(0);
     // in shader-web-background provided as uniforms: end
             

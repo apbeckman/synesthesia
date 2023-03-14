@@ -215,7 +215,7 @@ vec4 renderPassA() {
     }
     
     
-    col += glowF*0.1*smoothstep(0.,1., t*(0.01+highhits*0.025));
+    col += glowF*0.1*smoothstep(0.,1., t*(0.01));
         
     col *= 0.5+syn_HighLevel;
     //col = mix(col, vec3(0.1,0.4,0.3),pow(smoothstep(0.,1.,t*0.05), 2.)*0.56);
