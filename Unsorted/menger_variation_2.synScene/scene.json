@@ -19,8 +19,18 @@
 				-1
 			],
 			"NAME" : "lookXY",
-			"PARAMS" : 0.05,
+			"PARAMS" : 0.02801,
 			"TYPE" : "xy smooth",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0.56,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.10701,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -66,6 +76,13 @@
 		}
 	],
 	"IMAGE_PATH" : "menger_variation_2.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Menger Variation 2",
 	"WIDTH" : 1920
 }

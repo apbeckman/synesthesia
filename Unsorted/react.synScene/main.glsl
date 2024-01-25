@@ -24,6 +24,12 @@
 vec4 image = vec4(0.);
 
 			//******** BuffA Code Begins ********
+vec4 mediaPass() {
+    vec4 media = vec4(0.);
+    vec2 U = _xy;
+    media = mix(_loadMedia(), _edgeDetectSobel(syn_UserImage), edge_mix);
+    return media;
+}
 
 vec4 renderPassA(){
     vec4 Q = vec4(0.);
@@ -37,9 +43,11 @@ vec4 renderPassA(){
     NeighborhoodD
     
     Q = A(U+.25*rot(Flip)*D(U).xy)-div;
-    
+
+    Q = mix(vec4(Q), sin((texture(media_pass, _uv)))*2*PI, 0.05*Media);
     Q = sin(Q);
-    Q *= 1.0 + (0.35*_loadUserImage()-0.4*_loadUserImageAsMask()*(1.0+0.5*syn_Intensity));
+
+    // Q *= 1.0 + (0.35*_loadUserImage()-0.4*_loadUserImageAsMask()*(1.0+0.5*syn_Intensity));
 
     Mouse Q.x = 1.;
     Init Q = sin((.1+syn_BassLevel)*U.xxxx)*cos(U.y);
@@ -55,7 +63,9 @@ vec4 renderPassB(){
 
     Q = vec4(0);
     For Q += Gaussian(i) * A(U+vec2(i,i)).x;
-	return Q; 
+    Q = mix(vec4(Q), sin((texture(media_pass, _uv)))*2*PI, 0.025*Media);
+	
+    return Q; 
  } 
 
 
@@ -68,7 +78,8 @@ vec4 renderPassC(){
 
     Q = vec4(0);
     For Q += Gaussian(i) * B(U+_uvc+vec2(-i,i));
-	return Q; 
+    Q = mix(vec4(Q), sin((texture(media_pass, _uv)))*2*PI, 0.025*Media);
+    return Q; 
  } 
 
 
@@ -114,6 +125,9 @@ vec4 renderMain(){
 		return renderPassD();
 	}
 	if(PASSINDEX == 4){
+		return mediaPass();
+	}
+	if(PASSINDEX == 5){
 		return renderMainImage();
 	}
 }

@@ -1,0 +1,311 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "OFF for quick splitting cells or ON for slow moving worms.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "regime_toggle",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "regime"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Concentric circles feed or poison the simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "cycling_rings",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "regime"
+		},
+		{
+			"DEFAULT" : 0.6,
+			"DESCRIPTION" : "Extra pulsing and shimmering with the music. Turn off to let it naturally progress.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "audio_reactivity",
+			"TYPE" : "slider",
+			"UI_GROUP" : "regime"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Removes the blur effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "no_blur",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "colorize"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Choose from one of 7 color palettes.",
+			"MAX" : 6.5,
+			"MIN" : 0,
+			"NAME" : "color_regime",
+			"TYPE" : "knob",
+			"UI_GROUP" : "colorize"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Mix to greyscale for a more minimal look.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "greyscale",
+			"TYPE" : "knob",
+			"UI_GROUP" : "colorize"
+		},
+		{
+			"DEFAULT" : 1.3,
+			"DESCRIPTION" : "Lower for a lot of smaller cells. Higher for fewer, big cells.",
+			"MAX" : 2.25,
+			"MIN" : 0.2,
+			"NAME" : "scale",
+			"TYPE" : "slider",
+			"UI_GROUP" : "parameters"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Affects how fast it naturally travels.",
+			"MAX" : 3,
+			"MIN" : 0.8,
+			"NAME" : "flow_resistance",
+			"TYPE" : "slider",
+			"UI_GROUP" : "parameters"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Affects how eagerly it occupies empty space.",
+			"MAX" : 3,
+			"MIN" : 0.8,
+			"NAME" : "space_filling",
+			"TYPE" : "slider",
+			"UI_GROUP" : "parameters"
+		},
+		{
+			"DEFAULT" : 1.5,
+			"DESCRIPTION" : "Contrast of the feeding media.",
+			"MAX" : 4,
+			"MIN" : 0.5,
+			"NAME" : "contrast",
+			"TYPE" : "slider",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Lower bound for the birth parameter.",
+			"MAX" : 2,
+			"MIN" : 0.8,
+			"NAME" : "birth_lower",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Higher bound for the birth parameter (more important).",
+			"MAX" : 2,
+			"MIN" : 0.8,
+			"NAME" : "birth_upper",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 0.7,
+			"DESCRIPTION" : "Lower bound for the survival parameter.",
+			"MAX" : 3,
+			"MIN" : 0.2,
+			"NAME" : "survival_lower",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 0.7,
+			"DESCRIPTION" : "Higher bound for the survival parameter. (Turn this up if you're getting frequent black outs).",
+			"MAX" : 3,
+			"MIN" : 0.2,
+			"NAME" : "survival_upper",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Timestep. Turn this up for faster, glitchier action.",
+			"MAX" : 3,
+			"MIN" : 0.8,
+			"NAME" : "timestep",
+			"TYPE" : "slider",
+			"UI_GROUP" : "advanced"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "If the simulation dies, return to default parameters and press this button.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reset_sim",
+			"TYPE" : "bang",
+			"UI_GROUP" : "utility"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "screen_space"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "shock_forward",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "shock_back",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_edge_mix",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 10,
+			"DESCRIPTION" : "",
+			"MAX" : 70,
+			"MIN" : 5,
+			"NAME" : "paintsize",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0.3,
+			"NAME" : "paintfull",
+			"PARAMS" : 0.07201,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 2,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 2,
+			"NAME" : "rings",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "cornusammonis",
+	"DESCRIPTION" : "A variant of Stephan Rafler's SmoothLife that uses a separable Gaussian kernel to compute inner and outer fullness. The improvement in performance over full 2D convolution makes it possible to use a much larger kernel in realtime, without using FFT.",
+	"GPU" : 3,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image47",
+			"PATH" : "images/47.jpg"
+		}
+	],
+	"IMAGE_PATH" : "gaussian_smoothlife_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "media_pass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "media_pass_fx",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"glitchy",
+		"simulation",
+		"groovy",
+		"reaction-diffusion",
+		"media"
+	],
+	"TITLE" : "Gaussian SmoothLife_dup",
+	"WIDTH" : 1920
+}

@@ -235,7 +235,7 @@ vec3 render(vec3 ro, vec3 rd) {
 
   vec3 col = vec3(0.0);
   col += pow(smoothstep(0.5, 1.0, trap0.x*0.25)*1.3, mix(6.0, 2.0, pulse+highs*0.1))*0.5*bgcol*mix(0.75, 2.25, pulse);
-  col.xy = 2.0*_rotate(col.xy*0.4*trap0.xz*(sin(_uvc)/pow(PI, 2.5)), sin(_uvc.x)*pow(PI, -2));
+  col.xy = 2.0*_rotate(col.xy*0.4*trap0.xz*(sin(_uv)/pow(PI, 2.5)), sin(_uv.x/3+TIME)*pow(PI, -2));
 
   //col += smoothstep(0.7, 0.6, trap0.z)*smoothstep(0.4, 0.5, trap0.z)*ao*bgcol*mix(0.2, 1.4, pulse);
   col += spe*bgcol*mix(0.66, 1.75, pulse);
@@ -253,12 +253,12 @@ vec3 effect3d(vec2 p, vec2 q) {
   vec3 ddcam= ddcam(z);
  // p.y*=1.0-0.75* Mirror.y;
  // p.x*=1.0-0.75* Mirror.x;
-
+  
   vec3 ro = cam;
   vec3 ww = normalize(dcam);
   vec3 uu = normalize(cross(vec3(0.0,1.0,0.0)+ddcam*06.0, ww ));
   vec3 vv = normalize(cross(ww,uu));
-  float fov = (2.0-FOV)/tanh(TAU/6.0);
+  float fov = (mix(2.0, 1.0+length(_uvc), FOV))/tanh(TAU/6.0);
   vec3 rd = normalize(-p.x*uu + p.y*vv + fov*ww );
     rd.yz = _rotate(rd.yz, -lookXY.y*PI+_uvc.y*PI*Perspective.y*0.5);
     rd.xz = _rotate(rd.xz, lookXY.x*PI+_uvc.x*PI*Perspective.x);

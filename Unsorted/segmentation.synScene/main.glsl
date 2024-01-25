@@ -11,6 +11,8 @@ float hash13(vec3 p3)
     p3 += dot(p3, p3.zyx + 31.32);
     return fract((p3.x + p3.y) * p3.z);
 }
+float dist(vec2 p0, vec2 pf){return sqrt((pf.x-p0.x)*(pf.x-p0.x)+(pf.y-p0.y)*(pf.y-p0.y));}
+float d2 = dist(RENDERSIZE.xy*0.5,_xy.xy)*0.00125;
 
 
 // Inigo Quilez
@@ -38,11 +40,13 @@ vec4 renderPassA() {
     U += Drift;
     U += Stretch*_uvc*PI+Zoom*_uvc*PI*0.5;
     U += _uvc*Zoom*PI*0.5;
-    vec2 u = .5+.1*vec2(sin(.025*smoothTimeC),cos(.025*smoothTimeC));
+    vec2 u = .5+.1*vec2(sin(.25*twist_time),cos(.25*twist_time));
     if (_mouse.z>0.) u = _mouse.xy/R;
     U -= u*R; 
+    U += abs(d2)*_uvc*Fisheye*PI* (1.0 +  low);
+
     float r = length(U)/R.y,
-        a = .01*sin(.005*smoothTimeC)/(1.+5.*r);
+        a = .01*sin(.05*twist_time)/(1.+5.*r);
 
     U *= (.999)*mat2(cos(a),-sin(a),sin(a),cos(a));
     U += u*R;
@@ -151,7 +155,7 @@ vec4 renderMainImage() {
     vec3 no = normalize(vec3(-e.x+w.x,-n.x+s.x,.000001));
     vec3 re = reflect(normalize(vec3(0,0,1)),no);
     
-    Q = vec4(0.7+0.5*no.x)*(0.25+.25*sin(120.*D(U).x*vec4(1,2,3,4))*(1.0+syn_HighLevel*(1.0*syn_Intensity)));
+    Q = vec4(0.7+0.5*no.x)*(0.25+.25*(sin(120.*D(U).x*vec4(1,2,3,4)))*(1.0+syn_HighLevel*(1.0*syn_Intensity)));
 	return Q; 
  } 
 

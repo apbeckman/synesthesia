@@ -2,9 +2,9 @@
 
 			//******** Common Code Begins ********
 
-//simulation variables
 float growthFactor = pow((syn_BassLevel*0.35)+(syn_MidLevel*0.35)+syn_Intensity*0.3, 2.0)*(0.5+0.35*syn_Intensity);
-
+bool fc = FRAMECOUNT <= 1;
+//simulation variables
 float dt = 0.25*(0.5+0.5*growthFactor);
 #define prad 1.4*(1.0+growthFactor*0.5) 
 #define decay 0.3
@@ -220,13 +220,14 @@ vec4 renderPassB() {
 	vec2 p = _xy;
     
     Q = texel(ch1, p);
-   
-    //diffusion equation
+    
     Q += dt*Laplace(ch1, p);
     p -= _uvc*PI*Zoom*(1.+0.5*growthFactor); //zoom
     p += Stretch*PI*_uvc; //drift
     p += Drift*PI; //drift
 
+   
+    //diffusion equation
     
     vec4 particle = texel(ch0, p);
     float distr = gauss(p - particle.xy, prad);

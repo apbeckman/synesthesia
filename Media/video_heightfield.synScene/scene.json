@@ -17,7 +17,6 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "flashy",
-			"PARAMS" : 0.15,
 			"TYPE" : "toggle",
 			"UI_GROUP" : "ungrouped"
 		},
@@ -92,6 +91,15 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "ungrouped"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "EdgeMix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "by nikharron",
@@ -99,6 +107,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "video_heightfield.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Video Heightfield",
 	"WIDTH" : 1920
 }

@@ -38,7 +38,7 @@ vec3 glowB = vec3(0);
 vec2 map(vec3 p){
 	vec2 d= vec2(10e6);
 
-    p.y += sin(p.z + p.x*4.  + smoothTimeC)*0.02;
+    p.y += _noise((sin(p.z+TIME)) + abs(p.x)*4.  - .1*smoothTime)*0.2*Floor*(1.0+Floor*syn_BassPresence*0.2);
     
     
     vec3 q = p;

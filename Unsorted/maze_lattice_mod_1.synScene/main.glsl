@@ -60,6 +60,14 @@
 // Implicit Maze-Like Patterns - Fizzer
 // http://amietia.com/slashmaze.html
 //
+
+vec2 rot(vec2 p,float r){
+
+	mat2 m = mat2(cos(r),sin(r),-sin(r),cos(r));
+
+	return m*p;
+
+}
 float map(in vec3 p) {
     
     
@@ -91,14 +99,14 @@ float map(in vec3 p) {
    // possible to rewrite this in "step" form, but I don't know if it's quicker, so I'll
    // leave it as is for now.
    p.xy = abs(q.x>.333 ? q.x>.666 ? p.xz : p.yz : p.xy);
-   return max(p.x, p.y) - .2;   
+   return max(p.x, p.y) - (.2+size*0.125);   
 
 }
 
 // Very basic raymarching equation. I thought I might need to use something more sophisticated,
 // but it turns out that this structure raymarches reasonably well. Not all surfaces do.
 float trace(vec3 ro, vec3 rd){
-    
+
     float t = 0.0;
     for(int i=0; i< 72; i++){
         float d = map(ro + rd*t);
@@ -230,7 +238,7 @@ float softShadow(vec3 ro, vec3 lp, float k){
 // https://www.shadertoy.com/view/4d2GzV
 float hexTruchet(in vec2 p) { 
     
-    p *= 6.;
+    p *= (6.);
     
 	// Hexagonal coordinates.
     vec2 h = vec2(p.x + p.y*.577350269, p.y*1.154700538);
@@ -277,6 +285,8 @@ float bumpFunc(vec3 p, vec3 n){
     
     // Wavy, 70s looking, hexagonal Truchet pattern.
     vec2 sc = (cos(hexTruchet(p.xy)*6.283*vec2(2, 4)));
+    sc = _rotate(sc, smoothTimeB*0.1);
+
     return clamp(dot(sc, vec2(.6)) + .5, 0., 1.);
 
 }
@@ -344,14 +354,17 @@ vec3 texFaces(in vec3 p, in vec3 n){
 
     // Some fBm noise based bluish red coloring.
    // n = mix(vec3(.3, .1, .02), vec3(.35, .5, .65), n2D(p.xy*8.)*.66 + n2D(p.xy*16.)*.34);
-    n = mix(vec3(.3, .1, .02), vec3(.35, .5, .65), n2D(p.xy*16.)*.66 + n2D(p.xy*32.)*.34);
-    n *= n2D(p.xy*512.)*1.2 + 1.4;
+    // n = mix(vec3(.3, .1, .02), vec3(.35, .5, .65), n2D(p.xy*4.)*.33 + n2D(p.xy*2.)*.34);
+    n = mix(vec3(.55, .5, .402), vec3(.5, .56, .589), p.zxz);
+    n = mix(vec3(1), vec3(1), p.zxz);
+    //n *= n2D(p.xy*512.)*1.2 + 1.4;
     
     //n =  n*.3 + min(n.zyx*vec3(1.3, .6, .2)*.75, 1.)*.7;
    
     // Overlaying with the hexagonal Truchet pattern.
-    vec2 sc = (cos(hexTruchet(p.xy)*6.283*vec2(2, 4)));
-    n *= clamp(dot(sc, vec2(.6))+.5, 0., 1.)*.95 + .05;
+    vec2 sc = cos(hexTruchet(p.xy)*6.283*(vec2(2, 4)));
+    sc = _rotate(sc, smoothTimeC*0.125);
+    n *= clamp(dot(sc, vec2(.6))+.5, 0., 1.)*(.75+0.6*syn_HighLevel) + .05;
     
     return min(n, 1.);
 
@@ -382,33 +395,41 @@ vec3 texEdges(in vec3 p, in vec3 n){
 vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
-    
-    
+    vec2 Mirror = vec2(x_flip, y_flip);
+
+    vec2 uv_noise = vec2(_noise(_rotate(_uvc, TIME*0.5)+TIME*0.001));
     // Unit direction ray vector: Note the absence of a divide term. I came across
     // this via a comment Shadertoy user "coyote" made. I'm pretty happy with this.
     vec3 rd = vec3(2.*fragCoord +_uvc*PI - RENDERSIZE.xy, RENDERSIZE.y);
+
+    vec3 rd2 = rd;
     // Barrel distortion;
     rd = normalize(vec3(rd.xy*FOV, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.))));
-    
+    vec2 rduvc =  mix(rd.xy, _uvc, 0.5);
+
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
     //vec2 m = sin(vec2(1.57079632, 0) + TIME/8.);
     //rd.xy = rd.xy*mat2(m.xy, -m.y, m.x);
     //rd.xz = rd.xz*mat2(m.xy, -m.y, m.x);
     //rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, -1.0*Rotate*PI);
+    rd.xy = mix(rd.xy, vec2(_noise(rd.xy+uv_noise+_fbm(sin(0.01*TIME)))), Warp*0.5);
+
+    rd.xy = _rotate(rd.xy, -1.0*Rotate*PI + mid_time);
+    rd.xy = mix( abs(rduvc), rd.xy, 1.0-Mirror);
     //rd.xz = _rotate(rd.xz, lookZ*PI);
-    rd.xz = _rotate(rd.xz, -PI*lookXY.x+PI*_uvc.x*Flip.x*FOV-_uvc.x*0.5*Flip.x);
-    rd.yz = _rotate(rd.yz, -PI*lookXY.y+PI*_uvc.y*Flip.y*FOV-_uvc.y*0.5*Flip.y);
+
+    rd.xz = _rotate(rd.xz, -PI*lookXY.x+PI*_uvc.x*Flip.x*FOV+FOV*0.25*_fbm(cos(0.05*TIME)));
+    rd.yz = _rotate(rd.yz, -PI*lookXY.y+FOV*0.25*_fbm(sin(0.05*TIME)));
 
     
     // Ray origin: Sending it along the Z-axis.
     //vec3 ro = vec3(0, 0, TIME*rate*0.25);
-    vec3 ro = vec3(0, 0, bass_time);
+    vec3 ro = vec3(0, 0, 0.8*bass_time);
 
     // Alternate: Set off in the YZ direction. Note the ".5." It's an old lattice trick.
     //vec3 ro = vec3(0, TIME/2. + .5, TIME/2.);
     
-    vec3 lp = ro + vec3(.2+cos(smoothTimeB*0.03)*0.25, 1.+sin(smoothTimeB*0.03)*0.25, .3); // Light, near the ray origin.
+    vec3 lp = ro + vec3(.2+cos(TIME*0.125)*0.5, 1.+sin(TIME*0.1)*01.25, .3); // Light, near the ray origin.
     
     // Set the initial scene color to black.
     vec3 col = vec3(0);
@@ -426,7 +447,7 @@ vec4 renderMainImage() {
         float edge;
         
         vec3 sp = ro + rd*t; // Surface position. 
-        
+
         vec3 sn = normal(sp, edge); // Surface normal.
 
     	// Saving a copy of the unbumped normal, since the texture routine require it.
@@ -435,7 +456,7 @@ vec4 renderMainImage() {
 		
     	// Bump mapping the faces and edges. The bump factor is reduced with distance
     	// to lessen artifacts.
-        if(edge<.001) sn = bumpMap(sp, sn, .01/(2. + t*.25));
+        if(edge<.001) sn = bumpMap(sp, sn, .01/(1. + t*.25));
         else sn = bumpMap2(sp, sn, .03/(1. + t*.25));
 
         vec3 ref = reflect(rd, sn); // Reflected ray.
@@ -448,7 +469,7 @@ vec4 renderMainImage() {
         float ao = calcAO(sp, sn); // Self shadows. Not too much.
 
         vec3 ld = lp - sp; // Light direction.
-        ld.xy = _rotate(ld.xy, -1.0*TIME*0.2);
+        //ld.xy = _rotate(ld.xy, -1.0*TIME*0.2);
 
         float lDist = max(length(ld), 0.001); // Light to surface distance.
         ld /= lDist; // Normalizing the light direction vector.
@@ -456,7 +477,7 @@ vec4 renderMainImage() {
         float diff = max(dot(ld, sn), 0.); // Diffuse component.
         float spec = pow(max(dot(reflect(-ld, sn), -rd), 0.), 64.); // Specular.
 
-        float atten = 1.25/(1.0 + lDist*0.1 + lDist*lDist*.05); // Attenuation.
+        float atten = 1./(1.0 + lDist*0.1 + lDist*lDist*.05); // Attenuation.
 
 
 
@@ -464,7 +485,7 @@ vec4 renderMainImage() {
         // Cheap reflection: Not entirely accurate, but the reflections are pretty subtle, so not much 
         // effort is being put in.
         //
-        float rt = refTrace(sp + ref*0.1, ref); // Raymarch from "sp" in the reflected direction.
+        float rt = refTrace(sp + ref*0.005, ref); // Raymarch from "sp" in the reflected direction.
         float rEdge;
         vec3 rsp = sp + ref*rt; // Reflected surface hit point.
         vec3 rsn = normal(rsp, rEdge); // Normal at the reflected surface.
@@ -483,7 +504,7 @@ vec4 renderMainImage() {
 
 
         // Combining the elements above to light and color the scene.
-        col = oCol*(diff*1. + vec3(.45, .4, .3)) + vec3(1., .6, .2)*spec*2.;
+        col = oCol*(diff*1. + vec3(.45, .4, .3)) + vec3(.9, .6, .2)*spec*2;
 
 
         // Adding the reflection to the edges and faces. Technically, there should be less on the faces,
@@ -502,8 +523,9 @@ vec4 renderMainImage() {
     //}
     
     // Mixing in some hazy bluish orange background.
-    vec3 bg = mix(vec3(.75, .7, 1).zyx, vec3(1, .37, .3).zyx, -rd.y*.35 + .35)*(1.0+pow(0.5*syn_HighLevel*0.5+0.5*syn_MidHighLevel+ syn_Intensity*0.25, 2.));
-    col = mix(col, bg, smoothstep(0., FAR-25., t));//min(bg.zyx*vec3(1.3, .6, .2)*1.5, 1.)
+    //  vec3 bg = mix(vec3(.5, .7, 1).zyx, vec3(1, .7, .3).zyx, -rd.y*.35 + .35);
+    vec3 bg = mix(vec3(.65, .7, .9).zyx, vec3(1, .37, .3).zyx, -rd.y*.35 + .35)*(1.0+Flash*pow(0.5*syn_HighLevel*0.5+0.5*syn_MidHighLevel+ syn_Intensity*0.25, 2.));
+    col = mix(col, bg, smoothstep(0., FAR-15., t));//min(bg.zyx*vec3(1.3, .6, .2)*1.5, 1.)
     
     // Postprocesing - A subtle vignette with a bit of warm coloring... I wanted to warm the atmosphere up
     // a bit. Uncomment it, if you want to see the bluer -possibly more natural looking - unprocessed version.

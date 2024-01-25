@@ -1,0 +1,18 @@
+{
+	"CREDIT" : "paniq",
+	"DESCRIPTION" : "A fluidly subdividing reaction/diffusion field. Use the mouse to control the zoom.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "byzantine_buffering.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Byzantine Buffering",
+	"WIDTH" : 1280
+}

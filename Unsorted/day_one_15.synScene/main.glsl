@@ -188,7 +188,7 @@ float map(vec3 z, float t){
 
     
 
-    glow += 0.5/(0.6 + pow( (abs(d) + 0.001)*0.7,2.)*800000.)*0.9;
+    glow += 0.5/(0.6 + pow( (abs(d) + 0.001)*0.7,2.)*800000.)*0.79;
 
     db += 0.001;
 
@@ -196,11 +196,11 @@ float map(vec3 z, float t){
 
     
 
-    float att = pow(abs(sin(p.z + smoothTimeB*0.5 + length(p.xy))),50.);
+    float att = pow(abs(sin(p.z + smoothTimeC*0.125 + length(p.xy))),50.);
 
     
 
-    glow -= 0.92/(0.04 + pow( (abs(db) + 0.001)*0.7,2.)*16000.)*(vec3(0.5,0.9,1.4)*(0.99875+0.0125*highhits))*att;
+    glow -= 0.92/(0.04 + pow( (abs(db) + 0.001)*0.7,2.)*16000.)*(vec3(0.5,0.9,1.4)*(0.99875+Flash*0.0125*highhits))*att;
 
 
 
@@ -290,13 +290,14 @@ vec4 renderMainImage() {
 
     
 
-    vec3 col = vec3(0.9,0.6,0.4);
+    // vec3 col = vec3(0.9,0.6,0.4);
+    vec3 col = mix(vec3(0.3,0.4,0.6), sin(vec3(0.4,0.1,0.05)), _uv.xyx/RENDERSIZE.xxy);
 
 
 
     vec3 ro = vec3(0);
 
-    ro.z += smoothTime*0.76;
+    ro.z += bass_time*0.76;
 
     
 
@@ -306,7 +307,7 @@ vec4 renderMainImage() {
 
     float T = smoothTime*1./tau + pi*0.25;
 
-    ro.xy += _rotate(vec2(cos(T), sin(T))*(0.7), 0.+smoothTime*0.1);
+    ro.xy += _rotate(vec2(cos(T*0.125), sin(T*0.125))*(0.7), 0.);
 
     ro.xz += MoveXY.x*PI;
 
@@ -321,12 +322,13 @@ vec4 renderMainImage() {
     lookAt.z = ro.z + 4.;
 
     
+    vec2 xy_noise = vec2(_noise(vec2(sin(TIME*0.2), cos(TIME*0.2))));
 
     vec3 rd = getRd(ro, lookAt, uv);
 
-    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI + xy_noise.x*0.25 + _uvc.x * PI * perspective * FOV);
 
-    rd.yz = _rotate(rd.yz, lookXY.y*PI);
+    rd.yz = _rotate(rd.yz, lookXY.y*PI + xy_noise.y*0.25);
 
     rd.xy = _rotate(rd.xy, Rotate*PI);
 
@@ -376,7 +378,7 @@ vec4 renderMainImage() {
 
     
 
-    col = pow(col, vec3(0.454545*(1.0-(highhits*0.75))));
+    col = pow(col, vec3(0.454545*(1.0-Flash*(syn_HighLevel*0.55))));
 
     
 

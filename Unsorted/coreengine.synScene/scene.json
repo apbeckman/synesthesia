@@ -112,6 +112,15 @@
 			"PARAMS" : 0.072,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "EvilRyu",
@@ -119,6 +128,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "coreengine.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "CoreEngine",
 	"WIDTH" : 1920
 }

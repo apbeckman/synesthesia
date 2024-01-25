@@ -108,7 +108,7 @@ float map(in vec3 p){
 
 
     // The terrain, so to speak. Just a flat XZ plane, at zero height, with some hills added.
-    float d = p.y + h*6. - Terrain_Height - Height_Reactivity*syn_Intensity;
+    float d = p.y + h*6. ;
 
     // Reusing "h" to provide an undulating base layer on the tunnel walls.
     q = sin(p*.5 + h);

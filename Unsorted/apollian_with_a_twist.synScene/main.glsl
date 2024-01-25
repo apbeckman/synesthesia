@@ -20,7 +20,7 @@ vec3 hsv2rgb(vec3 c) {
 float apollian(vec4 p, float s) {
   float scale = 1.0;
 
-  for(int i=0; i<7; ++i) {
+  for(int i=0; i<8; ++i) {
     p        = -1.0 + 2.0*fract(0.5*p+0.5);
 
     float r2 = dot(p,p);
@@ -35,8 +35,8 @@ float apollian(vec4 p, float s) {
 
 float weird(vec2 p) {
   float z = 4.0*(1.0+test2);
-  p *= ROT(smoothTimeC*0.1);
-  float tm = 0.2*smoothTimeC;
+  p *= ROT(smoothTimeC*0.01);
+  float tm = 0.05*smoothTimeC;
   float r = 0.5;
   vec4 off = vec4(r*PSIN(tm*sqrt(3.0)), r*PSIN(tm*sqrt(1.5)), r*PSIN(tm*sqrt(2.0)), 0.0);
   vec4 pp = vec4(p.x, p.y, 0.0, 0.0)+off;
@@ -99,7 +99,7 @@ vec3 color(vec2 p) {
   col       += vec3(1.0, 1.0, 1.0)*(1.0-exp(-ss*(max((sd1+0.0*lw), 0.0))))/bl21;
   col       += vec3(0.5)*(1.0-exp(-ss*(max((sd2+0.0*lw), 0.0))))/bl22;
   float l   = length(p);
-  float hue = fract(0.75*l-0.3*smoothTimeB)+0.3+0.15;
+  float hue = fract(0.75*l-0.03*smoothTimeC)+0.3+0.15;
   float sat = 0.75*tanh(2.0*l);
   vec3 hsv  = vec3(hue, sat, 1.0);
   vec3 bcol = hsv2rgb(hsv);

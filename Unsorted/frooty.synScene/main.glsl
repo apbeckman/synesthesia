@@ -9,7 +9,7 @@ const float max_dist = 200.;
 
 // snippets
 #define R RENDERSIZE
-#define T(uv) texture(iChannel0, uv).a
+#define T(uv) texture(BuffA, uv).a
 #define N(x,y,z) normalize(vec3(x,y,z))
 #define ss(a,b,t) smoothstep(a,b,t)
 #define repeat(p,r) (mod(p,r)-r/2.)

@@ -5,10 +5,69 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
+			"MIN" : -4,
+			"NAME" : "Fov",
+			"PARAMS" : 0.05201,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.03201,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "x_flip",
+			"PARAMS" : 0.06601,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_flip",
+			"PARAMS" : 0.10001,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "spin",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert",
+			"PARAMS" : 0.05901,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "Flash",
-			"PARAMS" : 0.361,
-			"TYPE" : "bang smooth",
+			"TYPE" : "bang",
 			"UI_GROUP" : "textures"
 		},
 		{
@@ -26,60 +85,40 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
+			"NAME" : "flash",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "textures"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
 			"NAME" : "LightLine",
-			"PARAMS" : 0.75,
-			"TYPE" : "slider smooth",
+			"PARAMS" : 0.13901,
+			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "Line"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 15,
-			"MIN" : -8,
+			"MAX" : 1,
+			"MIN" : 0,
 			"NAME" : "LineMod",
 			"PARAMS" : 0.089,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Line"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 0.4,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Fov",
-			"PARAMS" : 0.141,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1.5,
-			"MIN" : -1.5,
-			"NAME" : "Fly_Speed",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Rotation",
-			"PARAMS" : 0.066,
-			"TYPE" : "knob smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
+			"MAX" : 0.8,
+			"MIN" : 0,
 			"NAME" : "Mist",
 			"PARAMS" : 0.085,
 			"TYPE" : "knob smooth",
-			"UI_GROUP" : "reactivity"
+			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 
@@ -117,8 +156,9 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "Whoa",
-			"TYPE" : "slider",
+			"NAME" : "Open",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -126,8 +166,18 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "Flip",
+			"NAME" : "stepMod",
 			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0,
+			"NAME" : "push_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -140,9 +190,20 @@
 		{
 			"NAME" : "image46",
 			"PATH" : "images/2.jpeg"
+		},
+		{
+			"NAME" : "marble",
+			"PATH" : "images/marble.jpeg"
 		}
 	],
 	"IMAGE_PATH" : "3d_cellular_tiling_1.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "3D Cellular Tiling_1",
 	"WIDTH" : 1920
 }

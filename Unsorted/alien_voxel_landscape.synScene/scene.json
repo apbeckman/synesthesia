@@ -5,8 +5,8 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : 0,
-			"NAME" : "Test",
+			"MIN" : -2,
+			"NAME" : "rate_in",
 			"PARAMS" : 0.24,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Test"

@@ -1,6 +1,10 @@
 //vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+#include "lygia/math/rotate3d.glsl"
 
-
+float smin(float a, float b, float k) {
+    float h = max(k - abs(a-b), 0.) / k;
+    return min(a, b) - h*h*h*k*1./6.;
+}
 			//******** BuffA Code Begins ********
 
 
@@ -37,7 +41,7 @@ vec2 map(vec3 p){
     //q.
     
     //q.z += length(p.xz)*0.6;
-    //q.z += exp(length(p.xz)*0.4)*0.1;
+    ///q.z += exp(length(p.xz)*0.4)*0.1;
     float h = exp(length(p.xz)*0.7)*0.2;
     q.z -= h;
     q.z += exp(-length(p.xz)*4.)*0.4;
@@ -63,11 +67,12 @@ vec2 map(vec3 p){
     //for()
     
     q.xy *= rot(0.25*pi);
+    // q.z += _noise(_uv);
     
     float dB = sdBox(q, vec3(bW*2.,bW*2.,bW));
     //dB = max(dB, -sdBox(q, vec3(0.1, bW*0.2,0.7)));
     float s = 0.2*bW;
-    dB = min(dB, sdBox(q, vec3(bW*s, bW*s,bW*1.2)));
+    dB = min(dB, sdBox(q, vec3(bW*s, bW*s,bW*.2)));
     
     s *= 2.;
     
@@ -94,10 +99,10 @@ vec2 map(vec3 p){
     q.z -= 0.4;
     float dD = sdBox(q, vec3(bW*s*1., bW*s*1.,bW*20.5));
     
-    glow += (0.8/(0.01 + dD*dD*20.)*pal(0., 0.9,vec3(0.9,0.4,0.8), 0.7,1.2)*columns*highhits*0.65);
+    glow += (0.8/(0.01 + dD*dD*20.)*pal(0., 0.9,vec3(0.9,0.4,0.8), 0.7,1.2)*columns*highhits*0.7);
     p.y -= h;
 
-    glow += 1.8/(0.01 + dD*dD*200.)*sin(vec3(0.8,0.5,0.1) + vec3(0,-0. - length(p.xz)*0.1,0))*pow(abs(sin((smoothTimeB*0.25) + idG.y)), 30.)* smoothstep(1.,0.,length(p.y)*0.6);
+    glow += 1.8/(0.01 + dD*dD*200.)*sin(vec3(0.8,0.5,0.1) + vec3(0,-0. - length(p.xz)*0.1,0))*pow(abs(sin((smoothTimeC*0.3) + idG.y)), 30.)* smoothstep(1.,0.,length(p.y)*0.6);
     dD = abs(dD) + 0.006 + smoothstep(0.,1.,length(p.y)*0.05);
     d = dmin(d, vec2(dD, 3.));
     //= dmin(d, vec2(length(p)- 0.1, 2.));
@@ -140,11 +145,21 @@ vec3 getNormal(vec3 p){
 }
 
 vec3 getRd(vec3 ro, vec3 lookAt, vec2 uv){
-
 	vec3 dir = normalize(lookAt - ro);
 	vec3 right = normalize(cross(vec3(0,1,0), dir));
 	vec3 up = normalize(cross(dir, right));
-    uv += pow(_uvc*PI, vec2(2.))*Mirror;
+    // uv += pow(_uvc*PI, vec2(2.))*Mirror;
+    float inv = mix(1, -1, invert);
+    // float mirror_x = smin(abs(.50-uv.x)*inv, uv.x, 0.5);
+    uv = mix(uv, uv+.4*sin(.4*vec2(_noise(abs(.5-_uv)+TIME*0.2))), Warp);
+    float mirror_x = smin(uv.x*-1, uv.x, 0.25)*inv + mirrormove.x;
+    float mirror_y = smin(uv.y*-1, uv.y, 0.25)*inv + mirrormove.y;
+    vec2 mxy = vec2(mirror_x, mirror_y);
+
+    vec2 m = vec2(x_mirror, y_mirror);
+    
+    uv = vec2(mix(uv.x, mxy.x, m.x), mix(uv.y, mxy.y, m.y));
+    uv = _rotate(uv, spin*PI);
 
     return normalize(dir + right*uv.x + up*uv.y);
 }
@@ -155,22 +170,21 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
-    uv *= 1. + dot(_uvc,_uvc)*0.1;
-    uv += _uvc*PI*FOV;
+    // uv *= 1. + dot(_uvc,_uvc)*0.1;
+    uv = mix(uv, uv+_uvc*1.5,FOV);
 
     vec3 col = vec3(0);
     dith = mix(0.9,1.,texture(image30, RENDERSIZE.x*(uv/256.)).x);
     
-    vec3 ro = vec3(2.501,3,0.001);
+    vec3 ro = vec3(2.501,3+Orbit.y*3.,0.001);
     vec3 lookAt = vec3(0.);
     ro.xz = _rotate(ro.xz, Orbit.x);
-    ro.yz = _rotate(ro.yz, PI*Orbit.y);
+    // ro.yz = _rotate(ro.yz, PI*Orbit.y+_noise(syn_BassTime*0.1)*0.2);
     //lookAt.xy += _uvc*PI*Stretch;
 
     lookAt.xz += vec2(sin(TIME)*.012,cos(TIME)*0.125)*0.4;
-
 	vec3 rd = getRd(ro, lookAt, uv); 
-
+    // rd.yz -= _rotate(rd.yz*0.125, TIME*0.2);
     //rd.xz = _rotate(rd.xz, 0.+_uvc.x*PI*Flip.x*FOV);
    // rd.yz = _rotate(rd.yz, _uvc.y*PI*Flip.y*FOV);
     vec3 p;float t; bool hit;
@@ -196,7 +210,7 @@ vec4 renderPassA() {
         
         float modD = 0.1;
         q = abs(q);
-        q.xy *= rot(0.25*pi+Pattern_Rot);
+        q.xy *= rot(0.25*pi);
         q.y -= 0.5;
         
         q = abs(q);
@@ -219,19 +233,19 @@ vec4 renderPassA() {
         float ao = mix(0.4,AO(0.1)*AO(0.2)/0.26,smoothstep(0.,1.,length(p.xz)*1.));
         //float ao = AO(0.2)*AO(0.4)*AO(0.3)/0.16;
         //float ao = AO(0.2)*AO(2.4)*AO(0.8)/0.3*3.;
-        float idc = floor(max(q.x,q.y)/ modD + smoothTimeB*0.035);
+        float idc = floor(max(q.x,q.y)/ modD + smoothTimeC*0.125);
         
         
         
         if(d.y == 2. || d.y == 1.){
             //col += pal(0.5,1., vec3(.7,0.1,-0.3),0.8,idc*1.5 + idG.y*0.5 + TIME*0.1);
-            col += pal(0.,0.9, vec3(-.67,0.21,0.43),-0.48,idc*1.5 + length(p.xz)*1. + smoothTimeB*0.0125);
+            col += pal(0.,0.9, vec3(-.67,0.21,0.43),-0.48,idc*1.5 + length(p.xz)*.75 + smoothTimeC*0.125);
 		
 
             col = max(col, 0.);
         } else if(d.y == 3.) {
             //col += pal(0.5,1., vec3(.7,0.2,0.),0.8,idc*1.5 + idG.y*0.5);
-            col += 0.4*fres;
+            col += 0.64*fres;
 
             //col += shiftHue(col, 0.98).xyz;
         }
@@ -251,14 +265,13 @@ vec4 renderPassA() {
     	    
     }
     
-    
     col += glow*0.005;
     
     //col = pow(col, vec3(0.454545));
 
     col = mix(col,vec3(0.06,0.02,0.05), smoothstep(0.,1.,t*0.04));
     
-    col *= 1. - dot(_uvc,_uvc)*0.7;
+    col *= 1. - dot(_uvc,_uvc)*0.27;
     
     // Output to screen
     fragColor = vec4(col,1.0);
@@ -309,7 +322,7 @@ vec4 renderMainImage() {
     fragColor = max(fragColor, 0.);
     //fragColor.b *= 1. + uv.x*0.4;
     //fragColor *= 1. - dot(uvn,uvn)*2.;
-    fragColor *= 1. - dot(uvn*0.7,uvn*0.7)*1.;
+    fragColor *= 1. - dot(uvn*0.27,uvn*0.27)*1.;
     fragColor = max(fragColor, 0.);
     fragColor = pow(fragColor, vec4(0.4545 ));
 	return fragColor; 

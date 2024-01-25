@@ -7,14 +7,15 @@
 vec4 renderPassA() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-    U += MoveXY*(1.0+pow(syn_MidLevel*0.5+syn_BassLevel*0.5, 2.));
-    U += Stretch*_uvc*2.;
     vec2 X = 0.5*RENDERSIZE.xy;
     if (_mouse.z>0.) X = _mouse.xy;
     U-=X;
     float a = .001*sin(.01*smoothTimeC)/(1.+length(U-0.5*RENDERSIZE.xy)/RENDERSIZE.y);
     U *= mat2(cos(a),-sin(a),sin(a),cos(a));
-    U *= .999;
+    U += Stretch*_uvc*4.;
+    U *= .999*(1.0-0.0125*Zoom*(1.0+pow(syn_MidLevel*0.5+syn_BassLevel*0.5, 2.)));
+    U += MoveXY*(1.0+pow(syn_MidLevel*0.5+syn_BassLevel*0.5, 2.));
+   // U += luminosity(_textureMediaAsMask(_uvc));
     U+=X;
     Q  =  D(U);
 
@@ -52,7 +53,7 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-    U -= _uvc*PI*Zoom*(1.0+pow(syn_MidLevel*0.5+syn_BassLevel*0.5, 2.));
+    //U -= _uvc*PI*Zoom*(1.0+pow(syn_MidLevel*0.5+syn_BassLevel*0.5, 2.));
     U += Stretch*_uvc*2.;
     U += MoveXY*(1.0+pow(syn_MidLevel*0.5+syn_BassLevel*0.5, 2.));
 

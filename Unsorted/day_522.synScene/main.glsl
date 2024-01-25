@@ -41,10 +41,10 @@ vec4 renderPassA() {
     vec3 col = mix(vec3(01.96,0.9,0.8 - dot(uv,uv)*0.01 ), prevFr,0.99 + sin(TIME*0.05)*0.0089);
     
     float ddf =  dot(dF,dF)*1.;
-    float cenv = max(sin(smoothTimeC*0.25),0.);
+    float cenv = max(sin(smoothTimeC*0.125),0.);
     cenv = smoothstep(0.,1.,cenv);
     for(float i = 0.; i < 130.; i++){
-        vec2 p = uv + vec2(sin(i)*0.25*cenv,0);
+        vec2 p = uv + vec2(sin(i)*0.25*cenv,cos(i)*0.25*cenv);
         p *= rot(i*10. + (smoothTimeC*0.1 +sin(smoothTimeC*0.1 + i*2.1)*1.)*0.4*sin(i));
         //p.y += sin(i*240.)*5.;
         
@@ -57,7 +57,7 @@ vec4 renderPassA() {
             - 0.02*smoothstep(0.,0.6,env)
             + 0.04*smoothstep(0.1,-0.04,env)
             + 0.04*smoothstep(0.,0.3,env);
-        vec3 c = pal(vec3(1.,1.,0.4),vec3(0.4,0.8,0.9),vec3(3,2,1),1.,i*3. + smoothTimeB + p.x*3. - ddf + p.x*47. + 0.*smoothstep(0.03,0.1,d));
+        vec3 c = pal(vec3(1.,1.,0.4),vec3(0.4,0.8,0.9),vec3(3,2,1),1.,i*3. + smoothTimeB*0.1 + p.x*3. - ddf + p.x*47. + 0.*smoothstep(0.03,0.1,d));
         //col = mix(col,c -col*vec3(0.4,1.,1.),smoothstep(fwidth(d),0.,d));
         col = mix(col,c -col*vec3(0.4,1.,1.),smoothstep(0.04 + sin(TIME*0.7 + sin(i))*0.02,0.,d ));
         

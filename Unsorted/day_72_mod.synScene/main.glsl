@@ -152,6 +152,8 @@ vec2 march(vec3 ro, vec3 rd, inout vec3 p, inout float t, inout bool hit){
 }
 
 vec3 getRd(vec3 ro, vec3 lookAt, vec2 uv){
+    lookAt.xy =mix(lookAt.xy, _uvc, FOV);
+
 	vec3 dir = normalize(lookAt - ro);
     vec3 right = normalize(cross(vec3(0,1,0), dir));
     vec3 up = normalize(cross(dir, right));
@@ -177,7 +179,6 @@ vec4 renderPassA() {
 	vec2 fragCoord = _xy;
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
-    uv.xy +=(_uvc*PI*FOV);
 
 
 
@@ -198,7 +199,7 @@ vec4 renderPassA() {
     
     ro += path(ro.z);
     
-    vec3 lookAt = vec3(0,0,ro.z + 1.);
+    vec3 lookAt = vec3(0,0,ro.z + 2.);
 
     lookAt += path(lookAt.z);
     

@@ -44,7 +44,7 @@ float grid( in vec2 p ) {
     const float N = 15.0;
     p += 1.0/N*0.5;
     vec2 w = max(abs(dpdx), abs(dpdy));
-    vec2 a = p + 0.5*w;                        
+    vec2 a = p + 0.5*w;
     vec2 b = p - 0.5*w;           
     vec2 i = (floor(a)+min(fract(a)*N,1.0)-
               floor(b)-min(fract(b)*N,1.0))/(N*w);
@@ -60,13 +60,13 @@ vec3 hash33( vec3 p3 ) {
 
 // path parametric equation
 vec3 path( float x ) {
-    x += smoothTimeC*0.25;
+    x += bass_time*0.25;
     return vec3(cos(x), sin(x*2.3312)*0.3 + sin(x*1.456)*0.4, sin(x))*1.0;
 }
 
 // path derivative
 vec3 pathd( float x ) {
-    x += smoothTimeC*0.25;
+    x += bass_time*0.25;
     return vec3(-sin(x), cos(x*2.3312)*0.3*2.3312+cos(x*1.456)*0.4*1.456, cos(x))*1.0;
 }
 
@@ -81,7 +81,7 @@ float leg( vec3 p, const bool complex, out vec4 albedo, float parm, float phase,
     float scaleP = paths(parm);
     
     // walk animation
-    float xro = smoothTimeC*-2.0+phase*2.0*PI + parm*12.0;
+    float xro = bass_time*-2.0+phase*2.0*PI + parm*12.0;
     float sro = sin(xro);
     float cro = cos(xro);
     
@@ -370,7 +370,7 @@ float traceShadow( in vec3 from, in vec3 dir, in vec3 normal, const float sinThe
     if (dot(dir, normal) < 0.0) return 0.0;
     float minAlpha = 1.0;
     float totdist = 0.0;
-    #define SHADOW_STEPS 20
+    #define SHADOW_STEPS 15
     for (int i = Z ; i < SHADOW_STEPS ; i++) {
         vec3 p = from+dir*totdist;
         if (dot(p, p) > 6.0) return minAlpha;
@@ -396,7 +396,7 @@ vec3 getLighting( in vec3 p, in vec3 dir, float index ) {
     vec3 n = getNormal(p, d);
     
     vec3 result = vec3(0);
-    const vec3 sunDir = normalize(vec3(1, 4, 2));
+    vec3 sunDir = normalize(vec3(1+_nsin(TIME), 4, 2));
     const vec3 subDir = normalize(vec3(2, -7, 3));
     
     // add two lights, main one with shadows
@@ -421,9 +421,9 @@ vec3 getBackground( in vec3 dir ) {
     float d = 1.0 / dir.y;
     vec2 p = (dir*d).xz;
     // add a simple grid
-    vec3 base = mix(COLOR_SUB*0.007, vec3(0.001), grid(p));
+    vec3 base = Grid * mix(COLOR_SUB*0.007, vec3(0.001), grid(p));
     // and a black fog over it
-    base = mix(base, vec3(0.0002), 1.0-exp(-d*0.4));
+    base = Grid*mix(base, vec3(0.0002), 1.0-exp(-d*0.4));
     return base;
 }
 
@@ -507,7 +507,7 @@ vec4 renderMainImage() {
     #ifdef SEGMENT
     from = vec3(0, 0, -0.5);
     #endif
-    vec3 dir = normalize(vec3(uv, 1.0));
+    vec3 dir = normalize(vec3(_uvc*FOV, 1.0));
     
     vec2 r = vec2(smoothTime*0.1, 0.3);
     
@@ -515,7 +515,7 @@ vec4 renderMainImage() {
         r = _mouse.xy - RENDERSIZE.xy*0.5;
         r *= -0.01;
     }
-    
+    r = camXY - RENDERSIZE.xy*0.5*PI;
     dir.yz *= rot(r.y+0.1);
     from.yz *= rot(r.y);
     dir.xz *= rot(r.x);

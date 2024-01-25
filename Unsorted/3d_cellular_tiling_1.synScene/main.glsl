@@ -1,4 +1,8 @@
 
+float smin(float a, float b, float k) {
+    float h = max(k - abs(a-b), 0.) / k;
+    return min(a, b) - h*h*h*k*1./6.;
+}
 
 /*
 
@@ -33,10 +37,9 @@
 
 //#define PI 3.14159265
 #define FAR 50.
-
 // Frequencies and amplitudes of tunnel "A" and "B". See then "path" function.
-const float freqA = 0.15;
-const float freqB = 0.25;
+const float freqA = 0.125;
+const float freqB = 0.025;
 const float ampA = PI;
 const float ampB = .85;
 
@@ -65,6 +68,8 @@ vec3 tex3D( sampler2D tex, in vec3 p, in vec3 n ){
 	p = (texture(tex, p.yz)*n.x + texture(tex, p.zx)*n.y + texture(tex, p.xy)*n.z).xyz;
     return p*p;
 }
+
+
 
 // More concise, self contained version of IQ's original 3D noise function.
 float n3D(in vec3 p){
@@ -216,6 +221,7 @@ float map(vec3 p){
 /*
 // Texture bump mapping. Four tri-planar lookups, or 12 texture lookups in total. I tried to 
 // make it as concise as possible. Whether that translates to speed, or not, I couldn't say.
+
 vec3 doBumpMap( sampler2D tx, in vec3 p, in vec3 n, float bf){
    
     const vec2 e = vec2(0.001, 0);
@@ -229,6 +235,7 @@ vec3 doBumpMap( sampler2D tx, in vec3 p, in vec3 n, float bf){
     return normalize( n + g*bf ); // Bumped normal. "bf" - bump factor.
 	
 }
+
 */
 
 // Surface bump function. Cheap, but with decent visual impact.
@@ -242,6 +249,7 @@ float bumpSurf3D( in vec3 p){
 }
 
 // Standard function-based bump mapping function.
+
 vec3 doBumpMap(in vec3 p, in vec3 nor, float bumpfactor){
     
     const vec2 e = vec2(0.001, 0);
@@ -463,15 +471,16 @@ vec4 renderMainImage() {
 	//vec3 lookAt = vec3(0., 0.25, TIME*2.);  // "Look At" position.
 	//vec3 camPos = lookAt + vec3(2., 1.5, -1.5); // Camera position, doubling as the ray origin.
 	
-	vec3 lookAt = vec3(0., 0.0, smoothTime*1.5 + 0.1);  // "Look At" position.
+	vec3 lookAt = vec3(0., 0.0, bass_time*1.5 + 0.1);  // "Look At" position.
+
 	vec3 camPos = lookAt + vec3(0.0, 0.0, -0.1); // Camera position, doubling as the ray origin.
 
- 
+    vec2 Flip = vec2(x_flip, y_flip);
     // Light positioning. One is a little behind the camera, and the other is further down the tunnel.
  	vec3 light_pos = camPos + vec3(0., 1, 8);// Put it a bit in front of the camera.
-	lookAt.xy+=(_uvc.xy/4.)*(Fov*PI+Fov*lookAt.xy/PI);
+	lookAt.xy+=(_uvc.xy/4.)*(Fov*PI*0.5+Fov*lookAt.xy/PI);
 
-	lookAt.xy+=(lookAt.xy*_uvc*Whoa*PI);
+	//lookAt.xy+=(lookAt.xy*_uvc*Whoa*PI);
 	// Using the Z-value to perturb the XY-plane.
 	// Sending the camera, "look at," and two light vectors down the tunnel. The "path" function is 
 	// synchronized with the distance function. Change to "path2" to traverse the other tunnel.
@@ -490,13 +499,18 @@ vec4 renderMainImage() {
     
     
     vec3 rd = normalize(forward + FOV*uv.x*right + FOV*uv.y*up);
-    rd.xy =  _rotate(rd.xy, Rotation*PI);
-    rd.xy += _rotate(rd.xy*_uvc, PI*n3D(rd.xyz)+smoothTime*0.1)*Flip*n3D(vec3(smoothTime*0.1));
+    // vec2 rduvc =  mix(rd.xy, _uvc, 0.5);
+    float mirror_x = smin(rd.x*-1, rd.x, 0.5);
+    float mirror_y = smin(rd.y*-1, rd.y, 0.5);
+    vec2 rd_mirrored = vec2(mix(mirror_x, mirror_x*-1, invert), mix(mirror_y, mirror_y*-1, invert));
+    // rd.xy = mix(mix(rd_mirrored, rd_mirrored*-1, invert) , rd.xy, 1.0-Flip);
+    rd.xy = mix(rd_mirrored , rd.xy, 1.0-Flip);
+    
+    rd.xy =  _rotate(rd.xy, spin*PI);
+    rd.yz = _rotate(rd.yz, LookXY.y*PI +_uvc.y*PI*Open + _scale(_fbm(sin(TIME*0.02)), -0.2, 0.2));
+    rd.xz = _rotate(rd.xz, LookXY.x*PI+ _scale(_fbm(cos(TIME*0.02)), -0.2, 0.2));
 
-    rd.yz = _rotate(rd.yz, LookXY.y*PI);
-    rd.xz = _rotate(rd.xz, LookXY.x*PI);
-
-    //rd = normalize(vec3(rd.xy, rd.z - dot(rd.xy, rd.xy)*.25));    
+    rd = normalize(vec3(rd.xy, rd.z - dot(rd.xy, rd.xy)*.25));    
     
     // Swiveling the camera about the XY-plane (from left to right) when turning corners.
     // Naturally, it's synchronized with the path in some kind of way.
@@ -521,10 +535,10 @@ vec4 renderMainImage() {
         // Texture scale factor.
         const float tSize0 = 1./4.; 
     	
-        //vec3 tsp = sp-vec3(path(sp.z), 0.);
+        vec3 tsp = sp-vec3(path(sp.z), 0.);
        
     	// Texture-based bump mapping.
-	    //sn = doBumpMap(image46, tsp*tSize0, sn, 0.025);//
+	    //sn = doBumpMap(marble, tsp*tSize0*2, sn, 0.0125);//
         
         
         // Function based bump mapping.
@@ -574,10 +588,9 @@ vec4 renderMainImage() {
         //float th = thickness( sp, sn, 1., 1. );
         float th = thickness( sp, sn);
         float tdiff =  pow( clamp( dot(rd, -hf), 0., 1.), 1.);
-        float trans = max((tdiff )*th*1.5+ (1.0+syn_Level)*.25, 0.);  
+        float trans = max((tdiff )*th*(.5+syn_Presence*0.3)+ (1.0+syn_Level*0.5+syn_Intensity*0.5)*.35, 0.);  
         trans = pow(trans, 6.)*1.;        
     	////////        
-
     	
     	// Darkening the crevices. Otherwise known as cheap, scientifically-incorrect shadowing.	
 	    //float shading = 1.;// crv*0.5+0.5; 
@@ -591,15 +604,15 @@ vec4 renderMainImage() {
         sceneCol = texCol*(diff + ambience) + vec3(.7, .9, 1.)*spec + vec3(1, .6, .2)*spec*spec*spec*.5;
         sceneCol += texCol*vec3(.8, .95, 1)*pow(fre, 4.)*2.;
         //sceneCol += vec3(1, .05, 0)*trans;
-        sceneCol += texCol*mix(vec3(1, .05, 0), vec3(1, .05, .15), abs(hf.y))*trans*6.;
-      
+        sceneCol += texCol*mix(vec3(1, .25, 0.02), vec3(1, .25, .15), abs(hf.y))*trans*6.;
+
         
         
         // Cool blue hilights. Adapted from numerous examples on here. Kali uses it to great effect.
-        float per = 10.+LineMod;
+        float per = 10.+LineMod*4.;
     	float tanHi = abs(mod(per*.5 + t -( smoothTimeB ), per) - per*.5);
     	//vec3 tanHiCol = (threeWaySin*ColorShift+vec3(0.7, .2, 1.6))*(1./tanHi*.2*pow(0.8+syn_HighLevel*0.8+(Flash), 1.+syn_Intensity));
-    	vec3 tanHiCol = (threeWaySin*ColorShift+vec3(0.9, .7, .6))*(1./tanHi*.2*pow(0.8+syn_HighLevel*0.8+(Flash), 1.+syn_Intensity))*LightLine;
+    	vec3 tanHiCol = (threeWaySin*ColorShift+vec3(0.9, .7, .6))*(1./tanHi*.2*pow(0.8+syn_HighLevel*(0.8+Flash), 1.+syn_Intensity))*LightLine;
         
         sceneCol += tanHiCol;
         
@@ -618,10 +631,10 @@ vec4 renderMainImage() {
 	}
        
     // Blend the scene and the background with some very basic, 4-layered fog.
-    float mist = getMist(camPos, rd, light_pos, t)*(1.0+pow(highhits*0.9, 2.));
+    float mist = getMist(camPos, rd, light_pos, t);
     vec3 sky = (threeWaySin*ColorShift*vec3(1.0, 0.75, 1.0)+Mist* vec3(1.5125, 0.925025, 1.515))* mix(1., .9972, mist)*(rd.y*1.25 + 1.);
-    sky+=0.25*Mist;
-    sceneCol = mix(sceneCol, sky, min(pow(t, 1.5)*.175/FAR, 1.));
+    sky+=0.25*Mist*(1.0+ flash * highhits*0.9);
+    sceneCol = mix(sceneCol, sky, min(pow(t, .75)*.175/FAR, 1.));
 
     // Clamp, perform rough gamma correction, then present the pixel to the screen.
 	fragColor = vec4(sqrt(clamp(sceneCol, 0., 1.)), 1.0);

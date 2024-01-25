@@ -2,6 +2,10 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 
 
 			//******** Common Code Begins ********
+float smin(float a, float b, float k) {
+    float h = max(k - abs(a-b), 0.) / k;
+    return min(a, b) - h*h*h*k*1./6.;
+}
 
 #define PI acos(-1.)
 
@@ -44,7 +48,7 @@ void initIcosahedron() {
     float cospin=cos(PI/float(Type)), scospin=sqrt(0.75-cospin*cospin);
 	nc=vec3(-0.5,-cospin,scospin);
 	pab=vec3(0.,0.,1.);
-	pbc=vec3(scospin,0.,0.5);
+	pbc=vec3(scospin,0.,0.5+Depth);
 	pca=vec3(0.,scospin,cospin);
 	//pbc=normalize(pbc+vec3(0., 0.+Fold*0.5,0.));	pca=normalize(pca+vec3(0., 0+Fold*0.5,0.));
     pbc=normalize(pbc);	pca=normalize(pca);
@@ -66,7 +70,7 @@ vec3 pIcosahedron(inout vec3 p, int subdivisions) {
     p.xy = abs(p.xy);
 
 	pReflect(p, nc, 0.);
-    float smoothSin = (sin(smoothTimeC*0.5)+sin(smoothTimeC+1.)-1.)*0.5+0.5;
+    float smoothSin = sin(_noise(smoothTimeC*0.75))*0.25+0.5;
     if (subdivisions > 0) {
 
         vec3 A = pbc;
@@ -255,6 +259,11 @@ vec4 renderPassA() {
     dith = mix(0.99,1.,texture(image30, 4000.*(uv + 0.5 + TIME)/256.).x);
     uv *= 1. + dot(uv,uv)*0.2;
     uv += _uvc*PI;
+    float m_x = smin(uv.x*-1, uv.x, 0.5);
+    float m_y = smin(uv.y*-1, uv.y, 0.5);
+    vec2 rd_mirrored = vec2(mix(m_x, m_x*-1, invert), mix(m_y, m_y*-1, invert));
+    uv.xy = mix(uv.xy, rd_mirrored, vec2(mirror_x, mirror_y));
+    uv.xy = _rotate(uv.xy, spin*PI);
     vec3 col = vec3(0);
 
     
@@ -269,7 +278,10 @@ vec4 renderPassA() {
     vec3 lookAt = vec3(0);
     
     vec3 rd = getRd(ro, lookAt, uv);
-    
+    // float m_x = smin(rd.x*-1, rd.x, 0.5);
+    // float m_y = smin(rd.y*-1, rd.y, 0.5);
+    // vec2 rd_mirrored = vec2(mix(m_x, m_x*-1, invert), mix(m_y, m_y*-1, invert));
+    // rd.xy = mix(rd.xy, rd_mirrored, vec2(mirror_x, mirror_y));
     bool hit; float t; vec3 p;
     vec2 d = march(ro, rd, p, t, hit);
     

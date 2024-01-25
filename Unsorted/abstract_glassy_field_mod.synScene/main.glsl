@@ -308,14 +308,15 @@ vec4 renderMainImage() {
     //vec3 r = normalize(fwd + FOV*(u.x*rgt + u.y*up));
     // Lens distortion.
     vec3 r = (0.1+FOV)*(fwd + (u.x*rgt-FOV*_uvc.x - FOV*_uvc.y+u.y*up));
-    r = normalize(vec3(n3D(r.xyz)*0.1+r.xy*(1.0+(Mirror*(-1+_uvc*PI))), (r.z - length(r.xy-_uvc*PI*Fisheye)*.125)));
+    // r.xy += vec2(_noise(_uv+TIME*0.1))*0.2;
+
+    r = normalize(vec3(n3D(r.xyz)*0.1+r.xy*(1.0+(vec2(mirror_x, mirror_y)*(-1+_uvc*PI)))+warp*vec2(_noise(_uv+TIME*0.1))*0.1, (r.z - length(r.xy-_uvc*PI*Fisheye+warp*vec2(_noise(_uv+TIME*0.1))*0.1)*.125)));
 
 //    r = normalize(vec3(n3D(r.xyz)+r.xy*(1.0+(Flip*(-1+_uvc*PI))), (r.z - length(r.xy)*.125)));
     r.yz = _rotate(r.yz, lookXY.y*PI);
-    r.xz = _rotate(r.xz, -1.0*lookXY.x*PI);
+    r.xz = _rotate(r.xz, 1.0*lookXY.x*PI);
  
     r.xy =  _rotate(r.xy, Rotation*PI);
-
 
 
     // Raymarch.
@@ -406,7 +407,7 @@ vec4 renderMainImage() {
         // Glow.
         // Taking the accumulated color (see the raymarching function), tweaking it to look a little
         // hotter, then combining it with the object color.
-        vec3 accCol = vec3(1, .3, .1)*accum;
+        vec3 accCol = vec3(1, .3, .1)*accum*(1.+Flash*pow(syn_HighLevel*0.5+syn_MidLevel*0.5, 2));
         
         vec3 gc = pow(min(vec3(1.5, 1, 1)*accum, 1.), vec3(1, 2.5, 12.))*.5 + accCol*.5;
         col += col*gc*12.;
@@ -414,13 +415,14 @@ vec4 renderMainImage() {
         
         // Purple electric charge.
         
+        // float hi = abs(mod(t/1. - ((smoothTimeB*0.2)/1.), 8.) - 8./2.)*pow(2.-highhits, 2.)*(1.0+length(_edgeDetectSobel(syn_FinalPass, _uv)));
         float hi = abs(mod(t/1. - ((smoothTimeB*0.2)/1.), 8.) - 8./2.)*pow(2.-highhits, 2.);
         vec3 cCol = vec3(.01, .025, .5)*col*1./(.001 + hi*hi*.12);
-        col += mix(cCol.yxz, cCol, n3D(p*3.));
+        col += mix(cCol.yxz, cCol, n3D(p*4.))*(.50+length(_edgeDetectSobel(syn_FinalPass, _uv)));
  		
         // Similar effect.
-        vec3 _cCol = vec3(.01, .05, 1)*(1.0+syn_HighLevel)*col*abs(tan(t/(6.5) - smoothTimeB*0.05));
-        col += _cCol;
+        // vec3 _cCol = vec3(.01, .05, 1)*(1.0+syn_HighLevel)*col*abs(tan(t/(6.5) - smoothTimeB*0.05));
+        // col += _cCol;
  
         
         // Apply some shading.

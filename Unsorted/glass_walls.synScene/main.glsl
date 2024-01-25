@@ -17,8 +17,8 @@
 #define T 		TIME
 #define M 		_mouse
 
-#define PI2     6.28318530718
-#define PI      3.14159265359
+#define PI2     PI*2.0
+//#define PI      3.14159265359
 
 // AA Setting - comment out to disable
 #define AA 2
@@ -45,7 +45,7 @@ float box( vec2 p, vec2 b){
 vec3 hit=vec3(0),hitPoint=vec3(0);
 float radius = 1.25;
      
-const vec2 scaler =vec2(6.);
+vec2 scaler =vec2(6.*Scale);
 float pattern(vec3 pt){
     vec3 hp = pt;
     vec2 uv   = hp.xy;
@@ -82,11 +82,11 @@ vec2 map(vec3 p){
     vec2 res = vec2(1e5,0.);
     p.xy*=spin;
     
-    vec3 q = p-vec3(.2*sin(T*.1),.2*cos(T*.0981),1);
+    vec3 q = p-vec3(.2*sin(smoothTime*.05),.2*cos(smoothTime*.0481),1);
     vec3 r = p+vec3(0,0,7);
 
     float hmp = pattern(q);
-    q.z+=.085*sin(T*.45+q.x*3.7);
+    q.z+=.085*sin(smoothTimeC*.25+q.x*3.7);
 
     float glass = abs(q.z)-hmp;
 
@@ -125,7 +125,7 @@ vec3 shade(vec3 p, vec3 rd, float d, float m, inout vec3 n) {
     
     if(m==3.) {
         vec2 uv = hitPoint.xy*.075;
-        uv.x+=T*.05;
+        uv.x+=smoothTime*.0125;
         
         float scale = 10.;
         vec2 id = floor(uv*scale);

@@ -482,7 +482,8 @@ vec4 renderMainImage() {
     
     //vec3 rd = normalize(forward + uv.x*right + uv.y*up);
     vec3 rd = (0.1+FOV)*(forward + (uv.x*right-FOV*_uvc.x - FOV*_uvc.y+uv.y*up));
-       rd.xy += _rotate(rd.xy*_uvc*0.5*PI, n3D(rd.xyz)+smoothTime*0.1)*Whoa*n3D(vec3(smoothTime*0.1));
+       
+    rd.xy += _rotate(rd.xy*_uvc*0.5*PI, n3D(rd.xyz)+smoothTime*0.1)*Whoa*n3D(vec3(smoothTime*0.1));
     rd = normalize(vec3(n3D(rd.xyz)+rd.xy*(1.0+(Flip*(-1+_uvc*PI*PI))), (rd.z - length(rd.xy*(1.0+(Flip*(-1+_uvc*PI*PI))))*.125)));
 
 

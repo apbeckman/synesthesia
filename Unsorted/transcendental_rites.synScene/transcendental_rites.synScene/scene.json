@@ -1,0 +1,280 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "How much the media will appear.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "media_color",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0.45,
+         "DESCRIPTION" : "Mix in rainbow color",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "rainbow",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 100.0,
+         "DESCRIPTION" : "How strong the specular light is.\nThe specular light color is the complement of the object's color.",
+         "IS_META" : false,
+         "MAX" : 100.0,
+         "MIN" : 1.0,
+         "NAME" : "specular_strength",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0.200000002980232,
+         "DEF_COLOR" : [ 0.02109375, 0.359375, 0.9859375 ],
+         "DESCRIPTION" : "base color, this color's complement will be calculated automatically",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "base_color",
+         "TYPE" : "color",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "ON: Apply black stripes to the scene color that move on drum beat.\nOFF: No stripes for you.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "beat_stripe",
+         "PARAMS" : 0.200000002980232,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Toggle media coloring mode.\nOFF: Media is mapped to the uv coordinates of the screen. The geometry revels the media.\nON: Media is mapped to surface of the geomerty/",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "media_uv_or_3d",
+         "PARAMS" : 0.200000002980232,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "color"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Smoothly apply a left vertical mirror.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "PARAMS": 0.01999999,
+         "NAME" : "l_vert_mirr_mix",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "mirror"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Smoothly apply a horizontal mirror.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "PARAMS": 0.01999999,
+         "NAME" : "hor_mirr_mix",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "mirror"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Smoothly ix between Left and Right vertical mirrors on beat detected.",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "PARAMS": 0.01999999,
+         "NAME" : "audio_mir",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "mirror"
+      },
+      {
+         "DEFAULT" : 0.97,
+         "DESCRIPTION" : "turn on feedback",
+         "IS_META" : false,
+         "MAX" : 0.97,
+         "MIN" : 0.3,
+         "NAME" : "feedback_on",
+         "PARAMS" : 0.200000002980232,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "feedback"
+      },
+      {
+         "DEFAULT" : 1.0,
+         "DESCRIPTION" : "zoom on beat",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "bass_zoom",
+         "PARAMS" : 0.091490116,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "feedback"
+      },
+      {
+         "DEFAULT" : 0.05,
+         "DESCRIPTION" : "direction that the feedback zooms.",
+         "IS_META" : false,
+         "MAX" : 0.0999999995529652,
+         "MIN" : -0.0999999995529652,
+         "NAME" : "zoom_direction",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "feedback"
+      },
+      {
+         "DEFAULT" : 0.05,
+         "DESCRIPTION" : "How much the feedback fades. Lower values retain feedback for longer.",
+         "IS_META" : false,
+         "MAX" : 0.2,
+         "MIN" : 0.0,
+         "NAME" : "fb_fade",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "feedback"
+      },
+      {
+         "DEFAULT": 3.0,
+         "DESCRIPTION": "Number of spires present.",
+         "IS_META": false,
+         "MAX": 10.0,
+         "MIN": 1.0,
+         "NAME": "spire_count",
+		   "PARAMS": 0.299999993294477,
+         "TYPE": "slider smooth",
+         "UI_GROUP": "geo"
+      },
+      {
+         "DEFAULT": 0.0,
+         "DESCRIPTION": "Randomize the amount of spires on beat detected.",
+         "IS_META": false,
+         "MAX": 1.0,
+         "MIN": 0.0,
+         "NAME": "rand_spire_count",
+		   "PARAMS": 0.299999993294477,
+         "TYPE": "toggle smooth",
+         "UI_GROUP": "geo"
+      },
+      {
+         "DEFAULT": 0.0,
+         "DESCRIPTION": "ON: time variable is influenced by the audio bass. OFF: constant rate.",
+         "IS_META": false,
+         "MAX": 1.0,
+         "MIN": 0.0,
+         "NAME": "geo_reactive_time",
+         "TYPE": "toggle",
+         "UI_GROUP": "geo"
+      },
+      {
+         "DEFAULT": 2.0,
+         "DESCRIPTION": "How fast the time variable for the geometry grows, whether it is reactive time or constant time.",
+         "IS_META": false,
+         "MAX": 10.0,
+         "MIN": -10.0,
+         "NAME": "geo_rate",
+		   "PARAMS": 0.299999993294477,
+         "TYPE": "slider smooth",
+         "UI_GROUP": "geo"
+      },
+      {
+         "DEFAULT" : 1.5,
+         "DESCRIPTION" : "Field of View for the perspective of the camera",
+         "IS_META" : false,
+         "MAX" : 3.0,
+         "MIN" : 0.03125,
+         "NAME" : "FOV",
+         "PARAMS" : 0.0350000001490116,
+         "TYPE" : "knob smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0.1,
+         "DESCRIPTION" : "Smoothly distort the camera.",
+         "IS_META" : false,
+         "MAX" : 0.1,
+         "MIN" : 0.0,
+         "NAME" : "cam_morph",
+         "PARAMS" : 0.100000001490116,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Place the camera in the helix tube.",
+         "IS_META" : false,
+         "MAX" : 39.0,
+         "MIN" : 0.0,
+         "NAME" : "in_da_tube",
+         "PARAMS" : 0.0900000001490116,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Switch between in da tube and out da tube on beat detected.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "rand_mode",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "camera"
+      },
+      {
+         "DEFAULT": 0.0,
+         "DESCRIPTION": "ON: time variable is influenced by the audio bass. OFF: constant rate.",
+         "IS_META": false,
+         "MAX": 1.0,
+         "MIN": 0.0,
+         "NAME": "reactive_time",
+         "TYPE": "toggle",
+         "UI_GROUP": "camera"
+      },
+      {
+         "DEFAULT": -3.0,
+         "DESCRIPTION": "How fast the time variable grows, whether it is reactive time or constant time.",
+         "IS_META": false,
+         "MAX": 10.0,
+         "MIN": -10.0,
+         "NAME": "spin_rate",
+		   "PARAMS": 0.299999993294477,
+         "TYPE": "knob smooth",
+         "UI_GROUP": "camera"
+      }
+   ],
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "buffA",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "postFXPass",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "rVertMirrPass",
+         "WIDTH" : 1920
+      }
+   ],
+   "CREDIT" : "Psybernautics - Alex Tiemann",
+   "DESCRIPTION" : "We've come to worship.",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "transcendental_rite.PNG",
+   "TITLE" : "Transcendental Rites",
+   "WIDTH" : 1920
+}

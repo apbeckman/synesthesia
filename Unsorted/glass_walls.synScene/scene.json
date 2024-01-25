@@ -1,4 +1,17 @@
 {
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0.5,
+			"NAME" : "Scale",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
 	"CREDIT" : "byt3_m3chanic",
 	"DESCRIPTION" : "Glass / Refractive surface - moving textured wall behind glass.\n",
 	"GPU" : 0,

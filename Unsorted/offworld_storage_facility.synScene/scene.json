@@ -1,0 +1,34 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Using a mixture of raymarching and cell by cell traversal techniques to raymarch a pseudo random box subdivision in order to render a basic sci-fi looking scene in realtime.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image3",
+			"PATH" : "images/3.jpg"
+		}
+	],
+	"IMAGE_PATH" : "offworld_storage_facility.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "clamp"
+		}
+	],
+	"TITLE" : "Offworld Storage Facility",
+	"WIDTH" : 1920
+}

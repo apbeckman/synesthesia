@@ -296,7 +296,7 @@ vec4 renderMainImage() {
    
     vec2 p = (-RENDERSIZE.xy + 2.0*fragCoord.xy)/RENDERSIZE.y;
     p.xy *= (1.0-Warp*(p.xy*0.25*PI*_uvc));
-    p.xy += _rotate(_uvc*Spin*PI*p.xy*0.25, smoothTime*0.2)*Warp*PI;
+    p.xy += _rotate(_uvc*Spin*PI*p.xy*0.25, bass_time*0.2)*Warp*PI;
     p.x /= 1.125;
 
     //-----------------------------------------------------
@@ -305,7 +305,7 @@ vec4 renderMainImage() {
     
     // camera movement
     vec3 ro, ta;
-    doCamera( ro, ta, smoothTime);
+    doCamera( ro, ta, bass_time);
 
     // camera matrix
     mat3 camMat = calcLookAtMatrix( ro, ta, 0.0 );  // 0.0 is the camera roll

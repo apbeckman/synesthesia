@@ -1,0 +1,312 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Toggle off for manual control of the fluid growth.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_growth",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "rate"
+		},
+		{
+			"DEFAULT" : 0.9,
+			"DESCRIPTION" : "Manually control rate of growth",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "manual_growth",
+			"TYPE" : "slider",
+			"UI_GROUP" : "rate"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Reset simulation",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reset",
+			"PARAMS" : 0.25,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "field"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Enable flashing arc pattern to chop up simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "disrupt_field",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "field"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "This runs the simulation twice per frame. Turn it off for a slower simulation that is easier on your GPU.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "run_twice_fps",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "field"
+		},
+		{
+			"DEFAULT" : -1.6,
+			"DESCRIPTION" : "Shifts the simulation between a smoke effect and finger like patterns",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "meltyDetail",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "field"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Scatter the simulation to add extra turbulence.",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "scatter",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "field"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Increases the texture size, resulting in faster movement.",
+			"MAX" : 5,
+			"MIN" : 0.05,
+			"NAME" : "size_modifier",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "field"
+		},
+		{
+			"DEFAULT" : -1,
+			"DESCRIPTION" : "Increase to add smaller details to the scene, decrease to make larger details.",
+			"MAX" : -2,
+			"MIN" : -0.1,
+			"NAME" : "curl_scale",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "field"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "50% is default no zooming. Move up to zoom in, down to zoom out.",
+			"MAX" : 1.5,
+			"MIN" : -1.5,
+			"NAME" : "zooming",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "field"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Select from 3 color palettes",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "color_palette",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "coloring"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Turn on for auto-rotating color palette",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "color_rotate",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "coloring"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "When on, automatically pulses the logo/media",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "light_pos",
+			"PARAMS" : 0.1,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "coloring"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "100% is full opacity for the media effect, 0% is just the normal simulation, no media.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_color_mix",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "media_color"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Affects how much the video is refracted by the simulation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_refraction",
+			"PARAMS" : 0.065,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "media_color"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "When off, ignores the underlying 'color palette' and just uses the media. When on, multiplies the two.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_multiply",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "media_color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Pulse the media to add it to the feedback field",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_pulse",
+			"PARAMS" : 0.05,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "media_feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "When on, automatically pulses the logo/media",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_pulse_auto",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "media_feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add the media to the field in a different, more subtle way",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_hint",
+			"TYPE" : "slider",
+			"UI_GROUP" : "media_feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggle to add audio reactive tracers that dart around the scene.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Tracers_on",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "tracers"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Affects the speed of tracers when enabled.",
+			"MAX" : 1,
+			"MIN" : 0.1,
+			"NAME" : "tracer_intensity",
+			"TYPE" : "slider",
+			"UI_GROUP" : "tracers"
+		},
+		{
+			"DEFAULT" : 25,
+			"DESCRIPTION" : "Affects the size of tracers when enabled.",
+			"MAX" : 50,
+			"MIN" : 10,
+			"NAME" : "tracer_size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "tracers"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Affects the position of tracers when enabled.",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "tracer_control",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "tracers"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "cornusammonis",
+	"DESCRIPTION" : "Fake fluid dynamical system that creates viscous-fingering-like flow patterns, and suturing patterns along boundaries. Original by cornusammonis from shadertoy",
+	"GPU" : 2,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "turbo_encabulator_fluid_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 900,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1600,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 900,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1600,
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"feedback",
+		"media",
+		"colorful",
+		"reaction-diffusion",
+		"fluid",
+		"simulation"
+	],
+	"TITLE" : "Turbo Encabulator Fluid_dup",
+	"WIDTH" : 1920
+}

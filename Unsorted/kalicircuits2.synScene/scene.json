@@ -14,10 +14,10 @@
 		{
 			"DEFAULT" : 15,
 			"DESCRIPTION" : "",
-			"MAX" : 24,
-			"MIN" : 8,
+			"MAX" : 32,
+			"MIN" : 12,
 			"NAME" : "loops",
-			"TYPE" : "slider",
+			"TYPE" : "knob",
 			"UI_GROUP" : "TIme"
 		},
 		{
@@ -28,6 +28,16 @@
 			"NAME" : "pulse",
 			"TYPE" : "knob",
 			"UI_GROUP" : "TIme"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.131,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "Camera"
 		},
 		{
 			"DEFAULT" : 
@@ -47,7 +57,7 @@
 				-3
 			],
 			"NAME" : "center",
-			"PARAMS" : 0.026,
+			"PARAMS" : 0.00301,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -57,18 +67,8 @@
 			"MAX" : 1.04,
 			"MIN" : 0.1,
 			"NAME" : "zoom",
-			"PARAMS" : 0.043,
+			"PARAMS" : 0.01301,
 			"TYPE" : "slider smooth",
-			"UI_GROUP" : "Camera"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Rotate",
-			"PARAMS" : 0.131,
-			"TYPE" : "knob smooth",
 			"UI_GROUP" : "Camera"
 		},
 		{
@@ -82,13 +82,14 @@
 			"UI_GROUP" : "Camera"
 		},
 		{
-			"DEFAULT" : 0.01,
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.05,
-			"MIN" : 0.01,
-			"NAME" : "intensity",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Vibe"
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
 		},
 		{
 			"DEFAULT" : 2.14,
@@ -96,6 +97,15 @@
 			"MAX" : 5,
 			"MIN" : 0.5,
 			"NAME" : "focus",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Vibe"
+		},
+		{
+			"DEFAULT" : 0.01,
+			"DESCRIPTION" : "",
+			"MAX" : 0.05,
+			"MIN" : 0.01,
+			"NAME" : "intensity",
 			"TYPE" : "slider",
 			"UI_GROUP" : "Vibe"
 		},
@@ -114,6 +124,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1440,
 	"IMAGE_PATH" : "kalicircuits2.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "KaliCircuits2",
 	"WIDTH" : 2560
 }

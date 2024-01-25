@@ -141,8 +141,8 @@ vec4 renderMainImage() {
 	vec3 rayDirection = normalize(vec3(sin(a.x) * cos(a.y), sin(a.y), cos(a.x) * cos(a.y)));
     
 	// rotazione vista
-	rayDirection = rotate(rayDirection, 0.25 * PI * mo.y, vec3(1., 0., 0.));
-	rayDirection = rotate(rayDirection, PI * mo.x, vec3(0., 1., 0.));
+	rayDirection = rotate(rayDirection, -.5, vec3(1., 0., 0.));
+	rayDirection = rotate(rayDirection, PI, vec3(0., 1., 0.));
     rayDirection.yz = _rotate(rayDirection.yz, -lookXY.y*PI+0.75);
     rayDirection.xy = _rotate(rayDirection.xy, lookZ*PI);
     rayDirection.xz = _rotate(rayDirection.xz, lookXY.x*PI);

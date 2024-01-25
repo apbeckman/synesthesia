@@ -127,8 +127,9 @@ float map(vec3 q){
  	d = max(d, min(max(p.x, p.y), min(max(p.y, p.z), max(p.x, p.z))) - .5/3. - .015); 
 
     // Layer four. The little holes, for fine detailing.
-    p =  abs(fract(q*3./.5)*.5/3. - .5/6.)+test/20.;
- 	return max(d, min(max(p.x, p.y), min(max(p.y, p.z), max(p.x, p.z))) - 1./18. - .015);
+    p =  abs(fract(q*3./.5)*.5/3. - .5/6.);
+
+ 	return max(d, min(max(p.x, p.y), min(max(p.y, p.z), max(p.x, p.z))) - 1./18. - .1015);
     //return max(d, max(max(p.x, p.y), p.z) - 1./18. - .024);
     //return max(d, length(p) - 1./18. - .048);
     
@@ -140,10 +141,10 @@ float map(vec3 q){
 
 // Very basic raymarching equation. Menger Sponge objects raymarch reasonably well. Not all surfaces do.
 float trace(vec3 ro, vec3 rd){
-        rd.xy*=1.0- ((_uvc.xy*PI))*FOV;
 
     float t = 0., d;
-    for(int i=0; i< 64; i++){        
+    for(int i=0; i< 64; i++){     
+           
         d = map(ro + rd*t);
         if (d <.0025*t || t>FAR) break;
         t += d;
@@ -266,7 +267,8 @@ vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
 
-    
+    vec2 Mirror = vec2(x_flip, y_flip);
+
     
     // Unit direction ray vector: Note the absence of a divide term. I came across this via a comment 
     // Shadertoy user "Coyote" made. I'm pretty happy with this.
@@ -274,19 +276,23 @@ vec4 renderMainImage() {
 
     // Barrel distortion. Looks interesting, but I like it because it fits more of the scene in.
     // If you comment this out, make sure you normalize the line above.
-    rd = normalize(vec3(rd.xy+PI*_uvc, sqrt(max(rd.z*rd.z/FOVmod - dot(rd.xy/FOVmod, rd.xy)/FOVmod*.2, 0.))));
+    // rd = normalize(vec3(rd.xy+PI*_uvc, sqrt(max(rd.z*rd.z/FOVmod - dot(rd.xy/FOVmod, rd.xy)/FOVmod*.2, 0.))));
+    rd = normalize(vec3(rd.xy*FOV, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.))));
+    vec2 rduvc =  mix(rd.xy, _uvc, 0.5);
     
     // Rotating the ray with Fabrice's cost cuttting matrix. I'm still pretty happy with this also. :)
-    vec2 m = sin(vec2(0, 1.57079632) + smoothTime*0.2);
+    vec2 m = sin(vec2(0, 1.57079632) + bass_time*0.2);
 
     //rd.xy = mat2(m.y, -m.x, m)*rd.xy;
     //rd.xz = mat2(m.y, -m.x, m)*rd.xz;
-    rd.yz = _rotate(rd.yz, lookXY.y*PI);
-    rd.xy = _rotate(rd.xy, -1.0*lookXY.x*PI);
+    rd.xy = mix( abs(rduvc), rd.xy, 1.0-Mirror);
 
+    rd.yz = _rotate(rd.yz, lookXY.y*PI+(_noise(TIME*0.1))*0.1);
+    rd.xy = _rotate(rd.xy, -1.0*rotate*PI);
+    rd.xz = _rotate(rd.xz, lookXY.x+(_noise(TIME*0.1)));
     
     // Ray origin, set off in the Z direction.
-    vec3 ro = vec3(0.0, 0.0, smoothTime*0.5);
+    vec3 ro = vec3(0.0, 0.0, bass_time*0.5);
 
     vec3 lp = ro  + vec3(0.0, 1.0, 0.0); // Light, near the ray origin.
     
@@ -348,7 +354,7 @@ vec4 renderMainImage() {
         
         vec3 rCol = tex3D(image6, rsp*ts, rsn); // Texel at "rsp."
         q = abs(mod(rsp, 3.) - 1.5);
-        if (max(max(q.x, q.y), q.z)<1.063) rCol = rCol*vec3(.7, .85, 1.);  
+        if (max(max(q.x, q.y), q.z)<1.063) rCol = rCol*vec3(.7, .85, 1.)*sin(TIME);  
         // Toning down the power of the reflected color, simply because I liked the way it looked more. 
         rCol = sqrt(rCol); 
         float rDiff = max(dot(rsn, normalize(lp-rsp)), 0.); // Diffuse at "rsp" from the main light.

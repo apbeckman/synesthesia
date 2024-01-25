@@ -184,12 +184,32 @@
 			"PARAMS" : 0.231,
 			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "x_mirror",
+			"PARAMS" : 0.03901,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_mirror",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",
 	"DESCRIPTION" : "Constructing a basic fractal object with Knighty's Kaleidoscopic IFS procedure.",
 	"GPU" : 0,
-	"HEIGHT" : 1080,
+	"HEIGHT" : 1440,
 	"IMAGES" : 
 	[
 		{
@@ -206,15 +226,24 @@
 		}
 	],
 	"IMAGE_PATH" : "kifs_flythrough_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 1224,
+			"HEIGHT" : 1440,
 			"TARGET" : "fractalPass",
-			"WIDTH" : 2176
+			"WIDTH" : 2560,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "KIFS Flythrough Mod",
-	"WIDTH" : 1920
+	"WIDTH" : 2560
 }

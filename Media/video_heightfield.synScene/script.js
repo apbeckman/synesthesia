@@ -55,7 +55,7 @@ function update(dt) {
   // bpmTime += (1. - Math.exp(-bpmcount.timeWithinBeat*3.))*inputs.amount_to_step;
   // uniforms.script_time = bpmTime;
   uniforms.highhits = 0.65*Math.pow(inputs.syn_HighLevel*0.2 + (inputs.syn_Level*0.125+inputs.syn_HighHits*0.35), 2.0)*inputs.syn_Intensity*inputs.syn_OnBeat;
-  uniforms.basshits = 0.65*Math.pow(inputs.syn_BassLevel*0.2 + (inputs.syn_Level*0.125+inputs.syn_BassHits*0.35), 2.0)*inputs.syn_Intensity*inputs.syn_OnBeat;
+  uniforms.basshits = 0.65*Math.pow(inputs.syn_BassLevel*0.2 + (inputs.syn_MidLevel*0.125+inputs.syn_BassHits*0.35), 2.0)*inputs.syn_Intensity*inputs.syn_OnBeat;
 
   bassT = bassT + Math.pow(inputs.syn_BassLevel*0.35+inputs.syn_MidLevel*0.15,2.0);
   uniforms.script_bass_time = bassT;
@@ -66,11 +66,13 @@ function update(dt) {
   uniforms.script_high_time = highT;
   uniforms.smooth_basstime = bpmcount.time*0.85+(bassT*0.35);
   uniforms.smooth_midtime = bpmcount.time*0.85+(midT*0.35);
-  uniforms.smooth_hightime = bpmcount.time*0.85+(highT*0.35);
-  uniforms.smoothTime = (uniforms.smooth_basstime * 0.75 + inputs.TIME * 0.125 + inputs.syn_Time * 0.2);
-  uniforms.smoothTimeB = (uniforms.smooth_hightime * 0.75 + inputs.TIME * 0.125 + inputs.syn_Time * 0.2);
-  uniforms.smoothTimeC = (uniforms.smooth_midtime * 0.75 + inputs.TIME * 0.125 + inputs.syn_Time * 0.2);
-  
+  uniformssmooth_hightime = bpmcount.time*0.85+(highT*0.35);
+
+  smoothTime = (uniforms.smooth_basstime * 0.75 + inputs.TIME * 0.125 + inputs.syn_Time * 0.2);
+  smoothTimeB = (uniforms.smooth_hightime * 0.75 + inputs.TIME * 0.125 + inputs.syn_Time * 0.2);
+  smoothTimeC = (uniforms.smooth_midtime * 0.75 + inputs.TIME * 0.125 + inputs.syn_Time * 0.2);
+
+
   // cPos.x = cPos.x + (-0.5+Math.random(inputs.syn_BeatTime)*inputs.syn_OnBeat);
   // decimator++;
   // if (decimator%10==0){

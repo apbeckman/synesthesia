@@ -8,9 +8,6 @@ vec4 iMouse = vec4(RENDERSIZE, 0, 0);
 			//******** BuffA Code Begins ********
 
 vec3 glow = vec3(0);
-float smoothTime = (smooth_basstime * 0.75 + TIME * 0.125 + syn_Time * 0.25)*0.95;
-float smoothTimeB = (smooth_hightime * 0.75 + TIME * 0.125 + syn_Time * 0.25)*0.95;
-float smoothTimeC = (smooth_midtime * 0.75 + TIME * 0.125 + syn_Time * 0.25)*0.95;
 
 vec4 noise(vec2 u){
 	return texture(image30, (u)/256.);
@@ -72,7 +69,7 @@ vec2 map(vec3 p){
 	p -= path(p.z);
     p.xy *= rot(0. + sin(p.z)*0.24 + cos(p.y)*0.13);
     //p.xy *= rot(0.6);
-	float wave = pow(abs(sin(p.z*0.2 + smooth_basstime*0.57)), 40.);
+	float wave = pow(abs(sin(p.z*0.2 + smooth_basstime*0.257)), 40.);
     
     pCoords = vec3(atan(p.y,p.x)/tau, length(p.xy), p.z);
     
@@ -143,7 +140,7 @@ vec2 map(vec3 p){
     dsqP = min(dsqP, pipe);
     
     
-    glow += exp(-dtt*(10. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*1.*pow(abs(sin(p.z - (3.5*smooth_hightime))), 10.);
+    glow += exp(-dtt*(10. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*1.*pow(abs(sin(p.z - (.35*smooth_hightime))), 10.);
     glow += exp(-dtt*(50. - pow(wave,0.4)*10. + sin(p.z)*1.))*max(coolPal(0.8, 1.8), 0.)*0.9;
     
     d = dmin(d, vec2(dtt,6.));
@@ -190,7 +187,7 @@ vec3 getRd(vec3 ro, vec3 lookAt, vec2 uv){
 	vec3 dir = normalize(lookAt - ro);
 	vec3 right = cross(vec3(0,1,0), dir);
 	vec3 up = cross(dir, right);
-    float fov = 1. + (sin(script_time*0.4)*0.21);
+    float fov = 1. + FOV;
 	return normalize(dir + right*uv.x*fov + up*uv.y*fov);
 }
 vec3 getNormal(vec3 p){
@@ -230,7 +227,7 @@ vec4 renderPassA() {
     ro -= rd*texture(image30,(uv)*16.).x*0.2; // remove banding from glow
     
     
-    rd.xy *= rot(sin(script_time + sin(smoothTime*0.4)*0.5 )*0.1);
+    rd.xy *= rot(sin(script_time*0.1 + sin(smoothTime*0.4)*0.5 )*0.1);
     rd.yz = _rotate(rd.yz, lookXY.y*PI);
     rd.xy = _rotate(rd.xy, lookXY.x*PI);
 

@@ -2,6 +2,16 @@
 	"CONTROLS" : 
 	[
 		{
+			"DEFAULT" : 0.75,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : -1,
+			"NAME" : "FOV",
+			"PARAMS" : 0.053,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
 			"DEFAULT" : 
 			[
 				0,
@@ -21,16 +31,6 @@
 			"NAME" : "lookXY",
 			"PARAMS" : 0.033,
 			"TYPE" : "xy smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0.75,
-			"DESCRIPTION" : "",
-			"MAX" : 1.5,
-			"MIN" : -1,
-			"NAME" : "FOV",
-			"PARAMS" : 0.053,
-			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -47,18 +47,18 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : -1,
+			"MIN" : -2,
 			"NAME" : "rate_in",
-			"PARAMS" : 0.068,
+			"PARAMS" : 0.09101,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
+			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "whiteout",
+			"NAME" : "Warp",
 			"PARAMS" : 0.104,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "effects"
@@ -84,6 +84,65 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "RotZ",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flash",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "size",
+			"PARAMS" : 0.14401,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "x_flip",
+			"PARAMS" : 0.14101,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_flip",
+			"PARAMS" : 0.04601,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : 0,
+			"NAME" : "push_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",
@@ -91,6 +150,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "maze_lattice_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Maze Lattice Mod",
 	"WIDTH" : 1920
 }

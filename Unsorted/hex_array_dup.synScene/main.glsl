@@ -124,6 +124,8 @@ vec3 raycast() {
   vec2 n = vec2(_rand(_uvc+(smoothTimeC*0.4))) - 0.5;
   // screenPos += n/100.;
   vec3 ray = normalize(vec3( screenPos, 1.0));
+  ray.xz = _rotate(ray.xz, _noise(sin(TIME*0.25))*0.4);
+  ray.yz = _rotate(ray.yz, _noise(sin(TIME*0.15))*0.4);
   float thresh = exp(-termThres);
   // raycasting parameter 
   float t  = 0.;

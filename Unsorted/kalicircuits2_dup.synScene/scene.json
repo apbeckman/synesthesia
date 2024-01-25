@@ -1,0 +1,147 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0.01,
+			"NAME" : "rate",
+			"PARAMS" : 0.393,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "TIme"
+		},
+		{
+			"DEFAULT" : 15,
+			"DESCRIPTION" : "",
+			"MAX" : 24,
+			"MIN" : 8,
+			"NAME" : "loops",
+			"TYPE" : "slider",
+			"UI_GROUP" : "TIme"
+		},
+		{
+			"DEFAULT" : 30,
+			"DESCRIPTION" : "",
+			"MAX" : 60,
+			"MIN" : 6,
+			"NAME" : "pulse",
+			"TYPE" : "knob",
+			"UI_GROUP" : "TIme"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"PARAMS" : 0.131,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				3,
+				3
+			],
+			"MIN" : 
+			[
+				-3,
+				-3
+			],
+			"NAME" : "center",
+			"PARAMS" : 0.00301,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0.67,
+			"DESCRIPTION" : "",
+			"MAX" : 1.04,
+			"MIN" : 0.1,
+			"NAME" : "zoom",
+			"PARAMS" : 0.01301,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.25,
+			"MIN" : -2,
+			"NAME" : "Zoom2",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 2.14,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 0.5,
+			"NAME" : "focus",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Vibe"
+		},
+		{
+			"DEFAULT" : 0.01,
+			"DESCRIPTION" : "",
+			"MAX" : 0.05,
+			"MIN" : 0.01,
+			"NAME" : "intensity",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Vibe"
+		},
+		{
+			"DEFAULT" : 10,
+			"DESCRIPTION" : "",
+			"MAX" : 100,
+			"MIN" : -100,
+			"NAME" : "glow",
+			"TYPE" : "knob",
+			"UI_GROUP" : "Vibe"
+		}
+	],
+	"CREDIT" : "by mojovideotech",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1440,
+	"IMAGE_PATH" : "kalicircuits2_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "KaliCircuits2_dup",
+	"WIDTH" : 2560
+}

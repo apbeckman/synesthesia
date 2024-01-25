@@ -13,7 +13,8 @@ vec3 warp(vec2 u, float ph1, float ph2){
     // Initializing the warped UV coordinates. This gives it a bit 
     // of a worm hole quality. There are infinitly other mutations.
     vec2 v = u - log(1./max(length(u), .001))*vec2(-1, 1);
-    
+       v += _scale(_fbm(u +sin(syn_BassTime*0.01)), -1, 1)*0.125;
+
     // Scene color.
     vec3 col = vec3(0.);
     
@@ -55,6 +56,7 @@ vec4 renderPassA() {
     // Adding two warp functions phase shifted by a certain amount was
     // Jolle's interesting addition. Just the one would work, but isn't
     // as interesting.
+    //u = mix(vec2(_fbm(u*2+(TIME*0.1))), u, 0.5);
     vec3 col = warp(u, ph1, ph2) + warp(u, ph1, ph2 + 1.57);
     
     // Toning things down slightly.
@@ -156,7 +158,6 @@ vec4 renderMainImage() {
 
     // Aspect correct pixel coordinates.
     vec2 uv = fragCoord/RENDERSIZE.y;
-   
     // A 3x3 blurred texture sample. The generated warped imagery contains a few
     // high frequency speckles, so blurred samples mitigate that somewhat. Denoising
     // would be better, but this will do.

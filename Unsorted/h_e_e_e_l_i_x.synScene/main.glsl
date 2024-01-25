@@ -5,7 +5,7 @@
 #define ANOTHER_LEVEL
 
 
-float guiLead = 0.6+Flop;
+float guiLead = 0.6+coil;
 float guiInnerRatio = 0.4407892623709694;
 float guiFocal = 3.;
 float guiRotateModel = 0.4560833039600971;

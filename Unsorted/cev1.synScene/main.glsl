@@ -1,4 +1,4 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
+// vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 			//******** BuffA Code Begins ********
@@ -32,7 +32,7 @@ vec2 map(vec3 p){
     	p = abs(p);
         p.x -= 2.;
         p.xy *= rot(0.25*pi);
-        
+
         p.t -= 1.;
         p.z += 0.2;
         
@@ -44,17 +44,16 @@ vec2 map(vec3 p){
     
     p = abs(p);
     p.xy -= 0.3;
-    float hightime = smoothTimeB*0.2;
+    float hightime = smoothTimeB*0.1;
     p = abs(p);
-    p.xy = _rotate(p.xy, spin_time);
     p.y -= 0.2+(sin(0.0125*smoothTimeC)*tog);
     p = abs(p);
     p.x -= 0.5;
     p = abs(p);
     p.x -= 0.5+(sin(0.0125*smoothTimeC)*tog);
     
-    float attd = pow(abs(sin(j.z*0.5 + hightime*0.4)), 10.);; 
-    float atte = pow(abs(sin(j.z*0.5 + hightime*.124)), 100.)*attd; 
+    float attd = pow(abs(sin(j.z*0.5 + hightime)), 10.);; 
+    float atte = pow(abs(sin(j.z*0.5 + hightime)), 100.)*attd; 
     
     vec3 q = p;
 
@@ -75,6 +74,9 @@ vec2 map(vec3 p){
     glown += 0.9/(0.0001 + dB*dB*10.)*vec3(.8 + attd*8.,0.9,02.7)*att;
     
     p.z -= 1.5;
+    p.yz = _rotate(p.yz, y_time);
+    p.xz = _rotate(p.xz, x_time);
+    p.xy = _rotate(p.xy, spin_time);
     
     p = abs(p);
     p.z -= 0.2;
@@ -86,18 +88,18 @@ vec2 map(vec3 p){
 	glown += 2.9/(0.001 - - atte*2. + dC*dC*400.)*vec3(1.,1.,1.7)*attb;
 
     //glow += 2.9/(0.001 + dC*dC*400.)*vec3(1.,1.,1.7)*attb;
-    
     p.x -= 0.4;
     p = abs(p);
     p.x += 0.1;
     p.y -= 0.2;
-    p.xy *= rot((-0.25+basshits*0.1)*pi);
+    p.xy *= rot((-0.25)*pi);
     p.z -= 1.;
     //p -= 0.4;
     p.x -= 0.3;
     
-    float dD = sdBox(p, vec3(0.02,1.7+basshits,0.02+basshits*0.1));
+    float dD = sdBox(p, vec3(0.02,1.7,0.02));
     d = dmin(d, vec2(dD, 2.));
+    // float attc = pow(abs(sin(p.y*0.24 + hightime + 4.)), 10.);
     float attc = pow(abs(sin(p.y*0.24 + hightime + 4.)), 10.);
     //glow += 10.9/(0.01 + dD*dD*2000.)*sin(vec3(0.1,0.8,0.7) + vec3(0,0,attd*2.))*attc;
     //glow += 0.7/(0.001 + dD*dD*100.)*sin(vec3(0.1,0.1,0.9) + vec3(0,0,attd*2.))*attc;
@@ -122,8 +124,10 @@ vec2 map(vec3 p){
 int it = 0;
 
 vec2 march(vec3 ro, vec3 rd, inout vec3 p, inout float t, inout bool hit){
+    vec2 xy_noise = vec2(_noise(TIME*0.1));
 	vec2 d = vec2(10e7);
-    
+    rd.xz = _rotate(rd.xz, xy_noise.x*0.1);
+    rd.yz = _rotate(rd.yz, xy_noise.y*0.1);
     t = 0.; hit = false; p = ro;
     
     for(it = 0; it< (60+FOV) + min(FRAMECOUNT,0); it++){
@@ -171,7 +175,7 @@ vec4 renderPassA() {
     
     vec3 ro = vec3(0);
     
-    ro.z += (smoothTime);
+    ro.z += (bass_time);
     
     vec3 lookAt = vec3(0);
     

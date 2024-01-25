@@ -51,6 +51,38 @@
 			"NAME" : "Stretch",
 			"TYPE" : "xy",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "twist",
+			"PARAMS" : 0.07701,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "wyatt",
@@ -58,31 +90,46 @@
 	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGE_PATH" : "segmentation.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 720,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1280,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 720,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1280
+			"WIDTH" : 1280,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 720,
 			"TARGET" : "BuffC",
-			"WIDTH" : 1280
+			"WIDTH" : 1280,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 720,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1280
+			"WIDTH" : 1280,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Segmentation",

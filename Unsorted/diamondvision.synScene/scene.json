@@ -54,9 +54,9 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0.5,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
+			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "rate_in",
 			"TYPE" : "knob",
@@ -77,8 +77,7 @@
 			"MAX" : 10,
 			"MIN" : 0,
 			"NAME" : "test",
-			"PARAMS" : 0.025,
-			"TYPE" : "slider smooth",
+			"TYPE" : "slider",
 			"UI_GROUP" : "geometry"
 		},
 		{
@@ -96,7 +95,7 @@
 			"MAX" : 0.5,
 			"MIN" : -0.5,
 			"NAME" : "test2",
-			"PARAMS" : 0.347,
+			"PARAMS" : 0.429,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "geometry"
 		},
@@ -128,6 +127,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "diamondvision.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "DiamondVision",
 	"WIDTH" : 1920
 }

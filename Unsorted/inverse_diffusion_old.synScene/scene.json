@@ -1,0 +1,226 @@
+{
+  "CONTROLS": [
+    {
+      "DEFAULT": 0.25,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": -1,
+      "NAME": "Zoom",
+      "PARAMS": 0.06201,
+      "TYPE": "slider smooth",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": [0, 0],
+      "DESCRIPTION": "",
+      "MAX": [1, 1],
+      "MIN": [-1, -1],
+      "NAME": "Fisheye",
+      "PARAMS": 0.05501,
+      "TYPE": "xy smooth",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "Move",
+      "TYPE": "toggle",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": [-0.2, -0.1],
+      "DESCRIPTION": "",
+      "MAX": [2, 2],
+      "MIN": [-2, -2],
+      "NAME": "moveXY",
+      "PARAMS": 0.124,
+      "TYPE": "xy smooth",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 0.975,
+      "MIN": -0.975,
+      "NAME": "Height",
+      "TYPE": "slider",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": 0.5,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": -0.975,
+      "NAME": "distortion",
+      "TYPE": "slider",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": [0, 0],
+      "DESCRIPTION": "",
+      "MAX": [1, 1],
+      "MIN": [-1, -1],
+      "NAME": "Stretch",
+      "PARAMS": 0.01,
+      "TYPE": "xy smooth",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": [0, 0],
+      "DESCRIPTION": "",
+      "MAX": [2, 2],
+      "MIN": [-2, -2],
+      "NAME": "Pull",
+      "PARAMS": 0.04201,
+      "TYPE": "xy smooth",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 4,
+      "MIN": 0,
+      "NAME": "warp",
+      "PARAMS": 0.06101,
+      "TYPE": "knob smooth",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "noise_rot",
+      "PARAMS": 0.06101,
+      "TYPE": "knob smooth",
+      "UI_GROUP": "default"
+    },
+    {
+      "DEFAULT": 0.5,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "flash",
+      "TYPE": "toggle",
+      "UI_GROUP": "light/color"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "greyscale",
+      "PARAMS": 0.01,
+      "TYPE": "knob smooth",
+      "UI_GROUP": "light/color"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "shock_forward",
+      "PARAMS": 0.01901,
+      "TYPE": "bang smooth",
+      "UI_GROUP": ":)"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "shock_back",
+      "PARAMS": 0.01901,
+      "TYPE": "bang smooth",
+      "UI_GROUP": ":)"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "stir",
+      "PARAMS": 0.01,
+      "TYPE": "bang smooth",
+      "UI_GROUP": ":)"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "spin_right",
+      "PARAMS": 0.01,
+      "TYPE": "bang smooth",
+      "UI_GROUP": ":)"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "spin_left",
+      "PARAMS": 0.01,
+      "TYPE": "bang smooth",
+      "UI_GROUP": ":)"
+    },
+    {
+      "DEFAULT": 0,
+      "DESCRIPTION": "",
+      "MAX": 1,
+      "MIN": 0,
+      "NAME": "Reset",
+      "TYPE": "bang",
+      "UI_GROUP": "utils"
+    }
+  ],
+  "CREDIT": "wyatt",
+  "DESCRIPTION": "The Diffusion equation in negative time!\nSomeone told me I do \"Millennial tie dye\" lol",
+  "GPU": 0,
+  "HEIGHT": 1080,
+  "IMAGE_PATH": "inverse_diffusion_old.png",
+  "MEDIA": [
+    {
+      "FILTER": "linear",
+      "WRAP": "repeat"
+    }
+  ],
+  "PASSES": [
+    {
+      "FILTER": "linear",
+      "FLOAT": true,
+      "HEIGHT": 1080,
+      "TARGET": "BuffA",
+      "WIDTH": 1920,
+      "WRAP": "repeat"
+    },
+    {
+      "FILTER": "linear",
+      "FLOAT": true,
+      "HEIGHT": 1080,
+      "TARGET": "BuffB",
+      "WIDTH": 1920,
+      "WRAP": "repeat"
+    },
+    {
+      "FILTER": "linear",
+      "FLOAT": true,
+      "HEIGHT": 1080,
+      "TARGET": "BuffC",
+      "WIDTH": 1920,
+      "WRAP": "repeat"
+    },
+    {
+      "FILTER": "linear",
+      "FLOAT": true,
+      "HEIGHT": 1080,
+      "TARGET": "BuffD",
+      "WIDTH": 1920,
+      "WRAP": "repeat"
+    }
+  ],
+  "TITLE": "Inverse diffusion old",
+  "WIDTH": 1920
+}

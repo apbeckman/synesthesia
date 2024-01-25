@@ -6,6 +6,11 @@
 #define C(u) texture(BuffC,(u)/RENDERSIZE.xy)
 #define D(u) texture(BuffD,(u)/RENDERSIZE.xy)
 #define T(u) texture(image46,(u)/RENDERSIZE.xy)
+float lum(vec4 rgb)
+{
+  return dot(rgb, vec4(0.4, 0.159, 0.11, 0.));
+}
+
 
 
 /*
@@ -26,16 +31,25 @@ vec4 renderPassA() {
 	vec2 u = _xy;
     vec4  r = vec4(0);
     vec4  a = D(u);
+
     a.xy += _uvc*Succ*syn_Intensity;
     float z    = 4.;//kernel convolution size
-    float blur = 3./z;
+    float blur = 4./z;
+    blur *= 1.0 + _luminance( _edgeDetectSobel(syn_UserImage)*0.5*( 11.250+syn_BassLevel ));
+
     a += syn_Level*0.006;
+    //a.r += (lum(_textureMedia(_uv))*4*PI)*(0.75*syn_BassLevel+0.35*syn_Intensity)*Media;
+    //a.g += sin(lum(_loadUserImage())*4*PI)*(0.75*syn_BassLevel+0.35*syn_Intensity)*Media;
+
     for(float i=-z; i<=z; ++i){
     for(float j=-z; j<=z; ++j){
         vec2  c = vec2(i,j)*blur; //c = c.yx*vec2(-1,1);
               c*= exp(-dot(c,c));
-        vec4  a2= D(u+vec2(i,j));
+        vec4  a2= D(u+vec2(i,j));  
         vec4  b = a2-a;
+        b *= 1.0 - ( _edgeDetectSobel(syn_UserImage)*0.35*( 1.0+syn_BassLevel ));
+      
+
         r.x += length(b.xy-_uvc*Split);
         //r.xy += c*b.z;
         //r.z  += dot(c,b.xy           );//*a2.z;
@@ -52,7 +66,9 @@ vec4 renderPassB() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
     u += _uvc*PI*Zoom;
+    u += _uvc*PI*Stretch;
     u += Drift*PI;
+    u += vec2(_noise(TIME)*0.5, 0.5*_noise(TIME))*syn_Presence;
 
     vec4  r = D(u);
     float z    = 4.;//kernel convolution size
@@ -83,6 +99,7 @@ vec4 renderPassC() {
              +t.z*vec2(0,.0)
              -T(u).x*t.xy*.0;
     float s = 0.;
+    
     float z    = 4.;//kernel convolution size
     for(float i=-z; i<=z; ++i){
     for(float j=-z; j<=z; ++j){
@@ -110,10 +127,14 @@ fragColor+= syn_HighLevel*0.125+syn_MidHighLevel*0.125;
     for(float j=-z; j<=z; ++j){
       vec4 t = B(u+vec2(i,j)); t.z = 1.;
       vec4 m = C(u+vec2(i,j));
+      //m *= 1.0 - ( _luminance(_edgeDetectSobel(syn_UserImage))*0.125*( 1.0+syn_BassLevel ));
+
       vec2 c = (m.xy-vec2(i,j))*1.;
       float z = t.z*exp(-dot(c,c));
+
       a.xy += z*m.xy;
       a.z  += z*m.z;
+
       tz   += z;
     }}
     if(tz==0.){tz = 1.;}
@@ -139,10 +160,16 @@ vec4 renderMainImage() {
 
     vec2 u = fragCoord/RENDERSIZE.xy;
     vec4 a = texture(BuffD,u);
-    //fragColor = a.z+a.z*sin(length(a.xy)+vec4(1,2,3,4)+0.);
+    //a *= 1.0 +  (_edgeDetectSobel(syn_UserImage)*0.25*( 1.0+syn_BassLevel )),1, 1;
+
+    //    a.r += sin(lum(_loadUserImage())*4*PI)*(0.75*syn_BassLevel+0.35*syn_Intensity)*Media;
+    //a.g += sin(lum(_loadUserImage())*4*PI)*(0.75*syn_BassLevel+0.35*syn_Intensity)*Media;
+    //a *= 1.0 -  _luminance( _edgeDetectSobelMedia()*0.25*( 1.0+syn_BassLevel )),1, 1;
+
+    fragColor = a.z+a.z*sin(length(a.xy)+vec4(1,2,3,4)+0.);
     fragColor = +sin(a.x*2.+vec4(2,3,5,8)+0.)*(.25)
-                +sin(a.y*2.+vec4(2,3,3,4)+0.)*.25*(1.+0.5*syn_HighLevel)
-                +.5*(1.+0.1*syn_HighLevel);
+                +sin(a.y*2.+vec4(2,3,3,4)+0.)*.25*(1.)
+                +.5*(1.);
 	return fragColor; 
  } 
 

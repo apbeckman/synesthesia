@@ -29,7 +29,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "Rotate",
-			"PARAMS" : 0.084,
+			"PARAMS" : 0.02001,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -39,7 +39,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "FOV",
-			"PARAMS" : 0.133,
+			"PARAMS" : 0.02501,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -66,12 +66,22 @@
 			"UI_GROUP" : "Camera"
 		},
 		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1.5,
 			"MIN" : -1.5,
 			"NAME" : "MinRadius",
-			"PARAMS" : 0.137,
+			"PARAMS" : 0.05101,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Geo"
 		},
@@ -104,6 +114,26 @@
 			"PARAMS" : 0.123,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Geo"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flash",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "perspective",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "jeyko",
@@ -111,6 +141,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1440,
 	"IMAGE_PATH" : "day_one_15.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Day One 15",
 	"WIDTH" : 2560
 }

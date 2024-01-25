@@ -61,6 +61,7 @@ function update(dt) {
   uniforms.midhits = 0.75*Math.pow( (inputs.syn_MidLevel*0.45 + inputs.syn_Level*0.125+inputs.syn_MidHits*0.25), 2.0)*inputs.syn_Intensity;
   uniforms.level = 
   bassT = bassT + Math.pow(inputs.syn_BassLevel*0.35+inputs.syn_MidLevel*0.15,2.0);
+  uniforms.bassT = bassT;
   uniforms.script_bass_time = bassT;
   midT = midT + Math.pow(inputs.syn_MidLevel*0.25+inputs.syn_MidHighLevel*0.25,2.0);
   uniforms.script_bass_time = bassT;

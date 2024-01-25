@@ -125,6 +125,13 @@
 		}
 	],
 	"IMAGE_PATH" : "weaved_3d_truchet_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Weaved 3D Truchet Mod",
 	"WIDTH" : 1920
 }

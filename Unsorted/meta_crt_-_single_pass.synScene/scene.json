@@ -5,7 +5,7 @@
 			"DEFAULT" : 
 			[
 				0.5,
-				0.5
+				0
 			],
 			"DESCRIPTION" : "",
 			"MAX" : 
@@ -39,6 +39,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "meta_crt_-_single_pass.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Meta CRT - Single Pass",
 	"WIDTH" : 1920
 }

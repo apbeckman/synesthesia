@@ -62,7 +62,7 @@ float map (vec3 p)
     {        
         
         // fold
-        p.xz = abs(p.xz)-0.5*a;
+        p.xz = abs(p.xz)-(0.5+Fold)*a;
         
         // rotate
         p.yx *= rot(angle.z/a);
@@ -107,6 +107,8 @@ vec4 renderMainImage() {
     vec3 at = vec3(0,0,1);
     vec2 mouse = (_mouse.xy/RENDERSIZE.xy-.5)*step(0.5,_mouse.z);
     at.yz *= rot(-mouse.y);
+    at.yz = _rotate(at.yz, lookxy.y*PI);
+    at.xz = _rotate(at.xz, lookxy.x*PI);
     at.xz *= rot(mouse.x);
     vec3 z = normalize(at-eye);
     vec3 x = normalize(cross(z, vec3(0,1,0)));

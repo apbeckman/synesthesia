@@ -78,6 +78,7 @@ float heightField(vec3 p)
 	//return sin(p.x*4.0)*sin(p.z*4.0);
 	//return luminance(syn_UserImage, p.xz*0.5+0.5)*2.0-1.0;
 	//return luminance(syn_UserImage, worldToTex(p))*0.5;
+	vec4 mediaEdges = _edgeDetectSobel(syn_UserImage, _uv);
 	return luminance(syn_UserImage, worldToTex(p))*maxheight*OVERDRIVE; //FACTOR IS SCALING in Z
 }
 bool traceHeightField(vec3 ro, vec3 rayStep, out vec3 hitPos)
@@ -111,7 +112,7 @@ vec3 background(vec3 rd)
 
 #define TWOPI 6.28318530718
 
-vec4 renderMain() { 
+vec4 renderMainImage() { 
  	vec4 out_FragColor = vec4(0.0);
 
     vec2 pixel = (_xy.xy / RENDERSIZE.xy)*2.0-1.0;
@@ -167,3 +168,9 @@ vec4 renderMain() {
 
 return out_FragColor; 
  } 
+vec4 renderMain(){
+
+	if(PASSINDEX == 0){
+		return renderMainImage();
+	}
+}

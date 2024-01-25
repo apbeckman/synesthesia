@@ -1,0 +1,21 @@
+{
+	"CREDIT" : "Synesthesia",
+	"DESCRIPTION" : "",
+	"GPU" : 1,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "raw_video_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"media",
+		"utility"
+	],
+	"TITLE" : "Raw Video_dup",
+	"WIDTH" : 1920
+}

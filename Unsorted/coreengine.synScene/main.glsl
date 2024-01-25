@@ -113,8 +113,8 @@ float map(vec3 p)
     d-=tri_surf(p)*(disturbFloor+0.2+react*sin(smoothTimeC)*0.05);
     
     vec3 r=q;
-    r.xz=abs(r.xz*rot(smoothTimeB*0.5))-1.9;    
-    r.yz=abs(r.yz*rot(smoothTimeB*0.5))-1.9;
+    r.xz=abs(r.xz*rot(smoothTimeC*0.5))-1.9;    
+    r.yz=abs(r.yz*rot(smoothTimeC*0.5))-1.9;
 
     float d3=oct(r,0.5);
     d=min(d,d3);
@@ -243,11 +243,11 @@ vec4 renderMainImage() {
 
     rnd=hash12(fragCoord)*0.1+0.9;
     
-    vec3 ro=vec3(0.,-1.,10.+cos(smoothTime/3.0));
+    vec3 ro=vec3(0.,-1.,10.+cos(bass_time/3.0));
     vec3 ta=vec3(0.,1.,0.);
 
     ro.yz =_rotate(ro.yz, LookXY.y*0.25);
-    ro.xz*=rot(LookXY.x*PI+.125*smoothTime); 
+    ro.xz*=rot(LookXY.x*PI+.125*bass_time); 
      // debugging camera
    // float x_rot=-lookXY.x/RENDERSIZE.x*PI*2.0;
     //float y_rot=lookXY.y/RENDERSIZE.y*3.14*0.5 + PI/2.0;
@@ -271,7 +271,7 @@ vec4 renderMainImage() {
     //p.xy+=(_uvc*PI*p.xy*Warp)*2.;
 
         rd = cam(ro,ta)*normalize(vec3(p.xy+p.xy*PI*FOVmod,.8));
-
+        rd.xy = _rotate(rd.xy, LookXY.y*0.5);
         vec3 col=vec3(0.);
 
         float t=intersect(ro,rd);

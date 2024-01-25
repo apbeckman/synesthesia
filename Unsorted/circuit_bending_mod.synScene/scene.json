@@ -54,28 +54,6 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "QuadMirror",
-			"PARAMS" : 0.066,
-			"TYPE" : "xy smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
@@ -111,8 +89,7 @@
 			"MAX" : 3,
 			"MIN" : 2,
 			"NAME" : "noise",
-			"PARAMS" : 0.084,
-			"TYPE" : "slider smooth",
+			"TYPE" : "knob",
 			"UI_GROUP" : "structure"
 		},
 		{
@@ -143,6 +120,26 @@
 			"PARAMS" : 0.069,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "structure"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror_x",
+			"PARAMS" : 0.08501,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror_y",
+			"PARAMS" : 0.07101,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "mojovideotech",
@@ -161,6 +158,13 @@
 		}
 	],
 	"IMAGE_PATH" : "circuit_bending_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Circuit Bending Mod",
 	"WIDTH" : 2560
 }

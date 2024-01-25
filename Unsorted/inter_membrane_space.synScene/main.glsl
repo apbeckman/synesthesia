@@ -51,10 +51,12 @@ vec4 renderPassA() {
     // coordinates
     vec2 uv = (fragCoord-RENDERSIZE.xy/2.)/RENDERSIZE.y;
     vec3 color = vec3(0);
+
     vec3 ray = normalize(vec3(uv, -1.));
+
     ray.xy *= rot(-.7);
+
     vec3 pos = ray*(.5+.5*rng.z);
-    
     // raymarch
     float maxDist = 5.;
     const float count = 100.;

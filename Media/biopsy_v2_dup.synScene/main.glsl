@@ -189,7 +189,7 @@ void mainImage1( out vec4 fragColor, in vec2 fragCoord )
     }
 
     //uv = uv - vec2(0.0,GradientB(uv, pixelSize, vec4(-128,-128.,-128.,-128.), 1)*syn_HighHits*0.0001);
-    float logo = dot(_loadUserImage().rgb, vec3(1.0))*0.33;
+    float logo = dot(_loadUserImage().rgb*media_impact, vec3(1.0))*0.33;
 
     uv -= vec2(-_uvc.x*0.005*basshits, _uvc.y*0.005*highhits)*(1.0-logo)*stretching;
 
@@ -218,9 +218,9 @@ void mainImage1( out vec4 fragColor, in vec2 fragCoord )
 
     if (syn_MediaType > 0.5){
 
-        fragColor.r -= fragColor.r*logo*syn_BassLevel;
+        fragColor.r -= fragColor.r*logo;
         fragColor.b += fragColor.g*logo;
-        fragColor.g = mix(fragColor.g, logo, syn_HighHits);
+        fragColor.g = mix(fragColor.g, logo, basshits);
 
     }
 

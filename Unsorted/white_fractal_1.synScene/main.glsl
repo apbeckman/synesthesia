@@ -232,8 +232,8 @@ vec4 renderMainImage() {
     vec3 uu = normalize(cross(vec3(0, 1, 0), ww));
     vec3 vv = normalize(cross(ww, uu));
     vec3 rd = normalize(mat3(uu, vv, ww)*vec3(uv, 01.));
-    rd.xz = _rotate(rd.xz, (LookXY.x*PI)+PI*_uvc.x*Perspective*FOV);
-    rd.yz = _rotate(rd.yz, (LookXY.y)*PI);
+    rd.xz = _rotate(rd.xz, (LookXY.x*PI+_noise(TIME*0.001))+PI*_uvc.x*Perspective*FOV);
+    rd.yz = _rotate(rd.yz, (LookXY.y+_noise(TIME*0.001))*PI);
    // rd.xy = _rotate(rd.xy, Rotate*PI);
 
     vec3 col = texture(image3, uv).rgb;
@@ -258,10 +258,10 @@ vec4 renderMainImage() {
         vec3 f0;
         float hov, nov;
         col = pbr(p, n, l, rd, a, ro, m, f0, hov, nov); // direct lighting.
-        
+        col += mix(col, bump(p*4., n, 0.1, .1), 0.5)*pastels;
         vec3 r = reflect(rd, n); 
         col += ibl(p, n, r, a, ro, m, f0, hov, nov); // indirect lighting.
-        col *= .24 +(syn_HighLevel*0.25+0.25*syn_MidHighLevel)*(.750+syn_Intensity);
+        col *= .24 +flash*(syn_HighLevel*0.25+0.25*syn_MidHighLevel)*(.750+syn_Intensity);
     }
     
     col = mix(col, vec3(0), 1.0 - exp(-0.1*t.x)); // some black fog.  lazy attenuation.

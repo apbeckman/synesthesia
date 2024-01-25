@@ -70,7 +70,7 @@ vec3 pal( in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d ) {
 }
 
 vec3 spectrum(float n) {
-    return pal( n, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0)*(1. +syn_MidHighLevel),vec3(0.0,0.33,0.67) );
+    return pal( n, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0)*(1. +syn_MidHighLevel*flash),vec3(0.0,0.33,0.67) );
 }
 
 
@@ -469,7 +469,7 @@ vec4 renderMainImage() {
         col = bgCol2;
     }
     
-    col = pow(col, vec3(1.519-syn_HighLevel*0.5*syn_MidHighLevel)) * 2.5;
+    col = pow(col, vec3(1.519-flash*syn_HighLevel*0.5*syn_MidHighLevel)) * 2.5;
     
     col = tonemap2(col);
         

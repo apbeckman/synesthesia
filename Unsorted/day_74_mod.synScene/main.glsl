@@ -136,7 +136,7 @@ vec4 renderPassA() {
     vec3 ro = vec3(0);
     
     ro.z += mx*2.;
-    ro.z += smoothTime*SPEED*0.75;
+    ro.z += bass_time;
 
     ro += path(ro.z);
     
@@ -145,11 +145,11 @@ vec4 renderPassA() {
     lookAt += path(lookAt.z);
     //lookAt.xy += (_uvc*PI*FOV*lookAt.xy);
    // uv *=1.0+ WarpFurther*(-1.+PI*uv*PI);
-
+    vec2 xy_noise = vec2(_noise(vec2(sin(TIME*0.2), cos(TIME*0.2))));
     vec3 rd = getRd(ro, lookAt, (uv)+_uvc*PI*FOV);
-    rd.xz = _rotate(rd.xz, LookXY.x*PI+_uvc.x*PI*WarpFurther.x);
+    rd.xz = _rotate(rd.xz, LookXY.x*PI+_uvc.x*PI*WarpFurther.x+ xy_noise.x*0.2);
     rd.xy = _rotate(rd.xy, Rotate*PI);
-    rd.yz = _rotate(rd.yz, LookXY.y*PI+_uvc.y*PI*WarpFurther.y*0.75);
+    rd.yz = _rotate(rd.yz, LookXY.y*PI+_uvc.y*PI*WarpFurther.y*0.75 + xy_noise.x*0.2);
     //rd.xy *= rot(sin(smoothTime)*0.05);
     
     bool hit; float t; vec3 p;

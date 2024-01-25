@@ -390,7 +390,7 @@ vec4 renderMainImage() {
     col.xyz += 0.2*a;
 //    col.xyz += 0.5 - 0.5*cos(8.*vec3(0.2,0.8,0.6)*rho.w);
     //col.xyz += vec3(1,1,1)*bord;
-   col.xyz += 0.5 - 0.5*cos(8.*vec3(0.25*(1.0+cos(smoothTimeB*0.25)*0.025+0.25),0.29,0.3*(1.0+sin(smoothTimeB*0.5)*0.0125+0.125))*rho.w);
+   col.xyz += 0.5 - 0.5*cos(8.*vec3(0.25*(1.0+cos(smoothTimeC*0.25)*0.025+0.25),0.29,0.3*(1.0+sin(smoothTimeC*0.5)*0.0125+0.125))*rho.w);
 
     col.xyz = tanh(4.*pow(col.xyz,vec3(1., 2.5,5)));
     col.w=1.0;

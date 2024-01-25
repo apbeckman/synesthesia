@@ -389,7 +389,7 @@ vec4 stepFlow(in sampler2D state, in sampler2D fine, bool init){
   float momentum_ = momentum
     * pow(2, -4*pulse_)
     * float(lens<=1.0)*max(1-zap_, 0);
-
+  
   mat4 corners;
   vec4 r_fine;
 

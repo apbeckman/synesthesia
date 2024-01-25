@@ -1,0 +1,33 @@
+{
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "A random animated 2D asymmetric rounded quad grid.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image30",
+			"PATH" : "images/30.png"
+		},
+		{
+			"NAME" : "image49",
+			"PATH" : "images/49.png"
+		},
+		{
+			"NAME" : "image49b",
+			"PATH" : "images/49b.jpg"
+		}
+	],
+	"IMAGE_PATH" : "random_asymmetric_quad_grid.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Random Asymmetric Quad Grid",
+	"WIDTH" : 1280
+}

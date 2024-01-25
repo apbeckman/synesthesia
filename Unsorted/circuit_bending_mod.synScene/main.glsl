@@ -21,8 +21,10 @@ vec4 texture2DAA(sampler2D tex, in vec3 p, vec2 uv) {
     uv_texspace = clamp(uv_texspace, seam-.5, seam+.5);
     return texture(tex, uv_texspace/texsize);
 }
-
-
+float smin(float a, float b, float k) {
+    float h = max(k - abs(a-b), 0.) / k;
+    return min(a, b) - h*h*h*k*1./7.;
+}
 vec4 texture2DAA1(sampler2D tex, in vec3 p, in vec3 n) {
     vec2 uv = _xy;
     vec2 texsize = vec2(textureSize(tex,0));
@@ -96,11 +98,16 @@ vec4 renderMain() {
     // sp.xy += lookXY;
     sp = mix(sp, normalize(vec3(_uvc*PI, 1.0)), perspective);
 
-    sp.yz = _rotate(sp.yz, lookXY.y*PI+Noise+_uvc.y*PI*perspective*perspective2);
+    float m_x = smin(sp.x*-1, sp.x, 0.25)*1.2;
+    float m_y = smin(sp.y*-1, sp.y, 0.25)*1.2;
+    vec2 sp_mirrored = vec2(m_x, m_y);
+    sp.xy = mix(sp.xy, sp_mirrored, vec2(mirror_x, mirror_y));
     sp.xz = _rotate(sp.xz, lookXY.x*PI+Noise);
+    sp.yz = _rotate(sp.yz, lookXY.y*PI+Noise);
+
 
     sp.xy = _rotate(sp.xy, Rotate*PI+0.025*n3D(vec3(smoothTime*0.01)));
-    sp.xy += sp.xy*_uvc*PI*QuadMirror*PI;
+    // sp.xy += sp.xy*_uvc*PI*QuadMirror*PI;
 
     vec3 camPos = vec3( pi, pi, bass_time*2.);
     vec3 pos = camPos;
@@ -137,9 +144,9 @@ vec4 renderMain() {
 
     //cyan circuits
    // finalCol.rgb += tpl(circuits2, pos*0.149, normal)*vec3(0.2,0.8,1.0)*(syn_HighLevel+syn_MidHighLevel)*sin(pos.z+0.125*smoothTimeB);
-    finalCol.rgb += tpl(circuits2, pos*0.24, normal)*vec3(01.2,01.75,01.50)*(syn_HighLevel+syn_HighHits+syn_MidHighLevel)*sin(pos.z+0.125*smoothTimeB);
+    finalCol.rgb += tpl(circuits2, pos*0.24, normal)*vec3(01.19,01.75,01.50)*(syn_HighLevel+syn_HighHits+syn_MidHighLevel)*sin(pos.z+0.125*smoothTimeB);
 
-    finalCol.rgb += tpl(circuits, pos*0.17+vec3(0.0, 0.0, syn_BPMTwitcher*0.0125), normal)*vec3(1.40,0.764,01.27370)*pow(_fbm(pos+smoothTimeB*0.06),2.50)*(0.850+syn_Intensity+.85*syn_HighLevel+syn_MidHighHits);
+    finalCol.rgb += tpl(circuits, pos*0.17+vec3(0.0, 0.0, syn_BPMTwitcher*0.0125), normal)*vec3(1.40,01.164,01.27370)*pow(_fbm(pos+smoothTimeB*0.06),2.50)*(0.850+syn_Intensity+.85*syn_HighLevel+syn_MidHighHits);
 
     if (syn_MediaType > 0.5){
         vec3 mediaCol = tpl(syn_UserImage, pos*media_scale, normal*10.0);
