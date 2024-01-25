@@ -1,1 +1,1 @@
-Some duplicates in here — mostly testing alternate versions of things in those cases. 
+Shaders modified to incorporate Synesthesia's audio engine as well as MIDI input variables.
