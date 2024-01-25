@@ -1,0 +1,91 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Reset",
+			"TYPE" : "bang",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_impact",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_hits",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "paint_size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "edge_mix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Jordan",
+	"DESCRIPTION" : "Each color eats around the color wheel. Click to grab a starter from the webcam.\nBased on my previous: https://www.shadertoy.com/view/wddGWM\n",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "cellular_automata_with_diffusion.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "media_pass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "media_pass_fx",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "Cellular Automata with Diffusion",
+	"WIDTH" : 1920
+}

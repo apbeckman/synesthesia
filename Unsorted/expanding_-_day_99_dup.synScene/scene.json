@@ -44,16 +44,6 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Fold",
-			"PARAMS" : 0.113,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
 			"MAX" : 0.25,
 			"MIN" : -0.25,
 			"NAME" : "test2",
@@ -92,6 +82,16 @@
 			"UI_GROUP" : "camera"
 		},
 		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "spin",
+			"PARAMS" : 0.09801,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
 			"DEFAULT" : 5,
 			"DESCRIPTION" : "",
 			"MAX" : 5,
@@ -107,7 +107,46 @@
 			"MIN" : -2,
 			"NAME" : "Rotate",
 			"PARAMS" : 0.084,
-			"TYPE" : "slider smooth",
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror_x",
+			"PARAMS" : 0.07001,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror_y",
+			"PARAMS" : 0.04601,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert",
+			"PARAMS" : 0.06501,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Depth",
+			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -123,13 +162,22 @@
 		}
 	],
 	"IMAGE_PATH" : "expanding_-_day_99_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Expanding - Day 99_dup",

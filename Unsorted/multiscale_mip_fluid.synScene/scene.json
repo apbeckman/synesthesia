@@ -1,0 +1,36 @@
+{
+	"CREDIT" : "cornusammonis",
+	"DESCRIPTION" : "A mipmap-based approach to multiscale fluid dynamics.",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "multiscale_mip_fluid.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Multiscale MIP Fluid",
+	"WIDTH" : 1280
+}

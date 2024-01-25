@@ -79,6 +79,36 @@
 			"UI_GROUP" : "default"
 		},
 		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror_x",
+			"PARAMS" : 0.05701,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror_y",
+			"PARAMS" : 0.06201,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert",
+			"PARAMS" : 0.04601,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2.5,
@@ -133,6 +163,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "big_path.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "big path",
 	"WIDTH" : 1920
 }

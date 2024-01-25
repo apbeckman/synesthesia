@@ -1,0 +1,21 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.2,
+			"DESCRIPTION" : "A slider.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "slider1",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Anonymous",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "3d_noise.png",
+	"TITLE" : "3D noise",
+	"WIDTH" : 1920
+}

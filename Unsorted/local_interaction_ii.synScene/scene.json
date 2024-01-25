@@ -58,31 +58,46 @@
 	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGE_PATH" : "local_interaction_ii.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1280
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffC",
-			"WIDTH" : 1280
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1280
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Local Interaction II",

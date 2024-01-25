@@ -1,0 +1,258 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Mix in the unaffected media. Don't forget to use 'media' meta controls, too!",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "normal_mix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "master mixer"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Mix in the edge detection effect, modified by controls in 'edge detect'.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "edge_mix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "master mixer"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Mix in the rgb split effect, modified by controls in 'rgb split'.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "rgb_mix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "master mixer"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Mix in the pixelate effect, modified by controls in 'pixelate'.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "pixelate_mix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "master mixer"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Mix in the feedback effect. Needs other channels. Try edge detect to get extra trippy!",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "feedback_mix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "master mixer"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Subtracts the normal video, instead of adding, for darker looks.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "subtract",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "normal media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Edge detection tends to make colors pure R, G, B, this readjusts them to the original media.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "expand",
+			"TYPE" : "slider",
+			"UI_GROUP" : "edge detect"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Expands and duplicates the edges.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "color_fix",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "edge detect"
+		},
+		{
+			"DEFAULT" : 0.75,
+			"DESCRIPTION" : "desc",
+			"MAX" : 1.5,
+			"MIN" : 0,
+			"NAME" : "split_amount",
+			"TYPE" : "slider",
+			"UI_GROUP" : "rgb split"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Bass-reactive RGB split effect. Toggle OFF for non-reactive.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_split",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "rgb split"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Channels constantly move in a chaotic way, instead of orderly.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "woozy",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "rgb split"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Affects how fast the 'woozy' effect will run.",
+			"MAX" : 10,
+			"MIN" : 0,
+			"NAME" : "woozy_speed",
+			"TYPE" : "slider",
+			"UI_GROUP" : "rgb split"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Simple, square pixels. Turn OFF to use other pixel types.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "square_pix",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "pixelate"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Triangular pixels. Turn OFF to use other pixel types.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "tri_pix",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "pixelate"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Circular pixels. Turn OFF to use other pixel types.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "circle_pix",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "pixelate"
+		},
+		{
+			"DEFAULT" : 2.5,
+			"DESCRIPTION" : "Size of the pixels while mix on the pixelate effect is turned up.",
+			"MAX" : 1,
+			"MIN" : 3,
+			"NAME" : "pixel_size",
+			"PARAMS" : 0.2,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "pixelate"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Helps limit white-out/black-out, but modifies how some feedback behaves.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "clamp_color",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Additive instead of mixing. Turn up for extra echoes and a more pronounced effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "extra_bright",
+			"TYPE" : "slider",
+			"UI_GROUP" : "feedback"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "XY offset for feedback.",
+			"MAX" : 
+			[
+				3,
+				3
+			],
+			"MIN" : 
+			[
+				-3,
+				-3
+			],
+			"NAME" : "fb_motion",
+			"PARAMS" : 0.2,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom in/out offset for feedback.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "fb_zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Rotational offset for feedback.",
+			"MAX" : 0.1,
+			"MIN" : -0.1,
+			"NAME" : "fb_rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "feedback"
+		}
+	],
+	"CREDIT" : "Synesthesia",
+	"DESCRIPTION" : "",
+	"GPU" : 2,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "videofx_1_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "noMedia",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "userImgFB",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "fxApplied",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"media",
+		"utility",
+		"feedback",
+		"glitchy"
+	],
+	"TITLE" : "VideoFX_1_dup",
+	"WIDTH" : 1920
+}

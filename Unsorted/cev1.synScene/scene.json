@@ -2,27 +2,6 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "MouseXY",
-			"TYPE" : "xy",
-			"UI_GROUP" : "defaults"
-		},
-		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 5,
@@ -51,12 +30,13 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 0.5,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
+			"MIN" : -1,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -78,6 +58,28 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "geo_rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "jeyko",
@@ -85,13 +87,22 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "cev1.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "CEV1",

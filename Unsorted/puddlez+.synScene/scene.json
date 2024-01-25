@@ -16,7 +16,8 @@
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "ZOOM",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "ungrouped"
 		},
 		{
@@ -34,7 +35,8 @@
 			"MAX" : 0.01,
 			"MIN" : -0.01,
 			"NAME" : "Offset",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "ungrouped"
 		},
 		{
@@ -85,6 +87,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1440,
 	"IMAGE_PATH" : "puddlez+.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Puddlez+",
 	"WIDTH" : 2560
 }

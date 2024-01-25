@@ -39,7 +39,7 @@
 				0
 			],
 			"NAME" : "Flip",
-			"PARAMS" : 0.03,
+			"PARAMS" : 0.02001,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "FX"
 		},
@@ -91,7 +91,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "FOV",
-			"PARAMS" : 0.104,
+			"PARAMS" : 0.01401,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -113,7 +113,7 @@
 				-1
 			],
 			"NAME" : "xyLook",
-			"PARAMS" : 0.049,
+			"PARAMS" : 0.03601,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -124,7 +124,7 @@
 			"MIN" : -2,
 			"NAME" : "rate_in",
 			"TYPE" : "slider",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Camera"
 		}
 	],
 	"CREDIT" : "butadiene",
@@ -132,6 +132,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGE_PATH" : "monster.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "MONSTER",
 	"WIDTH" : 1280
 }

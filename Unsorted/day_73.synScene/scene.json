@@ -39,6 +39,16 @@
 			"NAME" : "Triangles",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Floor",
+			"PARAMS" : 0.04501,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "jeyko",
@@ -46,13 +56,22 @@
 	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGE_PATH" : "day_73.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "day 73",

@@ -6,8 +6,17 @@
 			"DESCRIPTION" : "",
 			"MAX" : 3,
 			"MIN" : 0.5,
-			"NAME" : "Size",
+			"NAME" : "diff",
 			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flash",
+			"TYPE" : "toggle",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -16,6 +25,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGE_PATH" : "chuck_close_effect.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Chuck Close Effect",
 	"WIDTH" : 1280
 }

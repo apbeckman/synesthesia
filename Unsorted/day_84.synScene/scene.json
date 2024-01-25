@@ -2,51 +2,13 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
+			"DEFAULT" : 3,
 			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "MouseXY",
-			"TYPE" : "xy",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "test",
-			"TYPE" : "slider",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
-			"NAME" : "rate_in",
-			"TYPE" : "slider",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Bounce",
-			"TYPE" : "toggle",
+			"MAX" : 5,
+			"MIN" : 2,
+			"NAME" : "polar_repeat",
+			"PARAMS" : 0.06401,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -58,17 +20,26 @@
 	[
 		{
 			"NAME" : "image30",
-			"PATH" : "images/30.jpg"
+			"PATH" : "images/image30.jpg"
 		}
 	],
-	"IMAGE_PATH" : "day_84.jpg",
+	"IMAGE_PATH" : "day_84.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Day 84",

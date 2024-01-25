@@ -14,6 +14,10 @@
 #define EVAPORATION .0001
 
 			//******** BuffA Code Begins ********
+float lum(vec4 rgb)
+{
+  return dot(rgb, vec4(0.4, 0.159, 0.11, 0.));
+}
 
 // Calculate forces and pressure
 vec4 renderPassA() {
@@ -40,6 +44,7 @@ vec4 renderPassA() {
         // magnus force
         0.25*Q.w*vec2(n.w-s.w,e.w-w.w));
     Q.xy *= min(1.,c.y);
+
     // divergence
     Q.z  = 0.25*(s.y-n.y+w.x-e.x+n.z+e.z+s.z+w.z)+basshits;
     // curl
@@ -63,6 +68,8 @@ vec4 renderPassB() {
 
     for (float i = 0.; i< N;i++) {
         Q = A(U);
+                Q.r += sin(lum(_loadUserImage())*4*PI)*(0.125*syn_BassLevel);
+
         float co = cos(Q.w/N), si = sin(Q.w/N);
         U -= Q.xy*mat2(co,-si,si,co)/N;
     }

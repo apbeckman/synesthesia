@@ -51,12 +51,33 @@
 			"NAME" : "Drift",
 			"TYPE" : "xy",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				1,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "fisheye",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "wyatt",
 	"DESCRIPTION" : "I havent made a zoomer in a while. this one is a feedback between the total derivative and a vector field. ",
 	"GPU" : 0,
-	"HEIGHT" : 720,
+	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
 		{
@@ -65,33 +86,48 @@
 		}
 	],
 	"IMAGE_PATH" : "zoomer.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1280
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1280
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffC",
-			"WIDTH" : 1280
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 720,
+			"HEIGHT" : 1080,
 			"TARGET" : "BuffD",
-			"WIDTH" : 1280
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Zoomer",
-	"WIDTH" : 1280
+	"WIDTH" : 1920
 }

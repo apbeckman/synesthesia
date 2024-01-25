@@ -1,0 +1,42 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.2,
+			"DESCRIPTION" : "A slider.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "slider1",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "circleposition",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Anonymous",
+	"DESCRIPTION" : "",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "shader_demo_follow-along.png",
+	"TITLE" : "Shader Demo follow-along",
+	"WIDTH" : 1920
+}

@@ -32,7 +32,7 @@ float fbm6( vec2 p )
     return f/(0.96875);
 }
 vec3 _position;
-vec3 camPos = _position + vec3(0.,0.,smoothTime * 10.);
+vec3 camPos = _position + vec3(0.,0.,bass_time * 10.);
 float camNoise =  fbm6(camPos.xz * (.025)*1.+0.125*smoothTimeC) *1.;
 
 
@@ -58,7 +58,7 @@ float hozPlane(float height)
 float idk = pow(syn_BassLevel*0.4+syn_MidLevel*0.4+syn_Level*0.2, 2.);
 float swingPlane(float height)
 {
-    vec3 pos = _position + vec3(0.+sin(smoothTime*0.1)*0.5,0.+cos(smoothTime*0.1)*0.5,smoothTime * 7.5);
+    vec3 pos = _position + vec3(0.+sin(smoothTime*0.1)*0.5,0.+cos(smoothTime*0.1)*0.5,bass_time*10.);
     float def =  fbm6((_uvc+pos.xz) * (.125)*1.+0.35*smoothTimeC) * 1.;
     
     float way = pow(abs(pos.x) * (17.*(NoiseStretch)) ,2.5) *.0000125;
@@ -100,10 +100,15 @@ vec4 renderMainImage() {
     vec3 look = vec3(0.);
     vec3 rayOrigin = vec3(vec2(0.,sin(smoothTime*0.1)*3.+3.0+16.*CamHeight), -1. );
     vec3 rayDir = normalize(vec3(_uvc*FOV , 1.));
-    
-   	rayDir.zy = normalize(getRot(.05*Distance) * rayDir.zy);
-   	rayDir.xy = (getRot(.075+-PI*2+sin(smoothTime*0.1)*0.0125) * rayDir.xy);
     rayDir.xz = _rotate(rayDir.xz, _uvc.x*PI*FOV*Perspective-_uvc.x*PI*Perspective);
+    float m_x = smin(rayDir.x*-1, rayDir.x, 0.5);
+    float m_y = smin(rayDir.y*-1, rayDir.y, 0.5);
+    vec2 rd_mirrored = vec2((m_x), (m_y));
+    // vec2 rd_mirrored = vec2(mix(m_x, m_x*-1, invert), mix(m_y, m_y*-1, invert));
+    rayDir.xy = mix(mix(rd_mirrored, rd_mirrored*-1, invert) , rayDir.xy, 1.0-vec2(mirror_x, mirror_y));
+    rayDir.xz = _rotate(rayDir.xz, PI*Swivel); 
+   	rayDir.zy = normalize(getRot(.05*Distance) * rayDir.zy);
+   	rayDir.xy = (getRot(.075+-PI*2+sin(bass_time*0.1)*0.0125) * rayDir.xy);
     //rayDir.xy+=_uvc*FOV;
     rayDir.xy = _rotate(rayDir.xy, Spin*PI);
     

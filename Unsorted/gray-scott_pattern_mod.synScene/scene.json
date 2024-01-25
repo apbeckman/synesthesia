@@ -106,6 +106,16 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
 			"MAX" : 0.5,
 			"MIN" : -1,
 			"NAME" : "Fov",
@@ -141,13 +151,22 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "gray-scott_pattern_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Gray-Scott Pattern Mod",

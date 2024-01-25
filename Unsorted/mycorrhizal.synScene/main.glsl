@@ -56,7 +56,7 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 Q = vec4(0.0);
 	vec2 U = _xy;
-
+    
 	vec4 C = vec4(0.0);
 
     vec4 p = texture(BuffB,U/RENDERSIZE.xy);

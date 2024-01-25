@@ -37,8 +37,8 @@ float	scene(vec3 p) {
     m = r2;
     //float aa = ((TIME+syn_Time*0.3)*0.5)*rate*0.025;
    // float aa = rate*(-0.5)+(script_time*0.06+script_bass_time*0.015);
-    float aa = ((bass_time));
-    float bb = ((smoothTimeB));
+    float aa = ((bass_time)); 
+    float bb = ((smoothTimeC));
     aa *= 0.05;
     p.z+=5.0;
     float tr = (spin_time);
@@ -108,6 +108,7 @@ vec4 renderMain() {
 
     vec4 o = vec4(0.0,0.0,0.0,1.0);
     vec2 uv  = vec2(_xy.xy - RENDERSIZE.xy/2.0) / RENDERSIZE.y;
+    // uv *= 1.0+ _uvc*_uvc;
     uv.xy -= _uvc*PI*zoom;
 	vec3 dir = camera(uv);
     vec3 pos = vec3(0.0, 0.0, 0.0);

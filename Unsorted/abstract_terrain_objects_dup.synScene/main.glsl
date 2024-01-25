@@ -594,7 +594,7 @@ vec3 getNormal(in vec3 p) {
 vec3 getSky(vec3 ro, vec3 rd, vec3 lp){
 
     // Gradient blues, and red, or something.
-    vec3 sky = max(mix(vec3(1, .7, .6), vec3(.7, .9, 1.5), rd.y + .0), 0.)/4.;
+    vec3 sky = max(mix(vec3(1, .4+_nsin(TIME*0.4)*0.3, .6), vec3(.7, .9, 1.5), rd.y + .0), 0.)/4.;
 
     // Last minute contrast.
     sky = pow(sky, vec3(1.25))*1.25;
@@ -686,7 +686,7 @@ vec3 getObjectColor(vec3 p, vec3 n){
 
 
         tx0 = mix(tx0*vec3(1.2, .8, .65).zyx, tx0, abs(n));
-        tx0 = mix(tx0, vec3(0), c2*.4)*Dark_Terrain; // MS: this is probably where you can make the terrain very dark
+        tx0 = mix(tx0, vec3(0), c2*.9)*Dark_Terrain; // MS: this is probably where you can make the terrain very dark
 
         //tx0 *= mix(vec3(1.2, .8, .6), vec3(1.2, .8, .6).yxz, -n.y*.5 + .5);
 

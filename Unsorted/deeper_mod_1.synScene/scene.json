@@ -49,7 +49,7 @@
 			"MAX" : 1,
 			"MIN" : -1,
 			"NAME" : "FOV",
-			"PARAMS" : 0.141,
+			"PARAMS" : 0.08401,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -226,13 +226,22 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "deeper_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1156,
 			"TARGET" : "backbuffer",
-			"WIDTH" : 2048
+			"WIDTH" : 2048,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Deeper Mod",

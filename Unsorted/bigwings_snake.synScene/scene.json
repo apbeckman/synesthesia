@@ -2,10 +2,22 @@
 	"CONTROLS" : 
 	[
 		{
-			"DEFAULT" : 0,
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
 			"NAME" : "MouseXY",
 			"TYPE" : "xy",
 			"UI_GROUP" : "defaults"
@@ -18,10 +30,29 @@
 			"NAME" : "MouseClick",
 			"TYPE" : "toggle",
 			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.2,
+			"NAME" : "zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "apb_0",
 	"DESCRIPTION" : "for modding",
+	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGE_PATH" : "bigwings_snake.png",
 	"TITLE" : "bigwings snake",

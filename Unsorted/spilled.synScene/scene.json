@@ -39,6 +39,15 @@
 			"NAME" : "Impact",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "flockaroo",

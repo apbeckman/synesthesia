@@ -1,0 +1,171 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Shows 4 view windows, providing an engineering drawing style layout.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "grid_view",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 
+			[
+				-0.78,
+				-0.595
+			],
+			"DESCRIPTION" : "Camera position on X and Y axes. Controllable by right or middle clicking the preview window.",
+			"MAX" : 
+			[
+				3.15,
+				1.68
+			],
+			"MIN" : 
+			[
+				-3.15,
+				-1.68
+			],
+			"NAME" : "cam_xy",
+			"TYPE" : "xy",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : -1,
+			"DESCRIPTION" : "Camera position on Z axis. Controllable by right or middle clicking the preview window.",
+			"MAX" : 0,
+			"MIN" : -10,
+			"NAME" : "cam_zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Set camera to front view",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "view_front",
+			"TYPE" : "bang",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Set camera to top view",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "view_top",
+			"TYPE" : "bang",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Set camera to right side view",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "view_right",
+			"TYPE" : "bang",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Set camera to bottom view",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "view_bottom",
+			"TYPE" : "bang",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Set camera to back view",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "view_back",
+			"TYPE" : "bang",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Set camera to left side view",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "view_left",
+			"TYPE" : "bang",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Which shader code to use for the hit objects in the raymarcher.",
+			"LABELS" : 
+			[
+				"Normals",
+				"Depth-map",
+				"Grid",
+				"Basic Lighting"
+			],
+			"MAX" : 3,
+			"MIN" : 0,
+			"NAME" : "shader_mode",
+			"TYPE" : "dropdown",
+			"UI_GROUP" : "shader",
+			"VALUES" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Which shape to render in the scene.",
+			"LABELS" : 
+			[
+				"Sphere",
+				"Box Minus Sphere",
+				"Gyroid"
+			],
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "shape",
+			"TYPE" : "dropdown",
+			"UI_GROUP" : "scene",
+			"VALUES" : 
+			[
+				0,
+				1,
+				2
+			]
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Modify the shape. Has a different effect on each shape.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "shape_mod",
+			"TYPE" : "slider",
+			"UI_GROUP" : "scene"
+		}
+	],
+	"CREDIT" : "Synesthesia",
+	"DESCRIPTION" : "Example scene for 3D raymarching and mouse camera controls. Includes a grid view and a few different shaders and shapes.",
+	"GPU" : 4,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "3d_orbit_camera_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"raymarching",
+		"template",
+		"3D"
+	],
+	"TITLE" : "3D Orbit Camera_dup",
+	"WIDTH" : 1920
+}

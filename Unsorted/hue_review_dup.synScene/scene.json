@@ -1,0 +1,194 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.08,
+			"DESCRIPTION" : "Take frame from media or let video feedback run unchecked.",
+			"MAX" : 0,
+			"MIN" : 0.4,
+			"NAME" : "feedback",
+			"TYPE" : "slider",
+			"UI_GROUP" : "main_parameters"
+		},
+		{
+			"DEFAULT" : 0.02,
+			"DESCRIPTION" : "Find the sweet spot where ripple patterns exist.",
+			"MAX" : 0.1,
+			"MIN" : 0,
+			"NAME" : "ripple_amt",
+			"TYPE" : "slider",
+			"UI_GROUP" : "main_parameters"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Generally keep near 0, but turn up for a different look.",
+			"MAX" : 0.05,
+			"MIN" : 0,
+			"NAME" : "sat_amt",
+			"TYPE" : "slider",
+			"UI_GROUP" : "main_parameters"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Simple mods for when it is too bright or dark.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "brighter",
+			"TYPE" : "slider",
+			"UI_GROUP" : "brightness"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Simple mods for when it is too bright or dark.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "darker",
+			"TYPE" : "slider",
+			"UI_GROUP" : "brightness"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Boom.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "fire_pulse",
+			"TYPE" : "bang counter",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Becomes pixelated and glitches out on the beats. Modified by glitchdown_speed.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "glitchdown",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0.6,
+			"DESCRIPTION" : "Rate of downward flow during glitchdown.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "glitchdown_speed",
+			"TYPE" : "slider",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Flying inward or outward.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "flow_style"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Rays radiating outward.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "rays",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "flow_style"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Less liquid, more pixelated.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "digital_mode",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "flow_style"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Pick from one of 5 color palettes.",
+			"MAX" : 4,
+			"MIN" : 0,
+			"NAME" : "color_palette",
+			"TYPE" : "slider",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "fisheye",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "punch_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "punch_out",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Meebs",
+	"DESCRIPTION" : "",
+	"GPU" : 2,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "hue_review_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 0,
+			"TARGET" : "backbuff",
+			"WIDTH" : 0,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 0,
+			"TARGET" : "backbuff2",
+			"WIDTH" : 0,
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"feedback",
+		"media",
+		"dark",
+		"psychedelic"
+	],
+	"TITLE" : "Hue Review_dup",
+	"WIDTH" : 1920
+}

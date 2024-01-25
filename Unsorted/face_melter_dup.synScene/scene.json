@@ -1,0 +1,186 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Reveal the media input.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "show_media",
+			"PARAMS" : 0.5,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "divide the media input with the color",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "divide_media",
+			"PARAMS" : 0.5,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Alternative coloring style when 'show media' is OFF.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "noise_tex",
+			"PARAMS" : 0.5,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0.15625,
+				0.47891,
+				0.97731
+			],
+			"DESCRIPTION" : "Base color, complement is automatically applied",
+			"MAX" : 
+			[
+				1,
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0,
+				0
+			],
+			"NAME" : "palette",
+			"TYPE" : "color",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 5,
+			"DESCRIPTION" : "Deacreases the space between each line in the scene. Move the slider up for more lines.",
+			"MAX" : 1,
+			"MIN" : 10,
+			"NAME" : "instances",
+			"TYPE" : "slider",
+			"UI_GROUP" : "geo"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Switch the direction that time flows on beat detected.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "teeter_time",
+			"PARAMS" : 0.3,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "time"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Rate at which constant time increases or decreases.",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rate",
+			"PARAMS" : 0.3,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "time"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom the feedback inward or outward.",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "_zoom",
+			"PARAMS" : 0.02,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "rainbow feedback style.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "rainbow",
+			"PARAMS" : 0.1,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "variation"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "blend the feedback on bass",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "heavy_blend",
+			"PARAMS" : 0.1,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "variation"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "smoothly mix in the tunnel view.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "tunnel",
+			"PARAMS" : 0.025,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "post fx"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "distort the view.",
+			"MAX" : 0.5,
+			"MIN" : 0,
+			"NAME" : "distort",
+			"PARAMS" : 0.025,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "post fx"
+		}
+	],
+	"CREDIT" : "Psybernautics",
+	"DESCRIPTION" : "Feedback scene with the ability to mix in media input with a variety of stylizations.",
+	"GPU" : 1,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "face_melter_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "postFXPass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "secondPass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "tp",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"2D",
+		"colorful",
+		"feedback",
+		"media"
+	],
+	"TITLE" : "Face Melter_dup",
+	"WIDTH" : 1920
+}

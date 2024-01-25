@@ -71,7 +71,8 @@
 // Scene object ID. Either the Menger object (1) or the chrome bracing (0).
 float objID;
 float svObjID; // Global ID to keep a copy of the above from pass to pass.
-
+float cosnoise = _scale(_fbm(cos(0.025*TIME)), -0.3, 0.3);
+float sinoise = _scale(_fbm(sin(0.025*TIME)), -0.3, 0.3);
 float hash(float n){ return fract(sin(n)*43758.5453); }
 
 // Fabrice's consice, 2D rotation formula.
@@ -577,7 +578,7 @@ vec4 renderMainImage() {
 	vec2 uv = (fragCoord.xy - RENDERSIZE.xy*.5) / RENDERSIZE.y;
 	
 	// Camera Setup.
-	vec3 ro = vec3(0, 0, smoothTime); // Camera position, doubling as the ray origin.
+	vec3 ro = vec3(0, 0, bass_time); // Camera position, doubling as the ray origin.
 	vec3 lk = ro + vec3(0, 0, .25);  // "Look At" position.
 
    
@@ -612,8 +613,8 @@ vec4 renderMainImage() {
     // Unit direction ray.
     vec3 rd = normalize(fwd + (uv.x*rgt + uv.y*up));
     //rd.xy += _uvc*PI*FOV;
-    rd.yz = _rotate(rd.yz, lookXY.y*PI) ;
-    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.yz = _rotate(rd.yz, lookXY.y*PI + cosnoise) ;
+    rd.xz = _rotate(rd.xz, lookXY.x*PI + sinoise);
     rd.xy = _rotate(rd.xy, Rotate*PI);
     
 

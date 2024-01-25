@@ -1,0 +1,358 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Choose whether impulses should happen automatically (ON) or only on your manual command.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_stir",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "stirrer"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Manually cause the stirrer to receive an impulse. Depends on 'motion mode', 'manual position' and 'impulse power'.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "manual_stir",
+			"PARAMS" : 0.095,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "stirrer"
+		},
+		{
+			"DEFAULT" : 0.75,
+			"DESCRIPTION" : "Choose how powerful the automatic and manual impulses are.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "stir_strength",
+			"TYPE" : "slider",
+			"UI_GROUP" : "stirrer"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "How much to zoom in or out on the visuals",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "zoom_in_out",
+			"TYPE" : "slider",
+			"UI_GROUP" : "zoom"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Choose whether to automatically zoom based on audio",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_zoom",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "zoom"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0.5,
+				0.5
+			],
+			"DESCRIPTION" : "Choose the center from which to do other UV transformations",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "center",
+			"TYPE" : "xy",
+			"UI_GROUP" : "uv warp"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Translate the scene across space",
+			"MAX" : 
+			[
+				-16,
+				-16
+			],
+			"MIN" : 
+			[
+				16,
+				16
+			],
+			"NAME" : "translate",
+			"TYPE" : "xy",
+			"UI_GROUP" : "uv warp"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Add fisheye distortion",
+			"MAX" : 
+			[
+				-1,
+				-1
+			],
+			"MIN" : 
+			[
+				1,
+				1
+			],
+			"NAME" : "fisheye_scale",
+			"TYPE" : "xy",
+			"UI_GROUP" : "uv warp"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "Twist and skew the scene",
+			"MAX" : 
+			[
+				-0.5,
+				-0.5
+			],
+			"MIN" : 
+			[
+				0.5,
+				0.5
+			],
+			"NAME" : "shear",
+			"TYPE" : "xy",
+			"UI_GROUP" : "uv warp"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Use media to seed the simulation",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_burn",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "seeding"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Seed the simulation with circles from the center",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "center_seed",
+			"PARAMS" : 0.1,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "seeding"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0.5,
+				0.5
+			],
+			"DESCRIPTION" : "Change the angle of the light source (only works if auto_circling is off)",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0
+			],
+			"NAME" : "light_angle",
+			"TYPE" : "xy",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Switch between two color modes",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "color_mode",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Automatically move the light source based on audio",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_circling",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "lighting"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add additional UV warping",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "fritzer",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add additional UV warping",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "warper",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Mix in an additional simulation layer",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "roil",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Click to pull the simulation backwards a bit, or click many times to completely black it out and let it pour forward at the right moment.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "shock_back",
+			"PARAMS" : 0.025,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Push the simulation forward, dulling it out a bit in the process.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "shock_forward",
+			"PARAMS" : 0.05,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "action"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "stir_or_paint",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.25,
+			"NAME" : "paint_size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Flexi",
+	"DESCRIPTION" : "A swirling, fluid reaction diffusion simulation with complex UV warping controls",
+	"GPU" : 3,
+	"HEIGHT" : 1024,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "colornoise",
+			"PATH" : "images/colornoise.jpg"
+		}
+	],
+	"IMAGE_PATH" : "blurp_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1024,
+			"TARGET" : "sampler_prev_B",
+			"WIDTH" : 2048,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1024,
+			"TARGET" : "sampler_prev",
+			"WIDTH" : 2048,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 512,
+			"TARGET" : "sampler_blurH",
+			"WIDTH" : 1024,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 512,
+			"TARGET" : "sampler_blur",
+			"WIDTH" : 1024,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 256,
+			"TARGET" : "sampler_blur2H",
+			"WIDTH" : 512,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 256,
+			"TARGET" : "sampler_blur2",
+			"WIDTH" : 512,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 128,
+			"TARGET" : "sampler_blur3H",
+			"WIDTH" : 256,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 128,
+			"TARGET" : "sampler_blur3",
+			"WIDTH" : 256,
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"simulation",
+		"reaction diffusion",
+		"colorful",
+		"dark",
+		"media"
+	],
+	"TITLE" : "Blurp_dup",
+	"WIDTH" : 2048
+}

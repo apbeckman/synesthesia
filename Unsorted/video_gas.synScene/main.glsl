@@ -13,10 +13,10 @@
 #define ch1 iChannel1
 #define ch2 iChannel2
 #define ch3 iChannel3
-#define PI 3.14159265
+// #define PI 3.14159265
 
 #define dt 0.4
-#define prop 0.5
+float prop = 0.6;
 
 ivec2 N;
 int tot_n;
@@ -153,7 +153,7 @@ vec4 renderPassA() {
     tot_n = N.x*N.y;
     if(p.x < N.x && p.y < N.y)
     {
-        irad = 0.3*size.y;
+        irad = 0.1*size.y;
         pos = floor(pos);
         //this pixel value
         U = texel(A, pos);
@@ -164,8 +164,8 @@ vec4 renderPassA() {
         if(FRAMECOUNT<10)
         {
             float t = 2.*PI*float(id)/float(tot_n);
-            U.xy = size*hash22(3.14159*pos);
-			U.zw = 1.*(hash22(3.14159*pos) - 0.5);
+            U.xy = size*hash22(PI*pos);
+			U.zw = 1.*(hash22(PI*pos) - 0.5);
       		return U;
         }
         
@@ -184,7 +184,8 @@ vec4 renderPassA() {
             F += 2.*normalize(_mouse.xy - U.xy)/(sqrt(d)+2.);
         }
         
-        U.zw = 15.*tanh((F*dt + U.zw)/15.) ;
+        F += 0.0002*sin(length(texture(media_pass, p/size)));
+        U.zw = 15.*tanh((F*dt + U.zw)/15.) ;\
         U.xy += U.zw*dt;
         
         //border conditions
@@ -280,8 +281,8 @@ vec4 renderPassB() {
     u = ivec4(-1); d = vec4(1e10); 
    
     tid = id;
+    pos.xy = mix((-pos.xy), pos.xy, 0.5);
     pos = getParticle(id).xy;
-    
     sortneighbor(id); 
     
     for(int i = 0; i < 8; i++)
@@ -290,7 +291,7 @@ vec4 renderPassB() {
     }
     
     ivec4 nb = getb(id);
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < 5; i++)
     {
         sortneighbor(nb[i]); 
     }
@@ -316,43 +317,43 @@ ivec4 get(ivec2 p)
 }
 
 
-ivec4 u; //ids
-vec4 d; //distances
-vec2 pos; //pixel position
+// // ivec4 u; //ids
+// // vec4 d; //distances
+// // vec2 pos; //pixel position
 
 
-float particleDistance(int id, vec2 p)
-{
-    return distance(p, getParticle(id).xy);
-}
+// float particleDistance(int id, vec2 p)
+// {
+//     return distance(p, getParticle(id).xy);
+// }
 
-//insertion sort
-void sort(int utemp)
-{
-    if(utemp <0) return; 
-   	float dtemp = particleDistance(utemp, pos);
-    //sorting
-    if(d.x > dtemp)
-    {
-        d = vec4(dtemp, d.xyz);
-        u = ivec4(utemp, u.xyz);
-    }
-    else if(d.y > dtemp && dtemp > d.x)
-    {
-        d.yzw = vec3(dtemp, d.yz);
-        u.yzw = ivec3(utemp, u.yz);
-    }
-    else if(d.z > dtemp && dtemp > d.y)
-    {
-        d.zw = vec2(dtemp, d.z);
-        u.zw = ivec2(utemp, u.z);
-    }
-    else if(d.w > dtemp && dtemp > d.z)
-    {
-        d.w = dtemp;
-        u.w = utemp;
-    }
-}
+// //insertion sort
+// void sort(int utemp)
+// {
+//     if(utemp <0) return; 
+//    	float dtemp = particleDistance(utemp, pos);
+//     //sorting
+//     if(d.x > dtemp)
+//     {
+//         d = vec4(dtemp, d.xyz);
+//         u = ivec4(utemp, u.xyz);
+//     }
+//     else if(d.y > dtemp && dtemp > d.x)
+//     {
+//         d.yzw = vec3(dtemp, d.yz);
+//         u.yzw = ivec3(utemp, u.yz);
+//     }
+//     else if(d.z > dtemp && dtemp > d.y)
+//     {
+//         d.zw = vec2(dtemp, d.z);
+//         u.zw = ivec2(utemp, u.z);
+//     }
+//     else if(d.w > dtemp && dtemp > d.z)
+//     {
+//         d.w = dtemp;
+//         u.w = utemp;
+//     }
+// }
 
 void sortpos(ivec2 p)
 {
@@ -381,7 +382,7 @@ vec4 renderPassC() {
         sortpos(p+cross_distribution(i)); 
     }
     
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < 5; i++)
     {
         sort(hash(ivec4(p, FRAMECOUNT, i)).x%tot_n); //random sort    
     }
@@ -401,9 +402,24 @@ vec4 renderPassC() {
 vec4 renderPassD() {
 	vec4 fragColor = vec4(0.0);
 	vec2 p = _xy;
-
-    fragColor = texture(syn_UserImage, p/size);
+    vec4 media = texture(media_pass, p/size);
+    vec4 media_edge = texture(media_pass_fx, p/size);
+    vec4 media_mixed = mix(media, media_edge, edge_mix);
+    fragColor = media_mixed+media*0.2;
 	return fragColor; 
+ } 
+
+vec4 mediaPass() {
+    vec2 p = _xy;
+
+    vec4 media = _loadMedia();
+	return media; 
+ } 
+vec4 mediaPassFX() {
+    vec2 p = _xy;
+
+    vec4 media_edge = _edgeDetectSobel(media_pass);
+    return media_edge;
  } 
 
 
@@ -413,26 +429,26 @@ vec4 renderPassD() {
 // Fork of "Large scale flocking" by michael0884. https://shadertoy.com/view/tsScRG
 // 2020-04-30 07:24:31
 
-ivec4 get(ivec2 p)
-{
-    return floatBitsToInt(texel(C, p));
-}
+// ivec4 get(ivec2 p)
+// {
+//     return floatBitsToInt(texel(C, p));
+// }
 
 
-vec4 getParticle(int id)
-{
-    return texel(ch1, i2xy(id));
-}
+// vec4 getParticle(int id)
+// {
+//     return texel(ch1, i2xy(id));
+// }
 
 vec3 imageC(vec2 p)
 {
-    return texture(ch3, vec2(1., 1.)*p/size).xyz;
+    return texture(media_pass, vec2(1., 1.)*p/size).xyz;
 }
 
-float particleDistance(int id, vec2 p)
-{
-    return distance(p, getParticle(id).xy);
-}
+// float particleDistance(int id, vec2 p)
+// {
+//     return distance(p, getParticle(id).xy);
+// }
 
 vec4 renderMainImage() {
 	vec4 fragColor = vec4(0.0);
@@ -444,12 +460,12 @@ vec4 renderMainImage() {
  	vec4 p0 = getParticle(nb.x);
    
     fragColor = vec4(0.,0,0,1);
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < 7; i++)
     {
        vec4 p0 = getParticle(nb[i]);
-    	fragColor.xyz += 0.3*(0.85+0.25*imageC(p0.xy))
+    	fragColor.xyz += 0.3*(0.5+10.5*imageC(p0.xy))
             			//*sin(vec3(1,2,3)*length(p0.zw))
-            			*exp(-0.15*distance(p0.xy, pos));
+            			*exp(-PI*length(texture(media_pass_fx, p/size))-0.35*distance(p0.xy, pos));
     }
 	return fragColor; 
  } 
@@ -469,6 +485,12 @@ vec4 renderMain(){
 		return renderPassD();
 	}
 	if(PASSINDEX == 4){
+		return mediaPass();
+	}
+	if(PASSINDEX == 5){
+		return mediaPassFX();
+	}
+	if(PASSINDEX == 6){
 		return renderMainImage();
 	}
 }

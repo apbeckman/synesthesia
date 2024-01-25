@@ -4,8 +4,8 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
+			"MAX" : 1.5,
+			"MIN" : -1.5,
 			"NAME" : "rate_in",
 			"PARAMS" : 0.101,
 			"TYPE" : "slider smooth",
@@ -15,8 +15,99 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
+			"MIN" : -0.2,
 			"NAME" : "FOV",
+			"PARAMS" : 0.03301,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0.2
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-0.25
+			],
+			"NAME" : "Orbit",
+			"PARAMS" : 0.037,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.25,
+			"MIN" : -0.25,
+			"NAME" : "Pattern_Rot",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.01,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Rotate",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "x_mirror",
+			"PARAMS" : 0.05301,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_mirror",
+			"PARAMS" : 0.04901,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert",
+			"PARAMS" : 0.05201,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "spin",
+			"PARAMS" : 0.04601,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Warp",
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
@@ -36,74 +127,12 @@
 			"MIN" : 
 			[
 				-1,
-				0
+				-1
 			],
-			"NAME" : "Orbit",
-			"PARAMS" : 0.037,
-			"TYPE" : "xy smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "Flip",
-			"TYPE" : "xy",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
-			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "Mirror",
-			"PARAMS" : 0.072,
-			"TYPE" : "xy smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.25,
-			"MIN" : -0.25,
-			"NAME" : "Pattern_Rot",
+			"NAME" : "mirrormove",
 			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Rotate",
-			"TYPE" : "knob",
-			"UI_GROUP" : "default"
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "kaleido"
 		},
 		{
 			"DEFAULT" : 0,
@@ -147,13 +176,22 @@
 		}
 	],
 	"IMAGE_PATH" : "3d_mandala.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "3D Mandala",

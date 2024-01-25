@@ -177,7 +177,7 @@ vec4 renderPassA() {
     vec3 abd = mix(vec3(rab,sd), uv, upd);
     
     if (_mouse.z > 0.0) {
-    	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy+0.25;
+    	vec2 d = (fragCoord.xy - _mouse.xy) / RENDERSIZE.xy;
         vec2 m = 0.1 * normz(d) * exp(-length(d) / 0.02);
         abd.xy += m;
         uv.xy += m;
@@ -519,7 +519,7 @@ vec4 renderMainImage() {
     
     vec3 ib = 0.4 * i + 0.15 * (i_n+i_e+i_s+i_w);
 
-    vec3 ld = normz(vec3(0.5+0.5*vec2(cos(TIME/2.0), sin(TIME/2.0)) - uv, -1.));
+    vec3 ld = normz(vec3(0.5+0.5*vec2(_noise(vec2(cos(TIME/2.0), sin(TIME/2.0)))) - uv, -1.));
     
     float spec = 0.0;    
     for(int i = 0; i < 3; i++) {
@@ -536,6 +536,17 @@ vec4 renderMainImage() {
     fragColor = vec4((tc + vec3(0.9, 0.85, 0.8)*spec),1.0);
 	return fragColor; 
  } 
+vec4 mediaPass() {
+    vec4 media = vec4(0.);
+    vec2 U = _xy;
+    media = _loadMedia();
+    return media;
+}
+vec4 mediaPassFX() {
+    vec4 media_fx = _edgeDetectSobel(media_pass);
+    return media_fx;
+}
+
 
 
 vec4 renderMain(){
@@ -551,7 +562,16 @@ vec4 renderMain(){
 	if(PASSINDEX == 3){
 		return renderPassD();
 	}
-	if(PASSINDEX == 4){
-		return renderMainImage();
-	}
+    if (PASSINDEX == 4) {
+
+        return mediaPass();
+    }
+    if (PASSINDEX == 5) {
+
+        return mediaPassFX();
+    }
+    if (PASSINDEX == 6) {
+
+        return renderMainImage();
+    }
 }

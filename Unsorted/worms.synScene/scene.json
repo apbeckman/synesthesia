@@ -1,0 +1,35 @@
+{
+	"CREDIT" : "aferriss",
+	"DESCRIPTION" : "experimenting with mixing convolutional feedback with last frame's color as texcoord offsets.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "worms.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "clamp"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "media_pass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "worms",
+	"WIDTH" : 1920
+}

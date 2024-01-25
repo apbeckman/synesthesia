@@ -24,16 +24,6 @@
 			"UI_GROUP" : "defaults"
 		},
 		{
-			"DEFAULT" : 1,
-			"DESCRIPTION" : "",
-			"MAX" : 6,
-			"MIN" : 1,
-			"NAME" : "FOVmod",
-			"PARAMS" : 0.1,
-			"TYPE" : "slider smooth",
-			"UI_GROUP" : "camera"
-		},
-		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 10.125,
@@ -47,9 +37,50 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
+			"MIN" : 0,
+			"NAME" : "x_flip",
+			"PARAMS" : 0.1,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_flip",
+			"PARAMS" : 0.1,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
 			"NAME" : "FOV",
-			"TYPE" : "slider",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.07001,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -65,6 +96,13 @@
 		}
 	],
 	"IMAGE_PATH" : "menger_sponge_variation.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Menger Sponge Variation",
 	"WIDTH" : 1920
 }

@@ -71,6 +71,15 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "jeyko",
@@ -85,13 +94,22 @@
 		}
 	],
 	"IMAGE_PATH" : "day_72_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Day 72 Mod",

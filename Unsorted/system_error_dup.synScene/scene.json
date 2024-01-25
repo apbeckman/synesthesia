@@ -1,0 +1,271 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0.25,
+			"DESCRIPTION" : "Size of the brush",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "window_size",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Errors"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Spam a bunch of error windows",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "error_blast",
+			"PARAMS" : 0.25,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "Errors"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Trigger a single error window",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "error_once",
+			"TYPE" : "bang",
+			"UI_GROUP" : "Errors"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add continual errors in a diagonal stack",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "error_stack",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "Errors"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Choose your operating system",
+			"LABELS" : 
+			[
+				"Windows XP",
+				"Mac OS 7"
+			],
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "platform",
+			"TYPE" : "dropdown",
+			"UI_GROUP" : "OS_Settings",
+			"VALUES" : 
+			[
+				0,
+				1
+			]
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Crash the OS",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "crash",
+			"TYPE" : "bang",
+			"UI_GROUP" : "OS_Settings"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Display the welcome (or happy mac) screen.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "welcome",
+			"TYPE" : "bang",
+			"UI_GROUP" : "OS_Settings"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Play user media in a popup window",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_player",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "Media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom media to fit full screen. Great for transitions.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "fullscreen_media",
+			"PARAMS" : 0.03,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Enable/disable screen warping effects",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp",
+			"PARAMS" : 0.03,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Warp to the rhythm. Only works when the BPM confidence is high.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp_beat",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "How warpy should the warper warp",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp_noise",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Scale of warping effect turbulence",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp_noise_scale",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "How much to warp based on bass and high hits",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp_hits",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "How much to move pixels in different directions based on color and audio levels when warping,",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp_melt",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Make the window and feedback dance to the beat. ",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "window_boogie",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Add twitchy uv remapping",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "twitchy",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Warp continuously",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "constant_warp",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Effects"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "UFFFD",
+	"DESCRIPTION" : "Operating system crash and error effects. Fake a blue screen or mac os crash during a set, then melt the error screen.",
+	"GPU" : 1,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "os7_happy",
+			"PATH" : "images/os7_happy.jpg"
+		},
+		{
+			"NAME" : "winxp_error",
+			"PATH" : "images/winxp_error.png"
+		},
+		{
+			"NAME" : "winxp_welcome",
+			"PATH" : "images/winxp_welcome.jpg"
+		},
+		{
+			"NAME" : "os7_error",
+			"PATH" : "images/os7_error.jpg"
+		},
+		{
+			"NAME" : "winxp_bsod",
+			"PATH" : "images/winxp_bsod.jpg"
+		},
+		{
+			"NAME" : "os7_crash",
+			"PATH" : "images/os7_crash.jpg"
+		}
+	],
+	"IMAGE_PATH" : "system_error_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "passA",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"retro",
+		"mouse",
+		"2d",
+		"utility",
+		"media"
+	],
+	"TITLE" : "System Error_dup",
+	"WIDTH" : 1920
+}

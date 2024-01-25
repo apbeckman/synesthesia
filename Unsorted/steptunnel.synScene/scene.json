@@ -80,6 +80,16 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.04801,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "apb_0",
@@ -87,6 +97,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGE_PATH" : "steptunnel.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "StepTunnel",
 	"WIDTH" : 1280
 }

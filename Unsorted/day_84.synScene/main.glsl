@@ -8,8 +8,9 @@ vec3 glow = vec3(0);
 #define PI acos(-1.)
 #define tau (2.*PI)
 #define rot(x) mat2(cos(x),-sin(x),sin(x),cos(x))
-#define TIME (TIME + 3.6)
+//#define TIME (TIME + 3.6)
 #define pal(a,b,c,d,e) (a + b*sin(c*d + e))
+
 vec3 att = vec3(1);
 
 float pModPolar(inout vec2 p, float repetitions) {
@@ -38,16 +39,16 @@ vec2 map(vec3 p){
     
     vec3 q = p;
     vec3 b = p;
-    float idb = pModPolar(q.xy, 3.);
+    float idb = pModPolar(q.xy, polar_repeat);
     //b.xy *= rot(idz*0.5);
-    pModPolar(b.xy, 3.);
+    pModPolar(b.xy, polar_repeat);
     
     b.x -= 0.8;
-    
+    // b.xy = mix(b.xy, _rotate(b.xy, TIME), 0.5);
     vec3 u = p;
     
     //u.xy *= rot(idz);
-    float o = pModPolar(u.xy, 5.);
+    float o = pModPolar(u.xy, 6.);
     u.x -= 1.;
     
     q.x -= 0.8;
@@ -55,7 +56,7 @@ vec2 map(vec3 p){
     float dG = -u.x;
     d = dmin(d, vec2(dG, 3.));
     
-    
+
     
     
     //u -= 0.1;
@@ -75,7 +76,7 @@ vec2 map(vec3 p){
     z = q;
     z.x += 0.02;
     z = abs(z) ;
-    z -= vec3(0.01+highhits*0.125*Bounce,0.3,0.02+highhits*0.5*Bounce);
+    z -= vec3(0.01,0.3,0.02);
     float dCb = max(z.z, max(z.y, z.x));
     d = dmin(d, vec2(dCb, 1.));
     
@@ -85,7 +86,7 @@ vec2 map(vec3 p){
     z.y -= 0.2;
     z.x += 0.3;
     z.z += modD*0.10;
-    z.xy *= rot(0.7 + sin((smoothTimeC*0.2) + idz*0.5));
+    z.xy *= rot(0.7 + sin(TIME*0.2 + idz*0.5));
     z = abs(z);
     z.zx *= rot(-0.1);
     z = abs(z) - vec3(0.01,0.5,0.04);
@@ -110,11 +111,12 @@ vec2 map(vec3 p){
     //d = dmin(d, vec2(dDd, 5.));
     
     
-    vec4 a = valueNoise((idb + (smoothTimeB) + idz*3.));
+    vec4 a = valueNoise((idb + TIME*3. + idz*3.));
     
     //vec3 c = max(pal(0.7,1., vec3(3.7,0.3,0.6), 0.6,4.4 + sin(TIME) + sin(idz * idb)*0.2), 0.);
-    vec3 c = max(pal(0.7,1., vec3(1.,0.3,0.1), 0.6+highhits,4.4 + sin(smoothTimeB) + idz + sin(idz * idb)*0.2+highhits), 0.1);
-    glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(75. - a.x*20.))*att*c* pow(smoothstep(1.,0.,length(q.y*1.)), 5.);
+    vec3 c = max(pal(0.7,1., vec3(3.,0.3,0.1), 0.6,4.4 + sin(TIME) + idz + sin(idz * idb)*0.2), 0.1);
+    
+    glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(90. - a.x*20.))*att*c* pow(smoothstep(1.,0.,length(q.y*1.)), 5.);
     //glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(100. - a.x*20.))*att*c;
     //glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(90. - a.x*20.))*att*c* (smoothstep(1.,0.,length(q.y*1.6)));
     //glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*0.01/(0.0004 + dCb*dCb*dCb*dCb*(50. - a.x*20.))*att*c;
@@ -126,15 +128,15 @@ vec2 map(vec3 p){
 }
 float dith;
 vec2 march(vec3 ro, vec3 rd, inout vec3 p, inout float t, inout bool hit){
-	vec2 d = vec2(10e9);
+	vec2 d = vec2(10e7);
 
     p = ro; t = 0.; hit = false;
-    for(int i = 0; i < 175 ; i++){
+    for(int i = 0; i < 230 ; i++){
     	d = map(p);
         d.x *= dith;
         
     	//glow += exp(-d.x*20.);
-        if(d.x < 0.001){
+        if(d.x < 0.002){
         	hit = true;
             break;
         }
@@ -164,14 +166,14 @@ vec4 renderPassA() {
     //
 	uv *= 1. - dot(uv,uv)*0.14;
     
-    uv.xy *= rot((bass_time*0.5 - 3.6)*0.1);
+    uv.xy *= rot((TIME - 3.6)*0.1);
     
     vec3 col = vec3(0);
 
     dith = mix(0.8,1., texture(image30, 20.*uv*256.).x);
     vec3 ro = vec3(0);
     
-    ro.z += bass_time*2.5;
+    ro.z += TIME*1.5;
     
     vec3 rd = normalize(vec3(uv,2.));
     //rd.yz *= rot(TIME);
@@ -180,12 +182,12 @@ vec4 renderPassA() {
     float side = 1.;
     float tA;
     
-    for(int i = 0; i < 2; i ++){
+    for(int i = 0; i < 3; i ++){
     	vec2 d = march(ro, rd, p, t, hit);
     	vec3 n = getNormal(p);
         
         vec3 ld = normalize(vec3(1));
-        vec3 h = normalize(ld - n);
+        vec3 h = normalize(ld - rd);
         
         float diff = max(dot(n, ld), 0.);
         float spec = pow(max(dot(n, -h), 0.), 10.);
@@ -205,6 +207,7 @@ vec4 renderPassA() {
         if (d.y == 3.){
         	rd = reflect(rd, n);
             att *= vec3(0.6,0.8,0.8)*0.2;
+            col += spec*0.04*att;
             ro = p + n*0.2;
         } else {
         	break;
@@ -212,7 +215,7 @@ vec4 renderPassA() {
     }
     
     
-    col += glow*0.000251;
+    col += glow*0.001;
     
     col = mix(col, vec3(0.4,0.4,0.7)*0.004, pow(smoothstep(0.,1.,tA*0.013), 1.6));
     
@@ -237,7 +240,7 @@ vec4 renderMainImage() {
     //float m = pow(abs(sin(p.z*0.03)),10.);
 
     // Radial blur
-    float steps = 15.;
+    float steps = 30.;
     float scale = 0.00 + pow(length(uv - 0.5),4.)*0.5;
     //float chromAb = smoothstep(0.,1.,pow(length(uv - 0.5), 0.3))*1.1;
     float chromAb = pow(length(uv - 0.5),1.)*3.7;
@@ -262,6 +265,7 @@ vec4 renderMainImage() {
     fragColor *= 1. - dot(uvn,uvn)*2.;
 	return fragColor; 
  } 
+
 
 
 vec4 renderMain(){

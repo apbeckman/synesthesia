@@ -15,11 +15,40 @@
 			],
 			"MIN" : 
 			[
-				0,
-				0
+				-1,
+				-1
 			],
 			"NAME" : "camXY",
-			"TYPE" : "xy",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rate_in",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0.45,
+			"NAME" : "FOV",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Grid",
+			"TYPE" : "toggle",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -35,6 +64,13 @@
 		}
 	],
 	"IMAGE_PATH" : "flying_centipede.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Flying Centipede",
 	"WIDTH" : 1280
 }

@@ -1,0 +1,57 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.03201,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "spin",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "Using a pseudo path tracing technique to produce a simple realtime scene lit up with multiple emitters.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image17",
+			"PATH" : "images/17.png"
+		}
+	],
+	"IMAGE_PATH" : "raytraced_rolling_ball.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "clamp"
+		}
+	],
+	"TITLE" : "Raytraced Rolling Ball",
+	"WIDTH" : 1920
+}

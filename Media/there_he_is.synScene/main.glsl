@@ -9,7 +9,7 @@ uniform samplerCube cubemap; // cubemap texture sampler
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
-
+    
     vec2 uv = fragCoord / RENDERSIZE.xy;
     vec2 pixel_uv = fragCoord;
     
@@ -24,8 +24,9 @@ vec4 renderPassA() {
     
     normal = normalize(normal + vec3(0.0, gravity, 0.0));
     
-    float turbulence = pow(texture(image7, vec3(uv / 3.0 + TIME * 0.04, TIME * 0.05)).r, 1.25);
-    
+    float turbulence = pow(texture(image7, vec3(uv / 3.0 + TIME * 0.04, TIME * 0.05).xy).r, 1.25);
+    float feedbackTurb = pow(texture(BuffA, vec3(uv / 3.0 + TIME * 0.04, TIME * 0.05).xy).r, 1.25);
+    float turbMixed = mix(turbulence, feedbackTurb, 0.5);
     float val = texture(BuffA, uv + ((off.xy * normal.xy) * spread * turbulence)).r;
     
     val = val * 0.99;
@@ -33,6 +34,7 @@ vec4 renderPassA() {
     // input
     vec4 winput = texture(syn_UserImage, uv);
     float grey = (winput.r + winput.g + winput.b) / 3.0;
+    grey = mix(grey, val, 0.125);
     winput.a *= step(0.5, distance(winput.rgb, vec3(0.0, 1.0, 0.0)));
     val = max(val, grey * winput.a);
     

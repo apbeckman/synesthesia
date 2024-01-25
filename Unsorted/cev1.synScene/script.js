@@ -42,6 +42,8 @@ var bassTimevar = new Timer();
 var midTimevar = new Timer();
 var timevar = new Timer();
 var spinTimevar = new Timer();
+var xtime = new Timer();
+var ytime = new Timer();
 
 var decimator = 0;
 var t = 0;
@@ -60,16 +62,21 @@ function update(dt) {
   bpmcount.updateTime(bpm, dt);
 
   try {
-    bassTimevar.updateTime(0.125, Math.pow((0.5+inputs.syn_BassLevel+inputs.syn_MidLevel*0.75+syn_Intensity*0.25), 2.0)*(inputs.rate_in+inputs.syn_Intensity), dt);
+    bassTimevar.updateTime(0.5, Math.pow((0.75+inputs.syn_BassLevel+inputs.syn_MidLevel*0.75+syn_Intensity*0.25), 2.0)*(inputs.rate_in), dt);
 
-    midTimevar.updateTime(0.125, Math.pow((inputs.syn_BassLevel*0.785+inputs.syn_MidHighLevel*0.9+inputs.syn_MidLevel*1.5+syn_Intensity), 2.0)*(inputs.mid_time), dt);
+    midTimevar.updateTime(0.125, Math.pow((inputs.syn_BassLevel*0.785+inputs.syn_MidHighLevel*0.9+inputs.syn_MidLevel*1.5+inputs.syn_Intensity*0.5), 2.0)*(inputs.mid_time), dt);
     spinTimevar.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Rotate), dt);
+    xtime.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.geo_rotate.x), dt);
+    ytime.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.geo_rotate.y), dt);
 
     timevar.updateTime(0.4, inputs.rate_in, dt);
 
     uniforms.script_time = timevar.time;
     uniforms.bass_time = bassTimevar.time;
     uniforms.mid_time = midTimevar.time;
+    uniforms.mid_time = midTimevar.time;
+    uniforms.x_time = xtime.time;
+    uniforms.y_time = ytime.time;
     uniforms.spin_time = spinTimevar.time;
 
     uniforms.highhits = Math.pow( (inputs.syn_HighLevel*0.5 + inputs.syn_Hits*0.125+inputs.syn_HighHits*0.375)*inputs.syn_Intensity, 2.0);

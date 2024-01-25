@@ -4,7 +4,12 @@ function BPMCounter () {
   this.timeWithinBeat = 0.0;
   this.didIncrement = 0.0;
 }
-
+function Timer () {
+  this.time = 0.0;
+}
+Timer.prototype.updateTime = function(rate, val, dt) {
+  this.time = this.time+rate*dt*val;
+}
 BPMCounter.prototype.updateTime = function(bpm, dt) {
   this.didIncrement = 0.0;
   var amountToStepThroughBeat = bpm*dt/60.0;
@@ -32,6 +37,8 @@ function CameraLook () {
 var bpmcount = new BPMCounter();
 var cPos = new CameraPos();
 var cLook = new CameraLook();
+var bassTimevar = new Timer();
+var spinTimevar = new Timer();
 
 var decimator = 0;
 var tAtLast0 = 0;
@@ -42,11 +49,15 @@ var midT = 0.0;
 var highhits = 0.0;
 var basshits = 0.0;
 function update(dt) {
+  bassTimevar.updateTime(0.5, Math.pow((0.5+inputs.syn_BassLevel*1.25+inputs.syn_MidLevel+syn_Intensity*0.5+inputs.push_in), 2.0)*(inputs.rate_in), dt);
+  spinTimevar.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Rotation), dt);
 
   var bpm = inputs.syn_BPM/4.0;
   bpmcount.updateTime(bpm, dt);
 
   uniforms.script_time = bpmcount.time;
+  uniforms.spin_time = spinTimevar.time;
+  uniforms.bass_time = bassTimevar.time;
 
   // if (bpmcount.didIncrement == 1.0){
   //   tAtLast0 = bpmTime;
@@ -54,7 +65,7 @@ function update(dt) {
   // bpmTime = tAtLast0;
   // bpmTime += (1. - Math.exp(-bpmcount.timeWithinBeat*3.))*inputs.amount_to_step;
   // uniforms.script_time = bpmTime;
-  uniforms.highhits = 0.65*Math.pow(inputs.syn_HighLevel*0.25 + (inputs.syn_Level*0.25+inputs.syn_HighHits*0.35), 2.0)*inputs.syn_Intensity;
+  uniforms.highhits = Math.pow(inputs.syn_HighLevel*0.25 + (inputs.syn_Level*0.25+inputs.syn_HighHits*0.35), 2.0)*inputs.syn_Intensity;
   uniforms.basshits = 0.65*Math.pow(inputs.syn_BassLevel*0.25 + (inputs.syn_Level*0.25+inputs.syn_BassHits*0.35), 2.0)*inputs.syn_Intensity;
 
   bassT = bassT + Math.pow(inputs.syn_BassLevel*0.35+inputs.syn_MidLevel*0.15,2.0);

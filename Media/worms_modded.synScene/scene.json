@@ -1,0 +1,191 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.1,
+			"MIN" : -0.1,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.109,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "ScreenSpace"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.0125,
+			"MIN" : -0.0125,
+			"NAME" : "rotat",
+			"TYPE" : "knob",
+			"UI_GROUP" : "ScreenSpace"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				0.5,
+				0.5
+			],
+			"MIN" : 
+			[
+				-0.5,
+				-0.5
+			],
+			"NAME" : "Fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "ScreenSpace"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "ScreenSpace"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "punch_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "ScreenSpace"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "punch_out",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "ScreenSpace"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : 0,
+			"NAME" : "spin_left",
+			"PARAMS" : 0.01701,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "ScreenSpace"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1.5,
+			"MIN" : 0,
+			"NAME" : "spin_right",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "ScreenSpace"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.0125,
+			"MIN" : -0.01,
+			"NAME" : "test",
+			"TYPE" : "slider",
+			"UI_GROUP" : "Color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.75,
+			"MIN" : -0.75,
+			"NAME" : "StepSize",
+			"PARAMS" : 0.125,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "",
+			"MAX" : 1.2,
+			"MIN" : 0,
+			"NAME" : "Convolution",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Noise",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.9,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "Media",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "aferriss",
+	"DESCRIPTION" : "experimenting with mixing convolutional feedback with last frame's color as texcoord offsets. AB: use media",
+	"GPU" : 0,
+	"HEIGHT" : 1440,
+	"IMAGE_PATH" : "worms_modded.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "media_pass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "feedback",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "worms modded",
+	"WIDTH" : 2560
+}

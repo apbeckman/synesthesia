@@ -1,0 +1,70 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Reset",
+			"TYPE" : "bang",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "Rory's SPEED UP:\n[url]javascript:  (function(){if(Effect.prototype.Paint.toString().length>1000){_Paint=Effect.prototype.Paint;} Effect.prototype.Paint = function(...args){for(var i=0; i<3;i++){_Paint.apply(this,args);}}})()[/url]",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "prism",
+			"PATH" : "images/prism.jpeg"
+		}
+	],
+	"IMAGE_PATH" : "mitosis_reaction_1.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffD",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "Mitosis Reaction_1",
+	"WIDTH" : 1920
+}

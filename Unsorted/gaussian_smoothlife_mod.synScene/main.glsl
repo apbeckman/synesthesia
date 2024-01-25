@@ -1,7 +1,8 @@
 vec3 colorPaletteChooser(float colReg, float var){
   vec3 paletteCol = vec3(0.5);
   if (colReg < 1.0){
-    paletteCol = _palette(var, vec3(0.500, 0.500, 0.520), vec3(0.500, 0.500, 0.500), vec3(0.780, 0.765, 0.750), vec3(0.360, 0.570, 0.680));
+    //paletteCol = _palette(var, vec3(0.500, 0.500, 0.520), vec3(0.500, 0.500, 0.500), vec3(0.780, 0.765, 0.750), vec3(0.360, 0.570, 0.680));
+    paletteCol = _palette(var, vec3(0.500, 0.500, 0.520), vec3(0.500, 0.500, 0.500), vec3(0.780, 0.765, 0.750), vec3(0.7, 0.570, 0.680));
   } else if (colReg < 2.0){
     paletteCol = _palette(var, vec3(1.025, 0.361, 0.703), vec3(0.900, 0.506, 0.724), vec3(0.720, 1.005, 0.075), vec3(1.000, 0.950, 0.590));
   } else if (colReg < 3.0){
@@ -242,7 +243,7 @@ vec4 renderMainImage() {
     float blur = col.g;
     float hard = col.r;
 
-    float colSel = mix(mix(blur, semiBlur, syn_Presence*syn_Intensity), hard, 0.);
+    float colSel = mix(mix(blur, semiBlur, syn_Intensity), hard, 0.);
     colSel = mix(colSel, (col.b+col.g+col.r)*(0.33+syn_BassLevel*0.3), max(no_blur, 1.0-audio_reactivity));
     // vec3 palCol = vec3(0.0,0.0,blur)*syn_BassLevel+colSel*_palette(colSel, vec3(1.439, -0.012, 0.314), vec3(0.746, 0.702, 0.276), vec3(0.680, 0.321, 1.190), vec3(0.407, 0.661, 0.759));
     vec3 palCol = vec3(0.0,0.0,blur)*syn_BassLevel+colSel*colorPaletteChooser(color_regime, colSel);

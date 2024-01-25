@@ -1,0 +1,263 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom in or out on the camera effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "diff_media",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Zoom in or out on the camera effect.",
+			"MAX" : 0,
+			"MIN" : 1,
+			"NAME" : "edge_only",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom in or out on the camera effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "_show_media",
+			"PARAMS" : 0.02101,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom in or out on the camera effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "hint_media",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom in or out on the camera effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "beat_flash",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom in or out on the camera effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "level_media",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Zoom in or out on the camera effect.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "tile_media",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "zoom",
+			"PARAMS" : 0.02,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "xtra"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "twist",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "xtra"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "tunnel",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_swirl",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "swirl"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "swirl",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "swirl"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flow",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "_flow"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "auto_flow",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "_flow"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 0.9,
+			"MIN" : 0,
+			"NAME" : "palette",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "color"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Toggle on/off the feedback.",
+			"MAX" : 0.025,
+			"MIN" : -0.025,
+			"NAME" : "distort",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "morph"
+		}
+	],
+	"CREDIT" : "Psybernautics",
+	"DESCRIPTION" : "Drink the water",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "colornoise",
+			"PATH" : "images/colornoise.jpg"
+		},
+		{
+			"NAME" : "noise",
+			"PATH" : "images/noise.jpg"
+		}
+	],
+	"IMAGE_PATH" : "G3LT4B2_sc.PNG",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "mediaPass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "mediaPassFX",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "postFXPass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "secondPass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 128,
+			"TARGET" : "secondPassB",
+			"WIDTH" : 128,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "edgePass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "glitchPass",
+			"WIDTH" : 720,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "rVertMirrPass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "finalMirrPass",
+			"WIDTH" : 720,
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "G3LT4B2 - Fine Control",
+	"WIDTH" : 1920
+}

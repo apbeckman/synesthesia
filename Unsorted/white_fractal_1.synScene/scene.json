@@ -80,6 +80,26 @@
 			"NAME" : "rate_in",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "pastels",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flash",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "zackpudil",
@@ -94,6 +114,13 @@
 		}
 	],
 	"IMAGE_PATH" : "white_fractal.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "White Fractal",
 	"WIDTH" : 1920
 }

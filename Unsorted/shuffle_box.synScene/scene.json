@@ -18,6 +18,15 @@
 			"NAME" : "FOV",
 			"TYPE" : "slider",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flash",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "tdhooper",
@@ -32,6 +41,13 @@
 		}
 	],
 	"IMAGE_PATH" : "shuffle_box.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Shuffle box",
 	"WIDTH" : 1920
 }

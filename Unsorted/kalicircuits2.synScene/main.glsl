@@ -124,11 +124,13 @@ vec4 renderMain() {
 
 	pos.x *= RENDERSIZE.x/RENDERSIZE.y;
 	vec2 uv = pos ;
+
 	uv -= _uvc*Zoom2*PI;
+	uv = mix(uv, vec2(_noise(uv +_rotate(_uvc+_uv, TIME*0.125))), warp*_uvc*(1.0-clamp(Zoom2*2., 0., 0.25)));
 
 	//uv *= -1.0 + Warp * (1.0 - (_uvc*PI-uv));
-	uv -= center;
-	uv = _rotate(uv, Rotate);
+	uv += center;
+	uv = _rotate(uv, Rotate*PI);
 
 	float sph = length(uv)*0.1; 
 	sph = sqrt(1.0 - sph * sph) * 2.0 ;
@@ -155,7 +157,7 @@ vec4 renderMain() {
 	}
 	S /= floor(loops); 
 	color /= floor(loops);
-	vec3 colo = mix(vec3(0.125), color, S) * (1.0 - length(pos))*min(1.,abs(.5+mod(smoothTimeB+.5,1.))*10.);	
+	vec3 colo = mix(vec3(0.125), color, S) * (1.0 - length(pos))*min(1.,abs(.5+mod(smoothTimeC+.5,1.))*10.);	
 	//colo*= 1.0 +highhits*0.5;
 	colo *=vec3(1.2, 1.1, 1.0);
 

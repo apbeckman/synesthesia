@@ -39,21 +39,13 @@
 			"UI_GROUP" : "tunnel"
 		},
 		{
-			"DEFAULT" : 0.2,
-			"DESCRIPTION" : "Determines how much the bass will make you travel forward. Default: 25%.",
-			"MAX" : 0.8,
-			"MIN" : 0,
-			"NAME" : "auto_in",
-			"TYPE" : "slider",
-			"UI_GROUP" : "speed"
-		},
-		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
 			"MIN" : -2,
 			"NAME" : "rate_in",
-			"TYPE" : "slider",
+			"PARAMS" : 0.03901,
+			"TYPE" : "knob smooth",
 			"UI_GROUP" : "speed"
 		},
 		{
@@ -143,13 +135,22 @@
 		}
 	],
 	"IMAGE_PATH" : "fire_tunnel_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 720,
 			"TARGET" : "tunnelPass",
-			"WIDTH" : 1280
+			"WIDTH" : 1280,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Fire Tunnel Mod",

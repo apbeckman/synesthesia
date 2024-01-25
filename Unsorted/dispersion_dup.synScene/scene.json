@@ -163,6 +163,50 @@
 			"PARAMS" : 0.05,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "brush2"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "stretch",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "cornusammonis",
@@ -170,19 +214,30 @@
 	"GPU" : 0,
 	"HEIGHT" : 720,
 	"IMAGE_PATH" : "dispersion_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 576,
+			"HEIGHT" : 1152,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1024
+			"WIDTH" : 2048,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
-			"HEIGHT" : 576,
+			"HEIGHT" : 1152,
 			"TARGET" : "BuffB",
-			"WIDTH" : 1024
+			"WIDTH" : 2048,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Dispersion_dup",

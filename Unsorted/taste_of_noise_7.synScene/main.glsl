@@ -51,7 +51,7 @@ float map (vec3 p)
     float dp = length(p);
     
     // rotation parameter
-    vec3 angle = vec3(.1,-.5,.1) + dp*.5 + p*.1 + cell;
+    vec3 angle = vec3(.1,-.5+cos(smoothTimeC*0.2),.1) + dp*.5 + p*.1 + cell;
     
     // shrink sphere size
     float size = sin(rng*PI);

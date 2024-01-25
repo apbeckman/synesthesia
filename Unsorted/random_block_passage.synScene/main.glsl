@@ -528,7 +528,7 @@ vec4 renderMainImage() {
     //col = mix(col, vec3(1.8, 1, .9), smoothstep(.2, .99, t/FAR));
     
     // Cooler colors... as in, less warm. :)
-    col *= vec3(.85, .95, 1.25);
+    col *= vec3(.95, .95, 1.125);
     
     // Vignette.
     uv = fragCoord/RENDERSIZE.xy;

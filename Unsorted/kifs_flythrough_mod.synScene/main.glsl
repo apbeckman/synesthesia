@@ -310,8 +310,8 @@ vec4 renderMainImage() {
     // vec2 m = sin(vec2(1.57079632, 0) + blur_out*2*PI);
     // rd.xy = rd.xy*mat2(m.xy, -m.y, m.x);
     // rd.xz = rd.xz*mat2(m.xy, -m.y, m.x);
-    rd.yz = _rotate(rd.yz, lookXY.y*PI+_uvc.y*Flip*PI*FOV);
-    rd.xz = _rotate(rd.xz, lookXY.x*PI);
+    rd.yz = _rotate(rd.yz, lookXY.y*PI+_uvc.y*Flip*PI*FOV+_noise(sin(TIME*0.1))*0.1);
+    rd.xz = _rotate(rd.xz, lookXY.x*PI+_noise(cos(TIME*0.1))*0.1);
     rd.xy = _rotate(rd.xy, Spin*PI+spin_time);
     // Ray origin, set off in the YZ direction. Note the "0.5." It's an old lattice trick.
     vec3 ro = vec3(0.0, 0.0, mix(smoothTime*0.35, bass_time*1.0, 1.0));
@@ -387,8 +387,11 @@ vec4 renderMainImage() {
     
     // // Mix the smokey haze with the object.
     // col = mix(sky, col, 1./(t*t/FAR/FAR*128. + 1.));
+    // original
+    // vec3 bg = mix(vec3(1.0, .0, 0.0), vec3(0.0, 0.0, 1.0), -rd.y*.35 + .35)*0.5;
 
-      vec3 bg = mix(vec3(1.750, .250, 0.1250), vec3(0.120, 0.0, 1.0), -rd.y*.35 + .35)*0.5*(1.0+syn_HighLevel);
+    //   vec3 bg = mix(vec3(1.750, .250, 0.1250), vec3(0.120, 0.0, 1.0), -rd.y*.35 + .35)*0.5*(1.0+syn_HighLevel);
+      vec3 bg = mix(vec3(.750, .1250, 0.50), vec3(0.120, 0.0, 1.0), -rd.y*.35 + .35)*0.5*(1.0+syn_HighLevel);
 
 
       col = mix(col, bg, smoothstep(0., FAR-15., t));//min(bg.zyx*vec3(1.3, .6, .2)*1.5, 1.)

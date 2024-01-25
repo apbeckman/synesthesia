@@ -19,7 +19,7 @@
 				-1
 			],
 			"NAME" : "lookXY",
-			"PARAMS" : 0.029,
+			"PARAMS" : 0.01901,
 			"TYPE" : "xy smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -29,7 +29,7 @@
 			"MAX" : 2,
 			"MIN" : -2,
 			"NAME" : "rate_in",
-			"PARAMS" : 0.1,
+			"PARAMS" : 0.04901,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -40,6 +40,16 @@
 			"MIN" : -1.5,
 			"NAME" : "FOV",
 			"PARAMS" : 0.029,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Fisheye",
+			"PARAMS" : 0.03701,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -74,25 +84,13 @@
 			"UI_GROUP" : "default"
 		},
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "Mirror",
-			"PARAMS" : 0.153,
-			"TYPE" : "xy smooth",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -100,19 +98,38 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "Fisheye",
-			"PARAMS" : 0.118,
-			"TYPE" : "slider smooth",
+			"NAME" : "mirror_x",
+			"PARAMS" : 0.05501,
+			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "default"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Convolution",
+			"MIN" : 0,
+			"NAME" : "mirror_y",
+			"PARAMS" : 0.06401,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 4,
+			"MIN" : 0,
+			"NAME" : "push_in",
 			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Flash",
+			"TYPE" : "toggle",
 			"UI_GROUP" : "default"
 		}
 	],
@@ -132,6 +149,13 @@
 		}
 	],
 	"IMAGE_PATH" : "abstract_glassy_field_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "Abstract Glassy Field Mod",
 	"WIDTH" : 1920
 }

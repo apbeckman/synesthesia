@@ -1,0 +1,49 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "wyatt",
+	"DESCRIPTION" : "fluid",
+	"GPU" : 0,
+	"HEIGHT" : 720,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image47",
+			"PATH" : "images/47.jpg"
+		}
+	],
+	"IMAGE_PATH" : "watershed.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1280
+		},
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "Watershed",
+	"WIDTH" : 1280
+}

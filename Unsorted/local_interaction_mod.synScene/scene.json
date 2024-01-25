@@ -8,24 +8,15 @@
 			"MIN" : 0,
 			"NAME" : "Reset",
 			"TYPE" : "bang",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "Utils"
 		},
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "media",
+			"NAME" : "media_hits",
 			"TYPE" : "toggle",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0.5,
-			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
-			"NAME" : "MediaImpact",
-			"TYPE" : "slider",
 			"UI_GROUP" : "default"
 		},
 		{
@@ -59,13 +50,141 @@
 			"UI_GROUP" : "default"
 		},
 		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "Warp",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -0.25,
-			"NAME" : "Intensity",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "Zoom",
+			"PARAMS" : 0.03901,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "EdgeMix",
 			"TYPE" : "slider",
-			"UI_GROUP" : "Geo"
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mediaEdgeMix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_impact",
+			"TYPE" : "knob",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "media_color_mix",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "greyscale",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "punch_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "bangs"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "punch_out",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "bangs"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "_warp",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "bangs"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "spin_left",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "bangs"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "spin_right",
+			"PARAMS" : 0.01,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "bangs"
 		},
 		{
 			"DEFAULT" : 
@@ -91,21 +210,11 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 1.275,
-			"MIN" : 0.75,
+			"MAX" : 1.15,
+			"MIN" : 0.85,
 			"NAME" : "Diffusion",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
+			"TYPE" : "knob",
 			"UI_GROUP" : "Geo"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : -1,
-			"NAME" : "Zoom",
-			"TYPE" : "slider",
-			"UI_GROUP" : "Cam"
 		},
 		{
 			"DEFAULT" : 0,
@@ -122,13 +231,62 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "local_interaction_mod.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 1080,
 			"TARGET" : "BuffA",
-			"WIDTH" : 1920
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "nearest",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffB",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "nearest",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffC",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "media_pass",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "media_pass_fx",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "Feedback",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
 		}
 	],
 	"TITLE" : "Local Interaction Mod",

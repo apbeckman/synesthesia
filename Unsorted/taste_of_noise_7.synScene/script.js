@@ -60,7 +60,7 @@ function update(dt) {
   bpmcount.updateTime(bpm, dt);
 
   try {
-    bassTimevar.updateTime(0.2, Math.pow((0.5+inputs.syn_BassLevel+inputs.syn_MidLevel*0.75+syn_Intensity*0.25), 2.0)*(inputs.rate_in), dt);
+    bassTimevar.updateTime(0.5, Math.pow((0.5+inputs.syn_BassLevel+inputs.syn_MidLevel*0.75+syn_Intensity*0.25), 2.0)*(inputs.rate_in), dt);
 
     midTimevar.updateTime(0.125, Math.pow((inputs.syn_BassLevel*0.785+inputs.syn_MidHighLevel*0.9+inputs.syn_MidLevel*1.5+inputs.syn_Intensity*0.5), 2.0)*(inputs.mid_time), dt);
     spinTimevar.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Rotate), dt);
