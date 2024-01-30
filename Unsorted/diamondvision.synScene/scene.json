@@ -27,7 +27,7 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : 0.5,
+			"MIN" : 0.25,
 			"NAME" : "FOVmod",
 			"PARAMS" : 0.065,
 			"TYPE" : "slider smooth",
@@ -46,7 +46,7 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
+			"MAX" : 0.5,
 			"MIN" : 0,
 			"NAME" : "Flip",
 			"PARAMS" : 0.01,
@@ -66,7 +66,7 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 4,
-			"MIN" : -1,
+			"MIN" : -1.5,
 			"NAME" : "its",
 			"TYPE" : "slider",
 			"UI_GROUP" : "geometry"
@@ -100,25 +100,43 @@
 			"UI_GROUP" : "geometry"
 		},
 		{
-			"DEFAULT" : 
-			[
-				0,
-				0
-			],
+			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 
-			[
-				1,
-				1
-			],
-			"MIN" : 
-			[
-				0,
-				0
-			],
-			"NAME" : "Mirror",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "x_mirror",
+			"PARAMS" : 0.06901,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_mirror",
+			"PARAMS" : 0.06201,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert",
+			"PARAMS" : 0.06201,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "iter_rotate",
 			"PARAMS" : 0.01,
-			"TYPE" : "xy smooth",
+			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		}
 	],

@@ -91,6 +91,47 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 5,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 2,
+			"NAME" : "Spirals",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1.25,
+			"NAME" : "thickness",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				3,
+				2
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				8,
+				8
+			],
+			"MIN" : 
+			[
+				2,
+				2
+			],
+			"NAME" : "density",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Shane",

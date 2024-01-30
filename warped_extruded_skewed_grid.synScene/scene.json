@@ -1,0 +1,36 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "fov",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "A warped extruded skewed dual tile grid, rendered in an early 2000s demoscene style. :)",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image10",
+			"PATH" : "images/10.jpg"
+		}
+	],
+	"IMAGE_PATH" : "warped_extruded_skewed_grid.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "Warped Extruded Skewed Grid",
+	"WIDTH" : 1920
+}

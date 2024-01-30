@@ -154,7 +154,7 @@ float map(vec3 p) {
     float pln = -p.z + 2.;//abs(p.z - 2. + .01) - .01;
 
     // Sphere rotation.
-    p.xy *= rot2(3.14159 / 3. + spin_time);
+    p.xy *= rot2(PI / 3. + spin_time);
     p.xz *= rot2(-bass_time);
     //p.yz *= rot2(-TIME/4.);
     p.yz *= rot2(mid_time);
@@ -166,7 +166,7 @@ float map(vec3 p) {
 
     // The X value controls the number of dashes per revolution and the Y value
     // dictates the number of spiral arms.
-    const vec2 sSc = vec2(3, 3);
+    vec2 sSc = vec2(density.x, density.y);
     float ax = atan(sphP.z, sphP.x) / 6.2831; // Longitudinal coordinate.
     float ay = asin(sphP.y / length(sphP));// Or atan(sphP.y, length(sphP.xz)); // Latitude. 
     // The above are only spherical coordinates, which you can arrange to spiral around
@@ -182,16 +182,15 @@ float map(vec3 p) {
     //
     // The following are equivalent. I'm not sure which one the GPU likes best, 
     // but I'm going to go with the most concise one. :)
-    ay = asinh(tan(ay)) / 6.2831;
+    ay = asinh(tan(ay)) / (PI*2.0);
     //ay = log(tan(3.14159265/4. + ay/2.))/6.2831; // Mercator
     //ay = sign(ay)*acosh(1./cos(ay))/6.2831;// + .5;
 
     // The number of spirals per arm.
-    const float spirals = 5.; 
+    float spirals = Spirals; 
     // Spiral lines running perpendicular to one another. You can combine
     // these to form objects, provide texture coordinates, etc.
     vec2 spir = vec2(ax * spirals + ay, ax - ay * spirals);
-
     gSUV = spir * sSc;
 
     // Unique dash line UV. Not used here.
@@ -199,11 +198,12 @@ float map(vec3 p) {
 
     // Line thickness. The first line arranges for increased thickness near the poles.
     float th = 1. / (.001 + pow(length(sphP - sign(sphP) * vec3(0, 1, 0)), .5) * 256.);
-    th += .04; // Constant thickness.
+    th += .04+thickness*0.025; // Constant thickness.
 
     // Divisor much be a factor of the scale (sSc) above.
     vec2 ln = abs(mod(spir, 1. / sSc) - .5 / sSc) - th;
 
+    // spir = _rotate(spir, TIME);
     #ifdef DASHED
     ln.x = smax(ln.y, -(ln.x - .01), .02); // Using the other spiral to cut out holes.
     #else 
@@ -499,7 +499,7 @@ vec4 renderMainImage() {
             oCol = mix(oCol, vec3(1, .3, .05) / 3.5, hash21(iq + .06) * .35);
 
             // The dot background edges and application.
-            float d = length(q) - .4 * sc.y*background_on_off;
+            float d = length(q) - .3 * sc.y*background_on_off;
             oCol = mix(oCol * .2, oCol, 1. - smoothstep(0., 1. / sc.y / RENDERSIZE.y, d))*background_on_off;
             //oCol = mix(oCol, oCol*.5, 1. - smoothstep(0., 1./sc.y/RENDERSIZE.y, d + .15*sc.y));
 

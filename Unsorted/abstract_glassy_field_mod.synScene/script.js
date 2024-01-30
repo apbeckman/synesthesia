@@ -67,8 +67,9 @@ function update(dt) {
         0.5 +
           (push_in - rate_in*(push_in/3.)) +
           inputs.syn_BassLevel * 1.25 +
-          inputs.syn_MidLevel +
-          syn_Intensity * 0.25,
+          inputs.syn_MidLevel*0.75 +
+          syn_Intensity * 0.25 +
+          syn_Level*0.125,
         2.0
       ) * inputs.rate_in,
       dt

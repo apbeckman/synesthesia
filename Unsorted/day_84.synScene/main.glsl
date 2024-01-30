@@ -1,3 +1,8 @@
+float smin(float a, float b, float k) {
+    float h = max(k - abs(a-b), 0.) / k;
+    return min(a, b) - h*h*h*k*1./6.;
+}
+
 
 
 			//******** BuffA Code Begins ********
@@ -52,7 +57,7 @@ vec2 map(vec3 p){
     u.x -= 1.;
     
     q.x -= 0.8;
-    
+    // q.xy = abs(q.xy);
     float dG = -u.x;
     d = dmin(d, vec2(dG, 3.));
     
@@ -114,7 +119,7 @@ vec2 map(vec3 p){
     vec4 a = valueNoise((idb + TIME*3. + idz*3.));
     
     //vec3 c = max(pal(0.7,1., vec3(3.7,0.3,0.6), 0.6,4.4 + sin(TIME) + sin(idz * idb)*0.2), 0.);
-    vec3 c = max(pal(0.7,1., vec3(3.,0.3,0.1), 0.6,4.4 + sin(TIME) + idz + sin(idz * idb)*0.2), 0.1);
+    vec3 c = max(pal(0.7,1., vec3(3.,0.3,0.1), 0.6,4.4 + sin(smoothTimeC*0.3) + idz + sin(idz * idb)*0.2), 0.1);
     
     glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(90. - a.x*20.))*att*c* pow(smoothstep(1.,0.,length(q.y*1.)), 5.);
     //glow += pow(smoothstep(0.,1.,a.z*1.5), 20.)*1.5/(0.005 + dCb*dCb*(100. - a.x*20.))*att*c;
@@ -161,10 +166,19 @@ vec3 getNormal(vec3 p){
 vec4 renderPassA() {
 	vec4 fragColor = vec4(0.0);
 	vec2 fragCoord = _xy;
+    float inv_screen = mix(1.0, -1.0, invert_screen);
 
     vec2 uv = (fragCoord - 0.5*RENDERSIZE.xy)/RENDERSIZE.y;
     //
+    // uv = mix(uv, uv+_uvc, fov);
 	uv *= 1. - dot(uv,uv)*0.14;
+    uv = mix(uv, uv+_uvc*PI, fov);
+    float x_mirror_screen = smin(uv.x * -1, uv.x, 0.0125);
+    float y_mirror_screen = smin(uv.y * -1, uv.y, 0.0125) ;
+    vec2 smxy = vec2(x_mirror_screen, y_mirror_screen)*inv_screen;
+    vec2 sm = vec2(screen_mirror_x, screen_mirror_y);
+    //rd.yz *= rot(TIME);
+    uv.xy = vec2(mix(uv.x, smxy.x, sm.x), mix(uv.y, smxy.y, sm.y));
     
     uv.xy *= rot((TIME - 3.6)*0.1);
     
@@ -173,11 +187,11 @@ vec4 renderPassA() {
     dith = mix(0.8,1., texture(image30, 20.*uv*256.).x);
     vec3 ro = vec3(0);
     
-    ro.z += TIME*1.5;
+    ro.z += bass_time*1.5;
     
     vec3 rd = normalize(vec3(uv,2.));
-    //rd.yz *= rot(TIME);
-    
+    rd.xz = _rotate(rd.xz, lookxy.x*PI);
+    rd.yz = _rotate(rd.yz, lookxy.y*PI);
     vec3 p; float t; bool hit;
     float side = 1.;
     float tA;
@@ -214,6 +228,7 @@ vec4 renderPassA() {
         }
     }
     
+    glow *= 1.0+highs*10.;
     
     col += glow*0.001;
     
@@ -241,7 +256,7 @@ vec4 renderMainImage() {
 
     // Radial blur
     float steps = 30.;
-    float scale = 0.00 + pow(length(uv - 0.5),4.)*0.5;
+    float scale = 0.00 + pow(length(uv - 0.5),4.)*0.25;
     //float chromAb = smoothstep(0.,1.,pow(length(uv - 0.5), 0.3))*1.1;
     float chromAb = pow(length(uv - 0.5),1.)*3.7;
     vec2 offs = vec2(0);

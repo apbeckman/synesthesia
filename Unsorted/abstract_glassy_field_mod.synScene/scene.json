@@ -24,10 +24,10 @@
 			"UI_GROUP" : "camera"
 		},
 		{
-			"DEFAULT" : 1,
+			"DEFAULT" : 0.5,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
+			"MAX" : 1,
+			"MIN" : -1,
 			"NAME" : "rate_in",
 			"PARAMS" : 0.04901,
 			"TYPE" : "slider smooth",
@@ -37,7 +37,7 @@
 			"DEFAULT" : -0.5,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -1.5,
+			"MIN" : -1,
 			"NAME" : "FOV",
 			"PARAMS" : 0.029,
 			"TYPE" : "slider smooth",
@@ -51,6 +51,36 @@
 			"NAME" : "Fisheye",
 			"PARAMS" : 0.03701,
 			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "x_mirror_screen",
+			"PARAMS" : 0.05801,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_mirror_screen",
+			"PARAMS" : 0.05801,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert_screen",
+			"PARAMS" : 0.06801,
+			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "camera"
 		},
 		{
@@ -96,26 +126,6 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "mirror_x",
-			"PARAMS" : 0.05501,
-			"TYPE" : "toggle smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "mirror_y",
-			"PARAMS" : 0.06401,
-			"TYPE" : "toggle smooth",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
 			"MAX" : 4,
 			"MIN" : 0,
 			"NAME" : "push_in",
@@ -124,13 +134,74 @@
 			"UI_GROUP" : "default"
 		},
 		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "mirror_move",
+			"TYPE" : "xy",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "glow",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "x_mirror",
+			"PARAMS" : 0.03901,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "geometry"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_mirror",
+			"PARAMS" : 0.03501,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "geometry"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert_geometry",
+			"PARAMS" : 0.05401,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "geometry"
+		},
+		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "Flash",
 			"TYPE" : "toggle",
-			"UI_GROUP" : "default"
+			"UI_GROUP" : "FX"
 		}
 	],
 	"CREDIT" : "Shane",

@@ -126,7 +126,7 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "mirror_x",
+			"NAME" : "screen_mirror_x",
 			"PARAMS" : 0.08501,
 			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "default"
@@ -136,7 +136,7 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
-			"NAME" : "mirror_y",
+			"NAME" : "screen_mirror_y",
 			"PARAMS" : 0.07101,
 			"TYPE" : "toggle smooth",
 			"UI_GROUP" : "default"

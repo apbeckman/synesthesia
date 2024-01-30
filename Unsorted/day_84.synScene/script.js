@@ -53,6 +53,7 @@ var highhits = 0.0;
 var basshits = 0.0;
 var midhits = 0.0;
 var bass = 0.0;
+var highs = 0.0;
 var hits = 0.0;
 
 function update(dt) {
@@ -60,10 +61,10 @@ function update(dt) {
   bpmcount.updateTime(bpm, dt);
 
   try {
-    bassTimevar.updateTime(0.6, Math.pow((0.5+inputs.syn_BassLevel+inputs.syn_MidLevel*0.75+syn_Intensity*0.25), 2.0)*(inputs.rate_in), dt);
+    bassTimevar.updateTime(1.0, Math.pow((0.5+inputs.syn_BassLevel+inputs.syn_MidLevel*0.75+syn_Intensity*0.25), 2.0)*(inputs.rate_in), dt);
 
     midTimevar.updateTime(0.125, Math.pow((inputs.syn_BassLevel*0.785+inputs.syn_MidHighLevel*0.9+inputs.syn_MidLevel*1.5+inputs.syn_Intensity*0.5), 2.0)*(inputs.mid_time), dt);
-    spinTimevar.updateTime(.1,  Math.pow(0.25+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Rotation), dt);
+    spinTimevar.updateTime(.1,  Math.pow(0.5+inputs.syn_BassLevel*0.75+inputs.syn_MidLevel*0.75+syn_Intensity,2.0)*(inputs.Rotate), dt);
 
     timevar.updateTime(0.4, inputs.rate_in, dt);
 
@@ -77,7 +78,8 @@ function update(dt) {
     uniforms.midhits = Math.pow( (inputs.syn_MidLevel*0.5 + inputs.syn_Level*0.125+inputs.syn_MidHits*0.375)*inputs.syn_Intensity, 2.0);
     uniforms.hits = Math.pow( (inputs.syn_HighLevel*0.5 + inputs.syn_Level*0.125+inputs.syn_Hits*0.375)*inputs.syn_Intensity, 2.0);
   
-    uniforms.low = Math.pow( (inputs.syn_BassLevel*0.5 + inputs.syn_MidLevel*0.375+inputs.syn_Level*0.125)*inputs.syn_Intensity, 2.0);
+    uniforms.low = Math.pow( (inputs.syn_BassLevel*0.5 + inputs.syn_MidLevel*0.375+inputs.syn_Level*0.125), 2.0);
+    uniforms.highs = Math.pow( (inputs.syn_HighLevel*0.5 + inputs.syn_MidHighLevel*0.375+inputs.syn_Level*0.125 +inputs.syn_HighHits)*inputs.syn_Intensity, 2.0);
   
     bassT = bassT + Math.pow(inputs.syn_BassLevel*0.45+inputs.syn_MidLevel*0.35+syn_Intensity*0.2,2.0);
     uniforms.script_bass_time = bassT;

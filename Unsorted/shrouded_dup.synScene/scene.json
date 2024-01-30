@@ -118,6 +118,28 @@
 			"NAME" : "Stretch",
 			"TYPE" : "xy",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "fisheye",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "Felix Woitzel ft. Meebs",
@@ -132,25 +154,38 @@
 		}
 	],
 	"IMAGE_PATH" : "shrouded_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"PASSES" : 
 	[
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 800,
 			"TARGET" : "buffA",
-			"WIDTH" : 1600
+			"WIDTH" : 1600,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 800,
 			"TARGET" : "buffC",
-			"WIDTH" : 1600
+			"WIDTH" : 1600,
+			"WRAP" : "repeat"
 		},
 		{
+			"FILTER" : "linear",
 			"FLOAT" : true,
 			"HEIGHT" : 800,
 			"TARGET" : "buffD",
-			"WIDTH" : 1600
+			"WIDTH" : 1600,
+			"WRAP" : "repeat"
 		}
 	],
 	"SMOOTH_TRANSITIONS" : 

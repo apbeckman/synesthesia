@@ -2,6 +2,11 @@
 
 
 
+float smin(float a, float b, float k) {
+
+    float f = max(0., 1. - abs(b - a) / k);
+    return min(a, b) - k * .25 * f * f;
+}
 
 
 ////////////////////////////////////////////////////////////////////
@@ -85,7 +90,15 @@ float map(in vec3 pm) {
 	vec3 m = abs(1.0-mod(pm,2.0));
 
 	m.yz = rotate(m.yz+test2, sqrt(time3));
+	for (int i = 0; i <= 3+int(its*0.75); i++){
+		m.xy = _rotate(m.xy, PI+length(m.z*.1));
+		m.xz = _rotate(m.xz, 1.5);
+		m.y += 0.5;
+		m.z = smin(-m.z, m.z, 0.1);
+		m.zy = _rotate(m.zy, sin(TIME*.0125));
 
+	}
+	m.x = smin(-m.x, m.x, 0.25);
 	float e = 9999.9999, f = 1.0;
 
 	for (float i = 0.0; i < 4.0+its; i++) {
@@ -236,16 +249,22 @@ vec4 renderMain() {
 
 	//vec3 rd = normalize(uw * ps.x + vw * ps.y + cd*(1.0-length(ps)*phi));
 
+
+
+
     vec3 rd = vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y);
-
-
-
-	rd = normalize(vec3(rd.xy*(1.0+(Mirror*(-1+_uvc*PI))), sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.)*(FOVmod-Flip*0.5))*FOVmod));
+	rd = normalize(vec3(mix(rd.xy, rd.xy + _uvc, - FOVmod), sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.)*(FOVmod-Flip*0.5))*FOVmod));
 
 //    rd = normalize(vec3(rd.xy*(1.0+(Mirror*(-1+_uvc*PI))), (rd.z - length(rd.xy-_uvc*PI*Fisheye)*.125)));
 
 
 
+    float mirror_x = smin(rd.x*-1, rd.x, 0.75);
+    float mirror_y = smin(rd.y*-1, rd.y, 0.75);
+    vec2 mirror = vec2(x_mirror, y_mirror);
+    vec2 rd_mirrored = vec2(mix(mirror_x, mirror_x*-1, invert), mix(mirror_y, mirror_y*-1, invert));
+
+    rd.xy = mix(rd_mirrored , rd.xy, 1.0-mirror);
 	rd.yz = _rotate(rd.yz, lookXY.y*PI+_uvc.y*Flip*PI);
 
     rd.xy = _rotate(rd.xy, lookXY.x*PI);

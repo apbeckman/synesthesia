@@ -4,8 +4,8 @@
 		{
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : -2,
+			"MAX" : 1,
+			"MIN" : -1,
 			"NAME" : "rate_in",
 			"PARAMS" : 0.11601,
 			"TYPE" : "slider smooth",
@@ -37,7 +37,7 @@
 			"DEFAULT" : 1,
 			"DESCRIPTION" : "",
 			"MAX" : 2,
-			"MIN" : 1e-05,
+			"MIN" : -2,
 			"NAME" : "fov",
 			"PARAMS" : 0.02001,
 			"TYPE" : "slider smooth",
@@ -52,6 +52,108 @@
 			"PARAMS" : 0.01,
 			"TYPE" : "knob smooth",
 			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert_geometry",
+			"PARAMS" : 0.05501,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "justTubes",
+			"PARAMS" : 0.06401,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "spin",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror_x",
+			"PARAMS" : 0.05801,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mirror_y",
+			"PARAMS" : 0.05401,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "rotategeo",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "screen_mirror_x",
+			"PARAMS" : 0.06101,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "screen"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "screen_mirror_y",
+			"PARAMS" : 0.06201,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "screen"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert_screen",
+			"PARAMS" : 0.06101,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "screen"
 		}
 	],
 	"CREDIT" : "Shane",
@@ -60,6 +162,10 @@
 	"HEIGHT" : 1080,
 	"IMAGES" : 
 	[
+		{
+			"NAME" : "aainv",
+			"PATH" : "images/aainv.jpg"
+		},
 		{
 			"NAME" : "marble",
 			"PATH" : "images/marble.jpeg"

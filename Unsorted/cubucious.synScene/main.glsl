@@ -1,5 +1,9 @@
 
+float smin(float a, float b, float k) {
 
+    float f = max(0., 1. - abs(b - a) / k);
+    return min(a, b) - k * .25 * f * f;
+}
 // ponk (Leon Denise) 19/07/2018
 // most lines below are from the shadertoy community
 // licensed under hippie love conspiracy
@@ -46,7 +50,7 @@ vec3 look (vec3 eye, vec3 target, vec2 anchor) {
 #define PIHALF PI/2.0
 #define PIQUART PI/4.0
 #define saturate(p) clamp(p,0.,1.)
-float random (in vec2 st) { return fract(sin(dot(st.xy, vec2(12.9898+sin(smoothTime),78.233)))* 43758.5453123); }
+float random (in vec2 st) { return fract(sin(dot(st.xy, vec2(12.9898+sin(smoothTime*0.2),78.233)))* 43758.5453123); }
 
 float geometry (vec3 pos)
 {
@@ -59,14 +63,25 @@ float geometry (vec3 pos)
 		ratio *= ratio;
         
         // domain reptition and translation offset
+		p.x = smin(-p.x, p.x, 0.05);
+		p.z = smin(-p.z, p.z, 0.05);
 		p.xz = abs(p.xz) - range * ratio*(Expand);
-        p.xy *= -rot(smoothTimeC*0.0475+sin(smoothTimeC*0.0475));
+        p.xy *= -rot(smoothTimeC*0.01475+sin(smoothTimeC*0.01475));
         // rotations
-		p.xz *= rot(PIQUART+smoothTime*0.0675);
+
 		p.yz = _rotate(p.yz, smoothTimeC*0.0375);
+		for(int i = 0; i < 2; i++){
+			p.xz = _rotate(p.xz, PI-smoothTimeC*0.0125);
+		}
 
 		p.yz *= -rot(smoothTimeC*0.0375+TAU);
+		for(int i = 0; i < 4; i++){
+			p.xy = _rotate(p.xy, PI-smoothTime*0.01);
+		}
 		p.yx *= rot(PIHALF);
+		for(int i = 0; i < 4; i++){
+			p.zy = _rotate(p.zy, PI+TIME*0.0125);
+		}
 
 		scene = smoothmin(scene, box(p, vec3(radius * ratio)), blend * ratio);
 	}
@@ -105,14 +120,15 @@ vec4 renderMainImage() {
     
 	vec2 uv = (coordinate.xy-.5*RENDERSIZE.xy)/RENDERSIZE.y;
     vec3 eye = vec3(0,2,2) * (2. - Zoom);
+	eye.xy = mix(eye.xy, eye.xy - _uvc, Zoom);
     eye.xz = _rotate(eye.xz, Rotate.x*PI);
     eye.yz = _rotate(eye.yz, Rotate.y*PI);
 
 
 
 	uv.xy *= normalize(1.0+(_uvc.xy*uv.xy * Warp*PI));
-	uv.xy += _rotate((uv.xy*_uvc*PIHALF*uv.xy), smoothTimeC*0.25)*Whoa;
-	eye.xz += _rotate((eye.xz*_uvc*PIHALF*uv.xy), smoothTimeC*0.25)*Whoa;
+	uv.xy += _rotate((uv.xy*_uvc*PIHALF*uv.xy), smoothTimeC*0.125)*Whoa;
+	eye.xz += _rotate((eye.xz*_uvc*PIHALF*uv.xy), smoothTimeC*0.125)*Whoa;
 
     vec3 target = vec3(0);
 	vec4 hit;

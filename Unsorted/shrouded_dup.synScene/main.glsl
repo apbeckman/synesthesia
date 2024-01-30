@@ -5,6 +5,9 @@ int iFrame = int(FRAMECOUNT);
 float time = TIME;
 vec2 resolution = RENDERSIZE;
 vec4 iMouse = vec4(0.5);
+float dist(vec2 p0, vec2 pf){return sqrt((pf.x-p0.x)*(pf.x-p0.x)+(pf.y-p0.y)*(pf.y-p0.y));}
+float d = dist(RENDERSIZE.xy*0.5,_xy.xy)*(_mouse.x/RENDERSIZE.x+0.1)*0.005;
+float d2 = dist(RENDERSIZE.xy*0.5,_xy.xy)*0.0125;
 
 
 // ****************** PASS 0 ***********************
@@ -119,8 +122,9 @@ void mainImage0( out vec4 fragColor, in vec2 fragCoord )
 {
     fragCoord -= _uvc*PI*Zoom;
     fragCoord += _uvc*Stretch;
+    fragCoord += _uvc*fisheye*d2;
     vec2 uv = fragCoord.xy / iResolution.xy;
-    vec4 noise = (texture(colornoise, _uv*4.0 + fract(vec2(42,56)*iGlobalTime))-0.5)*2.;
+    vec4 noise = (texture(colornoise, _uv*4.0 + fract(vec2(42,56)*TIME*0.125))-0.5)*2.;
     uv += _uvc*pow(tunnel,vec2(4.0));
 
     if ((pyramid>0.5)&&(uv.x > uv.y*0.5)){
@@ -134,7 +138,7 @@ void mainImage0( out vec4 fragColor, in vec2 fragCoord )
         return;
     }
 
-    float intensity = pow(syn_Presence,5.0);
+    float intensity = pow(syn_Presence*0.5+syn_Intensity*0.5,5.0);
     vec2 flowVel = vec2(0.00,mix(-0.0001, -0.002, intensity));
     vec2 aspect = vec2(1.,iResolution.y/iResolution.x);
     vec2 pixelSize = 1. / iResolution.xy;
@@ -142,8 +146,8 @@ void mainImage0( out vec4 fragColor, in vec2 fragCoord )
     uv = vortex_pair_warp(uv, vec2(0.5, 0.5), flowVel*aspect*1.4);
 
     // expansion
-    vec2 gradientLookupDistance = pixelSize*3.;
-    float expansionFactor = mix(0.3, 1.5, syn_Intensity);
+    vec2 gradientLookupDistance = pixelSize*5.;
+    float expansionFactor = mix(0.3, 1.5, syn_Intensity*0.5+syn_Level*0.5);
     // bool jumpyExpoRegime = false;
     // if (jumpyExpoRegime == true){
     //     expansionFactor = 1.*syn_OnBeat*4.0;
@@ -159,7 +163,7 @@ void mainImage0( out vec4 fragColor, in vec2 fragCoord )
     float feedBack = shimmer*6./256.;
     float feedForward = shimmer*6./256.;
 
-    float motion = clamp(-syn_HighHits+syn_BassLevel,-0.35,1.0)*0.01;
+    float motion = clamp(-high+bass,-0.35,1.0)*0.01;
     if (bpm_oscillate > 0.5){
         // expansionFactor = syn_BPMSin2;
         motion = clamp(syn_BPMSin2*2-1.0,-1.0,1.0)*0.01+0.002*syn_HighHits;
@@ -560,9 +564,9 @@ void mainImage4( out vec4 fragColor, in vec2 fragCoord )
     midCol = mix(midCol, _normalizeRGB(4, 117, 111)*2.0, cReg4);
 
 
-    vec2 zoneMids = vec2(sin(syn_MidTime*0.23), cos(syn_MidTime*0.17));
-    vec2 zoneMidHighs = vec2(sin(syn_MidHighTime*0.23), cos(syn_MidHighTime*0.17));
-    vec2 zoneHighs = vec2(sin(syn_HighTime*0.23), cos(syn_HighTime*0.17));
+    vec2 zoneMids = vec2(sin(smooth_midtime*0.23), cos(smoothTimeC*0.17));
+    vec2 zoneMidHighs = vec2(sin(smooth_hightime*0.23), cos(smooth_midtime*0.17));
+    vec2 zoneHighs = vec2(sin(smooth_hightime*0.23), cos(smoothTimeB*0.17));
 
     midHighCol *= (0.05+0.95*syn_MidHighPresence*distance(zoneMidHighs, _uvc)*0.8);
     bassCol1 *= (0.05+0.95*(sqrt(syn_BassPresence))*1.25);

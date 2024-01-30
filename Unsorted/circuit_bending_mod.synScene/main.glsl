@@ -92,19 +92,29 @@ vec4 renderMain() {
 
 	float T = smoothTime;
 	vec2 v = (_xy.xy / RENDERSIZE.xy) + RENDERSIZE.y;
+    // float inv_screen = mix(1.0, -1.0, invert_screen);
+
+    // float x_mirror_screen = smin(v.x * -1, v.x, 0.0125);
+
+    // float y_mirror_screen = smin(v.y * -1, v.y, 0.0125) ;
+
+    // vec2 smxy = vec2(x_mirror_screen, y_mirror_screen)*inv_screen;
+
+    // vec2 sm = vec2(screen_mirror_x, screen_mirror_y);
+
 	v.y -= 0.5;
 	float th =  v.y * pi, ph = v.x * twpi;
     vec3 sp = vec3( sin(ph) * cos(th), sin(th), cos(ph) * cos(th) );
     // sp.xy += lookXY;
-    sp = mix(sp, normalize(vec3(_uvc*PI, 1.0)), perspective);
 
-    float m_x = smin(sp.x*-1, sp.x, 0.25)*1.2;
-    float m_y = smin(sp.y*-1, sp.y, 0.25)*1.2;
+
+    sp = mix(sp, normalize(vec3(_uvc*PI, 1.0)), perspective);
+    float m_x = smin(sp.x*-1, sp.x, 0.125);
+    float m_y = smin(sp.y*-1, sp.y, 0.125);
     vec2 sp_mirrored = vec2(m_x, m_y);
-    sp.xy = mix(sp.xy, sp_mirrored, vec2(mirror_x, mirror_y));
+    sp.xy = mix(sp.xy, sp_mirrored, vec2(screen_mirror_x, screen_mirror_y));
     sp.xz = _rotate(sp.xz, lookXY.x*PI+Noise);
     sp.yz = _rotate(sp.yz, lookXY.y*PI+Noise);
-
 
     sp.xy = _rotate(sp.xy, Rotate*PI+0.025*n3D(vec3(smoothTime*0.01)));
     // sp.xy += sp.xy*_uvc*PI*QuadMirror*PI;

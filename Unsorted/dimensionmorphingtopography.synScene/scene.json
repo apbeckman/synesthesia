@@ -36,7 +36,7 @@
 			"MAX" : 0.75,
 			"MIN" : 0.25,
 			"NAME" : "cycle",
-			"TYPE" : "slider",
+			"TYPE" : "knob",
 			"UI_GROUP" : "defaults"
 		},
 		{
@@ -64,10 +64,20 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 0.5,
-			"MIN" : -1,
+			"MAX" : 0.75,
+			"MIN" : -2,
 			"NAME" : "zoom",
 			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "Camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 0.5,
+			"MIN" : -0.5,
+			"NAME" : "FOV",
+			"PARAMS" : 0.06501,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Camera"
 		},
@@ -104,13 +114,12 @@
 			"UI_GROUP" : "light/color"
 		},
 		{
-			"DEFAULT" : 12.5,
+			"DEFAULT" : 4,
 			"DESCRIPTION" : "",
 			"MAX" : 20,
 			"MIN" : 0,
 			"NAME" : "light",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
+			"TYPE" : "knob",
 			"UI_GROUP" : "light/color"
 		},
 		{
@@ -122,6 +131,16 @@
 			"PARAMS" : 0.066,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "Defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "rings",
+			"PARAMS" : 0.06201,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
 		}
 	],
 	"CREDIT" : "by mojovideotech",
@@ -129,6 +148,13 @@
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGE_PATH" : "dimensionmorphingtopography.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
 	"TITLE" : "DimensionMorphingTopography",
 	"WIDTH" : 1920
 }

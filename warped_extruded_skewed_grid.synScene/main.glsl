@@ -1,4 +1,3 @@
-//vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick); 
 
 
 /*
@@ -46,8 +45,10 @@
     The frame rate in window form was surprisingly better than I'd expected. 
     Having said that, I'm on a pretty quick machine, and it doesn't like running 
     in fullscreen, so it's all relative. There are at least two things that could
-    improve performance (like face and height storage), but that would be at the 
-    expense of readability, so I'm going to leave it alone.
+    improve performance. One is face and height buffer storage and the other is
+    using a pinwheel (or pythagorean) arrangement for five (or possibly three) 
+    taps, but that would be at the expense of readability, so I'm going to leave 
+    it alone.
 
     By the way, for anyone interested in just the grid code, I'll put up a much
 	simpler example later.
@@ -79,7 +80,7 @@
 //#define QUANTIZE_HEIGHTS
 
 // Flattening the grid in order to discern the 2D face pattern more clearly.
-//]#define FLAT_GRID
+//#define FLAT_GRID
 
 // Grid positioning independant of the camera path.
 //#define PTH_INDPNT_GRD
@@ -89,30 +90,17 @@
 //#define GRAYSCALE
 
 // Reverse the color palette.
-#define REVERSE_PALETTE
+//#define REVERSE_PALETTE
 
 // Max ray distance: If deliberately set this up close for artistic effect (and to
 // save a few cycles), but you'd normally set this higher to put the horizon further away.
-#define FAR 30.//20
+#define FAR 35.
 
-//float highhits = pow(syn_HighLevel*0.25 + (syn_Level*0.25+syn_HighHits*0.35), 2.0)*syn_Intensity;
 
 
 // Scene object ID to separate the floor object from the pylons.
 float objID;
 
-// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
-// example that explains it, if you require it.
-float n3D(vec3 p){
-    
-	const vec3 s = vec3(7, 157, 113);
-	vec3 ip = floor(p); p -= ip; 
-    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
-    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
-    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
-    h.xy = mix(h.xz, h.yw, p.y);
-    return mix(h.x, h.y, p.z); // Range: [0, 1].
-}
 
 // Standard 2D rotation formula.
 mat2 rot2(in float a){ float c = cos(a), s = sin(a); return mat2(c, -s, s, c); }
@@ -138,20 +126,11 @@ vec2 path(in float z){
 // 2D texture function.
 //
 vec3 getTex(in vec2 p){
-    vec3 tx;
-    // Strething things out so that the image fills up the window.
-    p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
-
-    if(_exists(syn_UserImage)){
-             tx = texture(syn_UserImage, p+TIME*0.0025).xyz*(0.5);
-
-    }
-    else{
-         p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
-        
-         tx = texture(image10, smoothTimeC*0.0025+p/32.).xyz;
-
-    }
+    
+    // Stretching things out so that the image fills up the window.
+    //p *= vec2(RENDERSIZE.y/RENDERSIZE.x, 1);
+    vec3 tx = texture(image10, p/8.).xyz;
+    // tx = vec3(_noise(tx+TIME*0.3));
     //vec3 tx = textureLod(image10, p, 0.).xyz;
     return tx*tx; // Rough sRGB to linear conversion.
 }
@@ -164,8 +143,8 @@ float hm(in vec2 p){ return dot(getTex(p), vec3(.299, .587, .114)); }
 float opExtrusion(in float sdf, in float pz, in float h, in float sf){
     
     // Slight rounding. A little nicer, but slower.
-    vec2 w = vec2( sdf, abs(pz) - h - sf/2.);
-  	return min(max(w.x, w.y), 0.) + length(max(w + sf, 0.)) - sf;    
+    vec2 w = vec2( sdf, abs(pz) - h) + sf;
+  	return min(max(w.x, w.y), 0.) + length(max(w, 0.)) - sf;    
 }
 
 /*
@@ -310,7 +289,7 @@ vec4 blocks(vec3 q){
         
         vec4 di = face1Ext<face2Ext? vec4(face1Ext, idi1, h1) : vec4(face2Ext, idi2, h2);
    
-       // di += highhits*0.000001;
+        
         
         // If applicable, update the overall minimum distance value,
         // ID, and box ID. 
@@ -358,7 +337,7 @@ float map(vec3 p){
 
     
     // Turning one plane into two. It's an old trick.
-    p.y = abs(p.y) - Height;
+    p.y = abs(p.y) - 1.25;
   
     // There are gaps between the pylons, so a floor needs to go in
     // to stop light from getting though.
@@ -379,8 +358,7 @@ float map(vec3 p){
     float rnd = hash21(gID.xy);
     //
     // Standard blinking lights animation.
-    gGlow.w = smoothstep(.992, .997, sin(rnd*8.2831 + smoothTimeB*0.1)*.5 + .5);
-    gGlow.w *=(1.0+((syn_HighLevel+syn_MidHighLevel)*syn_Intensity));
+    gGlow.w = smoothstep(.992, .997, sin(rnd*6.2831 + TIME/4.)*.5 + .5);
     //gGlow.w = rnd>.05? 0. : 1.; // Static version.
  
  
@@ -408,7 +386,7 @@ float trace(in vec3 ro, in vec3 rd){
     // scene, you wouldn't do this.
     t = hash31(ro.zxy + rd.yzx)*.25;
     
-    for(int i = 0; i<100; i++){
+    for(int i = 0; i<120; i++){
     
         d = map(ro + rd*t); // Distance function.
         
@@ -416,14 +394,14 @@ float trace(in vec3 ro, in vec3 rd){
         float ad = abs(d + (hash31(ro + rd) - .5)*.05);
         const float dst = .25;
         if(ad<dst){
-            gGlow.xyz += (gGlow.w)*(dst - ad)*(dst - ad)/(1. + t);
+            gGlow.xyz += gGlow.w*(dst - ad)*(dst - ad)/(1. + t);
         }
  
         // Note the "t*b + a" addition. Basically, we're putting less emphasis on accuracy, as
         // "t" increases. It's a cheap trick that works in most situations... Not all, though.
         if(abs(d)<.001*(1. + t*.05) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.), etc.
         
-        t += i<28? d*.4 : d*.7; 
+        t += i<32? d*.4 : d*.7; 
         //t += d*.5; 
     }
 
@@ -460,15 +438,15 @@ vec3 getNormal(in vec3 p){
 float softShadow(vec3 ro, vec3 lp, vec3 n, float k){
 
     // More would be nicer. More is always nicer, but not really affordable... Not on my slow test machine, anyway.
-    const int iter = 9; 
+    const int iter = 24; 
     
-    ro += n*.00125;
+    ro += n*.0015;
     vec3 rd = lp - ro; // Unnormalized direction ray.
     
 
     float shade = 1.;
     float t = 0.;//.0015; // Coincides with the hit condition in the "trace" function.  
-    float end = max(length(rd), 0.001);
+    float end = max(length(rd), 0.0001);
     //float stepDist = end/float(maxIterationsShad);
     rd /= end;
 
@@ -510,6 +488,19 @@ float calcAO(in vec3 p, in vec3 n)
     return clamp(1. - occ, 0., 1.);  
 }
 
+/*
+// Compact, self-contained version of IQ's 3D value noise function. I have a transparent noise
+// example that explains it, if you require it.
+float n3D(in vec3 p){
+    
+	const vec3 s = vec3(7, 157, 113);
+	vec3 ip = floor(p); p -= ip; 
+    vec4 h = vec4(0., s.yz, s.y + s.z) + dot(ip, s);
+    p = p*p*(3. - 2.*p); //p *= p*p*(p*(p * 6. - 15.) + 10.);
+    h = mix(fract(sin(h)*43758.5453), fract(sin(h + s.x)*43758.5453), p.x);
+    h.xy = mix(h.xz, h.yw, p.y);
+    return mix(h.x, h.y, p.z); // Range: [0, 1].
+}
 
 // Very basic pseudo environment mapping... and by that, I mean it's fake. :) However, it 
 // does give the impression that the surface is reflecting the surrounds in some way.
@@ -533,7 +524,7 @@ vec3 envMap(vec3 p){
     return mix(p, p.xzy, n3D2*.4); // Mixing in a bit of purple.
 
 }
-
+*/ 
  
 
 vec4 renderMainImage() {
@@ -544,19 +535,16 @@ vec4 renderMainImage() {
     
     // Screen coordinates.
 	vec2 uv = (fragCoord - RENDERSIZE.xy*.5)/RENDERSIZE.y;
+	
 	// Camera Setup.
-	vec3 ro = vec3(0, 0, bass_time); // Camera position, doubling as the ray origin.
+	vec3 ro = vec3(0, 0, TIME*1.5); // Camera position, doubling as the ray origin.
     ro.xy += path(ro.z); 
     vec2 roTwist = vec2(0, 0);
     roTwist *= rot2(-getTwist(ro.z));
     ro.xy += roTwist;
     
-	vec3 lk = vec3(0, 0, ro.z + .5); // "Look At" position.
-
-    lk.xy+=(PI*_uvc.xy/2.)*Fov;
- 
+	vec3 lk = vec3(0, 0, ro.z + .25); // "Look At" position.
     lk.xy += path(lk.z); 
-
     vec2 lkTwist = vec2(0, -.1); // Only twist horizontal and vertcal.
     lkTwist *= rot2(-getTwist(lk.z));
     lk.xy += lkTwist;
@@ -576,19 +564,14 @@ vec4 renderMainImage() {
     a += (path(ro.z).x - path(lk.z).x)/(ro.z - lk.z)/4.;
 	vec3 fw = normalize(lk - ro);
 	//vec3 up = normalize(vec3(-fw.x, 0, -fw.z));
-	//vec3 up = vec3(sin(a), cos(a), 0);
-	vec3 up = vec3(0, 1, 0);
+	vec3 up = vec3(sin(a), cos(a), 0);
+	//vec3 up = vec3(0, 1, 0);
     vec3 cu = normalize(cross(up, fw));
 	vec3 cv = cross(fw, cu);   
-    
+    uv = mix(uv, uv+_uvc, fov);
     // Unit direction ray.
     vec3 rd = normalize(uv.x*cu + uv.y*cv + fw/FOV);	
-    rd = normalize(vec3(rd.xy, (rd.z - length(rd.xy-_uvc*PI*Fisheye)*.25)));
-
-    rd.yz = _rotate(rd.yz, lookXY.y*PI + _uvc.y*PI*Perspective*Fov);
-    rd.xz = _rotate(rd.xz, -1.0*lookXY.x*PI);
-    rd.xy = _rotate(rd.xy, -1.0*Rotate*PI+spin_time);
-
+    
     // Raymarch to the scene.
     float t = trace(ro, rd);
     
@@ -629,10 +612,10 @@ vec4 renderMainImage() {
         if(svObjID<.5){
             
             // Coloring the individual blocks with the saved ID.
-            vec3 tx = getTex(svGID.xy)*(1.0+syn_MidHighLevel);
+            vec3 tx = getTex(svGID.xy);
             
             // Ramping the shade up a bit.
-            texCol = smoothstep(-.5, 1., tx)*vec3(0.76, .468, .8);
+            texCol = smoothstep(-.5, 1., tx)*vec3(1, .8, 1.8);
             
             
             // Very fake, but very cheap, bump mapping. Render some equispaced horizontal
@@ -645,7 +628,7 @@ vec4 renderMainImage() {
             //float vLn = min(abs(txP.x - svGID.x), abs(txP.z - svGID.y));
             
             // Horizontal lines (planes, technically) around the pylons.
-            float yDist = (2.25 + abs(txP.y) + svGID.z*2.);
+            float yDist = (1.25 + abs(txP.y) + svGID.z*2.);
             float hLn = abs(mod(yDist  + .5/lvls, 1./lvls) - .5/lvls);
             float hLn2 = abs(mod(yDist + .5/lvls - .008, 1./lvls) - .5/lvls);
             
@@ -662,8 +645,8 @@ vec4 renderMainImage() {
             // Render a dot on the face center of each extruded block for whatever reason...
             // They were there as markers to begin with, so I got used to them. :)
             float fDot = length(txP.xz - svGID.xy) - .0086;
-            //texCol = mix(texCol, texCol*2., 1. - smoothstep(0., .005, fDot - .0035));
-            //texCol = mix(texCol, vec3(0), 1. - smoothstep(0., .005, fDot));
+            texCol = mix(texCol, texCol*2., 1. - smoothstep(0., .005, fDot - .0035));
+            texCol = mix(texCol, vec3(0), 1. - smoothstep(0., .005, fDot));
   
 
  
@@ -697,19 +680,19 @@ vec4 renderMainImage() {
     	
     	// Diffuse lighting.
 	    float diff = max( dot(sn, ld), 0.);
-        diff *= diff*1.; // Ramping up the diffuse.
+        diff *= diff*1.35; // Ramping up the diffuse.
     	
     	// Specular lighting.
 	    float spec = pow(max(dot(reflect(ld, sn), rd ), 0.), 32.); 
 	    
 	    // Fresnel term. Good for giving a surface a bit of a reflective glow.
-       // float fre = pow(clamp(1. - abs(dot(sn, rd))*.5, 0., 1.), 4.);
+        float fre = pow(clamp(1. - abs(dot(sn, rd))*.5, 0., 1.), 4.);
         
 		// Schlick approximation. I use it to tone down the specular term. It's pretty subtle,
         // so could almost be aproximated by a constant, but I prefer it. Here, it's being
         // used to give a hard clay consistency... It "kind of" works.
-		float Schlick = pow( 1. - max(dot(rd, normalize(rd + ld)), 0.), 5.);
-		float fre = mix(.15, 1., Schlick);  //F0 = .2 - Glass... or close enough.        
+		//float Schlick = pow( 1. - max(dot(rd, normalize(rd + ld)), 0.), 5.);
+		//float freS = mix(.15, 1., Schlick);  //F0 = .2 - Glass... or close enough.        
         
         // Combining the above terms to procude the final color.
         col = texCol*(diff + ao*.25 + vec3(1, .4, .2)*fre*.25 + vec3(1, .4, .2)*spec*4.);
@@ -717,8 +700,8 @@ vec4 renderMainImage() {
        
         // Fake environmental lighting: Interesting, but I couldn't justify it, both
         // from a visual and logical standpoint.
-        vec3 cTex = envMap(reflect(rd, sn)); // Be sure to uncomment the function above.
-        col += col*cTex.zyx*4.;
+        //vec3 cTex = envMap(reflect(rd, sn)); // Be sure to uncomment the function above.
+        //col += col*cTex.zyx*4.;
 
     
         // Shading.
@@ -732,10 +715,7 @@ vec4 renderMainImage() {
     // to figure out why it's not working. :) As for how you apply it, that's up to
     // you. I made the following up, and I'd imagine there'd be nicer ways to apply 
     // it, but it'll do.
-       
-
     svGlow.xyz *= mix(vec3(4, 1, 2), vec3(4, 2, 1), min(svGlow.xyz*3.5, 1.25));
-
     col *= .25 + svGlow.xyz*8.;
    
     // Some colorful fog: Like the above, it's been tweaked to produce something
@@ -743,10 +723,10 @@ vec4 renderMainImage() {
     // it's about as cheap an operation as you could hope for, but has virtually
     // no impact on the frame rate. With that in mind, it's definitely worth taking
     // the time to get it looking the way you'd like it to look.
-    vec3 fog =  mix(vec3(4, 1, 2), vec3(4, 2, 1), rd.y*.5 + .5)*(0.25+0.5*syn_HighLevel*(syn_Intensity));
+    vec3 fog =  mix(vec3(4, 1, 2), vec3(4, 2, 1), rd.y*.5 + .5);
     fog = mix(fog, fog.zyx, smoothstep(0., .35, uv.y - .35));
     col = mix(col, fog/1.5, smoothstep(0., .99, t*t/FAR/FAR));
-    col *= (1.0+highhits*0.25);
+    
     
     #ifdef GRAYSCALE
     // Grayscale... or almost grayscale. :)
