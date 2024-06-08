@@ -1,0 +1,354 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Turn on datamoshing effect",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "mosh_on",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "feedback mosh"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Flash the selected media input on beat detected.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "drum_hits",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "feedback mosh"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Flashes the media when the 'show media' slider is below 100%.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "flash_feedback",
+			"PARAMS" : 0.9,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "feedback mosh"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Blends feedback over the media.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "_show_feedback",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "feedback mosh"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "alternate feedback that's extra melty with edge detection.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "alt_fb",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "alternate feedback on bass.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "alt_auto",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "feedback"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Turn on to make everything look like a cartoon!",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "_cartoon_style",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "mode"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Controls the texture of the feedback",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "textured_feedback",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "mode"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "Turn on to generate shapes to disrupt the feedback",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "disruptor",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "color disrupt"
+		},
+		{
+			"DEFAULT" : 0.21,
+			"DESCRIPTION" : "Turn on to generate shapes to disrupt the feedback",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "_size",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "color disrupt"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : 0,
+			"NAME" : "distort",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "color disrupt"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Turn this on to keep bits of the color when the simulation overwrites the buffer",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "keep_color",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "sim"
+		},
+		{
+			"DEFAULT" : 0.5,
+			"DESCRIPTION" : "Turn on to generate shapes to disrupt the feedback",
+			"MAX" : 1.9999,
+			"MIN" : 0.25,
+			"NAME" : "kp_thresh",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "sim"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Turn on to generate shapes to disrupt the feedback",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "bass_thresh",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "sim"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "tile the media input on beat detected.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "tile_media",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "vertically flip the media when a beat is detected.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "beat_flip",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "media"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Turn on to glitch the feedback.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "_glitch",
+			"PARAMS" : 0.1,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "glitch"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Blend between alternate glitch style",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "glitch_style",
+			"PARAMS" : 0.1,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "glitch"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Pixelate the image. Pixel size is based on the audio signal.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "pixelate",
+			"PARAMS" : 0.05,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "pix"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Pixelate effect smoothly turns on as the bass rises in the audio.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "bass_pix",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "pix"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Pixelate the image. Pixel size is based on the audio signal.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "am_i_tenorless",
+			"PARAMS" : 0.05101,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "recolor"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Pixelate effect smoothly turns on as the bass rises in the audio.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "xxxtra",
+			"PARAMS" : 0.05,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "recolor"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "zoom",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "fisheye",
+			"PARAMS" : 0.06501,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Psybernautics",
+	"DESCRIPTION" : "PARTY FOWWWWLLLLLLLLLLL CLUCK CLUCK MUHFUKAAAA",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "noMedia",
+			"PATH" : "images/PsybernauticsTC.png"
+		}
+	],
+	"IMAGE_PATH" : "vial_spiller.PNG",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "a",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "b",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "c",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "d",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "ep",
+			"WIDTH" : 1280,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "f",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "bp",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "g",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "h",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		},
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "jp",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "Vial Spiller 2024 Mod",
+	"WIDTH" : 1920
+}

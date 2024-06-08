@@ -10,7 +10,7 @@ vec4 renderMain(void) {
 	vec4 newcol = vec4(1.);
 	
 	
-    	vec2 pxl = 1./RENDERSIZE;
+    	vec2 pxl = vec2(1.)/RENDERSIZE;
     	vec2 screenwarp = sin(_uv.x*10. + TIME*1.)*pxl*2.*syn_Presence;
     	screenwarp += _noise(_uvc*600. + 4.*sin(TIME))*pxl*10.;
     	screenwarp.x += sin(screenwarp.x*20.)/RENDERSIZE.x*1.;
@@ -44,16 +44,16 @@ vec4 renderMain(void) {
     	screenwarp.y += _uvc.x*(syn_BPMSin4*0.5 - syn_BPMConfidence/2.)*0.25 * pow(window_boogie, 2.);
     	
     	screenwarp += _uv;
+    	screenwarp += zoom*0.001*_uvc+_noise(_uv+TIME*0.1)*zoom*0.00125;
     
     	screenwarp += fisheye*0.003*_uv*d3;
-    	screenwarp += zoom*0.001*_uvc+_noise(_uv+TIME*0.1)*zoom*0.00125;
         // screenwarp += abs(_noise(_uv+TIME*0.3)*0.001);
     if (PASSINDEX == 0) {
         
 	    float mouse_dist = 0.;
     	vec2 lastuv = _uv;
 
-    	vec2 pxl = 1./RENDERSIZE;
+    	vec2 pxl = vec2(1.)/RENDERSIZE;
 	    lastuv = screenwarp;
     	if (warp > 0.2 || (warp_beat > 0.5 && syn_BPMConfidence > 0.5)) {
             lastuv.x += (_noise(_uvc * 1. * warp_noise_scale + TIME) * 0.01 - 0.005) * warp_noise;
@@ -193,14 +193,23 @@ vec4 renderMain(void) {
         vec3 a = texture(passA,screenwarp).rgb;
         // vec3 lp = texture(syn_FinalPass,_uv).rgb;
         // col = mix(a,lp,0.9);
-        
-        col = a;
-        
+        	float s = sin(smoothTimeC * 0.35) * .0033;
+        float t = tan(smoothTimeC * 0.25) * .002;
+        col.r = texture(passA, screenwarp + glitch * syn_BassLevel * vec2(-s, s)).r;
+        col.g = texture(passA, screenwarp + glitch * syn_BassLevel * vec2(-t, t)).g;
+        col.b = texture(passA, screenwarp + glitch * syn_BassLevel * vec2(pow(s, 2), -s)).b;
+
         if (media_player > 0.5) {
-            vec2 wuv  = screenwarp; // popup window uv
+            vec2 wuv  = screenwarp; // popup window wuv
+            // wuv = mix(wuv, mix(wuv, fract(wuv*(1.0+floor(syn_RandomOnBeat*3.5))), .1+floor(syn_ToggleOnBeat*1.5)), tile_media);
+            // float ps = mix(5.0, mix(10.0, 3.0, 1.0-clamp(floor(pow(syn_RandomOnBeat, 2.0)*10.5)*0.1, 0.0, 1.0)), floor(syn_Presence*10.5)*0.1);
+            // vec2 puv = fract(_pixelate((wuv)*ps,0.99)/ps + 0.01*(syn_ToggleOnBeat >= 0.5 ? -1.0 : 1.0));
+            // wuv = mix(wuv, puv, mix(pixelate, syn_BassLevel*syn_BassPresence*0.5+syn_MidLevel*syn_Intensity*.5, bass_pix));
+
             wuv.y += 0.03;
             // wuv.y += sin(TIME*6.)*0.03*(0.5+syn_Level);
-            wuv.y += mix(sin(TIME*6.),syn_BPMSin2,syn_BPMConfidence)*0.03*(0.5+syn_Level);
+            wuv.y += _noise(sin(TIME*.805)*0.1);
+            wuv.x += _noise(cos(TIME*.805)*0.1);
             wuv -= 0.5;
             wuv *= 2.2;
             wuv += 0.5;

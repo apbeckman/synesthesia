@@ -74,7 +74,7 @@ vec4 renderPassA() {
     // src *= 0.75 + _edgeDetectSobel(syn_UserImage)*0.5;
     // src = mix(src, texture(feedback, _uv), .15*(syn_HighLevel)) ;
     vec4 mediaEdges = _edgeDetectSobelMedia();
-    sum.rgb = mix(sum.rgb, src.rgb-(sum.rgb)*0.001*syn_BassLevel, src.rgb*(0.25)*Media);
+    sum.rgb = mix(sum.rgb, src.rgb-(sum.rgb)*0.001*syn_BassLevel, src.rgb*(0.65)*Media);
     sum.rgb -= .0125*(_noise(texture(feedback, _uv).rgb*0.01));
     if(FRAMECOUNT < 10 || _mouse.z > 0.0){
         fragColor = src;

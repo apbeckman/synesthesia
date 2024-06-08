@@ -96,6 +96,7 @@ vec2 hextile(inout vec2 p) {
   p = p3;
 
   n -= vec2(0.5);
+  
   // Rounding to make hextile 0,0 well behaved
   return round(n*2.0)*0.5;
 }
@@ -232,6 +233,7 @@ vec4 renderPassA() {
   vec2 q = fragCoord/RESOLUTION.xy;
   vec2 p = -1. + 2. * q;
   p.x *= RESOLUTION.x/RESOLUTION.y;
+  p.x = abs(p.x);
 
   vec3 col = effect(p, q);
   

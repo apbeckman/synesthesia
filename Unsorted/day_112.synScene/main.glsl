@@ -62,9 +62,12 @@ vec2 map(vec3 p){
     p.xy -= 0.3;
     
     for(int i = 0; i < 2; i++){
-        p = abs(p);
-        p.xz = _rotate(p.xz, .50+.1*cos(xtime*0.125));
-        p.xz = _rotate(p.xz, .50+.1*sin(xtime*0.125));
+        p.x = smin(p.x, -p.x, 0.12);
+        p.y = smin(p.y, -p.y, 0.12);
+        // p.xy = _rotate(p.xy, 1.0 + 0.5*sin(TIME));
+        p.xz = _rotate(p.xz, PI*0.25+.1*cos(xtime*0.125)+PI*morph_1.x);
+        p.yz = _rotate(p.yz, PI*0.25+.1*sin(xtime*0.125+PI*morph_1.y));
+        p.z = smin(p.y, -p.z, 0.12);
     }    
     p = abs(p);
     p.y -= 0.2;

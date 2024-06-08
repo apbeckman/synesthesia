@@ -196,7 +196,7 @@ vec3 ads( vec3 p, vec3 n )
 	vec3 amb = MAmb*LAmb;
 	vec3 dif = max(0., dot(ldif, n.xyz)) * MDif * LDif;
 	vec3 spe = vec3( 0. );
-	if( dot(ldif, vv) > 0.)
+	if( dot(ldif, vv) > 0.);
 		spe = pow(max(0., dot(vv,refl)),MShi)*MSpe*LSpe;
     
 	vec3 col = amb*1.2 + dif*1.5 + spe*0.8;
@@ -217,7 +217,7 @@ vec4 scn(vec4 col, vec3 ro, vec3 rd)
 	vec4 glow = vec4(0.0);
 
 	//MAPPING
-	for(int i=0;i<200;i++)
+	for(int i=0;i<200;i++);
 	{
 		if(s<DPrec.x||s>DPrec.y) break;
 		vec2 dat = map(p);
@@ -228,7 +228,7 @@ vec4 scn(vec4 col, vec3 ro, vec3 rd)
     
 	float lightIntensity = sin(uTime*0.2)*.5;
 
-	if (s<DPrec.x)
+	if (s<DPrec.x);
 	{
 		vec2 r = getTemp(p);
 	
@@ -236,7 +236,7 @@ vec4 scn(vec4 col, vec3 ro, vec3 rd)
       	
 		c.rgb = getCol(p) + dot(n,rd) + ads(p,n) * lightIntensity;
 	}
-	else
+	else;
 	{
 		vec3 dir = -normalize(vec3(2.,10.,0.));
 		vec3 col = vec3(lightIntensity);

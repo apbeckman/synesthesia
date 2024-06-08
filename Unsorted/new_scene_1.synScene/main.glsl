@@ -1,244 +1,256 @@
 
+#include "hg_sdf.glsl"
+#include "lygia/sdf.glsl"
+#include "sqTile.glsl"
+#include "../space/mirrorTile.glsl"
+#include "../space/depth2viewZ.glsl"
+// #include "../space/screen2viewPosition.glsl"
+#include "../sample.glsl"
+#include "../math/lengthSq.glsl"
+#include "lygia/draw/fill.glsl"
+#include "lygia/space/lookAt.glsl"
+#include "lygia/space/ratio.glsl"
+#include "lygia/space/xyz2equirect.glsl"
+#include "lygia/math/inverse.glsl"
+#include "lygia/sdf/opExtrude.glsl"
+#include "lygia/math/const.glsl"
+#include "lygia/math/mod2.glsl"
+#define CAMERA_POSITION     cam
 
-//change this to increase or decrease the levels of recursion
-#define levels 4
+// #include "lygia/space/center.glsl"
+// #include "lygia/space/screen2viewPosition.glsl"
+#define RESOLUTION          RENDERSIZE
+#define RAYMARCH_SAMPLES    90
+#define RAYMARCH_MULTISAMPLE 3
+#define RAYMARCH_BACKGROUND ( vec3(0.1, 0.1, .10) + ray.y * 0.8 )
+// #define RAYMARCH_CAMERA_MATRIX_FNC(cam, ta)
+// #define RAYMARCH_RENDER_FNC(ro, rd)
+#define RAYMARCH_AMBIENT    vec3(0.7, 0.9, 1.0)
+#define RAYMARCH_MAX_DIST 40
+#define M 60
 
-//rendering and camera
-#define fdist 0.3
-#define iters 40
-#define tol 0.005
-#define maxdist 5.
-#define maxdist_refl 0.4
-#define iters_refl 20
-#define reflection_eps 0.05
-#define gradient_eps 0.01
 
-//shape parameters
-#define PI 3.1415926
-#define TWO_PI 6.28318530718
-#define min_rings 3.
-#define max_rings 10.
-#define ratio 0.4
-#define ring_offset 1.5
-#define offsetdiff 0.8
-#define indent 0.2
-#define base_radius 2.
-#define repeat_offset 8.
+// #define SAMPLE2DCUBE_CELL_SIZE 64.0
+// #define SAMPLE2DCUBE_CELLS_PER_SIDE 8.0
+#define SAMPLE2DCUBE_FNC(TEX, UV) sampleBicubic(TEX, UV, vec2(512.0))
+// #define SAMPLE2DCUBE_FNC(TEX, UV) sampleSmooth(TEX, UV, vec2(512.0))
+// #define SAMPLE2DCUBE_FNC(TEX, UV) sampleNearest(TEX, UV, vec2(512.0))
 
-//materials and lighting parameters
-#define ao_radius 0.05
-#define ao_min 0.2
-#define laplace_factor 100.
-#define reflections 1
-#define reflection_albedo 0.3
-#define light_dir vec3(0.436436,0.872872,0.218218)
-#define n1 1.0
-#define n2 1.0
-#define plane_height -2.
-#define shadow_step 0.1
-#define shadow_eps 0.01
-#define shadow_iters 5
-#define shadow_maxdist 1.5
-#define shadow_sharpness 2.
-#define ambient 0.2
+#include "lygia/math/cubic.glsl"
+#include "lygia/math/quartic.glsl"
+#include "lygia/math/quintic.glsl"
+// #include "lygia/sdf.glsl"
+#include "lygia/space/ratio.glsl"
+#include "lygia/space/scale.glsl"
+#include "lygia/sample/bicubic.glsl"
+#include "lygia/sample/smooth.glsl"
+#include "lygia/sample/nearest.glsl"
+#include "lygia/sample/3DSdf.glsl"
+#include "lygia/math/saturate.glsl"
+#include "lygia/lighting/raymarch.glsl"
+#include "lygia/color/space/linear2gamma.glsl"
 
-float R0 = (n1 - n2) / (n1 + n2);
+// vec3 cam = vec3(vec2(1., -1.), -100);
 
-vec3 viridis_quintic(float x) {
-	x = clamp(x, 0., 1.);
-	vec4 x1 = vec4(1.0, x, x * x, x * x * x); // 1 x x2 x3
-	vec4 x2 = x1 * x1.w * x; // x4 x5 x6 x7
-	return vec3(dot(x1.xyzw, vec4(+0.280268003, -0.143510503, +2.225793877, -14.815088879)) + dot(x2.xy, vec2(+25.212752309, -11.772589584)), dot(x1.xyzw, vec4(-0.002117546, +1.617109353, -1.909305070, +2.701152864)) + dot(x2.xy, vec2(-1.685288385, +0.178738871)), dot(x1.xyzw, vec4(+0.300805501, +2.614650302, -12.019139090, +28.933559110)) + dot(x2.xy, vec2(-33.491294770, +13.762053843)));
+
+float smin(float c, float b, float k) {
+	float h = max(k - abs(c - b), 0.) / k;
+	return min(c, b) - h * h * h * k * 1. / 6.;
 }
-
-vec2 sdTorus(vec3 p, vec2 t) {
-	vec2 q = vec2(length(p.xz) - t.x, p.y);
-	float d = length(q) - t.y;
-
-	float theta = atan(-p.z, p.x); //outer angle
-	return vec2(d, theta);
+vec2 smin2(vec2 a, vec2 b, float k){
+	vec2 mixed;
+	mixed.x = smin(a.x, b.x, k);
+	mixed.y = smin(a.y, b.y, k);
+	return mixed;
 }
-
-float delay_sin(float t) {
-	return cos(PI * ((abs(mod(t, 2.) - 1.) + t) * 0.5 - 0.5));
+vec3 smin3(vec3 a, vec3 b, float k){
+	vec3 mixed;
+	mixed.x = smin(a.x, b.x, k);
+	mixed.y = smin(a.y, b.y, k);
+	mixed.z = smin(a.z, b.z, k);
+	return mixed;
 }
-float map(vec3 p) {
-    //p = mod(p+0.5*repeat_offset, repeat_offset)-0.5*repeat_offset;
-    //time-varying parameters (maybe replace with some inputs, or remove)
-	float final_offset;
-	if(_mouse.z < 1.)
-		final_offset = offsetdiff * delay_sin(TIME * 0.5 + 1.) + ring_offset;
-	else
-		final_offset = (_mouse.y / RENDERSIZE.y - 0.5) * 3. + 2.;
-	float final_ratio = ratio / final_offset;
+mat3 wiggleMatrix(vec3 axis, float angle) {
+//  from 'hex array' 
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 2.0 - c;
+    
+    return mat3(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c);
+}
+//3D Rotation
+vec3 rot3d(in vec3 x, in vec3 r) {
+	x.xy = _rotate(x.xy, r.z);
+	x.yz = _rotate(x.yz, r.x);
+	x.zx = _rotate(x.zx, r.y);
+	return x;
+}
+#include "lygia/lighting/raymarch.glsl"
 
-	float ringdiff = (max_rings - min_rings) * 0.5;
-	float ring_count = (max_rings + min_rings) * 0.5;
-	float final_ringcount;
-	if(_mouse.z < 1.)
-		final_ringcount = ringdiff * delay_sin(TIME * 0.5) + ring_count;
-	else
-		final_ringcount = ringdiff * (_mouse.x / RENDERSIZE.x - 0.5) * 2. + ring_count;
-	float sector = TWO_PI / (final_ringcount);
-	float outerrad = base_radius;
-	float innerrad = outerrad * final_ratio;
-	vec2 h = sdTorus(p, vec2(outerrad, innerrad));
-	float currindent = indent;
-	vec2 minh = h;
-
-	for(int i = 0; i < levels; i++) {
-
-        //mod polar coordinates
-		float theta = mod(abs(h.y), sector) - sector / 2.;
-
-        //new cartesian coords
-		float s = length(p.zx);
-		p.z = cos(theta) * s - outerrad;
-		p.x = sin(theta) * s;
-		p = p.zxy;
-
-        //new torus
-		outerrad = innerrad * final_offset;
-		innerrad = outerrad * final_ratio;
-		h = sdTorus(p, vec2(outerrad, innerrad));
-
-		minh.x = max(minh.x, currindent - h.x);
-		if(h.x < minh.x) {
-			minh = h;
-		}
-
-		currindent = currindent * final_ratio * final_offset;
+float checkBoard(vec2 uv, vec2 _scale) {
+	uv.xy += fract(TIME*0.001);
+	for(int i = 0; i <= 2; i++) {
+		uv += _noise(abs(_uv) + smoothTimeC * 0.01);
 	}
-	return minh.x;
+	uv = floor(fract(uv * _scale) * 12.0);
+	return min(1.0, uv.x + uv.y) - (uv.x * uv.y);
 }
 
-vec4 gradient(vec3 ro) {
-	vec2 d = vec2(gradient_eps, 0.0);
-	float x1 = map(ro + d.xyy);
-	float x2 = map(ro - d.xyy);
-	float y1 = map(ro + d.yxy);
-	float y2 = map(ro - d.yxy);
-	float z1 = map(ro + d.yyx);
-	float z2 = map(ro - d.yyx);
-	return vec4(normalize(vec3(x1 - x2, y1 - y2, z1 - z2)), x1 + x2 + y1 + y2 + z1 + z2 - 6. * map(ro));
+vec4 raymarchMap(in vec3 pos) {
+	vec3 ones, box_pos, hex_pos, hex1_pos, hex2_pos, rotate, gem_pos, repeat;
+	vec2 hex_size, st;
+	st = (_xy * 1/RENDERSIZE);
+	st = ratio(st, RENDERSIZE);
+	vec4 t = mirrorTile(st*4.0);
+	hex_size = vec2(0.5, 5.0);
+
+	ones = vec3(1.0);
+	box_pos = pos;
+	box_pos += 4.;
+	box_pos.y += 1.;
+	gem_pos = box_pos;
+	vec3 box2_pos = box_pos;
+	vec3 box3_pos = box_pos;
+	box_pos = smin3(box_pos, -box_pos, 0.125);
+	// box_pos.x = smin(box_pos.x, -box_pos.x, 0.25);
+	box_pos.xz = _rotate(box_pos.xz, smoothTimeC*0.05);
+	// box_pos.y = smin(box_pos.y, -box_pos.y, 0.25);
+	box_pos.yz = _rotate(box_pos.yz, smoothTime*0.05);
+	// box_pos.z = smin(box_pos.z, -box_pos.z, 0.25);
+	// box_pos.x = smin(box_pos.x, -box_pos.x, 0.25);
+	box_pos = smin3(box_pos*0.9, -box_pos, 0.125);
+	box_pos.xy = _rotate(box_pos.xy, smoothTimeC*0.05);
+	box_pos = smin3(box_pos, -box_pos, 0.125);
+	gem_pos.xz = _rotate(gem_pos.xz, smoothTimeC*0.035);
+	gem_pos = abs(gem_pos);
+	gem_pos.yz = _rotate(gem_pos.yz, smoothTime*0.035);
+	gem_pos = abs(gem_pos);
+	gem_pos.xy = _rotate(gem_pos.xy, smoothTimeC*0.035);
+	gem_pos = abs(gem_pos);
+	box2_pos.xz = _rotate(box2_pos.xz, smoothTime*0.05);
+	box2_pos.yz = _rotate(box2_pos.yz, smoothTimeC	*0.05);
+	box2_pos.xy = _rotate(box2_pos.xy, smoothTime*0.05);
+	box3_pos.yz = _rotate(box3_pos.yz, smoothTime*0.03);
+	box3_pos.xy = _rotate(box3_pos.xy, smoothTimeC*0.03);
+	box3_pos.xz = _rotate(box3_pos.xz, smoothTimeC*0.03);
+	hex_pos = pos;
+	rotate = vec3(xy1.x, xy1.y, 0);
+	hex_pos.xz = _rotate(hex_pos.xz, .75*PI);
+	hex_pos.yz = _rotate(hex_pos.yz, -.37*PI);
+	pos.xz = _rotate(pos.xz, .5*PI);
+	pos.yz = _rotate(pos.yz, .5*PI);
+	hex_pos.z -= 0.75;
+	hex_pos = rot3d(hex_pos, vec3(.25, 0., 0.));
+	pR(hex_pos.xz, hex_pos.y*0.0125);
+	hex_pos.y -= fract(smoothTimeC*0.02)*60;
+	hex_pos.y = mod(hex_pos.y, 6.0);
+	// hex_pos.z = wiggleMatrix(vec3(0.0, 0.0, 2.0), 1.0 * sin(hex_pos.z*2.5));
+	// / hex_pos += vec3(10,0,0);
+	hex_pos = opRepeat(hex_pos, repeat);
+	// hex_pos.xy = _rotate(hex_pos.xy, sin(TIME*0.2)*0.2002);
+	hex_pos.z += 1.25;
+	hex_pos.x = fOpUnionChamfer(hex_pos.x, -hex_pos.x, 0.2);
+	hex_pos.xz = _rotate(hex_pos.xz, 0.5);
+	hex_pos.z = fOpUnionChamfer(hex_pos.z, -hex_pos.z, 0.2);
+	hex_pos.xz = _rotate(hex_pos.xz, TIME*0.1);
+	pR(hex_pos.xz, hex_pos.y*-0.025);
+	hex_pos.x = fOpUnionChamfer(hex_pos.x, -hex_pos.x, 0.2);
+	hex_pos.xz = _rotate(hex_pos.xz, -TIME*0.2);
+	hex_pos.z = fOpUnionChamfer(hex_pos.z, -hex_pos.z, 0.2);
+	hex_pos.xz = _rotate(hex_pos.xz, -0.1);
+	// hex_pos.xz = _rotate(hex_pos.xz, (TIME*0.2)*0.2002);
+	hex_pos.z = pModPolar(hex_pos.xz,4);
+	hex_pos -= vec3(1.0);
+	// hex_pos.z = pModPolar(hex_pos.xz, 10.)-5.;
+	hex_pos = opRepeat(hex_pos, vec3(3.5, 0., 3.5));
+	// hex_pos.x -= vec3(-1., 0., 0.);
+	hex_pos.xy = abs(hex_pos.xy);
+	// hex_pos = rot3d(hex_pos, vec3(0., 0. ,0.+sin(TIME)*0.5 ));
+	// hex2_pos = hex_pos;
+	hex_pos.x -= 1.90;
+	hex2_pos.x += 02.0;
+	// hex_pos = opRepeat(hex_pos, repeat);
+	
+	// hex2_pos.y = mod(hex2_pos.y + TIME, 2.5);
+	// hex1_pos.xy = _rotate(hex1_pos.xy, .5);
+	// hex2_pos.xy = _rotate(hex2_pos.xy, -.5);
+	// box_pos = rot3d(box_pos, rotate);
+	// box_pos.x = mod(box_pos.x, 1.);
+	// hex_pos.x = abs(1.0-hex_pos.x);
+	// hex_pos = rot3d(hex_pos, hex_rotate);
+	vec3 bfh = vec3(0.75, 0.75, 0.75);
+	vec3 bf2h = vec3(0.5, 0.5, 0.5);
+	vec4 res = vec4(1.);
+	float hexP = hexPrismSDF(hex_pos, hex_size);
+	float hexP2 = hexPrismSDF(hex2_pos, hex_size);
+	// hexP = opRepeat(hex1_pos, vec3(1.0, 0.0, 0.0));
+	float dodecahedron = dodecahedronSDF(gem_pos, 0.5);
+	float boxframe = boxFrameSDF(box_pos, bfh*1.2, .1);
+	
+	
+	float boxframe2 = boxFrameSDF(box2_pos, bf2h, .05);
+	
+	// float boxframe3 = boxFrameSDF(box3_pos*0.45, bf2h*01.2, .05);
+	// float check = checkBoard(vec2(_noise(pos.xz)), vec2(5.0));
+	// res.z = wiggleMatrix(vec3(0.0, 1.0, 0.0), 1.0*sin(res.z*0.5)); 
+	boxframe = fOpUnionStairs(boxframe, boxframe2, .1, 4.);
+	// boxframe = fOpUnionStairs(boxframe, boxframe3, .4, 4.);
+	boxframe = fOpUnionColumns(boxframe, dodecahedron, .12, 4.);
+	float final = fOpUnionRound(boxframe, hexP, 0.1);
+	// barrel distortion 
+	// final = barrel(vec2(0.5, 0.5) , final);
+	res = opUnion(res, vec4(ones, final));
+	// res = opUnion(res, vec4(vec3(ones),hexP)); 
+	// res = opUnion(res, vec4(vec3(ones),hexP2));
+	// res = opUnion(res, vec4(ones, boxframe2));
+	// res = opUnion(res, vec4(ones, boxframe3));
+	// res = opUnion(res, vec4(ones, dodecahedron));
+	// res = opUnion(res, vec4(1.0, 1.0, 1.0, sample3DSdf(u_tex0, c_pos)));
+	// res = opUnion(res, planeSDF,)
+	// res = opUnion(res, vec4(vec3(0.5 + check * 0.5), planeSDF(pos + 1.0)), 0.1);
+
+	return res;
 }
 
-vec2 raymarch(vec3 pos, vec3 dir, float max_dist, int num_iters) {
-	int i;
-	float d = 0.;
-	float dist;
-	for(i = 0; i < num_iters; i++) {
-		dist = map(pos + d * dir);
-		d += dist;
-		if(dist < tol) {
-			return vec2(d, 2.);
-		} else if(dist > max_dist) {
-			break;
-		}
-	}
-	d = (plane_height - pos.y) / dir.y;
-	return vec2(d, step(-d, 0.) * step(length((pos + d * dir).zx), 50.));
-}
-
-vec3 skycol(vec3 rd) {
-	return vec3(0.6, 0.7, 0.8) * (1. + pow(max(dot(rd, light_dir), 0.), 2.)) + pow(max(0., dot(rd, light_dir)), 5.);
-}
-
-float schlick(vec3 rd, vec3 n) {
-	return 1. - (R0 + (1. - R0) * pow(max(dot(n.xyz, -rd), 0.), 5.0));
-    //return 1.-pow(max(dot(n.xyz, -rd), 0.), 5.0);
-}
-
-vec3 material(vec3 ro, vec3 rd, vec4 n, vec2 record) {
-	if(record.y > 1.5) {
-		float edgefac = abs(n.w * laplace_factor);
-		vec3 color = 1. - viridis_quintic(edgefac).yxz * 0.5;
-		float fac = max(ambient, dot(light_dir, n.xyz));
-        //float ao = min(1.,ao_min+(record.z > ao_radius ? 1. : record.z/(ao_radius)));
-		return fac * color;
-	} else if(record.y > 0.5) {
-		vec2 uv = (ro + rd * record.x).zx;
-		uv = abs(mod(uv, 4.) - 2.);
-		float checker = abs(step(uv.x, 1.) - step(uv.y, 1.));
-		return vec3(light_dir.y * (0.5 + 0.5 * checker));
-	} else {
-		return skycol(rd);
-	}
-}
-
-//softer soft shadows
-//see https://www.shadertoy.com/view/4tBcz3
-//float shadowtrace(vec3 pos, vec3 dir) {
-//    int i;
-//    float d = shadow_eps;
-//    float dist = map(pos+d*dir);
-//    float fac = 1.0;
-//    for (i=0; i<shadow_iters; i++) {
-//    d += max(shadow_step, dist);
-//        dist = map(pos+d*dir);
-//        fac = min(fac, dist * shadow_sharpness / d);
-//    }
-//    return mix(mix(0.5, 0., -fac), mix(0.5, 1., fac), step(fac, 0.));
-//}
-
-//materials with reflections
-vec3 shade(vec3 ro, vec3 rd, vec4 n, vec2 record) {
-	vec3 pos = ro + rd * record.x;
-	vec3 shadedcolor = material(ro, rd, n, record);
-	if(record.y > 0.5) {
-		vec3 offsetpos = pos + n.xyz * 0.25;
-		float fac = clamp(map(offsetpos) * 3., 0., 1.);
-        //float fac = shadowtrace(pos, light_dir);
-		shadedcolor *= mix(fac, 1., 0.5);
-	}
-	if(record.y > 1.5) {
-		int i;
-		float final_albedo = reflection_albedo;
-
-		for(i = 0; i < reflections; i++) {
-			if(record.y < 1.5)
-				break;
-			final_albedo *= schlick(rd, n.xyz);
-			ro = pos;
-			rd = reflect(rd, n.xyz);
-			ro += reflection_eps * rd;
-			record = raymarch(ro, rd, maxdist_refl, iters_refl);
-			pos = ro + rd * record.x;
-			n = gradient(pos);
-			shadedcolor += final_albedo * material(ro, rd, n, record);
-		}
-        //compute last reflections with just envmap
-		if(record.y > 1.5) {
-			final_albedo *= schlick(rd, n.xyz);
-			shadedcolor += final_albedo * skycol(reflect(rd, n.xyz));
-		}
-	}
-	return shadedcolor;
-}
-
-vec4 renderMainImage() {
-	vec4 fragColor = vec4(0.0);
+vec4 renderMain() {
+	vec3 color;
+	vec3 cam = vec3(4.5, 4.2, 4.5) * 10.;
+	vec3 eye = cam;
+	vec3 up = vec3(0.0, 1.0, 0.0);
+	vec3 target = vec3(0.0, 0.0, 0.0);
+	vec3 forward = vec3(0.0, 0.0, -1.0);
+	// vec3 forward = normalize(vec3(eye - target));
+	mat3 rmc = raymarchCamera(vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 0.0), up);
+	// mat3 look = lookAt(forward, up);
+	vec4 fragColor = vec4(0.);
 	vec2 fragCoord = _xy;
+	float d2z = depth2viewZ(01., 0., 1.+TIME);
+	// cam.z = d2z;
+	// cam = (look[1]);
+	color = vec3(0.0);
+	vec2 pixel = vec2(1.0) / RENDERSIZE;
+	vec2 st = gl_FragCoord.xy * pixel;
+	vec2 uv = ratio(st, RENDERSIZE);
+	vec3 s2v = cart2polar( vec3(_uvc, 1.0));
+	vec3 rd = vec3(2.*fragCoord - RENDERSIZE.xy, RENDERSIZE.y);
+    // rd = normalize(vec3(rd.xy, sqrt(max(rd.z*rd.z - dot(rd.xy, rd.xy)*.2, 0.))));
+	vec2 mo = _mouse.xy * pixel;
+	float time = 32.0 + TIME * 1.5;
+	
+	// cam *= rmc;
+	// vec3 cam = vec3(rd);
+	
+	// cam.z + TIME;
+	// cam = normalize(cam);
+	color = raymarch(cam, uv).rgb;
+	color = linear2gamma(color);
 
-	R0 *= R0;
-    //camera position
-	float s = sin(TIME * 0.5);
-	float ww = TIME * 0.2;
-	vec3 ro = (3. - s) * vec3(cos(ww), 0.5 + 0.5 * s, sin(ww));
-	vec3 w = normalize(vec3(0., -1.5 - s, 0.) - ro);
-	vec3 u = normalize(cross(w, vec3(0., 1., 0.)));
-	vec3 v = cross(u, w);
-	vec3 rd = normalize(w * fdist + (fragCoord.x / RENDERSIZE.x - 0.5) * u + (fragCoord.y - RENDERSIZE.y / 2.0) / RENDERSIZE.x * v);
-
-	vec2 record = raymarch(ro, rd, maxdist, iters);
-	vec4 n = record.y > 1.5 ? gradient(ro + rd * record.x) : vec4(0., 8., 0., 1.);
-	vec3 shadedcolor = shade(ro, rd, n, record);
-
-	fragColor = vec4(shadedcolor, 1.);
+	fragColor = vec4(color, 1.0);
 	return fragColor;
 }
-vec4 renderMain() {
-	if(PASSINDEX == 0) {
-		return renderMainImage();
-	}
-}
+    // vec3 n = normal(p);
+    // vec3 l = normalize(lightPos - p);
+    // float diff = clamp(dot(n, l), 0.0, 1.0);
+    // vec4 fragColor = vec4(vec3(diff), 1.0);

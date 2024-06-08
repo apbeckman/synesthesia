@@ -9,6 +9,13 @@ float smin(float a, float b, float k) {
 // licensed under hippie love conspiracy
 // happy tweaking
 
+//3D Rotation
+vec3 rot3d(in vec3 x, in vec3 r) {
+    x.xy = _rotate(x.xy, r.z);
+    x.yz = _rotate(x.yz, r.x);
+    x.zx = _rotate(x.zx, r.y);
+    return x;
+}
 // Geometry
 float range = .8;
 float radius = .4;
@@ -66,7 +73,7 @@ float geometry (vec3 pos)
 		p.x = smin(-p.x, p.x, 0.05);
 		p.z = smin(-p.z, p.z, 0.05);
 		p.xz = abs(p.xz) - range * ratio*(Expand);
-        p.xy *= -rot(smoothTimeC*0.01475+sin(smoothTimeC*0.01475));
+        p.xy *= -rot(smoothTimeC*0.01475);
         // rotations
 
 		p.yz = _rotate(p.yz, smoothTimeC*0.0375);
@@ -75,15 +82,15 @@ float geometry (vec3 pos)
 		}
 
 		p.yz *= -rot(smoothTimeC*0.0375+TAU);
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i <= 4; i++){
 			p.xy = _rotate(p.xy, PI-smoothTime*0.01);
 		}
 		p.yx *= rot(PIHALF);
-		for(int i = 0; i < 4; i++){
-			p.zy = _rotate(p.zy, PI+TIME*0.0125);
+		for(int i = 0; i <= 4; i++){
+			p.zy = _rotate(p.zy, PI-smoothTimeC*0.0125);
 		}
 
-		scene = smoothmin(scene, box(p, vec3(radius * ratio)), blend * ratio);
+		scene = smoothmin(scene, box(p+simplify, vec3(radius * ratio)), blend * ratio*(1.0+smoothify));
 	}
     return scene;
 }

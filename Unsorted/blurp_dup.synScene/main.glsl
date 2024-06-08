@@ -1,4 +1,4 @@
-vec2 pixelSize = 1./ RENDERSIZE.xy;
+vec2 pixelSize = vec2(1.)/ RENDERSIZE.xy;
 vec2 aspect = vec2(1.,RENDERSIZE.y/RENDERSIZE.x);
 float smin(float a, float b, float k) {
     float h = max(k - abs(a-b), 0.) / k;
@@ -135,7 +135,7 @@ float smooth_circle(vec2 uv, vec2 pos, float size, float ramp)
 
 vec2 vortex_warp(vec2 uv, vec2 pos, float size, float ramp, vec2 rot)
 {
-  vec2 pos_correct = 0.5 + (pos - 0.5);
+  vec2 pos_correct = vec2(0.5) + (pos - 0.5);
   vec2 rot_uv = pos_correct + complex_mul((uv - pos_correct)*aspect, rot)/aspect;
   float smooth_circle = smooth_circle(uv, pos_correct, size, ramp);
   return mix(uv, rot_uv, smooth_circle);
@@ -192,7 +192,7 @@ vec4 advance()
   // kindly borrowed from glassier scene
   if (_mouse.z > 0. && stir_or_paint != 1.0){
     brushPosition = _muvc;
-    stir = _mouse.z*0.000125;
+    stir = _mouse.z*0.000125*(.250+syn_BassLevel*0.7+syn_MidLevel*0.4);
   }
   else{
     stir = manual_stir;

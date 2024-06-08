@@ -5,9 +5,9 @@
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
 			"MAX" : 1,
-			"MIN" : -4,
+			"MIN" : -3,
 			"NAME" : "Fov",
-			"PARAMS" : 0.05201,
+			"PARAMS" : 0.02701,
 			"TYPE" : "slider smooth",
 			"UI_GROUP" : "camera"
 		},
@@ -66,6 +66,16 @@
 			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
+			"NAME" : "Open",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "camera"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
 			"NAME" : "Flash",
 			"TYPE" : "bang",
 			"UI_GROUP" : "textures"
@@ -73,7 +83,7 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1.5,
+			"MAX" : 0.45,
 			"MIN" : -0.75,
 			"NAME" : "Voronoi_Level",
 			"PARAMS" : 0.503,
@@ -149,16 +159,6 @@
 			"MIN" : 0,
 			"NAME" : "ColorShift",
 			"TYPE" : "toggle",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "Open",
-			"PARAMS" : 0.01,
-			"TYPE" : "slider smooth",
 			"UI_GROUP" : "default"
 		},
 		{

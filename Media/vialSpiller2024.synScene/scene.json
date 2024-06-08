@@ -1,0 +1,296 @@
+{
+   "CONTROLS" : [
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Turn on datamoshing effect",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "mosh_on",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "feedback mosh"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Flash the selected media input on beat detected.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "drum_hits",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "feedback mosh"
+      },
+      {
+         "DEFAULT" : 1,
+         "DESCRIPTION" : "alternate feedback that's extra melty with edge detection.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0,
+         "NAME" : "alt_fb",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "feedback"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "alternate feedback on bass.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0,
+         "NAME" : "alt_auto",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "feedback"
+      },
+      {
+         "DEFAULT" : 0,
+         "DESCRIPTION" : "Turn on to make everything look like a cartoon!",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0,
+         "NAME" : "_cartoon_style",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "mode"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Controls the texture of the feedback",
+         "IS_META" : false,
+         "MAX" : 1,
+         "MIN" : 0,
+         "NAME" : "textured_feedback",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "mode"
+      },
+      {
+         "DEFAULT" : 1.0,
+         "DESCRIPTION" : "Turn on to generate shapes to disrupt the feedback",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0,
+         "NAME" : "disruptor",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "color disrupt"
+      },
+      {
+         "DEFAULT" : 0.21,
+         "DESCRIPTION" : "Turn on to generate shapes to disrupt the feedback",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0,
+         "NAME" : "_size",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "color disrupt"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Turn this on to keep bits of the color when the simulation overwrites the buffer",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0,
+         "NAME" : "keep_color",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "sim"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "Turn on to generate shapes to disrupt the feedback",
+         "IS_META" : false,
+         "MAX" : 1.9999,
+         "MIN" : 0.25,
+         "NAME" : "kp_thresh",
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "sim"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Turn on to generate shapes to disrupt the feedback",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "bass_thresh",
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "sim"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Flashes the media when the 'show media' slider is below 100%.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "PARAMS": 0.9,
+         "NAME" : "flash_feedback",
+         "TYPE" : "bang smooth",
+         "UI_GROUP" : "feedback mosh"
+      },
+      {
+         "DEFAULT" : 0.5,
+         "DESCRIPTION" : "Blends feedback over the media.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "_show_feedback",
+         "PARAMS" : 0.050000001490116,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "feedback mosh"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "tile the media input on beat detected.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "tile_media",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "media"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "vertically flip the media when a beat is detected.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "beat_flip",
+         "TYPE" : "toggle",
+         "UI_GROUP" : "media"
+      },
+      {
+         "DEFAULT": 0.0,
+         "DESCRIPTION": "Turn on to glitch the feedback.",
+         "IS_META": false,
+         "MAX": 1.0,
+         "MIN": 0.0,
+         "PARAMS" : 0.100000001490116,
+         "NAME": "_glitch",
+         "TYPE": "toggle smooth",
+         "UI_GROUP": "glitch"
+      },
+      {
+         "DEFAULT": 0.0,
+         "DESCRIPTION": "Blend between alternate glitch style",
+         "IS_META": false,
+         "MAX": 1.0,
+         "MIN": 0.0,
+         "PARAMS" : 0.100000001490116,
+         "NAME": "glitch_style",
+         "TYPE": "slider smooth",
+         "UI_GROUP": "glitch"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Pixelate the image. Pixel size is based on the audio signal.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "pixelate",
+         "PARAMS" : 0.0500000002980232,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "pix"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Pixelate effect smoothly turns on as the bass rises in the audio.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "bass_pix",
+         "PARAMS" : 0.0500000002980232,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "pix"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Pixelate the image. Pixel size is based on the audio signal.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "am_i_tenorless",
+         "PARAMS" : 0.0500000002980232,
+         "TYPE" : "slider smooth",
+         "UI_GROUP" : "recolor"
+      },
+      {
+         "DEFAULT" : 0.0,
+         "DESCRIPTION" : "Pixelate effect smoothly turns on as the bass rises in the audio.",
+         "IS_META" : false,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
+         "NAME" : "xxxtra",
+         "PARAMS" : 0.0500000002980232,
+         "TYPE" : "toggle smooth",
+         "UI_GROUP" : "recolor"
+      }
+   ],
+   "IMAGES" : [
+      {
+         "NAME" : "noMedia",
+         "PATH" : "images/PsybernauticsTC.png"
+      }
+   ],
+   "PASSES" : [
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "a",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "b",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "c",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "d",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 720,
+         "TARGET" : "ep",
+         "WIDTH" : 1280
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "f",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "bp",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "g",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "h",
+         "WIDTH" : 1920
+      },
+      {
+         "FLOAT" : true,
+         "HEIGHT" : 1080,
+         "TARGET" : "jp",
+         "WIDTH" : 1920
+      }
+   ],
+   "CREDIT" : "Psybernautics",
+   "DESCRIPTION" : "PARTY FOWWWWLLLLLLLLLLL CLUCK CLUCK MUHFUKAAAA",
+   "HEIGHT" : 1080,
+   "IMAGE_PATH" : "vial_spiller.PNG",
+   "TITLE" : "Vial Spiller 2024",
+   "WIDTH" : 1920
+}

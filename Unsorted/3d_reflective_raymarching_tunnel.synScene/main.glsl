@@ -162,8 +162,7 @@ vec3 getShadedColor( vec3 hitPosition, vec3 normal, vec3 cameraPosition )
 	vec3 outputColor = vec3( 0.0 );
 
 	//	Calculate eye vector and its reflection
-	//vec3 ev = normalize( hitPosition - cameraPosition );
-	//vec3 ref_ev = reflect( ev, normal );
+
 	vec3 surfaceToLight = normalize(lightPosition - hitPosition);
 	vec3 surfaceToCamera = normalize(cameraPosition - hitPosition);
 

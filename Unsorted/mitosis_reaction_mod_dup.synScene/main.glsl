@@ -4,15 +4,17 @@
 vec2 pixelSize = 1. / RENDERSIZE.xy;
 vec2 aspect = vec2(1., RENDERSIZE.y / RENDERSIZE.x);
 float a = 1.;
-float dist(vec2 p0, vec2 pf){return sqrt((pf.x-p0.x)*(pf.x-p0.x)+(pf.y-p0.y)*(pf.y-p0.y));}
-float d = dist(RENDERSIZE.xy*0.5,_xy.xy)*(_mouse.x/RENDERSIZE.x+0.1)*0.005;
-float d2 = dist(RENDERSIZE.xy*0.5,_xy.xy)*0.00125;
+float dist(vec2 p0, vec2 pf) {
+    return sqrt((pf.x - p0.x) * (pf.x - p0.x) + (pf.y - p0.y) * (pf.y - p0.y));
+}
+float d = dist(RENDERSIZE.xy * 0.5, _xy.xy) * (_mouse.x / RENDERSIZE.x + 0.1) * 0.005;
+float d2 = dist(RENDERSIZE.xy * 0.5, _xy.xy) * 0.00125;
 float o = a * .7071;
-vec2 xy_noise = vec2(_noise((_uv +(TIME) * 0.2)), _noise((_uv +(TIME) * 0.2)));
-vec2 rot_noise = _rotate(xy_noise, _noise(TIME*0.1));
+vec2 xy_noise = vec2(_noise((_uv + (TIME) * 0.2)), _noise((_uv + (TIME) * 0.2)));
+vec2 rot_noise = _rotate(xy_noise, _noise(TIME * 0.1));
 vec4 mediaEdges = texture(media_pass_fx, _uv);
 vec4 media = texture(media_pass, _uv);
-vec4 mixedEdgeCol = mix(media, mediaEdges, edge_mix*0.95+0.1) * media_impact ;
+vec4 mixedEdgeCol = mix(media, mediaEdges, edge_mix * 0.95 + 0.1) * media_impact;
 vec4 media_influence = mixedEdgeCol * media_impact * 0.25;
 float mediahits_mix = mix(media_impact * 0.125, media_impact * 0.125 * (syn_MidLevel * 0.5 * syn_MidPresence + syn_Presence * syn_Level * 0.5), media_hits);
 bool mediaOn = _exists(syn_UserImage);
@@ -21,64 +23,56 @@ float media_lum = PI * 0.25 * sin(length(media_influence * mediahits_mix));
 float paintsize = paint_size * 40.;
 #define R RENDERSIZE.xy
 
-float sigmoid(float x)
-{
-  return 2./(1. + exp2(-x)) - 1.;
+float sigmoid(float x) {
+    return 2. / (1. + exp2(-x)) - 1.;
 }
-float circle_distance(vec2 uv, vec2 pos, float size, float min)
-{
-  return max( min, 1. - length((uv - pos) * aspect / size) );
+float circle_distance(vec2 uv, vec2 pos, float size, float min) {
+    return max(min, 1. - length((uv - pos) * aspect / size));
 }
 
-float smooth_circle(vec2 uv, vec2 pos, float size, float ramp)
-{
-  return 0.5 + sigmoid( circle_distance(uv, pos, size, -16.) * ramp) * 0.5;
+float smooth_circle(vec2 uv, vec2 pos, float size, float ramp) {
+    return 0.5 + sigmoid(circle_distance(uv, pos, size, -16.) * ramp) * 0.5;
 }
 
-vec2 complex_mul(vec2 factorA, vec2 factorB)
-{
-  return vec2( factorA.x*factorB.x - factorA.y*factorB.y, factorA.x*factorB.y + factorA.y*factorB.x);
+vec2 complex_mul(vec2 factorA, vec2 factorB) {
+    return vec2(factorA.x * factorB.x - factorA.y * factorB.y, factorA.x * factorB.y + factorA.y * factorB.x);
 }
 
-vec2 complex_div(vec2 numerator, vec2 denominator){
-  return vec2( numerator.x*denominator.x + numerator.y*denominator.y,
-    numerator.y*denominator.x - numerator.x*denominator.y)/
-    vec2(denominator.x*denominator.x + denominator.y*denominator.y);
+vec2 complex_div(vec2 numerator, vec2 denominator) {
+    return vec2(numerator.x * denominator.x + numerator.y * denominator.y, numerator.y * denominator.x - numerator.x * denominator.y) /
+        vec2(denominator.x * denominator.x + denominator.y * denominator.y);
 }
 
-vec2 vortex_warp(vec2 uv, vec2 pos, float size, float ramp, vec2 rot)
-{
-  vec2 pos_correct = 0.5 + (pos - 0.5);
-  vec2 rot_uv = pos_correct + complex_mul((uv - pos_correct)*aspect, rot)/aspect;
-  float smooth_circle = smooth_circle(uv, pos_correct, size, ramp);
-  return mix(uv, rot_uv, smooth_circle);
+vec2 vortex_warp(vec2 uv, vec2 pos, float size, float ramp, vec2 rot) {
+    vec2 pos_correct = 0.5 + (pos - 0.5);
+    vec2 rot_uv = pos_correct + complex_mul((uv - pos_correct) * aspect, rot) / aspect;
+    float smooth_circle = smooth_circle(uv, pos_correct, size, ramp);
+    return mix(uv, rot_uv, smooth_circle);
 }
 
-vec2 vortex_pair_warp(vec2 uv, vec2 pos, vec2 vel)
-{
-  vec2 aspect = vec2(1.,RENDERSIZE.y/RENDERSIZE.x);
-  float ramp = 5.;
-  float d = 0.2;
+vec2 vortex_pair_warp(vec2 uv, vec2 pos, vec2 vel) {
+    vec2 aspect = vec2(1., RENDERSIZE.y / RENDERSIZE.x);
+    float ramp = 5.;
+    float d = 0.2;
 
-  float l = length(vel);
-  vec2 p1 = pos;
-  vec2 p2 = pos;
+    float l = length(vel);
+    vec2 p1 = pos;
+    vec2 p2 = pos;
 
-  if(l > 0.)
-  {
-    vec2 normal = normalize(vel.yx * vec2(-1., 1.))/aspect;
-    p1 = pos - normal * d / 2.;
-    p2 = pos + normal * d / 2.;
-  }
+    if(l > 0.) {
+        vec2 normal = normalize(vel.yx * vec2(-1., 1.)) / aspect;
+        p1 = pos - normal * d / 2.;
+        p2 = pos + normal * d / 2.;
+    }
 
-  float w = l / d * 2.;
+    float w = l / d * 2.;
 
   // two overlapping rotations that would annihilate when they were not displaced.
 
-  vec2 circle1 = vortex_warp(uv, p1, d, ramp, vec2(cos(w),sin(w)));
-  vec2 circle2 = vortex_warp(uv, p2, d, ramp, vec2(cos(-w),sin(-w)));
+    vec2 circle1 = vortex_warp(uv, p1, d, ramp, vec2(cos(w), sin(w)));
+    vec2 circle2 = vortex_warp(uv, p2, d, ramp, vec2(cos(-w), sin(-w)));
 
-  return (circle1 + circle2) / 2.;
+    return (circle1 + circle2) / 2.;
 }
 
 vec4 D(vec2 U) {
@@ -103,22 +97,22 @@ vec4 renderPassA() {
     // U -= vec2(Pull.yx - U.yx) * aspect.yx * pixelSize * 128.;
     vec2 uvc_rot = _rotate(_uvc, TIME);
     U += vec2(rot_noise) * 0.15;
-    U += vec2(dot(cos(uvc_rot.x), sin(_uvc.y))) * (Pull+manual_stir) * PI * (2.0 + low)*(1.0-d2);
-    float shock = shock_forward - shock_back*0.5;
+    U += vec2(dot(cos(uvc_rot.x), sin(_uvc.y))) * (Pull + manual_stir*4.) * PI * (2.0 + low) * (1.0 - d2);
+    float shock = shock_forward - shock_back * 0.5;
     U -= _uvc * (Zoom) * (1.0 + 2.0 * low + syn_Intensity * 1.5);
 
     U += _uvc * Stretch * (1.0 + low);
-    U += abs(d2)*_uvc*(Fisheye-shock*PI)*PI* (1.0 + 2.0 * low + syn_Intensity * 1.5);
+    U += abs(d2) * _uvc * (Fisheye - shock * PI) * PI * (1.0 + 2.0 * low + syn_Intensity * 1.5);
 
-    U += Drift * (1.0 + low);
-    U = mix(U, U + vec2(_noise(_uv)) * (warp+manual_stir) * (1. + syn_BassPresence), warp+manual_stir);
+    U += Drift * (1.20 + low);
+    U = mix(U, U + vec2(_noise(_uv)) * (warp + manual_stir*2.) * (1. + syn_BassPresence), warp + manual_stir);
 
     Q = D(U);
-  vec2 brushPosition = vec2((sin(TIME*0.3+syn_BassTime*2*PI*0.05)),(cos(TIME*0.25+syn_BassTime*2*PI*0.04)));
+    vec2 brushPosition = vec2((sin(TIME * 0.3 + syn_BassTime * 2 * PI * 0.05)), (cos(TIME * 0.25 + syn_BassTime * 2 * PI * 0.04)));
 
-  float twitcher = ( pow(syn_BassLevel, 1.3) * 1.25 + manual_stir * 4. );
+    float twitcher = (pow(syn_BassLevel, 1.3) * 1.25 + manual_stir * 4.);
 
-    U = vortex_pair_warp(U, brushPosition*0.5+0.5, normalize(brushPosition)*(twitcher)*0.025);
+    U = vortex_pair_warp(U, brushPosition * 0.5 + 0.5, normalize(brushPosition) * (twitcher) * 0.025);
 
     //float a = TIME+3.*length(U), c = cos(a), s = sin(a);
 
@@ -139,26 +133,26 @@ vec4 renderPassA() {
     Q.y = Q.y + x - 0.025 - .1 * Q.z;
 
     // Q.x = Q.x + 0.11 * Q.x * (1. - Q.x) - x;
-    Q.x = Q.x + (0.1*(1.0+mystery*0.2)) * Q.x * (1. - Q.x) - x;
+    Q.x = Q.x + (0.1 * (1.0 + mystery * 0.2)) * Q.x * (1. - Q.x) - x;
 
-    Q.z = Q.z * 0.98 + .6 * dx.y + .001 * Q.y + (Split*(1.+syn_BassLevel*0.1)) * 0.005 + media_lum * 0.1;
+    Q.z = Q.z * 0.98 + .6 * dx.y + .001 * Q.y + (Split * (1. + syn_BassLevel * 0.1)) * 0.005 + media_lum * 0.1;
 
     Q = clamp(Q, 0., 1.);
 
-    if (_mouse.z > 0. && length(U - _mouse.xy) < paintsize)
+    if(_mouse.z > 0. && length(U - _mouse.xy) < paintsize)
         Q.y = .75;
 
     // if(_exists(syn_UserImage)) Q.y += _luminance(_edgeDetectSobel(syn_UserImage))*syn_Level*0.2;
     if(_exists(syn_UserImage)) {
         Q.x += media_lum;
-        Q.y += media_lum; 
+        Q.y += media_lum;
     }
 
-    if (FRAMECOUNT <= 1 || Reset != 0.) {
+    if(FRAMECOUNT <= 1 || Reset != 0.) {
 
         Q = vec4(1, 0, 0, 0);
 
-        if (length(U - 0.5 * R) < 20.)
+        if(length(U - 0.5 * R) < 20.)
             Q.y += 1.;
 
     }
@@ -190,7 +184,7 @@ vec4 renderPassB() {
     mat2 m = mat2(c, -s, s, c);
 
     o = a * .7071;
-    
+
     vec4 n = A(U + vec2(0, a) * m) + A(U + vec2(a, 0) * m) + A(U + vec2(0, -a) * m) + A(U + vec2(-a, 0) * m) + A(U + vec2(-o, o) * m) + A(U + vec2(o, -o) * m) + A(U + vec2(-o, -o) * m) + A(U + vec2(o, o) * m);
 
     n *= .125;
@@ -207,8 +201,8 @@ vec4 renderPassB() {
 
     Q.y = Q.y + x - (0.025 - Thiccness) - .1 * Q.z;
     Q.y *= 1.0 + 0.025 * low;
-    Q.z *= 1.0 + low*0.0125;
-    Q.x = Q.x + (0.1*(1.0+mystery*0.2)) * Q.x * (1. - Q.x) - x;
+    Q.z *= 1.0 + low * 0.0125;
+    Q.x = Q.x + (0.1 * (1.0 + mystery * 0.2)) * Q.x * (1. - Q.x) - x;
     // Q.x -= media_lum;
 
     // Q.z = Q.z*0.98+ .6*dx.y+.001*Q.y;
@@ -218,20 +212,20 @@ vec4 renderPassB() {
 
     Q = clamp(Q, 0., 1.);
 
-    if (_mouse.z > 0. && length(U - _mouse.xy) < paintsize)
-        Q.y = 1.*d2;
+    if(_mouse.z > 0. && length(U - _mouse.xy) < paintsize)
+        Q.y = 1. * d2;
 
     // if(_exists(syn_UserImage)) {
     //     Q.y += media_lum;
     //     Q.x += media_lum;
     // }
 
-    if (FRAMECOUNT <= 1) {
+    if(FRAMECOUNT <= 1) {
 
         Q = vec4(1, 0, 0, 0);
 
-        if (length(U - 0.5 * R) < 10.)
-            Q.y += 1.*d2;
+        if(length(U - 0.5 * R) < 10.)
+            Q.y += 1. * d2;
 
     }
 
@@ -271,31 +265,31 @@ vec4 renderPassC() {
 
     Q += dx * vec4(1., .3, 1., 1);
 
-    float x = (.3) * Q.x * Q.y * (1. - Q.y - Test);
+    float x = (.3) * Q.x * Q.y * (1. - Q.y);
 
     Q.y = Q.y + x - (0.025 - Thiccness) - .1 * Q.z;
 
     // Q.y = Q.y+x-(0.025)-.1*Q.z;
 
     // Q.x = Q.x + 0.1 * Q.x * (1. - Q.x) - x;
-    Q.x = Q.x + (0.1*(1.0+mystery*0.2)) * Q.x * (1. - Q.x) - x;
+    Q.x = Q.x + (0.1 * (1.0 + mystery * 0.2)) * Q.x * (1. - Q.x) - x;
 
     Q.z = Q.z * 0.98 + .6 * dx.y + .001 * Q.y + media_lum * 0.1;
 
     Q = clamp(Q, 0., 2.);
 
-    if (_mouse.z > 0.  && length(U - _mouse.xy) < paintsize)
+    if(_mouse.z > 0. && length(U - _mouse.xy) < paintsize)
         Q.y = .75;
-    if (mediaOn) {
+    if(mediaOn) {
         Q.x += media_lum;
         Q.y += media_lum;
     }
 
-    if (FRAMECOUNT <= 1) {
+    if(FRAMECOUNT <= 1) {
 
         Q = vec4(1, 0, 0, 0);
 
-        if (length(U - 0.5 * R) < 10.)
+        if(length(U - 0.5 * R) < 10.)
             Q.y += 1.;
 
     }
@@ -334,7 +328,7 @@ vec4 renderPassD() {
 
     a += 1.0;
 
-    o = a * .7071+ media_lum;
+    o = a * .7071 + media_lum;
 
     vec4 n = C(U + vec2(0, a) * m) + C(U + vec2(a, 0) * m) + C(U + vec2(0, -a) * m) + C(U + vec2(-a, 0) * m) + C(U + vec2(-o, o) * m) + C(U + vec2(o, -o) * m) + C(U + vec2(-o, -o) * m) + C(U + vec2(o, o) * m);
 
@@ -347,7 +341,7 @@ vec4 renderPassD() {
     float x = .3 * Q.x * Q.y * (1. - Q.y);
 
     x -= Thiccness;
-    x -= media_lum*.05;
+    x -= media_lum * .05;
     //Q.y = Q.y+x-0.025-.1*Q.z;
 
     // Q.y = Q.y+x-(0.025-Thiccness)-.1*Q.z;
@@ -359,22 +353,22 @@ vec4 renderPassD() {
 
     Q = clamp(Q, 0., 1.);
 
-    if (_mouse.z > 0. && length(U - _mouse.xy) < paintsize)
+    if(_mouse.z > 0. && length(U - _mouse.xy) < paintsize)
         Q.y = .75;
-    if (mediaOn) {
+    if(mediaOn) {
         Q.x += media_lum;
         Q.y += media_lum;
     }
 
-    if (FRAMECOUNT <= 1) {
+    if(FRAMECOUNT <= 1) {
 
         Q = vec4(1, 0, 0, 0);
 
-        if (length(U - 0.55 * R) < 10.)
-            Q.y += 1.*d2;
+        if(length(U - 0.55 * R) < 10.)
+            Q.y += 1. * d2;
 
     }
-    
+
     return Q;
 
 }
@@ -422,9 +416,8 @@ vec4 renderMainImage() {
 
     //Q *= 1.+texture(iChannel1,r);
 
-
     Q *= 1. + texture(prism, r.xz);
-    Q *= (1.0+highhits*Flash);
+    Q *= (1.0 + highhits * Flash);
 
     no = normalize(vec3(g - h, 1));
 
@@ -439,15 +432,15 @@ vec4 renderMainImage() {
     o = length(r - lu * dot(r, lu) / dot(lu, lu));
     o += media_lum;
     Q = 4. * dx + (Q * 0.9 + 0.1) * (0.4 + exp(-o) + 10. * exp(-9.5 * o));
-    Q.rgb = _hueRotate(Q.rgb, hue*180);
+    Q.rgb = _hueRotate(Q.rgb, hue * 180);
    // Q *= 1.+0.2*sin(Q+3.*texture(iChannel1,r).x*vec4(1,2,3,4));
 
     //Q *= 1.+0.3*sin(Q+3.*texture(prism,r.yz).x*vec4(1,2,3,4));
-    
+
     Q *= 1. + 0.4 * sin(Q + 3. * texture(prism, r.yz).x * vec4(1, 2, 3, 4));
 
    //Q *= 1.+0.2*sin(Q+3.*vec4(1,2,3,4));
-    Q += mix(vec4(0.0), masked_media, see_media)*0.1;
+    Q += mix(vec4(0.0), masked_media, see_media) * 0.1;
 
     //Q = mix(Q, masked_media, mediahits_mix);
     Q = mix(Q, _grayscale(_contrast(_brightness(Q, 1.25), 1.5)), BW_Mode);
@@ -457,41 +450,41 @@ vec4 renderMainImage() {
 
 vec4 renderMain() {
 
-    if (PASSINDEX == 0) {
+    if(PASSINDEX == 0) {
 
         return renderPassA();
 
     }
 
-    if (PASSINDEX == 1) {
+    if(PASSINDEX == 1) {
 
         return renderPassB();
 
     }
 
-    if (PASSINDEX == 2) {
+    if(PASSINDEX == 2) {
 
         return renderPassC();
 
     }
 
-    if (PASSINDEX == 3) {
+    if(PASSINDEX == 3) {
 
         return renderPassD();
 
     }
 
-    if (PASSINDEX == 4) {
+    if(PASSINDEX == 4) {
 
         return mediaPass();
 
     }
-    if (PASSINDEX == 5) {
+    if(PASSINDEX == 5) {
 
         return mediaPassFX();
 
     }
-    if (PASSINDEX == 6) {
+    if(PASSINDEX == 6) {
 
         return renderMainImage();
 

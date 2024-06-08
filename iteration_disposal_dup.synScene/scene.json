@@ -1,0 +1,286 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				40,
+				40
+			],
+			"MIN" : 
+			[
+				-40,
+				-40
+			],
+			"NAME" : "cam_offset",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "cam"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 85,
+			"MIN" : 0,
+			"NAME" : "cam_zoom",
+			"PARAMS" : 0.00801,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "cam"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0.1098,
+				0.039216,
+				0.22353
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0,
+				0
+			],
+			"NAME" : "box_color",
+			"TYPE" : "color",
+			"UI_GROUP" : "settings"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0.2549,
+				0.41176,
+				0.70588
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0,
+				0
+			],
+			"NAME" : "tri_color",
+			"TYPE" : "color",
+			"UI_GROUP" : "settings"
+		},
+		{
+			"DEFAULT" : 
+			[
+				1,
+				0.5,
+				0
+			],
+			"DESCRIPTION" : "",
+			"MAX" : 
+			[
+				1,
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				0,
+				0,
+				0
+			],
+			"NAME" : "glow_color",
+			"TYPE" : "color",
+			"UI_GROUP" : "settings"
+		},
+		{
+			"DEFAULT" : 5,
+			"DESCRIPTION" : "",
+			"MAX" : 10,
+			"MIN" : 5,
+			"NAME" : "ambient_occlusion",
+			"TYPE" : "slider",
+			"UI_GROUP" : "settings"
+		},
+		{
+			"DEFAULT" : 44,
+			"DESCRIPTION" : "",
+			"MAX" : 44,
+			"MIN" : 24,
+			"NAME" : "more_its",
+			"PARAMS" : 0.03101,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "settings"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "infl",
+			"PARAMS" : 0.00901,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "shapes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "rate",
+			"TYPE" : "knob",
+			"UI_GROUP" : "shapes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "kick",
+			"PARAMS" : 0.02201,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "shapes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "inner_kick",
+			"PARAMS" : 0.03601,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "shapes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "middle_kick",
+			"PARAMS" : 0.03601,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "shapes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 5,
+			"MIN" : 0,
+			"NAME" : "outer_kick",
+			"PARAMS" : 0.03601,
+			"TYPE" : "bang smooth",
+			"UI_GROUP" : "shapes"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "spin",
+			"PARAMS" : 0.03701,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 1,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+			"NAME" : "hole",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "tunnel",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 0.03,
+			"DESCRIPTION" : "",
+			"MAX" : 0.15,
+			"MIN" : 0.03,
+			"NAME" : "tunnel_rate",
+			"PARAMS" : 0.44901,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "reset_tun",
+			"TYPE" : "bang",
+			"UI_GROUP" : "tunnel"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "x_mirror",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "y_mirror",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "invert",
+			"PARAMS" : 0.01,
+			"TYPE" : "toggle smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Reino",
+	"DESCRIPTION" : "",
+	"GPU" : 4,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "iteration_disposal_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"3d",
+		"raymarching",
+		"mandala",
+		"tunnel"
+	],
+	"TITLE" : "Iteration Disposal_dup",
+	"WIDTH" : 1920
+}

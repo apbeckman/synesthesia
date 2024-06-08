@@ -65,7 +65,7 @@ vec4 renderPassA() {
 vec4 renderPassB() {
 	vec4 fragColor = vec4(0.0);
 	vec2 u = _xy;
-    u += _uvc*PI*Zoom;
+    u += _uvc*PI*(Zoom+push_in*8. - push_out *8.);
     u += _uvc*PI*Stretch;
     u += Drift*PI;
     u += vec2(_noise(TIME)*0.5, 0.5*_noise(TIME))*syn_Presence;

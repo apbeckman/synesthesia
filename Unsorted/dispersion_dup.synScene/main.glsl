@@ -102,9 +102,11 @@ vec4 firstPass() {
     vUv += _uvc*0.0025*stretch;
     vUv += _uvc*0.0025*fisheye*d2;
 
-    if(paint2_on > 0.5) {
-        vec2 d = _uvc - xyPaint2 * vec2(1.0, 9.0 / 16.0);
+    if(_mouse.z >= 0.50) {
+        vec2 d = _uvc - _muvc * vec2(1.0, 9.0 / 16.0);
+        
         vec2 m = 2.0 * normz(d) * exp(-length(d) / 0.03);
+        
         vUv += m;
         // div += pow(length(m)*3.0,2.0);
     }

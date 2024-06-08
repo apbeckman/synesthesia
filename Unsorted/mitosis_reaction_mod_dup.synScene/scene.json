@@ -3,7 +3,7 @@
 	[
 		{
 			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
+			"DESCRIPTION" : "Infinite zoom in/out. Audio reactive.",
 			"MAX" : 1.5,
 			"MIN" : -1.5,
 			"NAME" : "Zoom",
@@ -17,7 +17,7 @@
 				0,
 				0
 			],
-			"DESCRIPTION" : "",
+			"DESCRIPTION" : "Tilt/stretch, more exaggerated towards the middle",
 			"MAX" : 
 			[
 				1,
@@ -35,7 +35,7 @@
 		},
 		{
 			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
+			"DESCRIPTION" : "push in",
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "shock_forward",
@@ -130,7 +130,7 @@
 		},
 		{
 			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
+			"DESCRIPTION" : "increase growth rate. helps with media visibility",
 			"MAX" : 0.0175,
 			"MIN" : -0.0175,
 			"NAME" : "Thiccness",
@@ -158,7 +158,7 @@
 		},
 		{
 			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
+			"DESCRIPTION" : "changes the reaction pattern a bit",
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "mystery",
@@ -171,15 +171,6 @@
 			"MAX" : 0.7,
 			"MIN" : 0,
 			"NAME" : "complexity",
-			"TYPE" : "slider",
-			"UI_GROUP" : "reaction"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 0.4,
-			"MIN" : 0,
-			"NAME" : "Test",
 			"TYPE" : "slider",
 			"UI_GROUP" : "reaction"
 		},
@@ -243,15 +234,6 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 2,
-			"MIN" : 0,
-			"NAME" : "hue",
-			"TYPE" : "knob",
-			"UI_GROUP" : "default"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
 			"MAX" : 1,
 			"MIN" : 0,
 			"NAME" : "manual_stir",
@@ -262,12 +244,11 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
+			"MAX" : 2,
 			"MIN" : 0,
-			"NAME" : "mirror_paint",
-			"PARAMS" : 0.01,
-			"TYPE" : "toggle smooth",
-			"UI_GROUP" : "default"
+			"NAME" : "hue",
+			"TYPE" : "knob",
+			"UI_GROUP" : "color"
 		},
 		{
 			"DEFAULT" : 0,
@@ -281,7 +262,7 @@
 		}
 	],
 	"CREDIT" : "wyatt",
-	"DESCRIPTION" : "Rory's SPEED UP:\n[url]javascript:  (function(){if(Effect.prototype.Paint.toString().length>1000){_Paint=Effect.prototype.Paint;} Effect.prototype.Paint = function(...args){for(var i=0; i<3;i++){_Paint.apply(this,args);}}})()[/url]",
+	"DESCRIPTION" : "A modified version of Wyatt's 'Mitosis Reaction' shader from Shadertoy.",
 	"GPU" : 0,
 	"HEIGHT" : 1080,
 	"IMAGES" : 

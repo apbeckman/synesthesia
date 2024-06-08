@@ -1,0 +1,27 @@
+{
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Easter hack #1\nEaster holiday and I got some time to tinker\n",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "easter_hack_#1.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"PASSES" : 
+	[
+		{
+			"FILTER" : "linear",
+			"FLOAT" : true,
+			"HEIGHT" : 1080,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1920,
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "Easter hack #1",
+	"WIDTH" : 1920
+}

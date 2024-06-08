@@ -1,0 +1,16 @@
+{
+	"CREDIT" : "liamegan",
+	"DESCRIPTION" : "Just a torus interior with a gyroid \"revolved\" around the surface.",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGE_PATH" : "inside_the_torus_1.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"TITLE" : "Inside the torus_1",
+	"WIDTH" : 1920
+}

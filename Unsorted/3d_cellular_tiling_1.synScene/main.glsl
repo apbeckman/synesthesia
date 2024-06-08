@@ -3,6 +3,7 @@ float smin(float a, float b, float k) {
     float h = max(k - abs(a-b), 0.) / k;
     return min(a, b) - h*h*h*k*1./6.;
 }
+float accum; // Used to create the glow, by accumulating values in the raymarching function.
 
 /*
 
@@ -275,7 +276,8 @@ float trace(in vec3 ro, in vec3 rd){
         // "t" increases. It's a cheap trick that works in most situations... Not all, though.
         if(abs(h)<0.0012*(t*.25 + 1.) || t>FAR) break; // Alternative: 0.001*max(t*.25, 1.)
         t += h*.8;
-        
+        if(abs(h)<.135) accum += (.35-abs(h)+pow(0.5*syn_HighLevel+0.5*syn_MidHighLevel+syn_Intensity*0.4, 2.)*0.25)/24.;
+
         
     }
 
@@ -506,8 +508,8 @@ vec4 renderMainImage() {
     // rd.xy = mix(mix(rd_mirrored, rd_mirrored*-1, invert) , rd.xy, 1.0-Flip);
     rd.xy = mix(rd_mirrored , rd.xy, 1.0-Flip);
     
-    rd.xy =  _rotate(rd.xy, spin*PI);
     rd.yz = _rotate(rd.yz, LookXY.y*PI +_uvc.y*PI*Open + _scale(_fbm(sin(TIME*0.02)), -0.2, 0.2));
+    rd.xy =  _rotate(rd.xy, spin*PI);
     rd.xz = _rotate(rd.xz, LookXY.x*PI+ _scale(_fbm(cos(TIME*0.02)), -0.2, 0.2));
 
     rd = normalize(vec3(rd.xy, rd.z - dot(rd.xy, rd.xy)*.25));    
@@ -519,7 +521,6 @@ vec4 renderMainImage() {
     // Standard ray marching routine. I find that some system setups don't like anything other than
     // a "break" statement (by itself) to exit. 
 	float t = trace(camPos, rd);
-	
     // Initialize the scene color.
     vec3 sceneCol = vec3(0);
 	
@@ -573,13 +574,13 @@ vec4 renderMainImage() {
 	    float crv = clamp(curve(sp, 0.125)*0.5+0.5, .0, 1.);
 	    
 	    // Fresnel term. Good for giving a surface a bit of a reflective glow.
-        float fre = pow( clamp(dot(sn, rd) + 1., .0, 1.), 1.);
+        float fre = pow( clamp(dot(sn, rd) + 1., .0, 1.), 1.)*(1.0 + Flash*syn_HighLevel*(1.0+syn_HighLevel +syn_HighHits));
         
         // Obtaining the texel color. 
         vec3 ref = reflect(sn, rd);
 
         // Object texturing.
-        vec3 texCol = tex3D(image46, sp*tSize0, sn)*1.5;
+        vec3 texCol = tex3D(image46, sp*tSize0, sn)*(1.5);
         texCol = smoothstep(-.05, .95, texCol)*(smoothstep(-.5, 1., crv)*.75+.25);
         
     	/////////   
@@ -621,6 +622,10 @@ vec4 renderMainImage() {
         //vec3 refCol = vec3(.5, .7, 1)*smoothstep(.2, 1., n3D((sp + ref*2.)*2.)*.66 + n3D((sp + ref*2.)*4.)*.34 );
         //sceneCol += refCol*.5;
 
+        vec3 accCol = vec3(1, .5, .2)*accum*(1.0 + Flash * syn_HighLevel);
+            
+        vec3 gc = pow(min(vec3(1.5, 1, 1)*accum, 1.), vec3(1, 2.5, 12.))*.5 + accCol*.5;
+        sceneCol += sceneCol*gc*12.;
 
 	    // Shading.
         sceneCol *= atten*shading*ao;

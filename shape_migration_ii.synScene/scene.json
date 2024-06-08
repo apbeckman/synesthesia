@@ -1,0 +1,119 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : -2,
+			"NAME" : "rate_in",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Field of View: up to zoom out, down to zoom in. ",
+			"MAX" : 1.125,
+			"MIN" : -0.5,
+			"NAME" : "fov",
+			"PARAMS" : 0.04501,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 
+			[
+				0,
+				0
+			],
+			"DESCRIPTION" : "3D camera rotation, pretty straightforward. x axis for left/right, y axis for up/down. ",
+			"MAX" : 
+			[
+				1,
+				1
+			],
+			"MIN" : 
+			[
+				-1,
+				-1
+			],
+			"NAME" : "lookxy",
+			"PARAMS" : 0.01,
+			"TYPE" : "xy smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "Shifts to an equirectangular perspective, allowing essentially an unwrapped 360 degree view and creating multiple points of convergence on the horizon. FOV Slider needs to be turned up for this to work. Interacts well with camera rotation.",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "perspective",
+			"PARAMS" : 0.01,
+			"TYPE" : "slider smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "rotate/tilt camera view left/right",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "rotate",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0.4,
+			"DESCRIPTION" : "speed ",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "shapetime",
+			"TYPE" : "slider",
+			"UI_GROUP" : "default"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : -1,
+			"NAME" : "squiggle",
+			"PARAMS" : 0.01,
+			"TYPE" : "knob smooth",
+			"UI_GROUP" : "default"
+		}
+	],
+	"CREDIT" : "Aidan Beckman",
+	"DESCRIPTION" : "Using the raymarching loop and lighting from shane's 'abstract corridor' to build my own scene with sdfs from lygia and hg_sdf",
+	"GPU" : 0,
+	"HEIGHT" : 1080,
+	"IMAGES" : 
+	[
+		{
+			"NAME" : "image10",
+			"PATH" : "images/image10.png"
+		},
+		{
+			"NAME" : "image6",
+			"PATH" : "images/image6.jpeg"
+		},
+		{
+			"NAME" : "image9",
+			"PATH" : "images/image9.jpeg"
+		}
+	],
+	"IMAGE_PATH" : "raymarching_template_dup.png",
+	"MEDIA" : 
+	[
+		{
+			"FILTER" : "linear",
+			"WRAP" : "repeat"
+		}
+	],
+	"TAGS" : 
+	[
+		"template"
+	],
+	"TITLE" : "Shape Migration II",
+	"WIDTH" : 1920
+}
